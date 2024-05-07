@@ -1,0 +1,612 @@
+<template>
+  <div
+    class="picker"
+    :class="{
+      'picker-right': position == 'right',
+      'picker-left': position == 'left',
+    }"
+  >
+    <select data-role="none" :id="id">
+      <option v-for="item in source" :value="item.value" :key="item.index">
+        {{ item.text }}
+      </option>
+    </select>
+  </div>
+</template>
+
+<script>
+import utils from '../libs/utils.js';
+export default {
+  name: 'picker',
+  data() {
+    return {
+      id: utils.getRandomString(10),
+    };
+  },
+  props: {
+    data: {
+      type: Array,
+      required: true,
+    },
+    value: {
+      type: [String, Number],
+      required: false,
+    },
+    position: {
+      type: String,
+      required: false,
+    },
+    name: {
+      type: String,
+      required: false,
+    },
+  },
+
+  watch: {
+    value(newVal) {
+      this.ele && this.ele.mobiscroll('setValue', newVal, true);
+    },
+    source() {
+      let self = this;
+      setTimeout(() => {
+        self.ele = $('#' + self.id)
+          .mobiscroll()
+          .select({
+            theme: '',
+            mode: 'scroller',
+            display: 'inline',
+            lang: 'en',
+          });
+        self.ele.mobiscroll('setValue', self.value, true);
+      }, 0);
+    },
+  },
+  created() {
+    let self = this;
+    setTimeout(() => {
+      self.ele = $('#' + self.id)
+        .mobiscroll()
+        .select({
+          theme: '',
+          mode: 'scroller',
+          display: 'inline',
+          lang: 'en',
+        });
+      self.ele.mobiscroll('setValue', self.value, true);
+    }, 0);
+  },
+  computed: {
+    source() {
+      return this.data;
+    },
+  },
+  // watch : {
+  //     source() {
+  //         let self = this;
+  //         setTimeout(() => {
+  //             self.ele = $('#' + self.id).mobiscroll().select({
+  //                 theme: "",
+  //                 mode: "scroller",
+  //                 display: "inline",
+  //                 lang: "en"
+  //             })
+  //             self.ele.mobiscroll('setValue', self.value, true);
+  //         }, 0);
+  //     }
+  // },
+  methods: {
+    getValue() {
+      return this.ele.mobiscroll('getValue');
+    },
+  },
+};
+</script>
+
+<style lang="less">
+.picker-right .dw-li {
+  text-align: right !important;
+}
+
+.picker-left .dw-li {
+  text-align: left !important;
+}
+.picker {
+  height: 100%;
+  width: 18%;
+  float: left;
+  input[type='text'] {
+    display: none;
+  }
+  .dw,
+  .dwo {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  .dw {
+    max-width: 98%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    font-size: 12px;
+    text-shadow: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -ms-touch-action: none;
+    user-select: none;
+    /*touch-action: none;*/
+    /* Kills native scroll in Chrome >=35 */
+  }
+  .dw:focus {
+    /*outline-color: transparent;*/
+    outline: none;
+  }
+  .dw :focus {
+    outline-offset: -2px;
+  }
+  .dw-rtl {
+    direction: rtl;
+  }
+  /* Box sizing */
+  .dw,
+  .dwbc {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .dwwr {
+    /*min-width: 170px;*/
+    zoom: 1;
+    overflow: hidden;
+    text-align: center;
+    font-family: arial, verdana, sans-serif;
+  }
+  /* Modal overlay */
+  .dw-persp,
+  .dwo {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .dw-persp {
+    z-index: 99998;
+  }
+  .dwo {
+    z-index: 1;
+    background-color: transparent;
+    filter: Alpha(Opacity=70);
+  }
+  /* Liquid mode */
+  .dw-liq .dw {
+    max-width: 100%;
+  }
+  /* Top/Bottom mode */
+  .dw-top .dw,
+  .dw-bottom .dw {
+    width: 100%;
+    max-width: 100%;
+  }
+  /* Inline mode */
+  .dw-inline .dw {
+    position: static;
+    /*display: inline-block;*/
+    max-width: 100%;
+  }
+  .dw-inline.dw-liq .dw-persp .dw {
+    display: block;
+  }
+  .dw-inline .dw-persp {
+    position: static;
+  }
+  /* Bubble mode */
+  .dw-bubble .dw {
+    margin: 20px 0;
+  }
+  .dw-bubble .dw-arrw {
+    position: absolute;
+    left: 0;
+    width: 100%;
+  }
+  .dw-bubble-top .dw-arrw {
+    bottom: -36px;
+  }
+  .dw-bubble-bottom .dw-arrw {
+    top: -36px;
+  }
+  .dw-bubble .dw-arrw-i {
+    margin: 0 30px;
+    position: relative;
+    height: 36px;
+  }
+  .dw-bubble .dw-arr {
+    display: block;
+  }
+  .dw-arr {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-width: 18px 18px;
+    border-style: solid;
+    margin-left: -18px;
+  }
+  .dw-bubble-bottom .dw-arr {
+    top: 0;
+  }
+  .dw-bubble-top .dw-arr {
+    bottom: 0;
+  }
+  .dw-hidden {
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+  }
+  /* Header */
+  .dwv {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* Buttons */
+  .dwb {
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: top;
+  }
+  .dwb-e {
+    cursor: pointer;
+  }
+  .dwb-d {
+    cursor: default;
+  }
+  /* Button container */
+  .dwbc {
+    display: none;
+    width: 100%;
+    text-align: center;
+  }
+  /* Button wrapper */
+  .dwbw {
+    vertical-align: top;
+    display: table-cell;
+    position: relative;
+    z-index: 5;
+  }
+  .dwbw .dwb:before {
+    padding: 0.375em;
+  }
+  /* Widget content styling */
+  .mbsc-wdg .dwcc {
+    padding: 0.5em 1em;
+    font-size: 14px;
+    text-align: left;
+    white-space: normal;
+  }
+  /* Default theme */
+  .mbsc-mobiscroll {
+    height: 100%;
+  }
+  .mbsc-mobiscroll .dwwr {
+    /*min-width: 15rem;*/
+    /*background: #f7f7f7;*/
+    color: #999999;
+    font-size: 16px;
+  }
+  .mbsc-mobiscroll .dwv {
+    padding: 0 0.6666em;
+    padding-top: 0.6666em;
+    color: #4eccc4;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    min-height: 2em;
+    line-height: 2em;
+  }
+  .mbsc-mobiscroll .dwbc {
+    display: none;
+    overflow: hidden;
+    text-align: right;
+    padding: 0 0.5em 0.5em 0.5em;
+  }
+  .mbsc-mobiscroll .dwbw {
+    display: block;
+    float: right;
+  }
+  .mbsc-mobiscroll .dw-rtl .dwbw {
+    float: left;
+  }
+  .mbsc-mobiscroll .dwb {
+    height: 2.5em;
+    line-height: 2.5em;
+    padding: 0 1em;
+    color: #4eccc4;
+    text-transform: uppercase;
+  }
+  .mbsc-mobiscroll .dwb-a {
+    background: rgba(78, 204, 196, 0.3);
+  }
+  .mbsc-mobiscroll .dw-bubble-bottom .dw-arr {
+    border-color: transparent transparent #f7f7f7 transparent;
+  }
+  .mbsc-mobiscroll .dw-bubble-top .dw-arr {
+    border-color: #f7f7f7 transparent transparent transparent;
+  }
+  .dwwb,
+  .dwwo,
+  .dwwol {
+    /*-webkit-backface-visibility: hidden;*/
+    -webkit-transform: translateZ(0);
+  }
+  /* Wheel container wrapper */
+  .dwc {
+    max-width: 100%;
+    width: 100%;
+    vertical-align: middle;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  /* Wheel label */
+  .dwl {
+    line-height: 30px;
+    height: 30px;
+    top: -30px;
+    left: 0;
+    text-align: center;
+    white-space: nowrap;
+    position: absolute;
+    width: 100%;
+  }
+  /* Wheel container */
+  .dwwc {
+    margin: 0 auto;
+    position: relative;
+    zoom: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+  }
+  .dwfl {
+    max-width: 100%;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 auto;
+    -ms-flex: 1 auto;
+    flex: 1 auto;
+  }
+  /* Wheels */
+  .dwwl {
+    position: relative;
+    z-index: 5;
+  }
+  .dwww {
+    position: relative;
+    padding: 1px;
+    /*overflow: hidden;*/
+  }
+  .dww {
+    overflow: hidden;
+    position: relative;
+  }
+  .dw-bf {
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  .dw-ul {
+    position: relative;
+    z-index: 3;
+  }
+  .dw-li {
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: bottom;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    cursor: pointer;
+    font-size: 0.32rem;
+    color: #8f8f8f;
+
+    text-align: center !important;
+  }
+  /* Valid entry */
+  .dw-li.dw-v,
+  .dw-li.dw-fv {
+    opacity: 1;
+    filter: Alpha(Opacity=100);
+  }
+  /* Hidden entry */
+  .dw-li.dw-h {
+    visibility: hidden;
+  }
+  .dw-i {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    /*text-overflow: ellipsis;*/
+  }
+  .dw-sel {
+    font-size: 0.36rem;
+    color: #dc6f11 !important;
+    font-weight: bold;
+  }
+  /* Clickpick mode */
+  .dwwb {
+    position: absolute;
+    z-index: 4;
+    left: 0;
+    cursor: pointer;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+    opacity: 1;
+    -webkit-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+  }
+  .dwa .dwwb {
+    opacity: 0;
+  }
+  .dwpm .dwwbp {
+    top: 0;
+  }
+  .dwpm .dwwbm {
+    bottom: 0;
+  }
+  .dwpm .dwwol {
+    display: none;
+  }
+  /* Wheel overlay */
+  .dwwo {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  /* Background line */
+  .dwwol {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+  }
+  /* Liquid mode */
+  .dw-liq .dwc {
+    display: block;
+  }
+  .dw-liq .dw-tbl {
+    width: 100%;
+    table-layout: fixed;
+  }
+  /* Hidden label */
+  .dwhl .dwl {
+    display: none;
+  }
+  /* Hidden select element */
+  .dw-hsel {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    left: 0;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+  }
+  /* Multiple lines */
+  .dw-ml .dw-li {
+    overflow: hidden;
+  }
+  .dw-ml .dw-li .dw-i {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: normal;
+  }
+  /* Multiple selection */
+  .dwwms .dw-li {
+    padding: 0 40px;
+  }
+  .dwwms .dwwol {
+    display: none;
+  }
+  .dw-msel:before {
+    width: 40px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  /* Select groups */
+  .dww .dw-w-gr {
+    padding: 0 5px;
+    opacity: 1;
+    font-weight: bold;
+    text-align: left;
+  }
+  /* Default theme */
+  .mbsc-mobiscroll .dwc {
+    /*padding: 2em .25em 0 .25em;*/
+  }
+  .mbsc-mobiscroll .dwl {
+    color: #4eccc4;
+    font-size: 0.75em;
+    text-transform: uppercase;
+  }
+  .mbsc-mobiscroll .dwhl {
+    padding-top: 0;
+  }
+  .mbsc-mobiscroll .dwfl {
+    /*padding: .5em .25em;*/
+  }
+  .mbsc-mobiscroll .dw-hl {
+    background: rgba(78, 204, 196, 0.3);
+  }
+  .mbsc-mobiscroll .dwwol {
+    border-top: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+  }
+  /* Clickpick mode */
+  .mbsc-mobiscroll .dwpm .dwwol {
+    display: block;
+  }
+  .mbsc-mobiscroll .dwwb {
+    color: #4eccc4;
+    background: #f7f7f7;
+  }
+  .mbsc-mobiscroll .dwwbp {
+    bottom: 0;
+    top: auto;
+  }
+  .mbsc-mobiscroll .dwwbm {
+    top: 0;
+    bottom: auto;
+  }
+  .mbsc-mobiscroll .dwwb span {
+    display: none;
+  }
+  .mbsc-mobiscroll .dwwb:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    font-size: 24px;
+    text-align: center;
+  }
+  .mbsc-mobiscroll .dwwb.dwb-a:before {
+    background: rgba(78, 204, 196, 0.3);
+  }
+  /* Group select */
+  /* Multiple select */
+  .mbsc-mobiscroll .dw-w-gr {
+    font-size: 1.125em;
+  }
+  .mbsc-mobiscroll .dw-msel:before {
+    font-size: 40px;
+    color: #4eccc4;
+  }
+  .mbsc-mobiscroll .dwwms .dwwol {
+    display: none;
+  }
+}
+.picker:nth-child(1) {
+  width: 25%;
+}
+</style>

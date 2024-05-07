@@ -1,0 +1,850 @@
+<!--
+ * @Author: wujiang@weli.cn
+ * @Date: 2023-11-09 15:31:53
+ * @LastEditors: wujiang 
+ * @LastEditTime: 2024-05-06 17:17:02
+ * @Description: 鬼谷子百卦论命
+-->
+<template>
+  <div :class="{ container: true, 'fix-box': choose_time ? true : false }">
+    <header-notice v-if="has_pay"></header-notice>
+    <canvas id="canvasbg"></canvas>
+    <canvas id="canvastag"></canvas>
+
+    <div class="info">
+      <div class="info-content">
+        <div class="info-item">
+          <div class="info-label">{{ $t('name-label') }}</div>
+          <div class="info-input">
+            <input
+              type="text"
+              v-model="username"
+              :placeholder="$t('name-placeholder')"
+            />
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">{{ $t('birth-label') }}</div>
+          <div class="info-input">
+            <div
+              class="info-birth"
+              :style="{ color: picker_date ? '#333' : '#4b3d3a80' }"
+              @click="openPicker"
+            >
+              {{ picker_date || $t('birth-placeholder') }}
+            </div>
+            <img
+              @click="openPicker"
+              class="info-arrow"
+              src="../../../assets/img/wealth_boutique_overseas/home/arrow.png"
+            />
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">{{ $t('sex-label') }}</div>
+          <div class="info-input">
+            <div
+              class="sex-tab"
+              :class="{ active: sex == '1' }"
+              ref="sex_male"
+              @click="changeSex(1)"
+            >
+              <img
+                v-if="sex == '1'"
+                class="sex-icon"
+                src="../../../assets/img/wealth_boutique_overseas/home/male-active.png"
+              />
+              <img
+                v-else
+                class="sex-icon"
+                src="../../../assets/img/mlxz/guiguzi/icon_boy_b.png"
+              />
+              <div class="sex-text">男性</div>
+            </div>
+            <div
+              class="sex-tab"
+              :class="{ active: sex == '0' }"
+              ref="sex_female"
+              @click="changeSex(0)"
+            >
+              <img
+                v-if="sex == '0'"
+                class="sex-icon"
+                src="../../../assets/img/wealth_boutique_overseas/home/female-active.png"
+              />
+              <img
+                v-else
+                class="sex-icon"
+                src="../../../assets/img/mlxz/guiguzi/login_icon_girl.png"
+              />
+              <div class="sex-text">女性</div>
+            </div>
+          </div>
+        </div>
+        <img
+          id="info-btn"
+          class="info-btn huxi-btn"
+          :src="language === 'zh-CN' ? cn_check_btn : tw_check_btn"
+          @click="check"
+        />
+        <div class="info-bottom">
+          <img
+            v-if="privacyChecked"
+            class="info-check"
+            src="../../../assets/img/wealth_boutique_overseas/home/check.png"
+            @click="privacyChecked = !privacyChecked"
+          />
+          <img
+            v-else
+            class="info-check"
+            src="../../../assets/img/wealth_boutique_overseas/home/uncheck.png"
+            @click="privacyChecked = !privacyChecked"
+          />
+          {{ $t('check-label') }}
+          <span @click="link('user_agreement.html')"
+            >{{ $t('user-agreement') }} </span
+          >{{ $t('and') }}
+          <span @click="link('privacy.html')">{{ $t('privacy-policy') }}</span>
+        </div>
+      </div>
+    </div>
+    <img class="card" :src="language === 'zh-CN' ? cn_card_1 : tw_card_1" />
+    <img class="card" :src="language === 'zh-CN' ? cn_card_2 : tw_card_2" />
+
+    <img class="order" :src="is_cn ? cn_order : tw_order" @click="toOrder()" />
+    <img
+      v-show="showFixedBtn"
+      class="btn-fixed huxi-btn"
+      :src="language === 'zh-CN' ? cn_check_btn : tw_check_btn"
+      @click="check"
+    />
+
+    <!-- 時间选择控件 -->
+    <DatetimePicker
+      start="1960"
+      end="2000"
+      :year="year"
+      :month="month"
+      :date="date"
+      :birth_hour="birth_hour"
+      v-show="choose_time && !show_nongli"
+    ></DatetimePicker>
+    <NongliPicker
+      start="1960"
+      end="2000"
+      :year="year"
+      :month="month"
+      :date="date"
+      :birth_hour="birth_hour"
+      v-show="choose_time && show_nongli"
+    ></NongliPicker>
+
+    <!-- Popup -->
+    <!-- <PayPopup
+      ref="PayPopup"
+      :visible="visible"
+      :product_key="product_key"
+      :query_user_string="query_user_string"
+      @update-visible="visible = false"
+    ></PayPopup> -->
+
+    <!-- <combinePayPop
+      :visible="pay_modal"
+      :all_list="productList"
+      :product_key="product_key"
+      :product_price="product_price"
+      :query_user_string="query_user_string"
+      @update-visible="pay_modal = false"
+      @getOrderId="getOrderId"
+    ></combinePayPop> -->
+  </div>
+</template>
+
+<script>
+import { Toast, Indicator } from 'mint-ui';
+import { Downloader, Parser, Player } from 'svga.lite';
+import DatetimePicker from '../../../components/DatetimePicker';
+import NongliPicker from '../../../components/NongliPicker';
+import PayPopup from '../../../components/PayPopup';
+import TopBar from '../../../components/TopBar';
+import utils from '../../../libs/utils.js';
+import HeaderNotice from '../../../components/headerNotice.vue';
+import { getPayOrderInfoAPI, payOrderAPI } from '../../../api/api';
+import moment from 'moment';
+import { reportEnum } from '../../../libs/enum';
+
+import cn_tag from '../../../assets/img/mlxz/guiguzi/img_word4.png';
+import tw_tag from '../../../assets/img/tw_mlxz/guiguzi/img_word4.png';
+
+import cn_card_2 from '../../../assets/img/mlxz/guiguzi/home_img_mo2@2x.png';
+import tw_card_2 from '../../../assets/img/tw_mlxz/guiguzi/home_img_mo2.png';
+
+import combinePayPop from '../../../components/combinePayPop.vue';
+
+import cn_header from '../../../assets/img/mlxz/svga/ggz/cn_header.svga';
+import tw_header from '../../../assets/img/mlxz/svga/ggz/tw_header.svga';
+import cn_tags from '../../../assets/img/mlxz/svga/ggz/cn_tags.svga';
+import tw_tags from '../../../assets/img/mlxz/svga/ggz/tw_tags.svga';
+
+import cn_order from '../../../assets/img/mlxz/guiguzi/bgm_lsdd.png';
+import tw_order from '../../../assets/img/mlxz/downloadBtn/tw/ggz_order.png';
+let show_popup = utils.getQueryString('show_popup');
+
+// 组合测算相关参数
+let is_combine = utils.getQueryString('is_combine');
+let main_order_id = utils.getQueryString('main_order_id');
+
+export default {
+  components: {
+    DatetimePicker,
+    NongliPicker,
+    PayPopup,
+    TopBar,
+    combinePayPop,
+    HeaderNotice,
+  },
+  data() {
+    return {
+      cn_order,
+      tw_order,
+      cn_header,
+      tw_header,
+      cn_tags,
+      tw_tags,
+      svg: 'https://mixmedia.rili.cn/c89f1fd7-acb1-48b8-9130-774512dfec70.svga',
+      privacyChecked: true, // 同意隐私协议
+      showFixedBtn: false,
+      sex: '1', // 1男 0女
+      year: '1995',
+      month: '',
+      date: '',
+      birth_hour: '-1',
+      username: '',
+      picker_date: '',
+      picker_date_obj: null,
+      picker_hour: '',
+      gongli_nongli: '1', // 1公曆 0農曆
+      choose_time: false,
+      show_nongli: false,
+      // 底部弹出popup版本所需数据
+      visible: false,
+      product_id: 4,
+      product_key: 'h5_bai_gua',
+      query_user_string: '',
+      is_combine,
+      has_pay: '',
+      language: utils.getLanguage(),
+      cn_tag,
+      tw_tag,
+      cn_check_btn:
+        'https://psychicai-static.psychicai.pro/imgs/24049ffe7e9c3fc64c499f9cc75f080f547e.png',
+      tw_check_btn:
+        'https://psychicai-static.psychicai.pro/imgs/240415141d43dc014efc8758f1e45a136142.png',
+      cn_card_1:
+        'https://psychicai-static.psychicai.pro/imgs/24044c3c7ad56f9f4e08a25d585164be739f.png',
+      tw_card_1:
+        'https://psychicai-static.psychicai.pro/imgs/24045923298c6eff48f1ac256edf9ed6d17d.png',
+
+      cn_card_2,
+      tw_card_2,
+      is_show_btn: true,
+      pay_modal: false,
+      product_price: '',
+    };
+  },
+  computed: {
+    productList() {
+      return this.$store.state.common.productList;
+    },
+    is_in_app() {
+      return utils.isInApp();
+    },
+    is_cn() {
+      return utils.getLanguage() === 'zh-CN';
+    },
+  },
+  created() {
+    if (this.is_in_app) {
+      utils.payStatusAdjust('page_view_report', 'u23wk8', '');
+    } else {
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'b7vv0n',
+        });
+    }
+    this.$store.dispatch('common/getProduction');
+    const { has_pay } = this.$route.query;
+    this.has_pay = has_pay ? has_pay : '';
+    utils.firebaseLogEvent('20001', '-10001', 'page_view_report', 'page_view', {
+      args_name: 'page_view_report',
+      report_id: '60003',
+      channel: utils.getFBChannel(),
+    });
+  },
+  mounted() {
+    // 赋默认值
+    let storaged_userInfo = localStorage.getItem('_guiguzi_overseas_info');
+    if (storaged_userInfo) {
+      let arr = storaged_userInfo.split('|');
+
+      this.year = arr[3];
+      this.month = arr[4];
+      this.date = arr[5];
+      this.birth_hour = arr[6];
+
+      this.username = arr[0];
+      this.sex = arr[1];
+      this.gongli_nongli = arr[2];
+      this.picker_hour = utils.formateNongliHour(arr[6]);
+      // 生日默认值
+      if (arr[2] == '1') {
+        this.show_nongli = false;
+        this.picker_date = `${arr[3]}年${arr[4]}月${arr[5]}日 ${this.picker_hour}`;
+      } else {
+        this.show_nongli = true;
+        this.picker_date = `${arr[3]}年${utils.formateNongliMonth(
+          arr[4]
+        )}${utils.formateNongliDate(arr[5])} ${this.picker_hour}`;
+      }
+      // 生日实际传值
+      let pick_date = {
+        year: arr[3],
+        month: arr[4],
+        date: arr[5],
+        birth_hour: arr[6],
+      };
+      this.picker_date_obj = pick_date;
+      this.$nextTick(() => {
+        if (this.sex !== '1') {
+          this.$refs.sex_male.click();
+          setTimeout(() => {
+            this.$refs.sex_female.click();
+          }, 10);
+        } else {
+          this.$refs.sex_female.click();
+          setTimeout(() => {
+            this.$refs.sex_male.click();
+          }, 10);
+        }
+      });
+    }
+    let self = this;
+    window.mlxzGooglePlayResult = function (val, pay_reason) {
+      console.log(val, pay_reason);
+      let store_report_id = localStorage.getItem('report_order_id');
+      if (val === 'SUCCESS') {
+        self.$router.push({
+          path: 'result',
+          query: { order_id: store_report_id, status: 'SUCCESS' },
+        });
+      } else {
+        if (self.is_in_app) {
+          utils.payStatusAdjust('event_status_pay_failure', 'veoeo1', '');
+        } else {
+          window.Adjust &&
+            window.Adjust.trackEvent({
+              eventToken: 'k7kijn',
+            });
+        }
+        utils.firebaseLogEvent(
+          '10060',
+          '-10008',
+          'event_status_pay_failure',
+          'event_status',
+          {
+            args_name: 'event_status_pay_failure',
+            reason: pay_reason,
+          }
+        );
+      }
+    };
+
+    let screenH = window.screen.height;
+    let btn = document.getElementById('info-btn');
+    document.addEventListener('scroll', e => {
+      let flag = utils.isElementInViewport(btn);
+      let scroll_distance =
+        window.pageYOffset || document.documentElement.scrollTop;
+      if (!self.is_show_btn || scroll_distance < 100) {
+        self.showFixedBtn = false;
+        return;
+      }
+      if (!flag) {
+        self.showFixedBtn = true;
+      } else {
+        self.showFixedBtn = false;
+      }
+    });
+    let initialWindowHeight = window.innerHeight;
+    // 添加resize事件监听器
+    window.addEventListener('resize', function () {
+      self.is_show_btn =
+        initialWindowHeight > window.innerHeight ? false : true;
+    });
+    self.loadBg('#canvasbg', self.is_cn ? self.cn_header : self.tw_header);
+    self.loadBg('#canvastag', self.is_cn ? self.cn_tags : self.tw_tags, 1);
+  },
+  methods: {
+    // 获取订单ID
+    getOrderId(val) {
+      this.order_id = val;
+    },
+    // 选择性别
+    changeSex(val) {
+      this.sex = val + '';
+    },
+    // 端内加载背景SVGA动画
+    loadBg(dom, url, is_loop = true) {
+      console.log(is_loop);
+      const downloader = new Downloader();
+      // 默认调用 WebWorker 线程解析
+      // 可配置 new Parser({ disableWorker: true }) 禁止
+      const parser = new Parser();
+      // #canvas 是 HTMLCanvasElement
+      const player = new Player(dom);
+
+      (async () => {
+        const fileData = await downloader.get(url);
+        const svgaData = await parser.do(fileData);
+
+        player.set({ loop: is_loop });
+
+        await player.mount(svgaData);
+
+        // 开始播放动画
+        player.start();
+      })();
+    },
+    // 跳转历史订单
+    toOrder() {
+      utils.jumpToOrder();
+    },
+    // 打开时间选择器
+    openPicker() {
+      this.choose_time = true;
+    },
+    // 关闭时间选择器
+    closePicker() {
+      this.choose_time = false;
+    },
+    // 跳转协议
+    link(url) {
+      let username = this.username;
+      let sex = this.sex;
+      let gongli_nongli = this.gongli_nongli;
+      let time_obj = this.picker_date_obj;
+      if (username == '') {
+        location.href = url;
+        return;
+      }
+      if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
+        location.href = url;
+        return;
+      }
+      if (time_obj == null) {
+        location.href = url;
+        return;
+      }
+
+      let querystring = '';
+      querystring += username;
+      querystring += '|';
+      querystring += sex;
+      querystring += '|';
+      querystring += gongli_nongli;
+      querystring += '|';
+      querystring += time_obj.year;
+      querystring += '|';
+      querystring += time_obj.month;
+      querystring += '|';
+      querystring += time_obj.date;
+      querystring += '|';
+      querystring += time_obj.birth_hour || '-1';
+      window.localStorage.setItem('_guiguzi_overseas_info', querystring);
+      location.href = url;
+    },
+    // 确认提交
+    async check() {
+      if (this.is_in_app) {
+        utils.payStatusAdjust('click_report_confirm', 'qcnk93', '');
+      } else {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 'gjog9k',
+          });
+      }
+
+      utils.firebaseLogEvent(
+        '20001',
+        '-10005',
+        'click_report_confirm',
+        'click',
+        {
+          args_name: 'click_report_confirm',
+          report_id: '60003',
+          channel: utils.getFBChannel(),
+        }
+      );
+      await utils.asleep(500);
+
+      let username = this.username;
+      let sex = this.sex;
+      let gongli_nongli = this.gongli_nongli;
+      let time_obj = this.picker_date_obj;
+      if (username == '') {
+        Toast(this.$t('name-tips'));
+        return;
+      }
+      if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
+        Toast(this.$t('name-tips-2'));
+        return;
+      }
+      if (time_obj == null) {
+        Toast(this.$t('birth-tips'));
+        return;
+      }
+      if (!this.privacyChecked) {
+        Toast(this.$t('xieyi-tips'));
+        return;
+      }
+      // Indicator.open('支付中');
+
+      let querystring = '';
+      querystring += username;
+      querystring += '|';
+      querystring += sex;
+      querystring += '|';
+      querystring += gongli_nongli;
+      querystring += '|';
+      querystring += time_obj.year;
+      querystring += '|';
+      querystring += time_obj.month;
+      querystring += '|';
+      querystring += time_obj.date;
+      querystring += '|';
+      querystring += time_obj.birth_hour || '-1';
+      window.localStorage.setItem('_guiguzi_overseas_info', querystring);
+      let path = 'detail?querystring=' + querystring;
+      this.query_user_string = querystring;
+      if (show_popup) {
+        this.visible = true;
+      } else if (is_combine) {
+        let paypopup = this.$refs.PayPopup;
+        paypopup.combinePay(main_order_id, this.product_id, querystring);
+      } else {
+        let { has_pay, order_id, product_key } = this.$route.query;
+        if (has_pay) {
+          if (has_pay === 'SUCCESS') {
+            getPayOrderInfoAPI(
+              order_id,
+              this.getExtra(product_key, querystring)
+            ).then(res => {
+              if (res.data) {
+                this.$router.push({
+                  path: 'result',
+                  query: { order_id: order_id, status: 'SUCCESS' },
+                });
+              }
+            });
+          }
+        } else {
+          let same_ = this.productList.find(
+            item => item.product_key === this.product_key
+          );
+          const { price, unit, product_id, google_goods_id, product_key } =
+            same_;
+          this.$router.push({ path });
+          return;
+          this.product_price = price || '-';
+          if (utils.isVersionMoreThan('1.1.1')) {
+            this.pay_modal = true;
+            return;
+          }
+
+          let params = {
+            pay_method: 'google_pay',
+            product_key: product_key,
+            platform: 'ANDROID',
+            product_id: product_id,
+            extra_ce_suan: this.getExtra(product_key, querystring),
+          };
+          payOrderAPI(params).then(res => {
+            if (res.status === 1000) {
+              Indicator.close();
+              this.order_id = res.data.id;
+              window.psychicai_client.onWebPayDialog(
+                res.data.id,
+                price + '',
+                unit,
+                google_goods_id,
+                reportEnum[product_key]
+              );
+            }
+          });
+          return;
+          this.$router.push({ path });
+        }
+      }
+    },
+    // 解析参数字符串
+    getExtra(product_key, querystring) {
+      let params = null;
+      let query_user_string = querystring;
+      let query_user_string_array = query_user_string.split('|');
+
+      // 八字合婚 双人信息
+      if (product_key === 'h5_marriage') {
+        let [
+          male_name,
+          female_name,
+          male_birth_year,
+          male_birth_month,
+          male_birth_date,
+          female_birth_year,
+          female_birth_month,
+          female_birth_date,
+          male_birth_hour,
+          female_birth_hour,
+          male_is_gongli,
+          female_is_gongli,
+          sex,
+        ] = query_user_string_array;
+
+        params = {
+          male_name,
+          female_name,
+          male_birth_year,
+          male_birth_month,
+          male_birth_date,
+          female_birth_year,
+          female_birth_month,
+          female_birth_date,
+          male_birth_hour,
+          female_birth_hour,
+          male_is_gongli,
+          female_is_gongli,
+          sex,
+        };
+      }
+      // 其他 单人信息
+      else {
+        let [
+          name,
+          sex,
+          is_gongli,
+          birth_year,
+          birth_month,
+          birth_date,
+          birth_hour,
+        ] = query_user_string_array;
+
+        params = {
+          name,
+          sex,
+          is_gongli,
+          birth_year,
+          birth_month,
+          birth_date,
+          birth_hour,
+          date: moment(
+            `${birth_year}${
+              +birth_month < 10 ? '0' + birth_month : birth_month
+            }${+birth_date < 10 ? '0' + birth_date : birth_date}`
+          ).format('YYYYMMDD'),
+        };
+      }
+      return params;
+    },
+  },
+};
+</script>
+
+<style scoped lang="less">
+#canvasbg {
+  width: 7.5rem;
+  height: 8.9rem;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+#canvastag {
+  width: 7.5rem;
+  height: 2rem;
+  position: absolute;
+  top: 5.16rem;
+  z-index: 2;
+}
+@keyframes scaleBtn {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1.04);
+  }
+}
+.fix-box {
+  position: fixed !important;
+}
+.container {
+  width: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('https://psychicai-static.psychicai.pro/imgs/24048f0d358d051f4890abe8ad40ec6cbe48.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-bottom: 1.6rem;
+  padding-top: 7.16rem;
+  .tags {
+    width: 6.86rem;
+    height: 0.78rem;
+    margin-bottom: 0.2rem;
+  }
+  .info {
+    position: relative;
+    z-index: 3;
+    margin-bottom: 0.24rem;
+    .info-content {
+      background: url('../../../assets/img/mlxz/guiguzi/home_info_bg.png')
+        no-repeat;
+      background-size: contain;
+      width: 7.1rem;
+      height: 6.56rem;
+      // position: absolute;
+      // top: 0;
+      // width: 100%;
+      // height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .info-item {
+        margin-bottom: 0.2rem;
+        width: 5.9rem;
+        display: flex;
+        align-items: center;
+        .info-label {
+          flex: none;
+          color: #333;
+          font-size: 0.3rem;
+          font-weight: bold;
+          margin-right: 0.14rem;
+        }
+        .info-input {
+          flex: auto;
+          height: 0.92rem;
+          background-color: #e2d0ba;
+          border-radius: 0.24rem;
+          display: flex;
+          box-sizing: border-box;
+          padding: 0.06rem;
+          align-items: center;
+          input {
+            width: 3rem;
+            font-size: 0.3rem;
+            line-height: 0.42rem;
+            outline: none;
+            border: none;
+            background-color: transparent;
+            padding: 0;
+            margin: 0 0.3rem;
+            &::input-placeholder {
+              color: #4b3d3a80;
+            }
+            &::-webkit-input-placeholder {
+              color: #4b3d3a80;
+            }
+            &::-moz-placeholder {
+              color: #4b3d3a80;
+            }
+            &::-moz-placeholder {
+              color: #4b3d3a80;
+            }
+            &::-ms-input-placeholder {
+              color: #4b3d3a80;
+            }
+          }
+          .info-birth {
+            flex: auto;
+            font-size: 0.3rem;
+            line-height: 0.42rem;
+            color: #b2663e;
+            margin-left: 0.24rem;
+          }
+          .info-arrow {
+            flex: none;
+            width: 0.12rem;
+            height: 0.22rem;
+            margin-right: 0.14rem;
+          }
+          .sex-tab {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.3rem;
+            color: #4b3d3a;
+            border-radius: 0.08rem;
+            .sex-icon {
+              display: block;
+              width: 0.3rem;
+              height: 0.3rem;
+              margin-right: 0.1rem;
+            }
+            &.active {
+              color: #fff;
+              background-color: #64372d;
+            }
+          }
+        }
+      }
+      .info-btn {
+        width: 5.92rem;
+        margin-top: 0.3rem;
+        margin-bottom: 0.4rem;
+        // animation: scaleBtn 1s infinite ease-in-out alternate;
+      }
+      .info-bottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #333333;
+        font-size: 0.22rem;
+        line-height: 0.3rem;
+        img {
+          width: 0.3rem;
+          height: 0.3rem;
+          margin-right: 0.12rem;
+        }
+        span {
+          color: #b2663e;
+        }
+      }
+    }
+  }
+  .card {
+    display: block;
+    width: 7.2rem;
+    margin-bottom: 0.2rem;
+  }
+  .order {
+    position: fixed;
+    width: 0.58rem;
+    top: 3rem;
+    right: 0;
+    z-index: 20;
+  }
+  .btn-fixed {
+    position: fixed;
+    width: 5.86rem;
+    left: 50%;
+    margin-left: -2.93rem;
+    bottom: 0.43rem;
+  }
+}
+</style>

@@ -1,0 +1,2092 @@
+<template>
+  <div :class="['container', fix_pop ? 'fix-pop' : '']">
+    <img
+      @click="jumpUrl('history_order', '-10010', 'click_main_history')"
+      class="history-order"
+      :src="is_cn ? cn_order_btn : tw_order_btn"
+      alt=""
+    />
+
+    <div class="header-box">
+      <mt-swipe :auto="3000" :showIndicators="true" class="swiper-contain">
+        <mt-swipe-item
+          v-for="(item, k) in header_list"
+          :key="'swiper' + k"
+          class="swiper-item"
+        >
+          <img
+            @click="handleReport(item, 5)"
+            :src="is_cn ? item.cn_icon : item.tw_icon"
+            alt=""
+          />
+        </mt-swipe-item>
+      </mt-swipe>
+      <!-- 用户已购买数据走马灯 -->
+      <div @click="jumpPage(mock_report_list[cur_index].id)" class="buy-list">
+        <img
+          class="laba"
+          src="https://psychicai-static.psychicai.pro/imgs/2404148caf3a4f6e4194ba7c5431e81fa82a.png"
+          alt=""
+        />
+        <van-swipe
+          class="swiper-buy"
+          :autoplay="2000"
+          :show-indicators="false"
+          vertical
+          @change="getReportItem"
+        >
+          <van-swipe-item
+            ref="swiper"
+            class="swiper-slide"
+            v-for="(it, j) in buy_list"
+            :key="j"
+          >
+            <div class="flex-row">
+              <span>{{ it }}</span>
+              <span
+                @click="jumpPage(mock_report_list[j].id)"
+                class="link-url"
+                >{{ mock_report_list[j].name }}</span
+              >
+              <span>{{ score_list[j] }}</span>
+            </div>
+          </van-swipe-item>
+        </van-swipe>
+        <img
+          class="arrow"
+          src="https://psychicai-static.psychicai.pro/imgs/2404fe7affcbeb894bd99695760f5bd315d1.png"
+          alt=""
+        />
+      </div>
+    </div>
+
+    <!-- banner位 -->
+    <div class="report-container">
+      <div
+        v-for="(item, index) in sale_list"
+        :key="index"
+        @click="jumpUrl(item.url, item.e_id, item.e_name, item.ad_e)"
+        :class="[item.is_big ? 'big-item' : 'normal-item']"
+      >
+        <img
+          :src="is_cn ? item.zh_icon : item.tw_icon"
+          :class="[item.is_big ? 'big-icon' : 'normal-icon']"
+          alt=""
+        />
+        <div v-if="item.is_big" class="big-box">
+          <div class="left">
+            <div style="-webkit-box-orient: vertical" class="text">
+              {{ is_cn ? item.cn_desc : item.tw_desc }}
+            </div>
+            <div class="tips flex-start">
+              <div class="buy-num">{{ item.buy_num }}{{ $t('tips-5') }}</div>
+              <div class="review-num ml-40">
+                {{ item.review_num }}{{ $t('tips-4') }}
+              </div>
+            </div>
+          </div>
+          <img
+            class="right-btn"
+            :src="is_cn ? cn_right_pay : tw_right_pay"
+            alt=""
+          />
+        </div>
+        <div v-else class="normal-box">
+          <div style="-webkit-box-orient: vertical" class="text">
+            {{ is_cn ? item.cn_desc : item.tw_desc }}
+          </div>
+          <div class="tips">
+            <div class="buy-num">{{ item.buy_num }}{{ $t('tips-5') }}</div>
+            <div class="review-num">
+              {{ item.review_num }}{{ $t('tips-4') }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 多买多折扣 -->
+    <div class="sale-box hidden">
+      <div class="title-box">
+        <div class="left">{{ $t('buy-zhekou') }}</div>
+        <div class="right">
+          <div v-if="zhekouList[zhekou].total" class="total">
+            {{ zhekouList[zhekou].total }}RM
+          </div>
+          <div v-if="zhekouList[zhekou].percent" class="percent">
+            {{ zhekouList[zhekou].percent }}
+          </div>
+          <div class="price">{{ zhekouList[zhekou].price }}RM</div>
+        </div>
+      </div>
+      <div class="sale-list">
+        <div
+          @click="showPop()"
+          v-for="(it, k) in checked_list"
+          :key="'sale' + k"
+          class="item"
+        >
+          <img v-if="it.check_icon" :src="it.check_icon" class="icon" alt="" />
+          <img
+            v-if="!it.check_icon"
+            src="../../assets/img/mlxz/index/ce_btn_jia.png"
+            class="add-icon"
+            alt=""
+          />
+        </div>
+      </div>
+      <div @click="payModal()" class="lock-btn">
+        {{ $t('order-btn') }}
+        <img
+          v-show="zhekou === 2"
+          class="btn-icon"
+          src="../../assets/img/mlxz/cold_start/cesuan_img_tag2@3x.png"
+          alt=""
+        />
+        <img
+          v-show="zhekou === 1"
+          class="btn-icon"
+          src="../../assets/img/mlxz/cold_start/cesuan_img_tag@3x.png"
+          alt=""
+        />
+      </div>
+      <div @click="showPop()" class="change-btn">
+        {{ $t('change-btn') }}
+      </div>
+    </div>
+    <!-- 爆款推荐 -->
+    <div class="hot-product hidden">
+      <img
+        class="title"
+        src="../../assets/img/mlxz/index/ce_img_bao.png"
+        alt=""
+      />
+      <div class="product-list">
+        <img
+          v-for="(it, k) in recommend_list"
+          :key="'reco' + k"
+          class="item"
+          :src="it.icon"
+          @click="handleReport(it, 2)"
+          alt=""
+        />
+      </div>
+    </div>
+
+    <!-- 广告位 -->
+    <div class="ad-list hidden">
+      <img
+        v-for="(ad, k) in ad_list"
+        @click="handleReport(ad, 3)"
+        :key="'ad' + k"
+        class="item"
+        :src="ad.icon"
+      />
+    </div>
+
+    <!-- 选择商品弹窗 -->
+    <mt-popup
+      v-model="sale_visible"
+      :closeOnClickModal="false"
+      position="bottom"
+    >
+      <div class="pop-box">
+        <div class="pop-header">
+          <div class="left">
+            {{ $t('get-three') }}
+          </div>
+          <img
+            @click="closeSalePop()"
+            src="../../assets/img/mlxz/cesuan_home/icon_close2.png"
+            class="close"
+            alt=""
+          />
+        </div>
+        <div class="pop-content">
+          <div
+            v-for="(it, k) in pop_list"
+            :key="'sale-' + k"
+            @click="chooseSale(it, k)"
+            :class="{
+              item: true,
+              'normal-item': true,
+              'forbidden-item': !can_choose && !it.checked,
+            }"
+          >
+            <img
+              v-if="it.checked"
+              class="check-icon"
+              src="../../assets/img/mlxz/index/checked_icon.png"
+              alt=""
+            />
+            <img
+              v-else
+              class="check-icon"
+              src="../../assets/img/mlxz/index/no_check_icon.png"
+              alt=""
+            />
+            <img class="top-icon" :src="it.icon" alt="" />
+
+            <div :id="`text-${k}`" v-if="measureProduct[k]" class="bottom-box">
+              {{ measureProduct[k].tips }}
+            </div>
+          </div>
+        </div>
+        <!-- 确认 -->
+
+        <div
+          :class="{
+            'confirm-box': true,
+            'disabled-confirm': !can_submit ? true : false,
+          }"
+          @click="handleConfirm()"
+        >
+          {{ $t('confirm-btn') }}
+        </div>
+      </div>
+    </mt-popup>
+    <!-- 调起支付页-->
+    <PayPopup
+      :visible="pay_visible"
+      :is_combine="true"
+      :total_money="zhekouList[zhekou].price"
+      :checked_list="checked_list"
+      :all_list="all_list"
+      :combine_ids="combine_ids"
+      @update-visible="pay_visible = false"
+    ></PayPopup>
+    <!-- 支付成功弹窗 -->
+    <PopResult
+      :visible="pay_result_visible"
+      :result_list="result_list"
+      :sub_orders="sub_orders"
+      :pop_list="pop_list"
+      @handleReport="hasPayReport"
+      @update-visible="pay_result_visible = false"
+    ></PopResult>
+  </div>
+</template>
+
+<script>
+// @ts-ignore
+import Recommend from './recommend.vue';
+// @ts-ignore
+import Fortune from './fortune.vue';
+import utils from '../../libs/utils';
+import PayPopup from '../../components/PayPopup.vue';
+
+import { Toast, Indicator } from 'mint-ui';
+import PopResult from './pay_result.vue';
+import { getResultAPI } from '../../api/api';
+import { getProductions } from '../../libs/common_api';
+import { getProductionsAPI } from '../../api/api';
+
+import longnianImg from '../../assets/img/mlxz/cold_start/banner-2024caiyun@3x.png';
+import career_2024 from '../../assets/img/mlxz/index/banner_shiyeyunshi.png';
+
+import bzhh from '../../assets/img/mlxz/index/bahh.png';
+import nianyun_24 from '../../assets/img/mlxz/index/2024-nianyun.png';
+import ganqqingyun_24 from '../../assets/img/mlxz/index/24-ganqqingyun.png';
+import caiyun_24 from '../../assets/img/mlxz/index/2024-caiyun.png';
+import zongheyunshi from '../../assets/img/mlxz/index/24-zongheyunshi.png';
+import banner_ganqing from '../../assets/img/mlxz/index/banner_ganqing.png';
+import top_caiyun from '../../assets/img/mlxz/index/top-caiyun.png';
+import top_shiye from '../../assets/img/mlxz/index//top-shiye.png';
+import xiabanner_bazi from '../../assets/img/mlxz/index/xiabanner_bazi_jianti.png';
+import banner_yuantiangang from '../../assets/img/mlxz/index/banner-yuantiangang.png';
+import gif_nianyun from '../../assets/img/mlxz/index/gif/24年运-简体.gif';
+import gif_ganqing from '../../assets/img/mlxz/index/gif/感情运势-简体.gif';
+import gif_guiguzi from '../../assets/img/mlxz/index/gif/鬼谷子-简体.gif';
+import gif_yuantiangang from '../../assets/img/mlxz/index/gif/袁天罡-简体.gif';
+
+import tw_bzhh from '../../assets/img/mlxz/index/tw/bzhh.png';
+import tw_wealth24 from '../../assets/img/mlxz/index/tw/wealth24.png';
+import tw_year24 from '../../assets/img/mlxz/index/tw/year24.png';
+import tw_web from '../../assets/img/mlxz/index/tw/web.png';
+
+import tw_wealth24_banner from '../../assets/img/mlxz/index/tw/wealth24_banner.png';
+import tw_year24_banner from '../../assets/img/mlxz/index/tw/year24_banner.png';
+import tw_bzhh_banner from '../../assets/img/mlxz/index/tw/bzhh_banner.png';
+import tw_emotion from '../../assets/img/mlxz/index/tw/emotion24_banner.png';
+import tw_career from '../../assets/img/mlxz/index/tw/career24_banner.png';
+import tw_ggz from '../../assets/img/mlxz/index/tw/ggz_banner.png';
+import tw_weigh from '../../assets/img/mlxz/index/tw/weigh_banner.png';
+
+import tw_order_btn from '../../assets/img/mlxz/index/tw/history_order.png';
+import tw_right_pay from '../../assets/img/mlxz/index/tw/right_pay.png';
+
+const hotRecommendProduction = [
+  //  {
+  //   name:'良缘合婚',
+  // content:'',
+  //   url:'',
+  //  },
+  //  {
+  //   name:'姓名风水',
+  // content:'',
+  //   url:'',
+  //  },
+  {
+    id: 1,
+    name: '瞬时卦',
+    url: 'mlxz://time/calculate',
+    content: '这是瞬时卦',
+  },
+  {
+    id: 2,
+    name: '号码测测运',
+    url: 'mlxz://numbermoney/calculate',
+    content: '这是号码测测运',
+  },
+  {
+    id: 3,
+    name: '数字风水',
+    url: 'mlxz://phonenumber/calculate',
+    content: '这是数字风水',
+  },
+];
+
+let index = utils.getQueryString('index') || 0;
+let channel = utils.getQueryString('channel');
+
+localStorage.setItem('suishen_overseas_channel', channel || '');
+
+const initCheck = [{ value: '' }, { value: '' }, { value: '' }];
+
+const eventProductKey = {
+  h5_wealth2024: '2024_wealty_report',
+  h5_career: 'profession_bazi_report',
+  h5_marriage: 'marriage_contract_report',
+  h5_love: 'emotion_report',
+  h5_fortune2023: '2023_report',
+  h5_wealth2023: '2023_wealty_report',
+};
+
+const eventProductValue = {
+  '2024_wealty_report': '80001',
+  profession_bazi_report: '80004',
+  marriage_contract_report: '80005',
+  emotion_report: '80006',
+  '2023_report': '80007',
+  '2023_wealty_report': '80008',
+};
+
+const user_name_arr = [
+  '林**',
+  '王*',
+  '朱*',
+  '刘**',
+  '刘*',
+  '张**',
+  '韩*',
+  '陈**',
+  '孙*',
+  '乔**',
+  '陈*',
+  '祝**',
+];
+
+const time_arr = ['1', '2', '3'];
+
+const report_arr = [
+  {
+    'zh-CN': '2024年流年运势',
+    'zh-TW': '2024年流年運勢',
+  },
+  {
+    'zh-CN': '2024年财运',
+    'zh-TW': '2024年財運',
+  },
+  {
+    'zh-CN': '2024年感情运势',
+    'zh-TW': '2024年感情運勢',
+  },
+  {
+    'zh-CN': '2024年事业运势',
+    'zh-TW': '2024年事業運勢',
+  },
+  {
+    'zh-CN': '八字合婚',
+    'zh-TW': '八字合婚',
+  },
+  {
+    'zh-CN': '袁天罡推背称骨',
+    'zh-TW': '袁天罡推背稱骨',
+  },
+  {
+    'zh-CN': '鬼谷子百卦论命',
+    'zh-TW': '鬼谷子百卦論命',
+  },
+  {
+    'zh-CN': '六爻财运神卦',
+    'zh-TW': '六爻財運神卦',
+  },
+  {
+    'zh-CN': '八字流年',
+    'zh-TW': '八字流年',
+  },
+  {
+    'zh-CN': '今生缘分揭秘',
+    'zh-TW': '今生緣分揭秘',
+  },
+];
+
+const e_id_arr = [
+  '60009',
+  '60001',
+  '60010',
+  '60011',
+  '60005',
+  '60002',
+  '60003',
+  '60001',
+  '60009',
+  '60005',
+];
+
+const report_url = [
+  'year_of_lucky_2024',
+  'lucky_year_report',
+  'emotion_fortune',
+  'career_fortune_2024',
+  'marriage_measure_overseas',
+  'weigh_bone',
+  'guiguzi_fortune',
+  'lucky_year_report',
+  'year_of_lucky_2024',
+  'marriage_measure_overseas',
+];
+
+const score_arr = ['96', '97', '98', '99', '100'];
+
+export default {
+  components: { Recommend, Fortune, PayPopup, PopResult },
+  data() {
+    return {
+      cn_order_btn:
+        'https://psychicai-static.psychicai.pro/imgs/2404db41abf620c84fbba27927577655e386.png',
+      cn_right_pay:
+        'https://psychicai-static.psychicai.pro/imgs/24042d415768c8314aad99eb44ebcaeda4d6.png',
+      tw_order_btn,
+      tw_right_pay,
+      index,
+      emotion_report: '80001',
+      w: 750,
+      visible: false,
+      //
+      zhekou: 2,
+      checked_list: initCheck, //已选择的产品
+      mySwiper: null,
+      sale_visible: false,
+      can_choose: true, // 选择商品
+      pop_list: [],
+      pay_visible: false,
+      product_id: 0,
+      combine_ids: '',
+      pay_result_visible: false, //支付结果弹窗页
+      can_submit: true, // 是否可以提交
+      hot_product_list: hotRecommendProduction, // 爆款推荐
+      all_list: [],
+      result_list: [],
+      order_id: utils.getQueryString('order_id') || '',
+      continue: true,
+      sub_orders: [],
+      fix_pop: false,
+      bzhh,
+      nianyun_24,
+      ganqqingyun_24,
+      caiyun_24,
+      zongheyunshi,
+      banner_ganqing,
+      banner_ganqing,
+      xiabanner_bazi,
+      top_caiyun,
+      top_shiye,
+      banner_yuantiangang,
+
+      // 新版
+      buy_list: [],
+      mock_report_list: [],
+      score_list: [],
+      cur_index: 0,
+    };
+  },
+  computed: {
+    // 顶部广告
+    header_list() {
+      return [
+        {
+          id: 1,
+          cn_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2404b88f1b070d4542f391d749cf8d5d6c48.png',
+          tw_icon: tw_wealth24,
+          name: '2024年财运',
+          url: 'lucky_year_report',
+          a_id: '60001',
+          a_name: '2024_wealty_report',
+        },
+        {
+          id: 2,
+          cn_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2404bfd6c3dce6cc479cb50e999f270358ec.png',
+          tw_icon: tw_year24,
+          name: '24年年运',
+          url: 'year_of_lucky_2024',
+          a_id: '60009',
+          a_name: '2024_report',
+        },
+        {
+          id: 3,
+          cn_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2404c53a0f34e86c4bbf90b5537bbd4c8fb0.png',
+          tw_icon: tw_bzhh,
+          name: '八字合婚',
+          url: 'marriage_measure_overseas',
+          a_id: '60005',
+          a_name: 'marriage_contract_report',
+        },
+        {
+          id: 4,
+          cn_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2404da455076874c45d689335fbb5fd98c5c.png',
+          tw_icon: tw_web,
+          name: '命理寻真',
+          url: 'https://www.psychicai.pro/',
+          a_id: '60099',
+          a_name: 'download',
+        },
+        // {
+        //   id: 80004,
+        //   icon: 'https://psychicai-static.psychicai.pro/imgs/231163a3ceab6ba14d97bbca80544b9c3cfd.png',
+        //   name: '八字事业详批',
+        //   url: 'career_divination_overseas',
+        //   ios_id: '',
+        //   android_id: '22',
+        // },
+        // {
+        //   id: 80005,
+        //   icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/af8b0b8a9c3484c4f4a5428e984c5e8c.png',
+        //   name: '袁天罡',
+        //   url: 'weigh_bone',
+        //   ios_id: '',
+        //   android_id: '23',
+        // },
+        // {
+        //   id: 80005,
+        //   icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/630c7179844d4b3b20f5cf3ff46ff4b6.png',
+        //   name: '鬼谷子',
+        //   url: 'guiguzi_fortune',
+        //   ios_id: '',
+        //   android_id: '24',
+        // },
+
+        // {
+        //   id: 80002,
+        //   icon: 'http://imgcom.static.suishenyun.net/img_head-5e6238.png',
+        //   name: '2024感情运势',
+        //   url: 'emotion_fortune',
+        //   ios_id: '',
+        //   android_id: '',
+        // },
+        // {
+        //   id: 80011,
+        //   icon: career_2024,
+        //   name: '2024事业运',
+        //   url: 'career_fortune_2024',
+        //   ios_id: '',
+        //   android_id: '',
+        // },
+        // {
+        //   id: 80009,
+        //   icon: top_shiye,
+        //   name: '2024年运',
+        //   url: 'year_of_lucky_2024',
+        //   ios_id: '',
+        //   android_id: '',
+        // },
+      ];
+    },
+    // 推荐
+    recommend_list() {
+      return [
+        {
+          id: 80010,
+          icon: ganqqingyun_24,
+          name: '感情运',
+          url: 'emotion_fortune',
+        },
+        {
+          id: 80005,
+          icon: bzhh,
+          name: '八字合婚',
+          url: 'marriage_measure_overseas',
+        },
+        {
+          id: 80009,
+          icon: nianyun_24,
+          name: '24年年运',
+          url: 'year_of_lucky_2024',
+        },
+        {
+          id: 80001,
+          icon: caiyun_24,
+          name: '24年财运',
+          url: 'lucky_year_report',
+        },
+      ];
+    },
+    // 底部广告
+    ad_list() {
+      return [
+        {
+          id: 80009,
+          icon: gif_nianyun,
+          name: '2024年年运',
+          url: 'year_of_lucky_2024',
+        },
+        {
+          id: 80010,
+          icon: gif_ganqing,
+          name: '24年感情运',
+          url: 'emotion_fortune',
+        },
+        {
+          id: 80002,
+          icon: gif_yuantiangang,
+          name: '袁天罡推背称骨',
+          url: 'weigh_bone',
+        },
+        {
+          id: 80003,
+          icon: gif_guiguzi,
+          name: '鬼谷子',
+          url: 'guiguzi_fortune',
+        },
+        {
+          id: 80005,
+          icon: xiabanner_bazi,
+          name: '八字合婚',
+          url: 'marriage_measure_overseas',
+        },
+        //
+      ];
+    },
+
+    // 折扣列表
+    zhekouList() {
+      return [
+        {
+          id: 1,
+          num: 1,
+          total: 0,
+          percent: 0,
+          price: 68,
+        },
+        {
+          id: 2,
+          num: 2,
+          total: 138,
+          percent: '-37%',
+          price: 88,
+        },
+        {
+          id: 3,
+          num: 3,
+          total: 204,
+          percent: '-47%',
+          price: 108,
+        },
+      ];
+    },
+    // 爆款推荐
+    productionList() {
+      let arr = [];
+      for (let i = 1; i < 11; i++) {
+        arr.push({
+          id: i,
+          checked: false,
+          name: '2024财运',
+          desc: '預知運勢順遂，預測好運危月份，把握流年機遇！預知運勢順遂，預測好運危月份，把握流年機遇！',
+          url: 'www.baidu.com',
+          icon: 'https://psychic-h5.wezhaxi.com/img/prod-combine_5.759e0d4.png',
+        });
+      }
+      return arr;
+    },
+    // 测算产品
+    measureProduct() {
+      return [
+        {
+          id: 21,
+          name: '2024年财运',
+          banner_id: 80001,
+          checked: false,
+          icon: 'https://psychicai-static.psychicai.pro/imgs/23115681e58a5c544fee8ac8c2f259080607.png',
+          url: 'lucky_year_report',
+          product_key: 'h5_wealth2024',
+          tips: '2024全景扫描，预知财运高低浮沉，提前为你揭示财富脉络，帮助你致富之道，拥有财富满盈的2024年！',
+          check_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2311c537595a580c452fb90354ab4244bd78.png',
+        },
+        {
+          id: 22,
+          name: '八字事业详批',
+          banner_id: 80004,
+          checked: false,
+          icon: 'https://psychicai-static.psychicai.pro/imgs/2311f9a18eab2fba41eb87c6b74a69c112f2.png',
+          url: 'career_divination_overseas',
+          product_key: 'h5_career',
+          tips: '预知事业低谷，成功时机，把握你的先天优势，让你的事业一帆风顺！',
+          check_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2311ff0388985646470a8302f1547167ba46.png',
+        },
+        {
+          id: 23,
+          name: '八字合婚',
+          banner_id: 80005,
+          checked: false,
+          icon: 'https://psychicai-static.psychicai.pro/imgs/2311b43a350070e54399beb014774e98dccd.png',
+          url: 'marriage_measure_overseas',
+          product_key: 'h5_marriage',
+          tips: '合八字测试姻缘，专业分析婚配指数，拥有更加幸福美满的婚姻！',
+          check_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2311012132873f174e7ebcd518f2253c909a.png',
+        },
+        {
+          id: 24,
+          name: '姻缘分析',
+          banner_id: 80006,
+          checked: false,
+          icon: 'https://psychicai-static.psychicai.pro/imgs/231106e4f92e19ab4095b50fcaa5075ad621.png',
+          url: 'marriage_divination_overseas',
+          product_key: 'h5_love',
+          tips: '姻缘分析，知己知彼，为你扫除情感障碍，帮你打造天赐良缘！',
+          check_icon:
+            'https://psychicai-static.psychicai.pro/imgs/231184d2494396114e79bdd2f5cdf7ab4f81.png',
+        },
+        {
+          id: 25,
+          name: '2023年兔年运程详批',
+          banner_id: 80007,
+          checked: false,
+          icon: 'https://psychicai-static.psychicai.pro/imgs/23111d65fa2098a5428fb4cdb8e793a1d3de.png',
+          url: 'new_year_luck_overseas',
+          product_key: 'h5_fortune2023',
+          tips: '预知运势顺利，预测好运、危机出现月份，助你把握流年机遇！ ',
+          check_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2311e8b5bdf1352f40ed80ec4239f8246eef.png',
+        },
+        {
+          id: 26,
+          name: '2023兔年一生财运',
+          banner_id: 80008,
+          checked: false,
+          icon: 'https://psychicai-static.psychicai.pro/imgs/2311dab2e4808856460198f9fb5d00335a02.png',
+          url: 'wealth_boutique_overseas',
+          product_key: 'h5_wealth2023',
+          tips: '把握财运先机，揭晓财富运程，助你财运亨通，财源滚滚！',
+          check_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2311451b81975b92422dba50e3ecb43a6c71.png',
+        },
+        {
+          id: 27,
+          name: '袁天罡推背称骨',
+          banner_id: 80002,
+          checked: false,
+          icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/af8b0b8a9c3484c4f4a5428e984c5e8c.png',
+          url: 'weigh_bone',
+          product_key: 'h5_weigh_bone',
+          tips: '通过袁天罡古老占算法，探究身体骨骼，揭示生命密码，为你清晰了解生涯命运走向，让你事业、爱情、健康三线并进，并在生活中找到最佳平衡！',
+          check_icon:
+            'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/af8b0b8a9c3484c4f4a5428e984c5e8c.png',
+        },
+        {
+          id: 28,
+          name: '鬼谷子百卦论命',
+          banner_id: 80003,
+          checked: false,
+          icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/630c7179844d4b3b20f5cf3ff46ff4b6.png',
+          url: 'guiguzi_fortune',
+          product_key: 'h5_bai_gua',
+          tips: '关乎命运的百卦，把握生活中的转机与挑战。通过古老的易经知识演绎生活，精准预判运势，解析个性、爱情、职业、健康等生活重要环节，让你能够明察秋毫，走好人生每一步！',
+          check_icon:
+            'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/630c7179844d4b3b20f5cf3ff46ff4b6.png',
+        },
+        {
+          id: 29,
+          name: '2024年年运',
+          banner_id: 80009,
+          checked: false,
+          icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/21fdbe04b4913ca464cc71222552327d.png',
+          url: 'year_of_lucky_2024',
+          product_key: 'h5_annual2024',
+          tips: '预知全年吉凶，揭示人生起伏，明晰先机，决策无忧，助力你掌握全年运势，开启更好的2024年！',
+          check_icon:
+            'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/21fdbe04b4913ca464cc71222552327d.png',
+        },
+        {
+          id: 30,
+          name: '2024感情运势',
+          banner_id: 12345,
+          checked: false,
+          icon: 'http://imgcom.static.suishenyun.net/img_head-5e6238.png',
+          url: 'emotion_fortune',
+          product_key: 'h5_emotion2024',
+          tips: '2024感情运势，暂无简介',
+          check_icon: 'http://imgcom.static.suishenyun.net/img_head-5e6238.png',
+        },
+        {
+          id: 31,
+          name: '2024事业运',
+          banner_id: 123456,
+          checked: false,
+          icon: career_2024,
+          url: 'career_fortune_2024',
+          product_key: 'h5_career2024',
+          tips: '2024年事业运，暂无简介，2024年事业运，暂无简介',
+          check_icon: career_2024,
+        },
+      ];
+    },
+    longnianBanner() {
+      return longnianImg;
+    },
+
+    // 改版的报告商品
+    sale_list() {
+      let arr = [];
+      for (let i = 0; i < 7; i++) {
+        let num = this.randomNum(6538, 9362);
+        arr.push({
+          buy_num: num,
+          review_num: +(num * (this.randomNum(95, 97) / 100)).toFixed(0),
+        });
+      }
+
+      let arr2 = [
+        {
+          id: 1,
+          name: '袁天罡',
+          cn_desc: '称骨论命，揭露宿命重负，应对多舛命途',
+          tw_desc: '稱骨論命，揭露宿命重負，應對多舛命途',
+          url: 'weigh_bone',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2404a40011fb74fd44aa9e0bf8eb8ca1dfc3.png',
+          tw_icon: tw_weigh,
+          buy_num: '6752',
+          review_num: '6518',
+          e_id: '-10009',
+          e_name: 'click_report_chenggu',
+          ad_e: 'kajqs3',
+        },
+        {
+          id: 2,
+          name: '鬼谷子',
+          cn_desc: '64卦预见人生，审慎应对风波，谨防危机潜伏',
+          tw_desc: '64卦預見人生，審慎應對風波，謹防危機潛伏',
+          url: 'guiguzi_fortune',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2404090733726e3c4fabb8a756a685bfadbf.png',
+          tw_icon: tw_ggz,
+          buy_num: '9522',
+          review_num: '9277',
+          e_id: '-10008',
+          e_name: 'click_report_64gua',
+          ad_e: 'jd4oen',
+        },
+        {
+          id: 3,
+          name: '24年年运',
+          cn_desc: '你的2024年如何度过？大师为你解读年度运势',
+          tw_desc: '你的2024年如何度過？大師為你解讀年度運勢',
+          url: 'year_of_lucky_2024',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2404e9c969b4e1464e91b6836b7e57b7d346.png',
+          tw_icon: tw_year24_banner,
+          buy_num: '8321',
+          review_num: '8238',
+          is_big: true,
+          e_id: '-10003',
+          e_name: 'click_report_2024report',
+          ad_e: 'oqfzzs',
+        },
+        {
+          id: 4,
+          name: '24年感情运',
+          cn_desc: '感情运势早知道，和合美满还是遗憾分手',
+          tw_desc: '感情運勢早知道，和合美滿還是遺憾分手',
+          url: 'emotion_fortune',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/240480dc4c244a8e4dafb2c9658a953b2b7d.png',
+          tw_icon: tw_emotion,
+          buy_num: '3492',
+          review_num: '3441',
+          e_id: '-10006',
+          e_name: 'click_report_2024lovely',
+          ad_e: 'efy9t0',
+        },
+        {
+          id: 5,
+          name: '24年事业运',
+          cn_desc: '前途迷雾重重，挑战接踵而至，开创事业新章',
+          tw_desc: '前途迷霧重重，挑戰接踵而至，開創事業新章',
+          url: 'career_fortune_2024',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/24046a9e0acaca504f16b3069e0c06a611df.png',
+          tw_icon: tw_career,
+          buy_num: '8314',
+          review_num: '8090',
+          e_id: '-10004',
+          e_name: 'click_report_2024career',
+          ad_e: 'tzsnzi',
+        },
+        {
+          id: 6,
+          name: '24年财运',
+          cn_desc: '预警财务危机，洞悉关键时刻，避免潜在财富风险。',
+          tw_desc: '預警財務危機，洞悉關鍵時刻，避免潛在財富風險。',
+          url: 'lucky_year_report',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/24048d23afe94dc94781b614ed38300c52d2.png',
+          tw_icon: tw_wealth24_banner,
+          buy_num: '7315',
+          review_num: '7044',
+          e_id: '-10005',
+          e_name: 'click_report_2024wealty',
+          ad_e: 'egm8a2',
+        },
+        {
+          id: 7,
+          name: '八字合婚',
+          cn_desc: '揭示姻缘宿命，戒备潜藏危机，慎选伴侣之道',
+          tw_desc: '揭示姻緣宿命，戒備潛藏危機，慎選伴侶之道',
+          url: 'marriage_measure_overseas',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/24041ad15f947999492aabf1a307f653f794.png',
+          tw_icon: tw_bzhh_banner,
+          buy_num: '6324',
+          review_num: '6185',
+          e_id: '-10007',
+          e_name: 'click_report_marriage',
+          ad_e: '8g4xt8',
+        },
+      ];
+
+      return arr2;
+    },
+    is_in_app() {
+      return utils.isInApp();
+    },
+    is_cn() {
+      return utils.getLanguage() === 'zh-CN';
+    },
+  },
+  watch: {
+    sale_visible(val) {
+      this.fix_pop = val ? true : false;
+      if (!val) {
+        this.can_choose = true;
+      } else {
+        this.$nextTick(() => {
+          this.pop_list.forEach((it, k) => {
+            this.handleText(k);
+          });
+        });
+      }
+    },
+    pay_visible(val) {
+      this.fix_pop = val ? true : false;
+    },
+    pay_result_visible(val) {
+      this.fix_pop = val ? true : false;
+    },
+  },
+  created() {
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'sogk80',
+      });
+    this.randomBuyList();
+    document.title = this.$t('dom-title');
+    getProductionsAPI('ceh5').then(res => {
+      this.all_list = res.data;
+      this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
+    });
+  },
+  async mounted() {
+    utils.firebaseLogEvent('20000', '-10001', 'page_view_h5main', 'page_view', {
+      args_name: 'page_view_h5main',
+      channel: utils.getFBChannel(),
+    });
+    this.getStoreChecked();
+    let arr = localStorage.getItem('mlxz_checked_list');
+    if (!this.order_id) return;
+    const { status, sub_orders } = await this.getOrderResult();
+    if (status) {
+      if (!this.is_in_app) return;
+      const stop = utils.getQueryString('stop') || '';
+      if (stop) {
+        if (status === 'PAYED') {
+          this.result_list = arr ? JSON.parse(arr) : initCheck;
+          this.checked_list = initCheck;
+          if (this.result_list.find(it => it.id !== '')) {
+            this.pay_result_visible = true;
+          }
+          localStorage.removeItem('mlxz_checked_list');
+          this.sub_orders = sub_orders;
+        }
+        let url = new URL(window.location.href);
+        let newUrl = url.origin + url.pathname;
+        history.pushState(null, '', newUrl);
+        return;
+      }
+      const new_url = window.location.href + '&stop=1';
+      if (utils.isAndroid()) {
+        window.psychicai_client.onWebPayResult(new_url, true);
+      } else {
+        let params = {
+          url: new_url,
+          main_page: 1,
+        };
+        window.prompt('onWebPayResult', JSON.stringify(params));
+      }
+    }
+  },
+  beforeDestroy() {
+    this.pay_result_visible = false;
+  },
+  methods: {
+    getProductions,
+    // 查询订单支付结果
+    async getOrderResult() {
+      if (!this.continue || !this.order_id) return;
+      Indicator.open(this.$t('order-result-loading'));
+      const { status, data } = await getResultAPI({ order_id: this.order_id });
+      Indicator.close();
+      this.continue = false;
+      if (status !== 1000) return;
+      return data;
+    },
+
+    // 两个数组中的key相同的合并成一个数组
+    mergeArray(arr1, arr2) {
+      let arr = [];
+      arr1.forEach(it => {
+        arr2.forEach(item => {
+          if (it.product_key === item.product_key) {
+            arr.push(Object.assign(it, item));
+          }
+        });
+      });
+      return arr;
+    },
+
+    /**
+     * @description: 获取缓存的已选商品
+     * @return {*}
+     */
+    getStoreChecked() {
+      let arr = localStorage.getItem('mlxz_checked_list');
+      this.checked_list = arr ? JSON.parse(arr) : initCheck;
+      let i = 0;
+      this.checked_list.forEach(it => {
+        if (it.product_key) {
+          i++;
+        }
+      });
+      this.zhekou = i > 0 ? i - 1 : 2;
+    },
+
+    /**
+     * @description: 初始化勾选的商品
+     * @param {*} arr1
+     * @param {*} arr2
+     * @return {*}
+     */
+    formatProductList(arr1, arr2) {
+      arr1.forEach(it => {
+        arr2.forEach(item => {
+          it.checked = it.product_key === item.product_key ? true : false;
+        });
+      });
+      return arr1;
+    },
+
+    /**
+     * @description: 开启商品弹窗
+     * @return {*}
+     */
+    showPop() {
+      utils.firebaseLogEvent(
+        '10009',
+        '-10004',
+        'click_fortune_report_choice',
+        'click',
+        {
+          args_name: 'click_fortune_report_choice',
+        }
+      );
+      utils.firebaseLogEvent(
+        '10010',
+        '-10001',
+        'page_view_report_choice',
+        'page_view',
+        {
+          args_name: 'page_view_report_choice',
+        }
+      );
+
+      let arr = localStorage.getItem('mlxz_checked_list');
+      if (arr) {
+        this.checked_list = JSON.parse(arr);
+      }
+      this.pop_list = this.formatProductList(this.pop_list, this.checked_list);
+
+      let id_arr = [];
+      this.checked_list.forEach(it => {
+        if (it.id) {
+          id_arr.push(it.id);
+        }
+      });
+      if (!id_arr.length) {
+        this.sale_visible = true;
+        return;
+      }
+      id_arr.forEach(it => {
+        this.pop_list.forEach(item => {
+          if (item.id === it) {
+            item.checked = true;
+          }
+        });
+      });
+      let has_num = this.formatChecked();
+      this.can_choose = has_num >= 3 ? false : true;
+      this.sale_visible = true;
+    },
+
+    /**
+     * @description: 选择商品
+     * @param {*} it 当前选中
+     * @param {*} k
+     * @return {*}
+     */
+    chooseSale(it, k) {
+      if (!this.can_choose && !it.checked) {
+        return;
+      }
+      this.pop_list[k].checked = !this.pop_list[k].checked;
+      utils.firebaseLogEvent(
+        '10010',
+        '-10003',
+        'click_report_choice',
+        'click',
+        {
+          args_name: 'click_report_choice',
+          // that[it.product_key]:eventProductValue[it.product_key],
+          report_id: it.banner_id + '',
+          channel: utils.getFBChannel(),
+        }
+      );
+      let has_num = this.formatChecked();
+      this.can_choose = has_num >= 3 ? false : true;
+    },
+
+    /**
+     * @description: 校验时候选择了3个商品
+     * @return {*}
+     */
+    formatChecked() {
+      let i = 0;
+      this.pop_list.forEach(it => {
+        if (it.checked) {
+          i++;
+        }
+      });
+      return i;
+    },
+
+    closeSalePop() {
+      this.getStoreChecked();
+      this.sale_visible = false;
+    },
+
+    /**
+     * @description: 按照ID大小排序
+     * @param {*} arr
+     * @return {*}
+     */
+    sortData(arr) {
+      return arr.sort((a, b) => {
+        return a.id - b.id;
+      });
+    },
+
+    /**
+     * @description: 确认选择的产品
+     * @return {*}
+     */
+    handleConfirm() {
+      let i = 0;
+      this.pop_list.forEach(it => {
+        if (it.checked) {
+          i++;
+        }
+      });
+      if (i < 2) {
+        Toast(this.$t('less-get-two-tips'));
+        return false;
+      }
+      this.checked_list = [];
+      this.pop_list.forEach(it => {
+        if (it.checked) {
+          this.checked_list.push(it);
+        }
+      });
+      if (this.checked_list.length < 3) {
+        for (let i = 0; i < 4 - this.checked_list.length; i++) {
+          this.checked_list.push({ value: '' });
+        }
+      }
+      let has_num = this.formatChecked();
+      this.zhekou = has_num > 0 ? has_num - 1 : 2;
+      this.sortData(this.checked_list);
+      localStorage.setItem(
+        'mlxz_checked_list',
+        JSON.stringify(this.checked_list)
+      );
+      utils.firebaseLogEvent(
+        '10010',
+        '-10002',
+        'click_fortune_report_choice_confirm',
+        'click',
+        {
+          args_name: 'click_fortune_report_choice_confirm',
+        }
+      );
+
+      this.sale_visible = false;
+    },
+
+    /**
+     * @description: 打开支付弹窗
+     * @return {*}
+     */
+    payModal() {
+      let i = 0;
+      this.checked_list.find(it => {
+        if (it.id) {
+          i++;
+        }
+      });
+      if (i < 2) {
+        Toast(this.$t('less-get-two-tips'));
+        return;
+      }
+
+      utils.firebaseLogEvent(
+        '10009',
+        '-10005',
+        'click_fortune_report_sales',
+        'click',
+        {
+          args_name: 'click_fortune_report_sales',
+        }
+      );
+      this.pay_visible = true;
+    },
+
+    /**
+     * @description: 查看报告/或者填写信息
+     * @param {*} val
+     * @return {*}
+     */
+    handleReport(val, index) {
+      if (index === 1) {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 'd1cle9',
+          });
+        console.log('Adjust', 'd1cle9');
+
+        utils.firebaseLogEvent(
+          '10009',
+          '-10003',
+          'click_fortune_report_banner',
+          'click',
+          {
+            args_name: 'click_fortune_report_banner',
+            banner_id: val.id,
+          }
+        );
+      }
+      if (index === 2) {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: '5ts44a',
+          });
+        console.log('Adjust', '5ts44a');
+
+        utils.firebaseLogEvent(
+          '10009',
+          '-10006',
+          'click_fortune_report_banner2',
+          'click',
+          {
+            args_name: 'click_fortune_report_banner2',
+            banner_id: val.id,
+          }
+        );
+      }
+      if (index === 3) {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 'vzsv9y',
+          });
+        console.log('Adjust', 'vzsv9y');
+
+        utils.firebaseLogEvent(
+          '10009',
+          '-10007',
+          'click_fortune_report_banner3',
+          'click',
+          {
+            args_name: 'click_fortune_report_banner3',
+            banner_id: val.id,
+          }
+        );
+      }
+      if (index === 5) {
+        utils.firebaseLogEvent(
+          '20000',
+          '-10002',
+          'click_h5main_banner',
+          'click',
+          {
+            args_name: 'click_h5main_banner',
+            report_id: val.a_id,
+          }
+        );
+        this.logHome(val.a_id);
+      }
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'sqqqbt',
+        });
+      // window.open(val.id === 4 ? val.url : `${val.url}.html`, '_blank');
+
+      location.href = val.id === 4 ? val.url : `${val.url}.html`;
+    },
+
+    backUrl() {
+      location.href = 'mlxz://back';
+    },
+
+    hasPayReport(item) {
+      setTimeout(() => {
+        this.pay_result_visible = false;
+      }, 1000);
+      location.href = `${item.url}.html#/?has_pay=SUCCESS&order_id=${item.order_id}&product_key=${item.product_key}`;
+    },
+    handleText(id) {
+      // 使用JavaScript截断文本并添加省略号
+      const element = document.getElementById(`text-${id}`);
+      let lineHeight = parseInt(
+        window.getComputedStyle(element).lineHeight,
+        10
+      );
+      let maxHeight = lineHeight * 2; // 两行文本的高度
+      if (element.offsetHeight > maxHeight) {
+        element.style.webkitLineClamp = '2';
+        element.style.webkitBoxOrient = 'vertical';
+        element.style.display = '-webkit-box';
+        element.style.overflow = 'hidden';
+      }
+    },
+    hiddenText(text) {
+      // return text;
+      if (text.length > 23) {
+        return text.substring(0, 23) + '......';
+      } else {
+        return text;
+      }
+    },
+
+    // 随机走马灯数据
+    randomBuyList() {
+      for (let i = 0; i < 50; i++) {
+        // 0-11随机数
+        let num1 = Math.floor(Math.random() * 12);
+        let num2 = Math.floor(Math.random() * 3);
+        let num3 = Math.floor(Math.random() * 10);
+        let num4 = Math.floor(Math.random() * 4);
+        this.buy_list.push(
+          `${user_name_arr[num1]}${time_arr[num2]}${this.$t(
+            'tips-1'
+          )}之前${this.$t('tips-2')}了`
+        );
+        this.mock_report_list.push({
+          name: report_arr[num3][utils.getLanguage()],
+          id: num3,
+        });
+        this.score_list.push(
+          `，${this.$t('tips-3')}${score_arr[num4]}分${this.$t('tips-4')}`
+        );
+      }
+    },
+    async jumpPage(index) {
+      utils.firebaseLogEvent(
+        '20000',
+        '-10011',
+        'click_main_scrollbar',
+        'click',
+        {
+          args_name: 'click_main_scrollbar',
+          report_id: e_id_arr[index],
+        }
+      );
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'exr1zn',
+        });
+      await utils.asleep(200);
+
+      location.href = `${report_url[index]}.html`;
+    },
+    // 随机数
+    randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    },
+    async jumpUrl(url, e_id, e_name, ad_e) {
+      utils.firebaseLogEvent('20000', e_id, e_name, 'click', {
+        args_name: e_name,
+      });
+
+      window.Adjust && window.Adjust.trackEvent({ eventToken: ad_e });
+      if (url !== 'history_order') {
+        this.logHome(e_id);
+      }
+
+      await utils.asleep(500);
+      location.href = `${url}.html`;
+      // window.open(`${url}.html`, '_blank');
+    },
+    getReportItem(index) {
+      this.cur_index = index;
+    },
+
+    /**
+     * @description: 上报埋点
+     * @param {*} e_id
+     * @return {*}
+     */
+    logHome(e_id) {
+      utils.firebaseLogEvent('20000', '-10012', 'click_report_all', 'click', {
+        args_name: 'click_report_all',
+        report_id: e_id,
+        channel: utils.getFBChannel(),
+      });
+
+      if (utils.isProd()) {
+        try {
+          fbq('track', 'CompleteRegistration');
+        } catch (err) {
+          console.error('CompleteRegistration fbq error message:', err);
+        }
+      }
+    },
+  },
+};
+</script>
+
+<style lang="less">
+.mint-toast {
+  z-index: 2200 !important;
+}
+
+.v-modal {
+  opacity: 0.7 !important;
+}
+.swiper-buy .van-swipe-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-contain .mint-swipe-indicators {
+  bottom: -0.15rem !important;
+  .mint-swipe-indicator {
+    width: 0.1rem !important;
+    height: 0.1rem !important;
+    background: #fff !important;
+    opacity: 0.4 !important ;
+    border-radius: 0.05rem !important;
+  }
+  .mint-swipe-indicator.is-active {
+    width: 0.24rem !important;
+    height: 0.1rem !important;
+    border-radius: 0.05rem !important;
+    opacity: 1 !important;
+  }
+}
+</style>
+
+<style scoped lang="less">
+@import './../../less/reset.less';
+@import './../../less/common.less';
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.link-url {
+  color: #e3453d;
+  text-decoration: underline;
+}
+
+.fix-pop {
+  position: fixed !important;
+  overflow-y: hidden;
+}
+.history-order {
+  width: 0.56rem;
+  height: 1.58rem;
+  position: fixed;
+  right: 0;
+  top: 0.6rem;
+  z-index: 10;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  box-sizing: border-box;
+  background: #d2e7de;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .index-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    .header {
+      width: 4.16rem;
+      height: 0.8rem;
+      margin: 0.3rem auto;
+      background-image: url('../../assets/img/3.0/slide.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .slide {
+        position: relative;
+        width: 3.56rem;
+        height: 0.68rem;
+        display: flex;
+        .slider {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 1.78rem;
+          height: 0.68rem;
+          z-index: 1;
+          transition-duration: 0.2s;
+        }
+        .tab {
+          position: relative;
+          z-index: 2;
+          width: 50%;
+          font-size: 0.32rem;
+          line-height: 0.68rem;
+          text-align: center;
+          font-weight: bold;
+          color: #e6ffff;
+          transition-duration: 0.2s;
+        }
+      }
+    }
+    .content {
+      margin-top: 0.44rem;
+    }
+  }
+}
+.header-box {
+  width: 7.5rem;
+  background: url('https://psychicai-static.psychicai.pro/imgs/24040a66e62f96ec4d54814920ed3dcc4125.png')
+    no-repeat;
+  background-size: 7.5rem 4.22rem;
+  position: relative;
+  padding: 0.2rem 0.2rem 0;
+  .buy-list {
+    width: 7.1rem;
+    height: 0.72rem;
+    background: url('https://psychicai-static.psychicai.pro/imgs/240498b976e40d914444b775fec84707719e.png')
+      no-repeat;
+    background-size: contain;
+    margin-top: 0.2rem;
+    font-weight: 400;
+    font-size: 0.24rem;
+    color: #314a46;
+    line-height: 0.24rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    position: relative;
+    .swiper-buy {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .laba {
+      width: 0.36rem;
+      height: 0.36rem;
+      left: 0.2rem;
+      position: absolute;
+    }
+    .arrow {
+      width: 0.16rem;
+      height: 0.24rem;
+      right: 0.25rem;
+      position: absolute;
+      z-index: 2;
+    }
+  }
+}
+.swiper-contain {
+  height: 2.96em;
+  width: 7.1rem;
+  .swiper-item {
+    width: 100%;
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.hidden {
+  display: none !important;
+}
+.sale-box {
+  width: 7.18rem;
+  height: 4.75rem;
+  background: #222;
+  border-radius: 0.24rem;
+  margin: 0.24rem auto;
+  overflow-x: hidden;
+  .title-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.3rem 0.3rem 0.34rem 0;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    .left {
+      width: 2.52rem;
+      height: 0.64rem;
+      background: url('../../assets/img/mlxz/index/ce_img_zhekoubg.png')
+        no-repeat;
+      background-size: contain;
+      font-size: 0.32rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 0.32rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 0.22rem;
+    }
+    .right {
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+      align-items: center;
+      .total {
+        height: 0.24rem;
+        font-size: 0.24rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 0.24rem;
+        text-decoration: line-through;
+        margin-right: 0.05rem;
+      }
+      .percent {
+        height: 0.24rem;
+        font-size: 0.24rem;
+        font-weight: 400;
+        color: #fff;
+        line-height: 0.24rem;
+        margin: 0 0.04rem;
+      }
+      .price {
+        height: 0.28rem;
+        font-size: 0.32rem;
+        font-weight: 700;
+        color: #962bd1;
+        line-height: 0.28rem;
+      }
+    }
+  }
+  .sale-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .item {
+      width: 2.02rem;
+      height: 1.3rem;
+      background: url('../../assets/img/mlxz/index/check_small.png') no-repeat;
+      background-size: contain;
+      margin: 0 0.11rem;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .icon {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .add-icon {
+      width: 0.52rem;
+      height: 0.52rem;
+      position: absolute;
+      z-index: 10;
+    }
+  }
+  .lock-btn {
+    position: relative;
+    width: 5.86rem;
+    height: 0.96rem;
+    background: url('../../assets/img/mlxz/cesuan_home/mymm_btn.png') no-repeat;
+    background-size: contain;
+    margin: 0.4rem 0.62rem 0.24rem;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 700;
+    font-size: 0.32rem;
+    color: #fdf4be;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .change-btn {
+    width: 100%;
+    height: 0.26rem;
+    font-size: 0.26rem;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #57a38e;
+    line-height: 0.26rem;
+    text-align: center;
+  }
+}
+
+.hot-product {
+  width: 7.18rem;
+  min-height: 4.56rem;
+  background: #222;
+  border-radius: 0.24rem;
+  margin: 0 auto 0.24rem;
+  display: flex;
+  flex-direction: column;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 0.2rem;
+  .title {
+    width: 2.45rem;
+    height: 0.92rem;
+    margin-top: 0.2rem;
+  }
+  .product-list {
+    width: 7.18rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    .item {
+      width: 3.34rem;
+      height: 3.34rem;
+      margin: 0.1rem;
+    }
+  }
+}
+.text-1 {
+  color: #8b4800;
+}
+.text-2 {
+  color: #9b3124;
+}
+.text-3 {
+  color: #250864;
+}
+.swiper-1 {
+  background: #ffeddf;
+}
+.swiper-2 {
+  background: #ffdfe2;
+}
+.swiper-3 {
+  background: #e5dbff;
+}
+.ask-bg-1 {
+  color: #ffeddf;
+  background: #8b4800;
+}
+.ask-bg-2 {
+  color: #ffdfe2;
+  background: #9b3124;
+}
+.ask-bg-3 {
+  color: #e5dbff;
+  background: #250864;
+}
+.ad-list {
+  width: 7.18rem;
+  min-height: 4rem;
+  background: #222;
+  border-radius: 0.24rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.12rem;
+  margin-bottom: 0.5rem;
+  .item {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0.2rem;
+  }
+}
+
+.hidden-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  word-wrap: break-word;
+  -webkit-box-orient: vertical;
+}
+.pop-box {
+  width: 7.5rem;
+  height: 10.5rem;
+  background: #000;
+  border-radius: 0.4rem 0.4rem 0 0;
+  border-color: #000;
+  padding: 0.4rem 0;
+  .pop-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: PingFangTC-Semibold, PingFangTC;
+    margin-bottom: 0.3rem;
+    padding: 0 0.3rem;
+    width: 100%;
+    .left {
+      font-size: 0.36rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 0.36rem;
+      height: 0.36rem;
+    }
+    .close {
+      width: 0.28rem;
+      height: 0.28rem;
+      position: absolute;
+      right: 0.2rem;
+    }
+  }
+  .pop-content {
+    // height: 9.6rem;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: center;
+    padding-bottom: 0.6rem;
+    height: 8rem;
+    width: 100%;
+    margin: 0 0.15rem;
+    .item {
+      width: 3.34rem;
+      height: 2.36rem;
+      margin: 0 0.13rem 0.3rem;
+      background-size: contain;
+      background-repeat: no-repeat;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .top-icon {
+        width: 100%;
+        height: 1.4rem;
+      }
+      .bottom-box {
+        margin-top: 0.1rem;
+        font-size: 0.24rem;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #999999;
+        width: 3rem;
+        line-height: 0.35rem;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+    }
+    .normal-item {
+      background-image: url('../../assets/img/mlxz/cesuan_home/sale_normal_kuang.png');
+    }
+    .forbidden-item {
+      opacity: 0.6;
+      // background-image: url('../../assets/img/mlxz/cesuan_home/sale_zhezhao_kuang.png');
+    }
+    .check-icon {
+      width: 0.36rem;
+      height: 0.36rem;
+      position: absolute;
+      right: 0.08rem;
+      top: 0.08rem;
+    }
+  }
+  .confirm-box {
+    width: 5.34rem;
+    height: 0.88rem;
+    background: #cc883f;
+    border-radius: 0.44rem;
+    font-size: 0.28rem;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0.4rem;
+    left: 1.08rem;
+  }
+}
+
+.btn-icon {
+  width: 1.08rem;
+  height: 0.48rem;
+  position: absolute;
+  top: -0.2rem;
+  right: 0.18rem;
+}
+.disabled-confirm {
+  // opacity: 0.4;
+  display: none !important;
+}
+
+.report-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.2rem;
+  .common-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 0.2rem;
+  }
+  .normal-item {
+    width: 3.46rem;
+    height: 4.88rem;
+    background: url('https://psychicai-static.psychicai.pro/imgs/2404a1e37968e812485bbeea12aa4254d485.png')
+      no-repeat;
+    background-size: contain;
+    margin: 0 0.09rem;
+    .common-item;
+    .normal-icon {
+      width: 3.34rem;
+      height: 3.34rem;
+      margin: 0.06rem;
+    }
+    .normal-box {
+      margin-top: 0.1rem;
+      .text {
+        width: 2.98rem;
+        font-weight: 400;
+        font-size: 0.28rem;
+        color: #314a46;
+        .hidden-2;
+      }
+      .tips {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0.16rem;
+        height: 0.24rem;
+        font-weight: 400;
+        font-size: 0.24rem;
+        color: #8da5a1;
+        line-height: 0.24rem;
+      }
+    }
+  }
+
+  .big-item {
+    width: 7.1rem;
+    height: 3.62rem;
+    background: url('https://psychicai-static.psychicai.pro/imgs/24041489a229d8c545d9bc252e1418de9766.png')
+      no-repeat;
+    background-size: contain;
+    .common-item;
+    .big-icon {
+      width: 6.98rem;
+      height: 2.08rem;
+      margin: 0.06rem;
+    }
+    .big-box {
+      display: flex;
+      margin-top: 0.1rem;
+      align-items: flex-start;
+      justify-content: space-around;
+      width: 100%;
+      .left {
+        display: flex;
+        flex-direction: column;
+        .text {
+          width: 4.3rem;
+          font-weight: 400;
+          font-size: 0.28rem;
+          color: #314a46;
+          .hidden-2;
+        }
+        .tips {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 0.24rem;
+          font-weight: 400;
+          font-size: 0.24rem;
+          color: #8da5a1;
+          line-height: 0.24rem;
+          margin-top: 0.16rem;
+        }
+      }
+      .right-btn {
+        width: 1.92rem;
+        height: 0.72rem;
+        margin-top: 0.15rem;
+      }
+    }
+  }
+}
+
+.ml-40 {
+  margin-left: 0.4rem;
+}
+.flex-start {
+  justify-content: flex-start !important;
+}
+</style>

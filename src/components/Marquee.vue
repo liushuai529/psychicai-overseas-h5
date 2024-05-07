@@ -1,0 +1,115 @@
+<template>
+    <div class="marquee">
+        <div class="marquee-wrapper">
+            <div class="marquee-box" :class="{ scrollmarquee: scrollMarquee }">
+                <div class="marquee-text">
+                    <div class="marquee-icon"></div>
+                    <span>{{ curMarqueeText }}</span>
+                </div>
+                <div class="marquee-text next">
+                    <div class="marquee-icon"></div>
+                    <span>{{ nextMarqueeText }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import utils from "../libs/utils";
+
+const default_mock_users = [
+    "5分钟前 我*** 成功解锁了事业精批的详细解析",
+    "6分钟前 vt*** 成功解锁了事业精批的详细解析",
+    "12分钟前 辣椒***成功解锁了事业精批的详细解析",
+    "2分钟前 14***成功解锁了事业精批的详细解析",
+    "1分钟前 96***成功解锁了事业精批的详细解析",
+    "8分钟前 小***成功解锁了事业精批的详细解析",
+    "7分钟前 il***成功解锁了事业精批的详细解析",
+    "21分钟前 lo***成功解锁了事业精批的详细解析",
+    "4分钟前 2t***成功解锁了事业精批的详细解析",
+]
+
+export default {
+    props: {
+        mock_users: {
+            default: default_mock_users,
+            type: Array
+        }
+    },
+    data() {
+        return {
+            scrollMarquee: false, // 跑马灯动画
+            nextMarqueeText: "", // 下一条跑马灯文案
+            curMarqueeText: "", // 当前跑马灯文案
+        };
+    },
+    created() {
+        this.runMarquee();
+    },
+    methods: {
+        runMarquee() {
+            this.curMarqueeText = this.mock_users[utils.getRandom(this.mock_users.length)];
+            setInterval(() => {
+                this.nextMarqueeText = this.mock_users[utils.getRandom(this.mock_users.length)];
+                this.scrollMarquee = true;
+
+                setTimeout(() => {
+                    this.curMarqueeText = this.nextMarqueeText;
+                    this.nextMarqueeText = "";
+                    this.scrollMarquee = false;
+                }, 500);
+            }, 4000);
+        },
+    },
+};
+</script>
+
+<style scoped lang="less">
+.marquee {
+    margin: 0.14rem 0;
+    .marquee-wrapper {
+        width: 100%;
+        position: relative;
+        height: 0.4rem;
+        font-size: 0.24rem;
+        line-height: 1;
+        text-align: center;
+        overflow: hidden;
+
+        .scrollmarquee {
+            animation: scrollmarquee linear 0.5s 1;
+        }
+        .marquee-box {
+            display: flex;
+            flex-direction: column;
+
+            .marquee-text {
+                flex: none;
+                height: 0.4rem;
+                text-align: left;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #666;
+                .marquee-icon {
+                    width: 0.28rem;
+                    height: 0.24rem;
+                    background-image: url("../assets/img/3.0/horn.png");
+                    background-position: top;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    margin-right: 0.08rem;
+                }
+            }
+        }
+    }
+}
+@keyframes scrollmarquee {
+    0% {
+        margin-top: 0;
+    }
+    100% {
+        margin-top: -0.4rem;
+    }
+}
+</style>

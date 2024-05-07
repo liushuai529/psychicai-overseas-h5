@@ -1,0 +1,442 @@
+<!--
+ * @Author: wujiang@weli.cn
+ * @Date: 2023-10-18 11:45:29
+ * @LastEditors: wujiang 
+ * @LastEditTime: 2024-05-06 17:35:32
+ * @Description: 八字合婚
+-->
+
+<template>
+  <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
+    <img
+      class="top-banner"
+      src="../../../assets/img/mlxz/bzhh/detail/img_head.png"
+    />
+    <div class="pay-box">
+      <img
+        class="banner"
+        src=""
+        :src="language === 'zh-CN' ? cn_img_title : tw_img_title"
+      />
+      <div class="user-info">
+        <div class="male-info">
+          <div class="info-name">{{ mname }}</div>
+          <div class="info-birth">{{ mbirth }}</div>
+          <baziInfo :user_info="male_user_string" />
+        </div>
+        <img
+          class="heart"
+          src="../../../assets/img/marriage_measure_overseas/detail/heart.png"
+        />
+        <div class="female-info">
+          <div class="info-name">{{ fname }}</div>
+          <div class="info-birth">{{ fbirth }}</div>
+          <baziInfo :user_info="female_user_string" />
+        </div>
+      </div>
+      <!-- <img
+        class="line"
+        src="../../../assets/img/marriage_measure_overseas/detail/line.png"
+      /> -->
+      <div class="bazi-box">
+        <!-- <PayCard
+          ref="paycard"
+          :type="product_id"
+          :product_key="product_key"
+          back_url="marriage_measure_overseas"
+          :query_user_string="query_user_string"
+          lucky_re_id="60005"
+          ><div class="price">结缘价 RM68</div></PayCard
+        > -->
+        <shengxiao
+          :male_str="male_user_string"
+          :female_str="female_user_string"
+        />
+        <div id="info-btn" @click="showPayModal" class="pay-btn">
+          {{ $t('tips-1') }}
+        </div>
+        <Marquee :mock_users="getRandomList()"></Marquee>
+      </div>
+    </div>
+    <img class="text" :src="language === 'zh-CN' ? cn_img_word : tw_img_word" />
+    <img class="module" :src="language === 'zh-CN' ? cn_mokuai1 : tw_mokuai1" />
+    <img class="module" :src="language === 'zh-CN' ? cn_mokuai2 : tw_mokuai2" />
+    <img class="module" :src="language === 'zh-CN' ? cn_mokuai3 : tw_mokuai3" />
+    <img class="module" :src="language === 'zh-CN' ? cn_mokuai4 : tw_mokuai4" />
+    <img class="module" :src="language === 'zh-CN' ? cn_mokuai5 : tw_mokuai5" />
+    <img class="module" :src="language === 'zh-CN' ? cn_mokuai6 : tw_mokuai6" />
+    <img
+      class="module"
+      style="margin-bottom: 1.59rem"
+      :src="language === 'zh-CN' ? cn_mokuai7 : tw_mokuai7"
+    />
+    <div v-if="showFixedBtn" @click="showPayModal" class="pay-btn fix-box">
+      {{ $t('tips-1') }}
+    </div>
+    <payModal
+      :product_key="product_key"
+      v-model="pay_modal"
+      :bg="is_cn ? cn_modal_bg : tw_modal_bg"
+      :query_user_string="query_user_string"
+      title="八字合婚"
+      title_style="color:#fff"
+      @close="pay_modal = false"
+    />
+  </div>
+</template>
+
+<script>
+import PayCard from '../../../components/PayCard.vue';
+import Marquee from './../../../components/Marquee.vue';
+import utils from './../../../libs/utils.js';
+import hour_ganzi from './../../../libs/suishen.huangli.js';
+import year_ganzi from './../../../libs/suishen.wnl.js';
+
+import cn_img_title from '../../../assets/img/mlxz/bzhh/detail/img_title.png';
+import tw_img_title from '../../../assets/img/tw_mlxz/bazihehun/detail/title.png';
+import tw_img_word from '../../../assets/img/tw_mlxz/bazihehun/detail/text.png';
+import cn_img_word from '../../../assets/img/mlxz/bzhh/detail/img_word.png';
+
+import cn_mokuai1 from '../../../assets/img/mlxz/bzhh/detail/2.png';
+import cn_mokuai2 from '../../../assets/img/mlxz/bzhh/detail/3.png';
+import cn_mokuai3 from '../../../assets/img/mlxz/bzhh/detail/4.png';
+import cn_mokuai4 from '../../../assets/img/mlxz/bzhh/detail/5.png';
+import cn_mokuai5 from '../../../assets/img/mlxz/bzhh/detail/6.png';
+import cn_mokuai6 from '../../../assets/img/mlxz/bzhh/detail/7.png';
+import cn_mokuai7 from '../../../assets/img/mlxz/bzhh/detail/8.png';
+
+import tw_mokuai1 from '../../../assets/img/tw_mlxz/bazihehun/detail/2.png';
+import tw_mokuai2 from '../../../assets/img/tw_mlxz/bazihehun/detail/3.png';
+import tw_mokuai3 from '../../../assets/img/tw_mlxz/bazihehun/detail/4.png';
+import tw_mokuai4 from '../../../assets/img/tw_mlxz/bazihehun/detail/5.png';
+import tw_mokuai5 from '../../../assets/img/tw_mlxz/bazihehun/detail/6.png';
+import tw_mokuai6 from '../../../assets/img/tw_mlxz/bazihehun/detail/7.png';
+import tw_mokuai7 from '../../../assets/img/tw_mlxz/bazihehun/detail/8.png';
+import tw_modal_bg from '../../../assets/img/tw_mlxz/bazihehun/detail/modal_bg.png';
+import payModal from '../../../components/PayModal.vue';
+import shengxiao from './shengxiao.vue';
+import baziInfo from './bazi.vue';
+import { report_id_arr } from '../../../libs/enum';
+const mockTipsArr = {
+  'zh-CN': '成功解锁了八字合婚的详细解析',
+  'zh-TW': '成功解鎖了八字合婚的詳細解析',
+};
+export default {
+  components: {
+    PayCard,
+    Marquee,
+    baziInfo,
+    payModal,
+    shengxiao,
+  },
+  data() {
+    return {
+      product_id: 23,
+      product_key: 'h5_marriage',
+      query_user_string: '',
+
+      mname: '',
+      mbirth: '',
+      fname: '',
+      fbirth: '',
+      language: utils.getLanguage(),
+      cn_img_title,
+      tw_img_title,
+      cn_img_word,
+      tw_img_word,
+      cn_mokuai1,
+      cn_mokuai2,
+      cn_mokuai3,
+      cn_mokuai4,
+      cn_mokuai5,
+      cn_mokuai6,
+      cn_mokuai7,
+      tw_mokuai1,
+      tw_mokuai2,
+      tw_mokuai3,
+      tw_mokuai4,
+      tw_mokuai5,
+      tw_mokuai6,
+      tw_mokuai7,
+      showFixedBtn: false,
+      // baziInfo
+      male_user_string: this.$route.query.male_str,
+      female_user_string: this.$route.query.female_str,
+      is_show_btn: true,
+      pay_modal: false,
+      tw_modal_bg,
+      cn_modal_bg:
+        'https://psychicai-static.psychicai.pro/imgs/240439e6ef4d89894c5d88378c3cbd7790fb.png',
+    };
+  },
+
+  created() {
+    if (this.is_in_app) {
+      utils.payStatusAdjust('page_view_pay', 'hevtih', '');
+    } else {
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'ty18p4',
+        });
+    }
+    utils.firebaseLogEvent('20002', '-10001', 'page_view_pay', 'page_view', {
+      args_name: 'page_view_pay',
+      report_id: '60005',
+      channel: utils.getFBChannel(),
+    });
+    this.query_user_string = this.$route.query.querystring;
+    this.parseUserString();
+  },
+  computed: {
+    is_in_app() {
+      return utils.isInApp();
+    },
+
+    is_cn() {
+      return utils.getLanguage() === 'zh-CN';
+    },
+  },
+  mounted() {
+    window.scrollTo(0, 0);
+
+    let btn = document.getElementById('info-btn');
+    let self = this;
+    document.addEventListener('scroll', e => {
+      let flag = utils.isElementInViewport(btn);
+      let scroll_distance =
+        window.pageYOffset || document.documentElement.scrollTop;
+      if (!self.is_show_btn || scroll_distance < 100) {
+        self.showFixedBtn = false;
+        return;
+      }
+      if (!flag) {
+        self.showFixedBtn = true;
+      } else {
+        self.showFixedBtn = false;
+      }
+    });
+
+    let initialWindowHeight = window.innerHeight;
+    // 添加resize事件监听器
+    window.addEventListener('resize', function () {
+      self.is_show_btn =
+        initialWindowHeight > window.innerHeight ? false : true;
+    });
+  },
+  methods: {
+    /**
+     * @description: 获取随机用户列表
+     * @return {*}
+     */
+    getRandomList() {
+      let arr = ['我的', 'vt1', '椒', '14', '96', '小', 'il', '2o', '22'];
+      let new_arr = [];
+      for (let i = 0; i < 29; i++) {
+        let randomIndex = Math.floor(Math.random() * arr.length);
+        new_arr.push(arr[randomIndex] + '***' + mockTipsArr[this.language]);
+      }
+      return new_arr;
+    },
+
+    /**
+     * @description: 用户生辰解析
+     * @return {*}
+     */
+    parseUserString() {
+      let query_user_string_array = this.query_user_string.split('|');
+      let myear = query_user_string_array[2];
+      let mmonth = query_user_string_array[3];
+      let mdate = query_user_string_array[4];
+      this.mname = query_user_string_array[0];
+      let fyear = query_user_string_array[5];
+      let fmonth = query_user_string_array[6];
+      let fdate = query_user_string_array[7];
+      this.fname = query_user_string_array[1];
+      // 男性生日農曆
+      if (query_user_string_array[10] === '0') {
+        let mday = this.getGlDate(myear, mmonth, mdate);
+        this.mbirth = `${this.$t('nongli-label')} ${myear}年${mday.nmonthstr}${
+          mday.ndatestr
+        }`;
+      } else {
+        this.mbirth = `${this.$t(
+          'gongli-label'
+        )} ${myear}年${mmonth}月${mdate}日`;
+      }
+      // 女性生日農曆
+      if (query_user_string_array[11] === '0') {
+        let fday = this.getGlDate(fyear, fmonth, fdate);
+        this.fbirth = `${this.$t('nongli-label')} ${fyear}年${fday.nmonthstr}${
+          fday.ndatestr
+        }`;
+      } else {
+        this.fbirth = `${this.$t(
+          'gongli-label'
+        )} ${fyear}年${fmonth}月${fdate}日`;
+      }
+    },
+
+    /**
+     * @description: 获取公历日期
+     * @param {*} year
+     * @param {*} month
+     * @param {*} date
+     * @return {*}
+     */
+    getGlDate(year, month, date) {
+      let twoYearAllDate = [];
+      for (let i = 0; i < 12; i++) {
+        twoYearAllDate = twoYearAllDate.concat(
+          year_ganzi.getOneMonthData(year, i + 1)
+        );
+      }
+      for (let i = 0; i < 12; i++) {
+        twoYearAllDate = twoYearAllDate.concat(
+          year_ganzi.getOneMonthData(year / 1 + 1, i + 1)
+        );
+      }
+
+      twoYearAllDate.concat(year_ganzi.getOneMonthData(year + 1, 1));
+      twoYearAllDate.concat(year_ganzi.getOneMonthData(year + 1, 2));
+
+      let gldate = twoYearAllDate.find(item => {
+        return item.nyear == year && item.nmonth == month && item.ndate == date;
+      });
+      if (this.language === 'zh-TW' && gldate.nmonth === 12) {
+        gldate.nmonthstr = '臘月';
+      }
+      return gldate;
+    },
+
+    /**
+     * @description: 打开支付弹窗
+     * @return {*}
+     */
+    showPayModal() {
+      if (this.is_in_app) {
+        utils.payStatusAdjust('click_report_choice', 'wp0pby', '');
+      } else {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 'e8qywf',
+          });
+      }
+      utils.firebaseLogEvent(
+        '20002',
+        '-10002',
+        'click_report_choice',
+        'click',
+        {
+          args_name: 'click_report_choice',
+          report_id: report_id_arr[this.product_key],
+          channel: utils.getFBChannel(),
+        }
+      );
+      this.pay_modal = true;
+    },
+  },
+};
+</script>
+
+<style scoped lang="less">
+.detail {
+  background-color: #fbf8ed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .top-banner {
+    width: 100%;
+    margin-bottom: 0.24rem;
+  }
+
+  .pay-box {
+    position: relative;
+    margin-top: -0.5rem;
+    width: 7.02rem;
+    border: 0.06rem solid #d19a47;
+    border-radius: 0.16rem;
+    background-color: #fbf8ed;
+    box-sizing: border-box;
+    margin-bottom: 0.24rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .banner {
+      position: absolute;
+      top: -0.45rem;
+      left: 50%;
+      margin-left: -2.245rem;
+      width: 4.49rem;
+      height: 0.89rem;
+    }
+    .user-info {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 0.68rem 0 0.49rem;
+      .heart {
+        width: 1.4rem;
+        flex: none;
+      }
+      .male-info,
+      .female-info {
+        color: #6f3300;
+        text-align: center;
+        .info-name {
+          font-size: 0.32rem;
+          line-height: 0.45rem;
+          font-weight: bold;
+          margin-bottom: 0.07rem;
+        }
+        .info-birth {
+          font-size: 0.24rem;
+          line-height: 0.33rem;
+        }
+        flex: 1;
+      }
+    }
+    .line {
+      width: 5.57rem;
+    }
+  }
+
+  .text {
+    width: 6.74rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .module {
+    width: 7.02rem;
+    margin-bottom: 0.24rem;
+  }
+}
+.pay-btn {
+  width: 6.3rem;
+  height: 0.88rem;
+  background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
+  border-radius: 0.24rem;
+  border: 0.02rem solid #ffd192;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.32rem;
+  color: #fef8eb;
+  margin: 0 auto;
+  margin-top: 0.16rem;
+  animation: btnMove 1s infinite ease-in-out alternate;
+}
+.fix-box {
+  position: fixed !important;
+  bottom: 0.1rem;
+}
+
+.bazi-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>

@@ -1,0 +1,39 @@
+/*
+ * @Author: wujiang@weli.cn
+ * @Date: 2023-10-18 13:51:13
+ * @LastEditors: wujiang
+ * @LastEditTime: 2023-10-30 10:27:48
+ * @Description:2024年财运
+ */
+import Vue from 'vue';
+import Router from 'vue-router';
+
+import index from '../pages/lucky_year_report/home/index.vue';
+import detail from '../pages/lucky_year_report/detail/index.vue';
+import result from '../pages/lucky_year_report/result/index.vue';
+
+Vue.use(Router);
+
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'index',
+      component: index,
+    },
+    {
+      path: '/detail',
+      name: 'detail',
+      component: detail,
+    },
+    {
+      path: '/result',
+      name: 'result',
+      component: result,
+    },
+    {
+      path: '*',
+      redirect: '/',
+    },
+  ],
+});
