@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 18:55:15
  * @LastEditors: wujiang
- * @LastEditTime: 2024-04-09 15:02:52
+ * @LastEditTime: 2024-05-07 18:55:15
  * @Description:
  */
 import axios from 'axios';
@@ -34,9 +34,8 @@ const service = axios.create({
   },
   timeout: 60000, // 超时时间
 });
-let is_in_app = utils.isInApp();
 service.interceptors.request.use(config => {
-  config = is_in_app ? addParams(config) : addOutParams(config);
+  config = addOutParams(config);
   return config;
 });
 

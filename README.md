@@ -1,12 +1,12 @@
 <!--
  * @Author: wujiang@weli.cn
  * @Date: 2023-09-28 14:17:24
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-04-16 18:44:52
+ * @LastEditors: wujiang
+ * @LastEditTime: 2024-05-07 19:23:14
  * @Description:
 -->
 
-# 命里寻真 H5
+# 命里寻真 H5 FB 单独投放项目
 
 ### H5 页面地址：
 
@@ -15,7 +15,7 @@
 - 正式环境：https://psychicai-h5.psychicai.pro
 - api 参数及签名规则见：https://gitlab.etouch.cn/psychic_fortune/psychicai-server.git
 
-## H5汇总页面
+## H5 汇总页面
 
 - page_overview：https://test-psychicai-h5.psychicai.pro/page_overview.html
 
@@ -32,10 +32,9 @@
 - 八字合婚：marriage_measure_overseas
 - 鬼谷子：guiguzi_fortune
 - 袁天罡：weigh_bone
-- 24年感情运：emotion_fortune
+- 24 年感情运：emotion_fortune
 
-## Adjust埋点
-- github地址：https://github.com/adjust/web_sdk/blob/master/docs/chinese/README.md#installation
-- SDK地址：https://help.adjust.com/zh/article/set-log-level-web-sdk
+## Adjust 埋点
 
-
+- github 地址：https://github.com/adjust/web_sdk/blob/master/docs/chinese/README.md#installation
+- SDK 地址：https://help.adjust.com/zh/article/set-log-level-web-sdk

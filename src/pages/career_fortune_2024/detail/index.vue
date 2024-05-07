@@ -169,22 +169,16 @@ export default {
     username_title() {
       return `${utils.getShortStr(this.username)}的${this.$t('pop-title')}`;
     },
-    is_in_app() {
-      return utils.isInApp();
-    },
+
     is_cn() {
       return this.language === 'zh-CN';
     },
   },
-  async created() {
-    if (this.is_in_app) {
-      utils.payStatusAdjust('page_view_pay', 'hevtih', '');
-    } else {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'ty18p4',
-        });
-    }
+  created() {
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'ty18p4',
+      });
 
     utils.firebaseLogEvent('20002', '-10001', 'page_view_pay', 'page_view', {
       args_name: 'page_view_pay',
@@ -420,14 +414,10 @@ export default {
      * @return {*}
      */
     showPayModal() {
-      if (this.is_in_app) {
-        utils.payStatusAdjust('click_report_choice', 'wp0pby', '');
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'e8qywf',
-          });
-      }
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'e8qywf',
+        });
       utils.firebaseLogEvent(
         '20002',
         '-10002',

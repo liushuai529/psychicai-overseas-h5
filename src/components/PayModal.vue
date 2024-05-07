@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-07 15:28:57
+ * @LastEditTime: 2024-05-07 19:00:52
  * @Description: 支付弹窗
 -->
 <template>
@@ -222,9 +222,7 @@ export default {
             this.product.origin_price_str
         : '-';
     },
-    is_in_app() {
-      return utils.isInApp();
-    },
+
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -252,14 +250,10 @@ export default {
             report_id: e_id_arr[this.product_key],
             channel: utils.getFBChannel(),
           });
-          if (this.is_in_app) {
-            utils.payStatusAdjust('view_pay_choise', 'xhdajj', '');
-          } else {
-            window.Adjust &&
-              window.Adjust.trackEvent({
-                eventToken: 'ajepm5',
-              });
-          }
+          window.Adjust &&
+            window.Adjust.trackEvent({
+              eventToken: 'ajepm5',
+            });
         } else {
           if (this.parser) {
             this.parser.destroy();
@@ -332,11 +326,7 @@ export default {
       this.loading = true;
 
       try {
-        const res = this.is_in_app
-          ? await getPayMethodsAPI({
-              ad_channel: utils.getRequestParams('ad_channel'),
-            })
-          : await getPayMethodsAPI();
+        const res = await getPayMethodsAPI();
         this.loading = false;
         if (res.status === 1000) {
           this.pay_methods = res.data;
@@ -352,45 +342,40 @@ export default {
      * @return {*}
      */
     async payMoney() {
-      if (this.is_in_app) {
-        utils.payStatusAdjust('click_pay_pay', 'z891um', '');
-        utils.payStatusAdjust('event_status_pay_type', '1le9tm', '');
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: '1le9tm',
-          });
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'mbqpev',
-          });
-        if (utils.isProd()) {
-          try {
-            fbq('track', 'AddToCart');
-          } catch (err) {
-            console.error('AddToCart fbq error message:', err);
-          }
-
-          //
-          try {
-            fbq('track', 'AddToCart', {
-              content_ids: -10004,
-              content_name: 'click_pay_pay',
-              content_type: 'click',
-            });
-          } catch (err) {
-            console.error('AddToCart fbq error message:', err);
-          }
-          // try {
-          //   fbq('track', 'AddToCart', {
-          //     content_ids: '-10004',
-          //     content_name: 'click_pay_pay',
-          //     content_type: 'click',
-          //   });
-          // } catch (err) {
-          //   console.error('fbq error message:', err);
-          // }
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: '1le9tm',
+        });
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'mbqpev',
+        });
+      if (utils.isProd()) {
+        try {
+          fbq('track', 'AddToCart');
+        } catch (err) {
+          console.error('AddToCart fbq error message:', err);
         }
+
+        //
+        try {
+          fbq('track', 'AddToCart', {
+            content_ids: -10004,
+            content_name: 'click_pay_pay',
+            content_type: 'click',
+          });
+        } catch (err) {
+          console.error('AddToCart fbq error message:', err);
+        }
+        // try {
+        //   fbq('track', 'AddToCart', {
+        //     content_ids: '-10004',
+        //     content_name: 'click_pay_pay',
+        //     content_type: 'click',
+        //   });
+        // } catch (err) {
+        //   console.error('fbq error message:', err);
+        // }
       }
       utils.firebaseLogEvent(
         '10060',
@@ -418,7 +403,7 @@ export default {
         pay_method: pay_method,
         product_key: this.product_key,
         product_id: this.product.product_id,
-        platform: utils.isInApp() ? 'ANDROID' : 'WEB',
+        platform: 'WEB',
         extra_ce_suan: utils.getExtraParams(
           this.product_key,
           this.query_user_string

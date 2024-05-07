@@ -246,14 +246,10 @@ export default {
     },
   },
   created() {
-    if (utils.isInApp()) {
-      utils.payStatusAdjust('page_view_report', 'u23wk8', '');
-    } else {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'b7vv0n',
-        });
-    }
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'b7vv0n',
+      });
     this.$store.dispatch('common/getProduction');
     utils.firebaseLogEvent('20001', '-10001', 'page_view_report', 'page_view', {
       args_name: 'page_view_report',
@@ -323,14 +319,10 @@ export default {
           query: { order_id: store_report_id, status: 'SUCCESS' },
         });
       } else {
-        if (utils.isInApp()) {
-          utils.payStatusAdjust('event_status_pay_failure', 'veoeo1', '');
-        } else {
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: 'k7kijn',
-            });
-        }
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 'k7kijn',
+          });
         utils.firebaseLogEvent(
           '10060',
           '-10008',
@@ -521,14 +513,10 @@ export default {
      * @return {*}
      */
     async check() {
-      if (utils.isInApp()) {
-        utils.payStatusAdjust('click_report_confirm', 'qcnk93', '');
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'gjog9k',
-          });
-      }
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'gjog9k',
+        });
 
       utils.firebaseLogEvent(
         '20001',

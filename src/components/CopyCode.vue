@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-19 10:41:34
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-04-25 14:07:44
+ * @LastEditTime: 2024-05-07 19:24:01
  * @Description: 更多精彩
 -->
 <template>
@@ -144,25 +144,24 @@ export default {
     async handleCopyCode(val) {
       utils.copyText('mlxz-' + this.transfer_code);
       Toast(tips_arr4[lang]);
-      !utils.isInApp() &&
-        window.Adjust.trackEvent({
-          eventToken: 'lcrtcc',
-        });
+      window.Adjust.trackEvent({
+        eventToken: 'lcrtcc',
+      });
+
       utils.logCopyEvent(val);
       if (!val) {
         await utils.asleep(1000);
         utils.openApp();
-        !utils.isInApp() &&
-          window.Adjust.trackEvent({
-            eventToken: 'ajynkv',
-          });
+        window.Adjust.trackEvent({
+          eventToken: 'ajynkv',
+        });
+
         return;
       }
       this.$emit('showModal');
-      !utils.isInApp() &&
-        window.Adjust.trackEvent({
-          eventToken: 'id6k2k',
-        });
+      window.Adjust.trackEvent({
+        eventToken: 'id6k2k',
+      });
       utils.logCopyOther();
     },
   },

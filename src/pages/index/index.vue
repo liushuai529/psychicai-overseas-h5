@@ -974,9 +974,7 @@ export default {
 
       return arr2;
     },
-    is_in_app() {
-      return utils.isInApp();
-    },
+
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -1018,39 +1016,6 @@ export default {
       args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
     });
-    this.getStoreChecked();
-    let arr = localStorage.getItem('mlxz_checked_list');
-    if (!this.order_id) return;
-    const { status, sub_orders } = await this.getOrderResult();
-    if (status) {
-      if (!this.is_in_app) return;
-      const stop = utils.getQueryString('stop') || '';
-      if (stop) {
-        if (status === 'PAYED') {
-          this.result_list = arr ? JSON.parse(arr) : initCheck;
-          this.checked_list = initCheck;
-          if (this.result_list.find(it => it.id !== '')) {
-            this.pay_result_visible = true;
-          }
-          localStorage.removeItem('mlxz_checked_list');
-          this.sub_orders = sub_orders;
-        }
-        let url = new URL(window.location.href);
-        let newUrl = url.origin + url.pathname;
-        history.pushState(null, '', newUrl);
-        return;
-      }
-      const new_url = window.location.href + '&stop=1';
-      if (utils.isAndroid()) {
-        window.psychicai_client.onWebPayResult(new_url, true);
-      } else {
-        let params = {
-          url: new_url,
-          main_page: 1,
-        };
-        window.prompt('onWebPayResult', JSON.stringify(params));
-      }
-    }
   },
   beforeDestroy() {
     this.pay_result_visible = false;

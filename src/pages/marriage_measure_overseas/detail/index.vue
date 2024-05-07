@@ -171,14 +171,10 @@ export default {
   },
 
   created() {
-    if (this.is_in_app) {
-      utils.payStatusAdjust('page_view_pay', 'hevtih', '');
-    } else {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'ty18p4',
-        });
-    }
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'ty18p4',
+      });
     utils.firebaseLogEvent('20002', '-10001', 'page_view_pay', 'page_view', {
       args_name: 'page_view_pay',
       report_id: '60005',
@@ -188,10 +184,6 @@ export default {
     this.parseUserString();
   },
   computed: {
-    is_in_app() {
-      return utils.isInApp();
-    },
-
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -313,14 +305,10 @@ export default {
      * @return {*}
      */
     showPayModal() {
-      if (this.is_in_app) {
-        utils.payStatusAdjust('click_report_choice', 'wp0pby', '');
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'e8qywf',
-          });
-      }
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'e8qywf',
+        });
       utils.firebaseLogEvent(
         '20002',
         '-10002',

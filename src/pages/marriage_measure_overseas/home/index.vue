@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-06 17:17:23
+ * @LastEditTime: 2024-05-07 19:12:28
  * @Description: 八字合婚
 -->
 <template>
@@ -253,14 +253,10 @@ export default {
   },
 
   created() {
-    if (this.is_in_app) {
-      utils.payStatusAdjust('page_view_report', 'u23wk8', '');
-    } else {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'b7vv0n',
-        });
-    }
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'b7vv0n',
+      });
     this.$store.dispatch('common/getProduction');
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
@@ -271,30 +267,6 @@ export default {
     });
   },
   mounted() {
-    let screenH = window.screen.height;
-    // let obj = {
-    //   username: '1',
-    //   picker_date: '1995年1月1日 未知时辰',
-    //   picker_hour: '',
-    //   picker_date_obj: {
-    //     year: '1995',
-    //     month: '1',
-    //     date: '1',
-    //     birth_hour: '-1',
-    //   },
-    //   gongli_nongli: '1',
-    // };
-    // this.male = obj;
-    // setTimeout(() => {
-    //   this.male = {
-    //     username: '',
-    //     picker_date: '',
-    //     picker_hour: '',
-    //     picker_date_obj: null,
-    //     gongli_nongli: '1',
-    //   };
-    // }, 10);
-
     // 賦默認值
     let storaged_userInfo = window.localStorage.getItem(
       'etouch_marriage_measure_new_userinfo'
@@ -371,14 +343,10 @@ export default {
           query: { order_id: store_report_id, status: 'SUCCESS' },
         });
       } else {
-        if (self.is_in_app) {
-          utils.payStatusAdjust('event_status_pay_failure', 'veoeo1', '');
-        } else {
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: 'k7kijn',
-            });
-        }
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 'k7kijn',
+          });
         utils.firebaseLogEvent(
           '10060',
           '-10008',
@@ -421,9 +389,7 @@ export default {
     productList() {
       return this.$store.state.common.productList;
     },
-    is_in_app() {
-      return utils.isInApp();
-    },
+
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -547,14 +513,10 @@ export default {
       location.href = url;
     },
     async check() {
-      if (this.is_in_app) {
-        utils.payStatusAdjust('click_report_confirm', 'qcnk93', '');
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'gjog9k',
-          });
-      }
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'gjog9k',
+        });
       window.Adjust &&
         window.Adjust.trackEvent({
           eventToken: 'qcnk93',

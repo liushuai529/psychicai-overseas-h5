@@ -168,7 +168,6 @@
         <p v-html="data_obj.all.desc"></p>
       </div>
       <CopyCode
-        v-if="!is_in_app"
         :set_title="true"
         title_icon="https://psychicai-static.psychicai.pro/imgs/2404e7ce06d17d704985b300bbb80fd6080c.png"
         title_icon_style="width: 5.26rem;height: .92rem;margin:.24rem auto .44rem;"
@@ -287,14 +286,10 @@ export default {
   async created() {
     window.scrollTo(0, 0);
 
-    if (this.is_in_app) {
-      utils.payStatusAdjust('page_view_interpretation', 'waf079', '');
-    } else {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: '77woaq',
-        });
-    }
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: '77woaq',
+      });
 
     utils.firebaseLogEvent(
       '20003',
@@ -311,9 +306,6 @@ export default {
     this.query();
   },
   computed: {
-    is_in_app() {
-      return utils.isInApp();
-    },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -322,10 +314,7 @@ export default {
     status(val) {
       let stop = utils.getQueryString('stop');
       if (stop) return;
-      if (val) {
-        if (!this.is_in_app) return;
-        utils.resetResultUrl(this.$route.query.order_id, val);
-      }
+      if (val) return;
     },
   },
   methods: {
@@ -345,131 +334,101 @@ export default {
         const { status } = res.data;
         const product_key = 'marriage_contract_report';
         if (status === 'PAYED') {
-          if (this.is_in_app) {
-            utils.payStatusAdjust('event_status_pay_success', 'ud1otd', price);
-            utils.firebaseLogEvent(
-              '10060',
-              '-10007',
-              'event_status_pay_success',
-              'event_status',
-              {
-                args_name: 'event_status_pay_success',
-                pay_page: product_key,
-                price: price,
-                channel: utils.getFBChannel(),
-              }
-            );
-          } else {
-            window.Adjust &&
-              window.Adjust.trackEvent({
-                eventToken: '8mmz00',
-                revenue: price,
+          window.Adjust &&
+            window.Adjust.trackEvent({
+              eventToken: '8mmz00',
+              revenue: price,
+              currency: 'MYR',
+            });
+
+          utils.firebaseLogEvent(
+            '20002',
+            '-10005',
+            'event_status_pay_success',
+            'event_status',
+            {
+              args_name: 'event_status_pay_success',
+              pay_page: product_key,
+              price: price,
+              channel: utils.getFBChannel(),
+            }
+          );
+          if (utils.isProd()) {
+            try {
+              fbq('track', 'Purchase', {
                 currency: 'MYR',
+                value: price.toFixed(2),
               });
+            } catch (err) {
+              console.error('Purchase fbq error message:', err);
+            }
+            try {
+              fbq('track', 'ViewContent');
+            } catch (err) {
+              console.error('ViewContent fbq error message:', err);
+            }
+            try {
+              fbq('track', 'Subscribe');
+            } catch (err) {
+              console.error('Subscribe fbq error message:', err);
+            }
+            try {
+              fbq('trackCustom', 'CustomPurchase');
+            } catch (err) {
+              console.error('CustomPurchase fbq error message:', err);
+            }
 
-            utils.firebaseLogEvent(
-              '20002',
-              '-10005',
-              'event_status_pay_success',
-              'event_status',
-              {
-                args_name: 'event_status_pay_success',
-                pay_page: product_key,
-                price: price,
-                channel: utils.getFBChannel(),
-              }
-            );
-            if (utils.isProd()) {
-              try {
-                fbq('track', 'Purchase', {
-                  currency: 'MYR',
-                  value: price.toFixed(2),
-                });
-              } catch (err) {
-                console.error('Purchase fbq error message:', err);
-              }
-              try {
-                fbq('track', 'ViewContent');
-              } catch (err) {
-                console.error('ViewContent fbq error message:', err);
-              }
-              try {
-                fbq('track', 'Subscribe');
-              } catch (err) {
-                console.error('Subscribe fbq error message:', err);
-              }
-              try {
-                fbq('trackCustom', 'CustomPurchase');
-              } catch (err) {
-                console.error('CustomPurchase fbq error message:', err);
-              }
-
-              try {
-                fbq('track', 'ViewContent', {
-                  content_ids: -10005,
-                  content_name: 'event_status_pay_success',
-                  content_type: 'event_status',
-                  currency: 'MYR',
-                  value: price.toFixed(2),
-                  event_name: 'event_status_pay_success',
-                });
-              } catch (err) {
-                console.error('fbq error message:', err);
-              }
-              try {
-                fbq('track', 'Subscribe', {
-                  currency: 'MYR',
-                  value: price.toFixed(2),
-                  content_name: 'event_status_pay_success',
-                  content_type: 'event_status',
-                  event_name: 'event_status_pay_success',
-                });
-              } catch (err) {
-                console.error('Subscribe fbq error message:', err);
-              }
-              try {
-                fbq('trackCustom', 'CustomPurchase', {
-                  currency: 'MYR',
-                  value: price.toFixed(2),
-                  content_ids: -10005,
-                  content_name: 'event_status_pay_success',
-                  content_type: 'event_status',
-                  event_name: 'event_status_pay_success',
-                });
-              } catch (err) {
-                console.error('fbq error message:', err);
-              }
+            try {
+              fbq('track', 'ViewContent', {
+                content_ids: -10005,
+                content_name: 'event_status_pay_success',
+                content_type: 'event_status',
+                currency: 'MYR',
+                value: price.toFixed(2),
+                event_name: 'event_status_pay_success',
+              });
+            } catch (err) {
+              console.error('fbq error message:', err);
+            }
+            try {
+              fbq('track', 'Subscribe', {
+                currency: 'MYR',
+                value: price.toFixed(2),
+                content_name: 'event_status_pay_success',
+                content_type: 'event_status',
+                event_name: 'event_status_pay_success',
+              });
+            } catch (err) {
+              console.error('Subscribe fbq error message:', err);
+            }
+            try {
+              fbq('trackCustom', 'CustomPurchase', {
+                currency: 'MYR',
+                value: price.toFixed(2),
+                content_ids: -10005,
+                content_name: 'event_status_pay_success',
+                content_type: 'event_status',
+                event_name: 'event_status_pay_success',
+              });
+            } catch (err) {
+              console.error('fbq error message:', err);
             }
           }
         } else {
-          if (this.is_in_app) {
-            utils.payStatusAdjust('event_status_pay_failure', 'veoeo1', '');
-            utils.firebaseLogEvent(
-              '10060',
-              '-10008',
-              'event_status_pay_failure',
-              'event_status',
-              {
-                args_name: 'event_status_pay_failure',
-                reason: 'failure',
-              }
-            );
-          } else {
-            window.Adjust &&
-              window.Adjust.trackEvent({
-                eventToken: 'k7kijn',
-              });
-            utils.firebaseLogEvent(
-              '20002',
-              '-10006',
-              'event_status_pay_failure',
-              'event_status',
-              {
-                args_name: 'event_status_pay_failure',
-                reason: 'failure',
-              }
-            );
-          }
+          window.Adjust &&
+            window.Adjust.trackEvent({
+              eventToken: 'k7kijn',
+            });
+          utils.firebaseLogEvent(
+            '20002',
+            '-10006',
+            'event_status_pay_failure',
+            'event_status',
+            {
+              args_name: 'event_status_pay_failure',
+              reason: 'failure',
+            }
+          );
         }
       }
       localStorage.removeItem('report_price');
@@ -514,10 +473,6 @@ export default {
           }, 1000);
         } else {
           this.backNotice();
-          //   let querystring = localStorage.getItem(
-          //     'etouch_marriage_measure_new_userinfo'
-          //   );
-          //   location.href = `marriage_measure_overseas.html#/detail?querystring=  + ${querystring}&order_id=${this.$route.query.order_id}`;
         }
         this.status = res.data.status;
       });

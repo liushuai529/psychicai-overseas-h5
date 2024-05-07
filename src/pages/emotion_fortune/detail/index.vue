@@ -159,22 +159,16 @@ export default {
         'report-title'
       )}`;
     },
-    is_in_app() {
-      return utils.isInApp();
-    },
+
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
   },
   async created() {
-    if (this.is_in_app) {
-      utils.payStatusAdjust('page_view_pay', 'hevtih', '');
-    } else {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'ty18p4',
-        });
-    }
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'ty18p4',
+      });
     utils.firebaseLogEvent('20002', '-10001', 'page_view_pay', 'page_view', {
       args_name: 'page_view_pay',
       report_id: '60010',
@@ -315,14 +309,10 @@ export default {
           channel: utils.getFBChannel(),
         }
       );
-      if (this.is_in_app) {
-        utils.payStatusAdjust('click_report_choice', 'wp0pby', '');
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'e8qywf',
-          });
-      }
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'e8qywf',
+        });
       this.pay_modal = true;
     },
   },

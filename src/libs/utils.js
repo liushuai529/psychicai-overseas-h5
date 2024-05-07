@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-07 15:30:44
+ * @LastEditTime: 2024-05-07 18:53:58
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -187,17 +187,8 @@ function getUAParam(param) {
  * @return {*}
  */
 function getDevid() {
-  let devid;
-  if (isInApp()) {
-    let UA_devid = getUAParam('devid');
-    if (UA_devid) {
-      devid = UA_devid;
-    } else {
-      devid = getDeviceId();
-    }
-  } else {
-    devid = getDeviceId();
-  }
+  let devid = getDeviceId();
+
   return devid;
 }
 
@@ -744,55 +735,9 @@ const isProd = () => {
   });
 };
 
-/**
- * @description: 判断是否在app内
- * @return {*}
- */
-const isInApp = () => {
-  // return true;
-  return window.psychicai_client ? true : false;
-};
-// const is_dev =
-//   location.origin.indexOf('192.168') > -1 ||
-//   getQueryString('is_test') ||
-//   getQueryString('is_master') ||
-//   getQueryString('master')
-//     ? true
-//     : false;
-const is_dev = location.origin.indexOf('192.168') > -1;
 //获取UA信息返回数组
 const getDataArrayFromUserAgent = () => {
-  if (!isInApp()) {
-    return {};
-  }
-  let init_str;
-  if (is_dev) {
-    init_str =
-      'mlxz={ver_code=117&ver_name=1.8.0&open_uid=e845dae3d0b29002ae09f00a7ca86aecdf754816d88ae11895127d019c63f3bd496478abe68765b0fee1f1cf0cdc155495559df4f3745ef9&access_token=eyJhbGciOiJIUzI1NiJ9.eyJjbGllbnRfdG9rZW4iOiJlODQ1ZGFlM2QwYjI5MDAyYWUwOWYwMGE3Y2E4NmFlY2RmNzU0ODE2ZDg4YWUxMTg5NTEyN2QwMTljNjNmM2JkNDk2NDc4YWJlNjg3NjViMGZlZTFmMWNmMGNkYzE1NTQ5NTU1OWRmNGYzNzQ1ZWY5IiwiZXhwIjoxNzMwNjE1NTYzLCJpYXQiOjE3MTUwNjM1NjMsImp0aSI6IjRiZmM4OGRjLTJhNTAtNGVjOC04NDI5LWRkMjcyNTUwNGQ5ZiJ9.d-PJ8RSi4o6Nvx2P7pk5ocgoGYSYGjLio6BIrjuoUEA&channel=weappstore&pkg=com.psychicai.fortune&device_id=de648ee1c0dfbea8c9a727d606764b6c&df_id=DUN0ICsBI_WjXaUinqk3LJuMoSQDhozolg5eRFVOMElDc0JJX1dqWGFVaW5xazNMSnVNb1NRRGhvem9sZzVlc2h1&osv=10&up=ANDROID&os=ANDROID&vendor=HUAWEI&model=COL-AL10&gid=3efd0770-78e6-44b2-b033-3df5290c0697&oaid=&ad_channel=Unattributed&language=zh-CN&imei=&android_id=ddb8b7a2fdfb4158&idfa=&mac=98:9c:57:d8:58:42&app_secret=42b5e4fa9e6646138a5dae28ac9f8f69&}';
-  } else if (isIos()) {
-    // init_str = window.prompt('getCommonParams');
-    return {};
-  } else {
-    init_str =
-      window.psychicai_client && window.psychicai_client.getClientParams();
-  }
-  if (!init_str) {
-    return {};
-  }
-  let str_;
-  let new_arr;
-  let new_obj = {};
-  if (init_str.indexOf('mlxz={') > -1) {
-    str_ = init_str.split('mlxz={')[1].split('}')[0];
-    new_arr = str_.split('&');
-    new_arr.forEach(item => {
-      let arr = item.split('=');
-      if (arr[0]) {
-        new_obj[arr[0]] = arr[1];
-      }
-    });
-  }
-  return new_obj;
+  return {};
 };
 
 /**
@@ -1104,41 +1049,9 @@ const firebaseLogEvent = (
   content_id,
   event_name,
   event_type,
-  args,
-  adjust
+  args
 ) => {
   let args_ = JSON.stringify(args);
-  let inner_obj = {
-    module: module_id,
-    content_id: content_id,
-    event_name: event_name,
-    event_type: event_type,
-    // 公共参数
-    device_id: getRequestParams('device_id') || '',
-    df_id: getRequestParams('df_id') || '',
-    channel: getRequestParams('channel') || '',
-    pkg: getRequestParams('pkg') || '',
-    mac: getRequestParams('mac') || '',
-    platform: getRequestParams('platform') || '',
-    network: getRequestParams('network') || '',
-    app_key: isAndroid() ? '20002001' : '20002002',
-    android_id: getRequestParams('android_id') || '',
-    event_time: new Date().getTime(),
-    imei: getRequestParams('imei') || '',
-    gid: getRequestParams('gid') || '',
-    oaid: getRequestParams('oaid') || '',
-    ver_code: getRequestParams('ver_code') || '',
-    ver_name: getRequestParams('ver_name') || '',
-
-    app_version: getRequestParams('app_version') || '', //?
-    device_model: getRequestParams('device_model') || '', //?
-    gaid: getRequestParams('gaid') || '', //?
-    imsi: getRequestParams('imsi') || '', //?
-    app_version_code: getRequestParams('app_version_code') || '', //?
-    user_id: getRequestParams('user_id') || '', //?
-    system_version: getRequestParams('system_version') || '', //?
-    args: args_,
-  };
   let outer_obj = {
     module: module_id,
     content_id: content_id,
@@ -1151,12 +1064,9 @@ const firebaseLogEvent = (
     device_id: getDeviceId() || '',
     args: args_,
   };
-  analytics.logEvent(event_name, isInApp() ? inner_obj : outer_obj);
+  analytics.logEvent(event_name, outer_obj);
   console.log('----firebase-----');
-  console.log(
-    '这是firebase埋点',
-    JSON.stringify(isInApp() ? inner_obj : outer_obj)
-  );
+  console.log('这是firebase埋点', JSON.stringify(outer_obj));
   console.log('----firebase-----');
 };
 
@@ -1379,8 +1289,7 @@ const logCopyOther = () => {
  * @return {*}
  */
 const jumpToOrder = () => {
-  const is_in_app = isInApp();
-  location.href = is_in_app ? 'mlxz://h5order?type=1' : 'history_order.html';
+  location.href = 'history_order.html';
 };
 
 /**
@@ -1508,104 +1417,8 @@ const resetResultUrl = (order_id, status, is_home_page = false) => {
   );
 };
 
-/**
- * @description: 上报支付状态
- * @param {*} status 支付状态
- * @param {*} product_key 产品
- * @param {*} price 价格
- * @return {*}
- */
-const eventPayStatusLog = (status, product_key, price) => {
-  return new Promise((resolve, reject) => {
-    try {
-      if (status === 'PAYED') {
-        if (isInApp()) {
-          payStatusAdjust('event_status_pay_success', 'ud1otd', price);
-          firebaseLogEvent(
-            '10060',
-            '-10007',
-            'event_status_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_pay_success',
-              pay_page: product_key,
-            }
-          );
-        } else {
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: '8mmz00',
-              revenue: price,
-              currency: 'MYR',
-            });
-
-          firebaseLogEvent(
-            '20002',
-            '-10005',
-            'event_status_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_pay_success',
-              pay_page: product_key,
-              price: price,
-            }
-          );
-          if (isProd()) {
-            try {
-              fbq('track', 'AddToWishlist', {
-                content_name: 'event_status_pay_success',
-                content_category: 'click',
-                content_ids: -10005,
-                // content_type: 'event_status',
-                // content_type: 'product',
-                currency: 'MYR',
-                value: price.toFixed(2),
-              });
-            } catch (err) {
-              console.error('fbq error message:', err);
-            }
-          }
-        }
-      } else {
-        if (isInApp()) {
-          payStatusAdjust('event_status_pay_failure', 'veoeo1', '');
-          firebaseLogEvent(
-            '10060',
-            '-10008',
-            'event_status_pay_failure',
-            'event_status',
-            {
-              args_name: 'event_status_pay_failure',
-              reason: 'failure',
-            }
-          );
-        } else {
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: 'k7kijn',
-            });
-          firebaseLogEvent(
-            '20002',
-            '-10006',
-            'event_status_pay_failure',
-            'event_status',
-            {
-              args_name: 'event_status_pay_failure',
-              reason: 'failure',
-            }
-          );
-        }
-      }
-      resolve('success');
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
-
 export default {
   getFBChannel,
-  eventPayStatusLog,
   resetResultUrl,
   openAdjustApp,
   buildURL,
@@ -1666,5 +1479,4 @@ export default {
   nongliHourEnum,
   firebaseLogEvent,
   getShortStr,
-  isInApp,
 };

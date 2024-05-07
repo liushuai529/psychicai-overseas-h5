@@ -16,7 +16,7 @@
     >
       <div class="top-box">
         <img class="order-icon" :src="is_cn ? cn_title : tw_title" alt="" />
-        <div v-if="!is_in_app" class="text">
+        <div class="text">
           {{ $t('tips-1')
           }}<span class="download" @click="openApp()">{{ $t('tips-2') }} </span>
         </div>
@@ -267,9 +267,6 @@ export default {
     CodePop,
   },
   computed: {
-    is_in_app() {
-      return utils.isInApp();
-    },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-04-25 10:35:13
+ * @LastEditTime: 2024-05-07 18:54:58
  * @Description:
  */
 export * from './fortune';
@@ -10,7 +10,6 @@ export * from './combine';
 import request from './request';
 import utils from '../libs/utils';
 
-const is_in_app = utils.isInApp();
 /**
  * @description: 查询测算商品列表
  * @param {string} id 商品id
@@ -57,40 +56,25 @@ export const eventReportAPI = data => {
  */
 export const getResultAPI = async data => {
   await visitorLoginAPI();
-  return request(
-    `/${is_in_app ? 'h5' : 'web'}/auth/trade/orders/${data.order_id}`,
-    'GET',
-    data
-  );
+  return request(`/web/auth/trade/orders/${data.order_id}`, 'GET', data);
 };
 
 // 商品查询
 export const getProductionsAPI = async productGroup => {
   await visitorLoginAPI();
-  return request(
-    `/${is_in_app ? 'h5' : 'web'}/auth/trade/products/${productGroup}`,
-    'GET'
-  );
+  return request(`/web/auth/trade/products/${productGroup}`, 'GET');
 };
 
 // 查询历史订单
 export const getHistoryOrderAPI = async data => {
   await visitorLoginAPI();
-  return request(
-    `/${is_in_app ? 'h5' : 'web'}/auth/trade/orders/ce_suan`,
-    'GET',
-    data
-  );
+  return request(`/web/auth/trade/orders/ce_suan`, 'GET', data);
 };
 
 // 下单
 export const payOrderAPI = async data => {
   await visitorLoginAPI();
-  return request(
-    `/${is_in_app ? 'h5' : 'web'}/auth/trade/orders/ce_suan`,
-    'POST',
-    data
-  );
+  return request(`/web/auth/trade/orders/ce_suan`, 'POST', data);
 };
 
 // 查询已支付订单填充信息
@@ -105,38 +89,30 @@ export const getPayOrderInfoAPI = (order_id, data) => {
 // 订单结果校验
 export const resultCheckAPI = async data => {
   await visitorLoginAPI();
-  return request(
-    `/${is_in_app ? 'h5' : 'web'}/auth/trade/orders/verify`,
-    'POST',
-    data
-  );
+  return request(`/web/auth/trade/orders/verify`, 'POST', data);
 };
 
 // 查询八字
 export const getBaziAPI = async data => {
   await visitorLoginAPI();
-  return request(`/${is_in_app ? 'h5' : 'web'}/auth/bazi/info`, 'GET', data);
+  return request(`/web/auth/bazi/info`, 'GET', data);
 };
 
 // 查询支付方式
 export const getPayMethodsAPI = async data => {
   await visitorLoginAPI();
-  return request(
-    `/${is_in_app ? 'h5' : 'web'}/auth/trade/pay_methods`,
-    'GET',
-    data
-  );
+  return request(`/web/auth/trade/pay_methods`, 'GET', data);
 };
 
 // 查询八字合婚信息
 export const getBazihehunAPI = async data => {
   await visitorLoginAPI();
-  return request(`/${is_in_app ? 'h5' : 'web'}/auth/bazi/hehun`, 'POST', data);
+  return request(`/web/auth/bazi/hehun`, 'POST', data);
 };
 
 // 游客注册登录
 export const visitorLoginAPI = async data => {
-  if (localStorage.getItem('mlxz_outer_open_uid') || is_in_app) {
+  if (localStorage.getItem('mlxz_outer_open_uid')) {
     return true;
   }
   const res = await request('/web/login/visitor', 'POST', data);

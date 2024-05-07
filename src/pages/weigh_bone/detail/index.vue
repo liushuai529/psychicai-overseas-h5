@@ -49,11 +49,7 @@ export default {
       showBottomBtn: false,
     };
   },
-  computed: {
-    is_in_app() {
-      return utils.isInApp();
-    },
-  },
+  computed: {},
   mounted() {
     window.scrollTo(0, 0);
     let screenH = window.screen.height;
@@ -68,14 +64,10 @@ export default {
     };
   },
   created() {
-    if (this.is_in_app) {
-      utils.payStatusAdjust('page_view_pay', 'hevtih', '');
-    } else {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'ty18p4',
-        });
-    }
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'ty18p4',
+      });
     utils.firebaseLogEvent('20002', '-10001', 'page_view_pay', 'page_view', {
       args_name: 'page_view_pay',
       report_id: '60002',
@@ -90,14 +82,10 @@ export default {
      * @return {*}
      */
     logEventFun() {
-      if (this.is_in_app) {
-        utils.payStatusAdjust('click_report_choice', 'wp0pby', '');
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'e8qywf',
-          });
-      }
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'e8qywf',
+        });
     },
   },
 };

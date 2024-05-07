@@ -266,9 +266,7 @@ export default {
     productList() {
       return this.$store.state.common.productList;
     },
-    is_in_app() {
-      return utils.isInApp();
-    },
+
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -278,14 +276,10 @@ export default {
 
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
-    if (this.is_in_app) {
-      utils.payStatusAdjust('page_view_report', 'u23wk8', '');
-    } else {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'b7vv0n',
-        });
-    }
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'b7vv0n',
+      });
 
     utils.firebaseLogEvent('20001', '-10001', 'page_view_report', 'page_view', {
       args_name: 'page_view_report',
@@ -337,36 +331,6 @@ export default {
       }
     }
     let self = this;
-    window.mlxzGooglePlayResult = function (val, pay_reason) {
-      console.log(val, pay_reason);
-      let store_report_id = localStorage.getItem('report_order_id');
-      if (val === 'SUCCESS') {
-        self.$router.push({
-          path: 'result',
-          query: { order_id: store_report_id, status: 'SUCCESS' },
-        });
-      } else {
-        if (self.is_in_app) {
-          utils.payStatusAdjust('event_status_pay_failure', 'veoeo1', '');
-        } else {
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: 'k7kijn',
-            });
-        }
-
-        utils.firebaseLogEvent(
-          '10060',
-          '-10008',
-          'event_status_pay_failure',
-          'event_status',
-          {
-            args_name: 'event_status_pay_failure',
-            reason: pay_reason,
-          }
-        );
-      }
-    };
 
     let btn = document.getElementById('info-btn');
     document.addEventListener('scroll', e => {
@@ -489,14 +453,10 @@ export default {
      * @return {*}
      */
     async check() {
-      if (this.is_in_app) {
-        utils.payStatusAdjust('click_report_confirm', 'qcnk93', '');
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'gjog9k',
-          });
-      }
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'gjog9k',
+        });
 
       utils.firebaseLogEvent(
         '20001',
