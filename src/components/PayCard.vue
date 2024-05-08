@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 14:09:51
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-06 17:22:33
+ * @LastEditTime: 2024-05-08 18:55:57
  * @Description: 融合支付
 -->
 <template>
@@ -504,8 +504,6 @@ export default {
       let click_ = this.new_pay_methods[this.index];
       localStorage.setItem('report_price', this.product.price);
 
-      utils.payStatusAdjust('event_status_pay_type', '1le9tm', '');
-
       utils.firebaseLogEvent(
         '10060',
         '-10006',
@@ -542,10 +540,6 @@ export default {
               this.order_id = res.data.id;
               // this.$emit('getOrderId', res.data.id);
               localStorage.setItem('report_order_id', res.data.id);
-              window.psychicai_client.onGooglePay(
-                res.data.id,
-                this.product.google_goods_id
-              );
             }
           })
           .catch(err => {

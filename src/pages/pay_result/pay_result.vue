@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-05 13:48:49
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-02-05 14:33:50
+ * @LastEditTime: 2024-05-08 18:54:26
  * @Description: 支付结果页
 -->
 <template>
@@ -52,7 +52,6 @@ export default {
       } else {
         this.status = 'FAIL';
       }
-      window.psychicai_client.onWebPayResult(this.status);
     },
   },
 };

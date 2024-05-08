@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang
- * @LastEditTime: 2024-01-29 13:58:16
+ * @LastEditTime: 2024-05-08 18:54:47
  * @Description:
  */
 
@@ -57,14 +57,6 @@ export default {
           key: 'order_id',
           value: res.data.id,
         });
-
-        window.psychicai_client.onWebPayDialog(
-          res.data.id,
-          price + '',
-          unit,
-          google_goods_id,
-          reportEnum[product_key]
-        );
       }
     },
   },

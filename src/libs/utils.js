@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-07 18:53:58
+ * @LastEditTime: 2024-05-08 18:56:11
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1185,19 +1185,6 @@ const isElementInViewport = el => {
 };
 
 /**
- * @description: adjust上报
- * @param {*} e_name 事件名称
- * @param {*} e_code 事件识别码
- * @param {*} price 价格  支付成功才上报
- * @return {*}
- */
-const payStatusAdjust = (e_name, e_code, price) => {
-  window.psychicai_client &&
-    window.psychicai_client.onAdjustTrackEvent &&
-    window.psychicai_client.onAdjustTrackEvent(e_name, e_code, price);
-};
-
-/**
  * @description: 打开app
  * @return {*}
  */
@@ -1430,7 +1417,6 @@ export default {
   getBaziStyleColor,
   openApp,
   copyToClipboard,
-  payStatusAdjust,
   isElementInViewport,
   isProduction,
   getExtraParams,

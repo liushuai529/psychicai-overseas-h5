@@ -388,10 +388,6 @@ export default {
               Indicator.close();
               this.order_id = res.data.id;
               this.$emit('getOrderId', res.data.id);
-              window.psychicai_client.onGooglePay(
-                res.data.id,
-                this.google_goods_id
-              );
             }
           })
           .catch(err => {

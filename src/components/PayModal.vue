@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-07 19:00:52
+ * @LastEditTime: 2024-05-08 18:53:08
  * @Description: 支付弹窗
 -->
 <template>
@@ -415,10 +415,6 @@ export default {
         Indicator.close();
         if (res.status !== 1000) return;
         localStorage.setItem('report_order_id', res.data.id);
-        window.psychicai_client.onGooglePay(
-          res.data.id,
-          this.product.google_goods_id
-        );
       } else {
         let pay_max_params = Object.assign({}, params, {
           trade_pay_type,

@@ -90,27 +90,7 @@ export default {
     window.scrollTo(0, 0);
     this.checkResult() && this.query();
   },
-  watch: {
-    status(val) {
-      if (val) {
-        let stop = utils.getQueryString('stop');
-        if (stop) return;
-        const new_url = window.location.href + '&stop=1';
-        if (utils.isAndroid()) {
-          window.psychicai_client.onWebPayResult(new_url, false);
-        } else {
-          let params = {
-            url: new_url,
-            main_page: 0,
-          };
-          window.prompt('onWebPayResult', JSON.stringify(params));
-        }
-        let url = new URL(window.location.href);
-        let newUrl = url.origin + url.pathname;
-        history.pushState(null, '', newUrl);
-      }
-    },
-  },
+  watch: {},
   methods: {
     async checkResult() {
       let data = {
