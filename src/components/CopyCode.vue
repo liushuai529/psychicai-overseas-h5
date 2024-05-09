@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-19 10:41:34
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-09 19:56:01
+ * @LastEditTime: 2024-05-09 22:23:11
  * @Description: 更多精彩
 -->
 <template>
@@ -167,10 +167,10 @@ export default {
       // utils.logCopyEvent(val);
       if (!val) {
         window.Adjust.trackEvent({
-          eventToken: a_token,
+          eventToken: this.a_token,
         });
-        utils.firebaseLogEvent(e_id, c_id, e_name, 'click', {
-          args_name: e_name,
+        utils.firebaseLogEvent(this.e_id, this.c_id, this.e_name, 'click', {
+          args_name: this.e_name,
           channel: utils.getFBChannel(),
         });
         await utils.asleep(1000);

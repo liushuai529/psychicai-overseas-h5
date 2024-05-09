@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-09 21:21:31
+ * @LastEditTime: 2024-05-09 22:22:35
  * @Description: 支付弹窗
 -->
 <template>
@@ -271,13 +271,19 @@ export default {
             );
           }
 
-          utils.firebaseLogEvent(e_view_id, c_view_id, e_view_name, 'view', {
-            args_name: e_view_name,
-            channel: utils.getFBChannel(),
-          });
+          utils.firebaseLogEvent(
+            this.e_view_id,
+            this.c_view_id,
+            this.e_view_name,
+            'view',
+            {
+              args_name: this.e_view_name,
+              channel: utils.getFBChannel(),
+            }
+          );
           window.Adjust &&
             window.Adjust.trackEvent({
-              eventToken: a_view_token,
+              eventToken: this.a_view_token,
             });
         } else {
           if (this.parser) {
@@ -369,7 +375,7 @@ export default {
     async payMoney() {
       window.Adjust &&
         window.Adjust.trackEvent({
-          eventToken: a_click_token,
+          eventToken: this.a_click_token,
         });
       if (utils.isProd()) {
         try {
@@ -378,11 +384,17 @@ export default {
           console.error('AddToCart  error message:', err);
         }
       }
-      utils.firebaseLogEvent(e_view_id, c_click_id, e_click_name, 'click', {
-        args_name: e_click_name,
-        pay_type: this.pay_methods[this.check_index].title,
-        channel: utils.getFBChannel(),
-      });
+      utils.firebaseLogEvent(
+        this.e_view_id,
+        this.c_click_id,
+        this.e_click_name,
+        'click',
+        {
+          args_name: this.e_click_name,
+          pay_type: this.pay_methods[this.check_index].title,
+          channel: utils.getFBChannel(),
+        }
+      );
 
       localStorage.setItem('report_price', this.product.price);
 
