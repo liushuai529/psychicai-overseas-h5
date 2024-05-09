@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-09 22:02:32
+ * @LastEditTime: 2024-05-09 22:33:11
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -730,7 +730,7 @@ const copyToClipboard = text => {
  */
 const isProd = () => {
   // return true;
-  return ['192.168', 'localhost', 'test'].every(item => {
+  return ['192.168', 'localhost', 'test', '10.1.9'].every(item => {
     return window.location.href.indexOf(item) < 0;
   });
 };
@@ -1413,7 +1413,7 @@ const channel_obj = {
 fb.config({
   autoPageView: true,
   pixel: channel_obj[getFBChannel()],
-  disabled: window.psychicai_client || !isProd(),
+  disabled: !isProd(),
 });
 
 const fbEvent = () => {
