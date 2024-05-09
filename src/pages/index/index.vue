@@ -65,7 +65,7 @@
       <div
         v-for="(item, index) in sale_list"
         :key="index"
-        @click="jumpUrl(item.url, item.e_id, item.e_name, item.ad_e)"
+        @click="jumpUrl(item.url, item.e_id, item.e_name, item.ad_e, report_id)"
         :class="[item.is_big ? 'big-item' : 'normal-item']"
       >
         <img
@@ -878,6 +878,7 @@ export default {
           e_id: '-10009',
           e_name: 'click_report_chenggu',
           ad_e: 'kajqs3',
+          report_id: '60002',
         },
         {
           id: 2,
@@ -893,6 +894,7 @@ export default {
           e_id: '-10008',
           e_name: 'click_report_64gua',
           ad_e: 'jd4oen',
+          report_id: '60003',
         },
         {
           id: 3,
@@ -909,6 +911,7 @@ export default {
           e_id: '-10003',
           e_name: 'click_report_2024report',
           ad_e: 'oqfzzs',
+          report_id: '60009',
         },
         {
           id: 4,
@@ -924,6 +927,7 @@ export default {
           e_id: '-10006',
           e_name: 'click_report_2024lovely',
           ad_e: 'efy9t0',
+          report_id: '60010',
         },
         {
           id: 5,
@@ -939,6 +943,7 @@ export default {
           e_id: '-10004',
           e_name: 'click_report_2024career',
           ad_e: 'tzsnzi',
+          report_id: '60011',
         },
         {
           id: 6,
@@ -954,6 +959,7 @@ export default {
           e_id: '-10005',
           e_name: 'click_report_2024wealty',
           ad_e: 'egm8a2',
+          report_id: '60001',
         },
         {
           id: 7,
@@ -969,6 +975,7 @@ export default {
           e_id: '-10007',
           e_name: 'click_report_marriage',
           ad_e: '8g4xt8',
+          report_id: '60005',
         },
       ];
 
@@ -1421,14 +1428,14 @@ export default {
     randomNum(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
-    async jumpUrl(url, e_id, e_name, ad_e) {
+    async jumpUrl(url, e_id, e_name, ad_e, report_id) {
       utils.firebaseLogEvent('20000', e_id, e_name, 'click', {
         args_name: e_name,
       });
 
       window.Adjust && window.Adjust.trackEvent({ eventToken: ad_e });
       if (url !== 'history_order') {
-        this.logHome(e_id);
+        this.logHome(report_id);
       }
 
       await utils.asleep(500);
