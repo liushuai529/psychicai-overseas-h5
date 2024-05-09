@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-09 21:42:45
+ * @LastEditTime: 2024-05-09 22:02:32
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1410,12 +1410,11 @@ const channel_obj = {
   nova: '1521267251796283',
   enjoy: '953933459469054',
 };
-if (!window.psychicai_client && isProd()) {
-  fb.config({
-    autoPageView: true,
-    pixel: channel_obj[getFBChannel()],
-  });
-}
+fb.config({
+  autoPageView: true,
+  pixel: channel_obj[getFBChannel()],
+  disabled: window.psychicai_client || !isProd(),
+});
 
 const fbEvent = () => {
   return fb;
