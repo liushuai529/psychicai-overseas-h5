@@ -65,7 +65,9 @@
       <div
         v-for="(item, index) in sale_list"
         :key="index"
-        @click="jumpUrl(item.url, item.e_id, item.e_name, item.ad_e, report_id)"
+        @click="
+          jumpUrl(item.url, item.e_id, item.e_name, item.ad_e, item.report_id)
+        "
         :class="[item.is_big ? 'big-item' : 'normal-item']"
       >
         <img
