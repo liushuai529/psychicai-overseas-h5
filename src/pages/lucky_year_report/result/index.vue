@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 11:34:10
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-07 19:24:44
+ * @LastEditTime: 2024-05-09 15:20:32
  * @Description: 
 -->
 <template>
@@ -172,7 +172,7 @@ export default {
       tw_code_btn,
     };
   },
-  async created() {
+  async mounted() {
     window.scrollTo(0, 0);
 
     window.Adjust &&

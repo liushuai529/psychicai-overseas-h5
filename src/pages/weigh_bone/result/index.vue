@@ -55,7 +55,7 @@ export default {
     };
   },
   computed: {},
-  async created() {
+  async mounted() {
     window.scrollTo(0, 0);
 
     window.Adjust &&

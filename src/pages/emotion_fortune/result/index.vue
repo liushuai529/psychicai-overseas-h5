@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-07 19:03:40
+ * @LastEditTime: 2024-05-09 15:19:55
  * @Description: 
 -->
 <template>
@@ -81,7 +81,7 @@ export default {
       code: '',
     };
   },
-  async created() {
+  async mounted() {
     window.Adjust &&
       window.Adjust.trackEvent({
         eventToken: '77woaq',

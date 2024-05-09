@@ -45,7 +45,7 @@ export default {
       result: {},
     };
   },
-  async created() {
+  async mounted() {
     window.Adjust &&
       window.Adjust.trackEvent({
         eventToken: '77woaq',

@@ -283,7 +283,7 @@ export default {
       tw_code_btn,
     };
   },
-  async created() {
+  async mounted() {
     window.scrollTo(0, 0);
 
     window.Adjust &&

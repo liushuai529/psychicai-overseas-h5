@@ -181,7 +181,7 @@ export default {
       is_finish: false,
     };
   },
-  created() {
+  mounted() {
     utils.firebaseLogEvent(
       '20003',
       '-10001',
