@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-12-20 14:26:33
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-04-23 10:21:32
+ * @LastEditTime: 2024-05-09 20:46:24
  * @Description: 
 -->
 <template>
@@ -98,6 +98,10 @@
       :code_btn="is_cn ? cn_code_btn : tw_code_btn"
       code_text_style="margin:.3rem auto;color:#FFD3EB"
       @showModal="code_modal = true"
+      a_token="idjkql"
+      e_id="10006"
+      c_id="-10010"
+      e_name="click_2024lovely_result"
     />
 
     <CodePop v-if="code_modal" @close="code_modal = false" />

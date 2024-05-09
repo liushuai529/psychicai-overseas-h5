@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-06 17:35:32
+ * @LastEditTime: 2024-05-09 21:06:13
  * @Description: 八字合婚
 -->
 
@@ -15,7 +15,6 @@
     <div class="pay-box">
       <img
         class="banner"
-        src=""
         :src="language === 'zh-CN' ? cn_img_title : tw_img_title"
       />
       <div class="user-info">
@@ -81,6 +80,13 @@
       title="八字合婚"
       title_style="color:#fff"
       @close="pay_modal = false"
+      e_view_id="10007"
+      c_view_id="-10005"
+      e_view_name="view_marriage_pay"
+      a_view_token="g790s3"
+      c_click_id="-10006"
+      e_click_name="click_marriage_pay"
+      a_click_token="2ijw47"
     />
   </div>
 </template>
@@ -173,13 +179,18 @@ export default {
   created() {
     window.Adjust &&
       window.Adjust.trackEvent({
-        eventToken: 'ty18p4',
+        eventToken: 'dfhs0r',
       });
-    utils.firebaseLogEvent('20002', '-10001', 'page_view_pay', 'page_view', {
-      args_name: 'page_view_pay',
-      report_id: '60005',
-      channel: utils.getFBChannel(),
-    });
+    utils.firebaseLogEvent(
+      '10007',
+      '-10003',
+      'page_view_marriage_mid',
+      'page_view',
+      {
+        args_name: 'page_view_marriage_mid',
+        channel: utils.getFBChannel(),
+      }
+    );
     this.query_user_string = this.$route.query.querystring;
     this.parseUserString();
   },
@@ -307,19 +318,12 @@ export default {
     showPayModal() {
       window.Adjust &&
         window.Adjust.trackEvent({
-          eventToken: 'e8qywf',
+          eventToken: 'ixk05w',
         });
-      utils.firebaseLogEvent(
-        '20002',
-        '-10002',
-        'click_report_choice',
-        'click',
-        {
-          args_name: 'click_report_choice',
-          report_id: report_id_arr[this.product_key],
-          channel: utils.getFBChannel(),
-        }
-      );
+      utils.firebaseLogEvent('10007', '-10004', 'click_marriage_mid', 'click', {
+        args_name: 'click_marriage_mid',
+        channel: utils.getFBChannel(),
+      });
       this.pay_modal = true;
     },
   },

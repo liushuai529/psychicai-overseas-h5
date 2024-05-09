@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-07 19:14:37
+ * @LastEditTime: 2024-05-09 21:10:18
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -212,13 +212,18 @@ export default {
   created() {
     window.Adjust &&
       window.Adjust.trackEvent({
-        eventToken: 'b7vv0n',
+        eventToken: 'yg9eg4',
       });
-    utils.firebaseLogEvent('20001', '-10001', 'page_view_report', 'page_view', {
-      args_name: 'page_view_report',
-      report_id: '60002',
-      channel: utils.getFBChannel(),
-    });
+    utils.firebaseLogEvent(
+      '10009',
+      '-10001',
+      'page_view_chenggu_main',
+      'page_view',
+      {
+        args_name: 'page_view_chenggu_main',
+        channel: utils.getFBChannel(),
+      }
+    );
     this.$store.dispatch('common/getProduction');
 
     const { has_pay } = this.$route.query;
@@ -272,32 +277,7 @@ export default {
       });
     }
     let self = this;
-    window.mlxzGooglePlayResult = function (val, pay_reason) {
-      console.log(val, pay_reason);
-      let store_report_id = localStorage.getItem('report_order_id');
-      if (val === 'SUCCESS') {
-        self.$router.push({
-          path: 'result',
-          query: { order_id: store_report_id, status: 'SUCCESS' },
-        });
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'k7kijn',
-          });
 
-        utils.firebaseLogEvent(
-          '10060',
-          '-10008',
-          'event_status_pay_failure',
-          'event_status',
-          {
-            args_name: 'event_status_pay_failure',
-            reason: pay_reason,
-          }
-        );
-      }
-    };
     let screenH = window.screen.height;
     let btn = document.getElementById('info-btn');
     document.addEventListener('scroll', e => {
@@ -406,24 +386,13 @@ export default {
     async check() {
       window.Adjust &&
         window.Adjust.trackEvent({
-          eventToken: 'gjog9k',
-        });
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'qcnk93',
+          eventToken: 'wtjjau',
         });
 
-      utils.firebaseLogEvent(
-        '20001',
-        '-10005',
-        'click_report_confirm',
-        'click',
-        {
-          args_name: 'click_report_confirm',
-          report_id: '60002',
-          channel: utils.getFBChannel(),
-        }
-      );
+      utils.firebaseLogEvent('10009', '-10002', 'click_chenggu_main', 'click', {
+        args_name: 'click_chenggu_main',
+        channel: utils.getFBChannel(),
+      });
 
       await utils.asleep(500);
 

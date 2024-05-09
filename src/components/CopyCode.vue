@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-19 10:41:34
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-07 19:24:01
+ * @LastEditTime: 2024-05-09 19:56:01
  * @Description: 更多精彩
 -->
 <template>
@@ -118,6 +118,22 @@ export default {
       type: Boolean,
       default: true,
     },
+    e_name: {
+      type: String,
+      default: '',
+    },
+    e_id: {
+      type: String,
+      default: '',
+    },
+    c_id: {
+      type: String,
+      default: '',
+    },
+    a_token: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -144,25 +160,28 @@ export default {
     async handleCopyCode(val) {
       utils.copyText('mlxz-' + this.transfer_code);
       Toast(tips_arr4[lang]);
-      window.Adjust.trackEvent({
-        eventToken: 'lcrtcc',
-      });
+      // window.Adjust.trackEvent({
+      //   eventToken: 'lcrtcc',
+      // });
 
-      utils.logCopyEvent(val);
+      // utils.logCopyEvent(val);
       if (!val) {
+        window.Adjust.trackEvent({
+          eventToken: a_token,
+        });
+        utils.firebaseLogEvent(e_id, c_id, e_name, 'click', {
+          args_name: e_name,
+          channel: utils.getFBChannel(),
+        });
         await utils.asleep(1000);
         utils.openApp();
-        window.Adjust.trackEvent({
-          eventToken: 'ajynkv',
-        });
-
         return;
       }
       this.$emit('showModal');
-      window.Adjust.trackEvent({
-        eventToken: 'id6k2k',
-      });
-      utils.logCopyOther();
+      // window.Adjust.trackEvent({
+      //   eventToken: 'id6k2k',
+      // });
+      // utils.logCopyOther();
     },
   },
 };

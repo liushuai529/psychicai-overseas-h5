@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-08 18:56:11
+ * @LastEditTime: 2024-05-09 21:14:12
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -18,7 +18,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('nova') > -1) {
     return 'nova';
   } else {
-    return '';
+    return 'own';
   }
 };
 /**
@@ -1404,7 +1404,25 @@ const resetResultUrl = (order_id, status, is_home_page = false) => {
   );
 };
 
+import { fb } from 'facebook-pixel';
+const channel_obj = {
+  own: '709060547838898',
+  nova: '1521267251796283',
+  enjoy: '953933459469054',
+};
+if (!window.psychicai_client && isProd) {
+  fb.config({
+    autoPageView: true,
+    pixel: channel_obj[getFBChannel()],
+  });
+}
+
+const fbEvent = () => {
+  return fb;
+};
+
 export default {
+  fbEvent,
   getFBChannel,
   resetResultUrl,
   openAdjustApp,

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-10 15:23:55
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-04-23 10:25:24
+ * @LastEditTime: 2024-05-09 20:44:16
  * @Description: 
 -->
 <template>
@@ -42,6 +42,10 @@
       code_text_style="margin:.4rem auto .3rem;color:#999FC2"
       tips5_style="width: 5.12rem;height: 1rem;margin-bottom: .4rem;"
       @showModal="code_modal = true"
+      a_token="m00746"
+      e_id="10009"
+      c_id="-10010"
+      e_name="click_chenggu_result"
     />
 
     <CodePop v-if="code_modal" @close="code_modal = false" />

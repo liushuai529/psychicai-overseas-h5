@@ -71,6 +71,13 @@
       title="袁天罡称骨论命"
       title_style="color:#fff"
       @close="pay_modal = false"
+      e_view_id="10009"
+      c_view_id="-10005"
+      e_view_name="view_chenggu_pay"
+      a_view_token="99oosg"
+      c_click_id="-10006"
+      e_click_name="click_chenggu_pay"
+      a_click_token="20fbsi"
     />
   </div>
 </template>
@@ -321,17 +328,10 @@ export default {
      */
     showPayModal() {
       this.$emit('logEvent');
-      utils.firebaseLogEvent(
-        '20002',
-        '-10002',
-        'click_report_choice',
-        'click',
-        {
-          args_name: 'click_report_choice',
-          report_id: report_id_arr[this.product_key],
-          channel: utils.getFBChannel(),
-        }
-      );
+      utils.firebaseLogEvent('10009', '-10004', 'click_chenggu_mid', 'click', {
+        args_name: 'click_chenggu_mid',
+        channel: utils.getFBChannel(),
+      });
       this.pay_modal = true;
     },
   },

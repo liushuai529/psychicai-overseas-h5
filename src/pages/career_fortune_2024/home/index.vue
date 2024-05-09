@@ -278,14 +278,19 @@ export default {
     this.has_pay = has_pay ? has_pay : '';
     window.Adjust &&
       window.Adjust.trackEvent({
-        eventToken: 'b7vv0n',
+        eventToken: '5ewewi',
       });
 
-    utils.firebaseLogEvent('20001', '-10001', 'page_view_report', 'page_view', {
-      args_name: 'page_view_report',
-      report_id: '60011',
-      channel: utils.getFBChannel(),
-    });
+    utils.firebaseLogEvent(
+      '10004',
+      '-10001',
+      'page_view_2024career_main',
+      'page_view',
+      {
+        args_name: 'page_view_2024career_main',
+        channel: utils.getFBChannel(),
+      }
+    );
   },
   async mounted() {
     // 赋默认值
@@ -455,17 +460,16 @@ export default {
     async check() {
       window.Adjust &&
         window.Adjust.trackEvent({
-          eventToken: 'gjog9k',
+          eventToken: 'femk1d',
         });
 
       utils.firebaseLogEvent(
-        '20001',
-        '-10005',
-        'click_report_confirm',
+        '10004',
+        '-10002',
+        'click_2024career_main',
         'click',
         {
-          args_name: 'click_report_confirm',
-          report_id: '60011',
+          args_name: 'click_2024career_main',
           channel: utils.getFBChannel(),
         }
       );

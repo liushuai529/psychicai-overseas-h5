@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-08 20:35:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-06 17:25:34
+ * @LastEditTime: 2024-05-09 21:01:45
  * @Description: 
 -->
 <template>
@@ -73,6 +73,13 @@
       :query_user_string="query_user_string"
       :title="username_title"
       @close="pay_modal = false"
+      e_view_id="10005"
+      c_view_id="-10005"
+      e_view_name="view_2024wealty_pay"
+      a_view_token="xa0760"
+      c_click_id="-10006"
+      e_click_name="click_2024wealty_pay"
+      a_click_token="rckacf"
     />
   </div>
 </template>
@@ -171,13 +178,18 @@ export default {
   async created() {
     window.Adjust &&
       window.Adjust.trackEvent({
-        eventToken: 'ty18p4',
+        eventToken: 'b1ze8a',
       });
-    utils.firebaseLogEvent('20002', '-10001', 'page_view_pay', 'page_view', {
-      args_name: 'page_view_pay',
-      report_id: '60001',
-      channel: utils.getFBChannel(),
-    });
+    utils.firebaseLogEvent(
+      '10005',
+      '-10003',
+      'page_view_2024wealty_mid',
+      'page_view',
+      {
+        args_name: 'page_view_2024wealty_mid',
+        channel: utils.getFBChannel(),
+      }
+    );
     this.query_user_string = this.$route.query.querystring;
     await this.formateQueryUserInfo(this.query_user_string);
     this.getUserBazi();
@@ -306,15 +318,15 @@ export default {
     showPayModal() {
       window.Adjust &&
         window.Adjust.trackEvent({
-          eventToken: 'e8qywf',
+          eventToken: '6abhf0',
         });
       utils.firebaseLogEvent(
-        '20002',
-        '-10002',
-        'click_report_choice',
+        '10005',
+        '-10004',
+        'click_2024wealty_mid',
         'click',
         {
-          args_name: 'click_report_choice',
+          args_name: 'click_2024wealty_mid',
           report_id: report_id_arr[this.product_key],
           channel: utils.getFBChannel(),
         }

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-07 19:12:28
+ * @LastEditTime: 2024-05-09 21:05:49
  * @Description: 八字合婚
 -->
 <template>
@@ -255,16 +255,21 @@ export default {
   created() {
     window.Adjust &&
       window.Adjust.trackEvent({
-        eventToken: 'b7vv0n',
+        eventToken: 'jsjb8g',
       });
     this.$store.dispatch('common/getProduction');
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
-    utils.firebaseLogEvent('20001', '-10001', 'page_view_report', 'page_view', {
-      args_name: 'page_view_report',
-      report_id: '60005',
-      channel: utils.getFBChannel(),
-    });
+    utils.firebaseLogEvent(
+      '10007',
+      '-10001',
+      'page_view_marriage_main',
+      'page_view',
+      {
+        args_name: 'page_view_marriage_main',
+        channel: utils.getFBChannel(),
+      }
+    );
   },
   mounted() {
     // 賦默認值
@@ -334,31 +339,7 @@ export default {
       this.female.picker_date_obj = femaleobj;
     }
     let self = this;
-    window.mlxzGooglePlayResult = function (val, pay_reason) {
-      console.log(val, pay_reason);
-      let store_report_id = localStorage.getItem('report_order_id');
-      if (val === 'SUCCESS') {
-        self.$router.push({
-          path: 'result',
-          query: { order_id: store_report_id, status: 'SUCCESS' },
-        });
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'k7kijn',
-          });
-        utils.firebaseLogEvent(
-          '10060',
-          '-10008',
-          'event_status_pay_failure',
-          'event_status',
-          {
-            args_name: 'event_status_pay_failure',
-            reason: pay_reason,
-          }
-        );
-      }
-    };
+
     let btn = document.getElementById('info-btn');
     document.addEventListener('scroll', e => {
       let flag = utils.isElementInViewport(btn);
@@ -515,21 +496,16 @@ export default {
     async check() {
       window.Adjust &&
         window.Adjust.trackEvent({
-          eventToken: 'gjog9k',
-        });
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'qcnk93',
+          eventToken: 'z82ece',
         });
 
       utils.firebaseLogEvent(
-        '20001',
-        '-10005',
-        'click_report_confirm',
+        '10007',
+        '-10002',
+        'click_marriage_main',
         'click',
         {
-          args_name: 'click_report_confirm',
-          report_id: '60005',
+          args_name: 'click_marriage_main',
           channel: utils.getFBChannel(),
         }
       );

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-04-30 10:22:00
+ * @LastEditTime: 2024-05-09 19:29:55
  * @Description: 历史订单
 -->
 <template>
@@ -281,16 +281,17 @@ export default {
   mounted() {
     window.Adjust &&
       window.Adjust.trackEvent({
-        eventToken: 'mg52x0',
+        eventToken: 'k7zenb',
       });
 
     utils.firebaseLogEvent(
-      '20004',
+      '10002',
       '-10001',
       'page_view_report_history',
       'page_view',
       {
         args_name: 'page_view_report_history',
+        channel: utils.getFBChannel(),
       }
     );
 
@@ -373,13 +374,18 @@ export default {
     },
 
     async openApp() {
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: 'u0jp7q',
+        });
       utils.firebaseLogEvent(
-        '20004',
-        '-10004',
-        'click_history_downloadlink',
+        '10002',
+        '-10002',
+        'click_history_download',
         'click',
         {
-          args_name: 'click_history_downloadlink',
+          args_name: 'click_history_download',
+          channel: utils.getFBChannel(),
         }
       );
       await utils.asleep(500);
@@ -558,13 +564,6 @@ export default {
     copyCode(code) {
       utils.copyText('mlxz-' + code);
       Toast('复制成功');
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: '9i43u8',
-        });
-      utils.firebaseLogEvent('20004', '-10002', 'view_history_copy', 'view', {
-        args_name: 'view_history_copy',
-      });
       this.code_modal = true;
     },
   },

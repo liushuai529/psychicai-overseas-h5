@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-08 18:53:08
+ * @LastEditTime: 2024-05-09 21:21:31
  * @Description: 支付弹窗
 -->
 <template>
@@ -191,6 +191,34 @@ export default {
       type: String,
       default: 'color:#222',
     },
+    e_view_id: {
+      type: String,
+      default: '',
+    },
+    c_view_id: {
+      type: String,
+      default: '',
+    },
+    e_view_name: {
+      type: String,
+      default: '',
+    },
+    a_view_token: {
+      type: String,
+      default: '',
+    },
+    e_click_name: {
+      type: String,
+      default: '',
+    },
+    c_click_id: {
+      type: String,
+      default: '',
+    },
+    a_click_token: {
+      type: String,
+      default: '',
+    },
   },
   components: {
     CountDown,
@@ -227,9 +255,7 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
   },
-  created() {
-    console.log(utils.isProd());
-  },
+  created() {},
 
   watch: {
     value: {
@@ -245,14 +271,13 @@ export default {
             );
           }
 
-          utils.firebaseLogEvent('20002', '-10003', 'view_pay_choise', 'view', {
-            args_name: 'view_pay_choise',
-            report_id: e_id_arr[this.product_key],
+          utils.firebaseLogEvent(e_view_id, c_view_id, e_view_name, 'view', {
+            args_name: e_view_name,
             channel: utils.getFBChannel(),
           });
           window.Adjust &&
             window.Adjust.trackEvent({
-              eventToken: 'ajepm5',
+              eventToken: a_view_token,
             });
         } else {
           if (this.parser) {
@@ -344,56 +369,21 @@ export default {
     async payMoney() {
       window.Adjust &&
         window.Adjust.trackEvent({
-          eventToken: '1le9tm',
-        });
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'mbqpev',
+          eventToken: a_click_token,
         });
       if (utils.isProd()) {
         try {
-          fbq('track', 'AddToCart');
+          utils.fbEvent().track('AddToCart');
         } catch (err) {
-          console.error('AddToCart fbq error message:', err);
+          console.error('AddToCart  error message:', err);
         }
-
-        //
-        try {
-          fbq('track', 'AddToCart', {
-            content_ids: -10004,
-            content_name: 'click_pay_pay',
-            content_type: 'click',
-          });
-        } catch (err) {
-          console.error('AddToCart fbq error message:', err);
-        }
-        // try {
-        //   fbq('track', 'AddToCart', {
-        //     content_ids: '-10004',
-        //     content_name: 'click_pay_pay',
-        //     content_type: 'click',
-        //   });
-        // } catch (err) {
-        //   console.error('fbq error message:', err);
-        // }
       }
-      utils.firebaseLogEvent(
-        '10060',
-        '-10006',
-        'event_status_pay_type',
-        'event_status',
-        {
-          args_name: 'event_status_pay_type',
-          pay_type: this.pay_methods[this.check_index].title,
-        }
-      );
-
-      utils.firebaseLogEvent('20002', '-10004', 'click_pay_pay', 'click', {
-        args_name: 'click_pay_pay',
+      utils.firebaseLogEvent(e_view_id, c_click_id, e_click_name, 'click', {
+        args_name: e_click_name,
         pay_type: this.pay_methods[this.check_index].title,
-        report_id: e_id_arr[this.product_key],
         channel: utils.getFBChannel(),
       });
+
       localStorage.setItem('report_price', this.product.price);
 
       Indicator.open(tipsArr5[utils.getLanguage()]);

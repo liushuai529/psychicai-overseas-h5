@@ -100,6 +100,13 @@
       :title="username_title"
       title_style="color:#fff"
       @close="pay_modal = false"
+      e_view_id="10008"
+      c_view_id="-10005"
+      e_view_name="view_64gua_pay"
+      a_view_token="d87aek"
+      c_click_id="-10006"
+      e_click_name="click_64gua_pay"
+      a_click_token="y33o5l"
     />
   </div>
 </template>
@@ -177,13 +184,18 @@ export default {
   async created() {
     window.Adjust &&
       window.Adjust.trackEvent({
-        eventToken: 'ty18p4',
+        eventToken: '7xbio7',
       });
-    utils.firebaseLogEvent('20002', '-10001', 'page_view_pay', 'page_view', {
-      args_name: 'page_view_pay',
-      report_id: '60003',
-      channel: utils.getFBChannel(),
-    });
+    utils.firebaseLogEvent(
+      '10008',
+      '-10003',
+      'page_view_64gua_mid',
+      'page_view',
+      {
+        args_name: 'page_view_64gua_mid',
+        channel: utils.getFBChannel(),
+      }
+    );
 
     this.query_user_string = this.$route.query.querystring;
     this.formateQueryUserInfo(this.query_user_string);
@@ -304,19 +316,12 @@ export default {
     showPayModal() {
       window.Adjust &&
         window.Adjust.trackEvent({
-          eventToken: 'e8qywf',
+          eventToken: 'qp9ymz',
         });
-      utils.firebaseLogEvent(
-        '20002',
-        '-10002',
-        'click_report_choice',
-        'click',
-        {
-          args_name: 'click_report_choice',
-          report_id: report_id_arr[this.product_key],
-          channel: utils.getFBChannel(),
-        }
-      );
+      utils.firebaseLogEvent('10008', '-10004', 'click_64gua_mid', 'click', {
+        args_name: 'click_64gua_mid',
+        channel: utils.getFBChannel(),
+      });
       this.pay_modal = true;
     },
   },

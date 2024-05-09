@@ -269,15 +269,20 @@ export default {
   created() {
     window.Adjust &&
       window.Adjust.trackEvent({
-        eventToken: 'b7vv0n',
+        eventToken: 'e6huul',
       });
     this.$store.dispatch('common/getProduction');
 
-    utils.firebaseLogEvent('20001', '-10001', 'page_view_report', 'page_view', {
-      args_name: 'page_view_report',
-      report_id: '60001',
-      channel: utils.getFBChannel(),
-    });
+    utils.firebaseLogEvent(
+      '10005',
+      '-10001',
+      'page_view_2024wealty_main',
+      'page_view',
+      {
+        args_name: 'page_view_2024wealty_main',
+        channel: utils.getFBChannel(),
+      }
+    );
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
   },
@@ -331,31 +336,6 @@ export default {
       }
     }
     let self = this;
-    window.mlxzGooglePlayResult = function (val, pay_reason) {
-      console.log(val, pay_reason);
-      let store_report_id = localStorage.getItem('report_order_id');
-      if (val === 'SUCCESS') {
-        self.$router.push({
-          path: 'result',
-          query: { order_id: store_report_id, status: 'SUCCESS' },
-        });
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'k7kijn',
-          });
-        utils.firebaseLogEvent(
-          '10060',
-          '-10008',
-          'event_status_pay_failure',
-          'event_status',
-          {
-            args_name: 'event_status_pay_failure',
-            reason: pay_reason,
-          }
-        );
-      }
-    };
 
     let screenH = window.screen.height;
 
@@ -454,17 +434,16 @@ export default {
     async check() {
       window.Adjust &&
         window.Adjust.trackEvent({
-          eventToken: 'gjog9k',
+          eventToken: 'k9jxcj',
         });
 
       utils.firebaseLogEvent(
-        '20001',
-        '-10005',
-        'click_report_confirm',
+        '10005',
+        '-10002',
+        'click_2024wealty_main',
         'click',
         {
-          args_name: 'click_report_confirm',
-          report_id: '60001',
+          args_name: 'click_2024wealty_main',
           channel: utils.getFBChannel(),
         }
       );

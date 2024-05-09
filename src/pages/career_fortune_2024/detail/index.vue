@@ -68,6 +68,13 @@
       :title="username_title"
       title_style="color:#fff"
       @close="pay_modal = false"
+      e_view_id="10004"
+      c_view_id="-10005"
+      e_view_name="view_2024career_pay"
+      a_view_token="43oykj"
+      c_click_id="-10006"
+      e_click_name="click_2024career_pay"
+      a_click_token="889e3j"
     />
   </div>
 </template>
@@ -177,14 +184,19 @@ export default {
   created() {
     window.Adjust &&
       window.Adjust.trackEvent({
-        eventToken: 'ty18p4',
+        eventToken: 'ltooty',
       });
 
-    utils.firebaseLogEvent('20002', '-10001', 'page_view_pay', 'page_view', {
-      args_name: 'page_view_pay',
-      report_id: '60011',
-      channel: utils.getFBChannel(),
-    });
+    utils.firebaseLogEvent(
+      '10004',
+      '-10003',
+      'page_view_2024career_mid',
+      'page_view',
+      {
+        args_name: 'page_view_2024career_mid',
+        channel: utils.getFBChannel(),
+      }
+    );
 
     this.query_user_string = this.$route.query.querystring;
     this.formateQueryUserInfo(this.query_user_string);
@@ -416,16 +428,15 @@ export default {
     showPayModal() {
       window.Adjust &&
         window.Adjust.trackEvent({
-          eventToken: 'e8qywf',
+          eventToken: '53e6wh',
         });
       utils.firebaseLogEvent(
-        '20002',
-        '-10002',
-        'click_report_choice',
+        '10004',
+        '-10004',
+        'click_2024career_mid',
         'click',
         {
-          args_name: 'click_report_choice',
-          report_id: report_id_arr[this.product_key],
+          args_name: 'click_2024career_mid',
           channel: utils.getFBChannel(),
         }
       );

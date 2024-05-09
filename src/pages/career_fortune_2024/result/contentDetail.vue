@@ -94,6 +94,10 @@
         :code_btn="is_cn ? cn_code_btn : tw_code_btn"
         code_text_style="margin:.3rem auto .39rem;color:#6E6E6E"
         @showModal="code_modal = true"
+        a_token="8l5rgs"
+        e_id="10004"
+        c_id="-10010"
+        e_name="click_2024career_result"
       />
     </div>
 

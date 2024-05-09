@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 11:34:10
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-09 15:20:32
+ * @LastEditTime: 2024-05-09 21:23:41
  * @Description: 
 -->
 <template>
@@ -115,6 +115,10 @@
       code_text_style="margin:.27rem auto .39rem;color:#6E6E6E"
       tips5_style="width: 5.92rem;height: 1.06rem;"
       @showModal="code_modal = true"
+      a_token="r6mrbi"
+      e_id="10005"
+      c_id="-10010"
+      e_name="click_2024wealty_result"
     />
 
     <CodePop v-if="code_modal" @close="code_modal = false" />
@@ -177,17 +181,17 @@ export default {
 
     window.Adjust &&
       window.Adjust.trackEvent({
-        eventToken: '77woaq',
+        eventToken: 'crbib8',
       });
 
     utils.firebaseLogEvent(
-      '20003',
-      '-10001',
-      'page_view_interpretation',
+      '10005',
+      '-10009',
+      'page_view_2024wealty_result',
       'page_view',
       {
-        args_name: 'page_view_interpretation',
-        report_id: '60001',
+        args_name: 'page_view_2024wealty_result',
+        channel: utils.getFBChannel(),
       }
     );
     let query = this.$route.query;
@@ -219,18 +223,18 @@ export default {
         if (status === 'PAYED') {
           window.Adjust &&
             window.Adjust.trackEvent({
-              eventToken: '8mmz00',
+              eventToken: 's1u6sh',
               revenue: price,
               currency: 'MYR',
             });
 
           utils.firebaseLogEvent(
-            '20002',
-            '-10005',
-            'event_status_pay_success',
+            '10005',
+            '-10007',
+            'event_status_2024wealty_pay_success',
             'event_status',
             {
-              args_name: 'event_status_pay_success',
+              args_name: 'event_status_2024wealty_pay_success',
               pay_page: product_key,
               price: price,
               channel: utils.getFBChannel(),
@@ -238,78 +242,27 @@ export default {
           );
           if (utils.isProd()) {
             try {
-              fbq('track', 'Purchase', {
+              utils.fbEvent().track('Purchase', {
                 currency: 'MYR',
                 value: price.toFixed(2),
               });
             } catch (err) {
-              console.error('Purchase fbq error message:', err);
-            }
-            try {
-              fbq('track', 'ViewContent');
-            } catch (err) {
-              console.error('ViewContent fbq error message:', err);
-            }
-            try {
-              fbq('track', 'Subscribe');
-            } catch (err) {
-              console.error('Subscribe fbq error message:', err);
-            }
-            try {
-              fbq('trackCustom', 'CustomPurchase');
-            } catch (err) {
-              console.error('CustomPurchase fbq error message:', err);
-            }
-
-            try {
-              fbq('track', 'ViewContent', {
-                content_ids: -10005,
-                content_name: 'event_status_pay_success',
-                content_type: 'event_status',
-                currency: 'MYR',
-                value: price.toFixed(2),
-                event_name: 'event_status_pay_success',
-              });
-            } catch (err) {
-              console.error('fbq error message:', err);
-            }
-            try {
-              fbq('track', 'Subscribe', {
-                currency: 'MYR',
-                value: price.toFixed(2),
-                content_name: 'event_status_pay_success',
-                content_type: 'event_status',
-                event_name: 'event_status_pay_success',
-              });
-            } catch (err) {
-              console.error('Subscribe fbq error message:', err);
-            }
-            try {
-              fbq('trackCustom', 'CustomPurchase', {
-                currency: 'MYR',
-                value: price.toFixed(2),
-                content_ids: -10005,
-                content_name: 'event_status_pay_success',
-                content_type: 'event_status',
-                event_name: 'event_status_pay_success',
-              });
-            } catch (err) {
-              console.error('fbq error message:', err);
+              console.error('Purchase  error message:', err);
             }
           }
         } else {
           window.Adjust &&
             window.Adjust.trackEvent({
-              eventToken: 'k7kijn',
+              eventToken: 'merbjw',
             });
           utils.firebaseLogEvent(
-            '20002',
-            '-10006',
-            'event_status_pay_failure',
+            '10005',
+            '-10008',
+            'even_status_2024wealty_pay_fail',
             'event_status',
             {
-              args_name: 'event_status_pay_failure',
-              reason: 'failure',
+              args_name: 'even_status_2024wealty_pay_fail',
+              channel: utils.getFBChannel(),
             }
           );
         }
@@ -331,18 +284,7 @@ export default {
           (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
             ? true
             : false;
-        can_store &&
-          utils.firebaseLogEvent(
-            '20003',
-            '-10002',
-            'event_status_reports',
-            'event_status',
-            {
-              args_name: 'event_status_reports',
-              report_id: '60001',
-              pay_status: res.data.status === 'PAYED' ? 'success' : 'failure',
-            }
-          );
+
         if (res.data.status === 'PAYED') {
           let responseData = res.data.result;
           this.userInfo = {

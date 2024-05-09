@@ -50,12 +50,6 @@ export default {
   },
   methods: {
     toCheckstand() {
-      try {
-        fbq('track', 'InitiateCheckout');
-      } catch (err) {
-        console.log('no fbq:', err);
-      }
-
       if (this.checkstand_url) {
         location.href = this.checkstand_url;
       }

@@ -1,7 +1,9 @@
 <template>
   <div :class="['container', fix_pop ? 'fix-pop' : '']">
     <img
-      @click="jumpUrl('history_order', '-10010', 'click_main_history')"
+      @click="
+        jumpUrl('history_order', '-10010', 'click_main_history', 'dvtjq2')
+      "
       class="history-order"
       :src="is_cn ? cn_order_btn : tw_order_btn"
       alt=""
@@ -1021,7 +1023,7 @@ export default {
     });
   },
   async mounted() {
-    utils.firebaseLogEvent('20000', '-10001', 'page_view_h5main', 'page_view', {
+    utils.firebaseLogEvent('10001', '-10001', 'page_view_h5main', 'page_view', {
       args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
     });
@@ -1091,25 +1093,6 @@ export default {
      * @return {*}
      */
     showPop() {
-      utils.firebaseLogEvent(
-        '10009',
-        '-10004',
-        'click_fortune_report_choice',
-        'click',
-        {
-          args_name: 'click_fortune_report_choice',
-        }
-      );
-      utils.firebaseLogEvent(
-        '10010',
-        '-10001',
-        'page_view_report_choice',
-        'page_view',
-        {
-          args_name: 'page_view_report_choice',
-        }
-      );
-
       let arr = localStorage.getItem('mlxz_checked_list');
       if (arr) {
         this.checked_list = JSON.parse(arr);
@@ -1149,18 +1132,7 @@ export default {
         return;
       }
       this.pop_list[k].checked = !this.pop_list[k].checked;
-      utils.firebaseLogEvent(
-        '10010',
-        '-10003',
-        'click_report_choice',
-        'click',
-        {
-          args_name: 'click_report_choice',
-          // that[it.product_key]:eventProductValue[it.product_key],
-          report_id: it.banner_id + '',
-          channel: utils.getFBChannel(),
-        }
-      );
+
       let has_num = this.formatChecked();
       this.can_choose = has_num >= 3 ? false : true;
     },
@@ -1228,15 +1200,6 @@ export default {
         'mlxz_checked_list',
         JSON.stringify(this.checked_list)
       );
-      utils.firebaseLogEvent(
-        '10010',
-        '-10002',
-        'click_fortune_report_choice_confirm',
-        'click',
-        {
-          args_name: 'click_fortune_report_choice_confirm',
-        }
-      );
 
       this.sale_visible = false;
     },
@@ -1257,15 +1220,6 @@ export default {
         return;
       }
 
-      utils.firebaseLogEvent(
-        '10009',
-        '-10005',
-        'click_fortune_report_sales',
-        'click',
-        {
-          args_name: 'click_fortune_report_sales',
-        }
-      );
       this.pay_visible = true;
     },
 
@@ -1281,17 +1235,6 @@ export default {
             eventToken: 'd1cle9',
           });
         console.log('Adjust', 'd1cle9');
-
-        utils.firebaseLogEvent(
-          '10009',
-          '-10003',
-          'click_fortune_report_banner',
-          'click',
-          {
-            args_name: 'click_fortune_report_banner',
-            banner_id: val.id,
-          }
-        );
       }
       if (index === 2) {
         window.Adjust &&
@@ -1299,17 +1242,6 @@ export default {
             eventToken: '5ts44a',
           });
         console.log('Adjust', '5ts44a');
-
-        utils.firebaseLogEvent(
-          '10009',
-          '-10006',
-          'click_fortune_report_banner2',
-          'click',
-          {
-            args_name: 'click_fortune_report_banner2',
-            banner_id: val.id,
-          }
-        );
       }
       if (index === 3) {
         window.Adjust &&
@@ -1317,27 +1249,17 @@ export default {
             eventToken: 'vzsv9y',
           });
         console.log('Adjust', 'vzsv9y');
-
-        utils.firebaseLogEvent(
-          '10009',
-          '-10007',
-          'click_fortune_report_banner3',
-          'click',
-          {
-            args_name: 'click_fortune_report_banner3',
-            banner_id: val.id,
-          }
-        );
       }
       if (index === 5) {
         utils.firebaseLogEvent(
-          '20000',
+          '10001',
           '-10002',
           'click_h5main_banner',
           'click',
           {
             args_name: 'click_h5main_banner',
             report_id: val.a_id,
+            channel: utils.getFBChannel(),
           }
         );
         this.logHome(val.a_id);
@@ -1346,7 +1268,6 @@ export default {
         window.Adjust.trackEvent({
           eventToken: 'sqqqbt',
         });
-      // window.open(val.id === 4 ? val.url : `${val.url}.html`, '_blank');
 
       location.href = val.id === 4 ? val.url : `${val.url}.html`;
     },
@@ -1409,13 +1330,14 @@ export default {
     },
     async jumpPage(index) {
       utils.firebaseLogEvent(
-        '20000',
+        '10001',
         '-10011',
         'click_main_scrollbar',
         'click',
         {
           args_name: 'click_main_scrollbar',
           report_id: e_id_arr[index],
+          channel: utils.getFBChannel(),
         }
       );
       window.Adjust &&
@@ -1431,8 +1353,9 @@ export default {
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
     async jumpUrl(url, e_id, e_name, ad_e, report_id) {
-      utils.firebaseLogEvent('20000', e_id, e_name, 'click', {
+      utils.firebaseLogEvent('10001', e_id, e_name, 'click', {
         args_name: e_name,
+        channel: utils.getFBChannel(),
       });
 
       window.Adjust && window.Adjust.trackEvent({ eventToken: ad_e });
@@ -1454,17 +1377,11 @@ export default {
      * @return {*}
      */
     logHome(e_id) {
-      utils.firebaseLogEvent('20000', '-10012', 'click_report_all', 'click', {
-        args_name: 'click_report_all',
-        report_id: e_id,
-        channel: utils.getFBChannel(),
-      });
-
       if (utils.isProd()) {
         try {
-          fbq('track', 'CompleteRegistration');
+          utils.fbEvent().track('CompleteRegistration');
         } catch (err) {
-          console.error('CompleteRegistration fbq error message:', err);
+          console.error('CompleteRegistration  error message:', err);
         }
       }
     },

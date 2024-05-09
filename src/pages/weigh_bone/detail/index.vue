@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-06 17:21:55
+ * @LastEditTime: 2024-05-09 21:10:37
  * @Description: 袁天罡称骨 支付页
 -->
 <template>
@@ -66,13 +66,18 @@ export default {
   created() {
     window.Adjust &&
       window.Adjust.trackEvent({
-        eventToken: 'ty18p4',
+        eventToken: 'u4fi8s',
       });
-    utils.firebaseLogEvent('20002', '-10001', 'page_view_pay', 'page_view', {
-      args_name: 'page_view_pay',
-      report_id: '60002',
-      channel: utils.getFBChannel(),
-    });
+    utils.firebaseLogEvent(
+      '10009',
+      '-10003',
+      'page_view_chenggu_mid',
+      'page_view',
+      {
+        args_name: 'page_view_chenggu_mid',
+        channel: utils.getFBChannel(),
+      }
+    );
 
     this.query_user_string = this.$route.query.querystring;
   },
@@ -84,7 +89,7 @@ export default {
     logEventFun() {
       window.Adjust &&
         window.Adjust.trackEvent({
-          eventToken: 'e8qywf',
+          eventToken: 'p4jzgk',
         });
     },
   },
