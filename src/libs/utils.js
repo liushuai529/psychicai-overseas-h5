@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-09 21:14:12
+ * @LastEditTime: 2024-05-09 21:42:45
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1410,7 +1410,7 @@ const channel_obj = {
   nova: '1521267251796283',
   enjoy: '953933459469054',
 };
-if (!window.psychicai_client && isProd) {
+if (!window.psychicai_client && isProd()) {
   fb.config({
     autoPageView: true,
     pixel: channel_obj[getFBChannel()],
