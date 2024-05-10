@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-10 16:27:00
+ * @LastEditTime: 2024-05-10 16:39:04
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1407,8 +1407,8 @@ const resetResultUrl = (order_id, status, is_home_page = false) => {
 // import { fb } from 'facebook-pixel';
 const channel_obj = {
   own: '709060547838898',
-  nova: '1521267251796283',
-  enjoy: '953933459469054',
+  nova01: '1521267251796283',
+  enjoy01: '953933459469054',
 };
 // fb.config({
 //   autoPageView: true,
