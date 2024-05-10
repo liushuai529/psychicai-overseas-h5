@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-08 20:35:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-09 21:01:45
+ * @LastEditTime: 2024-05-10 14:45:17
  * @Description: 
 -->
 <template>
@@ -327,7 +327,6 @@ export default {
         'click',
         {
           args_name: 'click_2024wealty_mid',
-          report_id: report_id_arr[this.product_key],
           channel: utils.getFBChannel(),
         }
       );
