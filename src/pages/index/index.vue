@@ -1258,7 +1258,7 @@ export default {
             channel: utils.getFBChannel(),
           }
         );
-        this.logHome(val.a_id);
+        this.logHome();
       }
       window.Adjust &&
         window.Adjust.trackEvent({
@@ -1325,6 +1325,8 @@ export default {
       }
     },
     async jumpPage(index) {
+      this.logHome();
+
       utils.firebaseLogEvent(
         '10001',
         '-10011',
@@ -1340,6 +1342,7 @@ export default {
         window.Adjust.trackEvent({
           eventToken: 'exr1zn',
         });
+
       await utils.asleep(200);
 
       location.href = `${report_url[index]}.html`;
@@ -1349,16 +1352,14 @@ export default {
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
     async jumpUrl(url, e_id, e_name, ad_e, report_id) {
+      this.logHome();
+
       utils.firebaseLogEvent('10001', e_id, e_name, 'click', {
         args_name: e_name,
         channel: utils.getFBChannel(),
       });
 
       window.Adjust && window.Adjust.trackEvent({ eventToken: ad_e });
-      if (url !== 'history_order') {
-        this.logHome(report_id);
-      }
-
       await utils.asleep(500);
       location.href = `${url}.html`;
       // window.open(`${url}.html`, '_blank');
@@ -1369,10 +1370,10 @@ export default {
 
     /**
      * @description: 上报埋点
-     * @param {*} e_id
+     * @param {*}
      * @return {*}
      */
-    async logHome(e_id) {
+    async logHome() {
       if (utils.isProd()) {
         await utils.checkFB();
         try {
