@@ -45,11 +45,7 @@
           >
             <div class="flex-row">
               <span>{{ it }}</span>
-              <span
-                @click="jumpPage(mock_report_list[j].id)"
-                class="link-url"
-                >{{ mock_report_list[j].name }}</span
-              >
+              <span class="link-url">{{ mock_report_list[j].name }}</span>
               <span>{{ score_list[j] }}</span>
             </div>
           </van-swipe-item>

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-09 19:29:55
+ * @LastEditTime: 2024-05-10 14:25:03
  * @Description: 历史订单
 -->
 <template>
@@ -287,10 +287,10 @@ export default {
     utils.firebaseLogEvent(
       '10002',
       '-10001',
-      'page_view_report_history',
+      'page_view_history',
       'page_view',
       {
-        args_name: 'page_view_report_history',
+        args_name: 'page_view_history',
         channel: utils.getFBChannel(),
       }
     );

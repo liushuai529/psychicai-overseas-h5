@@ -375,10 +375,10 @@ export default {
           utils.firebaseLogEvent(
             '10007',
             '-10008',
-            'even_status_marriage_pay_fail',
+            'event_status_marriage_pay_fail',
             'event_status',
             {
-              args_name: 'even_status_marriage_pay_fail',
+              args_name: 'event_status_marriage_pay_fail',
               channel: utils.getFBChannel(),
             }
           );

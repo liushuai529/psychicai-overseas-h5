@@ -28,7 +28,7 @@
           :code_btn="is_cn ? cn_code_btn : tw_code_btn"
           code_text_style="margin:.3rem auto .36rem;color:#6E6E6E"
           @showModal="code_modal = true"
-          a_token="r6mrbi"
+          a_token="ocunew"
           e_id="10008"
           c_id="-10010"
           e_name="click_64gua_result"
@@ -171,10 +171,10 @@ export default {
           utils.firebaseLogEvent(
             '10008',
             '-10008',
-            'even_status_64gua_pay_fail',
+            'event_status_64gua_pay_fail',
             'event_status',
             {
-              args_name: 'even_status_64gua_pay_fail',
+              args_name: 'event_status_64gua_pay_fail',
               channel: utils.getFBChannel(),
             }
           );

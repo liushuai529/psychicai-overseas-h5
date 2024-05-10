@@ -132,10 +132,10 @@ export default {
           utils.firebaseLogEvent(
             '10004',
             '-10008',
-            'even_status_2024career_pay_fail',
+            'event_status_2024career_pay_fail',
             'event_status',
             {
-              args_name: 'even_status_2024career_pay_fail',
+              args_name: 'event_status_2024career_pay_fail',
               channel: utils.getFBChannel(),
             }
           );

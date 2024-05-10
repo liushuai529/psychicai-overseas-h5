@@ -232,7 +232,7 @@ export default {
       });
     utils.firebaseLogEvent(
       '10003',
-      '-10001',
+      '-10003',
       'page_view_2024report_mid',
       'page_view',
       {
