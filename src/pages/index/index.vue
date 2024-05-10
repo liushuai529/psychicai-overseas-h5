@@ -1373,11 +1373,13 @@ export default {
      * @return {*}
      */
     async logHome(e_id) {
-      await utils.checkFB();
-      try {
-        fbq('track', 'CompleteRegistration');
-      } catch (err) {
-        console.error('CompleteRegistration  error message:', err);
+      if (utils.isProd()) {
+        await utils.checkFB();
+        try {
+          fbq('track', 'CompleteRegistration');
+        } catch (err) {
+          console.error('CompleteRegistration  error message:', err);
+        }
       }
     },
   },
