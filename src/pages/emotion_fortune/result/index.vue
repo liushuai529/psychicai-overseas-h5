@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-09 21:23:05
+ * @LastEditTime: 2024-05-10 15:02:08
  * @Description: 
 -->
 <template>
@@ -146,19 +146,18 @@ export default {
             'event_status',
             {
               args_name: 'event_status_2024lovely_pay_success',
-              pay_page: product_key,
-              price: price,
               channel: utils.getFBChannel(),
             }
           );
           if (utils.isProd()) {
+            await utils.checkFB();
             try {
-              utils.fbEvent().track('Purchase', {
-                currency: 'MYR',
+              fbq('track', 'Purchase', {
                 value: price.toFixed(2),
+                currency: 'MYR',
               });
             } catch (err) {
-              console.error('Purchase error message:', err);
+              console.error('error message:', err);
             }
           }
         } else {

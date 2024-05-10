@@ -19,7 +19,6 @@
     "clipboard": "^2.0.1",
     "cors": "^2.8.4",
     "echarts": "^5.4.1",
-    "facebook-pixel": "0.0.1",
     "fastclick": "^1.0.6",
     "inobounce": "^0.2.1",
     "less": "^4.1.3",

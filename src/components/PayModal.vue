@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-09 22:22:35
+ * @LastEditTime: 2024-05-10 14:58:08
  * @Description: 支付弹窗
 -->
 <template>
@@ -128,6 +128,10 @@ const originPriceArr = {
 const tipsArr5 = {
   'zh-CN': '订单创建中...',
   'zh-TW': '訂單創建中...',
+};
+const tipsArr6 = {
+  'zh-CN': '请稍等...',
+  'zh-TW': '請稍等...',
 };
 export default {
   data() {
@@ -378,10 +382,13 @@ export default {
           eventToken: this.a_click_token,
         });
       if (utils.isProd()) {
+        Indicator.open(tipsArr6[utils.getLanguage()]);
+        await utils.checkFB();
+        Indicator.close();
         try {
-          utils.fbEvent().track('AddToCart');
+          fbq('track', 'AddToCart');
         } catch (err) {
-          console.error('AddToCart  error message:', err);
+          console.error('AddToCart error message:', err);
         }
       }
       utils.firebaseLogEvent(

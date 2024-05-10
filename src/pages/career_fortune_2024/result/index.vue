@@ -109,19 +109,18 @@ export default {
             'event_status',
             {
               args_name: 'event_status_2024career_pay_success',
-              pay_page: product_key,
-              price: price,
               channel: utils.getFBChannel(),
             }
           );
           if (utils.isProd()) {
+            await utils.checkFB();
             try {
-              utils.fbEvent().track('Purchase', {
-                currency: 'MYR',
+              fbq('track', 'Purchase', {
                 value: price.toFixed(2),
+                currency: 'MYR',
               });
             } catch (err) {
-              console.error('Purchase fbq error message:', err);
+              console.error('error message:', err);
             }
           }
         } else {

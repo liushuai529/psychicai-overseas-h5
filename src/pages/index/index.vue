@@ -1372,13 +1372,12 @@ export default {
      * @param {*} e_id
      * @return {*}
      */
-    logHome(e_id) {
-      if (utils.isProd()) {
-        try {
-          utils.fbEvent().track('CompleteRegistration');
-        } catch (err) {
-          console.error('CompleteRegistration  error message:', err);
-        }
+    async logHome(e_id) {
+      await utils.checkFB();
+      try {
+        fbq('track', 'CompleteRegistration');
+      } catch (err) {
+        console.error('CompleteRegistration  error message:', err);
       }
     },
   },
