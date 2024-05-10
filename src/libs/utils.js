@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-10 15:24:37
+ * @LastEditTime: 2024-05-10 15:33:38
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1410,11 +1410,11 @@ const channel_obj = {
   nova: '1521267251796283',
   enjoy: '953933459469054',
 };
-fb.config({
-  autoPageView: true,
-  pixel: channel_obj[getFBChannel()],
-  disabled: !isProd(),
-});
+// fb.config({
+//   autoPageView: true,
+//   pixel: channel_obj[getFBChannel()],
+//   disabled: !isProd(),
+// });
 
 const fbEvent = () => {
   return 1;
