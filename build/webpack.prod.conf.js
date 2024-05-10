@@ -103,7 +103,7 @@ for (var pathname in entries) {
 for (var pathname in entries) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
   var conf = {
-    filename: path.resolve(__dirname, '../dist/enjoy/' + filename + '.html'),
+    filename: path.resolve(__dirname, '../dist/enjoy01/' + filename + '.html'),
     template: 'template/index_enjoy.html',
     inject: true,
     minify: {
@@ -126,7 +126,7 @@ for (var pathname in entries) {
 for (var pathname in entries) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
   var conf = {
-    filename: path.resolve(__dirname, '../dist/nova/' + filename + '.html'),
+    filename: path.resolve(__dirname, '../dist/nova01/' + filename + '.html'),
     template: 'template/index_nova.html',
     inject: true,
     minify: {
