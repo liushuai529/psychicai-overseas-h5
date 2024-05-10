@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-10 16:57:47
+ * @LastEditTime: 2024-05-10 17:02:33
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1041,6 +1041,7 @@ const firebaseConfig = {
   appId: '1:391425422960:web:7fd76da07aaab6390766b5',
   measurementId: 'G-43C3GF0Z45',
 };
+
 firebase.initializeApp(firebaseConfig);
 const analytics = firebase.analytics();
 // 埋点上报function
@@ -1064,10 +1065,13 @@ const firebaseLogEvent = (
     device_id: getDeviceId() || '',
     args: args_,
   };
+  if (!isProd()) {
+    return true;
+  }
   analytics.logEvent(event_name, outer_obj);
-  console.log('----firebase-----');
+  console.log('----firebase start-----');
   console.log('这是firebase埋点', JSON.stringify(outer_obj));
-  console.log('----firebase-----');
+  console.log('----firebase end-----');
 };
 
 // 判断字符串是否大于四位，如果超出四位，截取第一二位和最后两位，中间用...代替
