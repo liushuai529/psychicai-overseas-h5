@@ -150,7 +150,7 @@ for (var pathname in entries) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
   var conf = {
     filename: path.resolve(__dirname, '../dist/panda01/' + filename + '.html'),
-    template: 'template/index_nova.html',
+    template: 'template/index_panda.html',
     inject: true,
     minify: {
       removeComments: true,
