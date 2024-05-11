@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-10 17:02:33
+ * @LastEditTime: 2024-05-11 10:35:59
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -17,6 +17,8 @@ const getFBChannel = () => {
     return 'enjoy01';
   } else if (url.indexOf('nova01') > -1) {
     return 'nova01';
+  } else if (url.indexOf('panda01') > -1) {
+    return 'panda01';
   } else {
     return 'own';
   }
@@ -1413,6 +1415,7 @@ const channel_obj = {
   own: '709060547838898',
   nova01: '718889796870693',
   enjoy01: '1122026312239443',
+  panda01: '798187135579003',
 };
 // fb.config({
 //   autoPageView: true,
