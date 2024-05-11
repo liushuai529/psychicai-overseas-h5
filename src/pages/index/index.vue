@@ -1247,6 +1247,8 @@ export default {
         console.log('Adjust', 'vzsv9y');
       }
       if (index === 5) {
+        this.logHome();
+
         utils.firebaseLogEvent(
           '10001',
           '-10002',
@@ -1258,7 +1260,6 @@ export default {
             channel: utils.getFBChannel(),
           }
         );
-        this.logHome();
       }
       window.Adjust &&
         window.Adjust.trackEvent({
@@ -1325,7 +1326,7 @@ export default {
       }
     },
     async jumpPage(index) {
-      this.logHome();
+      await this.logHome();
 
       utils.firebaseLogEvent(
         '10001',
@@ -1343,7 +1344,7 @@ export default {
           eventToken: 'exr1zn',
         });
 
-      await utils.asleep(200);
+      await utils.asleep(500);
 
       location.href = `${report_url[index]}.html`;
     },
@@ -1352,7 +1353,7 @@ export default {
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
     async jumpUrl(url, e_id, e_name, ad_e, report_id) {
-      this.logHome();
+      await this.logHome();
 
       utils.firebaseLogEvent('10001', e_id, e_name, 'click', {
         args_name: e_name,
