@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-06 17:17:40
+ * @LastEditTime: 2024-05-13 10:06:27
  * @Description: 2023兔年一生财运
 -->
 <template>
@@ -167,11 +167,6 @@ import HeaderNotice from '../../../components/headerNotice.vue';
 
 import { getPayOrderInfoAPI } from '../../../api/api';
 import moment from 'moment';
-
-import tStatistic from 'tstatistic';
-tStatistic.init({
-  app_key: 92440113,
-});
 
 let show_popup = utils.getQueryString('show_popup');
 

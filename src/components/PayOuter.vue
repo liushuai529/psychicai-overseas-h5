@@ -15,11 +15,6 @@
 </template>
 
 <script>
-import tStatistic from 'tstatistic';
-tStatistic.init({
-  app_key: 92440113,
-});
-
 export default {
   data() {
     return {};

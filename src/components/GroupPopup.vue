@@ -39,13 +39,6 @@
 <script>
 import { Popup } from 'mint-ui';
 
-import tStatistic from 'tstatistic';
-tStatistic.init({
-  app_key: 92440113,
-});
-
-let tStat_10 = tStatistic.curry(10);
-
 export default {
   components: { Popup },
   data() {
@@ -109,13 +102,6 @@ export default {
     },
     confirm() {
       if (!this.canConfirm) return false;
-
-      // 测测 成功选择商品组合
-      tStat_10('action', 115, {
-        type: this.maxNum === 3 ? 1 : 2,
-        origin: location.origin,
-        channel: localStorage.getItem('suishen_overseas_channel'),
-      });
 
       let str = '';
       this.list.forEach(item => {

@@ -2,7 +2,7 @@
  * @Author: ZhaoZhiqi
  * @Date: 2022-12-13 15:50:43
  * @LastEditors: wujiang 
- * @LastEditTime: 2023-10-27 15:58:53
+ * @LastEditTime: 2024-05-13 10:04:46
  * @Description: 运势
  * @FilePath: \find-future-overseas\src\pages\index2\fortune.vue
 -->
@@ -472,12 +472,6 @@ import {
   getFortuneGoodsListAPI,
 } from '../../api/api';
 import { Toast, Indicator, MessageBox } from 'mint-ui';
-import tStatistic from 'tstatistic';
-tStatistic.init({
-  app_key: 92440113,
-});
-
-let tStat_11 = tStatistic.curry(11);
 
 export default {
   components: {
@@ -577,13 +571,6 @@ export default {
     // 运势类型切换
     changeFortuneIndex(fortune_index) {
       this.fortune_index = fortune_index;
-
-      // 运势 运势类型导航点击
-      tStat_11('click', 104, {
-        name: fortune_index + 1,
-        origin: location.origin,
-        channel: localStorage.getItem('suishen_overseas_channel'),
-      });
     },
     // 请求运势商品数据
     getProducts() {
@@ -603,12 +590,6 @@ export default {
     },
     // 展示设置弹窗
     showSetVisible() {
-      // 运势 设置按钮点击
-      tStat_11('click', 102, {
-        origin: location.origin,
-        channel: localStorage.getItem('suishen_overseas_channel'),
-      });
-
       if (this.userInfo.real_name) {
         this.username = this.userInfo.real_name;
         this.sex = this.userInfo.sex;
@@ -694,22 +675,6 @@ export default {
         real_name: this.username,
         sex: this.sex,
       }).then(res => {
-        // 运势 信息设置成功事件
-        tStat_11('action', 103, {
-          origin: location.origin,
-          channel: localStorage.getItem('suishen_overseas_channel'),
-        });
-
-        // fb事件追踪 注册成功
-        if (!this.userInfo.real_name) {
-          console.log('fb事件追踪 注册成功');
-          try {
-            fbq('track', 'CompleteRegistration', { content_name: '2' });
-          } catch (err) {
-            console.log('no fbq:', err);
-          }
-        }
-
         res.data.access_token &&
           localStorage.setItem('suishen_overseas_token', res.data.access_token);
         res.data.open_uid &&
@@ -924,12 +889,6 @@ export default {
     //     })
     // },
     toFb(url) {
-      // 运势 FB账号链接点击
-      tStat_11('click', 108, {
-        origin: location.origin,
-        channel: localStorage.getItem('suishen_overseas_channel'),
-      });
-
       location.href = url;
     },
     // 跳转页面
@@ -938,32 +897,9 @@ export default {
     },
     // 解锁 周运101 年运102 今日运势103
     unlock(product_id) {
-      // 运势 支付区域的点击
-      tStat_11('click', 105, {
-        state: this.userInfo.real_name ? 2 : 1,
-        origin: location.origin,
-        channel: localStorage.getItem('suishen_overseas_channel'),
-      });
-
       if (!this.userInfo.real_name) {
         Toast('请先填写用户信息方可解锁运势');
         return false;
-      }
-      if (product_id) {
-        try {
-          fbq('track', 'InitiateCheckout');
-        } catch (err) {
-          console.log('no fbq:', err);
-        }
-
-        this.cur_product_id = product_id;
-        this.popupVisible = true;
-
-        // 运势 支付抽屉的浏览
-        tStat_11('view', 106, {
-          origin: location.origin,
-          channel: localStorage.getItem('suishen_overseas_channel'),
-        });
       }
     },
     // 注册表单检验
