@@ -2,20 +2,46 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-10 15:02:08
+ * @LastEditTime: 2024-05-14 14:13:45
  * @Description: 
 -->
 <template>
   <div class="result">
-    <UserInfo
+    <!-- <UserInfo
       :username="username"
       :sex="sex"
       :picker_date_yangli="picker_date_yangli"
       :picker_date_nongli="picker_date_nongli"
       :gan="gan"
       :zhi="zhi"
-      :is_result="true"
-    />
+      :is_result="false"
+    /> -->
+    <div :class="['info-box', lang ? 'cn-bg' : 'tw-bg']">
+      <BaziTable
+        :sex="sex"
+        :is_result="true"
+        :username="username"
+        :gongli_nongli="gongli_nongli"
+        :picker_date_yangli="picker_date_yangli"
+        :picker_date_nongli="picker_date_nongli"
+        :gan="gan"
+        :zhi="zhi"
+        :nayin="nayin"
+        :cai_bo_num="cai_bo_num"
+        :gui_ren_num="gui_ren_num"
+        :hun_yin_num="hun_yin_num"
+        :ming_ge="ming_ge"
+        :riyuanqiangruo="riyuanqiangruo"
+        :shi_ye_num="shi_ye_num"
+        :wuxingqiang="wuxingqiang"
+        text_color="#000"
+        minge_color="#ED1A86"
+        :show_daji="false"
+        bg="#FFE9F5"
+        width="6.14rem"
+      />
+    </div>
+
     <contentDetail v-if="fortune.qian" :result="fortune.qian" :item_index="2" />
     <contentDetail v-if="fortune.concept" :result="fortune" :item_index="3" />
     <contentDetail v-if="fortune.keyword" :result="fortune" :item_index="5" />
@@ -31,9 +57,9 @@ import utils from '../../../libs/utils.js';
 import UserInfo from '../detail/user_info.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import { getResultAPI, resultCheckAPI, getBaziAPI } from '../../../api/api';
-
+import BaziTable from '../../../components/baziTable.vue';
 export default {
-  components: { contentDetail, UserInfo },
+  components: { contentDetail, UserInfo, BaziTable },
   data() {
     return {
       loading: false,
@@ -73,12 +99,21 @@ export default {
       picker_hour: '',
       picker_date_yangli: '',
       picker_date_nongli: '',
-      gan: [],
-      zhi: [],
+
       extra_ce_suan: {},
       baoshi_icon: '',
       order_id: null,
       code: '',
+      gan: ['-', '-', '-', '-'],
+      zhi: ['-', '-', '-', '-'],
+      nayin: ['？', '？', '？', '？'],
+      cai_bo_num: 0,
+      gui_ren_num: 0,
+      hun_yin_num: 0,
+      ming_ge: '',
+      riyuanqiangruo: '',
+      shi_ye_num: 0,
+      wuxingqiang: '',
     };
   },
   async mounted() {
@@ -102,7 +137,11 @@ export default {
     await this.checkResult();
     this.query();
   },
-  computed: {},
+  computed: {
+    lang() {
+      return utils.getLanguage() === 'zh-CN';
+    },
+  },
   watch: {
     status(val) {
       let stop = utils.getQueryString('stop');
@@ -237,7 +276,7 @@ export default {
       if (res.data.extra_ce_suan) {
         this.extra_ce_suan = res.data.extra_ce_suan;
         this.formateQueryUserInfo();
-        this.getUserBazi();
+        this.getUserBazi(res);
       }
 
       if (res.data.result) {
@@ -276,7 +315,11 @@ export default {
      * @description: 获取八字数据
      * @return {*}
      */
-    async getUserBazi() {
+    async getUserBazi(res) {
+      if (res.data.result && res.data.result.gan) {
+        this.getMinggeInfo(res.data.result);
+        return;
+      }
       let { birth_hour, birth_year, birth_month, birth_date, is_gongli, date } =
         this.extra_ce_suan;
       let hour_ = birth_hour === '-1' ? '12' : birth_hour;
@@ -300,8 +343,37 @@ export default {
       };
       const { status, data } = await getBaziAPI(params);
       if (status !== 1000) return;
-      this.gan = data.gan;
-      this.zhi = data.zhi;
+      this.getMinggeInfo(data);
+    },
+
+    /**
+     * @description: 解析命格信息
+     * @param {*} data
+     * @return {*}
+     */
+    getMinggeInfo(data) {
+      const {
+        gan,
+        zhi,
+        nayin,
+        cai_bo_num,
+        gui_ren_num,
+        hun_yin_num,
+        ming_ge,
+        riyuanqiangruo,
+        shi_ye_num,
+        wuxingqiang,
+      } = data;
+      this.gan = gan;
+      this.zhi = zhi;
+      this.nayin = nayin;
+      this.cai_bo_num = cai_bo_num;
+      this.gui_ren_num = gui_ren_num;
+      this.hun_yin_num = hun_yin_num;
+      this.ming_ge = ming_ge;
+      this.riyuanqiangruo = riyuanqiangruo;
+      this.shi_ye_num = shi_ye_num;
+      this.wuxingqiang = wuxingqiang;
     },
 
     /**
@@ -350,5 +422,20 @@ export default {
 .result {
   padding: 0.43rem 0.22rem 0.5rem;
   background: #ffdaf5;
+}
+
+.cn-bg {
+  background-image: url('../../../assets/img/emotion/new/result_info_bg.png');
+}
+.tw-bg {
+  background-image: url('../../../assets/img/emotion/new/tw/result_info_bg.png');
+}
+.info-box {
+  width: 7.06rem;
+  height: 7.81rem;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-top: 1.5rem;
+  margin-bottom: 0.2rem;
 }
 </style>

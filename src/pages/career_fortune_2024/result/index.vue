@@ -1,6 +1,10 @@
 <template>
   <div class="detail result-detail">
-    <user-info v-if="extra_ce_suan.name" :extra_ce_suan="extra_ce_suan" />
+    <user-info
+      v-if="extra_ce_suan.name"
+      :extra_ce_suan="extra_ce_suan"
+      :result="result"
+    />
     <content-detail v-if="result.fang_wei" :result="result" :title_index="1" />
     <content-detail v-if="result.zhi_nan" :result="result" :title_index="2" />
     <content-detail v-if="result.tai_sui" :result="result" :title_index="3" />

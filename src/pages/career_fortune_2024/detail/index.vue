@@ -493,8 +493,8 @@ export default {
     align-items: center;
     z-index: 2;
     .word3 {
-      width: 3.74rem;
-      height: 0.46rem;
+      width: 3.61rem;
+      height: 0.53rem;
     }
   }
   .bottom-one {
