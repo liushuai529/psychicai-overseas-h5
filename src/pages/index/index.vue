@@ -57,6 +57,53 @@
         />
       </div>
     </div>
+    <!-- 新版多买多折扣 -->
+    <van-swipe
+      :loop="false"
+      :show-indicators="false"
+      class="discount-box"
+      @change="getCombineIndex"
+    >
+      <van-swipe-item :class="['sale-item', !combine_index ? '' : 'ml-130']">
+        <div class="item">
+          <div class="sale-title">多买多折扣</div>
+          <img
+            src="../../assets/img/new_combine/home_tag_58_big.png"
+            class="zhekou-icon"
+            alt=""
+          />
+          <!-- 商品选择 -->
+          <div class="three-list">
+            <div
+              @click="changeSale"
+              v-for="(it, k) in three_list"
+              :key="'three' + k"
+              :class="['it', it ? '' : 'no-it', `it${k + 1}`]"
+            ></div>
+            <div class="divider-line-left">
+              <div class="one"></div>
+              <div class="two"></div>
+            </div>
+            <div class="divider-line-right">
+              <div class="one"></div>
+              <div class="two"></div>
+              <div class="three"></div>
+            </div>
+          </div>
+          <div @click="changeSale" class="pick-btn">选择组合</div>
+        </div>
+      </van-swipe-item>
+      <van-swipe-item :class="['sale-item', 'ml-80']">
+        <div class="item">
+          <div class="sale-title">多买多折扣</div>
+          <img
+            src="../../assets/img/new_combine/home_tag_68_big.png"
+            class="zhekou-icon"
+            alt=""
+          />
+        </div>
+      </van-swipe-item>
+    </van-swipe>
 
     <!-- banner位 -->
     <div class="report-container">
@@ -106,7 +153,7 @@
     </div>
 
     <!-- 多买多折扣 -->
-    <div class="sale-box hidden">
+    <div class="sale-box">
       <div class="title-box">
         <div class="left">{{ $t('buy-zhekou') }}</div>
         <div class="right">
@@ -264,6 +311,48 @@
       @handleReport="hasPayReport"
       @update-visible="pay_result_visible = false"
     ></PopResult>
+
+    <!-- 新版选择弹窗 -->
+    <mt-popup
+      v-model="new_sale_modal"
+      :closeOnClickModal="false"
+      position="bottom"
+    >
+      <div class="modal-box">
+        <div class="title-box">
+          <div @click="new_sale_modal = false" class="left">取消</div>
+          <div class="center">
+            任选{{ combine_index ? '两' : '三' }}项享特惠
+          </div>
+          <div class="right">
+            <div class="btn">确定</div>
+          </div>
+        </div>
+        <div class="modal-list">
+          <div
+            v-for="(item, k) in new_pop_list"
+            :key="k"
+            :class="[
+              'item',
+              !three_list[0]
+                ? 'item-normal'
+                : item.checked
+                ? 'opacity-20'
+                : 'item-checked',
+            ]"
+          >
+            <img
+              :src="is_cn ? item.cn_pop_icon : item.tw_pop_icon"
+              class="icon"
+              alt=""
+            />
+            <div class="desc">
+              {{ is_cn ? item.cn_desc : item.tw_desc }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </mt-popup>
   </div>
 </template>
 
@@ -314,6 +403,21 @@ import tw_weigh from '../../assets/img/mlxz/index/tw/weigh_banner.png';
 
 import tw_order_btn from '../../assets/img/mlxz/index/tw/history_order.png';
 import tw_right_pay from '../../assets/img/mlxz/index/tw/right_pay.png';
+
+import cn_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_bazihehun.png';
+import cn_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_guiguzi.png';
+import cn_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_yuantiangang.png';
+import cn_modal_emotion from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_ganqing.png';
+import cn_modal_career from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_shiye.png';
+import cn_modal_wealth from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_caiyun.png';
+import cn_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_nianyun.png';
+import tw_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_bazihehun.png';
+import tw_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_guiguzi.png';
+import tw_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_yuantiangang.png';
+import tw_modal_emotion from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_ganqing.png';
+import tw_modal_career from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_shiye.png';
+import tw_modal_wealth from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_caiyun.png';
+import tw_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_nianyun.png';
 
 const hotRecommendProduction = [
   //  {
@@ -459,6 +563,93 @@ const report_url = [
 
 const score_arr = ['96', '97', '98', '99', '100'];
 
+const new_pop_list = [
+  {
+    id: 1,
+    name: '鬼谷子',
+    url: 'guiguzi_fortune',
+    product_key: 'h5_bai_gua',
+    cn_desc: '64卦预见人生，审慎应对风波，谨防危机潜伏',
+    tw_desc: '64卦預見人生，審慎應對風波，謹防危機潛伏',
+    cn_pop_icon: cn_modal_ggz,
+    tw_pop_icon: tw_modal_ggz,
+    check_icon: '',
+    checked: false,
+  },
+  {
+    id: 2,
+    name: '袁天罡',
+    url: 'weigh_bone',
+    product_key: 'h5_weigh_bone',
+    cn_desc: '称骨论命，揭露宿命重负，应对多舛命途',
+    tw_desc: '稱骨論命，揭露宿命重負，應對多舛命途',
+    cn_pop_icon: cn_modal_weigh,
+    tw_pop_icon: tw_modal_weigh,
+    check_icon: '',
+    checked: false,
+  },
+  {
+    id: 3,
+    name: '八字合婚',
+    url: 'marriage_measure_overseas',
+    product_key: 'h5_marriage',
+    cn_desc: '揭示姻缘宿命，戒备潜藏危机，慎选伴侣之道',
+    tw_desc: '揭示姻緣宿命，戒備潛藏危機，慎選伴侶之道',
+    cn_pop_icon: cn_modal_bzhh,
+    tw_pop_icon: tw_modal_bzhh,
+    check_icon: '',
+    checked: false,
+  },
+  {
+    id: 4,
+    name: '感情运',
+    url: 'emotion_fortune',
+    product_key: 'h5_emotion2024',
+    cn_desc: '感情运势早知道，和合美满还是遗憾分手',
+    tw_desc: '感情運勢早知道，和合美滿還是遺憾分手',
+    cn_pop_icon: cn_modal_emotion,
+    tw_pop_icon: tw_modal_emotion,
+    check_icon: '',
+    checked: false,
+  },
+  {
+    id: 5,
+    name: '2024年运',
+    url: 'year_of_lucky_2024',
+    product_key: 'h5_annual2024',
+    cn_desc: '你的2024年如何度过？大师为你解读年度运势',
+    tw_desc: '你的2024年如何度過？大師為你解讀年度運勢',
+    cn_pop_icon: cn_modal_year,
+    tw_pop_icon: tw_modal_year,
+    check_icon: '',
+    checked: false,
+  },
+  {
+    id: 6,
+    name: '2024财运',
+    url: 'lucky_year_report',
+    product_key: 'h5_wealth2024',
+    cn_desc: '预警财务危机，洞悉关键时刻，避免潜在财富风险。',
+    tw_desc: '預警財務危機，洞悉關鍵時刻，避免潛在財富風險。',
+    cn_pop_icon: cn_modal_wealth,
+    tw_pop_icon: tw_modal_wealth,
+    check_icon: '',
+    checked: false,
+  },
+  {
+    id: 7,
+    name: '事业运势',
+    url: 'career_fortune_2024',
+    product_key: 'h5_career2024',
+    cn_desc: '前途迷雾重重，挑战接踵而至，开创事业新章',
+    tw_desc: '前途迷霧重重，挑戰接踵而至，開創事業新章',
+    cn_pop_icon: cn_modal_career,
+    tw_pop_icon: tw_modal_career,
+    check_icon: '',
+    checked: false,
+  },
+];
+
 export default {
   components: { Recommend, Fortune, PayPopup, PopResult },
   data() {
@@ -509,6 +700,10 @@ export default {
       mock_report_list: [],
       score_list: [],
       cur_index: 0,
+      combine_index: 0,
+      three_list: ['', '', ''], //三项组合
+      new_sale_modal: false,
+      new_pop_list,
     };
   },
   computed: {
@@ -1384,6 +1579,14 @@ export default {
         }
       }
     },
+    // 切换轮播组
+    getCombineIndex(index) {
+      this.combine_index = index;
+    },
+    // 打开选择弹窗
+    changeSale() {
+      this.new_sale_modal = true;
+    },
   },
 };
 </script>
@@ -1978,5 +2181,229 @@ export default {
 }
 .flex-start {
   justify-content: flex-start !important;
+}
+
+.discount-box {
+  width: 7.5rem;
+  height: 4.08rem;
+  margin: 0.4rem auto 0.2rem;
+
+  .sale-item {
+    width: 100%;
+    height: 100%;
+    .item {
+      width: 6.54rem !important;
+      height: 4.08rem !important;
+      margin-left: 0.2rem;
+      background: url('../../assets/img/new_combine/home_img_headcard.png')
+        no-repeat;
+      background-size: 100% 100%;
+      position: relative;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+.ml-80 {
+  margin-left: -0.8rem;
+}
+.ml-76 {
+  margin-left: 0.76rem;
+}
+.ml-130 {
+  margin-left: 1.3rem;
+}
+.sale-title {
+  width: 2rem;
+  height: 0.36rem;
+  font-weight: 600;
+  font-size: 0.36rem;
+  color: #314a46;
+  line-height: 0.36rem;
+  position: absolute;
+  top: 0.3rem;
+  left: 0.24rem;
+}
+.zhekou-icon {
+  position: absolute;
+  top: 0.22rem;
+  right: 0.24rem;
+  width: 1.54rem;
+  height: 0.52rem;
+}
+
+.three-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.96rem;
+  position: relative;
+  .it {
+    width: 1.8rem;
+    height: 1.2rem;
+    margin: 0 0.12rem;
+    position: relative;
+    z-index: 2;
+  }
+  .no-it {
+    background: url('../../assets/img/new_combine/home_btn_add.png') no-repeat;
+    background-size: contain;
+  }
+}
+
+.pick-btn {
+  width: 5.86rem;
+  height: 0.96rem;
+  background: url('../../assets/img/new_combine/button_big.png') no-repeat;
+  background-size: contain;
+  font-weight: 600;
+  font-size: 0.32rem;
+  color: #fdf4be;
+  line-height: 0.96rem;
+  text-align: center;
+  margin-top: 0.52rem;
+}
+.divider-line-left {
+  position: absolute;
+  height: 0.04rem;
+  top: 0.6rem;
+  left: 1.9rem;
+  z-index: 1;
+  display: flex;
+  .one {
+    width: 0.1rem;
+    height: 100%;
+    background: #b0d5cf;
+  }
+  .two {
+    width: 0.05rem;
+    height: 100%;
+    background: #b0d5cf;
+    margin-left: 0.05rem;
+  }
+}
+.divider-line-right {
+  position: absolute;
+  height: 0.04rem;
+  top: 0.6rem;
+  right: 1.9rem;
+  z-index: 1;
+  display: flex;
+  .one {
+    width: 0.03rem;
+    height: 100%;
+    background: #b0d5cf;
+  }
+  .two {
+    width: 0.07rem;
+    height: 100%;
+    background: #b0d5cf;
+    margin-left: 0.05rem;
+  }
+  .three {
+    width: 0.06rem;
+    height: 100%;
+    background: #b0d5cf;
+    margin-left: 0.05rem;
+  }
+}
+
+.modal-box {
+  width: 7.5rem;
+  height: 11.18rem;
+  background: linear-gradient(180deg, #d2e7de 0%, #ffffff 100%);
+  border-radius: 0.4rem 0.4rem 0 0;
+  overflow-x: hidden;
+  .title-box {
+    width: 100%;
+    height: 0.64rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 0.28rem;
+    color: #314a46;
+    margin-top: 0.26rem;
+    position: relative;
+    .left {
+      margin-left: 0.3rem;
+    }
+    .center {
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      top: 0.1rem;
+      height: 0.36rem;
+      font-weight: 600;
+      font-size: 0.36rem;
+      line-height: 0.36rem;
+    }
+    .right {
+      width: 1.36rem;
+      height: 0.64rem;
+      background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
+      border-radius: 0.16rem;
+      margin-right: 0.3rem;
+      .btn {
+        width: 100%;
+        height: 100%;
+        font-size: 0.28rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.16rem;
+        color: #fff;
+        border: 0.02rem solid #ffd192;
+      }
+    }
+  }
+  .modal-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0.28rem 0.16rem;
+    width: 100%;
+    height: 10.1rem;
+    overflow-y: auto;
+    .item {
+      width: 3.35rem;
+      height: 2.28rem;
+      margin: 0 0.11rem 0.22rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .icon {
+        width: 3.31rem;
+        height: 1.4rem;
+      }
+      .desc {
+        width: 2.95rem;
+        font-weight: 400;
+        font-size: 0.24rem;
+        color: #314a46;
+        margin-top: 0.1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        word-break: break-all;
+        word-wrap: break-word;
+        -webkit-box-orient: vertical;
+        opacity: 0.7;
+      }
+    }
+    .item-normal {
+      background: url('../../assets/img/new_combine/sale_normal.png') no-repeat;
+      background-size: contain;
+    }
+    .item-checked {
+      background: url('../../assets/img/new_combine/sale_checked.png') no-repeat;
+      background-size: contain;
+    }
+  }
 }
 </style>
