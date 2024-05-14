@@ -315,6 +315,9 @@ import tw_weigh from '../../assets/img/mlxz/index/tw/weigh_banner.png';
 import tw_order_btn from '../../assets/img/mlxz/index/tw/history_order.png';
 import tw_right_pay from '../../assets/img/mlxz/index/tw/right_pay.png';
 
+import cn_banner_ganqin from '../../assets/img/mlxz/new_banner/h5_img_topbanner_ganqing_jian.png';
+import tw_banner_ganqin from '../../assets/img/mlxz/new_banner/h5_img_topbanner_ganqing_fan.png';
+
 const hotRecommendProduction = [
   //  {
   //   name:'良缘合婚',
@@ -515,26 +518,26 @@ export default {
     // 顶部广告
     header_list() {
       return [
-        {
-          id: 1,
-          cn_icon:
-            'https://psychicai-static.psychicai.pro/imgs/2404b88f1b070d4542f391d749cf8d5d6c48.png',
-          tw_icon: tw_wealth24,
-          name: '2024年财运',
-          url: 'lucky_year_report',
-          a_id: '60001',
-          a_name: '2024_wealty_report',
-        },
-        {
-          id: 2,
-          cn_icon:
-            'https://psychicai-static.psychicai.pro/imgs/2404bfd6c3dce6cc479cb50e999f270358ec.png',
-          tw_icon: tw_year24,
-          name: '24年年运',
-          url: 'year_of_lucky_2024',
-          a_id: '60009',
-          a_name: '2024_report',
-        },
+        // {
+        //   id: 1,
+        //   cn_icon:
+        //     'https://psychicai-static.psychicai.pro/imgs/2404b88f1b070d4542f391d749cf8d5d6c48.png',
+        //   tw_icon: tw_wealth24,
+        //   name: '2024年财运',
+        //   url: 'lucky_year_report',
+        //   a_id: '60001',
+        //   a_name: '2024_wealty_report',
+        // },
+        // {
+        //   id: 2,
+        //   cn_icon:
+        //     'https://psychicai-static.psychicai.pro/imgs/2404bfd6c3dce6cc479cb50e999f270358ec.png',
+        //   tw_icon: tw_year24,
+        //   name: '24年年运',
+        //   url: 'year_of_lucky_2024',
+        //   a_id: '60009',
+        //   a_name: '2024_report',
+        // },
         {
           id: 3,
           cn_icon:
@@ -544,6 +547,15 @@ export default {
           url: 'marriage_measure_overseas',
           a_id: '60005',
           a_name: 'marriage_contract_report',
+        },
+        {
+          id: 5,
+          cn_icon: cn_banner_ganqin,
+          tw_icon: tw_banner_ganqin,
+          name: '2024感情运势',
+          url: 'emotion_fortune',
+          a_id: '60010',
+          a_name: '2024_lovely_report',
         },
         {
           id: 4,
@@ -865,6 +877,88 @@ export default {
 
       let arr2 = [
         {
+          id: 7,
+          name: '八字合婚',
+          cn_desc: '揭示姻缘宿命，戒备潜藏危机，慎选伴侣之道',
+          tw_desc: '揭示姻緣宿命，戒備潛藏危機，慎選伴侶之道',
+          url: 'marriage_measure_overseas',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/24041ad15f947999492aabf1a307f653f794.png',
+          tw_icon: tw_bzhh_banner,
+          buy_num: '6324',
+          review_num: '6185',
+          e_id: '-10007',
+          e_name: 'click_report_marriage',
+          ad_e: '8g4xt8',
+          report_id: '60005',
+        },
+        {
+          id: 4,
+          name: '24年感情运',
+          cn_desc: '感情运势早知道，和合美满还是遗憾分手',
+          tw_desc: '感情運勢早知道，和合美滿還是遺憾分手',
+          url: 'emotion_fortune',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/240480dc4c244a8e4dafb2c9658a953b2b7d.png',
+          tw_icon: tw_emotion,
+          buy_num: '3492',
+          review_num: '3441',
+          e_id: '-10006',
+          e_name: 'click_report_2024lovely',
+          ad_e: 'efy9t0',
+          report_id: '60010',
+        },
+        {
+          id: 3,
+          name: '24年年运',
+          cn_desc: '你的2024年如何度过？大师为你解读年度运势',
+          tw_desc: '你的2024年如何度過？大師為你解讀年度運勢',
+          url: 'year_of_lucky_2024',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2404e9c969b4e1464e91b6836b7e57b7d346.png',
+          tw_icon: tw_year24_banner,
+          buy_num: '8321',
+          review_num: '8238',
+          is_big: true,
+          e_id: '-10003',
+          e_name: 'click_report_2024report',
+          ad_e: 'oqfzzs',
+          report_id: '60009',
+        },
+        {
+          id: 6,
+          name: '24年财运',
+          cn_desc: '预警财务危机，洞悉关键时刻，避免潜在财富风险。',
+          tw_desc: '預警財務危機，洞悉關鍵時刻，避免潛在財富風險。',
+          url: 'lucky_year_report',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/24048d23afe94dc94781b614ed38300c52d2.png',
+          tw_icon: tw_wealth24_banner,
+          buy_num: '7315',
+          review_num: '7044',
+          e_id: '-10005',
+          e_name: 'click_report_2024wealty',
+          ad_e: 'egm8a2',
+          report_id: '60001',
+        },
+        {
+          id: 5,
+          name: '24年事业运',
+          cn_desc: '前途迷雾重重，挑战接踵而至，开创事业新章',
+          tw_desc: '前途迷霧重重，挑戰接踵而至，開創事業新章',
+          url: 'career_fortune_2024',
+          zh_icon:
+            'https://psychicai-static.psychicai.pro/imgs/24046a9e0acaca504f16b3069e0c06a611df.png',
+          tw_icon: tw_career,
+          buy_num: '8314',
+          review_num: '8090',
+          e_id: '-10004',
+          e_name: 'click_report_2024career',
+          ad_e: 'tzsnzi',
+          report_id: '60011',
+        },
+
+        {
           id: 1,
           name: '袁天罡',
           cn_desc: '称骨论命，揭露宿命重负，应对多舛命途',
@@ -895,87 +989,6 @@ export default {
           e_name: 'click_report_64gua',
           ad_e: 'jd4oen',
           report_id: '60003',
-        },
-        {
-          id: 3,
-          name: '24年年运',
-          cn_desc: '你的2024年如何度过？大师为你解读年度运势',
-          tw_desc: '你的2024年如何度過？大師為你解讀年度運勢',
-          url: 'year_of_lucky_2024',
-          zh_icon:
-            'https://psychicai-static.psychicai.pro/imgs/2404e9c969b4e1464e91b6836b7e57b7d346.png',
-          tw_icon: tw_year24_banner,
-          buy_num: '8321',
-          review_num: '8238',
-          is_big: true,
-          e_id: '-10003',
-          e_name: 'click_report_2024report',
-          ad_e: 'oqfzzs',
-          report_id: '60009',
-        },
-        {
-          id: 4,
-          name: '24年感情运',
-          cn_desc: '感情运势早知道，和合美满还是遗憾分手',
-          tw_desc: '感情運勢早知道，和合美滿還是遺憾分手',
-          url: 'emotion_fortune',
-          zh_icon:
-            'https://psychicai-static.psychicai.pro/imgs/240480dc4c244a8e4dafb2c9658a953b2b7d.png',
-          tw_icon: tw_emotion,
-          buy_num: '3492',
-          review_num: '3441',
-          e_id: '-10006',
-          e_name: 'click_report_2024lovely',
-          ad_e: 'efy9t0',
-          report_id: '60010',
-        },
-        {
-          id: 5,
-          name: '24年事业运',
-          cn_desc: '前途迷雾重重，挑战接踵而至，开创事业新章',
-          tw_desc: '前途迷霧重重，挑戰接踵而至，開創事業新章',
-          url: 'career_fortune_2024',
-          zh_icon:
-            'https://psychicai-static.psychicai.pro/imgs/24046a9e0acaca504f16b3069e0c06a611df.png',
-          tw_icon: tw_career,
-          buy_num: '8314',
-          review_num: '8090',
-          e_id: '-10004',
-          e_name: 'click_report_2024career',
-          ad_e: 'tzsnzi',
-          report_id: '60011',
-        },
-        {
-          id: 6,
-          name: '24年财运',
-          cn_desc: '预警财务危机，洞悉关键时刻，避免潜在财富风险。',
-          tw_desc: '預警財務危機，洞悉關鍵時刻，避免潛在財富風險。',
-          url: 'lucky_year_report',
-          zh_icon:
-            'https://psychicai-static.psychicai.pro/imgs/24048d23afe94dc94781b614ed38300c52d2.png',
-          tw_icon: tw_wealth24_banner,
-          buy_num: '7315',
-          review_num: '7044',
-          e_id: '-10005',
-          e_name: 'click_report_2024wealty',
-          ad_e: 'egm8a2',
-          report_id: '60001',
-        },
-        {
-          id: 7,
-          name: '八字合婚',
-          cn_desc: '揭示姻缘宿命，戒备潜藏危机，慎选伴侣之道',
-          tw_desc: '揭示姻緣宿命，戒備潛藏危機，慎選伴侶之道',
-          url: 'marriage_measure_overseas',
-          zh_icon:
-            'https://psychicai-static.psychicai.pro/imgs/24041ad15f947999492aabf1a307f653f794.png',
-          tw_icon: tw_bzhh_banner,
-          buy_num: '6324',
-          review_num: '6185',
-          e_id: '-10007',
-          e_name: 'click_report_marriage',
-          ad_e: '8g4xt8',
-          report_id: '60005',
         },
       ];
 
