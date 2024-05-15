@@ -144,9 +144,11 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
+    <HomeFooter v-if="showFixedBtn" product_key="h5_annual2024" />
   </div>
 </template>
 <script>
+import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
 import { Downloader, Parser, Player } from 'svga.lite';
 import DatetimePicker from '../../../components/DatetimePicker';
@@ -200,6 +202,7 @@ export default {
     HeaderNotice,
     TopBar,
     combinePayPop,
+    HomeFooter,
   },
   data() {
     return {
@@ -731,6 +734,7 @@ export default {
   width: 5.19rem;
   height: 1.03rem;
   bottom: 0.2rem;
+  z-index: 2;
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }
 .cn-bg {

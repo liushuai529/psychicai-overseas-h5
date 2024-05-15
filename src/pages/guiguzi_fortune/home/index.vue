@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-15 18:14:20
+ * @LastEditTime: 2024-05-15 19:19:26
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -159,10 +159,12 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
+    <HomeFooter v-if="showFixedBtn" product_key="h5_bai_gua" />
   </div>
 </template>
 
 <script>
+import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
 import { Downloader, Parser, Player } from 'svga.lite';
 import DatetimePicker from '../../../components/DatetimePicker';
@@ -204,6 +206,7 @@ export default {
     TopBar,
     combinePayPop,
     HeaderNotice,
+    HomeFooter,
   },
   data() {
     return {
@@ -821,7 +824,8 @@ export default {
     width: 5.86rem;
     left: 50%;
     margin-left: -2.93rem;
-    bottom: 0.43rem;
+    bottom: 0.3rem;
+    z-index: 2;
   }
 }
 </style>

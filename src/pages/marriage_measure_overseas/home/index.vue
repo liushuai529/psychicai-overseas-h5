@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-09 21:05:49
+ * @LastEditTime: 2024-05-15 19:25:19
  * @Description: 八字合婚
 -->
 <template>
@@ -131,10 +131,12 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
+    <HomeFooter v-if="showFixedBtn" product_key="h5_marriage" />
   </div>
 </template>
 
 <script>
+import HomeFooter from '../../../components/HomeFooter.vue';
 import utils from './../../../libs/utils.js';
 import topBanner from './top_banner.vue';
 // @ts-ignore
@@ -190,6 +192,7 @@ export default {
     TopBar,
     HeaderNotice,
     combinePayPop,
+    HomeFooter,
   },
   data() {
     return {
@@ -866,7 +869,8 @@ export default {
   width: 6.9rem;
   left: 50%;
   margin-left: -3.46rem;
-  bottom: 0.6rem;
+  bottom: 0.3rem;
+  z-index: 2;
   animation: btnMove 1s infinite ease-in-out alternate;
 }
 </style>

@@ -130,22 +130,6 @@ const all_list = [
     ad_e: 'tzsnzi',
     report_id: '60011',
   },
-
-  {
-    id: 1,
-    name: '袁天罡',
-    cn_desc: '称骨论命，揭露宿命重负，应对多舛命途',
-    tw_desc: '稱骨論命，揭露宿命重負，應對多舛命途',
-    url: 'weigh_bone',
-    zh_icon: cn_weight,
-    tw_icon: tw_weight,
-    buy_num: '6752',
-    review_num: '6518',
-    e_id: '-10009',
-    e_name: 'click_report_chenggu',
-    ad_e: 'kajqs3',
-    report_id: '60002',
-  },
   {
     id: 2,
     name: '鬼谷子',
@@ -160,6 +144,21 @@ const all_list = [
     e_name: 'click_report_64gua',
     ad_e: 'jd4oen',
     report_id: '60003',
+  },
+  {
+    id: 1,
+    name: '袁天罡',
+    cn_desc: '称骨论命，揭露宿命重负，应对多舛命途',
+    tw_desc: '稱骨論命，揭露宿命重負，應對多舛命途',
+    url: 'weigh_bone',
+    zh_icon: cn_weight,
+    tw_icon: tw_weight,
+    buy_num: '6752',
+    review_num: '6518',
+    e_id: '-10009',
+    e_name: 'click_report_chenggu',
+    ad_e: 'kajqs3',
+    report_id: '60002',
   },
 ];
 
@@ -219,7 +218,7 @@ export default {
   min-height: 16.03rem;
   background: #fff9fc;
   border-radius: 0.2rem;
-  margin-top: 0.1rem;
+  margin: 0.1rem auto 1.5rem;
   .header-box {
     width: 7.1rem;
     height: 1.1rem;

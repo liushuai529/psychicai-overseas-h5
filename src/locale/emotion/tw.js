@@ -2,11 +2,11 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-01-12 17:15:01
  * @LastEditors: wujiang
- * @LastEditTime: 2024-04-18 15:56:42
+ * @LastEditTime: 2024-05-15 19:28:42
  * @Description:
  */
 export default {
-  'dom-title': '2024感情運勢',
+  'dom-title': '八字姻緣',
   'name-label': '姓名',
   'birth-label': '生日',
   'sex-label': '性別',

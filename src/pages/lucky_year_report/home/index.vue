@@ -159,10 +159,12 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
+    <HomeFooter v-if="showFixedBtn" product_key="h5_wealth2024" />
   </div>
 </template>
 
 <script>
+import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
 import { Downloader, Parser, Player } from 'svga.lite';
 import DatetimePicker from '../../../components/DatetimePicker';
@@ -183,8 +185,8 @@ import tw_kaiyun from '../../../assets/img/mlxz/svga/wealth24/tw_kaiyun.svga';
 import cn_info_title from '../../../assets/img/mlxz/lucky_year_report/info-title.png';
 import tw_info_title from '../../../assets/img/tw_mlxz/wealth_24/home/txt.png';
 
-import cn_btn from '../../../assets/img/mlxz/lucky_year_report/btn.png';
-import tw_btn from '../../../assets/img/tw_mlxz/wealth_24/home/bt.png';
+import cn_btn from '../../../assets/img/common/bt.png';
+import tw_btn from '../../../assets/img/common/tw_bt.png';
 
 import cn_card1 from '../../../assets/img/mlxz/lucky_year_report/1.png';
 import tw_card1 from '../../../assets/img/tw_mlxz/wealth_24/home/1.png';
@@ -208,6 +210,7 @@ export default {
     NongliPicker,
     HeaderNotice,
     combinePayPop,
+    HomeFooter,
   },
   data() {
     return {
@@ -835,7 +838,8 @@ export default {
     width: 5.86rem;
     left: 50%;
     margin-left: -2.93rem;
-    bottom: 0.43rem;
+    bottom: 0.3rem;
+    z-index: 2;
   }
 }
 </style>

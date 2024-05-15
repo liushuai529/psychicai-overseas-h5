@@ -162,10 +162,12 @@
       @getOrderId="getOrderId"
     ></combinePayPop> -->
     <HotProduct product_key="h5_emotion2024" url="emotion_fortune" />
-    <div class="footer-box"></div>
+    <!-- <div class="footer-box"></div> -->
+    <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
   </div>
 </template>
 <script>
+import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
 import utils from '../../../libs/utils.js';
 import { getPayOrderInfoAPI, payOrderAPI } from '../../../api/api';
@@ -206,6 +208,7 @@ export default {
     HeaderNotice,
     combinePayPop,
     HotProduct,
+    HomeFooter,
   },
   data() {
     return {
@@ -912,6 +915,7 @@ export default {
   height: 1.24rem;
   position: fixed;
   bottom: 0;
+  z-index:2
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }
 .order-icon {
