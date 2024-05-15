@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-11 10:35:59
+ * @LastEditTime: 2024-05-14 19:20:09
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1490,7 +1490,19 @@ const resetInitFB = () => {
   checkFB();
 };
 
+const copyResultCode = text => {
+  navigator.clipboard
+    .writeText(text)
+    .then(function () {
+      // console.log('copy success');
+    })
+    .catch(function (err) {
+      console.error('copy error', err);
+    });
+};
+
 export default {
+  copyResultCode,
   checkFB,
   fbEvent,
   getFBChannel,

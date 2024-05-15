@@ -67,7 +67,21 @@
       <van-swipe-item :class="['sale-item', !combine_index ? '' : 'ml-130']">
         <div class="item">
           <div class="sale-title">多买多折扣</div>
+          <div v-if="combine_info.price" class="new-price">
+            <span class="one">{{
+              combine_info.unit
+                ? `${combine_info.unit + combine_info.origin_price_str}`
+                : 'RM-'
+            }}</span>
+            <span class="two">-42%</span>
+            <span class="large">{{
+              combine_info.unit
+                ? `${combine_info.unit + combine_info.price}`
+                : 'RM-'
+            }}</span>
+          </div>
           <img
+            v-else
             src="../../assets/img/new_combine/home_tag_58_big.png"
             class="zhekou-icon"
             alt=""
@@ -75,11 +89,17 @@
           <!-- 商品选择 -->
           <div class="three-list">
             <div
-              @click="changeSale"
-              v-for="(it, k) in three_list"
+              @click="new_sale_modal = true"
+              v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
               :key="'three' + k"
-              :class="['it', it ? '' : 'no-it', `it${k + 1}`]"
-            ></div>
+              :class="['it', it.product_key ? '' : 'no-it', `it${k + 1}`]"
+            >
+              <img
+                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                class="check-icon"
+                alt=""
+              />
+            </div>
             <div class="divider-line-left">
               <div class="one"></div>
               <div class="two"></div>
@@ -90,7 +110,25 @@
               <div class="three"></div>
             </div>
           </div>
-          <div @click="changeSale" class="pick-btn">选择组合</div>
+          <div
+            @click="changeSale"
+            :style="{ 'margin-top': three_list.length ? '0.3rem' : '0.52rem' }"
+            class="pick-btn"
+          >
+            {{ !three_list.length ? '选择组合' : '解锁命运密码' }}
+            <img
+              src="../../assets/img/new_combine/home_tag_58_big.png"
+              class="zhekou-icon absolute-zhe"
+              alt=""
+            />
+          </div>
+          <div
+            v-show="three_list.length"
+            class="reset-select"
+            @click="new_sale_modal = true"
+          >
+            重新选择
+          </div>
         </div>
       </van-swipe-item>
       <van-swipe-item :class="['sale-item', 'ml-80']">
@@ -153,7 +191,7 @@
     </div>
 
     <!-- 多买多折扣 -->
-    <div class="sale-box">
+    <div style="display: none" class="sale-box">
       <div class="title-box">
         <div class="left">{{ $t('buy-zhekou') }}</div>
         <div class="right">
@@ -324,35 +362,53 @@
           <div class="center">
             任选{{ combine_index ? '两' : '三' }}项享特惠
           </div>
-          <div class="right">
+          <div
+            v-if="three_list.length === 3"
+            @click="submitPopList()"
+            class="right-common right-check"
+          >
+            <div class="btn">确定</div>
+          </div>
+          <div v-else class="right-common disable-right">
             <div class="btn">确定</div>
           </div>
         </div>
+
         <div class="modal-list">
           <div
             v-for="(item, k) in new_pop_list"
+            @click="chooseNewSale(item, k)"
             :key="k"
-            :class="[
-              'item',
-              !three_list[0]
-                ? 'item-normal'
-                : item.checked
-                ? 'opacity-20'
-                : 'item-checked',
-            ]"
+            :class="{
+              item: true,
+              'item-checked': item.checked,
+              'opacity-20': three_list.length >= 3 && !item.checked,
+              'item-normal': !item.checked,
+            }"
           >
+            <img
+              :src="item.checked ? checkIcon : noCheckIcon"
+              class="check-icon"
+              alt=""
+            />
             <img
               :src="is_cn ? item.cn_pop_icon : item.tw_pop_icon"
               class="icon"
               alt=""
             />
-            <div class="desc">
+            <div class="desc" style="-webkit-box-orient: vertical">
               {{ is_cn ? item.cn_desc : item.tw_desc }}
             </div>
           </div>
         </div>
       </div>
     </mt-popup>
+    <PayModal
+      :visible="pay_modal"
+      :combine_info="combine_info"
+      @close="pay_modal = false"
+      @resetInfo="combine_info = {}"
+    />
   </div>
 </template>
 
@@ -418,7 +474,25 @@ import tw_modal_emotion from '../../assets/img/new_combine/sale_big/h5_zuhe_big_
 import tw_modal_career from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_shiye.png';
 import tw_modal_wealth from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_caiyun.png';
 import tw_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_nianyun.png';
+import checkIcon from '../../assets/img/new_combine/zuhe_btn_choose_selected.png';
+import noCheckIcon from '../../assets/img/new_combine/zuhe_btn_choose_normal.png';
 
+import cn_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_bazihehun.png';
+import cn_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_guiguzi.png';
+import cn_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_yuantiangang.png';
+import cn_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_ganqing.png';
+import cn_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_shiye.png';
+import cn_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_caiyun.png';
+import cn_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_nianyun.png';
+import tw_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_bazihehun.png';
+import tw_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_guiguzi.png';
+import tw_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_yuantiangang.png';
+import tw_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_ganqing.png';
+import tw_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_shiye.png';
+import tw_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_caiyun.png';
+import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_nianyun.png';
+
+import PayModal from './components/payModal.vue';
 const hotRecommendProduction = [
   //  {
   //   name:'良缘合婚',
@@ -573,7 +647,8 @@ const new_pop_list = [
     tw_desc: '64卦預見人生，審慎應對風波，謹防危機潛伏',
     cn_pop_icon: cn_modal_ggz,
     tw_pop_icon: tw_modal_ggz,
-    check_icon: '',
+    cn_check_icon: cn_check_icon_ggz,
+    tw_check_icon: tw_check_icon_ggz,
     checked: false,
   },
   {
@@ -585,7 +660,8 @@ const new_pop_list = [
     tw_desc: '稱骨論命，揭露宿命重負，應對多舛命途',
     cn_pop_icon: cn_modal_weigh,
     tw_pop_icon: tw_modal_weigh,
-    check_icon: '',
+    cn_check_icon: cn_check_icon_weigh,
+    tw_check_icon: tw_check_icon_weigh,
     checked: false,
   },
   {
@@ -597,7 +673,8 @@ const new_pop_list = [
     tw_desc: '揭示姻緣宿命，戒備潛藏危機，慎選伴侶之道',
     cn_pop_icon: cn_modal_bzhh,
     tw_pop_icon: tw_modal_bzhh,
-    check_icon: '',
+    cn_check_icon: cn_check_icon_bzhh,
+    tw_check_icon: tw_check_icon_bzhh,
     checked: false,
   },
   {
@@ -609,7 +686,8 @@ const new_pop_list = [
     tw_desc: '感情運勢早知道，和合美滿還是遺憾分手',
     cn_pop_icon: cn_modal_emotion,
     tw_pop_icon: tw_modal_emotion,
-    check_icon: '',
+    cn_check_icon: cn_check_icon_emotion,
+    tw_check_icon: tw_check_icon_emotion,
     checked: false,
   },
   {
@@ -621,7 +699,8 @@ const new_pop_list = [
     tw_desc: '你的2024年如何度過？大師為你解讀年度運勢',
     cn_pop_icon: cn_modal_year,
     tw_pop_icon: tw_modal_year,
-    check_icon: '',
+    cn_check_icon: cn_check_icon_year,
+    tw_check_icon: tw_check_icon_year,
     checked: false,
   },
   {
@@ -633,7 +712,8 @@ const new_pop_list = [
     tw_desc: '預警財務危機，洞悉關鍵時刻，避免潛在財富風險。',
     cn_pop_icon: cn_modal_wealth,
     tw_pop_icon: tw_modal_wealth,
-    check_icon: '',
+    cn_check_icon: cn_check_icon_wealth,
+    tw_check_icon: tw_check_icon_wealth,
     checked: false,
   },
   {
@@ -645,13 +725,14 @@ const new_pop_list = [
     tw_desc: '前途迷霧重重，挑戰接踵而至，開創事業新章',
     cn_pop_icon: cn_modal_career,
     tw_pop_icon: tw_modal_career,
-    check_icon: '',
+    cn_check_icon: cn_check_icon_career,
+    tw_check_icon: tw_check_icon_career,
     checked: false,
   },
 ];
 
 export default {
-  components: { Recommend, Fortune, PayPopup, PopResult },
+  components: { Recommend, Fortune, PayPopup, PopResult, PayModal },
   data() {
     return {
       cn_order_btn:
@@ -701,9 +782,13 @@ export default {
       score_list: [],
       cur_index: 0,
       combine_index: 0,
-      three_list: ['', '', ''], //三项组合
+      three_list: [], //三项组合
       new_sale_modal: false,
       new_pop_list,
+      checkIcon,
+      noCheckIcon,
+      pay_modal: false,
+      combine_info: {},
     };
   },
   computed: {
@@ -1200,20 +1285,25 @@ export default {
     pay_result_visible(val) {
       this.fix_pop = val ? true : false;
     },
+    new_sale_modal(val) {
+      this.getLocalChecked();
+    },
   },
   created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'sogk80',
-      });
+    this.getLocalChecked();
     this.randomBuyList();
     document.title = this.$t('dom-title');
     getProductionsAPI('ceh5').then(res => {
       this.all_list = res.data;
+      this.getSelectTagList();
       this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
     });
   },
   async mounted() {
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'sogk80',
+      });
     utils.firebaseLogEvent('10001', '-10001', 'page_view_h5main', 'page_view', {
       args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
@@ -1585,7 +1675,89 @@ export default {
     },
     // 打开选择弹窗
     changeSale() {
+      if (this.three_list.length) {
+        this.payOrder();
+        return;
+      }
       this.new_sale_modal = true;
+    },
+
+    // 删除选中的商品
+    getDeleteIndex(list, key) {
+      return list.findIndex(item => item.product_key === key);
+    },
+
+    // 选择商品
+    chooseNewSale(it, k) {
+      if (this.three_list.length >= 3) {
+        if (!it.checked) {
+          Toast('最多选择3个商品');
+          return;
+        } else {
+          this.new_pop_list[k].checked = !this.new_pop_list[k].checked;
+          this.three_list.splice(
+            this.getDeleteIndex(this.three_list, it.product_key),
+            1
+          );
+        }
+      } else {
+        this.new_pop_list[k].checked = !this.new_pop_list[k].checked;
+        if (!it.checked) {
+          this.three_list.splice(
+            this.getDeleteIndex(this.three_list, it.product_key),
+            1
+          );
+        } else {
+          this.three_list.push(it);
+        }
+      }
+    },
+    // 提交已选商品
+    submitPopList() {
+      this.new_sale_modal = false;
+      localStorage.setItem(
+        'mlxz_web_select_list',
+        JSON.stringify(this.three_list)
+      );
+    },
+    // 获取本地缓存选择的商品
+    getLocalChecked() {
+      let arr = localStorage.getItem('mlxz_web_select_list');
+      this.three_list = arr ? JSON.parse(arr) : [];
+      console.log(this.three_list);
+      this.three_list.forEach(item => {
+        this.new_pop_list.forEach(it => {
+          if (it.product_key === item.product_key) {
+            it.checked = true;
+          }
+        });
+      });
+    },
+
+    getSelectTagList() {
+      if (!this.three_list.length) return;
+      let product_key =
+        this.three_list.length === 3 ? 'h5_combo3' : 'h5_combo2';
+      let pick_list = this.three_list.map(item => item.product_key);
+      let combine_ids = [];
+      this.three_list.forEach(it => {
+        this.all_list.forEach(item => {
+          if (it.product_key === item.product_key) {
+            combine_ids.push(item.product_id);
+          }
+        });
+      });
+      this.combine_info = this.all_list.find(
+        it =>
+          it.product_key === product_key &&
+          it.tags.length &&
+          it.tags.sort().join('').indexOf(pick_list.sort().join('')) > -1
+      );
+      this.combine_info.combine_product_ids = combine_ids;
+    },
+
+    payOrder() {
+      this.pay_modal = true;
     },
   },
 };
@@ -2226,6 +2398,33 @@ export default {
   top: 0.3rem;
   left: 0.24rem;
 }
+.new-price {
+  display: flex;
+  height: 0.34rem;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.24rem;
+  margin-top: 0.31rem;
+  .one {
+    font-weight: 400;
+    font-size: 0.24rem;
+    color: #8da5a1;
+    text-decoration-line: line-through;
+  }
+  .two {
+    font-weight: 400;
+    font-size: 0.24rem;
+    color: #314a46;
+    margin: 0 0.04rem;
+  }
+  .large {
+    font-weight: 600;
+    font-size: 0.34rem;
+    color: #e3453d;
+    line-height: 0.34rem;
+  }
+}
 .zhekou-icon {
   position: absolute;
   top: 0.22rem;
@@ -2238,7 +2437,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.96rem;
+  margin-top: 0.3rem;
   position: relative;
   .it {
     width: 1.8rem;
@@ -2246,6 +2445,10 @@ export default {
     margin: 0 0.12rem;
     position: relative;
     z-index: 2;
+    .check-icon {
+      width: 1.86rem;
+      height: 1.2rem;
+    }
   }
   .no-it {
     background: url('../../assets/img/new_combine/home_btn_add.png') no-repeat;
@@ -2263,7 +2466,22 @@ export default {
   color: #fdf4be;
   line-height: 0.96rem;
   text-align: center;
-  margin-top: 0.52rem;
+  position: relative;
+}
+.absolute-zhe {
+  position: absolute;
+  top: -0.14rem;
+  right: 0.2rem;
+}
+.reset-select {
+  width: 100%;
+  height: 0.26rem;
+  font-weight: 400;
+  font-size: 0.26rem;
+  color: #8da5a1;
+  line-height: 0.26rem;
+  text-align: center;
+  margin-top: 0.2rem;
 }
 .divider-line-left {
   position: absolute;
@@ -2325,27 +2543,29 @@ export default {
     font-weight: 600;
     font-size: 0.28rem;
     color: #314a46;
-    margin-top: 0.26rem;
+    margin: 0.26rem auto;
     position: relative;
     .left {
       margin-left: 0.3rem;
+      z-index: 2;
     }
     .center {
       width: 100%;
       text-align: center;
       position: absolute;
+      z-index: 1;
       top: 0.1rem;
       height: 0.36rem;
       font-weight: 600;
       font-size: 0.36rem;
       line-height: 0.36rem;
     }
-    .right {
+    .right-common {
       width: 1.36rem;
       height: 0.64rem;
-      background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
       border-radius: 0.16rem;
       margin-right: 0.3rem;
+      z-index: 2;
       .btn {
         width: 100%;
         height: 100%;
@@ -2355,8 +2575,22 @@ export default {
         align-items: center;
         justify-content: center;
         border-radius: 0.16rem;
+      }
+    }
+    .right-check {
+      background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
+
+      .btn {
         color: #fff;
+
         border: 0.02rem solid #ffd192;
+      }
+    }
+    .disable-right {
+      background: linear-gradient(180deg, #fbc8ba 0%, #f6a8a8 100%);
+      .btn {
+        border: 0.02rem solid #ffedd3;
+        color: #fef8eb;
       }
     }
   }
@@ -2364,7 +2598,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin: 0.28rem 0.16rem;
+    padding: 0 0.16rem;
     width: 100%;
     height: 10.1rem;
     overflow-y: auto;
@@ -2375,7 +2609,14 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-
+      position: relative;
+      .check-icon {
+        width: 0.48rem;
+        height: 0.46rem;
+        position: absolute;
+        top: 0.08rem;
+        right: 0.08rem;
+      }
       .icon {
         width: 3.31rem;
         height: 1.4rem;
@@ -2403,6 +2644,9 @@ export default {
     .item-checked {
       background: url('../../assets/img/new_combine/sale_checked.png') no-repeat;
       background-size: contain;
+    }
+    .opacity-20 {
+      opacity: 0.2;
     }
   }
 }
