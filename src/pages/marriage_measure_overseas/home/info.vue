@@ -17,6 +17,7 @@
         <div class="input-label">男方姓名：</div>
         <input
           class="input"
+          id="maleusername"
           :placeholder="$t('name-placeholder')"
           v-model="maleusername"
         />
@@ -39,6 +40,7 @@
         <div class="input-label">女方姓名：</div>
         <input
           class="input"
+          id="femaleusername"
           :placeholder="$t('name-placeholder')"
           v-model="femaleusername"
         />
@@ -79,11 +81,33 @@ export default {
     };
   },
   watch: {
-    malename(newV, oldV) {
-      this.maleusername = newV;
+    malename(val) {
+      this.maleusername = val;
+      if (val) {
+        let new_ = val.trim();
+        let regex = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+        if (!regex.test(new_)) {
+          this.maleusername = new_.replace(/[^\u4E00-\u9FA5A-Za-z0-9]/g, '');
+        }
+
+        if (new_.length > 20) {
+          this.maleusername = new_.slice(0, 20);
+        }
+      }
     },
-    femalename(newV, oldV) {
-      this.femaleusername = newV;
+    femalename(val) {
+      this.femaleusername = val;
+      if (val) {
+        let new_ = val.trim();
+        let regex = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+        if (!regex.test(new_)) {
+          this.femaleusername = new_.replace(/[^\u4E00-\u9FA5A-Za-z0-9]/g, '');
+        }
+
+        if (new_.length > 20) {
+          this.femaleusername = new_.slice(0, 20);
+        }
+      }
     },
     sex(newV, oldV) {
       if (newV == '1') {
@@ -93,10 +117,43 @@ export default {
       }
     },
     maleusername(newV, oldV) {
-      this.$parent.male.username = newV;
+      console.log('2', newV);
+      // this.$parent.male.username = newV;
+      if (newV) {
+        let new_ = newV.trim();
+        let regex = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+        if (!regex.test(new_)) {
+          this.$parent.male.username = new_.replace(
+            /[^\u4E00-\u9FA5A-Za-z0-9]/g,
+            ''
+          );
+          this.maleusername = new_.replace(/[^\u4E00-\u9FA5A-Za-z0-9]/g, '');
+        }
+
+        if (new_.length > 20) {
+          this.$parent.male.username = new_.slice(0, 20);
+          this.maleusername = new_.slice(0, 20);
+        }
+      }
     },
     femaleusername(newV, oldV) {
-      this.$parent.female.username = newV;
+      // this.$parent.female.username = newV;
+      if (newV) {
+        let new_ = newV.trim();
+        let regex = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+        if (!regex.test(new_)) {
+          this.$parent.female.username = new_.replace(
+            /[^\u4E00-\u9FA5A-Za-z0-9]/g,
+            ''
+          );
+          this.femaleusername = new_.replace(/[^\u4E00-\u9FA5A-Za-z0-9]/g, '');
+        }
+
+        if (new_.length > 20) {
+          this.$parent.female.username = new_.slice(0, 20);
+          this.femaleusername = new_.slice(0, 20);
+        }
+      }
     },
   },
   created() {

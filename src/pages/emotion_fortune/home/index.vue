@@ -8,6 +8,14 @@
     }"
   >
     <header-notice v-if="has_pay"></header-notice>
+    <div @click="backHome()" class="back-box">
+      <img
+        src="../../../assets/img/common/baogao_icon_home.png"
+        class="left"
+        alt=""
+      />
+      <div class="right">{{ is_cn ? '首页' : '首頁' }}</div>
+    </div>
     <canvas id="bg-svga"></canvas>
     <img
       class="order-icon"
@@ -22,6 +30,7 @@
           <div class="info-input">
             <input
               type="text"
+              id="username"
               v-model="username"
               :placeholder="$t('name-placeholder')"
             />
@@ -118,7 +127,6 @@
     </div>
     <img class="card" :src="is_cn ? cn_card_1 : tw_card_1" />
     <img class="card" :src="is_cn ? cn_card_2 : tw_card_2" />
-    <div class="footer"></div>
     <img
       v-if="showFixedBtn"
       class="fix-btn huxi-btn"
@@ -153,6 +161,8 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
+    <HotProduct product_key="h5_emotion2024" url="emotion_fortune" />
+    <div class="footer-box"></div>
   </div>
 </template>
 <script>
@@ -184,6 +194,8 @@ import cn_card_2 from '../../../assets/img/emotion/new/3.png';
 import tw_card_2 from '../../../assets/img/emotion/new/tw/3.png';
 import cn_history_order from '../../../assets/img/mlxz/downloadBtn/emotion24.png';
 import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/emotion24_order.png';
+
+import HotProduct from '../../../components/hotProduct.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
 
@@ -193,6 +205,7 @@ export default {
     NongliPicker,
     HeaderNotice,
     combinePayPop,
+    HotProduct,
   },
   data() {
     return {
@@ -243,6 +256,21 @@ export default {
     },
     is_cn() {
       return this.language === 'zh-CN';
+    },
+  },
+  watch: {
+    username(val) {
+      if (val) {
+        let new_ = val.trim();
+        let regex = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+        if (!regex.test(new_)) {
+          this.username = new_.replace(/[^\u4E00-\u9FA5A-Za-z0-9]/g, '');
+        }
+
+        if (new_.length > 20) {
+          this.username = new_.slice(0, 20);
+        }
+      }
     },
   },
   created() {
@@ -460,10 +488,10 @@ export default {
         location.href = url;
         return;
       }
-      if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
-        location.href = url;
-        return;
-      }
+      // if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
+      //   location.href = url;
+      //   return;
+      // }
       if (time_obj == null) {
         location.href = url;
         return;
@@ -514,12 +542,15 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         Toast(this.$t('name-tips'));
+        let dom = document.getElementById('username');
+        dom.focus();
         return;
       }
-      if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
-        Toast(this.$t('name-tips-2'));
-        return;
-      }
+
+      // if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
+      //   Toast(this.$t('name-tips-2'));
+      //   return;
+      // }
       if (time_obj == null) {
         Toast(this.$t('birth-tips'));
         return;
@@ -677,6 +708,10 @@ export default {
       }
 
       return params;
+    },
+
+    backHome() {
+      location.href = 'index.html';
     },
   },
 };
@@ -897,6 +932,36 @@ export default {
   #qian {
     width: 100%;
     height: 100%;
+  }
+}
+.footer-box {
+  width: 7.5rem;
+  height: 1.96rem;
+  background: url('../../../assets/img/common/ganqing_img_btnmengban.png')
+    no-repeat;
+  background-size: 100% 100%;
+  margin-top: 0.2rem;
+}
+
+.back-box {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  width: 1.32rem;
+  height: 0.6rem;
+  background: url('../../../assets/img/common/baogao_img_btnbj.png') no-repeat;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  font-weight: 500;
+  font-size: 0.28rem;
+  color: #ffffff;
+  .left {
+    margin-right: 0.08rem;
+    width: 0.32rem;
+    height: 0.32rem;
   }
 }
 </style>

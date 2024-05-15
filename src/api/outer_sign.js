@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-09 14:58:43
  * @LastEditors: wujiang
- * @LastEditTime: 2024-04-09 15:52:47
+ * @LastEditTime: 2024-05-15 18:07:26
  * @Description: 外部签名
  */
 import crypto from 'crypto';
@@ -62,6 +62,9 @@ export const addOutParams = config => {
   config.params.open_uid = localStorage.getItem('mlxz_outer_open_uid') || '';
   config.params.access_token =
     localStorage.getItem('mlxz_outer_access_token') || '';
+  config.params.language = utils.getLanguage();
+  config.params.channel = utils.getFBChannel() ? utils.getFBChannel() : '';
   config.params.app_sign = getAppSign(config);
+
   return config;
 };

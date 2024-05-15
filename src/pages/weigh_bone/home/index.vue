@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-09 21:10:18
+ * @LastEditTime: 2024-05-15 18:18:29
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -14,6 +14,7 @@
         <input
           v-model="username"
           class="info-input"
+          id="username"
           type="text"
           :placeholder="$t('name-placeholder')"
         />
@@ -209,6 +210,21 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
   },
+  watch: {
+    username(val) {
+      if (val) {
+        let new_ = val.trim();
+        let regex = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+        if (!regex.test(new_)) {
+          this.username = new_.replace(/[^\u4E00-\u9FA5A-Za-z0-9]/g, '');
+        }
+
+        if (new_.length > 20) {
+          this.username = new_.slice(0, 20);
+        }
+      }
+    },
+  },
   created() {
     window.Adjust &&
       window.Adjust.trackEvent({
@@ -303,7 +319,6 @@ export default {
 
     self.loadBg('#canvas', self.is_cn ? self.cn_header : self.tw_header);
   },
-  watch: {},
   methods: {
     // 获取订单ID
     getOrderId(val) {
@@ -356,10 +371,10 @@ export default {
         location.href = url;
         return;
       }
-      if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
-        location.href = url;
-        return;
-      }
+      // if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
+      //   location.href = url;
+      //   return;
+      // }
       if (time_obj == null) {
         location.href = url;
         return;
@@ -402,12 +417,14 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         Toast(this.$t('tips-1'));
+        let dom = document.getElementById('username');
+        dom.focus();
         return;
       }
-      if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
-        Toast(this.$t('tips-2'));
-        return;
-      }
+      // if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
+      //   Toast(this.$t('tips-2'));
+      //   return;
+      // }
       if (time_obj == null) {
         Toast(this.$t('tips-3'));
         return;
@@ -620,7 +637,7 @@ export default {
       }
       .info-input {
         flex: 1 1 auto;
-        width: 150px;
+        width: 1.5rem;
         font-size: 0.32rem;
         line-height: 0.45rem;
         outline: none;

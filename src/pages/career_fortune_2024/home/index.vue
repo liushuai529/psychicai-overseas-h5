@@ -16,6 +16,7 @@
           <div class="info-input">
             <input
               type="text"
+              id="username"
               v-model="username"
               :placeholder="$t('name-placeholder')"
             />
@@ -271,6 +272,21 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
   },
+  watch: {
+    username(val) {
+      if (val) {
+        let new_ = val.trim();
+        let regex = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+        if (!regex.test(new_)) {
+          this.username = new_.replace(/[^\u4E00-\u9FA5A-Za-z0-9]/g, '');
+        }
+
+        if (new_.length > 20) {
+          this.username = new_.slice(0, 20);
+        }
+      }
+    },
+  },
   created() {
     this.$store.dispatch('common/getProduction');
 
@@ -427,10 +443,10 @@ export default {
         location.href = url;
         return;
       }
-      if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
-        location.href = url;
-        return;
-      }
+      // if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
+      //   location.href = url;
+      //   return;
+      // }
       if (time_obj == null) {
         location.href = url;
         return;
@@ -479,12 +495,14 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         Toast(this.$t('tips-1'));
+        let dom = document.getElementById('username');
+        dom.focus();
         return;
       }
-      if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
-        Toast(this.$t('tips-2'));
-        return;
-      }
+      // if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
+      //   Toast(this.$t('tips-2'));
+      //   return;
+      // }
       if (time_obj == null) {
         Toast(this.$t('tips-3'));
         return;
@@ -816,7 +834,7 @@ export default {
           padding: 0.06rem;
           align-items: center;
           input {
-            width: 3rem;
+            width: 95%;
             font-size: 0.3rem;
             line-height: 0.42rem;
             outline: none;

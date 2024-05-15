@@ -1,3 +1,10 @@
+/*
+ * @Author: wujiang@weli.cn
+ * @Date: 2024-05-07 21:03:37
+ * @LastEditors: wujiang
+ * @LastEditTime: 2024-05-15 17:56:42
+ * @Description:
+ */
 export default {
   'dom-title': '2024感情运势',
   'name-label': '姓名',

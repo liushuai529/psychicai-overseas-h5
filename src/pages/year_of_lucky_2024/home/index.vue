@@ -24,6 +24,7 @@
           <div class="label">姓名</div>
           <input
             v-model="username"
+            id="username"
             class="info-input"
             type="text"
             :placeholder="$t('name-placeholder')"
@@ -384,7 +385,22 @@ export default {
     );
     this.loadBg('#canvas3', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
   },
-  watch: {},
+  watch: {
+    username(val) {
+      if (val) {
+        let new_ = val.trim();
+        let regex = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+        if (!regex.test(new_)) {
+          this.username = new_.replace(/[^\u4E00-\u9FA5A-Za-z0-9]/g, '');
+        }
+
+        if (new_.length > 20) {
+          this.username = new_.slice(0, 20);
+        }
+      }
+    },
+  },
+
   methods: {
     /**
      * @description: 获取订单ID
@@ -472,10 +488,10 @@ export default {
         location.href = url;
         return;
       }
-      if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
-        location.href = url;
-        return;
-      }
+      // if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
+      //   location.href = url;
+      //   return;
+      // }
       if (time_obj == null) {
         location.href = url;
         return;
@@ -527,12 +543,14 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         Toast(this.$t('name-tips'));
+        let dom = document.getElementById('username');
+        dom.focus();
         return;
       }
-      if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
-        Toast(this.$t('name-tips-2'));
-        return;
-      }
+      // if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
+      //   Toast(this.$t('name-tips-2'));
+      //   return;
+      // }
       if (time_obj == null) {
         Toast(this.$t('birth-tips'));
         return;
@@ -813,7 +831,7 @@ export default {
         }
         .info-input {
           flex: 1 1 auto;
-          width: 150px;
+          width: 1.5rem;
           font-size: 0.34rem;
           line-height: 1;
           font-weight: bold;
