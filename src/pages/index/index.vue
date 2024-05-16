@@ -86,7 +86,6 @@
                 ? payed_order_three_list
                 : ['', '', '']"
               :key="'three' + k"
-              @click="toWriteInfo(it)"
               :class="['it', it.product_key ? '' : 'no-it', `it${k + 1}`]"
             >
               <img
@@ -98,7 +97,7 @@
                 已解锁
               </div>
               <div :class="`status-${it.status} status-common`">
-                <div class="text">
+                <div @click="toWriteInfo(it)" class="text">
                   {{ it.status ? '查看结果' : '开始测算' }}
                 </div>
               </div>
@@ -116,46 +115,34 @@
           </div>
         </div>
       </van-swipe-item>
-      <van-swipe-item
-        v-if="payed_order_two_list.length"
-        :class="['sale-item', 'w654']"
-      >
-        <div class="item">
-          <div class="sale-title">多买多折扣2</div>
-          <img
-            src="../../assets/img/new_combine/home_tag_68_big.png"
-            class="zhekou-icon"
-            alt=""
-          />
-        </div>
-      </van-swipe-item>
+
       <van-swipe-item :class="['sale-item', 'w654']">
         <div class="item">
-          <div class="sale-title">多买多折扣</div>
-          <div v-if="combine_info.price" class="new-price">
-            <span class="one">{{
-              combine_info.unit
-                ? `${combine_info.unit + combine_info.origin_price_str}`
-                : 'RM-'
-            }}</span>
-            <span class="two">-42%</span>
-            <span class="large">{{
-              combine_info.unit
-                ? `${combine_info.unit + combine_info.price}`
-                : 'RM-'
-            }}</span>
+          <div class="item-price-box">
+            <div class="sale-title">多买多折扣</div>
+            <div v-if="combine_info.price" class="new-price">
+              <span class="one">{{
+                combine_info.unit
+                  ? `${combine_info.unit + combine_info.origin_price_str}`
+                  : 'RM-'
+              }}</span>
+              <span class="two">-42%</span>
+              <span class="large">{{
+                combine_info.unit
+                  ? `${combine_info.unit + combine_info.price}`
+                  : 'RM-'
+              }}</span>
+            </div>
+            <img
+              v-else
+              src="../../assets/img/new_combine/home_tag_58_big.png"
+              class="zhekou-icon"
+              alt=""
+            />
           </div>
-          <img
-            v-else
-            src="../../assets/img/new_combine/home_tag_58_big.png"
-            class="zhekou-icon"
-            alt=""
-          />
+
           <!-- 新版 商品选择 -->
-          <div
-            class="three-list"
-            :style="{ 'margin-top': three_list.length ? '0.34rem' : '0.96rem' }"
-          >
+          <div class="three-list">
             <div
               @click="new_sale_modal = true"
               v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
@@ -193,6 +180,7 @@
           >
             {{ !three_list.length ? '选择组合' : '解锁命运密码' }}
             <img
+              v-if="three_list.length"
               src="../../assets/img/new_combine/home_tag_58_big.png"
               class="absolute-zhe"
               alt=""
@@ -207,14 +195,84 @@
           </div>
         </div>
       </van-swipe-item>
+      <!-- 两项选择 -->
       <van-swipe-item :class="['sale-item', 'w654']">
         <div class="item">
-          <div class="sale-title">多买多折扣</div>
-          <img
-            src="../../assets/img/new_combine/home_tag_68_big.png"
-            class="zhekou-icon"
-            alt=""
-          />
+          <div class="item-price-box">
+            <div class="sale-title">多买多折扣</div>
+            <div v-if="combine_info2.price" class="new-price">
+              <span class="one">{{
+                combine_info2.unit
+                  ? `${combine_info2.unit + combine_info2.origin_price_str}`
+                  : 'RM-'
+              }}</span>
+              <span class="two">-42%</span>
+              <span class="large">{{
+                combine_info2.unit
+                  ? `${combine_info2.unit + combine_info2.price}`
+                  : 'RM-'
+              }}</span>
+            </div>
+            <img
+              v-else
+              src="../../assets/img/new_combine/home_tag_68_big.png"
+              class="zhekou-icon"
+              alt=""
+            />
+          </div>
+
+          <!-- 新版 商品选择 -->
+          <div class="three-list">
+            <div
+              @click="new_sale_modal2 = true"
+              v-for="(it, k) in two_list.length ? two_list : ['', '']"
+              :key="'three' + k"
+              :class="['it']"
+            >
+              <img
+                v-if="two_list.length"
+                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                class="check-icon"
+                alt=""
+              />
+              <img
+                v-else
+                src="../../assets/img/new_combine/home_btn_add.png"
+                class="check-icon"
+                alt=""
+              />
+              <div v-if="two_list.length" class="tag">待解锁</div>
+            </div>
+            <div class="divider-line-left">
+              <div class="one"></div>
+              <div class="two"></div>
+            </div>
+            <div class="divider-line-right" style="display: none">
+              <div class="one"></div>
+              <div class="two"></div>
+              <div class="three"></div>
+            </div>
+          </div>
+          <div
+            @click="changeSale(2)"
+            class="pick-btn"
+            :style="{ 'margin-top': two_list.length ? '0.3rem' : '0.48rem' }"
+          >
+            {{ !two_list.length ? '选择组合' : '解锁命运密码' }}
+            <img
+              v-if="two_list.length"
+              src="../../assets/img/new_combine/home_tag_68_big.png"
+              class="absolute-zhe"
+              alt=""
+            />
+          </div>
+          <div
+            v-show="two_list.length"
+            class="reset-select"
+            @click="new_sale_modal = true"
+          >
+            重新选择
+          </div>
         </div>
       </van-swipe-item>
     </van-swipe>
@@ -435,9 +493,7 @@
       <div class="modal-box">
         <div class="title-box">
           <div @click="new_sale_modal = false" class="left">取消</div>
-          <div class="center">
-            任选{{ combine_index ? '两' : '三' }}项享特惠
-          </div>
+          <div class="center">任选三项享特惠</div>
           <div
             v-if="pick_list.length === 3"
             @click="submitPopList()"
@@ -479,11 +535,69 @@
         </div>
       </div>
     </mt-popup>
+    <mt-popup
+      v-model="new_sale_modal2"
+      :closeOnClickModal="false"
+      position="bottom"
+    >
+      <div class="modal-box">
+        <div class="title-box">
+          <div @click="new_sale_modal2 = false" class="left">取消</div>
+          <div class="center">任选两项享特惠</div>
+          <div
+            v-if="pick_list2.length === 2"
+            @click="submitPopList(2)"
+            class="right-common right-check"
+          >
+            <div class="btn">确定</div>
+          </div>
+          <div v-else class="right-common disable-right">
+            <div class="btn">确定</div>
+          </div>
+        </div>
+
+        <div class="modal-list">
+          <div
+            v-for="(item, k) in new_pop_list"
+            @click="chooseNewSale(item, k, 2, 'pick_list2')"
+            :key="k"
+            :class="{
+              item: true,
+              'item-checked': item.checked,
+              'opacity-20': pick_list2.length >= 2 && !item.checked,
+              'item-normal': !item.checked,
+            }"
+          >
+            <img
+              :src="item.checked ? checkIcon : noCheckIcon"
+              class="check-icon"
+              alt=""
+            />
+            <img
+              :src="is_cn ? item.cn_pop_icon : item.tw_pop_icon"
+              class="icon"
+              alt=""
+            />
+            <div class="desc" style="-webkit-box-orient: vertical">
+              {{ is_cn ? item.cn_desc : item.tw_desc }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </mt-popup>
     <PayModal
       :visible="pay_modal"
       :combine_info="combine_info"
       @close="pay_modal = false"
       @resetInfo="combine_info = {}"
+      key_store="mlxz_web_select_list"
+    />
+    <PayModal
+      :visible="pay_modal2"
+      :combine_info="combine_info2"
+      @close="pay_modal2 = false"
+      @resetInfo="combine_info2 = {}"
+      key_store="mlxz_web_select_list_two"
     />
   </div>
 </template>
@@ -858,7 +972,7 @@ export default {
       score_list: [],
       cur_index: 0,
       combine_index: 0,
-      pick_listthree_list: [], //三项组合
+      three_list: [], //三项组合
       new_sale_modal: false,
       new_pop_list,
       checkIcon,
@@ -866,9 +980,15 @@ export default {
       pay_modal: false,
       combine_info: {},
       payed_order_three_list: [],
-      payed_order_two_list: [],
-      item_width: 0,
       pick_list: [],
+      // 两个
+      combine_info2: {},
+      two_list: [],
+      payed_order_two_list: [],
+      pick_list2: [],
+      item_index: 0,
+      new_sale_modal2: false,
+      pay_modal2: false,
     };
   },
   computed: {
@@ -1366,28 +1486,33 @@ export default {
       this.fix_pop = val ? true : false;
     },
     new_sale_modal(val) {
-      this.getLocalChecked();
       if (val) {
-        this.pick_list = JSON.parse(JSON.stringify(this.three_list));
-      } else {
-        this.pick_list = [];
+        this.getLocalChecked('three_list', 'mlxz_web_select_list');
       }
+    },
+    new_sale_modal2(val) {
+      if (val) {
+        this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
+      }
+    },
+    combine_index(val) {
+      this.getLocalChecked();
     },
   },
   created() {
     let url_query = utils.getUrlParams();
     let order_id = url_query.order_id;
-    console.log('order_id', order_id);
     let pay_status = url_query.status;
-    this.getLocalChecked();
+    this.getLocalChecked('three_list', 'mlxz_web_select_list');
+    this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
     this.randomBuyList();
     document.title = this.$t('dom-title');
     getProductionsAPI('ceh5').then(res => {
       this.all_list = res.data;
       this.getSelectTagList();
-      if (order_id && pay_status == 'SUCCESS') {
-        this.getPayedOrderList();
-      }
+      this.getSelectTagList(2);
+      order_id && pay_status === 'SUCCESS' && this.getPayedOrderList();
+
       this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
     });
   },
@@ -1400,9 +1525,8 @@ export default {
       args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
     });
-    this.$nextTick(() => {
-      this.getSwiperWidth();
-    });
+    console.log(this.pick_list);
+    console.log(this.three_list);
   },
   beforeDestroy() {
     this.pay_result_visible = false;
@@ -1769,9 +1893,17 @@ export default {
       this.combine_index = index;
     },
     // 打开选择弹窗
-    changeSale() {
+    changeSale(val) {
+      if (val) {
+        if (this.two_list.length) {
+          this.pay_modal2 = true;
+          return;
+        }
+        this.new_sale_modal2 = true;
+        return;
+      }
       if (this.three_list.length) {
-        this.payOrder();
+        this.pay_modal = true;
         return;
       }
       this.new_sale_modal = true;
@@ -1783,33 +1915,38 @@ export default {
     },
 
     // 选择商品
-    chooseNewSale(it, k) {
-      if (this.pick_list.length >= 3) {
+    chooseNewSale(it, k, val, key = 'pick_list') {
+      if (this[key].length >= (val ? 2 : 3)) {
         if (!it.checked) {
-          Toast('最多选择3个商品');
+          Toast(`最多选择${val ? 2 : 3}个商品`);
           return;
         } else {
           this.new_pop_list[k].checked = !this.new_pop_list[k].checked;
-          this.pick_list.splice(
-            this.getDeleteIndex(this.pick_list, it.product_key),
-            1
-          );
+          this[key].splice(this.getDeleteIndex(this[key], it.product_key), 1);
         }
       } else {
         this.new_pop_list[k].checked = !this.new_pop_list[k].checked;
         if (!it.checked) {
-          this.pick_list.splice(
-            this.getDeleteIndex(this.pick_list, it.product_key),
-            1
-          );
+          this[key].splice(this.getDeleteIndex(this[key], it.product_key), 1);
         } else {
-          this.pick_list.push(it);
+          this[key].push(it);
         }
       }
     },
     // 提交已选商品
-    submitPopList() {
+    submitPopList(val) {
+      if (val) {
+        this.two_list = JSON.parse(JSON.stringify(this.pick_list2));
+        this.getSelectTagList(val);
+        localStorage.setItem(
+          'mlxz_web_select_list_two',
+          JSON.stringify(this.two_list)
+        );
+        this.new_sale_modal2 = false;
+        return;
+      }
       this.three_list = JSON.parse(JSON.stringify(this.pick_list));
+      this.getSelectTagList();
       localStorage.setItem(
         'mlxz_web_select_list',
         JSON.stringify(this.three_list)
@@ -1817,10 +1954,13 @@ export default {
       this.new_sale_modal = false;
     },
     // 获取本地缓存选择的商品
-    getLocalChecked() {
-      let arr = localStorage.getItem('mlxz_web_select_list');
-      this.three_list = arr ? JSON.parse(arr) : [];
-      this.three_list.forEach(item => {
+    getLocalChecked(list, key) {
+      this.new_pop_list.forEach(it => {
+        it.checked = false;
+      });
+      let arr = localStorage.getItem(key);
+      this[list] = arr ? JSON.parse(arr) : [];
+      this[list].forEach(item => {
         this.new_pop_list.forEach(it => {
           if (it.product_key === item.product_key) {
             it.checked = true;
@@ -1829,42 +1969,66 @@ export default {
       });
     },
     // 获取组合订单信息
-    getSelectTagList() {
-      if (!this.three_list.length) return;
-      let product_key =
-        this.three_list.length === 3 ? 'h5_combo3' : 'h5_combo2';
-      let pick_list = this.three_list.map(item => item.product_key);
-      let combine_ids = [];
-      this.three_list.forEach(it => {
-        this.all_list.forEach(item => {
-          if (it.product_key === item.product_key) {
-            combine_ids.push(item.product_id);
-          }
+    getSelectTagList(val) {
+      if (val > 0) {
+        if (!this.two_list.length) return;
+      } else {
+        if (!this.three_list.length) return;
+      }
+
+      if (val > 0) {
+        let product_key2 = 'h5_combo2';
+        let pick_list = this.two_list.map(item => item.product_key);
+        let combine_ids2 = [];
+
+        this.two_list.forEach(it => {
+          this.all_list.forEach(item => {
+            if (it.product_key === item.product_key) {
+              combine_ids2.push(item.product_id);
+            }
+          });
         });
-      });
-      this.combine_info = this.all_list.find(
-        it =>
-          it.product_key === product_key &&
-          it.tags.length &&
-          it.tags.sort().join('').indexOf(pick_list.sort().join('')) > -1
-      );
-      this.combine_info.combine_product_ids = combine_ids;
+        this.combine_info2 = this.all_list.find(
+          it =>
+            it.product_key === product_key2 &&
+            it.tags.length &&
+            it.tags.sort().join('').indexOf(pick_list.sort().join('')) > -1
+        );
+        this.combine_info2.combine_product_ids = combine_ids2;
+      } else {
+        let product_key = 'h5_combo3';
+        let pick_list = this.three_list.map(item => item.product_key);
+        let combine_ids = [];
+
+        this.three_list.forEach(it => {
+          this.all_list.forEach(item => {
+            if (it.product_key === item.product_key) {
+              combine_ids.push(item.product_id);
+            }
+          });
+        });
+        this.combine_info = this.all_list.find(
+          it =>
+            it.product_key === product_key &&
+            it.tags.length &&
+            it.tags.sort().join('').indexOf(pick_list.sort().join('')) > -1
+        );
+        this.combine_info.combine_product_ids = combine_ids;
+      }
+      this.pick_list = this.three_list;
+      this.pick_list2 = this.two_list;
     },
-    // 打开支付弹窗
-    payOrder() {
-      this.pay_modal = true;
-    },
+
     // 获取已下单未填写订单信息
     async getPayedOrderList() {
       this.payed_order_three_list = [];
-      // this.payed_order_three_list = this.three_list;
-      // this.payed_order_three_list.forEach(it => {
-      //   it.status = 0;
-      // });
+      this.payed_order_two_list = [];
       const res = await getComboListAPI();
-      if (res.status !== 1000 || !res.data.combine.order_id) return;
+
+      if (res.status !== 1000 || !res.data.combine) return;
 
       const { sub_orders } = res.data.combine;
+      this.combine_index = this.combine_index - 1;
 
       let arr_ = [];
       sub_orders.forEach(item => {
@@ -1887,10 +2051,15 @@ export default {
             it_.status = item.status;
             it_.order_id = item.product_id;
             this.payed_order_three_list.push(it_);
+
+            // if (sub_orders.length == 2) {
+            //   this.payed_order_two_list.push(it_);
+            // } else {
+            //   this.payed_order_three_list.push(it_);
+            // }
           }
         });
       });
-      console.log(this.payed_order_three_list);
     },
 
     toWriteInfo(item) {
@@ -2543,9 +2712,10 @@ export default {
   font-size: 0.36rem;
   color: #314a46;
   line-height: 0.36rem;
-  position: absolute;
-  top: 0.3rem;
-  left: 0.24rem;
+  white-space: nowrap;
+  // position: absolute;
+  // top: 0.3rem;
+  // left: 0.24rem;
 }
 .new-price {
   display: flex;
@@ -2553,8 +2723,6 @@ export default {
   width: 100%;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 0.24rem;
-  margin-top: 0.31rem;
   .one {
     font-weight: 400;
     font-size: 0.24rem;
@@ -2575,9 +2743,9 @@ export default {
   }
 }
 .zhekou-icon {
-  position: absolute;
-  top: 0.22rem;
-  right: 0.24rem;
+  // position: absolute;
+  // top: 0.22rem;
+  // right: 0.24rem;
   width: 1.54rem;
   height: 0.52rem;
 }
@@ -2586,7 +2754,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.96rem;
+  margin-top: 0.3rem;
   position: relative;
   .it {
     width: 1.8rem;
@@ -2883,5 +3051,14 @@ export default {
 }
 .pl-90 {
   padding-left: 0 !important;
+}
+
+.item-price-box {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 0.24rem;
+  align-items: center;
+  margin-top: 0.3rem;
 }
 </style>

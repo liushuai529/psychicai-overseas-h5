@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-15 14:18:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-15 20:03:13
+ * @LastEditTime: 2024-05-16 18:32:37
  * @Description: 
 -->
 <template>
@@ -74,6 +74,10 @@ export default {
         };
       },
     },
+    key_store: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -93,6 +97,7 @@ export default {
       if (!val) {
         this.$emit('close', false);
       } else {
+        console.log(this.combine_info);
         this.getPayMethod();
       }
     },
@@ -129,14 +134,14 @@ export default {
         trade_pay_type,
         trade_target_org,
         combine_product_ids: combine_product_ids,
-        callback_url: location.href,
+        callback_url: location.origin + location.pathname,
       };
       const res = await payOrderAPI(params);
       Indicator.close();
       if (res.status !== 1000) return;
       await utils.asleep(1000);
       this.pop_modal = false;
-      localStorage.removeItem('mlxz_web_select_list');
+      localStorage.removeItem(this.key_store);
       location.href = res.data.pay_url;
     },
   },
