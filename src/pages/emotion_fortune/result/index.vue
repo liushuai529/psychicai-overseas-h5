@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-14 14:13:45
+ * @LastEditTime: 2024-05-16 18:53:13
  * @Description: 
 -->
 <template>
@@ -323,8 +323,8 @@ export default {
      * @return {*}
      */
     async getUserBazi(res) {
-      if (res.data.result && res.data.result.gan) {
-        this.getMinggeInfo(res.data.result);
+      if (res.data.result && res.data.result.bazi) {
+        this.getMinggeInfo(res.data.result.bazi);
         return;
       }
       let { birth_hour, birth_year, birth_month, birth_date, is_gongli, date } =

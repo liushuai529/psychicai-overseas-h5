@@ -7,6 +7,7 @@
       <div class="top-one"></div>
       <div class="center-one">
         <img class="word3" :src="is_cn ? cn_word3 : tw_word3" alt="" />
+
         <BaziTable
           :sex="extra_ce_suan.sex"
           :is_result="false"
@@ -117,8 +118,8 @@ export default {
   methods: {
     // 获取用户八字
     async getUserBazi() {
-      if (this.result && this.result.gan) {
-        this.getMinggeInfo(this.result);
+      if (this.result && this.result.bazi) {
+        this.getMinggeInfo(this.result.bazi);
 
         return;
       }
