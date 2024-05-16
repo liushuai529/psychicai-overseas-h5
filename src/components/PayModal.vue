@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-10 14:58:08
+ * @LastEditTime: 2024-05-16 13:13:38
  * @Description: 支付弹窗
 -->
 <template>
@@ -431,7 +431,9 @@ export default {
         });
         pay_max_params.callback_url = `${location.origin}${
           location.pathname
-        }#/result?path=${path_enums[this.product_key]}`;
+        }#/result?path=${path_enums[this.product_key]}&report_price=${
+          this.product.price
+        }`;
         const res = await payOrderAPI(pay_max_params);
         Indicator.close();
         if (res.status !== 1000) return;
