@@ -1519,6 +1519,7 @@ export default {
     new_sale_modal(val) {
       if (val) {
         this.getLocalChecked('three_list', 'mlxz_web_select_list');
+        this.pick_list = this.three_list;
       } else {
         this.pick_list = [];
       }
@@ -1526,6 +1527,7 @@ export default {
     new_sale_modal2(val) {
       if (val) {
         this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
+        this.pick_list2 = this.two_list;
       } else {
         this.pick_list2 = [];
       }
