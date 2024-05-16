@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-16 18:41:51
+ * @LastEditTime: 2024-05-16 18:51:49
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1519,7 +1519,20 @@ const getUrlParams = () => {
   }
   return theRequest;
 };
+
+const resetPageUrl = (order_id, status) => {
+  // 重置URL
+  let url = new URL(window.location.href);
+  let newUrl = url.origin + url.pathname;
+  history.pushState(
+    null,
+    '',
+    `${newUrl}#/result?order_id=${order_id}&status=${status}`
+  );
+};
+
 export default {
+  resetPageUrl,
   getUrlParams,
   copyResultCode,
   checkFB,
