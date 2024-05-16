@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-09 21:06:13
+ * @LastEditTime: 2024-05-16 14:00:19
  * @Description: 八字合婚
 -->
 
@@ -19,7 +19,7 @@
       />
       <div class="user-info">
         <div class="male-info">
-          <div class="info-name">{{ mname }}</div>
+          <div class="info-name">{{ mname | nameFilter }}</div>
           <div class="info-birth">{{ mbirth }}</div>
           <baziInfo :user_info="male_user_string" />
         </div>
@@ -28,7 +28,7 @@
           src="../../../assets/img/marriage_measure_overseas/detail/heart.png"
         />
         <div class="female-info">
-          <div class="info-name">{{ fname }}</div>
+          <div class="info-name">{{ fname | nameFilter }}</div>
           <div class="info-birth">{{ fbirth }}</div>
           <baziInfo :user_info="female_user_string" />
         </div>
@@ -174,6 +174,11 @@ export default {
       cn_modal_bg:
         'https://psychicai-static.psychicai.pro/imgs/240439e6ef4d89894c5d88378c3cbd7790fb.png',
     };
+  },
+  filters: {
+    nameFilter(val) {
+      return utils.getShortStr(val, 4);
+    },
   },
 
   created() {
@@ -367,7 +372,8 @@ export default {
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding: 0.68rem 0 0.49rem;
+      margin: 0.68rem 0 0.49rem;
+      padding: 0 0.28rem;
       .heart {
         width: 1.4rem;
         flex: none;
@@ -376,11 +382,16 @@ export default {
       .female-info {
         color: #6f3300;
         text-align: center;
+        width: 2.25rem;
         .info-name {
           font-size: 0.32rem;
           line-height: 0.45rem;
           font-weight: bold;
           margin-bottom: 0.07rem;
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .info-birth {
           font-size: 0.24rem;

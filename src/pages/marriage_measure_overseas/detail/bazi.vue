@@ -134,10 +134,9 @@ export default {
 .bazi {
   display: flex;
   flex-direction: column;
-  width: 2.25rem;
+  // width: 2.25rem;
   height: 1.28rem;
   margin-top: 0.3rem;
-  margin-left: 0.2rem;
   .c-zhu {
     display: flex;
     align-items: center;
