@@ -68,7 +68,7 @@
           <div v-if="isString(result.challenge)">
             {{ result.challenge }}
           </div>
-          <div v-else v-for="(it, k) in result.challenge">
+          <div v-else v-for="(it, k) in result.challenge" :key="k">
             {{ it }}
           </div>
         </div>

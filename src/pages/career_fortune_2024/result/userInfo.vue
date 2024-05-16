@@ -6,57 +6,29 @@
       </div>
       <div class="top-one"></div>
       <div class="center-one">
-        <div class="info-box">
-          <div class="row-1 c-mb c-row">
-            <div v-if="extra_ce_suan.name" class="c-label">
-              <span>您的名字：</span>
-              <span class="c-value mr-50">{{
-                extra_ce_suan.name | filter_name
-              }}</span>
-            </div>
-            <div v-if="extra_ce_suan.sex" class="c-label">
-              <span>您的性别：</span>
-              <span class="c-value">{{ extra_ce_suan.sex | filter_sex }}</span>
-            </div>
-          </div>
-          <div class="row-2 c-mb c-row">
-            <span class="c-label">出生日期：</span>
-            <span class="c-value">
-              {{ picker_date_yangli }}
-            </span>
-          </div>
-          <div class="row-3 c-mb c-row">
-            <span class="h-label c-label">出生日期：</span>
-            <span class="c-value">
-              {{ picker_date_nongli }}
-            </span>
-          </div>
-          <div class="row-4 c-row">
-            <span class="h-label c-label">您的八字：</span>
-            <span class="zhu-label">年柱</span>
-            <span class="zhu-label">月柱</span>
-            <span class="zhu-label">日柱</span>
-            <span class="zhu-label">时柱</span>
-          </div>
-          <div v-if="gan.length > 0" class="row-5 c-mb c-row">
-            <span class="c-label">您的八字：</span>
-            <span
-              v-for="(it, k) in gan"
-              :key="'gan' + k"
-              :class="`zhu-value  ${styleColor(it)}`"
-              >{{ it }}</span
-            >
-          </div>
-          <div v-if="zhi.length > 0" class="row-5 c-mb c-row">
-            <span class="h-label c-label">您的八字：</span>
-            <span
-              v-for="(it, k) in zhi"
-              :key="'zhi' + k"
-              :class="`zhu-value ${styleColor(it)}`"
-              >{{ it }}</span
-            >
-          </div>
-        </div>
+        <img class="word3" :src="is_cn ? cn_word3 : tw_word3" alt="" />
+        <BaziTable
+          :sex="extra_ce_suan.sex"
+          :is_result="false"
+          :username="extra_ce_suan.name"
+          :gongli_nongli="gongli_nongli"
+          :picker_date_yangli="picker_date_yangli"
+          :picker_date_nongli="picker_date_nongli"
+          :gan="gan"
+          :zhi="zhi"
+          :nayin="nayin"
+          :cai_bo_num="cai_bo_num"
+          :gui_ren_num="gui_ren_num"
+          :hun_yin_num="hun_yin_num"
+          :ming_ge="ming_ge"
+          :riyuanqiangruo="riyuanqiangruo"
+          :shi_ye_num="shi_ye_num"
+          :wuxingqiang="wuxingqiang"
+          text_color="#E34A42"
+          minge_color="#E34A42"
+          :show_daji="false"
+          :is_career="true"
+        ></BaziTable>
       </div>
       <div class="bottom-one"></div>
     </div>
@@ -72,9 +44,14 @@ import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import { getBaziAPI } from '../../../api/api';
 import cn_info_title from '../../../assets/img/mlxz/career_2024/detail/yu_img_title.png';
 import tw_info_title from '../../../assets/img/tw_mlxz/career_24/info_title.png';
-
+import BaziTable from '../../../components/baziTable.vue';
+import cn_word3 from '../../../assets/img/mlxz/career_2024/detail/img_word3.png';
+import tw_word3 from '../../../assets/img/tw_mlxz/career_24/tw_word3.png';
 export default {
-  props: ['orderId', 'extra_ce_suan'],
+  props: ['orderId', 'extra_ce_suan', 'result'],
+  components: {
+    BaziTable,
+  },
   data() {
     return {
       gongli_nongli_string: '',
@@ -88,11 +65,21 @@ export default {
       picker_hour: '',
       picker_date_yangli: '',
       picker_date_nongli: '',
-      gan: [],
-      zhi: [],
       cn_info_title,
       tw_info_title,
       language: utils.getLanguage(),
+      cn_word3,
+      tw_word3,
+      gan: ['-', '-', '-', '-'],
+      zhi: ['-', '-', '-', '-'],
+      nayin: ['？', '？', '？', '？'],
+      cai_bo_num: 0,
+      gui_ren_num: 0,
+      hun_yin_num: 0,
+      ming_ge: '',
+      riyuanqiangruo: '',
+      shi_ye_num: 0,
+      wuxingqiang: '',
     };
   },
   created() {
@@ -130,6 +117,11 @@ export default {
   methods: {
     // 获取用户八字
     async getUserBazi() {
+      if (this.result && this.result.gan) {
+        this.getMinggeInfo(this.result);
+
+        return;
+      }
       let { birth_hour, birth_year, birth_month, birth_date, is_gongli, date } =
         this.extra_ce_suan;
       let hour_ = birth_hour === '-1' ? '12' : birth_hour;
@@ -153,8 +145,8 @@ export default {
       };
       const { status, data } = await getBaziAPI(data_);
       if (status !== 1000) return;
-      this.gan = data.gan;
-      this.zhi = data.zhi;
+
+      this.getMinggeInfo(data);
     },
 
     // 格式化用户信息
@@ -180,6 +172,36 @@ export default {
         : `${Lunar.fromYmd(+birth_year, +birth_month, +birth_date)
             .getSolar()
             .toString()} ${this.picker_hour}`;
+    },
+
+    /**
+     * @description: 解析命格信息
+     * @param {*} data
+     * @return {*}
+     */
+    getMinggeInfo(data) {
+      const {
+        gan,
+        zhi,
+        nayin,
+        cai_bo_num,
+        gui_ren_num,
+        hun_yin_num,
+        ming_ge,
+        riyuanqiangruo,
+        shi_ye_num,
+        wuxingqiang,
+      } = data;
+      this.gan = gan;
+      this.zhi = zhi;
+      this.nayin = nayin;
+      this.cai_bo_num = cai_bo_num;
+      this.gui_ren_num = gui_ren_num;
+      this.hun_yin_num = hun_yin_num;
+      this.ming_ge = ming_ge;
+      this.riyuanqiangruo = riyuanqiangruo;
+      this.shi_ye_num = shi_ye_num;
+      this.wuxingqiang = wuxingqiang;
     },
 
     // 八字颜色
@@ -219,15 +241,22 @@ export default {
     background-size: 100% 100%;
   }
   .center-one {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     min-height: 1.2rem;
     background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_mid.png')
       no-repeat;
     background-size: 100% 100%;
-    margin-top: -0.02rem;
+    margin-top: -0.3rem;
     position: relative;
     z-index: 100;
     padding-bottom: 0.1rem;
+    .word3 {
+      width: 3.61rem;
+      height: 0.53rem;
+    }
   }
   .bottom-one {
     width: 100%;

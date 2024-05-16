@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-07 18:54:58
+ * @LastEditTime: 2024-05-16 15:24:53
  * @Description:
  */
 export * from './fortune';
@@ -78,9 +78,11 @@ export const payOrderAPI = async data => {
 };
 
 // 查询已支付订单填充信息
-export const getPayOrderInfoAPI = (order_id, data) => {
+export const getPayOrderInfoAPI = async (order_id, data) => {
+  await visitorLoginAPI();
+
   return request(
-    `/h5/auth/trade/orders/contract/cesuan/${order_id}`,
+    `/web/auth/trade/orders/contract/cesuan/${order_id}`,
     'POST',
     data
   );
@@ -121,4 +123,10 @@ export const visitorLoginAPI = async data => {
   localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
   localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
   return true;
+};
+
+// 已支付待填写子订单查询
+export const getComboListAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/trade/orders/cesuan/combo`, 'GET', data);
 };

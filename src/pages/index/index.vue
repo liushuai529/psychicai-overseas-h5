@@ -57,6 +57,225 @@
         />
       </div>
     </div>
+    <!-- 新版多买多折扣 -->
+    <van-swipe
+      :loop="false"
+      :show-indicators="false"
+      class="discount-box"
+      @change="getCombineIndex"
+      width="6.54rem"
+    >
+      <van-swipe-item
+        v-if="payed_order_three_list.length"
+        :class="['sale-item', 'w654']"
+      >
+        <div class="item">
+          <div class="order-title">已解锁报告，快来查看！</div>
+
+          <!-- 新版 商品选择 -->
+          <div
+            class="three-list"
+            :style="{
+              'margin-top': payed_order_three_list.length
+                ? '0.34rem'
+                : '0.96rem',
+            }"
+          >
+            <div
+              v-for="(it, k) in payed_order_three_list.length
+                ? payed_order_three_list
+                : ['', '', '']"
+              :key="'three' + k"
+              :class="['it', it.product_key ? '' : 'no-it', `it${k + 1}`]"
+            >
+              <img
+                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                class="check-icon"
+                alt=""
+              />
+              <div v-if="payed_order_three_list.length" class="tag get-tag">
+                已解锁
+              </div>
+              <div :class="`status-${it.status} status-common`">
+                <div @click="toWriteInfo(it)" class="text">
+                  {{ it.status ? '查看结果' : '开始测算' }}
+                </div>
+              </div>
+              <div class="tips-ce">{{ it.status ? '已测算' : '还未测算' }}</div>
+            </div>
+            <div class="divider-line-left">
+              <div class="one"></div>
+              <div class="two"></div>
+            </div>
+            <div class="divider-line-right">
+              <div class="one"></div>
+              <div class="two"></div>
+              <div class="three"></div>
+            </div>
+          </div>
+        </div>
+      </van-swipe-item>
+
+      <van-swipe-item :class="['sale-item', 'w654']">
+        <div class="item">
+          <div class="item-price-box">
+            <div class="sale-title">多买多折扣</div>
+            <div v-if="combine_info.price" class="new-price">
+              <span class="one">{{
+                combine_info.unit
+                  ? `${combine_info.unit + combine_info.origin_price_str}`
+                  : 'RM-'
+              }}</span>
+              <span class="two">-42%</span>
+              <span class="large">{{
+                combine_info.unit
+                  ? `${combine_info.unit + combine_info.price}`
+                  : 'RM-'
+              }}</span>
+            </div>
+            <img
+              v-else
+              src="../../assets/img/new_combine/home_tag_58_big.png"
+              class="zhekou-icon"
+              alt=""
+            />
+          </div>
+
+          <!-- 新版 商品选择 -->
+          <div class="three-list">
+            <div
+              @click="new_sale_modal = true"
+              v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
+              :key="'three' + k"
+              :class="['it']"
+            >
+              <img
+                v-if="three_list.length"
+                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                class="check-icon"
+                alt=""
+              />
+              <img
+                v-else
+                src="../../assets/img/new_combine/home_btn_add.png"
+                class="check-icon"
+                alt=""
+              />
+              <div v-if="three_list.length" class="tag">待解锁</div>
+            </div>
+            <div class="divider-line-left">
+              <div class="one"></div>
+              <div class="two"></div>
+            </div>
+            <div class="divider-line-right">
+              <div class="one"></div>
+              <div class="two"></div>
+              <div class="three"></div>
+            </div>
+          </div>
+          <div
+            @click="changeSale"
+            class="pick-btn"
+            :style="{ 'margin-top': three_list.length ? '0.3rem' : '0.52rem' }"
+          >
+            {{ !three_list.length ? '选择组合' : '解锁命运密码' }}
+            <img
+              v-if="three_list.length"
+              src="../../assets/img/new_combine/home_tag_58_big.png"
+              class="absolute-zhe"
+              alt=""
+            />
+          </div>
+          <div
+            v-show="three_list.length"
+            class="reset-select"
+            @click="new_sale_modal = true"
+          >
+            重新选择
+          </div>
+        </div>
+      </van-swipe-item>
+      <!-- 两项选择 -->
+      <van-swipe-item :class="['sale-item', 'w654']">
+        <div class="item">
+          <div class="item-price-box">
+            <div class="sale-title">多买多折扣</div>
+            <div v-if="combine_info2.price" class="new-price">
+              <span class="one">{{
+                combine_info2.unit
+                  ? `${combine_info2.unit + combine_info2.origin_price_str}`
+                  : 'RM-'
+              }}</span>
+              <span class="two">-42%</span>
+              <span class="large">{{
+                combine_info2.unit
+                  ? `${combine_info2.unit + combine_info2.price}`
+                  : 'RM-'
+              }}</span>
+            </div>
+            <img
+              v-else
+              src="../../assets/img/new_combine/home_tag_68_big.png"
+              class="zhekou-icon"
+              alt=""
+            />
+          </div>
+
+          <!-- 新版 商品选择 -->
+          <div class="three-list">
+            <div
+              @click="new_sale_modal2 = true"
+              v-for="(it, k) in two_list.length ? two_list : ['', '']"
+              :key="'three' + k"
+              :class="['it']"
+            >
+              <img
+                v-if="two_list.length"
+                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                class="check-icon"
+                alt=""
+              />
+              <img
+                v-else
+                src="../../assets/img/new_combine/home_btn_add.png"
+                class="check-icon"
+                alt=""
+              />
+              <div v-if="two_list.length" class="tag">待解锁</div>
+            </div>
+            <div class="divider-line-left">
+              <div class="one"></div>
+              <div class="two"></div>
+            </div>
+            <div class="divider-line-right" style="display: none">
+              <div class="one"></div>
+              <div class="two"></div>
+              <div class="three"></div>
+            </div>
+          </div>
+          <div
+            @click="changeSale(2)"
+            class="pick-btn"
+            :style="{ 'margin-top': two_list.length ? '0.3rem' : '0.48rem' }"
+          >
+            {{ !two_list.length ? '选择组合' : '解锁命运密码' }}
+            <img
+              v-if="two_list.length"
+              src="../../assets/img/new_combine/home_tag_68_big.png"
+              class="absolute-zhe"
+              alt=""
+            />
+          </div>
+          <div
+            v-show="two_list.length"
+            class="reset-select"
+            @click="new_sale_modal = true"
+          >
+            重新选择
+          </div>
+        </div>
+      </van-swipe-item>
+    </van-swipe>
 
     <!-- banner位 -->
     <div class="report-container">
@@ -106,7 +325,7 @@
     </div>
 
     <!-- 多买多折扣 -->
-    <div class="sale-box hidden">
+    <div style="display: none" class="sale-box">
       <div class="title-box">
         <div class="left">{{ $t('buy-zhekou') }}</div>
         <div class="right">
@@ -264,6 +483,122 @@
       @handleReport="hasPayReport"
       @update-visible="pay_result_visible = false"
     ></PopResult>
+
+    <!-- 新版选择弹窗 -->
+    <mt-popup
+      v-model="new_sale_modal"
+      :closeOnClickModal="false"
+      position="bottom"
+    >
+      <div class="modal-box">
+        <div class="title-box">
+          <div @click="new_sale_modal = false" class="left">取消</div>
+          <div class="center">任选三项享特惠</div>
+          <div
+            v-if="pick_list.length === 3"
+            @click="submitPopList()"
+            class="right-common right-check"
+          >
+            <div class="btn">确定</div>
+          </div>
+          <div v-else class="right-common disable-right">
+            <div class="btn">确定</div>
+          </div>
+        </div>
+
+        <div class="modal-list">
+          <div
+            v-for="(item, k) in new_pop_list"
+            @click="chooseNewSale(item, k)"
+            :key="k"
+            :class="{
+              item: true,
+              'item-checked': item.checked,
+              'opacity-20': pick_list.length >= 3 && !item.checked,
+              'item-normal': !item.checked,
+            }"
+          >
+            <img
+              :src="item.checked ? checkIcon : noCheckIcon"
+              class="check-icon"
+              alt=""
+            />
+            <img
+              :src="is_cn ? item.cn_pop_icon : item.tw_pop_icon"
+              class="icon"
+              alt=""
+            />
+            <div class="desc" style="-webkit-box-orient: vertical">
+              {{ is_cn ? item.cn_desc : item.tw_desc }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </mt-popup>
+    <mt-popup
+      v-model="new_sale_modal2"
+      :closeOnClickModal="false"
+      position="bottom"
+    >
+      <div class="modal-box">
+        <div class="title-box">
+          <div @click="new_sale_modal2 = false" class="left">取消</div>
+          <div class="center">任选两项享特惠</div>
+          <div
+            v-if="pick_list2.length === 2"
+            @click="submitPopList(2)"
+            class="right-common right-check"
+          >
+            <div class="btn">确定</div>
+          </div>
+          <div v-else class="right-common disable-right">
+            <div class="btn">确定</div>
+          </div>
+        </div>
+
+        <div class="modal-list">
+          <div
+            v-for="(item, k) in new_pop_list"
+            @click="chooseNewSale(item, k, 2, 'pick_list2')"
+            :key="k"
+            :class="{
+              item: true,
+              'item-checked': item.checked,
+              'opacity-20': pick_list2.length >= 2 && !item.checked,
+              'item-normal': !item.checked,
+            }"
+          >
+            <img
+              :src="item.checked ? checkIcon : noCheckIcon"
+              class="check-icon"
+              alt=""
+            />
+            <img
+              :src="is_cn ? item.cn_pop_icon : item.tw_pop_icon"
+              class="icon"
+              alt=""
+            />
+            <div class="desc" style="-webkit-box-orient: vertical">
+              {{ is_cn ? item.cn_desc : item.tw_desc }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </mt-popup>
+    <PayModal
+      :visible="pay_modal"
+      :combine_info="combine_info"
+      @close="pay_modal = false"
+      @resetInfo="combine_info = {}"
+      key_store="mlxz_web_select_list"
+    />
+    <PayModal
+      :visible="pay_modal2"
+      :combine_info="combine_info2"
+      @close="pay_modal2 = false"
+      @resetInfo="combine_info2 = {}"
+      key_store="mlxz_web_select_list_two"
+    />
   </div>
 </template>
 
@@ -279,7 +614,7 @@ import { Toast, Indicator } from 'mint-ui';
 import PopResult from './pay_result.vue';
 import { getResultAPI } from '../../api/api';
 import { getProductions } from '../../libs/common_api';
-import { getProductionsAPI } from '../../api/api';
+import { getProductionsAPI, getComboListAPI } from '../../api/api';
 
 import longnianImg from '../../assets/img/mlxz/cold_start/banner-2024caiyun@3x.png';
 import career_2024 from '../../assets/img/mlxz/index/banner_shiyeyunshi.png';
@@ -318,6 +653,39 @@ import tw_right_pay from '../../assets/img/mlxz/index/tw/right_pay.png';
 import cn_banner_ganqin from '../../assets/img/mlxz/new_banner/h5_img_topbanner_ganqing_jian.png';
 import tw_banner_ganqin from '../../assets/img/mlxz/new_banner/h5_img_topbanner_ganqing_fan.png';
 
+import cn_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_bazihehun.png';
+import cn_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_guiguzi.png';
+import cn_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_yuantiangang.png';
+import cn_modal_emotion from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_ganqing.png';
+import cn_modal_career from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_shiye.png';
+import cn_modal_wealth from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_caiyun.png';
+import cn_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_nianyun.png';
+import tw_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_bazihehun.png';
+import tw_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_guiguzi.png';
+import tw_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_yuantiangang.png';
+import tw_modal_emotion from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_ganqing.png';
+import tw_modal_career from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_shiye.png';
+import tw_modal_wealth from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_caiyun.png';
+import tw_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_nianyun.png';
+import checkIcon from '../../assets/img/new_combine/zuhe_btn_choose_selected.png';
+import noCheckIcon from '../../assets/img/new_combine/zuhe_btn_choose_normal.png';
+
+import cn_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_bazihehun.png';
+import cn_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_guiguzi.png';
+import cn_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_yuantiangang.png';
+import cn_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_ganqing.png';
+import cn_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_shiye.png';
+import cn_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_caiyun.png';
+import cn_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_nianyun.png';
+import tw_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_bazihehun.png';
+import tw_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_guiguzi.png';
+import tw_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_yuantiangang.png';
+import tw_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_ganqing.png';
+import tw_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_shiye.png';
+import tw_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_caiyun.png';
+import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_nianyun.png';
+
+import PayModal from './components/payModal.vue';
 const hotRecommendProduction = [
   //  {
   //   name:'良缘合婚',
@@ -462,8 +830,102 @@ const report_url = [
 
 const score_arr = ['96', '97', '98', '99', '100'];
 
+const new_pop_list = [
+  {
+    id: 1,
+    name: '鬼谷子',
+    url: 'guiguzi_fortune',
+    product_key: 'h5_bai_gua',
+    cn_desc: '64卦预见人生，审慎应对风波，谨防危机潜伏',
+    tw_desc: '64卦預見人生，審慎應對風波，謹防危機潛伏',
+    cn_pop_icon: cn_modal_ggz,
+    tw_pop_icon: tw_modal_ggz,
+    cn_check_icon: cn_check_icon_ggz,
+    tw_check_icon: tw_check_icon_ggz,
+    checked: false,
+  },
+  {
+    id: 2,
+    name: '袁天罡',
+    url: 'weigh_bone',
+    product_key: 'h5_weigh_bone',
+    cn_desc: '称骨论命，揭露宿命重负，应对多舛命途',
+    tw_desc: '稱骨論命，揭露宿命重負，應對多舛命途',
+    cn_pop_icon: cn_modal_weigh,
+    tw_pop_icon: tw_modal_weigh,
+    cn_check_icon: cn_check_icon_weigh,
+    tw_check_icon: tw_check_icon_weigh,
+    checked: false,
+  },
+  {
+    id: 3,
+    name: '八字合婚',
+    url: 'marriage_measure_overseas',
+    product_key: 'h5_marriage',
+    cn_desc: '揭示姻缘宿命，戒备潜藏危机，慎选伴侣之道',
+    tw_desc: '揭示姻緣宿命，戒備潛藏危機，慎選伴侶之道',
+    cn_pop_icon: cn_modal_bzhh,
+    tw_pop_icon: tw_modal_bzhh,
+    cn_check_icon: cn_check_icon_bzhh,
+    tw_check_icon: tw_check_icon_bzhh,
+    checked: false,
+  },
+  {
+    id: 4,
+    name: '感情运',
+    url: 'emotion_fortune',
+    product_key: 'h5_emotion2024',
+    cn_desc: '感情运势早知道，和合美满还是遗憾分手',
+    tw_desc: '感情運勢早知道，和合美滿還是遺憾分手',
+    cn_pop_icon: cn_modal_emotion,
+    tw_pop_icon: tw_modal_emotion,
+    cn_check_icon: cn_check_icon_emotion,
+    tw_check_icon: tw_check_icon_emotion,
+    checked: false,
+  },
+  {
+    id: 5,
+    name: '2024年运',
+    url: 'year_of_lucky_2024',
+    product_key: 'h5_annual2024',
+    cn_desc: '你的2024年如何度过？大师为你解读年度运势',
+    tw_desc: '你的2024年如何度過？大師為你解讀年度運勢',
+    cn_pop_icon: cn_modal_year,
+    tw_pop_icon: tw_modal_year,
+    cn_check_icon: cn_check_icon_year,
+    tw_check_icon: tw_check_icon_year,
+    checked: false,
+  },
+  {
+    id: 6,
+    name: '2024财运',
+    url: 'lucky_year_report',
+    product_key: 'h5_wealth2024',
+    cn_desc: '预警财务危机，洞悉关键时刻，避免潜在财富风险。',
+    tw_desc: '預警財務危機，洞悉關鍵時刻，避免潛在財富風險。',
+    cn_pop_icon: cn_modal_wealth,
+    tw_pop_icon: tw_modal_wealth,
+    cn_check_icon: cn_check_icon_wealth,
+    tw_check_icon: tw_check_icon_wealth,
+    checked: false,
+  },
+  {
+    id: 7,
+    name: '事业运势',
+    url: 'career_fortune_2024',
+    product_key: 'h5_career2024',
+    cn_desc: '前途迷雾重重，挑战接踵而至，开创事业新章',
+    tw_desc: '前途迷霧重重，挑戰接踵而至，開創事業新章',
+    cn_pop_icon: cn_modal_career,
+    tw_pop_icon: tw_modal_career,
+    cn_check_icon: cn_check_icon_career,
+    tw_check_icon: tw_check_icon_career,
+    checked: false,
+  },
+];
+
 export default {
-  components: { Recommend, Fortune, PayPopup, PopResult },
+  components: { Recommend, Fortune, PayPopup, PopResult, PayModal },
   data() {
     return {
       cn_order_btn:
@@ -512,6 +974,24 @@ export default {
       mock_report_list: [],
       score_list: [],
       cur_index: 0,
+      combine_index: 0,
+      three_list: [], //三项组合
+      new_sale_modal: false,
+      new_pop_list,
+      checkIcon,
+      noCheckIcon,
+      pay_modal: false,
+      combine_info: {},
+      payed_order_three_list: [],
+      pick_list: [],
+      // 两个
+      combine_info2: {},
+      two_list: [],
+      payed_order_two_list: [],
+      pick_list2: [],
+      item_index: 0,
+      new_sale_modal2: false,
+      pay_modal2: false,
     };
   },
   computed: {
@@ -1018,24 +1498,48 @@ export default {
     pay_result_visible(val) {
       this.fix_pop = val ? true : false;
     },
+    new_sale_modal(val) {
+      if (val) {
+        this.getLocalChecked('three_list', 'mlxz_web_select_list');
+      }
+    },
+    new_sale_modal2(val) {
+      if (val) {
+        this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
+      }
+    },
+    combine_index(val) {
+      this.getLocalChecked();
+    },
   },
   created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'sogk80',
-      });
+    let url_query = utils.getUrlParams();
+    let order_id = url_query.order_id;
+    let pay_status = url_query.status;
+    this.getLocalChecked('three_list', 'mlxz_web_select_list');
+    this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
     this.randomBuyList();
     document.title = this.$t('dom-title');
     getProductionsAPI('ceh5').then(res => {
       this.all_list = res.data;
+      this.getSelectTagList();
+      this.getSelectTagList(2);
+      order_id && pay_status === 'SUCCESS' && this.getPayedOrderList();
+
       this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
     });
   },
   async mounted() {
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'sogk80',
+      });
     utils.firebaseLogEvent('10001', '-10001', 'page_view_h5main', 'page_view', {
       args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
     });
+    console.log(this.pick_list);
+    console.log(this.three_list);
   },
   beforeDestroy() {
     this.pay_result_visible = false;
@@ -1396,6 +1900,195 @@ export default {
           console.error('CompleteRegistration  error message:', err);
         }
       }
+    },
+    // 切换轮播组
+    getCombineIndex(index) {
+      this.combine_index = index;
+    },
+    // 打开选择弹窗
+    changeSale(val) {
+      if (val) {
+        if (this.two_list.length) {
+          this.pay_modal2 = true;
+          return;
+        }
+        this.new_sale_modal2 = true;
+        return;
+      }
+      if (this.three_list.length) {
+        this.pay_modal = true;
+        return;
+      }
+      this.new_sale_modal = true;
+    },
+
+    // 删除选中的商品
+    getDeleteIndex(list, key) {
+      return list.findIndex(item => item.product_key === key);
+    },
+
+    // 选择商品
+    chooseNewSale(it, k, val, key = 'pick_list') {
+      if (this[key].length >= (val ? 2 : 3)) {
+        if (!it.checked) {
+          Toast(`最多选择${val ? 2 : 3}个商品`);
+          return;
+        } else {
+          this.new_pop_list[k].checked = !this.new_pop_list[k].checked;
+          this[key].splice(this.getDeleteIndex(this[key], it.product_key), 1);
+        }
+      } else {
+        this.new_pop_list[k].checked = !this.new_pop_list[k].checked;
+        if (!it.checked) {
+          this[key].splice(this.getDeleteIndex(this[key], it.product_key), 1);
+        } else {
+          this[key].push(it);
+        }
+      }
+    },
+    // 提交已选商品
+    submitPopList(val) {
+      if (val) {
+        this.two_list = JSON.parse(JSON.stringify(this.pick_list2));
+        this.getSelectTagList(val);
+        localStorage.setItem(
+          'mlxz_web_select_list_two',
+          JSON.stringify(this.two_list)
+        );
+        this.new_sale_modal2 = false;
+        return;
+      }
+      this.three_list = JSON.parse(JSON.stringify(this.pick_list));
+      this.getSelectTagList();
+      localStorage.setItem(
+        'mlxz_web_select_list',
+        JSON.stringify(this.three_list)
+      );
+      this.new_sale_modal = false;
+    },
+    // 获取本地缓存选择的商品
+    getLocalChecked(list, key) {
+      this.new_pop_list.forEach(it => {
+        it.checked = false;
+      });
+      let arr = localStorage.getItem(key);
+      this[list] = arr ? JSON.parse(arr) : [];
+      this[list].forEach(item => {
+        this.new_pop_list.forEach(it => {
+          if (it.product_key === item.product_key) {
+            it.checked = true;
+          }
+        });
+      });
+    },
+    // 获取组合订单信息
+    getSelectTagList(val) {
+      if (val > 0) {
+        if (!this.two_list.length) return;
+      } else {
+        if (!this.three_list.length) return;
+      }
+
+      if (val > 0) {
+        let product_key2 = 'h5_combo2';
+        let pick_list = this.two_list.map(item => item.product_key);
+        let combine_ids2 = [];
+
+        this.two_list.forEach(it => {
+          this.all_list.forEach(item => {
+            if (it.product_key === item.product_key) {
+              combine_ids2.push(item.product_id);
+            }
+          });
+        });
+        this.combine_info2 = this.all_list.find(
+          it =>
+            it.product_key === product_key2 &&
+            it.tags.length &&
+            it.tags.sort().join('').indexOf(pick_list.sort().join('')) > -1
+        );
+        this.combine_info2.combine_product_ids = combine_ids2;
+      } else {
+        let product_key = 'h5_combo3';
+        let pick_list = this.three_list.map(item => item.product_key);
+        let combine_ids = [];
+
+        this.three_list.forEach(it => {
+          this.all_list.forEach(item => {
+            if (it.product_key === item.product_key) {
+              combine_ids.push(item.product_id);
+            }
+          });
+        });
+        this.combine_info = this.all_list.find(
+          it =>
+            it.product_key === product_key &&
+            it.tags.length &&
+            it.tags.sort().join('').indexOf(pick_list.sort().join('')) > -1
+        );
+        this.combine_info.combine_product_ids = combine_ids;
+      }
+      this.pick_list = this.three_list;
+      this.pick_list2 = this.two_list;
+    },
+
+    // 获取已下单未填写订单信息
+    async getPayedOrderList() {
+      this.payed_order_three_list = [];
+      this.payed_order_two_list = [];
+      const res = await getComboListAPI();
+
+      if (res.status !== 1000 || !res.data.combine) return;
+
+      const { sub_orders } = res.data.combine;
+      this.combine_index = this.combine_index - 1;
+
+      let arr_ = [];
+      sub_orders.forEach(item => {
+        this.all_list.forEach(it => {
+          if (it.product_id === item.product_id) {
+            arr_.push(it.product_key);
+            arr_.push({
+              product_key: it.product_key,
+              status: item.extra_ce_suan ? 1 : 0, // 0 未填写 ，1 已填写
+              product_id: item.product_id,
+            });
+          }
+        });
+      });
+
+      arr_.forEach(item => {
+        new_pop_list.forEach(it => {
+          if (it.product_key === item.product_key) {
+            let it_ = Object.assign({}, it);
+            it_.status = item.status;
+            it_.order_id = item.product_id;
+            this.payed_order_three_list.push(it_);
+
+            // if (sub_orders.length == 2) {
+            //   this.payed_order_two_list.push(it_);
+            // } else {
+            //   this.payed_order_three_list.push(it_);
+            // }
+          }
+        });
+      });
+    },
+
+    toWriteInfo(item) {
+      console.log(item);
+
+      const { status, url, order_id } = item;
+      location.href = `${url}.html#/${
+        status ? 'result' : ''
+      }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
+    },
+
+    getSwiperWidth() {
+      let arr = document.querySelectorAll('.sale-item');
+      arr.forEach(it => {
+        it.style.width = '6.54rem';
+      });
     },
   },
 };
@@ -1991,5 +2684,394 @@ export default {
 }
 .flex-start {
   justify-content: flex-start !important;
+}
+
+.discount-box {
+  width: 7.5rem;
+  height: 4.08rem;
+  margin: 0.4rem auto 0.2rem;
+  padding-left: 0.2em;
+  .sale-item {
+    width: 100%;
+    height: 100%;
+    .item {
+      width: 6.54rem !important;
+      height: 4.08rem !important;
+      // margin-left: 0.2rem;
+      background: url('../../assets/img/new_combine/home_img_headcard.png')
+        no-repeat;
+      background-size: 100% 100%;
+      position: relative;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+.ml-80 {
+  margin-left: -0.8rem;
+}
+.ml-76 {
+  margin-left: 0.76rem;
+}
+.ml-130 {
+  margin-left: 1.3rem;
+}
+.sale-title {
+  width: 2rem;
+  height: 0.36rem;
+  font-weight: 600;
+  font-size: 0.36rem;
+  color: #314a46;
+  line-height: 0.36rem;
+  white-space: nowrap;
+  // position: absolute;
+  // top: 0.3rem;
+  // left: 0.24rem;
+}
+.new-price {
+  display: flex;
+  height: 0.34rem;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  .one {
+    font-weight: 400;
+    font-size: 0.24rem;
+    color: #8da5a1;
+    text-decoration-line: line-through;
+  }
+  .two {
+    font-weight: 400;
+    font-size: 0.24rem;
+    color: #314a46;
+    margin: 0 0.04rem;
+  }
+  .large {
+    font-weight: 600;
+    font-size: 0.34rem;
+    color: #e3453d;
+    line-height: 0.34rem;
+  }
+}
+.zhekou-icon {
+  // position: absolute;
+  // top: 0.22rem;
+  // right: 0.24rem;
+  width: 1.54rem;
+  height: 0.52rem;
+}
+
+.three-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.3rem;
+  position: relative;
+  .it {
+    width: 1.8rem;
+    // height: 1.2rem;
+    margin: 0 0.12rem;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .tag {
+      position: absolute;
+      right: -0.05rem;
+      top: -0.1rem;
+      width: 0.82rem;
+      height: 0.36rem;
+      background: #ff9456;
+      font-size: 0.2rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.1rem;
+    }
+    .check-icon {
+      width: 1.86rem;
+      height: 1.2rem;
+    }
+  }
+  .no-it {
+    background: url('../../assets/img/new_combine/home_btn_add.png') no-repeat;
+    background-size: contain;
+  }
+}
+
+.pick-btn {
+  width: 5.86rem;
+  height: 0.96rem;
+  background: url('../../assets/img/new_combine/button_big.png') no-repeat;
+  background-size: contain;
+  font-weight: 600;
+  font-size: 0.32rem;
+  color: #fdf4be;
+  line-height: 0.96rem;
+  text-align: center;
+  position: relative;
+}
+.absolute-zhe {
+  position: absolute;
+  top: -0.14rem;
+  right: 0.2rem;
+  width: 1.3rem;
+  height: 0.44rem;
+}
+.reset-select {
+  width: 100%;
+  height: 0.26rem;
+  font-weight: 400;
+  font-size: 0.26rem;
+  color: #8da5a1;
+  line-height: 0.26rem;
+  text-align: center;
+  margin-top: 0.2rem;
+}
+.divider-line-left {
+  position: absolute;
+  height: 0.04rem;
+  top: 0.6rem;
+  left: 1.9rem;
+  z-index: 1;
+  display: flex;
+  .one {
+    width: 0.1rem;
+    height: 100%;
+    background: #b0d5cf;
+  }
+  .two {
+    width: 0.05rem;
+    height: 100%;
+    background: #b0d5cf;
+    margin-left: 0.05rem;
+  }
+}
+.divider-line-right {
+  position: absolute;
+  height: 0.04rem;
+  top: 0.6rem;
+  right: 1.9rem;
+  z-index: 1;
+  display: flex;
+  .one {
+    width: 0.03rem;
+    height: 100%;
+    background: #b0d5cf;
+  }
+  .two {
+    width: 0.07rem;
+    height: 100%;
+    background: #b0d5cf;
+    margin-left: 0.05rem;
+  }
+  .three {
+    width: 0.06rem;
+    height: 100%;
+    background: #b0d5cf;
+    margin-left: 0.05rem;
+  }
+}
+
+.modal-box {
+  width: 7.5rem;
+  height: 11.18rem;
+  background: linear-gradient(180deg, #d2e7de 0%, #ffffff 100%);
+  border-radius: 0.4rem 0.4rem 0 0;
+  overflow-x: hidden;
+  .title-box {
+    width: 100%;
+    height: 0.64rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 0.28rem;
+    color: #314a46;
+    margin: 0.26rem auto;
+    position: relative;
+    .left {
+      margin-left: 0.3rem;
+      z-index: 2;
+    }
+    .center {
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      z-index: 1;
+      top: 0.1rem;
+      height: 0.36rem;
+      font-weight: 600;
+      font-size: 0.36rem;
+      line-height: 0.36rem;
+    }
+    .right-common {
+      width: 1.36rem;
+      height: 0.64rem;
+      border-radius: 0.16rem;
+      margin-right: 0.3rem;
+      z-index: 2;
+      .btn {
+        width: 100%;
+        height: 100%;
+        font-size: 0.28rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.16rem;
+      }
+    }
+    .right-check {
+      background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
+
+      .btn {
+        color: #fff;
+
+        border: 0.02rem solid #ffd192;
+      }
+    }
+    .disable-right {
+      background: linear-gradient(180deg, #fbc8ba 0%, #f6a8a8 100%);
+      .btn {
+        border: 0.02rem solid #ffedd3;
+        color: #fef8eb;
+      }
+    }
+  }
+  .modal-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0 0.16rem;
+    width: 100%;
+    height: 10.1rem;
+    overflow-y: auto;
+    .item {
+      width: 3.35rem;
+      height: 2.28rem;
+      margin: 0 0.11rem 0.22rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      .check-icon {
+        width: 0.48rem;
+        height: 0.46rem;
+        position: absolute;
+        top: 0.08rem;
+        right: 0.08rem;
+      }
+      .icon {
+        width: 3.31rem;
+        height: 1.4rem;
+      }
+      .desc {
+        width: 2.95rem;
+        font-weight: 400;
+        font-size: 0.24rem;
+        color: #314a46;
+        margin-top: 0.1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        word-break: break-all;
+        word-wrap: break-word;
+        -webkit-box-orient: vertical;
+        opacity: 0.7;
+      }
+    }
+    .item-normal {
+      background: url('../../assets/img/new_combine/sale_normal.png') no-repeat;
+      background-size: contain;
+    }
+    .item-checked {
+      background: url('../../assets/img/new_combine/sale_checked.png') no-repeat;
+      background-size: contain;
+    }
+    .opacity-20 {
+      opacity: 0.2;
+    }
+  }
+}
+
+.order-title {
+  width: 100%;
+  position: relative;
+  text-align: left;
+  height: 0.36rem;
+  font-weight: 600;
+  font-size: 0.36rem;
+  color: #314a46;
+  line-height: 0.36rem;
+  margin-top: 0.3rem;
+  padding-left: 0.24rem;
+}
+.get-tag {
+  background: #29be7c !important ;
+}
+
+.status-common {
+  width: 1.62rem;
+  height: 0.64rem;
+  border-radius: 0.16rem;
+  font-weight: 600;
+  font-size: 0.24rem;
+  line-height: 0.24rem;
+  margin-top: 0.42rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.status-1 {
+  border: 0.02rem solid #e79999;
+
+  color: #e3453d;
+}
+.status-0 {
+  border-radius: 0.16rem;
+  border: 0.02rem solid #ffd192;
+  background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
+
+  .text {
+    color: #fef8eb;
+    border-radius: 0.16rem;
+  }
+}
+.tips-ce {
+  height: 0.24rem;
+  font-weight: 400;
+  font-size: 0.24rem;
+  color: #8da5a1;
+  line-height: 0.24rem;
+  text-align: center;
+  margin-top: 0.2rem;
+}
+
+.w654 {
+  width: 6.54rem !important;
+}
+
+.ml-0 {
+  margin: 0 !important;
+}
+.pl-90 {
+  padding-left: 0 !important;
+}
+
+.item-price-box {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 0.24rem;
+  align-items: center;
+  margin-top: 0.3rem;
 }
 </style>
