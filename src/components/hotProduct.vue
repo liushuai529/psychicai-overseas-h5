@@ -218,7 +218,7 @@ export default {
   min-height: 16.03rem;
   background: #fff9fc;
   border-radius: 0.2rem;
-  margin: 0.1rem auto 1.5rem;
+  margin: 0.1rem auto 1.96rem;
   .header-box {
     width: 7.1rem;
     height: 1.1rem;
@@ -241,7 +241,8 @@ export default {
     margin: 0.24rem auto;
     .item {
       display: flex;
-      border-bottom: 1px solid #0000001f;
+      border-bottom: 1px solid rgb(0 0 0 / 12%);
+
       padding-bottom: 0.24rem;
       margin-bottom: 0.24rem;
       .icon {
@@ -253,12 +254,13 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-around;
-        margin-left: 0.12rem;
+        margin-left: 0.24rem;
         .name {
           font-size: 0.36rem;
           color: #040404;
           height: 0.36rem;
           line-height: 0.36rem;
+          font-weight: 700;
         }
         .desc {
           font-size: 0.3rem;
@@ -276,14 +278,23 @@ export default {
         }
         .buy {
           display: flex;
-          width: 163px;
           height: 0.28rem;
           font-weight: 400;
           font-size: 0.28rem;
           line-height: 0.28rem;
           color: #999;
+          align-items: center;
           div {
             white-space: nowrap;
+            line-height: 0.28rem;
+            height: 0.28rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            span {
+              line-height: 0.28rem;
+              height: 0.28rem;
+            }
           }
           .num {
             color: #e3453d;
@@ -294,6 +305,7 @@ export default {
     .item:last-child {
       border-bottom: none;
       margin-bottom: 0;
+      padding-bottom: 0;
     }
   }
 }
