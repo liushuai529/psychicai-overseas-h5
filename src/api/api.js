@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-07 18:54:58
+ * @LastEditTime: 2024-05-15 19:54:40
  * @Description:
  */
 export * from './fortune';
@@ -121,4 +121,10 @@ export const visitorLoginAPI = async data => {
   localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
   localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
   return true;
+};
+
+// 已支付待填写子订单查询
+export const getComboListAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/trade/orders/cesuan/combo`, 'GET', data);
 };

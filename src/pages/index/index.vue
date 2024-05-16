@@ -63,8 +63,60 @@
       :show-indicators="false"
       class="discount-box"
       @change="getCombineIndex"
+      :width="654"
     >
-      <van-swipe-item :class="['sale-item', !combine_index ? '' : 'ml-130']">
+      <!-- <van-swipe-item :class="['sale-item', !combine_index ? '' : 'ml-130']"> -->
+      <van-swipe-item :class="['sale-item', 'w654']">
+        <div class="item">
+          <div class="order-title">已解锁报告，快来查看！</div>
+
+          <!-- 新版 商品选择 -->
+          <div
+            class="three-list"
+            :style="{ 'margin-top': three_list.length ? '0.34rem' : '0.96rem' }"
+          >
+            <div
+              v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
+              :key="'three' + k"
+              :class="['it', it.product_key ? '' : 'no-it', `it${k + 1}`]"
+            >
+              <img
+                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                class="check-icon"
+                alt=""
+              />
+              <div v-if="three_list.length" class="tag get-tag">已解锁</div>
+              <div :class="`status-${it.status} status-common`">
+                <div class="text">
+                  {{ it.status ? '查看结果' : '开始测算' }}
+                </div>
+              </div>
+              <div class="tips-ce">{{ it.status ? '已测算' : '还未测算' }}</div>
+            </div>
+            <div class="divider-line-left">
+              <div class="one"></div>
+              <div class="two"></div>
+            </div>
+            <div class="divider-line-right">
+              <div class="one"></div>
+              <div class="two"></div>
+              <div class="three"></div>
+            </div>
+          </div>
+        </div>
+      </van-swipe-item>
+      <!-- <van-swipe-item :class="['sale-item', !combine_index ? '' : 'ml-130']"> -->
+      <van-swipe-item :class="['sale-item', 'w654']">
+        <div class="item">
+          <div class="sale-title">多买多折扣2</div>
+          <img
+            src="../../assets/img/new_combine/home_tag_68_big.png"
+            class="zhekou-icon"
+            alt=""
+          />
+        </div>
+      </van-swipe-item>
+      <van-swipe-item :class="['sale-item', 'w654']">
         <div class="item">
           <div class="sale-title">多买多折扣</div>
           <div v-if="combine_info.price" class="new-price">
@@ -86,8 +138,11 @@
             class="zhekou-icon"
             alt=""
           />
-          <!-- 商品选择 -->
-          <div class="three-list">
+          <!-- 新版 商品选择 -->
+          <div
+            class="three-list"
+            :style="{ 'margin-top': three_list.length ? '0.34rem' : '0.96rem' }"
+          >
             <div
               @click="new_sale_modal = true"
               v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
@@ -99,6 +154,7 @@
                 class="check-icon"
                 alt=""
               />
+              <div v-if="three_list.length" class="tag">待解锁</div>
             </div>
             <div class="divider-line-left">
               <div class="one"></div>
@@ -112,13 +168,13 @@
           </div>
           <div
             @click="changeSale"
-            :style="{ 'margin-top': three_list.length ? '0.3rem' : '0.52rem' }"
             class="pick-btn"
+            :style="{ 'margin-top': three_list.length ? '0.3rem' : '0.52rem' }"
           >
             {{ !three_list.length ? '选择组合' : '解锁命运密码' }}
             <img
               src="../../assets/img/new_combine/home_tag_58_big.png"
-              class="zhekou-icon absolute-zhe"
+              class="absolute-zhe"
               alt=""
             />
           </div>
@@ -131,7 +187,8 @@
           </div>
         </div>
       </van-swipe-item>
-      <van-swipe-item :class="['sale-item', 'ml-80']">
+      <!-- <van-swipe-item :class="['sale-item', !combine_index ? '' : 'ml-130']"> -->
+      <van-swipe-item :class="['sale-item', 'w654']">
         <div class="item">
           <div class="sale-title">多买多折扣</div>
           <img
@@ -424,7 +481,7 @@ import { Toast, Indicator } from 'mint-ui';
 import PopResult from './pay_result.vue';
 import { getResultAPI } from '../../api/api';
 import { getProductions } from '../../libs/common_api';
-import { getProductionsAPI } from '../../api/api';
+import { getProductionsAPI, getComboListAPI } from '../../api/api';
 
 import longnianImg from '../../assets/img/mlxz/cold_start/banner-2024caiyun@3x.png';
 import career_2024 from '../../assets/img/mlxz/index/banner_shiyeyunshi.png';
@@ -789,6 +846,7 @@ export default {
       noCheckIcon,
       pay_modal: false,
       combine_info: {},
+      payed_order_list: [],
     };
   },
   computed: {
@@ -1290,12 +1348,19 @@ export default {
     },
   },
   created() {
+    let url_query = utils.getUrlParams();
+    let order_id = url_query.order_id;
+    console.log('order_id', order_id);
+    let pay_status = url_query.status;
     this.getLocalChecked();
     this.randomBuyList();
     document.title = this.$t('dom-title');
     getProductionsAPI('ceh5').then(res => {
       this.all_list = res.data;
       this.getSelectTagList();
+      if (order_id && pay_status == 'SUCCESS') {
+        this.getPayedOrderList();
+      }
       this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
     });
   },
@@ -1733,7 +1798,7 @@ export default {
         });
       });
     },
-
+    // 获取组合订单信息
     getSelectTagList() {
       if (!this.three_list.length) return;
       let product_key =
@@ -1755,9 +1820,40 @@ export default {
       );
       this.combine_info.combine_product_ids = combine_ids;
     },
-
+    // 打开支付弹窗
     payOrder() {
       this.pay_modal = true;
+    },
+    // 获取已下单未填写订单信息
+    async getPayedOrderList() {
+      this.payed_order_list = [];
+      this.payed_order_list = this.three_list;
+      this.payed_order_list.forEach(it => {
+        it.status = 0;
+      });
+      const res = await getComboListAPI();
+      if (res.status !== 1000 || !res.data.order_id) return;
+
+      const { sub_orders } = res.data.combine;
+
+      let arr_ = [];
+      sub_orders.forEach(item => {
+        this.all_list.forEach(it => {
+          if (it.product_id === item.product_id) {
+            arr_.push(it.product_key);
+          }
+        });
+      });
+
+      arr_.forEach(item => {
+        new_pop_list.forEach(it => {
+          if (it.product_key === item) {
+            this.payed_order_list.push(it);
+          }
+        });
+      });
+      console.log(this.payed_order_list);
+      // this.payed_order_list = res.data;
     },
   },
 };
@@ -2359,14 +2455,14 @@ export default {
   width: 7.5rem;
   height: 4.08rem;
   margin: 0.4rem auto 0.2rem;
-
+  padding-left: 0.2em;
   .sale-item {
     width: 100%;
     height: 100%;
     .item {
       width: 6.54rem !important;
       height: 4.08rem !important;
-      margin-left: 0.2rem;
+      // margin-left: 0.2rem;
       background: url('../../assets/img/new_combine/home_img_headcard.png')
         no-repeat;
       background-size: 100% 100%;
@@ -2437,14 +2533,33 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.3rem;
+  margin-top: 0.96rem;
   position: relative;
   .it {
     width: 1.8rem;
-    height: 1.2rem;
+    // height: 1.2rem;
     margin: 0 0.12rem;
     position: relative;
     z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .tag {
+      position: absolute;
+      right: -0.05rem;
+      top: -0.1rem;
+      width: 0.82rem;
+      height: 0.36rem;
+      background: #ff9456;
+      font-size: 0.2rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.1rem;
+    }
     .check-icon {
       width: 1.86rem;
       height: 1.2rem;
@@ -2472,6 +2587,8 @@ export default {
   position: absolute;
   top: -0.14rem;
   right: 0.2rem;
+  width: 1.3rem;
+  height: 0.44rem;
 }
 .reset-select {
   width: 100%;
@@ -2649,5 +2766,73 @@ export default {
       opacity: 0.2;
     }
   }
+}
+
+.order-title {
+  width: 100%;
+  position: relative;
+  text-align: left;
+  height: 0.36rem;
+  font-weight: 600;
+  font-size: 0.36rem;
+  color: #314a46;
+  line-height: 0.36rem;
+  margin-top: 0.3rem;
+  padding-left: 0.24rem;
+}
+.get-tag {
+  background: #29be7c !important ;
+}
+
+.status-common {
+  width: 1.62rem;
+  height: 0.64rem;
+  border-radius: 0.16rem;
+  font-weight: 600;
+  font-size: 0.24rem;
+  line-height: 0.24rem;
+  margin-top: 0.42rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.status-1 {
+  border: 0.02rem solid #e79999;
+
+  color: #e3453d;
+}
+.status-0 {
+  border-radius: 0.16rem;
+  border: 0.02rem solid #ffd192;
+  background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
+
+  .text {
+    color: #fef8eb;
+    border-radius: 0.16rem;
+  }
+}
+.tips-ce {
+  height: 0.24rem;
+  font-weight: 400;
+  font-size: 0.24rem;
+  color: #8da5a1;
+  line-height: 0.24rem;
+  text-align: center;
+  margin-top: 0.2rem;
+}
+
+.w654 {
+  // width: 6.54rem !important;
+  // margin-right: -0.7rem;
+}
+
+.ml-100 {
+  // margin-left: 1rem;
+}
+.ml-0 {
+  margin: 0 !important;
+}
+.pl-90 {
+  padding-left: 0 !important;
 }
 </style>

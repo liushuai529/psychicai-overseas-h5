@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-15 14:18:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-15 16:00:31
+ * @LastEditTime: 2024-05-15 20:03:13
  * @Description: 
 -->
 <template>
@@ -56,6 +56,7 @@ import { getPayMethodsAPI, payOrderAPI } from '../../../api/api';
 import checked from '../../../assets/img/new_combine/img_choose2.png';
 import noChecked from '../../../assets/img/new_combine/img_choose1.png';
 import { Indicator } from 'mint-ui';
+import utils from '../../../libs/utils';
 export default {
   name: 'PayModal',
   props: {
@@ -134,6 +135,8 @@ export default {
       Indicator.close();
       if (res.status !== 1000) return;
       await utils.asleep(1000);
+      this.pop_modal = false;
+      localStorage.removeItem('mlxz_web_select_list');
       location.href = res.data.pay_url;
     },
   },

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-14 19:20:09
+ * @LastEditTime: 2024-05-15 19:52:26
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1501,7 +1501,20 @@ const copyResultCode = text => {
     });
 };
 
+const getUrlParams = () => {
+  let url = window.location.href;
+  let theRequest = new Object();
+  if (url.indexOf('?') != -1) {
+    let str = url.substr(url.indexOf('?') + 1);
+    let strs = str.split('&');
+    for (let i = 0; i < strs.length; i++) {
+      theRequest[strs[i].split('=')[0]] = strs[i].split('=')[1];
+    }
+  }
+  return theRequest;
+};
 export default {
+  getUrlParams,
   copyResultCode,
   checkFB,
   fbEvent,
