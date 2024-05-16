@@ -283,7 +283,14 @@
         v-for="(item, index) in sale_list"
         :key="index"
         @click="
-          jumpUrl(item.url, item.e_id, item.e_name, item.ad_e, item.report_id)
+          jumpUrl(
+            item.url,
+            item.e_id,
+            item.e_name,
+            item.ad_e,
+            item.report_id,
+            item.product_key
+          )
         "
         :class="[item.is_big ? 'big-item' : 'normal-item']"
       >
@@ -614,7 +621,11 @@ import { Toast, Indicator } from 'mint-ui';
 import PopResult from './pay_result.vue';
 import { getResultAPI } from '../../api/api';
 import { getProductions } from '../../libs/common_api';
-import { getProductionsAPI, getComboListAPI } from '../../api/api';
+import {
+  getProductionsAPI,
+  getComboListAPI,
+  reportEventAPI,
+} from '../../api/api';
 
 import longnianImg from '../../assets/img/mlxz/cold_start/banner-2024caiyun@3x.png';
 import career_2024 from '../../assets/img/mlxz/index/banner_shiyeyunshi.png';
@@ -1371,6 +1382,7 @@ export default {
           e_name: 'click_report_marriage',
           ad_e: '8g4xt8',
           report_id: '60005',
+          product_key: 'h5_marriage',
         },
         {
           id: 4,
@@ -1387,6 +1399,7 @@ export default {
           e_name: 'click_report_2024lovely',
           ad_e: 'efy9t0',
           report_id: '60010',
+          product_key: 'h5_emotion2024',
         },
         {
           id: 3,
@@ -1404,6 +1417,7 @@ export default {
           e_name: 'click_report_2024report',
           ad_e: 'oqfzzs',
           report_id: '60009',
+          product_key: 'h5_annual2024',
         },
         {
           id: 6,
@@ -1420,6 +1434,7 @@ export default {
           e_name: 'click_report_2024wealty',
           ad_e: 'egm8a2',
           report_id: '60001',
+          product_key: 'h5_wealth2024',
         },
         {
           id: 5,
@@ -1436,6 +1451,7 @@ export default {
           e_name: 'click_report_2024career',
           ad_e: 'tzsnzi',
           report_id: '60011',
+          product_key: 'h5_career2024',
         },
 
         {
@@ -1453,6 +1469,7 @@ export default {
           e_name: 'click_report_chenggu',
           ad_e: 'kajqs3',
           report_id: '60002',
+          product_key: 'h5_weigh_bone',
         },
         {
           id: 2,
@@ -1469,6 +1486,7 @@ export default {
           e_name: 'click_report_64gua',
           ad_e: 'jd4oen',
           report_id: '60003',
+          product_key: 'h5_bai_gua',
         },
       ];
 
@@ -1873,13 +1891,16 @@ export default {
     randomNum(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
-    async jumpUrl(url, e_id, e_name, ad_e, report_id) {
+    async jumpUrl(url, e_id, e_name, ad_e, report_id, product_key) {
       await this.logHome();
 
       utils.firebaseLogEvent('10001', e_id, e_name, 'click', {
         args_name: e_name,
         channel: utils.getFBChannel(),
       });
+      let same_ = this.all_list.find(it => it.product_key === product_key);
+
+      await this.logEventForSort({ e_name, product_id: same_.product_id });
 
       window.Adjust && window.Adjust.trackEvent({ eventToken: ad_e });
       await utils.asleep(500);
@@ -2089,12 +2110,17 @@ export default {
         status ? 'result' : ''
       }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
     },
-
-    getSwiperWidth() {
-      let arr = document.querySelectorAll('.sale-item');
-      arr.forEach(it => {
-        it.style.width = '6.54rem';
-      });
+    // 事件排序
+    async logEventForSort(it) {
+      try {
+        const res = await reportEventAPI({
+          event_name: it.e_name,
+          product_id: it.product_id,
+        });
+        if (res.status !== 1000) return;
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
 };

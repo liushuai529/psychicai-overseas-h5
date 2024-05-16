@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-16 20:01:05
+ * @LastEditTime: 2024-05-16 20:18:35
  * @Description:
  */
 export * from './fortune';
@@ -133,4 +133,16 @@ export const visitorLoginAPI = async data => {
 export const getComboListAPI = async data => {
   await visitorLoginAPI();
   return request(`/web/auth/trade/orders/cesuan/combo`, 'GET', data);
+};
+
+// 事件上报
+export const reportEventAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/event/report`, 'POST', data);
+};
+
+// 排序事件
+export const sortByEvent = async data => {
+  await visitorLoginAPI();
+  return request(`/web/event/products/sort`, 'GET', data);
 };
