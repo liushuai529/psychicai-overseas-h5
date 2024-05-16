@@ -63,9 +63,8 @@
       :show-indicators="false"
       class="discount-box"
       @change="getCombineIndex"
-      :width="654"
+      width="6.54rem"
     >
-      <!-- <van-swipe-item :class="['sale-item', !combine_index ? '' : 'ml-130']"> -->
       <van-swipe-item
         v-if="payed_order_three_list.length"
         :class="['sale-item', 'w654']"
@@ -76,11 +75,18 @@
           <!-- 新版 商品选择 -->
           <div
             class="three-list"
-            :style="{ 'margin-top': three_list.length ? '0.34rem' : '0.96rem' }"
+            :style="{
+              'margin-top': payed_order_three_list.length
+                ? '0.34rem'
+                : '0.96rem',
+            }"
           >
             <div
-              v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
+              v-for="(it, k) in payed_order_three_list.length
+                ? payed_order_three_list
+                : ['', '', '']"
               :key="'three' + k"
+              @click="toWriteInfo(it)"
               :class="['it', it.product_key ? '' : 'no-it', `it${k + 1}`]"
             >
               <img
@@ -88,7 +94,9 @@
                 class="check-icon"
                 alt=""
               />
-              <div v-if="three_list.length" class="tag get-tag">已解锁</div>
+              <div v-if="payed_order_three_list.length" class="tag get-tag">
+                已解锁
+              </div>
               <div :class="`status-${it.status} status-common`">
                 <div class="text">
                   {{ it.status ? '查看结果' : '开始测算' }}
@@ -108,7 +116,6 @@
           </div>
         </div>
       </van-swipe-item>
-      <!-- <van-swipe-item :class="['sale-item', !combine_index ? '' : 'ml-130']"> -->
       <van-swipe-item
         v-if="payed_order_two_list.length"
         :class="['sale-item', 'w654']"
@@ -153,10 +160,17 @@
               @click="new_sale_modal = true"
               v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
               :key="'three' + k"
-              :class="['it', it.product_key ? '' : 'no-it', `it${k + 1}`]"
+              :class="['it']"
             >
               <img
+                v-if="three_list.length"
                 :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                class="check-icon"
+                alt=""
+              />
+              <img
+                v-else
+                src="../../assets/img/new_combine/home_btn_add.png"
                 class="check-icon"
                 alt=""
               />
@@ -193,7 +207,6 @@
           </div>
         </div>
       </van-swipe-item>
-      <!-- <van-swipe-item :class="['sale-item', !combine_index ? '' : 'ml-130']"> -->
       <van-swipe-item :class="['sale-item', 'w654']">
         <div class="item">
           <div class="sale-title">多买多折扣</div>
@@ -426,7 +439,7 @@
             任选{{ combine_index ? '两' : '三' }}项享特惠
           </div>
           <div
-            v-if="three_list.length === 3"
+            v-if="pick_list.length === 3"
             @click="submitPopList()"
             class="right-common right-check"
           >
@@ -445,7 +458,7 @@
             :class="{
               item: true,
               'item-checked': item.checked,
-              'opacity-20': three_list.length >= 3 && !item.checked,
+              'opacity-20': pick_list.length >= 3 && !item.checked,
               'item-normal': !item.checked,
             }"
           >
@@ -845,7 +858,7 @@ export default {
       score_list: [],
       cur_index: 0,
       combine_index: 0,
-      three_list: [], //三项组合
+      pick_listthree_list: [], //三项组合
       new_sale_modal: false,
       new_pop_list,
       checkIcon,
@@ -854,6 +867,8 @@ export default {
       combine_info: {},
       payed_order_three_list: [],
       payed_order_two_list: [],
+      item_width: 0,
+      pick_list: [],
     };
   },
   computed: {
@@ -1352,6 +1367,11 @@ export default {
     },
     new_sale_modal(val) {
       this.getLocalChecked();
+      if (val) {
+        this.pick_list = JSON.parse(JSON.stringify(this.three_list));
+      } else {
+        this.pick_list = [];
+      }
     },
   },
   created() {
@@ -1379,6 +1399,9 @@ export default {
     utils.firebaseLogEvent('10001', '-10001', 'page_view_h5main', 'page_view', {
       args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
+    });
+    this.$nextTick(() => {
+      this.getSwiperWidth();
     });
   },
   beforeDestroy() {
@@ -1761,42 +1784,42 @@ export default {
 
     // 选择商品
     chooseNewSale(it, k) {
-      if (this.three_list.length >= 3) {
+      if (this.pick_list.length >= 3) {
         if (!it.checked) {
           Toast('最多选择3个商品');
           return;
         } else {
           this.new_pop_list[k].checked = !this.new_pop_list[k].checked;
-          this.three_list.splice(
-            this.getDeleteIndex(this.three_list, it.product_key),
+          this.pick_list.splice(
+            this.getDeleteIndex(this.pick_list, it.product_key),
             1
           );
         }
       } else {
         this.new_pop_list[k].checked = !this.new_pop_list[k].checked;
         if (!it.checked) {
-          this.three_list.splice(
-            this.getDeleteIndex(this.three_list, it.product_key),
+          this.pick_list.splice(
+            this.getDeleteIndex(this.pick_list, it.product_key),
             1
           );
         } else {
-          this.three_list.push(it);
+          this.pick_list.push(it);
         }
       }
     },
     // 提交已选商品
     submitPopList() {
-      this.new_sale_modal = false;
+      this.three_list = JSON.parse(JSON.stringify(this.pick_list));
       localStorage.setItem(
         'mlxz_web_select_list',
         JSON.stringify(this.three_list)
       );
+      this.new_sale_modal = false;
     },
     // 获取本地缓存选择的商品
     getLocalChecked() {
       let arr = localStorage.getItem('mlxz_web_select_list');
       this.three_list = arr ? JSON.parse(arr) : [];
-      console.log(this.three_list);
       this.three_list.forEach(item => {
         this.new_pop_list.forEach(it => {
           if (it.product_key === item.product_key) {
@@ -1839,7 +1862,7 @@ export default {
       //   it.status = 0;
       // });
       const res = await getComboListAPI();
-      if (res.status !== 1000 || !res.data.order_id) return;
+      if (res.status !== 1000 || !res.data.combine.order_id) return;
 
       const { sub_orders } = res.data.combine;
 
@@ -1848,20 +1871,42 @@ export default {
         this.all_list.forEach(it => {
           if (it.product_id === item.product_id) {
             arr_.push(it.product_key);
+            arr_.push({
+              product_key: it.product_key,
+              status: item.extra_ce_suan ? 1 : 0, // 0 未填写 ，1 已填写
+              product_id: item.product_id,
+            });
           }
         });
       });
-      console.log('arr_', arr_);
 
       arr_.forEach(item => {
         new_pop_list.forEach(it => {
-          if (it.product_key === item) {
-            this.payed_order_three_list.push(it);
+          if (it.product_key === item.product_key) {
+            let it_ = Object.assign({}, it);
+            it_.status = item.status;
+            it_.order_id = item.product_id;
+            this.payed_order_three_list.push(it_);
           }
         });
       });
       console.log(this.payed_order_three_list);
-      // this.payed_order_three_list = res.data;
+    },
+
+    toWriteInfo(item) {
+      console.log(item);
+
+      const { status, url, order_id } = item;
+      location.href = `${url}.html#/${
+        status ? 'result' : ''
+      }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
+    },
+
+    getSwiperWidth() {
+      let arr = document.querySelectorAll('.sale-item');
+      arr.forEach(it => {
+        it.style.width = '6.54rem';
+      });
     },
   },
 };
@@ -2830,13 +2875,9 @@ export default {
 }
 
 .w654 {
-  // width: 6.54rem !important;
-  // margin-right: -0.7rem;
+  width: 6.54rem !important;
 }
 
-.ml-100 {
-  // margin-left: 1rem;
-}
 .ml-0 {
   margin: 0 !important;
 }
