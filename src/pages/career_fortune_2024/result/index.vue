@@ -65,54 +65,56 @@ export default {
     );
     let report_price = +utils.getQueryStr('report_price');
     let report_status = utils.getQueryStr('status');
-    if (report_status === 'SUCCESS') {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'uxtpmw',
-          revenue: report_price,
-          currency: 'MYR',
-        });
-
-      utils.firebaseLogEvent(
-        '10004',
-        '-10007',
-        'event_status_2024career_pay_success',
-        'event_status',
-        {
-          args_name: 'event_status_2024career_pay_success',
-          channel: utils.getFBChannel(),
-        }
-      );
-      if (utils.isProd()) {
-        await utils.checkFB();
-        try {
-          fbq('track', 'Purchase', {
-            value: report_price.toFixed(2),
+    if (report_price) {
+      if (report_status === 'SUCCESS') {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 'uxtpmw',
+            revenue: report_price,
             currency: 'MYR',
           });
-        } catch (err) {
-          console.error('error message:', err);
-        }
-      }
-    } else {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 't9r87h',
-        });
-      utils.firebaseLogEvent(
-        '10004',
-        '-10008',
-        'event_status_2024career_pay_fail',
-        'event_status',
-        {
-          args_name: 'event_status_2024career_pay_fail',
-          channel: utils.getFBChannel(),
-        }
-      );
-    }
-    utils.resetPageUrl(this.order_id, report_status);
 
+        utils.firebaseLogEvent(
+          '10004',
+          '-10007',
+          'event_status_2024career_pay_success',
+          'event_status',
+          {
+            args_name: 'event_status_2024career_pay_success',
+            channel: utils.getFBChannel(),
+          }
+        );
+        if (utils.isProd()) {
+          await utils.checkFB();
+          try {
+            fbq('track', 'Purchase', {
+              value: report_price.toFixed(2),
+              currency: 'MYR',
+            });
+          } catch (err) {
+            console.error('error message:', err);
+          }
+        }
+      } else {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 't9r87h',
+          });
+        utils.firebaseLogEvent(
+          '10004',
+          '-10008',
+          'event_status_2024career_pay_fail',
+          'event_status',
+          {
+            args_name: 'event_status_2024career_pay_fail',
+            channel: utils.getFBChannel(),
+          }
+        );
+      }
+      utils.resetPageUrl(this.order_id, report_status);
+    }
     await this.checkResult();
+
     this.query();
   },
   computed: {},

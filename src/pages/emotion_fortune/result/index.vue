@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-16 13:39:54
+ * @LastEditTime: 2024-05-16 14:30:12
  * @Description: 
 -->
 <template>
@@ -102,7 +102,7 @@ export default {
     );
     let report_price = +utils.getQueryStr('report_price');
     let report_status = utils.getQueryStr('status');
-    if (report_price && report_status === 'SUCCESS') {
+    if (report_price) {
       if (report_status === 'SUCCESS') {
         window.Adjust &&
           window.Adjust.trackEvent({
