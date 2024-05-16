@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-10 15:00:55
+ * @LastEditTime: 2024-05-16 14:28:38
  * @Description: 
 -->
 <template>
@@ -195,6 +195,58 @@ export default {
     );
     window.scrollTo(0, 0);
     this.order_id = this.$route.query.order_id;
+
+    let report_price = +utils.getQueryStr('report_price');
+    let report_status = utils.getQueryStr('status');
+    if (report_price) {
+      if (report_status === 'PAYED') {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 'ygw32z',
+            revenue: report_price,
+            currency: 'MYR',
+          });
+
+        utils.firebaseLogEvent(
+          '10003',
+          '-10007',
+          'event_status_2024report_pay_success',
+          'event_status',
+          {
+            args_name: 'event_status_2024report_pay_success',
+            channel: utils.getFBChannel(),
+          }
+        );
+        if (utils.isProd()) {
+          await utils.checkFB();
+          try {
+            fbq('track', 'Purchase', {
+              value: report_price.toFixed(2),
+              currency: 'MYR',
+            });
+          } catch (err) {
+            console.error('error message:', err);
+          }
+        }
+      } else {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 'rxhrp5',
+          });
+        utils.firebaseLogEvent(
+          '10003',
+          '-10008',
+          'event_status_2024report_pay_fail',
+          'event_status',
+          {
+            args_name: 'event_status_2024report_pay_fail',
+            channel: utils.getFBChannel(),
+          }
+        );
+      }
+      utils.resetPageUrl(this.order_id, report_status);
+    }
+
     await this.checkResult();
     this.query();
   },
@@ -219,51 +271,6 @@ export default {
         const price = +localStorage.getItem('report_price');
         const { status } = res.data;
         const product_key = '2024_report';
-        if (status === 'PAYED') {
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: 'ygw32z',
-              revenue: price,
-              currency: 'MYR',
-            });
-
-          utils.firebaseLogEvent(
-            '10003',
-            '-10007',
-            'event_status_2024report_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024report_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-          if (utils.isProd()) {
-            await utils.checkFB();
-            try {
-              fbq('track', 'Purchase', {
-                value: price.toFixed(2),
-                currency: 'MYR',
-              });
-            } catch (err) {
-              console.error('error message:', err);
-            }
-          }
-        } else {
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: 'rxhrp5',
-            });
-          utils.firebaseLogEvent(
-            '10003',
-            '-10008',
-            'event_status_2024report_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024report_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
       }
       localStorage.removeItem('report_price');
       return res.status === 1000 ? 1 : 0;

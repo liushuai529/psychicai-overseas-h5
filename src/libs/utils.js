@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-16 14:08:00
+ * @LastEditTime: 2024-05-16 14:48:57
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1079,6 +1079,7 @@ const firebaseLogEvent = (
     return true;
   }
   analytics.logEvent(event_name, outer_obj);
+  console.log('firebase埋点上报执行');
 };
 
 // 判断字符串是否大于四位，如果超出四位，截取第一二位和最后两位，中间用...代替
@@ -1495,7 +1496,71 @@ const resetInitFB = () => {
   checkFB();
 };
 
+// 上报支付结果埋点
+
+const payResultEvent = async (
+  status,
+  ad_success_token,
+  price,
+  currency,
+  e_id,
+  c_s_d,
+  e_s_name,
+  e_type,
+
+  s_args,
+
+  ad_fail_token
+) => {
+  if (status === 'PAYED') {
+    try {
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          token: ad_success_token,
+          revenue: price,
+          currency: currency,
+        });
+    } catch (e) {
+      console.log('adjust error', e);
+    }
+    firebaseLogEvent(e_id, c_id, e_name, e_type, args);
+    if (isProd()) {
+      await utils.checkFB();
+      try {
+        fbq('track', 'Purchase', {
+          value: price.toFixed(2),
+          currency: 'MYR',
+        });
+      } catch (err) {
+        console.error('error message:', err);
+      }
+    }
+  } else {
+    try {
+      window.Adjust &&
+        window.Adjust.trackEvent({
+          eventToken: ad_fail_token,
+        });
+    } catch (e) {
+      console.log('adjust error', e);
+    }
+  }
+};
+
+const resetPageUrl = (order_id, status) => {
+  // 重置URL
+  let url = new URL(window.location.href);
+  let newUrl = url.origin + url.pathname;
+  history.pushState(
+    null,
+    '',
+    `${newUrl}#/result?order_id=${order_id}&status=${status}`
+  );
+};
+
 export default {
+  resetPageUrl,
+  payResultEvent,
   checkFB,
   fbEvent,
   getFBChannel,

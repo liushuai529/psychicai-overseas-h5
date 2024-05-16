@@ -80,6 +80,8 @@ export default {
     };
   },
   async mounted() {
+    window.scrollTo(0, 0);
+    this.order_id = this.$route.query.order_id;
     window.Adjust &&
       window.Adjust.trackEvent({
         eventToken: 'wuzcse',
@@ -95,8 +97,56 @@ export default {
         channel: utils.getFBChannel(),
       }
     );
-    window.scrollTo(0, 0);
-    this.order_id = this.$route.query.order_id;
+    let report_price = +utils.getQueryStr('report_price');
+    let report_status = utils.getQueryStr('status');
+    if (report_price) {
+      if (report_status === 'SUCCESS') {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: '26k5jm',
+            revenue: report_price,
+            currency: 'MYR',
+          });
+
+        utils.firebaseLogEvent(
+          '10008',
+          '-10007',
+          'event_status_64gua_pay_success',
+          'event_status',
+          {
+            args_name: 'event_status_64gua_pay_success',
+            channel: utils.getFBChannel(),
+          }
+        );
+        if (utils.isProd()) {
+          await utils.checkFB();
+          try {
+            fbq('track', 'Purchase', {
+              value: report_price.toFixed(2),
+              currency: 'MYR',
+            });
+          } catch (err) {
+            console.error('error message:', err);
+          }
+        }
+      } else {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: '67mmjr',
+          });
+        utils.firebaseLogEvent(
+          '10008',
+          '-10008',
+          'event_status_64gua_pay_fail',
+          'event_status',
+          {
+            args_name: 'event_status_64gua_pay_fail',
+            channel: utils.getFBChannel(),
+          }
+        );
+      }
+      utils.resetPageUrl(this.order_id, report_status);
+    }
 
     await this.checkResult();
     this.query();
@@ -133,51 +183,6 @@ export default {
         const price = +localStorage.getItem('report_price');
         const { status } = res.data;
         const product_key = '64gua_report';
-        if (status === 'PAYED') {
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: '26k5jm',
-              revenue: price,
-              currency: 'MYR',
-            });
-
-          utils.firebaseLogEvent(
-            '10008',
-            '-10007',
-            'event_status_64gua_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_64gua_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-          if (utils.isProd()) {
-            await utils.checkFB();
-            try {
-              fbq('track', 'Purchase', {
-                value: price.toFixed(2),
-                currency: 'MYR',
-              });
-            } catch (err) {
-              console.error('error message:', err);
-            }
-          }
-        } else {
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: '67mmjr',
-            });
-          utils.firebaseLogEvent(
-            '10008',
-            '-10008',
-            'event_status_64gua_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_64gua_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
       }
       localStorage.removeItem('report_price');
 

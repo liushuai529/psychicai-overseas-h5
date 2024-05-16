@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 11:34:10
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-10 15:01:47
+ * @LastEditTime: 2024-05-16 14:29:23
  * @Description: 
 -->
 <template>
@@ -196,6 +196,58 @@ export default {
     );
     let query = this.$route.query;
     this.adverTise_order = parseInt(query.order_id);
+    let report_price = +utils.getQueryStr('report_price');
+    let report_status = utils.getQueryStr('status');
+    if (report_price) {
+      if (report_status === 'SUCCESS') {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 's1u6sh',
+            revenue: report_price,
+            currency: 'MYR',
+          });
+
+        utils.firebaseLogEvent(
+          '10005',
+          '-10007',
+          'event_status_2024wealty_pay_success',
+          'event_status',
+          {
+            args_name: 'event_status_2024wealty_pay_success',
+            channel: utils.getFBChannel(),
+          }
+        );
+        if (utils.isProd()) {
+          await utils.checkFB();
+          try {
+            fbq('track', 'Purchase', {
+              value: report_price.toFixed(2),
+              currency: 'MYR',
+            });
+          } catch (err) {
+            console.error('error message:', err);
+          }
+        }
+      } else {
+        window.Adjust &&
+          window.Adjust.trackEvent({
+            eventToken: 'merbjw',
+          });
+        utils.firebaseLogEvent(
+          '10005',
+          '-10008',
+          'event_status_2024wealty_pay_fail',
+          'event_status',
+          {
+            args_name: 'event_status_2024wealty_pay_fail',
+            channel: utils.getFBChannel(),
+          }
+        );
+      }
+
+      utils.resetPageUrl(this.adverTise_order, report_status);
+    }
+
     await this.checkResult();
     this.getDetail(this.adverTise_order);
   },
@@ -220,51 +272,6 @@ export default {
         const price = +localStorage.getItem('report_price');
         const { status } = res.data;
         const product_key = '2024_wealty_report';
-        if (status === 'PAYED') {
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: 's1u6sh',
-              revenue: price,
-              currency: 'MYR',
-            });
-
-          utils.firebaseLogEvent(
-            '10005',
-            '-10007',
-            'event_status_2024wealty_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024wealty_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-          if (utils.isProd()) {
-            await utils.checkFB();
-            try {
-              fbq('track', 'Purchase', {
-                value: price.toFixed(2),
-                currency: 'MYR',
-              });
-            } catch (err) {
-              console.error('error message:', err);
-            }
-          }
-        } else {
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: 'merbjw',
-            });
-          utils.firebaseLogEvent(
-            '10005',
-            '-10008',
-            'event_status_2024wealty_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024wealty_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
       }
       localStorage.removeItem('report_price');
       return res.status === 1000 ? 1 : 0;
