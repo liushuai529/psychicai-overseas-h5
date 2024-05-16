@@ -174,7 +174,7 @@
             </div>
           </div>
           <div
-            @click="changeSale"
+            @click="changeSale(0)"
             class="pick-btn"
             :style="{ 'margin-top': three_list.length ? '0.3rem' : '0.52rem' }"
           >
@@ -269,7 +269,7 @@
           <div
             v-show="two_list.length"
             class="reset-select"
-            @click="new_sale_modal = true"
+            @click="new_sale_modal2 = true"
           >
             重新选择
           </div>
@@ -1501,16 +1501,20 @@ export default {
     new_sale_modal(val) {
       if (val) {
         this.getLocalChecked('three_list', 'mlxz_web_select_list');
+      } else {
+        this.pick_list = [];
       }
     },
     new_sale_modal2(val) {
       if (val) {
         this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
+      } else {
+        this.pick_list2 = [];
       }
     },
-    combine_index(val) {
-      this.getLocalChecked();
-    },
+    // combine_index(val) {
+    //   this.getLocalChecked();
+    // },
   },
   created() {
     let url_query = utils.getUrlParams();
@@ -2052,6 +2056,7 @@ export default {
               product_key: it.product_key,
               status: item.extra_ce_suan ? 1 : 0, // 0 未填写 ，1 已填写
               product_id: item.product_id,
+              order_id: item.order_id,
             });
           }
         });
@@ -2062,7 +2067,8 @@ export default {
           if (it.product_key === item.product_key) {
             let it_ = Object.assign({}, it);
             it_.status = item.status;
-            it_.order_id = item.product_id;
+            it_.product_id = item.product_id;
+            it_.order_id = item.order_id;
             this.payed_order_three_list.push(it_);
 
             // if (sub_orders.length == 2) {

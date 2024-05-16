@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-10 14:25:03
+ * @LastEditTime: 2024-05-16 19:50:53
  * @Description: 历史订单
 -->
 <template>
@@ -55,10 +55,12 @@
         </div>
         <div v-else class="order-list">
           <div
-            :class="[
-              'item',
-              item.product_key === 'h5_marriage' ? 'two-bg' : 'one-bg',
-            ]"
+            :class="{
+              item: true,
+              'two-bg': item.product_key === 'h5_marriage' && !item.can_write,
+              'one-bg': item.product_key !== 'h5_marriage' || item.can_write,
+            }"
+            :style="`height:${item.can_write ? '1.92rem' : ''}`"
             v-for="(item, k) in list"
             :key="'order' + k"
           >
@@ -70,10 +72,12 @@
               <div class="right">{{ $t('tips-4') }}{{ item.id }}</div>
             </div>
             <div
-              :class="[
-                'info',
-                item.product_key === 'h5_marriage' ? 'two-info' : 'one-info',
-              ]"
+              :class="{
+                info: !item.can_write,
+                'two-info':
+                  item.product_key === 'h5_marriage' && !item.can_write,
+                'one-info': item.product_key !== 'h5_marriage',
+              }"
             >
               <div v-if="item.ext.name || item.ext.male_name" class="left">
                 <div v-if="item.ext.name" class="one">
@@ -130,12 +134,21 @@
                   </div>
                 </div>
               </div>
-              <div v-else class="left">
+              <div v-else class="no-user">
+                <div class="left-box">
+                  <div class="one">{{ $t('tips-5') }}</div>
+                  <div class="tag">已解锁</div>
+                </div>
+                <div @click="handleJump(item)" class="right-btn">
+                  <div class="text">开始测算</div>
+                </div>
+              </div>
+              <!-- <div v-else class="left">
                 <div class="name color-999">{{ $t('tips-5') }}</div>
                 <div class="time color-999">{{ $t('tips-6') }}</div>
-              </div>
+              </div> -->
             </div>
-            <div class="code-box">
+            <div v-if="!item.can_write" class="code-box">
               <div
                 :class="['left', item.transfer_code ? '' : ' visible-hidden']"
               >
@@ -324,6 +337,11 @@ export default {
           : [...this.list, ...data.data_list];
       this.has_next = data.page_no >= data.total_page ? false : true;
 
+      this.list.forEach(it => {
+        if (!it.ext) {
+          it.can_write = true;
+        }
+      });
       this.is_empty = !this.list.length ? true : false;
       this.show_kf = true;
 
@@ -741,7 +759,7 @@ export default {
       margin: 0 0.2rem;
       .item {
         width: 7.1rem;
-        background-size: contain;
+        background-size: 100% 100%;
         margin-bottom: 0.2rem;
         overflow-x: hidden;
         .title-box {
@@ -874,9 +892,8 @@ export default {
   height: 0.6rem;
 }
 .right-1 {
-  // background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
-  background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
-  border: 2px solid #ffd192;
+  border: 0.02rem solid #e79999;
+  color: #e3453d;
 }
 .right-0,
 .right-2 {
@@ -890,5 +907,70 @@ export default {
 .cancel-btn {
   background: #f2e7d8;
   color: #ffffff;
+}
+
+.write-bg {
+  width: 7.1rem;
+  height: 1.92rem !important;
+  background: url('../../assets/img/common/home_img_card_dingdan.png') no-repeat;
+  background-size: contain !important;
+}
+
+.no-user {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 0 0.3rem;
+  .left-box {
+    width: 4.4rem;
+    height: 0.76rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #dcece5;
+    border-radius: 0.12rem;
+    padding: 0 0.24rem;
+    .one {
+      height: 0.28rem;
+      font-weight: 400;
+      font-size: 0.28rem;
+      color: #314a46;
+      line-height: 0.28rem;
+      margin-left: 0.24rem;
+      opacity: 0.7;
+    }
+    .tag {
+      width: 0.82rem;
+      height: 0.36rem;
+      background: #34c585;
+      font-size: 0.2rem;
+      color: #fff;
+      border-radius: 0.06rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.24rem;
+    }
+  }
+  .right-btn {
+    width: 1.44rem;
+    height: 0.68rem;
+    background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
+    border-radius: 0.16rem;
+    border: 0.02rem solid #ffd192;
+    font-weight: 600;
+    font-size: 0.28rem;
+    color: #fef8eb;
+    margin-left: 0.24rem;
+
+    .text {
+      width: 100%;
+      height: 100%;
+      border-radius: 0.16rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 </style>

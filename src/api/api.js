@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-16 15:24:53
+ * @LastEditTime: 2024-05-16 20:01:05
  * @Description:
  */
 export * from './fortune';
@@ -114,7 +114,11 @@ export const getBazihehunAPI = async data => {
 
 // 游客注册登录
 export const visitorLoginAPI = async data => {
-  if (localStorage.getItem('mlxz_outer_open_uid')) {
+  if (
+    localStorage.getItem('mlxz_outer_open_uid') ||
+    localStorage.getItem('mlxz_outer_access_token') ||
+    localStorage.getItem('mlxz_outer_visitor_id')
+  ) {
     return true;
   }
   const res = await request('/web/login/visitor', 'POST', data);

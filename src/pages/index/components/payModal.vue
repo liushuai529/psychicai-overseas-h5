@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-15 14:18:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-16 18:32:37
+ * @LastEditTime: 2024-05-16 19:56:44
  * @Description: 
 -->
 <template>
@@ -97,7 +97,6 @@ export default {
       if (!val) {
         this.$emit('close', false);
       } else {
-        console.log(this.combine_info);
         this.getPayMethod();
       }
     },
