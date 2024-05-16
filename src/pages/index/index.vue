@@ -597,6 +597,7 @@
       :combine_info="combine_info"
       @close="pay_modal = false"
       @resetInfo="combine_info = {}"
+      @logEvent="logEventForSort"
       key_store="mlxz_web_select_list"
     />
     <PayModal
@@ -604,6 +605,7 @@
       :combine_info="combine_info2"
       @close="pay_modal2 = false"
       @resetInfo="combine_info2 = {}"
+      @logEvent="logEventForSort"
       key_store="mlxz_web_select_list_two"
     />
   </div>
@@ -1902,7 +1904,10 @@ export default {
       });
       if (product_key) {
         let same_ = this.all_list.find(it => it.product_key === product_key);
-        await this.logEventForSort({ e_name, product_id: same_.product_id });
+        await this.logEventForSort({
+          e_name: 'content_click',
+          product_id: same_.product_id,
+        });
       }
 
       window.Adjust && window.Adjust.trackEvent({ eventToken: ad_e });
@@ -1934,7 +1939,7 @@ export default {
       this.combine_index = index;
     },
     // 打开选择弹窗
-    changeSale(val) {
+    async changeSale(val) {
       if (val) {
         if (this.two_list.length) {
           this.pay_modal2 = true;

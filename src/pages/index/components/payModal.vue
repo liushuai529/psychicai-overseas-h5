@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-15 14:18:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-16 20:23:52
+ * @LastEditTime: 2024-05-16 21:01:50
  * @Description: 
 -->
 <template>
@@ -78,6 +78,10 @@ export default {
       type: String,
       default: '',
     },
+    logEvent: {
+      type: Function,
+      default: () => {},
+    },
   },
   data() {
     return {
@@ -122,6 +126,12 @@ export default {
         this.pay_methods[this.check_index];
       const { price, unit, product_key, product_id, combine_product_ids } =
         this.combine_info;
+      let item_ = {
+        e_name: 'pay_click',
+        product_id,
+      };
+      this.$emit('logEvent', item_);
+
       let params = {
         pay_method,
         product_key,
