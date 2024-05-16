@@ -241,7 +241,7 @@ export default {
     margin: 0.24rem auto;
     .item {
       display: flex;
-      border-bottom: 1px solid rgb(0 0 0 / 12%);
+      border-bottom: 1px solid rgb(0 0 0 / 10%);
 
       padding-bottom: 0.24rem;
       margin-bottom: 0.24rem;
