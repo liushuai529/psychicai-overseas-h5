@@ -2729,6 +2729,7 @@ export default {
   .sale-item {
     width: 100%;
     height: 100%;
+    margin-right: 0.2rem;
     .item {
       width: 6.54rem !important;
       height: 4.08rem !important;
