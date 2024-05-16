@@ -1900,9 +1900,10 @@ export default {
         args_name: e_name,
         channel: utils.getFBChannel(),
       });
-      let same_ = this.all_list.find(it => it.product_key === product_key);
-
-      await this.logEventForSort({ e_name, product_id: same_.product_id });
+      if (product_key) {
+        let same_ = this.all_list.find(it => it.product_key === product_key);
+        await this.logEventForSort({ e_name, product_id: same_.product_id });
+      }
 
       window.Adjust && window.Adjust.trackEvent({ eventToken: ad_e });
       await utils.asleep(500);
