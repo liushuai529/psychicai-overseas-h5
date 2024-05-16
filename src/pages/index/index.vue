@@ -66,7 +66,10 @@
       :width="654"
     >
       <!-- <van-swipe-item :class="['sale-item', !combine_index ? '' : 'ml-130']"> -->
-      <van-swipe-item :class="['sale-item', 'w654']">
+      <van-swipe-item
+        v-if="payed_order_three_list.length"
+        :class="['sale-item', 'w654']"
+      >
         <div class="item">
           <div class="order-title">已解锁报告，快来查看！</div>
 
@@ -106,7 +109,10 @@
         </div>
       </van-swipe-item>
       <!-- <van-swipe-item :class="['sale-item', !combine_index ? '' : 'ml-130']"> -->
-      <van-swipe-item :class="['sale-item', 'w654']">
+      <van-swipe-item
+        v-if="payed_order_two_list.length"
+        :class="['sale-item', 'w654']"
+      >
         <div class="item">
           <div class="sale-title">多买多折扣2</div>
           <img
@@ -846,7 +852,8 @@ export default {
       noCheckIcon,
       pay_modal: false,
       combine_info: {},
-      payed_order_list: [],
+      payed_order_three_list: [],
+      payed_order_two_list: [],
     };
   },
   computed: {
@@ -1826,11 +1833,11 @@ export default {
     },
     // 获取已下单未填写订单信息
     async getPayedOrderList() {
-      this.payed_order_list = [];
-      this.payed_order_list = this.three_list;
-      this.payed_order_list.forEach(it => {
-        it.status = 0;
-      });
+      this.payed_order_three_list = [];
+      // this.payed_order_three_list = this.three_list;
+      // this.payed_order_three_list.forEach(it => {
+      //   it.status = 0;
+      // });
       const res = await getComboListAPI();
       if (res.status !== 1000 || !res.data.order_id) return;
 
@@ -1844,16 +1851,17 @@ export default {
           }
         });
       });
+      console.log('arr_', arr_);
 
       arr_.forEach(item => {
         new_pop_list.forEach(it => {
           if (it.product_key === item) {
-            this.payed_order_list.push(it);
+            this.payed_order_three_list.push(it);
           }
         });
       });
-      console.log(this.payed_order_list);
-      // this.payed_order_list = res.data;
+      console.log(this.payed_order_three_list);
+      // this.payed_order_three_list = res.data;
     },
   },
 };
