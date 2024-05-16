@@ -167,8 +167,8 @@ const str_list1 = {
   'zh-TW': '人已購買',
 };
 const str_list2 = {
-  'zh-CN': '条评论',
-  'zh-TW': '條評論',
+  'zh-CN': '好评',
+  'zh-TW': '好評',
 };
 export default {
   name: 'HotProduct',

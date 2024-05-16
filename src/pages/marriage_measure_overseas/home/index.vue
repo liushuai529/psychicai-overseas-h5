@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-15 19:25:19
+ * @LastEditTime: 2024-05-16 11:57:34
  * @Description: 八字合婚
 -->
 <template>
@@ -430,13 +430,13 @@ export default {
         location.href = url;
         return;
       }
-      if (
-        !/^[\u4e00-\u9fa5]+$/g.test(this.male.username) ||
-        !/^[\u4e00-\u9fa5]+$/g.test(this.female.username)
-      ) {
-        location.href = url;
-        return;
-      }
+      // if (
+      //   !/^[\u4e00-\u9fa5]+$/g.test(this.male.username) ||
+      //   !/^[\u4e00-\u9fa5]+$/g.test(this.female.username)
+      // ) {
+      //   location.href = url;
+      //   return;
+      // }
       if (this.male.picker_date_obj == null) {
         location.href = url;
         return;
@@ -517,19 +517,24 @@ export default {
       let gongli_nongli = this.gongli_nongli;
       if (this.male.username == '') {
         Toast(this.$t('male-name-check'));
+        let dom = document.getElementById('maleusername');
+        dom.focus();
         return;
       }
       if (this.female.username == '') {
         Toast(this.$t('female-name-check'));
+        let dom2 = document.getElementById('femaleusername');
+        dom2.focus();
         return;
       }
-      if (
-        !/^[\u4e00-\u9fa5]+$/g.test(this.male.username) ||
-        !/^[\u4e00-\u9fa5]+$/g.test(this.female.username)
-      ) {
-        Toast(this.$t('chinese-name-check'));
-        return;
-      }
+
+      // if (
+      //   !/^[\u4e00-\u9fa5]+$/g.test(this.male.username) ||
+      //   !/^[\u4e00-\u9fa5]+$/g.test(this.female.username)
+      // ) {
+      //   Toast(this.$t('chinese-name-check'));
+      //   return;
+      // }
       if (this.male.picker_date_obj == null) {
         Toast(this.$t('male-date-check'));
         return;

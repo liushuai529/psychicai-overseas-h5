@@ -117,7 +117,6 @@ export default {
       }
     },
     maleusername(newV, oldV) {
-      console.log('2', newV);
       // this.$parent.male.username = newV;
       if (newV) {
         let new_ = newV.trim();
@@ -133,6 +132,9 @@ export default {
         if (new_.length > 20) {
           this.$parent.male.username = new_.slice(0, 20);
           this.maleusername = new_.slice(0, 20);
+        } else {
+          this.$parent.male.username = newV;
+          this.maleusername = newV;
         }
       }
     },
@@ -152,6 +154,9 @@ export default {
         if (new_.length > 20) {
           this.$parent.female.username = new_.slice(0, 20);
           this.femaleusername = new_.slice(0, 20);
+        } else {
+          this.$parent.female.username = newV;
+          this.femaleusername = newV;
         }
       }
     },
