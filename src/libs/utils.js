@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-16 12:48:35
+ * @LastEditTime: 2024-05-16 14:08:00
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1072,13 +1072,13 @@ const firebaseLogEvent = (
     device_id: getDeviceId() || '',
     args: args_,
   };
+  console.log('----firebase start-----');
+  console.log('这是firebase埋点', JSON.stringify(outer_obj));
+  console.log('----firebase end-----');
   if (!isProd()) {
     return true;
   }
   analytics.logEvent(event_name, outer_obj);
-  console.log('----firebase start-----');
-  console.log('这是firebase埋点', JSON.stringify(outer_obj));
-  console.log('----firebase end-----');
 };
 
 // 判断字符串是否大于四位，如果超出四位，截取第一二位和最后两位，中间用...代替
