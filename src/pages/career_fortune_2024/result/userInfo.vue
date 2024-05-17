@@ -10,7 +10,7 @@
 
         <BaziTable
           :sex="extra_ce_suan.sex"
-          :is_result="false"
+          :is_result="true"
           :username="extra_ce_suan.name"
           :gongli_nongli="gongli_nongli"
           :picker_date_yangli="picker_date_yangli"

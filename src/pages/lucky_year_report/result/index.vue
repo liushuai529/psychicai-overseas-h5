@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 11:34:10
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 11:57:24
+ * @LastEditTime: 2024-05-17 12:00:07
  * @Description: 
 -->
 <template>
@@ -17,7 +17,7 @@
       <img class="word3" :src="is_cn ? cn_word3 : tw_word3" alt="" />
       <BaziTable
         :sex="userInfo.sex"
-        :is_result="false"
+        :is_result="true"
         :username="userInfo.name"
         :gongli_nongli="gongli_nongli"
         :picker_date_yangli="picker_date_yangli"
