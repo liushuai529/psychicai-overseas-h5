@@ -58,6 +58,9 @@
       </div>
     </div>
     <!-- 新版多买多折扣 -->
+    <!-- <div class="empty-loading">
+      <mt-spinner color="#26a2ff" :size="60" type="fading-circle"></mt-spinner>
+    </div> -->
     <van-swipe
       :loop="false"
       :show-indicators="false"
@@ -207,7 +210,6 @@
       <van-swipe-item
         :class="{
           'sale-item': true,
-          // 'ml-100': !payed_order_three_list.length && combine_index === 1,
         }"
       >
         <div class="item" id="card-item">
@@ -521,7 +523,11 @@
           >
             <div class="btn">确定</div>
           </div>
-          <div v-else class="right-common disable-right">
+          <div
+            v-else
+            @click="ToastSubmit('三')"
+            class="right-common disable-right"
+          >
             <div class="btn">确定</div>
           </div>
         </div>
@@ -571,7 +577,11 @@
           >
             <div class="btn">确定</div>
           </div>
-          <div v-else class="right-common disable-right">
+          <div
+            v-else
+            @click="ToastSubmit('两')"
+            class="right-common disable-right"
+          >
             <div class="btn">确定</div>
           </div>
         </div>
@@ -611,6 +621,7 @@
       @close="pay_modal = false"
       @resetInfo="combine_info = {}"
       @logEvent="logEventForSort"
+      :pay_index="3"
       key_store="mlxz_web_select_list"
     />
     <PayModal
@@ -619,6 +630,7 @@
       @close="pay_modal2 = false"
       @resetInfo="combine_info2 = {}"
       @logEvent="logEventForSort"
+      :pay_index="2"
       key_store="mlxz_web_select_list_two"
     />
   </div>
@@ -632,7 +644,7 @@ import Fortune from './fortune.vue';
 import utils from '../../libs/utils';
 import PayPopup from '../../components/PayPopup.vue';
 
-import { Toast, Indicator } from 'mint-ui';
+import { Toast, Indicator, Spinner } from 'mint-ui';
 import PopResult from './pay_result.vue';
 import { getResultAPI } from '../../api/api';
 import { getProductions } from '../../libs/common_api';
@@ -1534,7 +1546,7 @@ export default {
     new_sale_modal(val) {
       if (val) {
         this.getLocalChecked('three_list', 'mlxz_web_select_list');
-        this.pick_list = this.three_list;
+        this.pick_list = JSON.parse(JSON.stringify(this.three_list));
       } else {
         this.pick_list = [];
       }
@@ -1542,7 +1554,7 @@ export default {
     new_sale_modal2(val) {
       if (val) {
         this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
-        this.pick_list2 = this.two_list;
+        this.pick_list2 = JSON.parse(JSON.stringify(this.two_list));
       } else {
         this.pick_list2 = [];
       }
@@ -1555,6 +1567,7 @@ export default {
     let url_query = utils.getUrlParams();
     let order_id = url_query.order_id;
     let pay_status = url_query.status;
+    let pay_index = url_query.pay_index;
     this.getLocalChecked('three_list', 'mlxz_web_select_list');
     this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
     this.randomBuyList();
@@ -1562,9 +1575,12 @@ export default {
     getProductionsAPI('ceh5').then(res => {
       this.all_list = res.data;
       this.getSelectTagList();
-      this.getSelectTagList(2);
-      order_id && pay_status === 'SUCCESS' && this.getPayedOrderList();
-
+      this.getPayedOrderList();
+      if (order_id && pay_status === 'SUCCESS') {
+        localStorage.removeItem(
+          pay_index === 3 ? 'mlxz_web_select_list' : 'mlxz_web_select_list_two'
+        );
+      }
       this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
     });
   },
@@ -1946,7 +1962,6 @@ export default {
     },
     // 切换轮播组
     getCombineIndex(index) {
-      console.log(index);
       if (this.payed_order_three_list.length) {
         this.combine_index = index - 1;
       } else {
@@ -1974,12 +1989,15 @@ export default {
     getDeleteIndex(list, key) {
       return list.findIndex(item => item.product_key === key);
     },
+    ToastSubmit(val) {
+      Toast(`请选择${val}项报告`);
+    },
 
     // 选择商品
     chooseNewSale(it, k, val, key = 'pick_list') {
       if (this[key].length >= (val ? 2 : 3)) {
         if (!it.checked) {
-          Toast(`最多选择${val ? 2 : 3}个商品`);
+          Toast(`最多选择${val ? '两' : '三'}项报告`);
           return;
         } else {
           this.new_pop_list[k].checked = !this.new_pop_list[k].checked;
@@ -2083,6 +2101,7 @@ export default {
     // 获取已下单未填写订单信息
     async getPayedOrderList() {
       this.payed_order_three_list = [];
+
       const res = await getComboListAPI();
 
       if (res.status !== 1000 || !res.data.combine) return;
@@ -3139,5 +3158,11 @@ export default {
 .ml-170 {
   margin-left: 1.7rem !important;
 }
-// 判断是否有已支付订单 如果有 则是三个轮播item ，再看当前的轮播index
+.empty-loading {
+  width: 7.5rem;
+  height: 4.08rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>

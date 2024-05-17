@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 13:52:21
+ * @LastEditTime: 2024-05-17 16:43:52
  * @Description: 历史订单
 -->
 <template>
@@ -639,6 +639,7 @@ export default {
   background: #d2e7de;
   padding-bottom: 0.3rem;
   padding-top: 0.3rem;
+  z-index: 10;
   .order-icon {
     width: 4.16rem;
     height: 0.8rem;
