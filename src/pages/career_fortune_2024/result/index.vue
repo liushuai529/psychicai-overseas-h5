@@ -65,7 +65,9 @@ export default {
     );
     let report_price = +utils.getQueryStr('report_price');
     let report_status = utils.getQueryStr('status');
-    if (report_price) {
+    let set_time = +localStorage.getItem('mlxz_set_event_times');
+
+    if (report_price && !set_time) {
       if (report_status === 'SUCCESS') {
         window.Adjust &&
           window.Adjust.trackEvent({
@@ -111,6 +113,8 @@ export default {
           }
         );
       }
+      localStorage.setItem('mlxz_set_event_times', 1);
+
       utils.resetPageUrl(this.order_id, report_status);
     }
     await this.checkResult();

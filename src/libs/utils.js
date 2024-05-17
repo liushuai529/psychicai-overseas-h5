@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-16 14:48:57
+ * @LastEditTime: 2024-05-17 11:32:56
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1556,6 +1556,7 @@ const resetPageUrl = (order_id, status) => {
     '',
     `${newUrl}#/result?order_id=${order_id}&status=${status}`
   );
+  // history.replaceState('', '', newUrl);
 };
 
 export default {
