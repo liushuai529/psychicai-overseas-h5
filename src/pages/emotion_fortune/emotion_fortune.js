@@ -1,3 +1,10 @@
+/*
+ * @Author: wujiang@weli.cn
+ * @Date: 2024-05-07 21:03:37
+ * @LastEditors: wujiang
+ * @LastEditTime: 2024-05-17 11:53:17
+ * @Description:
+ */
 import Vue from 'vue';
 import App from './emotion_fortune.vue';
 import router from '../../router/emotion_fortune.js';

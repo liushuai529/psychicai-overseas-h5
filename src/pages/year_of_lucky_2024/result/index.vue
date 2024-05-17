@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-16 15:03:39
+ * @LastEditTime: 2024-05-17 11:55:54
  * @Description: 
 -->
 <template>
@@ -198,7 +198,9 @@ export default {
 
     let report_price = +utils.getQueryStr('report_price');
     let report_status = utils.getQueryStr('status');
-    if (report_price) {
+    let set_time = +localStorage.getItem('mlxz_set_event_times');
+
+    if (report_price && !set_time) {
       if (report_status === 'SUCCESS') {
         window.Adjust &&
           window.Adjust.trackEvent({
@@ -244,6 +246,8 @@ export default {
           }
         );
       }
+      localStorage.setItem('mlxz_set_event_times', 1);
+
       utils.resetPageUrl(this.order_id, report_status);
     }
 
