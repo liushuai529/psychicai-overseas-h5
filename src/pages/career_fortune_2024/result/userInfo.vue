@@ -154,6 +154,7 @@ export default {
     formateQueryUserInfo() {
       let { birth_hour, birth_year, birth_month, birth_date, is_gongli } =
         this.extra_ce_suan;
+      this.gongli_nongli = +is_gongli;
       this.picker_hour = utils.formateNongliHour(birth_hour);
       let android_date = `${birth_year}-${birth_month}-${birth_date}`;
       let ios_date = `${birth_year}/${birth_month}/${birth_date}`;

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 11:34:10
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 12:00:07
+ * @LastEditTime: 2024-05-17 19:15:57
  * @Description: 
 -->
 <template>
@@ -16,7 +16,7 @@
     <div class="info-box">
       <img class="word3" :src="is_cn ? cn_word3 : tw_word3" alt="" />
       <BaziTable
-        :sex="userInfo.sex"
+        :sex="sex"
         :is_result="true"
         :username="userInfo.name"
         :gongli_nongli="gongli_nongli"
@@ -211,6 +211,7 @@ export default {
       cn_code_btn:
         'https://psychicai-static.psychicai.pro/imgs/240454546072b63847a9aad72a93359f78f7.png',
       tw_code_btn,
+      sex: '',
       gan: ['-', '-', '-', '-'],
       zhi: ['-', '-', '-', '-'],
       nayin: ['-', '-', '-', '-'],
@@ -362,6 +363,7 @@ export default {
           this.fortune.transfer_code = res.data.transfer_code;
           if (res.data.extra_ce_suan) {
             this.extra_ce_suan = res.data.extra_ce_suan;
+
             this.formateQueryUserInfo();
             this.getUserBazi(res);
           }
@@ -398,7 +400,7 @@ export default {
      * @return {*}
      */
     async getUserBazi(res) {
-      if (res.data.result && res.data.result.gazi) {
+      if (res.data.result && res.data.result.bazi) {
         this.getMinggeInfo(res.data.result.bazi);
         return;
       }
@@ -474,6 +476,7 @@ export default {
       } = this.extra_ce_suan;
       this.username = eval("'" + name + "'");
       this.sex = sex;
+      this.sex = ['1', 'male'].includes(sex) ? '1' : '0';
       this.picker_hour = utils.formateNongliHour(birth_hour);
       let android_date = `${birth_year}-${birth_month}-${birth_date}`;
       let ios_date = `${birth_year}/${birth_month}/${birth_date}`;
@@ -481,6 +484,7 @@ export default {
         new Date(utils.isAndroid() ? android_date : ios_date)
       );
       let lunar = solar.getLunar();
+      this.gongli_nongli = +is_gongli;
       this.picker_date_nongli = +is_gongli
         ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${
             this.picker_hour

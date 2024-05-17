@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 11:57:00
+ * @LastEditTime: 2024-05-17 18:54:15
  * @Description: 
 -->
 <template>
@@ -403,6 +403,7 @@ export default {
       } = this.extra_ce_suan;
       this.username = eval("'" + name + "'");
       this.sex = sex;
+      this.gongli_nongli = +is_gongli;
       this.picker_hour = utils.formateNongliHour(birth_hour);
       let android_date = `${birth_year}-${birth_month}-${birth_date}`;
       let ios_date = `${birth_year}/${birth_month}/${birth_date}`;
