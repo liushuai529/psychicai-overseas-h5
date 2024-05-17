@@ -63,11 +63,14 @@
       :show-indicators="false"
       class="discount-box"
       @change="getCombineIndex"
-      width="6.54rem"
     >
       <van-swipe-item
         v-if="payed_order_three_list.length"
-        :class="['sale-item', 'w654']"
+        :class="{
+          'sale-item': true,
+          'ml-100': combine_index === 0,
+          'ml-170': combine_index === 1,
+        }"
       >
         <div class="item">
           <div class="order-title">已解锁报告，快来查看！</div>
@@ -116,7 +119,12 @@
         </div>
       </van-swipe-item>
 
-      <van-swipe-item :class="['sale-item', 'w654']">
+      <van-swipe-item
+        :class="{
+          'sale-item': true,
+          'ml-100': !payed_order_three_list.length && combine_index !== 0,
+        }"
+      >
         <div class="item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
@@ -199,11 +207,10 @@
       <van-swipe-item
         :class="{
           'sale-item': true,
-          w654: true,
-          'ml-100': !payed_order_three_list.length && combine_index === 1,
+          // 'ml-100': !payed_order_three_list.length && combine_index === 1,
         }"
       >
-        <div class="item">
+        <div class="item" id="card-item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
             <div v-if="combine_info2.price" class="new-price">
@@ -1010,6 +1017,7 @@ export default {
       item_index: 0,
       new_sale_modal2: false,
       pay_modal2: false,
+      width_dom: 0,
     };
   },
   computed: {
@@ -1916,7 +1924,6 @@ export default {
       window.Adjust && window.Adjust.trackEvent({ eventToken: ad_e });
       await utils.asleep(500);
       location.href = `${url}.html`;
-      // window.open(`${url}.html`, '_blank');
     },
     getReportItem(index) {
       this.cur_index = index;
@@ -2081,7 +2088,7 @@ export default {
       if (res.status !== 1000 || !res.data.combine) return;
 
       const { sub_orders } = res.data.combine;
-      if (this.payed_order_three_list.length) {
+      if (sub_orders.length) {
         this.combine_index = this.combine_index - 1;
       }
 
@@ -2117,9 +2124,15 @@ export default {
       console.log(item);
 
       const { status, url, order_id } = item;
-      location.href = `${url}.html#/${
-        status ? 'result' : ''
-      }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
+      // location.href = `${url}.html#/${
+      //   status ? 'result' : ''
+      // }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
+      window.open(
+        `${location.origin}/${url}.html#/${
+          status ? 'result' : ''
+        }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`,
+        '_self'
+      );
     },
     // 事件排序
     async logEventForSort(it) {
@@ -2735,7 +2748,7 @@ export default {
   margin: 0.4rem auto 0.2rem;
   // padding-left: 0.2em;
   .sale-item {
-    width: 100%;
+    width: 6.54rem !important;
     height: 100%;
     // margin-right: 0.2rem;
     margin-left: 0.2rem;
@@ -3123,6 +3136,8 @@ export default {
 .ml-100 {
   margin-left: 1rem !important;
 }
-
+.ml-170 {
+  margin-left: 1.7rem !important;
+}
 // 判断是否有已支付订单 如果有 则是三个轮播item ，再看当前的轮播index
 </style>
