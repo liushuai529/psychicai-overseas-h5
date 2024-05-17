@@ -161,7 +161,11 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
-    <HotProduct product_key="h5_emotion2024" url="emotion_fortune" />
+    <HotProduct
+      product_key="h5_emotion2024"
+      url="emotion_fortune"
+      e_id="10006"
+    />
     <!-- <div class="footer-box"></div> -->
     <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
   </div>
@@ -713,7 +717,18 @@ export default {
       return params;
     },
 
-    backHome() {
+    async backHome() {
+      utils.firebaseLogEvent(
+        '10006',
+        '-10011',
+        'click_2024lovely_main_home',
+        'click',
+        {
+          args_name: 'click_2024lovely_main_home',
+          channel: utils.getFBChannel(),
+        }
+      );
+      await utils.asleep(500);
       location.href = 'index.html';
     },
   },

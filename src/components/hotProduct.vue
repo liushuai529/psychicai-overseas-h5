@@ -68,6 +68,10 @@ const all_list = [
     e_name: 'click_report_marriage',
     ad_e: '8g4xt8',
     report_id: '60005',
+    hot: {
+      c_id: '-10015',
+      e_name: 'click_report_marriage_recommend',
+    },
   },
   {
     id: 4,
@@ -83,6 +87,10 @@ const all_list = [
     e_name: 'click_report_2024lovely',
     ad_e: 'efy9t0',
     report_id: '60010',
+    hot: {
+      c_id: '',
+      e_name: '',
+    },
   },
   {
     id: 3,
@@ -99,6 +107,10 @@ const all_list = [
     e_name: 'click_report_2024report',
     ad_e: 'oqfzzs',
     report_id: '60009',
+    hot: {
+      c_id: '-10012',
+      e_name: 'click_report_2024report_recommend',
+    },
   },
   {
     id: 6,
@@ -114,6 +126,10 @@ const all_list = [
     e_name: 'click_report_2024wealty',
     ad_e: 'egm8a2',
     report_id: '60001',
+    hot: {
+      c_id: '-10014',
+      e_name: 'click_report_2024wealty_recommend',
+    },
   },
   {
     id: 5,
@@ -129,6 +145,10 @@ const all_list = [
     e_name: 'click_report_2024career',
     ad_e: 'tzsnzi',
     report_id: '60011',
+    hot: {
+      c_id: '-10013',
+      e_name: 'click_report_2024career_recommend',
+    },
   },
   {
     id: 2,
@@ -144,6 +164,10 @@ const all_list = [
     e_name: 'click_report_64gua',
     ad_e: 'jd4oen',
     report_id: '60003',
+    hot: {
+      c_id: '-10016',
+      e_name: 'click_report_64gua_recommend',
+    },
   },
   {
     id: 1,
@@ -159,6 +183,10 @@ const all_list = [
     e_name: 'click_report_chenggu',
     ad_e: 'kajqs3',
     report_id: '60002',
+    hot: {
+      c_id: '-10017',
+      e_name: 'click_report_chenggu_recommend',
+    },
   },
 ];
 
@@ -178,6 +206,10 @@ export default {
       default: '',
     },
     url: {
+      type: String,
+      default: '',
+    },
+    e_id: {
       type: String,
       default: '',
     },
@@ -201,12 +233,22 @@ export default {
   },
   methods: {
     // Your methods go here
-    jumpPage(item) {
+    async jumpPage(item) {
+      utils.firebaseLogEvent(
+        this.e_id,
+        item.hot.c_id,
+        item.hot.e_name,
+        'click',
+        {
+          args_name: item.hot.e_name,
+          channel: utils.getFBChannel(),
+        }
+      );
+      await utils.asleep(500);
       location.href = item.url + '.html';
     },
   },
   mounted() {
-    console.log(this.show_list);
     // Code to run when the component is mounted goes here
   },
 };
