@@ -733,7 +733,7 @@ export default {
       if (!check_event && utils.isProd()) {
         location.href = 'index.html';
       } else {
-        window.open(item.url + '.html', '_blank');
+        window.open(index.html + '.html', '_blank');
       }
     },
   },
