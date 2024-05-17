@@ -1567,20 +1567,23 @@ export default {
     let url_query = utils.getUrlParams();
     let order_id = url_query.order_id;
     let pay_status = url_query.status;
-    let pay_index = url_query.pay_index;
-    this.getLocalChecked('three_list', 'mlxz_web_select_list');
-    this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
+    let pay_index = +url_query.pay_index;
+    let remove_flag = +localStorage.getItem('mlxz_remove_flag'); // 1:已经删除 ,2:未删除
+
     this.randomBuyList();
     document.title = this.$t('dom-title');
     getProductionsAPI('ceh5').then(res => {
       this.all_list = res.data;
-      this.getSelectTagList();
-      this.getPayedOrderList();
-      if (order_id && pay_status === 'SUCCESS') {
+      if (order_id && pay_status === 'SUCCESS' && remove_flag === 2) {
         localStorage.removeItem(
           pay_index === 3 ? 'mlxz_web_select_list' : 'mlxz_web_select_list_two'
         );
+        localStorage.setItem('mlxz_remove_flag', 1);
       }
+      this.getSelectTagList();
+      this.getPayedOrderList();
+      this.getLocalChecked('three_list', 'mlxz_web_select_list');
+      this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
       this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
     });
   },
@@ -1595,7 +1598,7 @@ export default {
     });
   },
   beforeDestroy() {
-    this.pay_result_visible = false;
+    // this.pay_result_visible = false;
   },
   methods: {
     getProductions,

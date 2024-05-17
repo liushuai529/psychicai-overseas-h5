@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-15 14:18:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 16:32:54
+ * @LastEditTime: 2024-05-17 17:15:24
  * @Description: 
 -->
 <template>
@@ -149,6 +149,7 @@ export default {
           location.origin + location.pathname + '?pay_index=' + this.pay_index,
       };
       const res = await payOrderAPI(params);
+      localStorage.setItem('mlxz_remove_flag', 2);
       Indicator.close();
       if (res.status !== 1000) return;
       await utils.asleep(1000);
