@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-16 19:50:53
+ * @LastEditTime: 2024-05-17 13:52:21
  * @Description: 历史订单
 -->
 <template>
@@ -338,8 +338,10 @@ export default {
       this.has_next = data.page_no >= data.total_page ? false : true;
 
       this.list.forEach(it => {
-        if (!it.ext) {
-          it.can_write = true;
+        if (it.product_key === 'h5_marriage') {
+          it.can_write = !it.ext.male_name ? true : false;
+        } else {
+          it.can_write = !it.ext.name ? true : false;
         }
       });
       this.is_empty = !this.list.length ? true : false;
