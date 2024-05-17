@@ -1568,6 +1568,7 @@ export default {
     let order_id = url_query.order_id;
     let pay_status = url_query.status;
     let pay_index = +url_query.pay_index;
+
     let remove_flag = +localStorage.getItem('mlxz_remove_flag'); // 1:已经删除 ,2:未删除
 
     this.randomBuyList();
@@ -1587,7 +1588,7 @@ export default {
       this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
     });
   },
-  async mounted() {
+  mounted() {
     window.Adjust &&
       window.Adjust.trackEvent({
         eventToken: 'sogk80',
@@ -1596,9 +1597,18 @@ export default {
       args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
     });
+
+    setInterval(() => {
+      let is_reload = localStorage.getItem('wlxz_reload_page');
+      if (is_reload) {
+        localStorage.removeItem('wlxz_reload_page');
+        this.payed_order_three_list = [];
+        this.getPayedOrderList();
+      }
+    }, 1000);
   },
   beforeDestroy() {
-    // this.pay_result_visible = false;
+    console.log('destory');
   },
   methods: {
     getProductions,
@@ -2107,7 +2117,11 @@ export default {
 
       const res = await getComboListAPI();
 
-      if (res.status !== 1000 || !res.data.combine) return;
+      if (res.status !== 1000 || !res.data.combine) {
+        this.payed_order_three_list = [];
+        this.combine_index = 0;
+        return;
+      }
 
       const { sub_orders } = res.data.combine;
       if (sub_orders.length) {
@@ -2143,12 +2157,11 @@ export default {
     },
 
     toWriteInfo(item) {
-      console.log(item);
-
       const { status, url, order_id } = item;
       // location.href = `${url}.html#/${
       //   status ? 'result' : ''
       // }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
+      localStorage.setItem('wlxz_reload_page', 1);
       window.open(
         `${location.origin}/${url}.html#/${
           status ? 'result' : ''
