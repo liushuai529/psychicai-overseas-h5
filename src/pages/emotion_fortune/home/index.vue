@@ -161,7 +161,11 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
-    <HotProduct product_key="h5_emotion2024" url="emotion_fortune" />
+    <HotProduct
+      product_key="h5_emotion2024"
+      url="emotion_fortune"
+      e_id="10006"
+    />
     <!-- <div class="footer-box"></div> -->
     <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
   </div>
@@ -729,7 +733,7 @@ export default {
       if (!check_event && utils.isProd()) {
         location.href = 'index.html';
       } else {
-        window.open(item.url + '.html', '_blank');
+        window.open('index.html', '_blank');
       }
     },
   },

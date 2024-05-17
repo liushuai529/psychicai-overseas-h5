@@ -209,6 +209,10 @@ export default {
       type: String,
       default: '',
     },
+    e_id: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -251,7 +255,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.show_list);
     // Code to run when the component is mounted goes here
   },
 };
