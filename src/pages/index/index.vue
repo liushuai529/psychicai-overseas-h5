@@ -196,7 +196,13 @@
         </div>
       </van-swipe-item>
       <!-- 两项选择 -->
-      <van-swipe-item :class="{ 'sale-item': true, w654: true }">
+      <van-swipe-item
+        :class="{
+          'sale-item': true,
+          w654: true,
+          'ml-100': !payed_order_three_list.length && combine_index === 1,
+        }"
+      >
         <div class="item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
