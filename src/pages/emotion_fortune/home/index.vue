@@ -728,8 +728,13 @@ export default {
           channel: utils.getFBChannel(),
         }
       );
-      await utils.asleep(500);
-      location.href = 'index.html';
+      await utils.asleep(600);
+      let check_event = utils.getQueryStr('check_event');
+      if (!check_event && utils.isProd()) {
+        location.href = 'index.html';
+      } else {
+        window.open(item.url + '.html', '_blank');
+      }
     },
   },
 };
