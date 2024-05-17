@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-16 11:57:34
+ * @LastEditTime: 2024-05-17 14:05:53
  * @Description: 八字合婚
 -->
 <template>
@@ -614,12 +614,12 @@ export default {
         let paypopup = this.$refs.PayPopup;
         paypopup.combinePay(main_order_id, this.product_id, querystring);
       } else {
-        let { has_pay, order_id, product_key } = this.$route.query;
+        let { has_pay, order_id } = this.$route.query;
         if (has_pay) {
           if (has_pay === 'SUCCESS') {
             getPayOrderInfoAPI(
               order_id,
-              this.getExtra(product_key, querystring)
+              this.getExtra('h5_marriage', querystring)
             ).then(res => {
               if (res.data) {
                 this.$router.push({

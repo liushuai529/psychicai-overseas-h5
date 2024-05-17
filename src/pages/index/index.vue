@@ -57,6 +57,7 @@
         />
       </div>
     </div>
+    {{ combine_index }}
     <!-- 新版多买多折扣 -->
     <van-swipe
       :loop="false"
@@ -1564,8 +1565,6 @@ export default {
       args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
     });
-    console.log(this.pick_list);
-    console.log(this.three_list);
   },
   beforeDestroy() {
     this.pay_result_visible = false;
@@ -1936,7 +1935,7 @@ export default {
     },
     // 切换轮播组
     getCombineIndex(index) {
-      this.combine_index = index;
+      this.combine_index = index - 1;
     },
     // 打开选择弹窗
     async changeSale(val) {
@@ -2730,11 +2729,12 @@ export default {
   width: 7.5rem;
   height: 4.08rem;
   margin: 0.4rem auto 0.2rem;
-  padding-left: 0.2em;
+  // padding-left: 0.2em;
   .sale-item {
     width: 100%;
     height: 100%;
-    margin-right: 0.2rem;
+    // margin-right: 0.2rem;
+    margin-left: 0.2rem;
     .item {
       width: 6.54rem !important;
       height: 4.08rem !important;
@@ -3115,4 +3115,10 @@ export default {
   align-items: center;
   margin-top: 0.3rem;
 }
+
+.ml-100 {
+  margin-left: 1rem !important;
+}
+
+// 判断是否有已支付订单 如果有 则是三个轮播item ，再看当前的轮播index
 </style>
