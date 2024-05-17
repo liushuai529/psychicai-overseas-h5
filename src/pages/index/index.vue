@@ -57,7 +57,6 @@
         />
       </div>
     </div>
-    {{ combine_index }}
     <!-- 新版多买多折扣 -->
     <van-swipe
       :loop="false"
@@ -197,7 +196,7 @@
         </div>
       </van-swipe-item>
       <!-- 两项选择 -->
-      <van-swipe-item :class="['sale-item', 'w654']">
+      <van-swipe-item :class="{ 'sale-item': true, w654: true }">
         <div class="item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
@@ -1001,7 +1000,6 @@ export default {
       // 两个
       combine_info2: {},
       two_list: [],
-      payed_order_two_list: [],
       pick_list2: [],
       item_index: 0,
       new_sale_modal2: false,
@@ -1935,7 +1933,12 @@ export default {
     },
     // 切换轮播组
     getCombineIndex(index) {
-      this.combine_index = index - 1;
+      console.log(index);
+      if (this.payed_order_three_list.length) {
+        this.combine_index = index - 1;
+      } else {
+        this.combine_index = index;
+      }
     },
     // 打开选择弹窗
     async changeSale(val) {
@@ -2067,13 +2070,14 @@ export default {
     // 获取已下单未填写订单信息
     async getPayedOrderList() {
       this.payed_order_three_list = [];
-      this.payed_order_two_list = [];
       const res = await getComboListAPI();
 
       if (res.status !== 1000 || !res.data.combine) return;
 
       const { sub_orders } = res.data.combine;
-      this.combine_index = this.combine_index - 1;
+      if (this.payed_order_three_list.length) {
+        this.combine_index = this.combine_index - 1;
+      }
 
       let arr_ = [];
       sub_orders.forEach(item => {
@@ -2098,12 +2102,6 @@ export default {
             it_.product_id = item.product_id;
             it_.order_id = item.order_id;
             this.payed_order_three_list.push(it_);
-
-            // if (sub_orders.length == 2) {
-            //   this.payed_order_two_list.push(it_);
-            // } else {
-            //   this.payed_order_three_list.push(it_);
-            // }
           }
         });
       });
