@@ -201,8 +201,25 @@ export default {
   },
   methods: {
     // Your methods go here
-    jumpPage(item) {
-      location.href = item.url + '.html';
+    async jumpPage(item) {
+      utils.firebaseLogEvent(
+        this.e_id,
+        item.hot.c_id,
+        item.hot.e_name,
+        'click',
+        {
+          args_name: item.hot.e_name,
+          channel: utils.getFBChannel(),
+        }
+      );
+
+      await utils.asleep(600);
+      let check_event = utils.getQueryStr('check_event');
+      if (!check_event && utils.isProd()) {
+        location.href = item.url + '.html';
+      } else {
+        window.open(item.url + '.html', '_blank');
+      }
     },
   },
   mounted() {

@@ -713,8 +713,24 @@ export default {
       return params;
     },
 
-    backHome() {
-      location.href = 'index.html';
+    async backHome() {
+      utils.firebaseLogEvent(
+        '10006',
+        '-10011',
+        'click_2024lovely_main_home',
+        'click',
+        {
+          args_name: 'click_2024lovely_main_home',
+          channel: utils.getFBChannel(),
+        }
+      );
+      await utils.asleep(600);
+      let check_event = utils.getQueryStr('check_event');
+      if (!check_event && utils.isProd()) {
+        location.href = 'index.html';
+      } else {
+        window.open(item.url + '.html', '_blank');
+      }
     },
   },
 };
