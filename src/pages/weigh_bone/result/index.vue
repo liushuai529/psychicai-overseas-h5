@@ -55,23 +55,7 @@ export default {
     };
   },
   computed: {},
-  async mounted() {
-    window.scrollTo(0, 0);
-
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'fcy4se',
-      });
-    utils.firebaseLogEvent(
-      '10009',
-      '-10009',
-      'page_view_chenggu_result',
-      'page_view',
-      {
-        args_name: 'page_view_chenggu_result',
-        channel: utils.getFBChannel(),
-      }
-    );
+  async created() {
     this.order_id = this.$route.query.order_id;
     let report_price = +utils.getQueryStr('report_price');
     let report_status = utils.getQueryStr('status');
@@ -79,13 +63,6 @@ export default {
 
     if (report_price && !set_time) {
       if (report_status === 'SUCCESS') {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'yrnwch',
-            revenue: report_price,
-            currency: 'MYR',
-          });
-
         utils.firebaseLogEvent(
           '10009',
           '-10007',
@@ -108,10 +85,6 @@ export default {
           }
         }
       } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'k34ta5',
-          });
         utils.firebaseLogEvent(
           '10009',
           '-10008',
@@ -123,10 +96,29 @@ export default {
           }
         );
       }
+      await utils.asleep(500);
       localStorage.setItem('mlxz_set_event_times', 1);
 
       utils.resetPageUrl(this.order_id, report_status);
     }
+  },
+  async mounted() {
+    window.scrollTo(0, 0);
+
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'fcy4se',
+      });
+    utils.firebaseLogEvent(
+      '10009',
+      '-10009',
+      'page_view_chenggu_result',
+      'page_view',
+      {
+        args_name: 'page_view_chenggu_result',
+        channel: utils.getFBChannel(),
+      }
+    );
 
     await this.checkResult();
     this.query();

@@ -287,37 +287,13 @@ export default {
       tw_code_btn,
     };
   },
-  async mounted() {
-    window.scrollTo(0, 0);
-
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'hznmbr',
-      });
-
-    utils.firebaseLogEvent(
-      '10007',
-      '-10009',
-      'page_view_marriage_result',
-      'page_view',
-      {
-        args_name: 'page_view_marriage_result',
-        channel: utils.getFBChannel(),
-      }
-    );
+  async created() {
     this.order_id = this.$route.query.order_id;
     let report_price = +utils.getQueryStr('report_price');
     let report_status = utils.getQueryStr('status');
     let set_time = +localStorage.getItem('mlxz_set_event_times');
     if (report_price && !set_time) {
       if (report_status === 'SUCCESS') {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'kdyj65',
-            revenue: report_price,
-            currency: 'MYR',
-          });
-
         utils.firebaseLogEvent(
           '10007',
           '-10007',
@@ -340,10 +316,6 @@ export default {
           }
         }
       } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'ackqxl',
-          });
         utils.firebaseLogEvent(
           '10007',
           '-10008',
@@ -355,10 +327,30 @@ export default {
           }
         );
       }
+      await utils.asleep(500);
       localStorage.setItem('mlxz_set_event_times', 1);
 
       utils.resetPageUrl(this.order_id, report_status);
     }
+  },
+  async mounted() {
+    window.scrollTo(0, 0);
+
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'hznmbr',
+      });
+
+    utils.firebaseLogEvent(
+      '10007',
+      '-10009',
+      'page_view_marriage_result',
+      'page_view',
+      {
+        args_name: 'page_view_marriage_result',
+        channel: utils.getFBChannel(),
+      }
+    );
 
     await this.checkResult();
     this.query();
@@ -368,13 +360,7 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
   },
-  watch: {
-    status(val) {
-      let stop = utils.getQueryString('stop');
-      if (stop) return;
-      if (val) return;
-    },
-  },
+  watch: {},
   methods: {
     async checkResult() {
       let data = {

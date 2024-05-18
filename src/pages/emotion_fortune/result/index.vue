@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 11:50:44
+ * @LastEditTime: 2024-05-18 20:05:28
  * @Description: 
 -->
 <template>
@@ -81,37 +81,14 @@ export default {
       code: '',
     };
   },
-  async mounted() {
+  async created() {
     this.order_id = this.$route.query.id || this.$route.query.order_id;
-    window.scrollTo(0, 0);
 
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'euvhwq',
-      });
-
-    utils.firebaseLogEvent(
-      '10006',
-      '-10009',
-      'page_view_2024lovely_result',
-      'page_view',
-      {
-        args_name: 'page_view_2024lovely_result',
-        channel: utils.getFBChannel(),
-      }
-    );
     let report_price = +utils.getQueryStr('report_price');
     let report_status = utils.getQueryStr('status');
     let set_time = +localStorage.getItem('mlxz_set_event_times');
     if (report_price && !set_time) {
       if (report_status === 'SUCCESS') {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: '6kho29',
-            revenue: report_price,
-            currency: 'MYR',
-          });
-
         utils.firebaseLogEvent(
           '10006',
           '-10007',
@@ -149,10 +126,32 @@ export default {
           }
         );
       }
+      await utils.asleep(500);
+
       localStorage.setItem('mlxz_set_event_times', 1);
 
       utils.resetPageUrl(this.order_id, report_status);
     }
+  },
+  async mounted() {
+    window.scrollTo(0, 0);
+
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'euvhwq',
+      });
+
+    utils.firebaseLogEvent(
+      '10006',
+      '-10009',
+      'page_view_2024lovely_result',
+      'page_view',
+      {
+        args_name: 'page_view_2024lovely_result',
+        channel: utils.getFBChannel(),
+      }
+    );
+
     await this.checkResult();
     this.query();
   },
