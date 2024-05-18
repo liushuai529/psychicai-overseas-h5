@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 11:34:10
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 19:15:57
+ * @LastEditTime: 2024-05-18 20:07:02
  * @Description: 
 -->
 <template>
@@ -229,24 +229,7 @@ export default {
       extra_ce_suan: {},
     };
   },
-  async mounted() {
-    window.scrollTo(0, 0);
-
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'crbib8',
-      });
-
-    utils.firebaseLogEvent(
-      '10005',
-      '-10009',
-      'page_view_2024wealty_result',
-      'page_view',
-      {
-        args_name: 'page_view_2024wealty_result',
-        channel: utils.getFBChannel(),
-      }
-    );
+  async created() {
     let query = this.$route.query;
     this.adverTise_order = parseInt(query.order_id);
     let report_price = +utils.getQueryStr('report_price');
@@ -255,13 +238,6 @@ export default {
 
     if (report_price && !set_time) {
       if (report_status === 'SUCCESS') {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 's1u6sh',
-            revenue: report_price,
-            currency: 'MYR',
-          });
-
         utils.firebaseLogEvent(
           '10005',
           '-10007',
@@ -284,10 +260,6 @@ export default {
           }
         }
       } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'merbjw',
-          });
         utils.firebaseLogEvent(
           '10005',
           '-10008',
@@ -299,10 +271,30 @@ export default {
           }
         );
       }
+      await utils.asleep(500);
       localStorage.setItem('mlxz_set_event_times', 1);
 
       utils.resetPageUrl(this.adverTise_order, report_status);
     }
+  },
+  async mounted() {
+    window.scrollTo(0, 0);
+
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'crbib8',
+      });
+
+    utils.firebaseLogEvent(
+      '10005',
+      '-10009',
+      'page_view_2024wealty_result',
+      'page_view',
+      {
+        args_name: 'page_view_2024wealty_result',
+        channel: utils.getFBChannel(),
+      }
+    );
 
     await this.checkResult();
     this.getDetail(this.adverTise_order);

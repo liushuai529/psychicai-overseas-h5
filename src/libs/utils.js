@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-17 11:57:15
+ * @LastEditTime: 2024-05-18 20:07:07
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -737,9 +737,11 @@ const copyToClipboard = text => {
  */
 const isProd = () => {
   // return true;
-  return ['192.168', 'localhost', 'test', '10.1.9'].every(item => {
-    return window.location.href.indexOf(item) < 0;
-  });
+  return ['192.168', 'localhost', 'test', '10.1.9', '10.206.0.133'].every(
+    item => {
+      return window.location.href.indexOf(item) < 0;
+    }
+  );
 };
 
 //获取UA信息返回数组
@@ -1075,11 +1077,20 @@ const firebaseLogEvent = (
   console.log('----firebase start-----');
   console.log('这是firebase埋点', JSON.stringify(outer_obj));
   console.log('----firebase end-----');
-  if (!isProd()) {
-    return true;
-  }
+  // if (!isProd()) {
+  //   return true;
+  // }
   analytics.logEvent(event_name, outer_obj);
-  console.log('firebase埋点上报执行');
+
+  // return new Promise((resolve, reject) => {
+  //   try {
+  //     analytics.logEvent(event_name, outer_obj);
+  //     console.log('firebase埋点上报执行');
+  //     resolve();
+  //   } catch (e) {
+  //     reject(e);
+  //   }
+  // });
 };
 
 // 判断字符串是否大于四位，如果超出四位，截取第一二位和最后两位，中间用...代替

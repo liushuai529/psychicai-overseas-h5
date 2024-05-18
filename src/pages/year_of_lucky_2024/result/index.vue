@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 11:55:54
+ * @LastEditTime: 2024-05-18 19:39:23
  * @Description: 
 -->
 <template>
@@ -177,23 +177,7 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
   },
-  async mounted() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: '5epl9n',
-      });
-
-    utils.firebaseLogEvent(
-      '10003',
-      '-10009',
-      'page_view_2024report_result',
-      'page_view',
-      {
-        args_name: 'page_view_2024report_result',
-        channel: utils.getFBChannel(),
-      }
-    );
-    window.scrollTo(0, 0);
+  async created() {
     this.order_id = this.$route.query.order_id;
 
     let report_price = +utils.getQueryStr('report_price');
@@ -202,13 +186,6 @@ export default {
 
     if (report_price && !set_time) {
       if (report_status === 'SUCCESS') {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'ygw32z',
-            revenue: report_price,
-            currency: 'MYR',
-          });
-
         utils.firebaseLogEvent(
           '10003',
           '-10007',
@@ -231,10 +208,6 @@ export default {
           }
         }
       } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'rxhrp5',
-          });
         utils.firebaseLogEvent(
           '10003',
           '-10008',
@@ -246,10 +219,29 @@ export default {
           }
         );
       }
+      await utils.asleep(500);
       localStorage.setItem('mlxz_set_event_times', 1);
 
       utils.resetPageUrl(this.order_id, report_status);
     }
+  },
+  async mounted() {
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: '5epl9n',
+      });
+
+    utils.firebaseLogEvent(
+      '10003',
+      '-10009',
+      'page_view_2024report_result',
+      'page_view',
+      {
+        args_name: 'page_view_2024report_result',
+        channel: utils.getFBChannel(),
+      }
+    );
+    window.scrollTo(0, 0);
 
     await this.checkResult();
     this.query();
