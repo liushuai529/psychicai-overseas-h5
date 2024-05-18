@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-18 20:04:58
+ * @LastEditTime: 2024-05-18 20:10:23
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1077,9 +1077,9 @@ const firebaseLogEvent = (
   console.log('----firebase start-----');
   console.log('这是firebase埋点', JSON.stringify(outer_obj));
   console.log('----firebase end-----');
-  // if (!isProd()) {
-  //   return true;
-  // }
+  if (!isProd()) {
+    return true;
+  }
   analytics.logEvent(event_name, outer_obj);
 
   // return new Promise((resolve, reject) => {
