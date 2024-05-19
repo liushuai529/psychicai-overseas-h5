@@ -200,7 +200,7 @@
           <div
             v-show="three_list.length"
             class="reset-select"
-            @click="new_sale_modal = true"
+            @click="restartChoose()"
           >
             重新选择
           </div>
@@ -284,7 +284,7 @@
           <div
             v-show="two_list.length"
             class="reset-select"
-            @click="new_sale_modal2 = true"
+            @click="restartChoose(2)"
           >
             重新选择
           </div>
@@ -633,6 +633,8 @@
       :pay_index="2"
       key_store="mlxz_web_select_list_two"
     />
+
+    <ResultPop v-if="show_result" @close="show_result = false" />
   </div>
 </template>
 
@@ -724,6 +726,7 @@ import tw_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuh
 import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_nianyun.png';
 
 import PayModal from './components/payModal.vue';
+import ResultPop from '../../components/ResultPop.vue';
 const hotRecommendProduction = [
   //  {
   //   name:'良缘合婚',
@@ -963,7 +966,7 @@ const new_pop_list = [
 ];
 
 export default {
-  components: { Recommend, Fortune, PayPopup, PopResult, PayModal },
+  components: { ResultPop, Recommend, Fortune, PayPopup, PopResult, PayModal },
   data() {
     return {
       cn_order_btn:
@@ -1030,6 +1033,7 @@ export default {
       new_sale_modal2: false,
       pay_modal2: false,
       width_dom: 0,
+      show_result: true,
     };
   },
   computed: {
@@ -1545,6 +1549,17 @@ export default {
     },
     new_sale_modal(val) {
       if (val) {
+        // 查看多买多折扣列表3项
+        utils.firebaseLogEvent(
+          '10001',
+          '-10020',
+          'view_reportlist_choise3',
+          'view',
+          {
+            args_name: 'view_reportlist_choise3',
+            channel: utils.getFBChannel(),
+          }
+        );
         this.getLocalChecked('three_list', 'mlxz_web_select_list');
         this.pick_list = JSON.parse(JSON.stringify(this.three_list));
       } else {
@@ -1553,15 +1568,64 @@ export default {
     },
     new_sale_modal2(val) {
       if (val) {
+        // 查看多买多折扣列表2项
+        utils.firebaseLogEvent(
+          '10001',
+          '-10019',
+          'view_reportlist_choise2',
+          'view',
+          {
+            args_name: 'view_reportlist_choise2',
+            channel: utils.getFBChannel(),
+          }
+        );
         this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
         this.pick_list2 = JSON.parse(JSON.stringify(this.two_list));
       } else {
         this.pick_list2 = [];
       }
     },
-    // combine_index(val) {
-    //   this.getLocalChecked();
-    // },
+
+    combine_index: {
+      handler(val) {
+        console.log('combine_index', val);
+        if (val === 0) {
+          utils.firebaseLogEvent(
+            '10001',
+            '-10012',
+            'view_main_report3',
+            'view',
+            {
+              args_name: 'view_main_report3',
+              channel: utils.getFBChannel(),
+            }
+          );
+        } else if (val > 0) {
+          utils.firebaseLogEvent(
+            '10001',
+            '-10013',
+            'view_main_report2',
+            'view',
+            {
+              args_name: 'view_main_report2',
+              channel: utils.getFBChannel(),
+            }
+          );
+        } else {
+          utils.firebaseLogEvent(
+            '10001',
+            '-10014',
+            'view_main_results',
+            'view',
+            {
+              args_name: 'view_main_results',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+      },
+      immediate: true,
+    },
   },
   created() {
     let url_query = utils.getUrlParams();
@@ -1589,10 +1653,10 @@ export default {
     });
   },
   mounted() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'sogk80',
-      });
+    // window.Adjust &&
+    //   window.Adjust.trackEvent({
+    //     eventToken: 'sogk80',
+    //   });
     utils.firebaseLogEvent('10001', '-10001', 'page_view_h5main', 'page_view', {
       args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
@@ -1985,6 +2049,16 @@ export default {
     async changeSale(val) {
       if (val) {
         if (this.two_list.length) {
+          utils.firebaseLogEvent(
+            '10001',
+            '-10022',
+            'click_choise2_pay',
+            'click',
+            {
+              args_name: 'click_choise2_pay',
+              channel: utils.getFBChannel(),
+            }
+          );
           this.pay_modal2 = true;
           return;
         }
@@ -1992,6 +2066,16 @@ export default {
         return;
       }
       if (this.three_list.length) {
+        utils.firebaseLogEvent(
+          '10001',
+          '-10021',
+          'click_choise3_pay',
+          'click',
+          {
+            args_name: 'click_choise3_pay',
+            channel: utils.getFBChannel(),
+          }
+        );
         this.pay_modal = true;
         return;
       }
@@ -2034,6 +2118,16 @@ export default {
           'mlxz_web_select_list_two',
           JSON.stringify(this.two_list)
         );
+        utils.firebaseLogEvent(
+          '10001',
+          '-10015',
+          'click_main_choise2',
+          'click',
+          {
+            args_name: 'click_main_choise2',
+            channel: utils.getFBChannel(),
+          }
+        );
         this.new_sale_modal2 = false;
         return;
       }
@@ -2043,6 +2137,10 @@ export default {
         'mlxz_web_select_list',
         JSON.stringify(this.three_list)
       );
+      utils.firebaseLogEvent('10001', '-10016', 'click_main_choise3', 'click', {
+        args_name: 'click_main_choise3',
+        channel: utils.getFBChannel(),
+      });
       this.new_sale_modal = false;
     },
     // 获取本地缓存选择的商品
@@ -2179,6 +2277,33 @@ export default {
         if (res.status !== 1000) return;
       } catch (e) {
         console.error(e);
+      }
+    },
+    restartChoose(val) {
+      if (val) {
+        utils.firebaseLogEvent(
+          '10001',
+          '-10016',
+          'click_main_rechoise2',
+          'click',
+          {
+            args_name: 'click_main_rechoise2',
+            channel: utils.getFBChannel(),
+          }
+        );
+        this.new_sale_modal2 = true;
+      } else {
+        utils.firebaseLogEvent(
+          '10001',
+          '-10018',
+          'click_main_rechoise3',
+          'click',
+          {
+            args_name: 'click_main_rechoise3',
+            channel: utils.getFBChannel(),
+          }
+        );
+        this.new_sale_modal = true;
       }
     },
   },
