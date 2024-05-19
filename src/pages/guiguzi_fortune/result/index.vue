@@ -79,37 +79,15 @@ export default {
       tw_code_btn,
     };
   },
-  async mounted() {
-    window.scrollTo(0, 0);
+  async created() {
     this.order_id = this.$route.query.order_id;
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'wuzcse',
-      });
 
-    utils.firebaseLogEvent(
-      '10008',
-      '-10009',
-      'page_view_64gua_result',
-      'page_view',
-      {
-        args_name: 'page_view_64gua_result',
-        channel: utils.getFBChannel(),
-      }
-    );
     let report_price = +utils.getQueryStr('report_price');
     let report_status = utils.getQueryStr('status');
     let set_time = +localStorage.getItem('mlxz_set_event_times');
 
     if (report_price && !set_time) {
       if (report_status === 'SUCCESS') {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: '26k5jm',
-            revenue: report_price,
-            currency: 'MYR',
-          });
-
         utils.firebaseLogEvent(
           '10008',
           '-10007',
@@ -132,10 +110,6 @@ export default {
           }
         }
       } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: '67mmjr',
-          });
         utils.firebaseLogEvent(
           '10008',
           '-10008',
@@ -147,10 +121,29 @@ export default {
           }
         );
       }
+      await utils.asleep(500);
       localStorage.setItem('mlxz_set_event_times', 1);
 
       utils.resetPageUrl(this.order_id, report_status);
     }
+  },
+  async mounted() {
+    window.scrollTo(0, 0);
+    window.Adjust &&
+      window.Adjust.trackEvent({
+        eventToken: 'wuzcse',
+      });
+
+    utils.firebaseLogEvent(
+      '10008',
+      '-10009',
+      'page_view_64gua_result',
+      'page_view',
+      {
+        args_name: 'page_view_64gua_result',
+        channel: utils.getFBChannel(),
+      }
+    );
 
     await this.checkResult();
     this.query();
@@ -160,14 +153,7 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
   },
-  watch: {
-    status(val) {
-      let stop = utils.getQueryString('stop');
-      if (stop) return;
-      // 自己添加的stop 否则会一直调用该方法
-      if (val) return;
-    },
-  },
+  watch: {},
   methods: {
     /**
      * @description: 更新支付结果
