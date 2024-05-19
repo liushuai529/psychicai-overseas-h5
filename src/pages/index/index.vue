@@ -1033,7 +1033,7 @@ export default {
       new_sale_modal2: false,
       pay_modal2: false,
       width_dom: 0,
-      show_result: true,
+      show_result: false,
     };
   },
   computed: {
@@ -1626,6 +1626,16 @@ export default {
       },
       immediate: true,
     },
+    three_list(val) {
+      if (val) {
+        this.getSelectTagList();
+      }
+    },
+    two_list(val) {
+      if (val) {
+        this.getSelectTagList(2);
+      }
+    },
   },
   created() {
     let url_query = utils.getUrlParams();
@@ -2205,8 +2215,8 @@ export default {
         );
         this.combine_info.combine_product_ids = combine_ids;
       }
-      this.pick_list = this.three_list;
-      this.pick_list2 = this.two_list;
+      this.pick_list = JSON.parse(JSON.stringify(this.three_list));
+      this.pick_list2 = JSON.parse(JSON.stringify(this.two_list));
     },
 
     // 获取已下单未填写订单信息
