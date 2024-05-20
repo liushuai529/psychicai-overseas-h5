@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-20 18:12:46
+ * @LastEditTime: 2024-05-20 20:21:53
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -24,6 +24,10 @@ const getFBChannel = () => {
     return 'panda02';
   } else if (url.indexOf('enjoy02') > -1) {
     return 'enjoy02';
+  } else if (url.indexOf('enjoy03') > -1) {
+    return 'enjoy03';
+  } else if (url.indexOf('panda03') > -1) {
+    return 'panda03';
   } else {
     return 'own';
   }

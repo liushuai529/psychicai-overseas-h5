@@ -62,6 +62,7 @@
       <mt-spinner color="#26a2ff" :size="60" type="fading-circle"></mt-spinner>
     </div> -->
     <van-swipe
+      v-if="is_show_combine"
       :loop="false"
       :show-indicators="false"
       :stop-propagation="false"
@@ -1036,6 +1037,7 @@ export default {
       width_dom: 0,
       show_result: false,
       order_id: '',
+      is_show_combine: false,
     };
   },
   computed: {
@@ -1608,6 +1610,11 @@ export default {
     },
   },
   created() {
+    this.is_show_combine = ['enjoy03', 'panda03'].includes(
+      utils.getFBChannel()
+    );
+    console.log('is_show_combine', this.is_show_combine);
+
     let url_query = utils.getUrlParams();
     let order_id = url_query.order_id;
     this.order_id = order_id || '';
