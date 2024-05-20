@@ -1663,7 +1663,10 @@ export default {
     }
 
     setInterval(() => {
-      let is_reload = localStorage.getItem('mlxz_reload_page_home');
+      let is_reload =
+        localStorage.getItem('mlxz_reload_page_home') ||
+        localStorage.getItem('mlxz_reload_page_history');
+
       if (is_reload) {
         localStorage.removeItem('mlxz_reload_page_home');
         this.payed_order_three_list = [];
