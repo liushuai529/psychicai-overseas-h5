@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-16 20:18:35
+ * @LastEditTime: 2024-05-20 15:32:38
  * @Description:
  */
 export * from './fortune';
@@ -145,4 +145,14 @@ export const reportEventAPI = async data => {
 export const sortByEvent = async data => {
   await visitorLoginAPI();
   return request(`/web/event/products/sort`, 'GET', data);
+};
+
+// 校验是否上报了埋点
+export const checkSendEventApi = data => {
+  return request(`/web/attribution/report/${data.order_id}`, 'GET', data);
+};
+
+// 上报埋点
+export const sendEventApi = data => {
+  return request(`/web/attribution/report/${data.order_id}`, 'POST', data);
 };
