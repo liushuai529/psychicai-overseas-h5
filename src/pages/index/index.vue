@@ -1593,41 +1593,6 @@ export default {
     combine_index: {
       handler(val) {
         console.log('combine_index', val);
-
-        if (val === 0) {
-          utils.firebaseLogEvent(
-            '10001',
-            '-10012',
-            'view_main_report3',
-            'view',
-            {
-              args_name: 'view_main_report3',
-              channel: utils.getFBChannel(),
-            }
-          );
-        } else if (val > 0) {
-          utils.firebaseLogEvent(
-            '10001',
-            '-10013',
-            'view_main_report2',
-            'view',
-            {
-              args_name: 'view_main_report2',
-              channel: utils.getFBChannel(),
-            }
-          );
-        } else {
-          utils.firebaseLogEvent(
-            '10001',
-            '-10014',
-            'view_main_results',
-            'view',
-            {
-              args_name: 'view_main_results',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
       },
       immediate: true,
     },
@@ -1673,20 +1638,23 @@ export default {
       args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
     });
-    let check_result = await this.checkWithTimeout();
-    if (check_result !== null) {
-      utils.gcyLog(`order_id:${this.order_id}`, {
-        mlxz_action_desc: '已经获取了是否上报埋点的状态',
-        mlxz_attribution_status: check_result.data.status,
-      });
-      if (check_result.data.status) {
+    if (this.order_id) {
+      let check_result = await this.checkWithTimeout();
+      if (check_result !== null) {
         utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: '准备执行上报埋点',
-          mlxz_check_status: check_result.data.status,
+          mlxz_action_desc: '已经获取了是否上报埋点的状态',
+          mlxz_attribution_status: check_result.data.status,
         });
-        this.handleSendEvent();
+        if (check_result.data.status) {
+          utils.gcyLog(`order_id:${this.order_id}`, {
+            mlxz_action_desc: '准备执行上报埋点',
+            mlxz_check_status: check_result.data.status,
+          });
+          this.handleSendEvent();
+        }
       }
     }
+
     setInterval(() => {
       let is_reload = localStorage.getItem('mlxz_reload_page_home');
       if (is_reload) {
@@ -2238,6 +2206,7 @@ export default {
       } else {
         this.combine_index = index;
       }
+      this.logPageView(this.combine_index);
     },
     // 打开选择弹窗
     async changeSale(val) {
@@ -2426,6 +2395,7 @@ export default {
       if (sub_orders.length) {
         this.combine_index = this.combine_index - 1;
       }
+      this.logPageView(this.combine_index);
 
       let arr_ = [];
       sub_orders.forEach(item => {
@@ -2453,6 +2423,24 @@ export default {
           }
         });
       });
+    },
+    logPageView(val) {
+      if (val === 0) {
+        utils.firebaseLogEvent('10001', '-10012', 'view_main_report3', 'view', {
+          args_name: 'view_main_report3',
+          channel: utils.getFBChannel(),
+        });
+      } else if (val > 0) {
+        utils.firebaseLogEvent('10001', '-10013', 'view_main_report2', 'view', {
+          args_name: 'view_main_report2',
+          channel: utils.getFBChannel(),
+        });
+      } else {
+        utils.firebaseLogEvent('10001', '-10014', 'view_main_results', 'view', {
+          args_name: 'view_main_results',
+          channel: utils.getFBChannel(),
+        });
+      }
     },
 
     toWriteInfo(item) {
