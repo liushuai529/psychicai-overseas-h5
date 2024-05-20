@@ -232,7 +232,7 @@ export default {
       // let store_id = localStorage.getItem('mlxz_order_id')
       //   ? +localStorage.getItem('mlxz_order_id')
       //   : 0;
-      if (store_id === this.order_id) return;
+      // if (store_id === this.order_id) return;
       const res = await sendEventApi({ order_id: this.order_id });
       if (res.status === 1000) {
         utils.gcyLog(`order_id:${this.order_id}`, {
