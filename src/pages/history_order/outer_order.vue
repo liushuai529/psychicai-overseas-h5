@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 18:40:03
+ * @LastEditTime: 2024-05-20 10:29:44
  * @Description: 历史订单
 -->
 <template>
@@ -291,9 +291,9 @@ export default {
   },
   created() {
     setInterval(() => {
-      let is_reload = localStorage.getItem('wlxz_reload_page');
+      let is_reload = localStorage.getItem('mlxz_reload_page_history');
       if (is_reload) {
-        localStorage.removeItem('wlxz_reload_page');
+        localStorage.removeItem('mlxz_reload_page_history');
         this.list = [];
         this.getData();
       }
@@ -442,11 +442,11 @@ export default {
       let url = path_enums[item.product_key];
       if (item.status === 'PAYED') {
         if (item.ext.name || item.ext.male_name) {
-          localStorage.setItem('wlxz_reload_page', 1);
+          localStorage.setItem('mlxz_reload_page_history', 1);
           // 跳转详情页
           location.href = `${url}.html#/result?order_id=${item.id}&status=${item.status}`;
         } else {
-          localStorage.setItem('wlxz_reload_page', 1);
+          localStorage.setItem('mlxz_reload_page_history', 1);
           // 跳转添加信息页
           location.href = `${url}.html#/?has_pay=SUCCESS&order_id=${item.id}&product_key=${item.product_key}`;
         }

@@ -1673,9 +1673,9 @@ export default {
     });
 
     setInterval(() => {
-      let is_reload = localStorage.getItem('wlxz_reload_page');
+      let is_reload = localStorage.getItem('mlxz_reload_page_home');
       if (is_reload) {
-        localStorage.removeItem('wlxz_reload_page');
+        localStorage.removeItem('mlxz_reload_page_home');
         this.payed_order_three_list = [];
         this.getPayedOrderList();
       }
@@ -2269,7 +2269,7 @@ export default {
       // location.href = `${url}.html#/${
       //   status ? 'result' : ''
       // }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
-      localStorage.setItem('wlxz_reload_page', 1);
+      localStorage.setItem('mlxz_reload_page_home', 1);
       window.open(
         `${location.origin}/${url}.html#/${
           status ? 'result' : ''
@@ -3305,9 +3305,11 @@ export default {
 
 .ml-100 {
   margin-left: 1rem !important;
+  transition: all 0.5s;
 }
 .ml-170 {
   margin-left: 1.7rem !important;
+  transition: all 0.5s;
 }
 .empty-loading {
   width: 7.5rem;
