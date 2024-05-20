@@ -2399,6 +2399,7 @@ export default {
       if (res.status !== 1000 || !res.data.combine) {
         this.payed_order_three_list = [];
         this.combine_index = 0;
+        this.logPageView(this.combine_index);
         return;
       }
 
