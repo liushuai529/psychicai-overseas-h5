@@ -2468,6 +2468,10 @@ export default {
     },
     // 事件排序
     async logEventForSort(it) {
+      let channel = utils.getFBChannel();
+      if (['enjoy02', 'panda02'].includes(channel)) {
+        return;
+      }
       try {
         const res = await reportEventAPI({
           event_name: it.e_name,
