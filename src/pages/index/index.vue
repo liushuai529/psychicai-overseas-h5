@@ -1663,17 +1663,14 @@ export default {
     }
 
     setInterval(() => {
-      let is_reload =
-        localStorage.getItem('mlxz_reload_page_home') ||
-        localStorage.getItem('mlxz_reload_page_history');
-
-      if (is_reload) {
+      let is_reload = localStorage.getItem('mlxz_reload_page_home');
+      if (is_reload && this.can_clear) {
         localStorage.removeItem('mlxz_reload_page_home');
-        localStorage.removeItem('mlxz_reload_page_history');
+        this.can_clear = false;
         this.payed_order_three_list = [];
         this.getPayedOrderList();
       }
-    }, 1000);
+    }, 2000);
   },
   beforeDestroy() {
     console.log('destory');
@@ -2403,9 +2400,30 @@ export default {
         return;
       }
 
-      const { sub_orders } = res.data.combine;
+      const { sub_orders, order_id } = res.data.combine;
       if (sub_orders.length) {
         this.combine_index = this.combine_index - 1;
+      }
+      if (order_id) {
+        this.order_id = order_id;
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '重新上报埋点',
+          mlxz_reset_url: location.href,
+        });
+        let check_result = await this.checkWithTimeout();
+        if (check_result !== null) {
+          utils.gcyLog(`order_id:${this.order_id}`, {
+            mlxz_action_desc: '已经获取了是否上报埋点的状态',
+            mlxz_attribution_status: check_result.data.status,
+          });
+          if (check_result.data.status) {
+            utils.gcyLog(`order_id:${this.order_id}`, {
+              mlxz_action_desc: '准备执行上报埋点',
+              mlxz_check_status: check_result.data.status,
+            });
+            this.handleSendEvent();
+          }
+        }
       }
       this.logPageView(this.combine_index);
 
@@ -2461,6 +2479,7 @@ export default {
       //   status ? 'result' : ''
       // }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
       localStorage.setItem('mlxz_reload_page_home', 1);
+      // this.can_clear=true;
       await utils.asleep(500);
       location.href = `${location.origin}/${url}.html#/${
         status ? 'result' : ''
