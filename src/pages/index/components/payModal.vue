@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-15 14:18:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-20 19:18:09
+ * @LastEditTime: 2024-05-20 21:08:16
  * @Description: 
 -->
 <template>
@@ -186,7 +186,7 @@ export default {
           location.pathname +
           '?pay_index=' +
           this.pay_index +
-          '?report_price=' +
+          '&report_price=' +
           price,
       };
       const res = await payOrderAPI(params);
