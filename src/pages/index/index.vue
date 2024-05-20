@@ -2453,18 +2453,16 @@ export default {
       }
     },
 
-    toWriteInfo(item) {
+    async toWriteInfo(item) {
       const { status, url, order_id } = item;
       // location.href = `${url}.html#/${
       //   status ? 'result' : ''
       // }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
       localStorage.setItem('mlxz_reload_page_home', 1);
-      window.open(
-        `${location.origin}/${url}.html#/${
-          status ? 'result' : ''
-        }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`,
-        '_self'
-      );
+      await utils.asleep(500);
+      location.href = `${location.origin}/${url}.html#/${
+        status ? 'result' : ''
+      }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
     },
     // 事件排序
     async logEventForSort(it) {
