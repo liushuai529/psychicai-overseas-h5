@@ -3337,7 +3337,7 @@ export default {
   transition: all 0.5s;
 }
 .ml-170 {
-  margin-left: 2.1rem !important;
+  margin-left: 2.3rem !important;
   transition: all 0.5s;
 }
 .empty-loading {
