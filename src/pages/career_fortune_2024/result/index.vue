@@ -96,8 +96,6 @@ export default {
     });
     await this.checkResult();
     this.query();
-
-    this.$nextTick(() => {});
   },
   computed: {},
 
@@ -233,10 +231,6 @@ export default {
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '开始调用接口，通知已上报',
       });
-      // let store_id = localStorage.getItem('mlxz_order_id')
-      //   ? +localStorage.getItem('mlxz_order_id')
-      //   : 0;
-      // if (store_id === this.order_id) return;
       const res = await sendEventApi({ order_id: this.order_id });
       if (res.status === 1000) {
         utils.gcyLog(`order_id:${this.order_id}`, {

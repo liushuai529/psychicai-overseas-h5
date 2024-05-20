@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-20 18:28:16
+ * @LastEditTime: 2024-05-20 19:13:44
  * @Description: 历史订单
 -->
 <template>
@@ -304,6 +304,7 @@ export default {
       let is_reload = localStorage.getItem('mlxz_reload_page_history');
       if (is_reload) {
         localStorage.removeItem('mlxz_reload_page_history');
+        this.query.page = 1;
         this.list = [];
         this.getData();
       }

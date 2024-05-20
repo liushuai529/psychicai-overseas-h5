@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-18 20:07:16
+ * @LastEditTime: 2024-05-20 19:41:04
  * @Description: 
 -->
 <template>
@@ -56,7 +56,13 @@ import contentDetail from './content_detail.vue';
 import utils from '../../../libs/utils.js';
 import UserInfo from '../detail/user_info.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
-import { getResultAPI, resultCheckAPI, getBaziAPI } from '../../../api/api';
+import {
+  getResultAPI,
+  resultCheckAPI,
+  getBaziAPI,
+  checkSendEventApi,
+  sendEventApi,
+} from '../../../api/api';
 import BaziTable from '../../../components/baziTable.vue';
 export default {
   components: { contentDetail, UserInfo, BaziTable },
@@ -116,65 +122,14 @@ export default {
       wuxingqiang: '',
     };
   },
-  async created() {
+  created() {},
+  async mounted() {
     this.order_id = this.$route.query.id || this.$route.query.order_id;
 
-    let report_price = +utils.getQueryStr('report_price');
-    let report_status = utils.getQueryStr('status');
-    let set_time = +localStorage.getItem('mlxz_set_event_times');
-    if (report_price && !set_time) {
-      if (report_status === 'SUCCESS') {
-        utils.firebaseLogEvent(
-          '10006',
-          '-10007',
-          'event_status_2024lovely_pay_success',
-          'event_status',
-          {
-            args_name: 'event_status_2024lovely_pay_success',
-            channel: utils.getFBChannel(),
-          }
-        );
-        if (utils.isProd()) {
-          await utils.checkFB();
-          try {
-            fbq('track', 'Purchase', {
-              value: report_price.toFixed(2),
-              currency: 'MYR',
-            });
-          } catch (err) {
-            console.error('error message:', err);
-          }
-        }
-      } else {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'w9nw13',
-          });
-        utils.firebaseLogEvent(
-          '10006',
-          '-10008',
-          'event_status_2024lovely_pay_fail',
-          'event_status',
-          {
-            args_name: 'event_status_2024lovely_pay_fail',
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
-      await utils.asleep(500);
-
-      localStorage.setItem('mlxz_set_event_times', 1);
-
-      utils.resetPageUrl(this.order_id, report_status);
-    }
-  },
-  async mounted() {
     window.scrollTo(0, 0);
-
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'euvhwq',
-      });
+    utils.gcyLog(`order_id:${this.order_id}`, {
+      mlxz_action_desc: '已进入结果页',
+    });
 
     utils.firebaseLogEvent(
       '10006',
@@ -186,7 +141,28 @@ export default {
         channel: utils.getFBChannel(),
       }
     );
-
+    utils.gcyLog(`order_id:${this.order_id}`, {
+      mlxz_action_desc: '上报了page_view，准备校验是否上报埋点',
+    });
+    // 上报支付结果埋点  start
+    let check_result = await this.checkWithTimeout();
+    if (check_result !== null) {
+      utils.gcyLog(`order_id:${this.order_id}`, {
+        mlxz_action_desc: '已经获取了是否上报埋点的状态',
+        mlxz_attribution_status: check_result.data.status,
+      });
+      if (check_result.data.status) {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '准备执行上报埋点',
+          mlxz_check_status: check_result.data.status,
+        });
+        this.handleSendEvent();
+      }
+    }
+    // end
+    utils.gcyLog(`order_id:${this.order_id}`, {
+      mlxz_action_desc: '开始验单',
+    });
     await this.checkResult();
     this.query();
   },
@@ -195,15 +171,148 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
   },
-  watch: {
-    status(val) {
-      let stop = utils.getQueryString('stop');
-      if (stop) return;
-      // 自己添加的stop 否则会一直调用该方法
-      if (val) return;
-    },
-  },
+  watch: {},
   methods: {
+    /**
+     * @description: 校验是否上报埋点
+     * @return {*}
+     */
+    async checkWithTimeout() {
+      try {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '开始调用校验上报埋点接口',
+        });
+        const result = await Promise.race([
+          checkSendEventApi({ order_id: this.order_id }),
+          new Promise((resolve, reject) => {
+            setTimeout(() => resolve(null), 6000);
+          }),
+        ]);
+
+        if (result !== null) {
+          // 如果有返回数据，则直接返回
+          utils.gcyLog(`order_id:${this.order_id}`, {
+            mlxz_action_desc: '已校验是否上报埋点',
+            mlxz_check_result_status: result.data.status,
+          });
+          return result;
+        } else {
+          utils.gcyLog(`order_id:${this.order_id}`, {
+            mlxz_action_desc: '接口超时，重新调用校验上报埋点接口',
+          });
+          // 等待 6 秒后再次调用 checkSendEventApi
+          const retryResult = await checkSendEventApi({
+            order_id: this.order_id,
+          });
+          utils.gcyLog(`order_id:${this.order_id}`, {
+            mlxz_action_desc: '接口超时，完成重试调用上报埋点接口',
+          });
+          return retryResult;
+        }
+      } catch (error) {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '接口报错，停止校验',
+        });
+        throw error;
+      }
+    },
+
+    /**
+     * @description: 完成上报埋点
+     * @return {*}
+     */
+    async handleSendEvent() {
+      let report_price = +utils.getQueryStr('report_price');
+      let report_status = utils.getQueryStr('status');
+      utils.gcyLog(`order_id:${this.order_id}`, {
+        mlxz_action_desc: '准备上报埋点，获取订单状态',
+        mlxz_order_status: report_status,
+      });
+      if (report_status === 'SUCCESS' || report_status === 'PAYED') {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '开始上报firebase埋点',
+          mlxz_order_status: report_status,
+        });
+        utils.firebaseLogEvent(
+          '10006',
+          '-10007',
+          'event_status_2024lovely_pay_success',
+          'event_status',
+          {
+            args_name: 'event_status_2024lovely_pay_success',
+            channel: utils.getFBChannel(),
+          }
+        );
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '完成firebase埋点上报',
+          mlxz_order_status: report_status,
+        });
+        if (utils.isProd()) {
+          await utils.checkFB();
+          try {
+            utils.gcyLog(`order_id:${this.order_id}`, {
+              mlxz_action_desc: '开始上报FB埋点，Purchase',
+              mlxz_value: report_price.toFixed(2),
+              mlxz_currency: 'MYR',
+              mlxz_order_status: report_status,
+            });
+            fbq('track', 'Purchase', {
+              value: report_price.toFixed(2),
+              currency: 'MYR',
+            });
+            utils.gcyLog(`order_id:${this.order_id}`, {
+              mlxz_action_desc: '完成FB埋点上报，Purchase',
+              mlxz_value: report_price.toFixed(2),
+              mlxz_currency: 'MYR',
+              mlxz_order_status: report_status,
+            });
+          } catch (err) {
+            console.error('error message:', err);
+          }
+        }
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '完成埋点上报，开始与接口通信，通知完成上报',
+        });
+        this.sendEvent();
+      } else {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '开始上报埋点',
+          mlxz_order_status: report_status,
+        });
+        utils.firebaseLogEvent(
+          '10006',
+          '-10008',
+          'event_status_2024lovely_pay_fail',
+          'event_status',
+          {
+            args_name: 'event_status_2024lovely_pay_fail',
+            channel: utils.getFBChannel(),
+          }
+        );
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '完成上报埋点',
+          mlxz_order_status: report_status,
+        });
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '完成埋点上报，开始与接口通信，通知完成上报',
+        });
+        this.sendEvent();
+      }
+    },
+
+    async sendEvent() {
+      utils.gcyLog(`order_id:${this.order_id}`, {
+        mlxz_action_desc: '开始调用接口，通知已上报',
+      });
+      const res = await sendEventApi({ order_id: this.order_id });
+      if (res.status === 1000) {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '已通知已上报',
+          mlxz_attribution_status: res.status,
+          mlxz_attribution_desc: res.desc,
+        });
+      }
+    },
     /**
      * @description: 更新支付结果
      * @return {*}
