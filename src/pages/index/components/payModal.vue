@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-15 14:18:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 17:50:02
+ * @LastEditTime: 2024-05-20 15:55:23
  * @Description: 
 -->
 <template>
@@ -17,7 +17,7 @@
       />
       <div class="price">
         <div class="unit">
-          {{ combine_info.uint }}
+          {{ combine_info.unit }}
         </div>
         <div class="num">
           {{ combine_info.price }}
@@ -104,12 +104,12 @@ export default {
     pop_modal(val) {
       if (!val) {
         this.$emit('close', false);
+      } else {
+        this.getPayMethod();
       }
     },
   },
-  created() {
-    this.getPayMethod();
-  },
+  created() {},
   methods: {
     async getPayMethod() {
       this.loading = true;
@@ -164,11 +164,11 @@ export default {
 <style scoped lang="less">
 .pay-modal {
   width: 7.5rem;
-  height: 8.56rem;
+  height: 7.8rem;
   background: linear-gradient(180deg, #d2e7de 0%, #ffffff 100%);
   border-radius: 0.4rem 0.4rem 0 0;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
   .title {
     width: 100%;
     height: 0.36rem;
@@ -197,15 +197,17 @@ export default {
       height: 0.32rem;
       line-height: 0.32rem;
       margin-right: 0.1rem;
+      margin-bottom: -0.02rem;
     }
     .num {
       font-size: 0.6rem;
       height: 0.6rem;
+      font-weight: 600;
     }
   }
   .pay-list {
-    height: 4.4rem;
-    overflow-y: auto;
+    // height: 4.4rem;
+    // overflow-y: auto;
 
     padding: 0.6rem 0.4rem 0;
     .no-empty {
@@ -239,6 +241,9 @@ export default {
         width: 0.36rem;
         height: 0.36rem;
       }
+    }
+    .pay-item:last-child {
+      margin-bottom: 0.6rem;
     }
   }
   .pay-btn {

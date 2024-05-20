@@ -2049,6 +2049,8 @@ export default {
     },
     // 切换轮播组
     getCombineIndex(index) {
+      this.new_sale_modal = false;
+      this.new_sale_modal2 = false;
       if (this.payed_order_three_list.length) {
         this.combine_index = index - 1;
       } else {
@@ -3014,13 +3016,13 @@ export default {
       top: -0.1rem;
       width: 0.82rem;
       height: 0.36rem;
-      background: #ff9456;
-      font-size: 0.2rem;
+      background: linear-gradient(180deg, #ff9e64 0%, #ff7a29 100%);
+      border-radius: 0.08rem;
+      font-size: 0.22rem;
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 0.1rem;
     }
     .check-icon {
       width: 1.86rem;
@@ -3127,6 +3129,7 @@ export default {
     .left {
       margin-left: 0.3rem;
       z-index: 2;
+      opacity: 0.7;
     }
     .center {
       width: 100%;
@@ -3243,7 +3246,7 @@ export default {
   padding-left: 0.24rem;
 }
 .get-tag {
-  background: #29be7c !important ;
+  background: linear-gradient(180deg, #5de3a8 0%, #22ba77 100%) !important;
 }
 
 .status-common {
@@ -3304,7 +3307,7 @@ export default {
 }
 
 .ml-100 {
-  margin-left: 1rem !important;
+  margin-left: 1.56rem !important;
   transition: all 0.5s;
 }
 .ml-170 {

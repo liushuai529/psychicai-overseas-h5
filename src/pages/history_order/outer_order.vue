@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-20 10:29:44
+ * @LastEditTime: 2024-05-20 16:12:59
  * @Description: 历史订单
 -->
 <template>
@@ -15,7 +15,16 @@
       :class="['container']"
     >
       <div class="top-box">
-        <img class="order-icon" :src="is_cn ? cn_title : tw_title" alt="" />
+        <!-- <img class="order-icon" :src="is_cn ? cn_title : tw_title" alt="" /> -->
+        <div class="new-tab">
+          <img
+            @click="backPage"
+            src="../../assets/img/common/dingdan_icon_back.png"
+            class="back"
+            alt=""
+          />
+          历史订单
+        </div>
         <div class="text">
           {{ $t('tips-1')
           }}<span class="download" @click="openApp()">{{ $t('tips-2') }} </span>
@@ -58,9 +67,9 @@
             :class="{
               item: true,
               'two-bg': item.product_key === 'h5_marriage' && !item.can_write,
-              'one-bg': item.product_key !== 'h5_marriage' || item.can_write,
+              'write-bg': item.can_write,
+              'one-bg': item.product_key !== 'h5_marriage' && !item.can_write,
             }"
-            :style="`height:${item.can_write ? '1.92rem' : ''}`"
             v-for="(item, k) in list"
             :key="'order' + k"
           >
@@ -597,6 +606,10 @@ export default {
       Toast('复制成功');
       this.code_modal = true;
     },
+
+    backPage() {
+      history.back();
+    },
   },
 };
 </script>
@@ -649,7 +662,7 @@ export default {
   top: 0;
   background: #d2e7de;
   padding-bottom: 0.3rem;
-  padding-top: 0.3rem;
+  // padding-top: 0.3rem;
   z-index: 10;
   .order-icon {
     width: 4.16rem;
@@ -865,8 +878,10 @@ export default {
   color: #314a46;
   margin: 0 0.24rem;
   .left .copy {
-    color: #e3453d;
     margin-left: 0.16rem;
+    color: #314a46;
+    text-decoration-line: underline;
+    opacity: 0.5;
   }
 }
 .right-btn {
@@ -950,7 +965,6 @@ export default {
       font-size: 0.28rem;
       color: #314a46;
       line-height: 0.28rem;
-      margin-left: 0.24rem;
       opacity: 0.7;
     }
     .tag {
@@ -963,7 +977,6 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 0.24rem;
     }
   }
   .right-btn {
@@ -985,6 +998,27 @@ export default {
       align-items: center;
       justify-content: center;
     }
+  }
+}
+
+.new-tab {
+  width: 7.5rem;
+  height: 0.88rem;
+  background: #bcdacd;
+  font-weight: 500;
+  font-size: 0.34rem;
+  color: #333333;
+  position: relative;
+  text-align: center;
+  line-height: 0.88rem;
+  margin-bottom: 0.3rem;
+  .back {
+    width: 0.44rem;
+    height: 0.44rem;
+    position: absolute;
+    z-index: 2;
+    left: 0.2rem;
+    top: 0.22rem;
   }
 }
 </style>
