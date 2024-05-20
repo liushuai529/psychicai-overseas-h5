@@ -1669,6 +1669,7 @@ export default {
 
       if (is_reload) {
         localStorage.removeItem('mlxz_reload_page_home');
+        localStorage.removeItem('mlxz_reload_page_history');
         this.payed_order_three_list = [];
         this.getPayedOrderList();
       }
