@@ -3090,7 +3090,7 @@ export default {
       background-size: contain;
     }
     .opacity-20 {
-      opacity: 0.2;
+      opacity: 0.5;
     }
   }
 }
