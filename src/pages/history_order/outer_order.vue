@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-20 16:12:59
+ * @LastEditTime: 2024-05-20 18:28:16
  * @Description: 历史订单
 -->
 <template>
@@ -14,17 +14,18 @@
       infinite-scroll-distance="10"
       :class="['container']"
     >
+      <div class="new-tab">
+        <img
+          @click="backPage"
+          src="../../assets/img/common/dingdan_icon_back.png"
+          class="back"
+          alt=""
+        />
+        历史订单
+      </div>
       <div class="top-box">
         <!-- <img class="order-icon" :src="is_cn ? cn_title : tw_title" alt="" /> -->
-        <div class="new-tab">
-          <img
-            @click="backPage"
-            src="../../assets/img/common/dingdan_icon_back.png"
-            class="back"
-            alt=""
-          />
-          历史订单
-        </div>
+
         <div class="text">
           {{ $t('tips-1')
           }}<span class="download" @click="openApp()">{{ $t('tips-2') }} </span>
@@ -658,8 +659,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: sticky;
-  top: 0;
+
   background: #d2e7de;
   padding-bottom: 0.3rem;
   // padding-top: 0.3rem;
@@ -977,6 +977,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+      font-weight: 600;
     }
   }
   .right-btn {
@@ -1008,10 +1009,12 @@ export default {
   font-weight: 500;
   font-size: 0.34rem;
   color: #333333;
-  position: relative;
   text-align: center;
   line-height: 0.88rem;
   margin-bottom: 0.3rem;
+  position: sticky;
+  top: 0;
+  z-index: 2;
   .back {
     width: 0.44rem;
     height: 0.44rem;

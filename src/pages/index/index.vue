@@ -64,6 +64,7 @@
     <van-swipe
       :loop="false"
       :show-indicators="false"
+      :stop-propagation="false"
       class="discount-box"
       @change="getCombineIndex"
     >
@@ -1591,6 +1592,7 @@ export default {
     combine_index: {
       handler(val) {
         console.log('combine_index', val);
+
         if (val === 0) {
           utils.firebaseLogEvent(
             '10001',
@@ -3044,6 +3046,7 @@ export default {
       font-size: 0.22rem;
       color: #fff;
       display: flex;
+      font-weight: 600;
       align-items: center;
       justify-content: center;
     }
@@ -3334,7 +3337,7 @@ export default {
   transition: all 0.5s;
 }
 .ml-170 {
-  margin-left: 1.7rem !important;
+  margin-left: 2.1rem !important;
   transition: all 0.5s;
 }
 .empty-loading {

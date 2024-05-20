@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-15 14:18:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-20 16:45:22
+ * @LastEditTime: 2024-05-20 18:24:31
  * @Description: 
 -->
 <template>
@@ -229,6 +229,8 @@ export default {
     align-items: flex-end;
     color: #e3453d;
     margin-top: 0.5rem;
+    font-weight: 600;
+
     .unit {
       font-size: 0.32rem;
       height: 0.32rem;
@@ -239,7 +241,6 @@ export default {
     .num {
       font-size: 0.6rem;
       height: 0.6rem;
-      font-weight: 600;
     }
   }
   .pay-list {
