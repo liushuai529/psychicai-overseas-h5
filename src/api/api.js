@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-07 18:54:58
+ * @LastEditTime: 2024-05-20 15:32:38
  * @Description:
  */
 export * from './fortune';
@@ -121,4 +121,14 @@ export const visitorLoginAPI = async data => {
   localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
   localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
   return true;
+};
+
+// 校验是否上报了埋点
+export const checkSendEventApi = data => {
+  return request(`/web/attribution/report/${data.order_id}`, 'GET', data);
+};
+
+// 上报埋点
+export const sendEventApi = data => {
+  return request(`/web/attribution/report/${data.order_id}`, 'POST', data);
 };

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-18 20:10:23
+ * @LastEditTime: 2024-05-20 17:22:02
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1570,7 +1570,17 @@ const resetPageUrl = (order_id, status) => {
   // history.replaceState('', '', newUrl);
 };
 
+// 观测云日志
+const gcyLog = (title, args) => {
+  let args_ = JSON.parse(JSON.stringify(args));
+  args_.mlxz_outer_visitor_id =
+    localStorage.getItem('mlxz_outer_visitor_id') || '';
+  args_.mlxz_outer_open_uid = localStorage.getItem('mlxz_outer_open_uid') || '';
+  window.DATAFLUX_RUM && window.DATAFLUX_RUM.addAction(title, args_);
+};
+
 export default {
+  gcyLog,
   resetPageUrl,
   payResultEvent,
   checkFB,
