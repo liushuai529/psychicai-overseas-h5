@@ -1664,9 +1664,9 @@ export default {
 
     setInterval(() => {
       let is_reload = localStorage.getItem('mlxz_reload_page_home');
-      if (is_reload && this.can_clear) {
+      if (is_reload) {
         localStorage.removeItem('mlxz_reload_page_home');
-        this.can_clear = false;
+        // this.can_clear = false;
         this.payed_order_three_list = [];
         this.getPayedOrderList();
       }
