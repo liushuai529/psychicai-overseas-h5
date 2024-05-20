@@ -157,7 +157,7 @@ export default {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
         mlxz_order_status: report_status,
       });
-      if (report_status === 'SUCCESS') {
+      if (report_status === 'SUCCESS' || report_status === 'PAYED') {
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '开始上报firebase埋点',
           mlxz_order_status: report_status,
