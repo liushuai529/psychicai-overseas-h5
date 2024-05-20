@@ -317,7 +317,8 @@ export default {
       this.date = arr[5];
       this.birth_hour = arr[6];
       this.username = arr[0];
-      if (arr[1] == '男' || arr[1] == 'male') {
+
+      if (['男', 'male', '1', 1].includes(arr[1])) {
         this.sex = 'male';
       } else {
         this.sex = 'female';
@@ -417,7 +418,7 @@ export default {
     },
     link(url) {
       let username = this.username;
-      let sex = this.sex;
+      let sex = this.sex === 'male' ? 1 : 0;
       let gongli_nongli = this.gongli_nongli;
       let time_obj = this.picker_date_obj;
       if (username == '') {
@@ -468,7 +469,7 @@ export default {
       );
       await utils.asleep(500);
       let username = this.username;
-      let sex = this.sex;
+      let sex = this.sex === 'male' ? 1 : 0;
       let gongli_nongli = this.gongli_nongli;
       let time_obj = this.picker_date_obj;
       if (username == '') {
