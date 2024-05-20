@@ -2077,16 +2077,6 @@ export default {
     async changeSale(val) {
       if (val) {
         if (this.two_list.length) {
-          utils.firebaseLogEvent(
-            '10001',
-            '-10022',
-            'click_choise2_pay',
-            'click',
-            {
-              args_name: 'click_choise2_pay',
-              channel: utils.getFBChannel(),
-            }
-          );
           this.pay_modal2 = true;
           return;
         }
@@ -2105,16 +2095,6 @@ export default {
         return;
       }
       if (this.three_list.length) {
-        utils.firebaseLogEvent(
-          '10001',
-          '-10021',
-          'click_choise3_pay',
-          'click',
-          {
-            args_name: 'click_choise3_pay',
-            channel: utils.getFBChannel(),
-          }
-        );
         this.pay_modal = true;
         return;
       }
