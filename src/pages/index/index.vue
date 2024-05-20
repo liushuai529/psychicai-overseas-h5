@@ -155,7 +155,7 @@
           <!-- 新版 商品选择 -->
           <div class="three-list">
             <div
-              @click="new_sale_modal = true"
+              @click="showModal()"
               v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
               :key="'three' + k"
               :class="['it']"
@@ -239,7 +239,7 @@
           <!-- 新版 商品选择 -->
           <div class="three-list">
             <div
-              @click="new_sale_modal2 = true"
+              @click="showModal2()"
               v-for="(it, k) in two_list.length ? two_list : ['', '']"
               :key="'three' + k"
               :class="['it']"
@@ -1560,6 +1560,7 @@ export default {
             channel: utils.getFBChannel(),
           }
         );
+
         this.getLocalChecked('three_list', 'mlxz_web_select_list');
         this.pick_list = JSON.parse(JSON.stringify(this.three_list));
       } else {
@@ -1579,6 +1580,7 @@ export default {
             channel: utils.getFBChannel(),
           }
         );
+
         this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
         this.pick_list2 = JSON.parse(JSON.stringify(this.two_list));
       } else {
@@ -1686,6 +1688,20 @@ export default {
   },
   methods: {
     getProductions,
+    showModal() {
+      utils.firebaseLogEvent('10001', '-10017', 'click_main_choise3', 'click', {
+        args_name: 'click_main_choise3',
+        channel: utils.getFBChannel(),
+      });
+      this.new_sale_modal = true;
+    },
+    showModal2() {
+      utils.firebaseLogEvent('10001', '-10015', 'click_main_choise2', 'click', {
+        args_name: 'click_main_choise2',
+        channel: utils.getFBChannel(),
+      });
+      this.new_sale_modal2 = true;
+    },
     // 查询订单支付结果
     async getOrderResult() {
       if (!this.continue || !this.order_id) return;
@@ -2074,7 +2090,18 @@ export default {
           this.pay_modal2 = true;
           return;
         }
+        utils.firebaseLogEvent(
+          '10001',
+          '-10031',
+          'click_main_choise2group',
+          'click',
+          {
+            args_name: 'click_main_choise2group',
+            channel: utils.getFBChannel(),
+          }
+        );
         this.new_sale_modal2 = true;
+
         return;
       }
       if (this.three_list.length) {
@@ -2091,6 +2118,16 @@ export default {
         this.pay_modal = true;
         return;
       }
+      utils.firebaseLogEvent(
+        '10001',
+        '-10032',
+        'click_main_choise3group',
+        'click',
+        {
+          args_name: 'click_main_choise3group',
+          channel: utils.getFBChannel(),
+        }
+      );
       this.new_sale_modal = true;
     },
 
@@ -2132,11 +2169,11 @@ export default {
         );
         utils.firebaseLogEvent(
           '10001',
-          '-10015',
-          'click_main_choise2',
+          '-10025',
+          'click_reportlist_check2',
           'click',
           {
-            args_name: 'click_main_choise2',
+            args_name: 'click_reportlist_check2',
             channel: utils.getFBChannel(),
           }
         );
@@ -2149,10 +2186,16 @@ export default {
         'mlxz_web_select_list',
         JSON.stringify(this.three_list)
       );
-      utils.firebaseLogEvent('10001', '-10016', 'click_main_choise3', 'click', {
-        args_name: 'click_main_choise3',
-        channel: utils.getFBChannel(),
-      });
+      utils.firebaseLogEvent(
+        '10001',
+        '-10026',
+        'click_reportlist_check3',
+        'click',
+        {
+          args_name: 'click_reportlist_check3',
+          channel: utils.getFBChannel(),
+        }
+      );
       this.new_sale_modal = false;
     },
     // 获取本地缓存选择的商品

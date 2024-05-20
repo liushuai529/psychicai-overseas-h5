@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-15 14:18:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-20 15:55:23
+ * @LastEditTime: 2024-05-20 16:45:22
  * @Description: 
 -->
 <template>
@@ -123,13 +123,49 @@ export default {
         this.loading = false;
       }
     },
+    eventSend(index, title) {
+      if (!index) return;
+      try {
+        fbq('track', 'AddToCart');
+      } catch (err) {
+        console.error('error message:', err);
+      }
+      if (index === 2) {
+        utils.firebaseLogEvent(
+          '10001',
+          '-10022',
+          'click_choise2_pay',
+          'click',
+          {
+            args_name: 'click_choise2_pay',
+            channel: utils.getFBChannel(),
+            pay_type: title,
+          }
+        );
+      } else {
+        utils.firebaseLogEvent(
+          '10001',
+          '-10021',
+          'click_choise3_pay',
+          'click',
+          {
+            args_name: 'click_choise3_pay',
+            channel: utils.getFBChannel(),
+            pay_type: title,
+          }
+        );
+      }
+    },
 
     async payMoney() {
       Indicator.open('支付中...');
-      const { pay_method, trade_pay_type, trade_target_org } =
+
+      const { pay_method, trade_pay_type, trade_target_org, title } =
         this.pay_methods[this.check_index];
       const { price, unit, product_key, product_id, combine_product_ids } =
         this.combine_info;
+
+      this.eventSend(combine_product_ids.length, title);
       let item_ = {
         e_name: 'pay_click',
         product_id,
@@ -149,6 +185,7 @@ export default {
           location.origin + location.pathname + '?pay_index=' + this.pay_index,
       };
       const res = await payOrderAPI(params);
+
       localStorage.setItem('mlxz_remove_flag', 2);
       Indicator.close();
       if (res.status !== 1000) return;
