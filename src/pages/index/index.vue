@@ -870,6 +870,19 @@ const e_id_arr = [
   '60005',
 ];
 
+const product_key_arr = [
+  'h5_annual2024',
+  'h5_wealth2024',
+  'h5_emotion2024',
+  'h5_career2024',
+  'h5_marriage',
+  'h5_weigh_bone',
+  'h5_guiguzi',
+  'h5_wealth2024',
+  'h5_annual2024',
+  'h5_marriage',
+];
+
 const report_url = [
   'year_of_lucky_2024',
   'lucky_year_report',
@@ -1088,6 +1101,7 @@ export default {
           url: 'marriage_measure_overseas',
           a_id: '60005',
           a_name: 'marriage_contract_report',
+          product_key: 'h5_marriage',
         },
         {
           id: 5,
@@ -1097,6 +1111,7 @@ export default {
           url: 'emotion_fortune',
           a_id: '60010',
           a_name: '2024_lovely_report',
+          product_key: 'h5_emotion2024',
         },
         {
           id: 4,
@@ -2063,7 +2078,7 @@ export default {
      * @param {*} val
      * @return {*}
      */
-    handleReport(val, index) {
+    async handleReport(val, index) {
       if (index === 1) {
         window.Adjust &&
           window.Adjust.trackEvent({
@@ -2100,10 +2115,17 @@ export default {
           }
         );
       }
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'sqqqbt',
+      if (val.product_key) {
+        let same_ = this.all_list.find(
+          it => it.product_key === val.product_key
+        );
+
+        await this.logEventForSort({
+          e_name: 'content_click',
+          product_id: same_.product_id,
         });
+      }
+      await utils.asleep(500);
 
       location.href = val.id === 4 ? val.url : `${val.url}.html`;
     },
@@ -2165,6 +2187,16 @@ export default {
       }
     },
     async jumpPage(index) {
+      if (product_key_arr[index]) {
+        let same_ = this.all_list.find(
+          it => it.product_key === product_key_arr[index]
+        );
+
+        await this.logEventForSort({
+          e_name: 'content_click',
+          product_id: same_.product_id,
+        });
+      }
       await this.logHome();
 
       utils.firebaseLogEvent(
@@ -2178,10 +2210,10 @@ export default {
           channel: utils.getFBChannel(),
         }
       );
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'exr1zn',
-        });
+      // window.Adjust &&
+      //   window.Adjust.trackEvent({
+      //     eventToken: 'exr1zn',
+      //   });
 
       await utils.asleep(500);
 
@@ -2206,7 +2238,7 @@ export default {
         });
       }
 
-      window.Adjust && window.Adjust.trackEvent({ eventToken: ad_e });
+      // window.Adjust && window.Adjust.trackEvent({ eventToken: ad_e });
       await utils.asleep(500);
       location.href = `${url}.html`;
     },
