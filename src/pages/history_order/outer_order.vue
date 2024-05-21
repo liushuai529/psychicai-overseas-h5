@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-20 19:13:44
+ * @LastEditTime: 2024-05-21 10:07:23
  * @Description: 历史订单
 -->
 <template>
@@ -303,7 +303,6 @@ export default {
     setInterval(() => {
       let is_reload = localStorage.getItem('mlxz_reload_page_history');
       if (is_reload) {
-        localStorage.removeItem('mlxz_reload_page_history');
         this.query.page = 1;
         this.list = [];
         this.getData();
@@ -312,11 +311,6 @@ export default {
   },
 
   mounted() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'k7zenb',
-      });
-
     utils.firebaseLogEvent(
       '10002',
       '-10001',
@@ -349,6 +343,8 @@ export default {
       this.show_kf = false;
       this.query.status = query_enums[this.active_tab] || '';
       const { status, data } = await getHistoryOrderAPI(this.query);
+      localStorage.removeItem('mlxz_reload_page_history');
+
       Indicator.close();
       if (status !== 1000) return;
       this.list =

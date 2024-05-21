@@ -1612,9 +1612,8 @@ export default {
   created() {
     document.title = this.$t('dom-title');
 
-    this.is_show_combine = ['enjoy03', 'panda03'].includes(
-      utils.getFBChannel()
-    );
+    this.is_show_combine =
+      ['enjoy03', 'panda03'].includes(utils.getFBChannel()) || !utils.isProd();
     console.log('is_show_combine', this.is_show_combine);
 
     let url_query = utils.getUrlParams();
@@ -1667,8 +1666,6 @@ export default {
     setInterval(() => {
       let is_reload = localStorage.getItem('mlxz_reload_page_home');
       if (is_reload) {
-        localStorage.removeItem('mlxz_reload_page_home');
-        // this.can_clear = false;
         this.payed_order_three_list = [];
         this.getPayedOrderList();
       }
@@ -2435,6 +2432,7 @@ export default {
           }
         });
       });
+      localStorage.removeItem('mlxz_reload_page_home');
     },
     logPageView(val) {
       if (val === 0) {
@@ -2457,11 +2455,7 @@ export default {
 
     async toWriteInfo(item) {
       const { status, url, order_id } = item;
-      // location.href = `${url}.html#/${
-      //   status ? 'result' : ''
-      // }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
       localStorage.setItem('mlxz_reload_page_home', 1);
-      // this.can_clear=true;
       await utils.asleep(500);
       location.href = `${location.origin}/${url}.html#/${
         status ? 'result' : ''
