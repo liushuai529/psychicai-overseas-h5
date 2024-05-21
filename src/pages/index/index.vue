@@ -58,9 +58,6 @@
       </div>
     </div>
     <!-- 新版多买多折扣 -->
-    <!-- <div class="empty-loading">
-      <mt-spinner color="#26a2ff" :size="60" type="fading-circle"></mt-spinner>
-    </div> -->
     <van-swipe
       v-if="is_show_combine"
       :loop="false"
@@ -69,12 +66,19 @@
       class="discount-box"
       @change="getCombineIndex"
     >
+      <div
+        :style="{
+          height: '100%',
+          width: scrollStyle,
+          transition: 'width 0.5s',
+        }"
+      ></div>
       <van-swipe-item
         v-if="payed_order_three_list.length"
         :class="{
           'sale-item': true,
-          'ml-100': combine_index === 0,
-          'ml-170': combine_index === 1,
+          // 'ml-100': combine_index === 0,
+          // 'ml-170': combine_index === 1,
         }"
       >
         <div class="item">
@@ -127,7 +131,7 @@
       <van-swipe-item
         :class="{
           'sale-item': true,
-          'ml-100': !payed_order_three_list.length && combine_index !== 0,
+          // 'ml-100': !payed_order_three_list.length && combine_index !== 0,
         }"
       >
         <div class="item">
@@ -1561,6 +1565,23 @@ export default {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
+    scrollStyle() {
+      if (this.payed_order_three_list.length) {
+        if (this.combine_index === -1) {
+          return '0px';
+        } else if (this.combine_index === 0) {
+          return '0.8rem';
+        } else {
+          return '1.55rem';
+        }
+      } else {
+        if (this.combine_index) {
+          return '0.8rem';
+        } else {
+          return '0px';
+        }
+      }
+    },
   },
   watch: {
     sale_visible(val) {
@@ -2448,7 +2469,9 @@ export default {
       this.payed_order_three_list = [];
 
       const res = await getComboListAPI();
-
+      if (res.data) {
+        localStorage.removeItem('mlxz_reload_page_home');
+      }
       if (res.status !== 1000 || !res.data.combine) {
         this.payed_order_three_list = [];
         this.combine_index = 0;
@@ -2489,7 +2512,6 @@ export default {
           }
         });
       });
-      localStorage.removeItem('mlxz_reload_page_home');
 
       if (order_id) {
         this.order_id = order_id;
@@ -3232,6 +3254,11 @@ export default {
   justify-content: flex-start !important;
 }
 
+.box1 {
+  width: 1px;
+  height: 100%;
+}
+
 .discount-box {
   width: 7.5rem;
   height: 4.08rem;
@@ -3240,12 +3267,10 @@ export default {
   .sale-item {
     width: 6.54rem !important;
     height: 100%;
-    // margin-right: 0.2rem;
     margin-left: 0.2rem;
     .item {
       width: 6.54rem !important;
       height: 4.08rem !important;
-      // margin-left: 0.2rem;
       background: url('../../assets/img/new_combine/home_img_headcard.png')
         no-repeat;
       background-size: 100% 100%;
@@ -3624,15 +3649,27 @@ export default {
   align-items: center;
   margin-top: 0.3rem;
 }
+.show-box1 {
+  width: 1.56rem;
+  height: 100%;
+}
+.hid-1 {
+  width: 0.8rem;
+  transition: width 0.3s;
+}
+.show-box2 {
+  width: 2.3rem;
+  height: 100%;
+}
 
 .ml-100 {
   margin-left: 1.56rem !important;
-  transition: all 0.5s;
-  // .3秒左移1.56rem
+  transition: margin-left 0.3s;
 }
 .ml-170 {
   margin-left: 2.3rem !important;
-  transition: all 0.5s;
+  // transition: all 0.5s;
+  transition: margin-left 0.3s;
 }
 .empty-loading {
   width: 7.5rem;
