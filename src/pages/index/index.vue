@@ -2450,6 +2450,10 @@ export default {
       localStorage.removeItem('mlxz_reload_page_home');
     },
     logPageView(val) {
+      let channel = utils.getFBChannel();
+      if (!['enjoy03', 'panda03'].includes(channel)) {
+        return;
+      }
       if (val === 0) {
         utils.firebaseLogEvent('10001', '-10012', 'view_main_report3', 'view', {
           args_name: 'view_main_report3',
@@ -2523,7 +2527,7 @@ export default {
 
     getSortInitList() {
       this.sale_list.forEach(it => {
-        item.icon_item = banner_enums[item.product_key];
+        it.icon_item = banner_enums[it.product_key];
 
         if (it.product_key === 'h5_annual2024') {
           it.is_big = true;
