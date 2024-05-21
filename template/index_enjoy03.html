@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-07 21:00:52
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-20 20:17:17
+ * @LastEditTime: 2024-05-21 19:19:16
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -155,21 +155,22 @@
       }
     </style>
     <script type="text/javascript">
-      let is_emo = location.href.indexOf('enjoy02/emotion_fortune') > -1;
-      if (is_emo) {
-        (function (c, l, a, r, i, t, y) {
-          c[a] =
-            c[a] ||
-            function () {
-              (c[a].q = c[a].q || []).push(arguments);
-            };
-          t = l.createElement(r);
-          t.async = 1;
-          t.src = 'https://www.clarity.ms/tag/' + i;
-          y = l.getElementsByTagName(r)[0];
-          y.parentNode.insertBefore(t, y);
-        })(window, document, 'clarity', 'script', 'mdeu0i8hxe');
-      }
+      //   let is_emo = location.href.indexOf('enjoy02/emotion_fortune') > -1;
+      //   if (is_emo) {
+      //     (function (c, l, a, r, i, t, y) {
+      //       c[a] =
+      //         c[a] ||
+      //         function () {
+      //           (c[a].q = c[a].q || []).push(arguments);
+      //         };
+      //       t = l.createElement(r);
+      //       t.async = 1;
+      //       t.src = 'https://www.clarity.ms/tag/' + i;
+      //       y = l.getElementsByTagName(r)[0];
+      //       y.parentNode.insertBefore(t, y);
+      //     })(window, document, 'clarity', 'script', 'mdeu0i8hxe');
+      //   }
+      //
     </script>
   </head>
 
@@ -230,5 +231,19 @@
     <script src="../js/zepto.min.js"></script>
     <script src="../js/mobiscroll.zepto.js"></script>
     <script src="../js/swiper-3.3.1.jquery.min.js"></script>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = 'https://www.clarity.ms/tag/' + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, 'clarity', 'script', 'mfgfvho5pg');
+    </script>
   </body>
 </html>
