@@ -881,7 +881,7 @@ const product_key_arr = [
   'h5_career2024',
   'h5_marriage',
   'h5_weigh_bone',
-  'h5_guiguzi',
+  'h5_bai_gua',
   'h5_wealth2024',
   'h5_annual2024',
   'h5_marriage',
