@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 11:49:18
+ * @LastEditTime: 2024-05-21 15:17:07
  * @Description: 支付弹窗
 -->
 <template>
@@ -85,7 +85,12 @@
 
 <script>
 import { Indicator } from 'mint-ui';
-import { getPayMethodsAPI, getProductionsAPI, payOrderAPI } from '../api/api';
+import {
+  getPayMethodsAPI,
+  getProductionsAPI,
+  payOrderAPI,
+  reportEventAPI,
+} from '../api/api';
 import utils from '../libs/utils';
 import { path_enums } from '../libs/enum';
 import { CountDown } from 'vant';
@@ -285,10 +290,10 @@ export default {
               channel: utils.getFBChannel(),
             }
           );
-          window.Adjust &&
-            window.Adjust.trackEvent({
-              eventToken: this.a_view_token,
-            });
+          // window.Adjust &&
+          //   window.Adjust.trackEvent({
+          //     eventToken: this.a_view_token,
+          //   });
         } else {
           if (this.parser) {
             this.parser.destroy();
@@ -371,16 +376,32 @@ export default {
         this.closeModal();
       }
     },
-
+    isShowBannerSort() {
+      let channel = utils.getFBChannel();
+      return ['enjoy02', 'panda02'].includes(channel) ? false : true;
+    },
+    // 事件排序
+    async logEventForSort(it) {
+      if (!this.isShowBannerSort()) return;
+      try {
+        const res = await reportEventAPI({
+          event_name: it.e_name,
+          product_id: it.product_id,
+        });
+        if (res.status !== 1000) return;
+      } catch (e) {
+        console.error(e);
+      }
+    },
     /**
      * @description: 创建订单 支付
      * @return {*}
      */
     async payMoney() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: this.a_click_token,
-        });
+      // window.Adjust &&
+      //   window.Adjust.trackEvent({
+      //     eventToken: this.a_click_token,
+      //   });
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
         await utils.checkFB();
@@ -391,6 +412,10 @@ export default {
           console.error('AddToCart error message:', err);
         }
       }
+      this.logEventForSort({
+        e_name: 'pay_click',
+        product_id: this.product.product_id,
+      });
       utils.firebaseLogEvent(
         this.e_view_id,
         this.c_click_id,

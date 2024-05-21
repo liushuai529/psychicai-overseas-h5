@@ -2460,6 +2460,7 @@ export default {
       localStorage.removeItem('mlxz_reload_page_home');
 
       if (order_id) {
+        this.order_id = order_id;
         let payed_key_list = this.payed_order_three_list.map(
           item => item.product_key
         );
@@ -2472,7 +2473,6 @@ export default {
             it.tags.sort().join('').indexOf(payed_key_list.sort().join('')) > -1
         );
         this.payed_combine_price = pay_combine_info.price;
-        this.order_id = order_id;
         let check_result = await this.checkWithTimeout();
         if (check_result !== null) {
           utils.gcyLog(`order_id:${this.order_id}`, {
