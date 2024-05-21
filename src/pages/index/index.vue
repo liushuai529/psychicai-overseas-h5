@@ -237,7 +237,7 @@
             <img
               v-else
               src="../../assets/img/new_combine/home_tag_68_big.png"
-              class="zhekou-icon"
+              class="zhekou-icon discount-tag"
               alt=""
             />
           </div>
