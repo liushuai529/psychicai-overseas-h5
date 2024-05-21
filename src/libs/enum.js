@@ -286,3 +286,108 @@ export const report_id_arr = {
   h5_emotion2024: '60010',
   h5_career2024: '60011',
 };
+
+import cn_small_bzhh from '../assets/img/common/banner/small/cn/h5_fang_jian_bazihehun.png';
+import cn_small_wealth from '../assets/img/common/banner/small/cn/h5_fang_jian_caiyun.png';
+import cn_small_career from '../assets/img/common/banner/small/cn/h5_fang_jian_shiye.png';
+import cn_small_love from '../assets/img/common/banner/small/cn/h5_fang_jian_ganqing.png';
+import cn_small_year from '../assets/img/common/banner/small/cn/h5_fang_jian_nianyun.png';
+import cn_small_gggz from '../assets/img/common/banner/small/cn/h5_fang_jian_guiguzi.png';
+import cn_small_weighbone from '../assets/img/common/banner/small/cn/h5_fang_jian_yuantiangang.png';
+
+import tw_small_bzhh from '../assets/img/common/banner/small/tw/h5_fang_fan_bazihhehun.png';
+import tw_small_wealth from '../assets/img/common/banner/small/tw/h5_fang_fan_caiyun.png';
+import tw_small_career from '../assets/img/common/banner/small/tw/h5_fang_fan_shiye.png';
+import tw_small_love from '../assets/img/common/banner/small/tw/h5_fang_fan_ganqing.png';
+import tw_small_year from '../assets/img/common/banner/small/tw/h5_fang_fan_nianyun.png';
+import tw_small_gggz from '../assets/img/common/banner/small/tw/h5_fang_fan_guiguzi.png';
+import tw_small_weighbone from '../assets/img/common/banner/small/tw/h5_fang_fan_yuantiangang.png';
+
+import cn_big_bzhh from '../assets/img/common/banner/big/cn/h5_chang_jian_bazihehun.png';
+import cn_big_wealth from '../assets/img/common/banner/big/cn/h5_chang_jian_caiyun.png';
+import cn_big_career from '../assets/img/common/banner/big/cn/h5_chang_jian_shiye.png';
+import cn_big_love from '../assets/img/common/banner/big/cn/h5_chang_jian_ganqing.png';
+import cn_big_year from '../assets/img/common/banner/big/cn/h5_chang_jian_nianyun.png';
+import cn_big_gggz from '../assets/img/common/banner/big/cn/h5_chang_jian_guiguzi.png';
+import cn_big_weighbone from '../assets/img/common/banner/big/cn/h5_chang_jian_yuantiangang.png';
+
+import tw_big_bzhh from '../assets/img/common/banner/big/tw/h5_chang_fan_bazihehun.png';
+import tw_big_wealth from '../assets/img/common/banner/big/tw/h5_chang_fan_caiyun.png';
+import tw_big_career from '../assets/img/common/banner/big/tw/h5_chang_fan_shiye.png';
+import tw_big_love from '../assets/img/common/banner/big/tw/h5_chang_fan_ganqing.png';
+import tw_big_year from '../assets/img/common/banner/big/tw/h5_chang_fan_nianyun.png';
+import tw_big_gggz from '../assets/img/common/banner/big/tw/h5_chang_fan_guiguzi.png';
+import tw_big_weighbone from '../assets/img/common/banner/big/tw/h5_chang_fan_yuantiangang.png';
+
+export const banner_enums = {
+  h5_marriage: {
+    big: {
+      cn: cn_big_bzhh,
+      tw: tw_big_bzhh,
+    },
+    small: {
+      cn: cn_small_bzhh,
+      tw: tw_small_bzhh,
+    },
+  },
+  h5_emotion2024: {
+    big: {
+      cn: cn_big_love,
+      tw: tw_big_love,
+    },
+    small: {
+      cn: cn_small_love,
+      tw: tw_small_love,
+    },
+  },
+  h5_annual2024: {
+    big: {
+      cn: cn_big_year,
+      tw: tw_big_year,
+    },
+    small: {
+      cn: cn_small_year,
+      tw: tw_small_year,
+    },
+  },
+  h5_wealth2024: {
+    big: {
+      cn: cn_big_wealth,
+      tw: tw_big_wealth,
+    },
+    small: {
+      cn: cn_small_wealth,
+      tw: tw_small_wealth,
+    },
+  },
+  h5_career2024: {
+    big: {
+      cn: cn_big_career,
+      tw: tw_big_career,
+    },
+    small: {
+      cn: cn_small_career,
+      tw: tw_small_career,
+    },
+  },
+  h5_bai_gua: {
+    big: {
+      cn: cn_big_gggz,
+      tw: tw_big_gggz,
+    },
+    small: {
+      cn: cn_small_gggz,
+      tw: tw_small_gggz,
+    },
+  },
+  h5_weigh_bone: {
+    big: {
+      cn: cn_big_weighbone,
+      tw: tw_big_weighbone,
+    },
+    small: {
+      cn: cn_small_weighbone,
+      tw: tw_small_weighbone,
+    },
+  },
+};

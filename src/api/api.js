@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-20 15:32:38
+ * @LastEditTime: 2024-05-21 10:10:17
  * @Description:
  */
 export * from './fortune';
@@ -148,11 +148,19 @@ export const sortByEvent = async data => {
 };
 
 // 校验是否上报了埋点
-export const checkSendEventApi = data => {
+export const checkSendEventApi = async data => {
+  await visitorLoginAPI();
   return request(`/web/attribution/report/${data.order_id}`, 'GET', data);
 };
 
 // 上报埋点
-export const sendEventApi = data => {
+export const sendEventApi = async data => {
+  await visitorLoginAPI();
   return request(`/web/attribution/report/${data.order_id}`, 'POST', data);
+};
+
+// 测算商品排序
+export const sortProductsAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/event/products/sort`, 'GET', data);
 };

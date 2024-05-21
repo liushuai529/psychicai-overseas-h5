@@ -297,7 +297,7 @@
     <!-- banner位 -->
     <div class="report-container">
       <div
-        v-for="(item, index) in sale_list"
+        v-for="(item, index) in banner_list"
         :key="index"
         @click="
           jumpUrl(
@@ -312,7 +312,15 @@
         :class="[item.is_big ? 'big-item' : 'normal-item']"
       >
         <img
-          :src="is_cn ? item.zh_icon : item.tw_icon"
+          :src="
+            item.is_big
+              ? is_cn
+                ? item.icon_item.big.cn
+                : item.icon_item.big.tw
+              : is_cn
+              ? item.icon_item.small.cn
+              : item.icon_item.small.tw
+          "
           :class="[item.is_big ? 'big-icon' : 'normal-icon']"
           alt=""
         />
@@ -347,6 +355,7 @@
         </div>
       </div>
     </div>
+    <van-skeleton title :row="3" />
 
     <!-- 多买多折扣 -->
     <div style="display: none" class="sale-box">
@@ -647,15 +656,19 @@ import Recommend from './recommend.vue';
 import Fortune from './fortune.vue';
 import utils from '../../libs/utils';
 import PayPopup from '../../components/PayPopup.vue';
+import { banner_enums } from '../../libs/enum';
+import { Toast, Indicator } from 'mint-ui';
 
-import { Toast, Indicator, Spinner } from 'mint-ui';
 import PopResult from './pay_result.vue';
-import { getResultAPI, checkSendEventApi, sendEventApi } from '../../api/api';
 import { getProductions } from '../../libs/common_api';
 import {
   getProductionsAPI,
   getComboListAPI,
   reportEventAPI,
+  sortProductsAPI,
+  getResultAPI,
+  checkSendEventApi,
+  sendEventApi,
 } from '../../api/api';
 
 import longnianImg from '../../assets/img/mlxz/cold_start/banner-2024caiyun@3x.png';
@@ -1038,6 +1051,8 @@ export default {
       show_result: false,
       order_id: '',
       is_show_combine: false,
+      today_sort_list: [],
+      banner_list: [],
     };
   },
   computed: {
@@ -1447,7 +1462,7 @@ export default {
           tw_icon: tw_year24_banner,
           buy_num: '8321',
           review_num: '8238',
-          is_big: true,
+          is_big: false,
           e_id: '-10003',
           e_name: 'click_report_2024report',
           ad_e: 'oqfzzs',
@@ -1625,6 +1640,7 @@ export default {
     let remove_flag = +localStorage.getItem('mlxz_remove_flag'); // 1:已经删除 ,2:未删除
 
     this.randomBuyList();
+    this.getProductSort();
     getProductionsAPI('ceh5').then(res => {
       this.all_list = res.data;
       if (!this.is_show_combine) return;
@@ -2503,6 +2519,35 @@ export default {
         );
         this.new_sale_modal = true;
       }
+    },
+
+    // 首页Banner排序
+    async getProductSort() {
+      const res = await sortProductsAPI();
+      if (res.status !== 1000) return;
+      // 在接口返回error或者没有排序值的情况下 添加一个默认值大图
+      if (res.status !== 1000 || !res.data.length) {
+        this.sale_list.forEach(it => {
+          if (it.product_key === 'h5_annual2024') {
+            it.is_big = true;
+          }
+        });
+        this.banner_list = JSON.parse(JSON.stringify(this.sale_list));
+      }
+      this.today_sort_list = res.data;
+      this.sale_list.forEach(item => {
+        item.icon_item = banner_enums[item.product_key];
+        // 将第一个置为大图
+        item.is_big = item.product_key === this.today_sort_list[0];
+      });
+      // 给banner_list按照排序值赋值
+      this.today_sort_list.forEach(it => {
+        this.banner_list.push(
+          this.sale_list.find(item => item.product_key === it)
+        );
+      });
+      // 将banner_list的第一个放到第三个
+      this.banner_list.splice(2, 0, this.banner_list.shift());
     },
   },
 };
