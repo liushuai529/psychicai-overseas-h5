@@ -355,7 +355,6 @@
         </div>
       </div>
     </div>
-    <van-skeleton title :row="3" />
 
     <!-- 多买多折扣 -->
     <div style="display: none" class="sale-box">
@@ -2477,12 +2476,13 @@ export default {
         status ? 'result' : ''
       }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
     },
+    isShowBannerSort() {
+      let channel = utils.getFBChannel();
+      return ['enjoy02', 'panda02'].includes(channel) ? false : true;
+    },
     // 事件排序
     async logEventForSort(it) {
-      let channel = utils.getFBChannel();
-      if (['enjoy02', 'panda02'].includes(channel)) {
-        return;
-      }
+      if (!this.isShowBannerSort()) return;
       try {
         const res = await reportEventAPI({
           event_name: it.e_name,
@@ -2521,18 +2521,27 @@ export default {
       }
     },
 
+    getSortInitList() {
+      this.sale_list.forEach(it => {
+        if (it.product_key === 'h5_annual2024') {
+          it.is_big = true;
+        }
+      });
+      this.banner_list = JSON.parse(JSON.stringify(this.sale_list));
+    },
+
     // 首页Banner排序
     async getProductSort() {
+      if (!this.isShowBannerSort()) {
+        this.getSortInitList();
+        return;
+      }
+
       const res = await sortProductsAPI();
       if (res.status !== 1000) return;
       // 在接口返回error或者没有排序值的情况下 添加一个默认值大图
       if (res.status !== 1000 || !res.data.length) {
-        this.sale_list.forEach(it => {
-          if (it.product_key === 'h5_annual2024') {
-            it.is_big = true;
-          }
-        });
-        this.banner_list = JSON.parse(JSON.stringify(this.sale_list));
+        this.getSortInitList();
       }
       this.today_sort_list = res.data;
       this.sale_list.forEach(item => {
