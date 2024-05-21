@@ -1052,6 +1052,7 @@ export default {
       is_show_combine: false,
       today_sort_list: [],
       banner_list: [],
+      payed_combine_price: null,
     };
   },
   computed: {
@@ -1739,9 +1740,18 @@ export default {
      * @return {*}
      */
     async handleSendEvent() {
-      let report_price = +utils.getQueryString('report_price');
-      let report_status = utils.getQueryString('status');
-      let pay_index = +utils.getQueryString('pay_index');
+      let report_price =
+        +utils.getQueryString('report_price') || this.payed_combine_price;
+      let report_status =
+        utils.getQueryString('status') || this.order_id ? 'SUCCESS' : '';
+      // let pay_index = +utils.getQueryString('pay_index') ;
+      let pay_index;
+      if (utils.getQueryString('pay_index')) {
+        pay_index = +utils.getQueryString('pay_index');
+      } else {
+        pay_index = this.payed_order_three_list.length;
+      }
+      console.log(pay_index);
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
         mlxz_order_status: report_status,
@@ -2414,7 +2424,7 @@ export default {
         return;
       }
 
-      const { sub_orders } = res.data.combine;
+      const { sub_orders, order_id } = res.data.combine;
       if (sub_orders.length) {
         this.combine_index = this.combine_index - 1;
       }
@@ -2448,6 +2458,36 @@ export default {
         });
       });
       localStorage.removeItem('mlxz_reload_page_home');
+
+      if (order_id) {
+        let payed_key_list = this.payed_order_three_list.map(
+          item => item.product_key
+        );
+        let product_key =
+          this.payed_order_three_list.length === 3 ? 'h5_combo3' : 'h5_combo2';
+        let pay_combine_info = this.all_list.find(
+          it =>
+            it.product_key === product_key &&
+            it.tags.length &&
+            it.tags.sort().join('').indexOf(payed_key_list.sort().join('')) > -1
+        );
+        this.payed_combine_price = pay_combine_info.price;
+        this.order_id = order_id;
+        let check_result = await this.checkWithTimeout();
+        if (check_result !== null) {
+          utils.gcyLog(`order_id:${this.order_id}`, {
+            mlxz_action_desc: '已经获取了是否上报埋点的状态',
+            mlxz_attribution_status: check_result.data.status,
+          });
+          if (check_result.data.status) {
+            utils.gcyLog(`order_id:${this.order_id}`, {
+              mlxz_action_desc: '准备执行上报埋点',
+              mlxz_check_status: check_result.data.status,
+            });
+            this.handleSendEvent();
+          }
+        }
+      }
     },
     logPageView(val) {
       let channel = utils.getFBChannel();
