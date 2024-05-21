@@ -2523,6 +2523,8 @@ export default {
 
     getSortInitList() {
       this.sale_list.forEach(it => {
+        item.icon_item = banner_enums[item.product_key];
+
         if (it.product_key === 'h5_annual2024') {
           it.is_big = true;
         }
@@ -3550,6 +3552,7 @@ export default {
 .ml-100 {
   margin-left: 1.56rem !important;
   transition: all 0.5s;
+  // .3秒左移1.56rem
 }
 .ml-170 {
   margin-left: 2.3rem !important;
