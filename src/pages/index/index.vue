@@ -153,7 +153,7 @@
             <img
               v-else
               src="../../assets/img/new_combine/home_tag_58_big.png"
-              class="zhekou-icon"
+              class="zhekou-icon discount-tag"
               alt=""
             />
           </div>
@@ -199,7 +199,7 @@
             <img
               v-if="three_list.length"
               src="../../assets/img/new_combine/home_tag_58_big.png"
-              class="absolute-zhe"
+              class="absolute-zhe discount-tag"
               alt=""
             />
           </div>
@@ -3677,5 +3677,18 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@keyframes scaleNewBtn {
+  0% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+.discount-tag {
+  animation: scaleNewBtn 0.6s infinite ease-in-out alternate;
 }
 </style>
