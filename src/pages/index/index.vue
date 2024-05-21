@@ -2437,6 +2437,10 @@ export default {
       });
     },
     logPageView(val) {
+      let channel = utils.getFBChannel();
+      if (!['enjoy03', 'panda03'].includes(channel)) {
+        return;
+      }
       if (val === 0) {
         utils.firebaseLogEvent('10001', '-10012', 'view_main_report3', 'view', {
           args_name: 'view_main_report3',
