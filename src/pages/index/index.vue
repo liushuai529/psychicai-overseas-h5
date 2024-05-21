@@ -70,7 +70,7 @@
         :style="{
           height: '100%',
           width: scrollStyle,
-          transition: 'width 0.5s',
+          transition: 'width 0.3s',
         }"
       ></div>
       <van-swipe-item
@@ -1576,7 +1576,7 @@ export default {
         }
       } else {
         if (this.combine_index) {
-          return '0.8rem';
+          return this.combine_index !== -1 ? '0.8rem' : '0px';
         } else {
           return '0px';
         }
@@ -2481,7 +2481,8 @@ export default {
 
       const { sub_orders, order_id } = res.data.combine;
       if (sub_orders.length) {
-        this.combine_index = this.combine_index - 1;
+        this.combine_index =
+          this.combine_index === -1 ? -1 : this.combine_index - 1;
       }
 
       this.logPageView(this.combine_index);
@@ -2512,7 +2513,7 @@ export default {
           }
         });
       });
-
+      return;
       if (order_id) {
         this.order_id = order_id;
         let payed_key_list = this.payed_order_three_list.map(
@@ -2569,7 +2570,6 @@ export default {
     async toWriteInfo(item) {
       const { status, url, order_id } = item;
       localStorage.setItem('mlxz_reload_page_home', 1);
-      await utils.asleep(500);
       location.href = `${location.origin}/${url}.html#/${
         status ? 'result' : ''
       }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
