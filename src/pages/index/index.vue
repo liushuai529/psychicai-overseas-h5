@@ -283,7 +283,7 @@
             <img
               v-if="two_list.length"
               src="../../assets/img/new_combine/home_tag_68_big.png"
-              class="absolute-zhe"
+              class="absolute-zhe discount-tag"
               alt=""
             />
           </div>
