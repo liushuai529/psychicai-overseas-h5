@@ -1610,6 +1610,8 @@ export default {
     },
   },
   created() {
+    document.title = this.$t('dom-title');
+
     this.is_show_combine = ['enjoy03', 'panda03'].includes(
       utils.getFBChannel()
     );
@@ -1624,9 +1626,9 @@ export default {
     let remove_flag = +localStorage.getItem('mlxz_remove_flag'); // 1:已经删除 ,2:未删除
 
     this.randomBuyList();
-    document.title = this.$t('dom-title');
     getProductionsAPI('ceh5').then(res => {
       this.all_list = res.data;
+      if (!this.is_show_combine) return;
       if (order_id && pay_status === 'SUCCESS' && remove_flag === 2) {
         localStorage.removeItem(
           pay_index === 3 ? 'mlxz_web_select_list' : 'mlxz_web_select_list_two'
@@ -2400,31 +2402,11 @@ export default {
         return;
       }
 
-      const { sub_orders, order_id } = res.data.combine;
+      const { sub_orders } = res.data.combine;
       if (sub_orders.length) {
         this.combine_index = this.combine_index - 1;
       }
-      if (order_id) {
-        this.order_id = order_id;
-        utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: '重新上报埋点',
-          mlxz_reset_url: location.href,
-        });
-        let check_result = await this.checkWithTimeout();
-        if (check_result !== null) {
-          utils.gcyLog(`order_id:${this.order_id}`, {
-            mlxz_action_desc: '已经获取了是否上报埋点的状态',
-            mlxz_attribution_status: check_result.data.status,
-          });
-          if (check_result.data.status) {
-            utils.gcyLog(`order_id:${this.order_id}`, {
-              mlxz_action_desc: '准备执行上报埋点',
-              mlxz_check_status: check_result.data.status,
-            });
-            this.handleSendEvent();
-          }
-        }
-      }
+
       this.logPageView(this.combine_index);
 
       let arr_ = [];
