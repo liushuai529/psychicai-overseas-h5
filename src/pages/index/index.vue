@@ -2632,11 +2632,14 @@ export default {
 
     // 首页Banner排序
     async getProductSort() {
+      // 2024.5.21g关闭banner排序
+      this.getSortInitList();
+      return;
+      // end  2024.5.23删除上面代码
       if (!this.isShowBannerSort()) {
         this.getSortInitList();
         return;
       }
-
       const res = await sortProductsAPI();
       if (res.status !== 1000) return;
       // 在接口返回error或者没有排序值的情况下 添加一个默认值大图
