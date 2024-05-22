@@ -1572,7 +1572,7 @@ export default {
         } else if (this.combine_index === 0) {
           return '0.8rem';
         } else {
-          return '1.55rem';
+          return '2.05rem';
         }
       } else {
         if (this.combine_index) {
