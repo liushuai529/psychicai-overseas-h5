@@ -63,9 +63,13 @@
             <div class="label-100">{{ tips2 }}</div>
             <div>{{ getStarNum(gui_ren_num) }}</div>
           </div>
-          <div class="minge-row">
+          <div v-if="!is_show_taohua" class="minge-row">
             <div class="label-100">{{ tips3 }}</div>
             <div>{{ getStarNum(cai_bo_num) }}</div>
+          </div>
+          <div v-else class="bottom-1 minge-row">
+            <div class="label-100">{{ tips6 }}</div>
+            <div>{{ getStarNum(tao_hua_num) }}</div>
           </div>
         </td>
         <td :style="{ background: minge_color }" class="geju">
@@ -88,9 +92,14 @@
             <div class="label-100">{{ tips4 }}</div>
             <div>{{ getStarNum(hun_yin_num) }}</div>
           </div>
-          <div class="minge-row">
+
+          <div v-if="!is_show_taohua" class="minge-row">
             <div class="label-100">{{ tips5 }}</div>
             <div>{{ getStarNum(shi_ye_num) }}</div>
+          </div>
+          <div v-else class="minge-row">
+            <div class="label-100">{{ tips7 }}</div>
+            <div>{{ fuqigong ? fuqigong : '？' }}</div>
           </div>
         </td>
       </tr>
@@ -118,12 +127,21 @@ const tipsArr3 = {
   'zh-TW': '財帛星',
 };
 const tipsArr4 = {
-  'zh-CN': '姻缘星',
-  'zh-TW': '姻緣星',
+  'zh-CN': '婚姻星',
+  'zh-TW': '婚姻星',
 };
 const tipsArr5 = {
   'zh-CN': '事业星',
   'zh-TW': '事業星',
+};
+
+const tipArr6 = {
+  'zh-CN': '桃花星',
+  'zh-TW': '桃花星',
+};
+const tipArr7 = {
+  'zh-CN': '夫妻宫',
+  'zh-TW': '夫妻宮',
 };
 export default {
   name: 'BaziTable',
@@ -192,6 +210,14 @@ export default {
       type: String,
       default: '',
     },
+    tao_hua_num: {
+      type: Number,
+      default: 0,
+    },
+    fuqigong: {
+      type: String,
+      default: '',
+    },
     text_color: {
       type: String,
       default: '#cb6735',
@@ -216,6 +242,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    is_show_taohua: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
@@ -226,6 +256,8 @@ export default {
       tips3: tipsArr3[lang],
       tips4: tipsArr4[lang],
       tips5: tipsArr5[lang],
+      tips6: tipArr6[lang],
+      tips7: tipArr7[lang],
     };
   },
   filters: {
