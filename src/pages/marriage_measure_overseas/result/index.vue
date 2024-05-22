@@ -238,8 +238,8 @@ import {
 import { Toast, Indicator } from 'mint-ui';
 import utils from './../../../libs/utils.js';
 import topBanner from './../detail/topBanner.vue';
-import cn_img_title from '../../../assets/img/mlxz/bzhh/detail/img_title.png';
-import tw_img_title from '../../../assets/img/tw_mlxz/bazihehun/detail/title.png';
+import cn_img_title from '../../../assets/img/bzhh_v2/cn/img_title.png';
+import tw_img_title from '../../../assets/img/bzhh_v2/tw/img_title.png';
 import solidStar from './../../../assets/img/marriage_measure_overseas/result/star_light.png';
 import dashedStar from './../../../assets/img/marriage_measure_overseas/result/star_gray.png';
 

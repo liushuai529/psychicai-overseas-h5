@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-22 18:23:06
+ * @LastEditTime: 2024-05-22 20:29:31
  * @Description: 八字合婚
 -->
 
@@ -141,8 +141,8 @@ import utils from './../../../libs/utils.js';
 import hour_ganzi from './../../../libs/suishen.huangli.js';
 import year_ganzi from './../../../libs/suishen.wnl.js';
 
-import cn_img_title from '../../../assets/img/mlxz/bzhh/detail/img_title.png';
-import tw_img_title from '../../../assets/img/tw_mlxz/bazihehun/detail/title.png';
+import cn_img_title from '../../../assets/img/bzhh_v2/cn/img_title.png';
+import tw_img_title from '../../../assets/img/bzhh_v2/tw/img_title.png';
 import tw_img_word from '../../../assets/img/tw_mlxz/bazihehun/detail/text.png';
 import cn_img_word from '../../../assets/img/mlxz/bzhh/detail/img_word.png';
 

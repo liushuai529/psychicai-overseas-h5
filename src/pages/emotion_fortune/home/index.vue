@@ -162,12 +162,10 @@
       @getOrderId="getOrderId"
     ></combinePayPop> -->
     <HotProduct
-      v-if="is_show_hot"
       product_key="h5_emotion2024"
       url="emotion_fortune"
       e_id="10006"
     />
-    <div v-else class="footer-box"></div>
 
     <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
   </div>

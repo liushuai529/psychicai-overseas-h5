@@ -36,21 +36,43 @@
               @change="getTime"
             >
               <template #default="timeData">
-                <span class="block rgb-light">{{
-                  timeData.minutes | filterTime
-                }}</span>
-                <span class="colon rgb-color">:</span>
-                <span class="block rgb-light">{{
-                  timeData.seconds | filterTime
-                }}</span>
-                <span class="colon rgb-color">:</span>
-                <span class="block rgb-light">{{
-                  timeData.milliseconds | filterTime
-                }}</span>
+                <span
+                  :class="{
+                    block: true,
+                    'rgb-light': is_show_shandong,
+                  }"
+                  >{{ timeData.minutes | filterTime }}</span
+                >
+                <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
+                  >:</span
+                >
+                <span
+                  :class="{
+                    block: true,
+                    'rgb-light': is_show_shandong,
+                  }"
+                  >{{ timeData.seconds | filterTime }}</span
+                >
+                <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
+                  >:</span
+                >
+
+                <span
+                  :class="{
+                    block: true,
+                    'rgb-light': is_show_shandong,
+                  }"
+                  >{{ timeData.milliseconds | filterTime }}</span
+                >
               </template>
             </count-down>
           </div>
-          <div class="title rgb-color">
+          <div
+            :class="{
+              title: true,
+              'rgb-color': is_show_shandong,
+            }"
+          >
             {{ is_show_daoqi ? new_tips1 : tips1 }}
           </div>
         </div>
@@ -175,6 +197,8 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/2404f091a163349f45d3909f82e4660cc3c6.png',
       start_down: false,
       new_time: new Date().getTime().valueOf(),
+      is_show_shandong: false,
+      is_show_daoqi: false,
     };
   },
   props: {
@@ -258,9 +282,6 @@ export default {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
-    is_show_daoqi() {
-      return this.time < 31 * 1000;
-    },
   },
   filters: {
     filterTime(val_) {
@@ -294,6 +315,8 @@ export default {
   methods: {
     getTime(val) {
       const { minutes, seconds, milliseconds } = val;
+      this.is_show_shandong = minutes * seconds * milliseconds < 60 * 1000;
+      this.is_show_daoqi = minutes * seconds * milliseconds < 31 * 1000;
       if (!minutes && !seconds && milliseconds < 10) {
         this.time = 1;
         this.$refs.countDown.pause();
@@ -509,6 +532,7 @@ export default {
     .title {
       height: 0.24rem;
       line-height: 0.24rem;
+      color: #e24c2e;
     }
   }
   .right div:first-child {
@@ -594,17 +618,18 @@ export default {
   margin: 0 0.02rem;
   display: flex;
   align-items: center;
+  color: #e24c2e;
 }
 .block {
   width: 0.4rem;
   height: 100%;
-  color: #fff;
   font-size: 0.26rem;
   border-radius: 0.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
+  background-color: #e24c2e; /* 初始背景色 */
 }
 .desc {
   display: flex;
@@ -625,7 +650,7 @@ export default {
   }
 }
 .mill {
-  animation: noticeTime 0.5s infinite;
+  animation: noticeTime 0.24s infinite;
 }
 
 @keyframes rgb-light {
@@ -644,13 +669,11 @@ export default {
 }
 
 .rgb-light {
-  background-color: #e24c2e; /* 初始背景色 */
-  animation: rgb-light 480ms infinite linear;
+  animation: rgb-light 720ms infinite linear;
 }
 
 .rgb-color {
-  animation: rgb-text 480ms infinite linear;
-  color: #e24c2e;
+  animation: rgb-text 720ms infinite linear;
 }
 @keyframes rgb-text {
   0% {
