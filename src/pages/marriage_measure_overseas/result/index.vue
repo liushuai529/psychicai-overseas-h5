@@ -1,7 +1,45 @@
 <template>
   <div class="detail result-detail">
     <top-banner />
-    <div v-if="!loading && hasData" class="info_container">
+
+    <!-- 新版信息start -->
+    <div v-if="!loading && hasData" class="pay-box">
+      <img
+        class="banner"
+        :src="language === 'zh-CN' ? cn_img_title : tw_img_title"
+      />
+      <div class="user-info">
+        <div class="male-info">
+          <div class="info-name">{{ user_ext.male_name | nameFilter }}</div>
+          <div class="info-birth">{{ mbirth }}</div>
+          <baziInfo v-if="show_bazi" :user_info="init_male_str" />
+        </div>
+        <img
+          class="heart"
+          src="../../../assets/img/marriage_measure_overseas/detail/heart.png"
+        />
+        <div class="female-info">
+          <div class="info-name">{{ user_ext.female_name | nameFilter }}</div>
+          <div class="info-birth">{{ fbirth }}</div>
+          <baziInfo v-if="show_bazi" :user_info="init_female_str" />
+        </div>
+      </div>
+
+      <div class="bazi-box">
+        <shengxiao
+          v-if="show_bazi"
+          :male_str="init_male_str"
+          :female_str="init_female_str"
+          :is_result="true"
+        />
+      </div>
+    </div>
+    <!-- 新版信息 end -->
+    <div
+      v-if="!loading && hasData"
+      style="display: none"
+      class="info_container"
+    >
       <div class="user_info">
         <div
           :class="{
@@ -200,7 +238,8 @@ import {
 import { Toast, Indicator } from 'mint-ui';
 import utils from './../../../libs/utils.js';
 import topBanner from './../detail/topBanner.vue';
-
+import cn_img_title from '../../../assets/img/mlxz/bzhh/detail/img_title.png';
+import tw_img_title from '../../../assets/img/tw_mlxz/bazihehun/detail/title.png';
 import solidStar from './../../../assets/img/marriage_measure_overseas/result/star_light.png';
 import dashedStar from './../../../assets/img/marriage_measure_overseas/result/star_gray.png';
 
@@ -227,11 +266,17 @@ import tw_all from '../../../assets/img/tw_mlxz/bazihehun/result/all.jpg';
 import CodePop from '../../../components/CodePop.vue';
 import CopyCode from '../../../components/CopyCode.vue';
 import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/bzhh.png';
+import shengxiao from '../detail/shengxiao.vue';
+import baziInfo from '../detail/bazi.vue';
+import year_ganzi from './../../../libs/suishen.wnl.js';
+
 export default {
   components: {
     topBanner,
     CodePop,
     CopyCode,
+    shengxiao,
+    baziInfo,
   },
   data() {
     return {
@@ -290,7 +335,20 @@ export default {
       cn_code_btn:
         'https://psychicai-static.psychicai.pro/imgs/2404234bb0c587034841ab541abf8dd71bc1.png',
       tw_code_btn,
+      cn_img_title,
+      tw_img_title,
+      query_user_string: '',
+      init_male_str: '',
+      init_female_str: '',
+      mbirth: '',
+      fbirth: '',
+      show_bazi: false,
     };
+  },
+  filters: {
+    nameFilter(val) {
+      return utils.getShortStr(val, 4);
+    },
   },
   created() {},
   async mounted() {
@@ -543,7 +601,10 @@ export default {
       }, 1000);
     },
     renderResult(res) {
-      var responseData = res.data.result;
+      let responseData = res.data.result;
+      console.log(res.data.extra_ce_suan);
+      this.user_ext = res.data.extra_ce_suan;
+      this.getFormateStr();
       this.transfer_code = res.data.transfer_code;
       // 用戶信息
       this.maleinfo = responseData.maleinfo;
@@ -558,7 +619,122 @@ export default {
       this.data_obj.blossom = responseData.taohua;
       this.data_obj.all = responseData.zhpp;
       this.data_obj.dayun = responseData.dayun;
-      this.user_ext = res.data.extra_ce_suan;
+    },
+
+    getFormateStr() {
+      let maleusername = this.user_ext.male_name;
+      let femaleusername = this.user_ext.female_name;
+      let maleyear = this.user_ext.male_birth_year;
+      let malemonth = this.user_ext.male_birth_month;
+      let maledate = this.user_ext.male_birth_date;
+      let femaleyear = this.user_ext.female_birth_year;
+      let femalemonth = this.user_ext.female_birth_month;
+      let femaledate = this.user_ext.female_birth_date;
+      let malehour = parseInt(this.user_ext.male_birth_hour);
+      let femalehour = parseInt(this.user_ext.female_birth_hour);
+      let male_rili = this.user_ext.male_is_gongli;
+      let female_rili = this.user_ext.female_is_gongli;
+      let querystring = '';
+      querystring += maleusername;
+      querystring += '|';
+      querystring += femaleusername;
+      querystring += '|';
+      querystring += maleyear;
+      querystring += '|';
+      querystring += malemonth;
+      querystring += '|';
+      querystring += maledate;
+      querystring += '|';
+      querystring += femaleyear;
+      querystring += '|';
+      querystring += femalemonth;
+      querystring += '|';
+      querystring += femaledate;
+      querystring += '|';
+      querystring += malehour;
+      querystring += '|';
+      querystring += femalehour;
+      querystring += '|';
+      querystring += male_rili;
+      querystring += '|';
+      querystring += female_rili;
+      querystring += '|';
+      querystring += '0';
+      this.init_male_str = `${maleusername}|1|${male_rili}|${maleyear}|${malemonth}|${maledate}|${malehour}`;
+      this.init_female_str = `${femaleusername}|0|${female_rili}|${femaleyear}|${femalemonth}|${femaledate}|${femalehour}`;
+
+      this.show_bazi = true;
+      this.query_user_string = querystring;
+      this.parseUserString();
+    },
+    /**
+     * @description: 用户生辰解析
+     * @return {*}
+     */
+    parseUserString() {
+      let query_user_string_array = this.query_user_string.split('|');
+      let myear = query_user_string_array[2];
+      let mmonth = query_user_string_array[3];
+      let mdate = query_user_string_array[4];
+      this.mname = query_user_string_array[0];
+      let fyear = query_user_string_array[5];
+      let fmonth = query_user_string_array[6];
+      let fdate = query_user_string_array[7];
+      this.fname = query_user_string_array[1];
+      // 男性生日農曆
+      if (query_user_string_array[10] === '0') {
+        let mday = this.getGlDate(myear, mmonth, mdate);
+        this.mbirth = `${this.$t('nongli-label')} ${myear}年${mday.nmonthstr}${
+          mday.ndatestr
+        }`;
+      } else {
+        this.mbirth = `${this.$t(
+          'gongli-label'
+        )} ${myear}年${mmonth}月${mdate}日`;
+      }
+      // 女性生日農曆
+      if (query_user_string_array[11] === '0') {
+        let fday = this.getGlDate(fyear, fmonth, fdate);
+        this.fbirth = `${this.$t('nongli-label')} ${fyear}年${fday.nmonthstr}${
+          fday.ndatestr
+        }`;
+      } else {
+        this.fbirth = `${this.$t(
+          'gongli-label'
+        )} ${fyear}年${fmonth}月${fdate}日`;
+      }
+    },
+
+    /**
+     * @description: 获取公历日期
+     * @param {*} year
+     * @param {*} month
+     * @param {*} date
+     * @return {*}
+     */
+    getGlDate(year, month, date) {
+      let twoYearAllDate = [];
+      for (let i = 0; i < 12; i++) {
+        twoYearAllDate = twoYearAllDate.concat(
+          year_ganzi.getOneMonthData(year, i + 1)
+        );
+      }
+      for (let i = 0; i < 12; i++) {
+        twoYearAllDate = twoYearAllDate.concat(
+          year_ganzi.getOneMonthData(year / 1 + 1, i + 1)
+        );
+      }
+
+      twoYearAllDate.concat(year_ganzi.getOneMonthData(year + 1, 1));
+      twoYearAllDate.concat(year_ganzi.getOneMonthData(year + 1, 2));
+
+      let gldate = twoYearAllDate.find(item => {
+        return item.nyear == year && item.nmonth == month && item.ndate == date;
+      });
+      if (this.language === 'zh-TW' && gldate.nmonth === 12) {
+        gldate.nmonthstr = '臘月';
+      }
+      return gldate;
     },
     getStarts(star) {
       let starts = [dashedStar, dashedStar, dashedStar, dashedStar, dashedStar];
@@ -793,7 +969,69 @@ export default {
   z-index: -999999;
   left: 0;
   top: 0;
-  /* width:1px;
-        height:1px; */
+}
+
+.pay-box {
+  position: relative;
+  margin: 0.6rem auto 0;
+  width: 7.02rem;
+  border: 2px solid #d29b48;
+  border-radius: 0.16rem;
+  background-color: #fbf8ed;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .banner {
+    position: absolute;
+    top: -0.45rem;
+    left: 50%;
+    margin-left: -2.245rem;
+    width: 4.49rem;
+    height: 0.89rem;
+  }
+  .user-info {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0.68rem 0 0.49rem;
+    padding: 0 0.28rem;
+    .heart {
+      width: 1.4rem;
+      flex: none;
+    }
+    .male-info,
+    .female-info {
+      color: #6f3300;
+      text-align: center;
+      width: 2.25rem;
+      .info-name {
+        font-size: 0.32rem;
+        line-height: 0.45rem;
+        font-weight: bold;
+        margin-bottom: 0.07rem;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .info-birth {
+        font-size: 0.24rem;
+        line-height: 0.33rem;
+      }
+      flex: 1;
+    }
+  }
+  .line {
+    width: 5.57rem;
+  }
+}
+
+.bazi-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

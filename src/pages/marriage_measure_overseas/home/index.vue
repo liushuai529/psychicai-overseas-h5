@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-17 14:05:53
+ * @LastEditTime: 2024-05-22 16:06:33
  * @Description: 八字合婚
 -->
 <template>
@@ -153,8 +153,8 @@ import moment from 'moment';
 import HeaderNotice from '../../../components/headerNotice.vue';
 import { reportEnum } from '../../../libs/enum';
 
-import tw_btn from './../../../assets/img/tw_mlxz/bazihehun/home/btn.png';
-import cn_btn from './../../../assets/img/mlxz/bzhh/img_btn.png';
+import tw_btn from './../../../assets/img//bzhh_v2/tw/img_btn.png';
+import cn_btn from './../../../assets/img/bzhh_v2/cn/img_btn.png';
 
 import cn_order from './../../../assets/img/mlxz/bzhh/btn_dingdan.png';
 import tw_order from './../../../assets/img/tw_mlxz/bazihehun/home/order.png';
@@ -833,7 +833,8 @@ export default {
 }
 
 .btn {
-  width: 6.9rem;
+  width: 6.89rem;
+  height: 1.03rem;
   margin-bottom: 0.2rem;
   animation: btnMove 1s infinite ease-in-out alternate;
 }
@@ -871,7 +872,7 @@ export default {
 
 .btn-fixed {
   position: fixed;
-  width: 6.9rem;
+  width: 6.89rem;
   left: 50%;
   margin-left: -3.46rem;
   bottom: 0.3rem;

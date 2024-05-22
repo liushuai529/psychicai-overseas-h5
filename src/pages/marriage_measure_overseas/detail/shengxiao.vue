@@ -62,6 +62,34 @@
         {{ zinvgong.female }}
       </div>
     </div>
+    <div class="line">
+      <div class="label">桃花星</div>
+      <div class="left circle star-box">
+        {{ is_result ? taohua.male : '?' }}颗
+      </div>
+      <div class="center visibility-h">
+        >
+        <span> - </span>
+        <
+      </div>
+      <div class="right circle star-box">
+        {{ is_result ? taohua.female : '?' }}颗
+      </div>
+    </div>
+    <div class="line">
+      <div class="label">姻缘星</div>
+      <div class="left circle star-box">
+        {{ is_result ? hunyin.male : '?' }}颗
+      </div>
+      <div class="center visibility-h">
+        >
+        <span> - </span>
+        <
+      </div>
+      <div class="right circle star-box">
+        {{ is_result ? hunyin.female : '?' }}颗
+      </div>
+    </div>
   </div>
 </template>
 
@@ -69,7 +97,6 @@
 import { getBaziAPI, getBazihehunAPI } from '../../../api/api';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import utils from '../../../libs/utils';
-import { unref } from 'vue';
 export default {
   name: 'Bazi',
   props: {
@@ -80,6 +107,10 @@ export default {
     female_str: {
       type: String,
       default: '',
+    },
+    is_result: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -102,6 +133,14 @@ export default {
       riyuan: { male: '？', female: '？', rel: '？' },
       fuqigong: { male: '？', female: '？', rel: '？' },
       zinvgong: { male: '？', female: '？', rel: '？' },
+      taohua: {
+        male: '？',
+        female: '？',
+      },
+      hunyin: {
+        male: '？',
+        female: '？',
+      },
     };
   },
 
@@ -147,11 +186,20 @@ export default {
 
       const res = await getBazihehunAPI(params);
       if (res.status !== 1000) return;
-      const { shengxiao, riyuan, fuqigong, zinvgong } = res.data;
+      const { shengxiao, riyuan, fuqigong, zinvgong, maleinfo, femaleinfo } =
+        res.data;
       this.shengxiao = shengxiao;
       this.riyuan = riyuan;
       this.fuqigong = fuqigong;
       this.zinvgong = zinvgong;
+      this.taohua = {
+        male: maleinfo.tao_hua_num,
+        female: femaleinfo.tao_hua_num,
+      };
+      this.hunyin = {
+        male: maleinfo.hun_yin_num,
+        female: femaleinfo.hun_yin_num,
+      };
     },
     /**
      * @description: 八字颜色
@@ -326,5 +374,22 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.visibility-h {
+  visibility: hidden;
+}
+.star-box {
+  width: 0.8rem;
+  height: 0.8rem;
+  background: #fbf8ed;
+  border: 0.02rem solid #6f3300;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 0.3rem;
+  color: #6f3300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

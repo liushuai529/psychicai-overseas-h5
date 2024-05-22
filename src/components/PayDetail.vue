@@ -1,5 +1,5 @@
 <template>
-  <div class="pay-method">
+  <div :class="className">
     <div v-if="!pay_methods.length && loading" class="no-empty">
       <mt-spinner type="fading-circle" :size="60"></mt-spinner>
     </div>
@@ -19,7 +19,7 @@
         </div>
         <div class="right">
           <div class="desc">
-            <div class="count-down">
+            <!-- <div class="count-down">
               <span class="block rgb-light">{{ time_str_1 }}</span>
               <span class="colon rgb-color">:</span>
               <span class="block rgb-light">{{ time_str_2 }}</span>
@@ -27,7 +27,28 @@
               <span class="block rgb-light">
                 <span :class="{ mill: !time }">{{ time_str_3 }}</span>
               </span>
-            </div>
+            </div> -->
+            <count-down
+              ref="countDown"
+              :time="time"
+              millisecond
+              class="time-box"
+              @change="getTime"
+            >
+              <template #default="timeData">
+                <span class="block rgb-light">{{
+                  timeData.minutes | filterTime
+                }}</span>
+                <span class="colon rgb-color">:</span>
+                <span class="block rgb-light">{{
+                  timeData.seconds | filterTime
+                }}</span>
+                <span class="colon rgb-color">:</span>
+                <span class="block rgb-light">{{
+                  timeData.milliseconds | filterTime
+                }}</span>
+              </template>
+            </count-down>
           </div>
           <div class="title rgb-color">
             {{ is_show_daoqi ? new_tips1 : tips1 }}
@@ -35,6 +56,7 @@
         </div>
       </div>
       <div class="divider-line"></div>
+      <div class="pay-type">支付方式</div>
       <div class="buy-people">
         今日已有<span>{{ buy_people }}</span
         >{{ tips2 }}
@@ -140,7 +162,7 @@ export default {
       new_user_icon:
         'https://psychicai-static.psychicai.pro/imgs/24040fcec5baef7f4fcea5a1eed3552d734e.png',
       time: 15 * 60 * 1000,
-      // time: 10 * 1000,
+      // time: 5 * 1000,
       time_str_1: '',
       time_str_2: '',
       time_str_3: '',
@@ -151,6 +173,8 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/24048e756ae2d40f436184b0bc8018199fbb.png',
       no_check_icon:
         'https://psychicai-static.psychicai.pro/imgs/2404f091a163349f45d3909f82e4660cc3c6.png',
+      start_down: false,
+      new_time: new Date().getTime().valueOf(),
     };
   },
   props: {
@@ -195,6 +219,10 @@ export default {
       type: String,
       default: '',
     },
+    className: {
+      type: String,
+      default: '',
+    },
   },
   components: {
     CountDown,
@@ -234,6 +262,18 @@ export default {
       return this.time < 31 * 1000;
     },
   },
+  filters: {
+    filterTime(val_) {
+      let val = val_.toString();
+      if (val.length === 1) {
+        return '0' + val;
+      } else if (val.length === 2) {
+        return val;
+      } else {
+        return (val / 10).toFixed(0);
+      }
+    },
+  },
   created() {
     this.getProductionList();
     this.getPayMethod();
@@ -249,37 +289,16 @@ export default {
       }
     );
   },
-  mounted() {
-    const intervalId = setInterval(() => {
-      this.time -= 10; // 减去 10 毫秒
-      if (this.time === 0) {
-        clearInterval(intervalId); // 时间用完了，清除计时器
-        // this.time = 15 * 60 * 1000;
-        this.time_str_1 = '00';
-        this.time_str_2 = '00';
-        this.time_str_3 = '01';
-        return;
-      }
-      this.formatTime(this.time);
-      this.time_str_1 = moment(this.time).format('mm');
-      this.time_str_2 = moment(this.time).format('ss');
-      this.time_str_3 = moment(this.time).format('SS');
-    }, 10);
-  },
+  mounted() {},
 
   methods: {
-    formatTime(milliseconds) {
-      let remainSeconds = Math.floor(milliseconds / 1000);
-      let millis = milliseconds % 1000; // 获取剩余的毫秒
-      millis = Math.floor(millis / 10); // 转换为两位毫秒数
-
-      let seconds = remainSeconds % 60;
-      let minutes = Math.floor(remainSeconds / 60);
-
-      // 将分钟、秒钟、毫秒转为两位数字符串
-      return `${minutes.toString().padStart(2, '0')}:${seconds
-        .toString()
-        .padStart(2, '0')}:${millis.toString().padStart(2, '0')}`;
+    getTime(val) {
+      const { minutes, seconds, milliseconds } = val;
+      if (!minutes && !seconds && milliseconds < 10) {
+        this.time = 1;
+        this.$refs.countDown.pause();
+        this.$refs.countDown.reset();
+      }
     },
 
     /**
@@ -308,11 +327,11 @@ export default {
         const res = await getPayMethodsAPI();
         this.loading = false;
         if (res.status === 1000) {
+          this.start_down = true;
           this.pay_methods = res.data;
         }
       } catch (e) {
         this.loading = false;
-        this.closeModal();
       }
     },
     isShowBannerSort() {
@@ -424,15 +443,6 @@ export default {
 // }
 </style>
 <style scoped lang="less">
-.pay-method {
-  width: 6.14rem;
-  height: 5.8rem;
-  font-family: system-ui, sans-serif;
-  margin-top: -0.11rem;
-  background: #ffffff;
-  border-radius: 0.1rem;
-}
-
 .no-empty {
   display: flex;
   justify-content: center;
@@ -581,15 +591,15 @@ export default {
 }
 
 .colon {
-  display: inline-block;
   margin: 0 0.02rem;
+  display: flex;
+  align-items: center;
 }
 .block {
   width: 0.4rem;
   height: 100%;
   color: #fff;
   font-size: 0.26rem;
-  // background: #e24c2e;
   border-radius: 0.1rem;
   display: flex;
   align-items: center;
@@ -655,5 +665,22 @@ export default {
   100% {
     color: #e24c2e;
   }
+}
+
+.pay-type {
+  width: 100%;
+  height: 0.3rem;
+  font-weight: 600;
+  font-size: 0.3rem;
+  color: #333333;
+  line-height: 0.3rem;
+  text-align: center;
+  margin-bottom: 0.19rem;
+}
+
+.time-box {
+  display: flex;
+  flex-direction: row;
+  height: 0.4rem;
 }
 </style>

@@ -31,6 +31,7 @@
         :is_show_taohua="1"
       ></BaziTable>
       <PayDetail
+        className="pay-method"
         ref="payDetail"
         :product_key="product_key"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg"
@@ -427,5 +428,14 @@ export default {
   position: fixed;
   bottom: 0;
   z-index: 2;
+}
+
+.pay-method {
+  width: 6.14rem;
+  min-height: 5.8rem;
+  font-family: system-ui, sans-serif;
+  margin-top: -0.11rem;
+  background: #ffffff;
+  border-radius: 0.1rem;
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang
- * @LastEditTime: 2024-01-15 10:44:00
+ * @LastEditTime: 2024-05-22 18:10:16
  * @Description:八字合婚
  */
 import Vue from 'vue';
@@ -14,6 +14,11 @@ import VueResource from 'vue-resource';
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
 import VueI18n from 'vue-i18n';
+import { Swipe, SwipeItem } from 'vant';
+import 'vant/lib/index.css';
+Vue.use(Swipe);
+Vue.use(SwipeItem);
+
 Vue.use(VueI18n);
 Vue.use(MintUI);
 Vue.use(VueResource);
@@ -45,6 +50,7 @@ if ('addEventListener' in document) {
     false
   );
 }
+
 import CN from '../../locale//marriage_measure_overseas/cn.js';
 import TW from '../../locale/marriage_measure_overseas/tw.js';
 import util from '../../libs/utils';
