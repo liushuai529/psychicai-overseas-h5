@@ -315,8 +315,9 @@ export default {
   methods: {
     getTime(val) {
       const { minutes, seconds, milliseconds } = val;
-      this.is_show_shandong = minutes * seconds * milliseconds < 60 * 1000;
-      this.is_show_daoqi = minutes * seconds * milliseconds < 31 * 1000;
+      let time_ = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
+      this.is_show_shandong = time_ < 60 * 1000;
+      this.is_show_daoqi = time_ < 31 * 1000;
       if (!minutes && !seconds && milliseconds < 10) {
         this.time = 1;
         this.$refs.countDown.pause();
