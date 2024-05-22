@@ -1,7 +1,7 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
-    <div class="pay-box">
-      <img class="title" :src="is_cn ? cn_info_title : tw_info_title" alt="" />
+    <div :class="{ 'pay-box': true, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
+      <!-- <img class="title" :src="is_cn ? cn_info_title : tw_info_title" alt="" /> -->
       <BaziTable
         :sex="sex"
         :is_result="is_result"
@@ -19,19 +19,37 @@
         :riyuanqiangruo="riyuanqiangruo"
         :shi_ye_num="shi_ye_num"
         :wuxingqiang="wuxingqiang"
+        :tao_hua_num="0"
+        fuqigong=""
         text_color="#000"
         minge_color="#ED1A86"
         :show_daji="false"
-        bg="#FFE9F5"
+        bg="#fff"
         width="6.14rem"
+        table_border="0.02rem solid #FD1E96"
+        border_color="#FD1E96"
+        :is_show_taohua="1"
       ></BaziTable>
-      <img
+      <PayDetail
+        ref="payDetail"
+        :product_key="product_key"
+        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg"
+        :query_user_string="query_user_string"
+        e_view_id="10006"
+        c_view_id="-10005"
+        e_view_name="view_2024lovely_pay"
+        a_view_token="184kba"
+        c_click_id="-10006"
+        e_click_name="click_2024lovely_pay"
+        a_click_token="2rov44"
+      />
+      <!-- <img
         id="info-btn"
         @click="showPayModal"
         class="ce-btn huxi-btn"
         :src="language === 'zh-CN' ? cn_pay_btn : tw_pay_btn"
         alt=""
-      />
+      /> -->
       <!-- <PayCard
         ref="paycard"
         :type="product_id"
@@ -50,14 +68,14 @@
     <img class="module" :src="is_cn ? cn_zhong3 : tw_zhong3" />
     <img class="module" :src="is_cn ? cn_zhong4 : tw_zhong4" />
     <div class="footer"></div>
-    <img
+    <!-- <img
       v-if="showFixedBtn"
       @click="showPayModal"
       class="ce-btn huxi-btn fix-box"
       :src="language === 'zh-CN' ? cn_pay_btn : tw_pay_btn"
       alt=""
-    />
-    <payModal
+    /> -->
+    <!-- <payModal
       :product_key="product_key"
       v-model="pay_modal"
       :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg"
@@ -72,7 +90,13 @@
       c_click_id="-10006"
       e_click_name="click_2024lovely_pay"
       a_click_token="2rov44"
+    /> -->
+    <img
+      @click="payOrder"
+      class="fix-btn huxi-btn"
+      :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
     />
+    <HomeFooter product_key="h5_emotion2024" />
   </div>
 </template>
 
@@ -100,15 +124,23 @@ import tw_zhong3 from '../../../assets/img/emotion/new/tw/zhong_3.png';
 import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.png';
 import tw_zhong4 from '../../../assets/img/emotion/new/tw/zhong_4.png';
 import { report_id_arr } from '../../../libs/enum';
+import cn_home_btn from '../../../assets/img/emotion_v2/cn/home_btn.png';
+import tw_home_btn from '../../../assets/img/emotion_v2/tw/home_btn.png';
+import HomeFooter from '../../../components/HomeFooter.vue';
+import PayDetail from '../../../components/PayDetail.vue';
 export default {
   components: {
     UserInfo,
     PayCard,
     payModal,
     BaziTable,
+    HomeFooter,
+    PayDetail,
   },
   data() {
     return {
+      cn_home_btn,
+      tw_home_btn,
       cn_zhong3,
       cn_zhong4,
       tw_zhong3,
@@ -172,10 +204,10 @@ export default {
     },
   },
   async created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'og1swe',
-      });
+    // window.Adjust &&
+    //   window.Adjust.trackEvent({
+    //     eventToken: 'og1swe',
+    //   });
     utils.firebaseLogEvent(
       '10006',
       '-10003',
@@ -193,24 +225,7 @@ export default {
   },
   mounted() {
     window.scrollTo(0, 0);
-
-    let btn = document.getElementById('info-btn');
     let self = this;
-    document.addEventListener('scroll', e => {
-      let flag = utils.isElementInViewport(btn);
-      let scroll_distance =
-        window.pageYOffset || document.documentElement.scrollTop;
-      if (!self.is_show_btn || scroll_distance < 100) {
-        self.showFixedBtn = false;
-        return;
-      }
-      if (!flag) {
-        self.showFixedBtn = true;
-      } else {
-        self.showFixedBtn = false;
-      }
-    });
-
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
     window.addEventListener('resize', function () {
@@ -320,11 +335,11 @@ export default {
           channel: utils.getFBChannel(),
         }
       );
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'ampab1',
-        });
+
       this.pay_modal = true;
+    },
+    payOrder() {
+      this.$refs.payDetail.payMoney();
     },
   },
 };
@@ -340,19 +355,21 @@ export default {
   .pay-box {
     margin-bottom: 0.21rem;
     width: 7.06rem;
-    height: 10.23rem;
-    background: url('https://psychicai-static.psychicai.pro/imgs/2404ebe2e22169d14e65996d7ad76756ea2f.png')
-      no-repeat;
-    background-size: 100% 100%;
+    height: 13.58rem;
+    padding-top: 1.4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    .title {
-      width: 5.16rem;
-      height: 0.72rem;
-      margin-top: 1.4rem;
-      margin-bottom: 0.3rem;
-    }
+  }
+  .cn-bg {
+    background: url(../../../assets/img/emotion_v2/cn/result_name_bg.png)
+      no-repeat;
+    background-size: 100% 100%;
+  }
+  .tw-bg {
+    background: url(../../../assets/img/emotion_v2/tw/result_name_bg.png)
+      no-repeat;
+    background-size: 100% 100%;
   }
 
   .text {
@@ -390,7 +407,7 @@ export default {
 
 .footer {
   width: 100%;
-  height: 1rem;
+  height: 1.8rem;
 }
 
 .card-box {
@@ -403,5 +420,12 @@ export default {
     width: 100%;
     height: 100%;
   }
+}
+.fix-btn {
+  width: 5.8rem;
+  height: 1.24rem;
+  position: fixed;
+  bottom: 0;
+  z-index: 2;
 }
 </style>

@@ -162,11 +162,13 @@
       @getOrderId="getOrderId"
     ></combinePayPop> -->
     <HotProduct
+      v-if="is_show_hot"
       product_key="h5_emotion2024"
       url="emotion_fortune"
       e_id="10006"
     />
-    <!-- <div class="footer-box"></div> -->
+    <div v-else class="footer-box"></div>
+
     <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
   </div>
 </template>
@@ -183,8 +185,8 @@ import DatetimePicker from '../../../components/DatetimePicker';
 import NongliPicker from '../../../components/NongliPicker';
 import { reportEnum } from '../../../libs/enum';
 
-import cn_home_btn from '../../../assets/img/emotion/home_btn.png';
-import tw_home_btn from '../../../assets/img/tw_mlxz/emotion/home_btn.png';
+import cn_home_btn from '../../../assets/img/emotion_v2/cn/home_btn.png';
+import tw_home_btn from '../../../assets/img/emotion_v2/tw/home_btn.png';
 
 import combinePayPop from '../../../components/combinePayPop.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
@@ -246,8 +248,8 @@ export default {
       showFixedBtn: false,
       //
       language: utils.getLanguage(),
-      cn_home_btn: cn_home_btn,
-      tw_home_btn: tw_home_btn,
+      cn_home_btn,
+      tw_home_btn,
       cn_card_1,
       tw_card_1,
       cn_card_2,
@@ -263,6 +265,9 @@ export default {
     },
     is_cn() {
       return this.language === 'zh-CN';
+    },
+    is_show_hot() {
+      return ['enjoy02', 'panda02'].includes(utils.getFBChannel());
     },
   },
   watch: {
@@ -931,7 +936,7 @@ export default {
 }
 
 .fix-btn {
-  width: 5.82rem;
+  width: 5.8rem;
   height: 1.24rem;
   position: fixed;
   bottom: 0;
@@ -960,11 +965,8 @@ export default {
 }
 .footer-box {
   width: 7.5rem;
-  height: 1.96rem;
-  background: url('../../../assets/img/common/ganqing_img_btnmengban.png')
-    no-repeat;
-  background-size: 100% 100%;
-  margin-top: 0.2rem;
+  height: 1.6rem;
+
 }
 
 .back-box {
@@ -989,3 +991,4 @@ export default {
   }
 }
 </style>
+../../../api/api.js../../../libs/enum.js

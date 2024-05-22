@@ -2,12 +2,12 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-07 21:03:37
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-22 10:09:36
+ * @LastEditTime: 2024-05-22 15:38:20
  * @Description:
  */
 import Vue from 'vue';
-import App from './emotion_fortune_v2.vue';
-import router from '../../router/emotion_fortune_v2.js';
+import App from './emotion_fortune_old.vue';
+import router from '../../router/emotion_fortune_old.js';
 import store from '../../store/index.js';
 import FastClick from 'fastclick';
 import VueResource from 'vue-resource';

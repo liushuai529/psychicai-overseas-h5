@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-22 15:16:44
+ * @LastEditTime: 2024-05-20 19:41:04
  * @Description: 
 -->
 <template>
@@ -34,9 +34,6 @@
         :riyuanqiangruo="riyuanqiangruo"
         :shi_ye_num="shi_ye_num"
         :wuxingqiang="wuxingqiang"
-        :tao_hua_num="tao_hua_num"
-        :fuqigong="fuqigong"
-        :is_show_taohua="1"
         text_color="#000"
         minge_color="#ED1A86"
         :show_daji="false"
@@ -123,8 +120,6 @@ export default {
       riyuanqiangruo: '',
       shi_ye_num: 0,
       wuxingqiang: '',
-      tao_hua_num:0,
-      fuqigong:''
     };
   },
   created() {},
@@ -485,8 +480,6 @@ export default {
         riyuanqiangruo,
         shi_ye_num,
         wuxingqiang,
-        fuqigong,
-        tao_hua_num
       } = data;
       this.gan = gan;
       this.zhi = zhi;
@@ -498,8 +491,6 @@ export default {
       this.riyuanqiangruo = riyuanqiangruo;
       this.shi_ye_num = shi_ye_num;
       this.wuxingqiang = wuxingqiang;
-      this.tao_hua_num = tao_hua_num;
-      this.fuqigong = fuqigong;
     },
 
     /**
