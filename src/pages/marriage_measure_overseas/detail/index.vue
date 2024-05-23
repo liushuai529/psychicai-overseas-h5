@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-22 20:29:31
+ * @LastEditTime: 2024-05-23 10:55:51
  * @Description: 八字合婚
 -->
 
@@ -75,24 +75,11 @@
       e_click_name="click_marriage_pay"
       a_click_token="2ijw47"
     />
-
-    <van-swipe class="user" :autoplay="2000" vertical>
-      <van-swipe-item
-        v-for="(item, k) in getRandomList()"
-        :key="k"
-        class="item"
-      >
-        <img
-          src="../../../assets/img/bzhh_v2/icon_laba.png"
-          class="laba"
-          alt=""
-        />
-        <span>{{ item.desc1 }}</span>
-        <span>{{ item.desc2 }}</span>
-        <span @click="jumpHome" class="light-red">八字合婚</span>
-        <span>{{ item.desc3 }}</span>
-      </van-swipe-item>
-    </van-swipe>
+    <Marquee
+      :mock_users="getRandomList()"
+      product_key="h5_marriage"
+      class="user"
+    />
 
     <img class="text" :src="language === 'zh-CN' ? cn_img_word : tw_img_word" />
     <img class="module" :src="language === 'zh-CN' ? cn_mokuai1 : tw_mokuai1" />
@@ -286,7 +273,7 @@ export default {
     getRandomList() {
       let arr = ['我的', 'vt1', '椒', '14', '96', '小', 'il', '2o', '22'];
       let new_arr = [];
-      for (let i = 0; i < 29; i++) {
+      for (let i = 0; i < 200; i++) {
         let randomIndex = Math.floor(Math.random() * arr.length);
         new_arr.push({
           desc1: arr[randomIndex] + '***',
@@ -294,6 +281,7 @@ export default {
           desc3: tips2[this.language],
         });
       }
+
       return new_arr;
     },
 
@@ -548,7 +536,10 @@ export default {
   .item {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
+    height: 0.7rem !important;
+    padding-bottom: 0.4rem;
   }
   .laba {
     width: 0.28rem;

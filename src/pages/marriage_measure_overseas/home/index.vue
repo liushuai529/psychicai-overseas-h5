@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-22 16:06:33
+ * @LastEditTime: 2024-05-23 11:06:44
  * @Description: 八字合婚
 -->
 <template>
@@ -497,10 +497,10 @@ export default {
       location.href = url;
     },
     async check() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'z82ece',
-        });
+      // window.Adjust &&
+      //   window.Adjust.trackEvent({
+      //     eventToken: 'z82ece',
+      //   });
 
       utils.firebaseLogEvent(
         '10007',
