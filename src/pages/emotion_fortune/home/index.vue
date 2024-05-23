@@ -168,7 +168,12 @@
     />
 
     <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
-    <PopNotice v-if="is_show_notice" @close="closeNotice" />
+    <PopNotice
+      v-if="is_show_notice"
+      @close="closeNotice"
+      :count_down="count_down"
+      :product_key="product_key"
+    />
   </div>
 </template>
 <script>
@@ -260,7 +265,8 @@ export default {
       product_price: '',
 
       // 挽留弹窗
-      is_show_notice: false,
+      is_show_notice: false, // 是否展示挽留弹窗
+      count_down: 0, // 挽留弹窗倒计时
     };
   },
   computed: {
@@ -619,13 +625,18 @@ export default {
         );
         const { price, unit, product_id, google_goods_id, product_key } = same_;
         localStorage.setItem(
-          'mlxz_emotion_user_info',
+          `mlxz_user_info_${this.product_key}`,
           JSON.stringify({
             user_info: querystring,
             product_key: this.product_key,
           })
         );
-        localStorage.setItem('mlxz_show_notice_emo', 1);
+        let num_ = localStorage.getItem(`mlxz_show_notice_${this.product_key}`);
+
+        localStorage.setItem(
+          `mlxz_show_notice_${this.product_key}`,
+          num_ ? 2 : 1
+        );
 
         this.product_price = price || '-';
         this.$router.push({ path });
@@ -758,13 +769,22 @@ export default {
     // 展示挽留弹窗  通过定时器
     showNoticePop() {
       setInterval(() => {
-        let is_show_notice = localStorage.getItem('mlxz_show_notice_emo');
-        this.is_show_notice = +is_show_notice ? true : false;
-      }, 1000);
+        let is_show_notice = localStorage.getItem(
+          `mlxz_show_notice_${this.product_key}`
+        );
+        this.is_show_notice = is_show_notice
+          ? +is_show_notice === 1
+            ? true
+            : false
+          : false;
+        let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
+        this.count_down = time_ ? +time_ : 0;
+      }, 500);
     },
     // 关闭当前报告的挽留弹窗
     closeNotice() {
-      localStorage.removeItem('mlxz_show_notice_emo');
+      localStorage.setItem(`mlxz_show_notice_${this.product_key}`, 2);
+      localStorage.removeItem(`mlxz_count_down_${this.product_key}`);
       this.is_show_notice = false;
     },
   },

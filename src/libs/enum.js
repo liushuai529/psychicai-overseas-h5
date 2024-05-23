@@ -391,3 +391,34 @@ export const banner_enums = {
     },
   },
 };
+
+export const reportName = {
+  h5_marriage: {
+    cn: '八字合婚',
+    tw: '八字合婚',
+  },
+  h5_emotion2024: {
+    cn: '2024年爱情运势',
+    tw: '2024年愛情運勢',
+  },
+  h5_annual2024: {
+    cn: '2024年年运',
+    tw: '2024年年運',
+  },
+  h5_wealth2024: {
+    cn: '2024年财运',
+    tw: '2024年財運',
+  },
+  h5_career2024: {
+    cn: '2024年事业运势',
+    tw: '2024年事業運勢',
+  },
+  h5_bai_gua: {
+    cn: '鬼谷子',
+    tw: '鬼谷子',
+  },
+  h5_weigh_bone: {
+    cn: '袁天罡秤骨',
+    tw: '袁天剛秤骨',
+  },
+};

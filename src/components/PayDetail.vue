@@ -316,6 +316,17 @@ export default {
     getTime(val) {
       const { minutes, seconds, milliseconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
+      let notice_num = localStorage.getItem(
+        `mlxz_show_notice_${this.product_key}`
+      );
+      console.log('notice_num', notice_num);
+      if (notice_num) {
+        if (+notice_num === 1) {
+          localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
+        }
+      } else {
+        localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
+      }
       this.is_show_shandong = time_ < 60 * 1000;
       this.is_show_daoqi = time_ < 31 * 1000;
       if (!minutes && !seconds && milliseconds < 10) {
