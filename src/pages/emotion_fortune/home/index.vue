@@ -168,6 +168,7 @@
     />
     <!-- <div class="footer-box"></div> -->
     <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
+    <PopNotice v-if="is_show_notice" @close="closeNotice" />
   </div>
 </template>
 <script>
@@ -202,6 +203,7 @@ import cn_history_order from '../../../assets/img/mlxz/downloadBtn/emotion24.png
 import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/emotion24_order.png';
 
 import HotProduct from '../../../components/hotProduct.vue';
+import PopNotice from '../../../components/PopNotice.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
 
@@ -213,6 +215,7 @@ export default {
     combinePayPop,
     HotProduct,
     HomeFooter,
+    PopNotice,
   },
   data() {
     return {
@@ -255,6 +258,9 @@ export default {
       is_show_btn: true,
       pay_modal: false,
       product_price: '',
+
+      // 挽留弹窗
+      is_show_notice: false,
     };
   },
   computed: {
@@ -300,6 +306,7 @@ export default {
     this.has_pay = has_pay ? has_pay : '';
   },
   mounted() {
+    this.showNoticePop();
     // 赋默认值
     let storaged_userInfo = window.localStorage.getItem(
       '_emotion_fortune_info'
@@ -583,6 +590,7 @@ export default {
       querystring += time_obj.birth_hour || '-1';
 
       window.localStorage.setItem('_emotion_fortune_info', querystring);
+
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
 
@@ -607,6 +615,14 @@ export default {
           item => item.product_key === this.product_key
         );
         const { price, unit, product_id, google_goods_id, product_key } = same_;
+        localStorage.setItem(
+          'mlxz_emotion_user_info',
+          JSON.stringify({
+            user_info: querystring,
+            product_key: this.product_key,
+          })
+        );
+        localStorage.setItem('mlxz_show_notice_emo', 1);
 
         this.product_price = price || '-';
         this.$router.push({ path });
@@ -735,6 +751,18 @@ export default {
       } else {
         window.open('index.html', '_blank');
       }
+    },
+    // 展示挽留弹窗  通过定时器
+    showNoticePop() {
+      setInterval(() => {
+        let is_show_notice = localStorage.getItem('mlxz_show_notice_emo');
+        this.is_show_notice = +is_show_notice ? true : false;
+      }, 1000);
+    },
+    // 关闭当前报告的挽留弹窗
+    closeNotice() {
+      localStorage.removeItem('mlxz_show_notice_emo');
+      this.is_show_notice = false;
     },
   },
 };
