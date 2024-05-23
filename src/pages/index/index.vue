@@ -2569,8 +2569,10 @@ export default {
 
     async toWriteInfo(item) {
       const { status, url, order_id } = item;
+      let channle = utils.getFBChannel() === 'own' ? '' : utils.getFBChannel();
+
       localStorage.setItem('mlxz_reload_page_home', 1);
-      location.href = `${location.origin}/${url}.html#/${
+      location.href = `${location.origin}/${channle}/${url}.html#/${
         status ? 'result' : ''
       }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
     },
@@ -2632,10 +2634,6 @@ export default {
 
     // 首页Banner排序
     async getProductSort() {
-      // 2024.5.21g关闭banner排序
-      this.getSortInitList();
-      return;
-      // end  2024.5.23删除上面代码
       if (!this.isShowBannerSort()) {
         this.getSortInitList();
         return;
