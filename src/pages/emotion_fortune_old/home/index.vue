@@ -166,9 +166,8 @@
       url="emotion_fortune"
       e_id="10006"
     />
-
+    <!-- <div class="footer-box"></div> -->
     <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
-    <PopNotice v-if="is_show_notice" @close="closeNotice" />
   </div>
 </template>
 <script>
@@ -184,8 +183,8 @@ import DatetimePicker from '../../../components/DatetimePicker';
 import NongliPicker from '../../../components/NongliPicker';
 import { reportEnum } from '../../../libs/enum';
 
-import cn_home_btn from '../../../assets/img/emotion_v2/cn/home_btn.png';
-import tw_home_btn from '../../../assets/img/emotion_v2/tw/home_btn.png';
+import cn_home_btn from '../../../assets/img/emotion/home_btn.png';
+import tw_home_btn from '../../../assets/img/tw_mlxz/emotion/home_btn.png';
 
 import combinePayPop from '../../../components/combinePayPop.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
@@ -203,7 +202,6 @@ import cn_history_order from '../../../assets/img/mlxz/downloadBtn/emotion24.png
 import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/emotion24_order.png';
 
 import HotProduct from '../../../components/hotProduct.vue';
-import PopNotice from '../../../components/PopNotice.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
 
@@ -215,7 +213,6 @@ export default {
     combinePayPop,
     HotProduct,
     HomeFooter,
-    PopNotice,
   },
   data() {
     return {
@@ -249,8 +246,8 @@ export default {
       showFixedBtn: false,
       //
       language: utils.getLanguage(),
-      cn_home_btn,
-      tw_home_btn,
+      cn_home_btn: cn_home_btn,
+      tw_home_btn: tw_home_btn,
       cn_card_1,
       tw_card_1,
       cn_card_2,
@@ -258,9 +255,6 @@ export default {
       is_show_btn: true,
       pay_modal: false,
       product_price: '',
-
-      // 挽留弹窗
-      is_show_notice: false,
     };
   },
   computed: {
@@ -269,9 +263,6 @@ export default {
     },
     is_cn() {
       return this.language === 'zh-CN';
-    },
-    is_show_hot() {
-      return ['enjoy02', 'panda02'].includes(utils.getFBChannel());
     },
   },
   watch: {
@@ -309,7 +300,6 @@ export default {
     this.has_pay = has_pay ? has_pay : '';
   },
   mounted() {
-    this.showNoticePop();
     // 赋默认值
     let storaged_userInfo = window.localStorage.getItem(
       '_emotion_fortune_info'
@@ -593,7 +583,6 @@ export default {
       querystring += time_obj.birth_hour || '-1';
 
       window.localStorage.setItem('_emotion_fortune_info', querystring);
-
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
 
@@ -618,14 +607,6 @@ export default {
           item => item.product_key === this.product_key
         );
         const { price, unit, product_id, google_goods_id, product_key } = same_;
-        localStorage.setItem(
-          'mlxz_emotion_user_info',
-          JSON.stringify({
-            user_info: querystring,
-            product_key: this.product_key,
-          })
-        );
-        localStorage.setItem('mlxz_show_notice_emo', 1);
 
         this.product_price = price || '-';
         this.$router.push({ path });
@@ -754,18 +735,6 @@ export default {
       } else {
         window.open('index.html', '_blank');
       }
-    },
-    // 展示挽留弹窗  通过定时器
-    showNoticePop() {
-      setInterval(() => {
-        let is_show_notice = localStorage.getItem('mlxz_show_notice_emo');
-        this.is_show_notice = +is_show_notice ? true : false;
-      }, 1000);
-    },
-    // 关闭当前报告的挽留弹窗
-    closeNotice() {
-      localStorage.removeItem('mlxz_show_notice_emo');
-      this.is_show_notice = false;
     },
   },
 };
@@ -962,7 +931,7 @@ export default {
 }
 
 .fix-btn {
-  width: 5.8rem;
+  width: 5.82rem;
   height: 1.24rem;
   position: fixed;
   bottom: 0;
@@ -991,8 +960,11 @@ export default {
 }
 .footer-box {
   width: 7.5rem;
-  height: 1.6rem;
-
+  height: 1.96rem;
+  background: url('../../../assets/img/common/ganqing_img_btnmengban.png')
+    no-repeat;
+  background-size: 100% 100%;
+  margin-top: 0.2rem;
 }
 
 .back-box {
@@ -1017,4 +989,3 @@ export default {
   }
 }
 </style>
-../../../api/api.js../../../libs/enum.js

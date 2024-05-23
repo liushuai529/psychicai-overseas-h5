@@ -69,6 +69,7 @@ export default {
      * @return {*}
      */
     async formateQueryUserInfo(string) {
+      console.log('1', string);
       let arr = string.split('|');
       this.year = arr[3];
       this.month = arr[4];

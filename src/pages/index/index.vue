@@ -1572,11 +1572,11 @@ export default {
         } else if (this.combine_index === 0) {
           return '0.8rem';
         } else {
-          return '1.55rem';
+          return '2.05rem';
         }
       } else {
         if (this.combine_index) {
-          return this.combine_index !== -1 ? '0.8rem' : '0px';
+          return this.combine_index !== -1 ? '1.3rem' : '0px';
         } else {
           return '0px';
         }

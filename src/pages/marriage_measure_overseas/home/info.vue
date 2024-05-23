@@ -14,6 +14,7 @@
     <!-- 男方 -->
     <div class="input-box">
       <div class="input-item">
+        {{ maleusername }}
         <div class="input-label">男方姓名：</div>
         <input
           class="input"
@@ -82,6 +83,7 @@ export default {
   },
   watch: {
     malename(val) {
+      console.log('val', val);
       this.maleusername = val;
       if (val) {
         let new_ = val.trim();
@@ -117,6 +119,7 @@ export default {
       }
     },
     maleusername(newV, oldV) {
+      console.log('newv', newV);
       // this.$parent.male.username = newV;
       if (newV) {
         let new_ = newV.trim();
@@ -136,6 +139,9 @@ export default {
           this.$parent.male.username = newV;
           this.maleusername = newV;
         }
+      } else {
+        this.$parent.male.username = newV;
+        this.maleusername = newV;
       }
     },
     femaleusername(newV, oldV) {
@@ -158,6 +164,9 @@ export default {
           this.$parent.female.username = newV;
           this.femaleusername = newV;
         }
+      } else {
+        this.$parent.female.username = newV;
+        this.femaleusername = newV;
       }
     },
   },
