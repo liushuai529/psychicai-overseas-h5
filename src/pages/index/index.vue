@@ -2632,10 +2632,6 @@ export default {
 
     // 首页Banner排序
     async getProductSort() {
-      // 2024.5.21g关闭banner排序
-      this.getSortInitList();
-      return;
-      // end  2024.5.23删除上面代码
       if (!this.isShowBannerSort()) {
         this.getSortInitList();
         return;
