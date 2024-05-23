@@ -151,6 +151,14 @@
       :count_down="count_down"
       :product_key="product_key"
     />
+    <div v-if="show_fixed_order" class="fix-order top-470">
+      <div class="title">
+        {{ fixed_order_name }}
+      </div>
+      <div class="divider">
+        <div v-for="it in 30" :key="it" class="line"></div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -185,7 +193,7 @@ import tw_card_4 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_tw.png
 
 import cn_card_5 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai5.png';
 import tw_card_5 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai5.png';
-import { reportEnum } from '../../../libs/enum';
+import { reportEnum, reportName } from '../../../libs/enum';
 import combinePayPop from '../../../components/combinePayPop.vue';
 import cn_new_user_btn from '../../../assets/img/mlxz/year_of_lucky_2024/nianyun_btn_jiexiao.png';
 import tw_new_user_btn from '../../../assets/img/tw_mlxz/year_24/nianyun_btn_jiexiao_fanti.png';
@@ -268,6 +276,9 @@ export default {
       // 挽留弹窗
       is_show_notice: false, // 是否展示挽留弹窗
       count_down: 0, // 挽留弹窗倒计时
+      fix_order_info: null, //最新一个订单信息
+      new_order_key: '',
+      reportName,
     };
   },
   computed: {
@@ -296,6 +307,20 @@ export default {
 
     is_cn() {
       return this.language === 'zh-CN';
+    },
+
+    show_fixed_order() {
+      return true;
+      return this.fix_order_info && this.new_order_key !== this.product_key
+        ? true
+        : false;
+    },
+    fixed_order_name() {
+      return this.new_order_key
+        ? utils.getLanguage() === 'zh-CN'
+          ? reportName[this.new_order_key].cn
+          : reportName[this.new_order_key].tw
+        : '';
     },
   },
   created() {
@@ -615,6 +640,9 @@ export default {
           item => item.product_key === this.product_key
         );
         const { price, unit, product_id, google_goods_id, product_key } = same_;
+        // 缓存最新一个订单信息
+        localStorage.setItem('mlxz_fixed_order_info', querystring);
+        localStorage.setItem('mlxz_fixed_order_key', this.product_key);
         localStorage.setItem(
           `mlxz_user_info_${this.product_key}`,
           JSON.stringify({
@@ -739,6 +767,9 @@ export default {
     // 展示挽留弹窗  通过定时器
     showNoticePop() {
       setInterval(() => {
+        // 最新一个订单信息
+        this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
+        this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
         let is_show_notice = localStorage.getItem(
           `mlxz_show_notice_${this.product_key}`
         );
@@ -960,5 +991,49 @@ export default {
 
 .last-card {
   margin-bottom: 1.52rem !important;
+}
+
+.fix-order {
+  width: 2.56rem;
+  height: 1.9rem;
+  background: url('../../../assets/img/pop/fix-pop.png') no-repeat;
+  background-size: contain;
+  position: fixed;
+  right: 0;
+  z-index: 101;
+  padding-top: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .title {
+    width: 90%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 0.28rem;
+    font-weight: 600;
+    font-size: 0.28rem;
+    color: #5b3825;
+    line-height: 0.28rem;
+  }
+  .divider {
+    width: 2.08rem;
+    height: 0.01rem;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    margin: 0.12rem auto;
+    .line {
+      width: 0.05rem;
+      height: 100%;
+      border-radius: 0.1rem;
+      margin-right: 0.03rem;
+      background: #ebd1b4;
+    }
+  }
+}
+.top-470 {
+  top: 4.7rem;
 }
 </style>
