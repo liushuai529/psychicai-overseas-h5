@@ -296,10 +296,17 @@ export default {
   },
   created() {
     // 首次挽留的弹窗计时
-    this.time =
-      +localStorage.getItem(`mlxz_new_time_down_${this.product_key}`) ||
-      15 * 60 * 1000;
-    localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
+    let use_fixed_time = this.$route.query.use_fixed_time;
+    if (use_fixed_time) {
+      this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
+      localStorage.removeItem('mlxz_fixed_local_order_time');
+    } else {
+      this.time =
+        +localStorage.getItem(`mlxz_new_time_down_${this.product_key}`) ||
+        15 * 60 * 1000;
+      localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
+    }
+
     this.getProductionList();
     this.getPayMethod();
 
@@ -331,6 +338,8 @@ export default {
       } else {
         localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
       }
+      localStorage.setItem(`mlxz_fixed_local_order_time`, time_);
+
       this.is_show_shandong = time_ < 60 * 1000;
       this.is_show_daoqi = time_ < 31 * 1000;
       if (!minutes && !seconds && milliseconds < 10) {
@@ -440,6 +449,9 @@ export default {
       if (pay_method === 'google_pay') {
         const res = await payOrderAPI(params);
         localStorage.removeItem('mlxz_set_event_times');
+        localStorage.removeItem('mlxz_fixed_order_info');
+        localStorage.removeItem('mlxz_fixed_order_key');
+        localStorage.removeItem('mlxz_fixed_local_order_time');
         Indicator.close();
         if (res.status !== 1000) return;
         localStorage.setItem('report_order_id', res.data.id);
@@ -455,6 +467,9 @@ export default {
         }`;
         const res = await payOrderAPI(pay_max_params);
         localStorage.removeItem('mlxz_set_event_times');
+        localStorage.removeItem('mlxz_fixed_order_info');
+        localStorage.removeItem('mlxz_fixed_order_key');
+        localStorage.removeItem('mlxz_fixed_local_order_time');
 
         Indicator.close();
 

@@ -151,17 +151,29 @@
       :count_down="count_down"
       :product_key="product_key"
     />
-    <div v-if="show_fixed_order" class="fix-order top-470">
-      <div class="title">
-        {{ fixed_order_name }}
-      </div>
-      <div class="divider">
-        <div v-for="it in 30" :key="it" class="line"></div>
-      </div>
-    </div>
+
+    <FixedOrder
+      v-if="show_fixed_order"
+      :new_order_key="new_order_key"
+      name="local"
+      top="4.7rem"
+      :time="local_time"
+      @payOrder="checkOrder"
+      @jumpDetail="jumpOrder"
+    />
+    <FixedOrder
+      v-if="show_api_order"
+      :last_order="last_order"
+      name="api"
+      top="6.7rem"
+      :time="api_time"
+      @payOrder="checkOrder"
+      @jumpDetail="jumpOrder"
+    />
   </div>
 </template>
 <script>
+import FixedOrder from '../../../components/FixedOrder.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
 import { Downloader, Parser, Player } from 'svga.lite';
@@ -170,7 +182,11 @@ import NongliPicker from '../../../components/NongliPicker';
 import PayPopup from '../../../components/PayPopup';
 import TopBar from '../../../components/TopBar';
 import utils from '../../../libs/utils.js';
-import { getPayOrderInfoAPI, payOrderAPI } from '../../../api/api';
+import {
+  getPayOrderInfoAPI,
+  payOrderAPI,
+  getLastOrderAPI,
+} from '../../../api/api';
 import moment from 'moment';
 import HeaderNotice from '../../../components/headerNotice.vue';
 
@@ -193,7 +209,7 @@ import tw_card_4 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_tw.png
 
 import cn_card_5 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai5.png';
 import tw_card_5 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai5.png';
-import { reportEnum, reportName } from '../../../libs/enum';
+import { reportEnum, reportName, path_enums } from '../../../libs/enum';
 import combinePayPop from '../../../components/combinePayPop.vue';
 import cn_new_user_btn from '../../../assets/img/mlxz/year_of_lucky_2024/nianyun_btn_jiexiao.png';
 import tw_new_user_btn from '../../../assets/img/tw_mlxz/year_24/nianyun_btn_jiexiao_fanti.png';
@@ -209,6 +225,10 @@ import cn_history_order from '../../../assets/img/mlxz/downloadBtn/year.png';
 import PopNotice from '../../../components/PopNotice.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
+const tipsArr5 = {
+  'zh-CN': '订单创建中...',
+  'zh-TW': '訂單創建中...',
+};
 export default {
   components: {
     DatetimePicker,
@@ -219,6 +239,7 @@ export default {
     combinePayPop,
     HomeFooter,
     PopNotice,
+    FixedOrder,
   },
   data() {
     return {
@@ -279,6 +300,11 @@ export default {
       fix_order_info: null, //最新一个订单信息
       new_order_key: '',
       reportName,
+
+      show_api_order: false,
+      last_order: null,
+      api_time: 0,
+      local_time: 0,
     };
   },
   computed: {
@@ -310,17 +336,12 @@ export default {
     },
 
     show_fixed_order() {
-      return true;
-      return this.fix_order_info && this.new_order_key !== this.product_key
+      // return true;
+      return this.fix_order_info &&
+        this.new_order_key !== this.product_key &&
+        this.new_order_key !== this.last_order.product_key
         ? true
         : false;
-    },
-    fixed_order_name() {
-      return this.new_order_key
-        ? utils.getLanguage() === 'zh-CN'
-          ? reportName[this.new_order_key].cn
-          : reportName[this.new_order_key].tw
-        : '';
     },
   },
   created() {
@@ -425,6 +446,8 @@ export default {
       1
     );
     this.loadBg('#canvas3', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
+
+    this.getLastOrder();
   },
   watch: {
     username(val) {
@@ -561,10 +584,10 @@ export default {
      * @return {*}
      */
     async check() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'vq6u1b',
-        });
+      // window.Adjust &&
+      //   window.Adjust.trackEvent({
+      //     eventToken: 'vq6u1b',
+      //   });
 
       utils.firebaseLogEvent(
         '10003',
@@ -781,6 +804,10 @@ export default {
         let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
         let set_time_ = (5 * 60 + 48) * 1000 + 280;
         this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
+
+        this.local_time =
+          +localStorage.getItem('mlxz_fixed_local_order_time') ||
+          15 * 60 * 1000;
       }, 500);
     },
     // 关闭当前报告的挽留弹窗
@@ -788,6 +815,67 @@ export default {
       localStorage.setItem(`mlxz_show_notice_${this.product_key}`, 2);
       localStorage.removeItem(`mlxz_count_down_${this.product_key}`);
       this.is_show_notice = false;
+    },
+
+    // 获取最新一个订单信息
+    async getLastOrder() {
+      const res = await getLastOrderAPI();
+      if (res.status !== 1000) return;
+      this.last_order = res.data;
+      if (
+        this.last_order.status !== 'PAYED' &&
+        this.last_order.product_key !== this.product_key
+      ) {
+        //
+        if (
+          +localStorage.getItem('mlxz_fixed_api_order_id') ===
+          this.last_order.id
+        ) {
+          this.api_time = +localStorage.getItem('mlxz_fixed_api_order_time');
+          this.show_api_order = true;
+          return;
+        }
+        this.api_time =
+          +localStorage.getItem('mlxz_fixed_api_order_time') || 15 * 60 * 1000;
+        localStorage.setItem('mlxz_fixed_api_order_id', this.last_order.id);
+        this.show_api_order = true;
+      }
+    },
+
+    // api订单下单
+    async checkOrder() {
+      Indicator.open(tipsArr5[utils.getLanguage()]);
+      const { ext, pay_method, product_key, product_id, payment } =
+        this.last_order;
+      if (this.last_order.status === 'PAYED') return;
+      let params = {
+        pay_method: pay_method,
+        product_key: product_key,
+        product_id: product_id,
+        platform: 'WEB',
+        extra_ce_suan: ext,
+        callback_url: `${location.origin}${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}`,
+      };
+
+      const res = await payOrderAPI(params);
+
+      Indicator.close();
+      if (res.status !== 1000) return;
+      localStorage.removeItem('mlxz_fixed_api_order_time');
+      localStorage.removeItem('mlxz_fixed_api_order_id');
+      await utils.asleep(1000);
+      location.href = res.data.pay_url;
+    },
+    jumpOrder() {
+      let path =
+        'detail?querystring=' +
+        this.fix_order_info +
+        '&pay_modal=1' +
+        '&use_fixed_time=1';
+
+      location.href = `${location.origin}/${
+        path_enums[this.new_order_key]
+      }.html#/${path}`;
     },
   },
 };
@@ -991,49 +1079,5 @@ export default {
 
 .last-card {
   margin-bottom: 1.52rem !important;
-}
-
-.fix-order {
-  width: 2.56rem;
-  height: 1.9rem;
-  background: url('../../../assets/img/pop/fix-pop.png') no-repeat;
-  background-size: contain;
-  position: fixed;
-  right: 0;
-  z-index: 101;
-  padding-top: 0.3rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .title {
-    width: 90%;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    height: 0.28rem;
-    font-weight: 600;
-    font-size: 0.28rem;
-    color: #5b3825;
-    line-height: 0.28rem;
-  }
-  .divider {
-    width: 2.08rem;
-    height: 0.01rem;
-    display: flex;
-    flex-wrap: nowrap;
-    overflow: hidden;
-    margin: 0.12rem auto;
-    .line {
-      width: 0.05rem;
-      height: 100%;
-      border-radius: 0.1rem;
-      margin-right: 0.03rem;
-      background: #ebd1b4;
-    }
-  }
-}
-.top-470 {
-  top: 4.7rem;
 }
 </style>
