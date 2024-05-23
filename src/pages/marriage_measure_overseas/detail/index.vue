@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-16 14:00:19
+ * @LastEditTime: 2024-05-23 10:55:51
  * @Description: 八字合婚
 -->
 
@@ -50,13 +50,37 @@
         <shengxiao
           :male_str="male_user_string"
           :female_str="female_user_string"
+          :is_result="false"
         />
-        <div id="info-btn" @click="showPayModal" class="pay-btn">
+        <!-- <div id="info-btn" @click="showPayModal" class="pay-btn">
           {{ $t('tips-1') }}
-        </div>
-        <Marquee :mock_users="getRandomList()"></Marquee>
+        </div> -->
       </div>
     </div>
+    <img
+      class="title-pay"
+      src="../../../assets/img/bzhh_v2/img_title.png"
+      alt=""
+    />
+    <PayDetail
+      className="method-box"
+      ref="payDetail"
+      :product_key="product_key"
+      :query_user_string="query_user_string"
+      e_view_id="10007"
+      c_view_id="-10005"
+      e_view_name="view_marriage_pay"
+      a_view_token="g790s3"
+      c_click_id="-10006"
+      e_click_name="click_marriage_pay"
+      a_click_token="2ijw47"
+    />
+    <Marquee
+      :mock_users="getRandomList()"
+      product_key="h5_marriage"
+      class="user"
+    />
+
     <img class="text" :src="language === 'zh-CN' ? cn_img_word : tw_img_word" />
     <img class="module" :src="language === 'zh-CN' ? cn_mokuai1 : tw_mokuai1" />
     <img class="module" :src="language === 'zh-CN' ? cn_mokuai2 : tw_mokuai2" />
@@ -69,9 +93,9 @@
       style="margin-bottom: 1.59rem"
       :src="language === 'zh-CN' ? cn_mokuai7 : tw_mokuai7"
     />
-    <div v-if="showFixedBtn" @click="showPayModal" class="pay-btn fix-box">
+    <!-- <div v-if="showFixedBtn" @click="showPayModal" class="pay-btn fix-box">
       {{ $t('tips-1') }}
-    </div>
+    </div> -->
     <payModal
       :product_key="product_key"
       v-model="pay_modal"
@@ -88,6 +112,12 @@
       e_click_name="click_marriage_pay"
       a_click_token="2ijw47"
     />
+    <img
+      @click="showPayModal"
+      class="btn-fixed"
+      :src="language === 'zh-CN' ? cn_btn : tw_btn"
+    />
+    <div class="footer-box"></div>
   </div>
 </template>
 
@@ -98,8 +128,8 @@ import utils from './../../../libs/utils.js';
 import hour_ganzi from './../../../libs/suishen.huangli.js';
 import year_ganzi from './../../../libs/suishen.wnl.js';
 
-import cn_img_title from '../../../assets/img/mlxz/bzhh/detail/img_title.png';
-import tw_img_title from '../../../assets/img/tw_mlxz/bazihehun/detail/title.png';
+import cn_img_title from '../../../assets/img/bzhh_v2/cn/img_title.png';
+import tw_img_title from '../../../assets/img/bzhh_v2/tw/img_title.png';
 import tw_img_word from '../../../assets/img/tw_mlxz/bazihehun/detail/text.png';
 import cn_img_word from '../../../assets/img/mlxz/bzhh/detail/img_word.png';
 
@@ -122,10 +152,23 @@ import tw_modal_bg from '../../../assets/img/tw_mlxz/bazihehun/detail/modal_bg.p
 import payModal from '../../../components/PayModal.vue';
 import shengxiao from './shengxiao.vue';
 import baziInfo from './bazi.vue';
+import tw_btn from './../../../assets/img//bzhh_v2/tw/img_btn.png';
+import cn_btn from './../../../assets/img/bzhh_v2/cn/img_btn.png';
 import { report_id_arr } from '../../../libs/enum';
+import HomeFooter from '../../../components/HomeFooter.vue';
+import PayDetail from '../../../components/PayDetail.vue';
+
 const mockTipsArr = {
   'zh-CN': '成功解锁了八字合婚的详细解析',
   'zh-TW': '成功解鎖了八字合婚的詳細解析',
+};
+const tips1 = {
+  'zh-CN': '成功解锁了',
+  'zh-TW': '成功解鎖了',
+};
+const tips2 = {
+  'zh-CN': '的详细解析',
+  'zh-TW': '的詳細解析',
 };
 export default {
   components: {
@@ -134,13 +177,18 @@ export default {
     baziInfo,
     payModal,
     shengxiao,
+    HomeFooter,
+    PayDetail,
   },
   data() {
     return {
+      cn_btn,
+      tw_btn,
       product_id: 23,
       product_key: 'h5_marriage',
       query_user_string: '',
-
+      tips1,
+      tips2,
       mname: '',
       mbirth: '',
       fname: '',
@@ -209,20 +257,6 @@ export default {
 
     let btn = document.getElementById('info-btn');
     let self = this;
-    document.addEventListener('scroll', e => {
-      let flag = utils.isElementInViewport(btn);
-      let scroll_distance =
-        window.pageYOffset || document.documentElement.scrollTop;
-      if (!self.is_show_btn || scroll_distance < 100) {
-        self.showFixedBtn = false;
-        return;
-      }
-      if (!flag) {
-        self.showFixedBtn = true;
-      } else {
-        self.showFixedBtn = false;
-      }
-    });
 
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
@@ -239,10 +273,15 @@ export default {
     getRandomList() {
       let arr = ['我的', 'vt1', '椒', '14', '96', '小', 'il', '2o', '22'];
       let new_arr = [];
-      for (let i = 0; i < 29; i++) {
+      for (let i = 0; i < 200; i++) {
         let randomIndex = Math.floor(Math.random() * arr.length);
-        new_arr.push(arr[randomIndex] + '***' + mockTipsArr[this.language]);
+        new_arr.push({
+          desc1: arr[randomIndex] + '***',
+          desc2: tips1[this.language],
+          desc3: tips2[this.language],
+        });
       }
+
       return new_arr;
     },
 
@@ -321,15 +360,16 @@ export default {
      * @return {*}
      */
     showPayModal() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'ixk05w',
-        });
+      this.$refs.payDetail.payMoney();
+      return;
       utils.firebaseLogEvent('10007', '-10004', 'click_marriage_mid', 'click', {
         args_name: 'click_marriage_mid',
         channel: utils.getFBChannel(),
       });
       this.pay_modal = true;
+    },
+    jumpHome() {
+      location.href = location.origin + location.pathname;
     },
   },
 };
@@ -355,7 +395,6 @@ export default {
     border-radius: 0.16rem;
     background-color: #fbf8ed;
     box-sizing: border-box;
-    margin-bottom: 0.24rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -441,5 +480,74 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.btn-fixed {
+  position: fixed;
+  width: 6.89rem;
+  left: 50%;
+  margin-left: -3.46rem;
+  bottom: 0.3rem;
+  z-index: 4;
+  animation: btnMove 1s infinite ease-in-out alternate;
+}
+
+.footer-box {
+  width: 7.5rem;
+  height: 1.96rem;
+  background: url('../../../assets/img/bzhh_v2/bazihehun_img_btnmengban.png')
+    no-repeat;
+  background-size: contain;
+  position: fixed;
+  bottom: 0;
+  z-index: 3;
+}
+
+.method-box {
+  width: 7.02rem;
+  min-height: 6rem;
+  font-family: system-ui, sans-serif;
+  background: #fbf8ed;
+  border-radius: 0.16rem;
+  border: 0.06rem solid #d19a47;
+  padding: 0.4rem 0.16rem 0;
+  margin-top: -0.45rem;
+}
+.title-pay {
+  width: 4.49rem;
+  height: 0.89rem;
+  margin: 0.29rem auto 0;
+  position: relative;
+  z-index: 2;
+}
+.user {
+  width: 7.02rem;
+  height: 0.72rem;
+  background: #fbf8ed;
+  border-radius: 0.16rem;
+  border: 0.06rem solid #d19a47;
+  margin: 0.28rem auto 0.44rem;
+  font-weight: 400;
+  font-size: 0.24rem;
+  color: #666666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 0.7rem !important;
+    padding-bottom: 0.4rem;
+  }
+  .laba {
+    width: 0.28rem;
+    height: 0.24rem;
+    margin-right: 0.08rem;
+  }
+  .light-red {
+    color: #e13d3c;
+  }
 }
 </style>

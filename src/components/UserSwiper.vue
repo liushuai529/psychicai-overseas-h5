@@ -13,13 +13,7 @@
       </div>
     </div>
   </div>
-  <div
-    v-else
-    class="marquee"
-    :style="{
-      margin: '0.28rem auto 0.44rem',
-    }"
-  >
+  <div v-else class="marquee">
     <div class="marquee-wrapper">
       <div class="marquee-box" :class="{ scrollmarquee: scrollMarquee }">
         <div class="marquee-text item">
@@ -76,6 +70,7 @@ export default {
     };
   },
   created() {
+    console.error(this.product_key);
     if (this.product_key) {
       this.marryMock();
     } else {
@@ -184,5 +179,7 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 0.7rem !important;
+  padding-bottom: 0.4rem;
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-07 21:03:37
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-17 11:53:17
+ * @LastEditTime: 2024-05-22 15:39:36
  * @Description:
  */
 import Vue from 'vue';
@@ -45,9 +45,9 @@ if ('addEventListener' in document) {
   );
 }
 
-import CN from '../../locale//emotion/cn.js';
+import CN from '../../locale/emotion/cn.js';
 import TW from '../../locale/emotion/tw.js';
-import util from '../../libs/utils';
+import util from '../../libs/utils.js';
 
 let _language = util.getLanguage();
 let _enum = {
