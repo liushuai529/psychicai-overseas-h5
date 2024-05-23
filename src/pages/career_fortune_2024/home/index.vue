@@ -170,6 +170,12 @@
       @getOrderId="getOrderId"
     ></combinePayPop> -->
     <HomeFooter v-if="showFixedBtn" product_key="h5_career2024" />
+    <PopNotice
+      v-if="is_show_notice"
+      @close="closeNotice"
+      :count_down="count_down"
+      :product_key="product_key"
+    />
   </div>
 </template>
 
@@ -204,6 +210,7 @@ import cn_zhanwang from '../../../assets/img/mlxz/svga/career24/cn_zhanwang.svga
 import tw_zhanwang from '../../../assets/img/mlxz/svga/career24/tw_zhanwang.svga';
 import cn_history_order from '../../../assets/img/mlxz/career_2024/bgm_lsdd.png';
 import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/career_order.png';
+import PopNotice from '../../../components/PopNotice.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
 let main_order_id = utils.getQueryString('main_order_id');
@@ -216,6 +223,7 @@ export default {
     HeaderNotice,
     combinePayPop,
     HomeFooter,
+    PopNotice,
   },
   data() {
     return {
@@ -264,6 +272,9 @@ export default {
       pay_modal: false,
       product_price: '',
       language: utils.getLanguage(),
+      // 挽留弹窗
+      is_show_notice: false, // 是否展示挽留弹窗
+      count_down: 0, // 挽留弹窗倒计时
     };
   },
   computed: {
@@ -295,10 +306,10 @@ export default {
 
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: '5ewewi',
-      });
+    // window.Adjust &&
+    //   window.Adjust.trackEvent({
+    //     eventToken: '5ewewi',
+    //   });
 
     utils.firebaseLogEvent(
       '10004',
@@ -312,6 +323,8 @@ export default {
     );
   },
   async mounted() {
+    this.showNoticePop();
+
     // 赋默认值
     let storaged_userInfo = localStorage.getItem('mlxz_career_2024_info');
     if (storaged_userInfo) {
@@ -477,10 +490,10 @@ export default {
      * @return {*}
      */
     async check() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'femk1d',
-        });
+      // window.Adjust &&
+      //   window.Adjust.trackEvent({
+      //     eventToken: 'femk1d',
+      //   });
 
       utils.firebaseLogEvent(
         '10004',
@@ -560,6 +573,20 @@ export default {
           );
           const { price, unit, product_id, google_goods_id, product_key } =
             same_;
+          localStorage.setItem(
+            `mlxz_user_info_${this.product_key}`,
+            JSON.stringify({
+              user_info: querystring,
+              product_key: this.product_key,
+            })
+          );
+          let num_ = localStorage.getItem(
+            `mlxz_show_notice_${this.product_key}`
+          );
+          localStorage.setItem(
+            `mlxz_show_notice_${this.product_key}`,
+            num_ ? 2 : 1
+          );
           this.$router.push({ path });
           return;
           this.product_price = price || '-';
@@ -624,6 +651,33 @@ export default {
         ).format('YYYYMMDD'),
       };
       return params;
+    },
+
+    // 展示挽留弹窗  通过定时器
+    showNoticePop() {
+      setInterval(() => {
+        let is_show_notice = localStorage.getItem(
+          `mlxz_show_notice_${this.product_key}`
+        );
+        this.is_show_notice = is_show_notice
+          ? +is_show_notice === 1
+            ? true
+            : false
+          : false;
+        let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
+        let set_time_ = (5 * 60 + 48) * 1000 + 280;
+        this.count_down = time_
+          ? set_time_ > +time_
+            ? set_time_
+            : +time_
+          : 30 * 60 * 1000;
+      }, 500);
+    },
+    // 关闭当前报告的挽留弹窗
+    closeNotice() {
+      localStorage.setItem(`mlxz_show_notice_${this.product_key}`, 2);
+      localStorage.removeItem(`mlxz_count_down_${this.product_key}`);
+      this.is_show_notice = false;
     },
   },
 };

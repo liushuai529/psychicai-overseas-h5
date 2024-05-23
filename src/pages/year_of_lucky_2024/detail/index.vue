@@ -226,10 +226,10 @@ export default {
     },
   },
   async created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'z2ck6v',
-      });
+    // window.Adjust &&
+    //   window.Adjust.trackEvent({
+    //     eventToken: 'z2ck6v',
+    //   });
     utils.firebaseLogEvent(
       '10003',
       '-10003',
@@ -242,6 +242,10 @@ export default {
     );
 
     this.query_user_string = this.$route.query.querystring;
+    let pay_modal = this.$route.query.pay_modal;
+    if (pay_modal) {
+      this.pay_modal = true;
+    }
     await this.formateQueryUserInfo(this.query_user_string);
     this.getUserBazi();
   },

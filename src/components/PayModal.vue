@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-21 15:17:07
+ * @LastEditTime: 2024-05-23 15:07:30
  * @Description: 支付弹窗
 -->
 <template>
@@ -44,7 +44,7 @@
               <div class="title">{{ tips1 }}</div>
               <div class="desc">
                 <!-- {{ time_str }} millisecond -->
-                <count-down :time="time" format="mm:ss" />
+                <count-down :time="time" @change="getTime" format="mm:ss" />
               </div>
             </div>
           </div>
@@ -156,7 +156,7 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/24049b44461fceb64a04b15edd6b2a8bb79e.png',
       new_user_icon:
         'https://psychicai-static.psychicai.pro/imgs/24040fcec5baef7f4fcea5a1eed3552d734e.png',
-      time: 30 * 60 * 1000,
+      time: 0,
       time_str: '',
       product: null,
       is_new_user: false, // 是否是新用户
@@ -264,7 +264,13 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
   },
-  created() {},
+  created() {
+    // 首次挽留的弹窗计时
+    this.time =
+      +localStorage.getItem(`mlxz_new_time_down_${this.product_key}`) ||
+      30 * 60 * 1000;
+    localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
+  },
 
   watch: {
     value: {
@@ -314,6 +320,28 @@ export default {
   },
 
   methods: {
+    getTime(val) {
+      const { minutes, seconds, milliseconds } = val;
+      let time_ = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
+      // 是否展示首次挽留弹窗 0 1展示 2不展示  并缓存当前时间用于弹窗倒计时
+      let notice_num = localStorage.getItem(
+        `mlxz_show_notice_${this.product_key}`
+      );
+      if (notice_num) {
+        if (+notice_num === 1) {
+          localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
+        }
+      } else {
+        localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
+      }
+      // this.is_show_shandong = time_ < 60 * 1000;
+      // this.is_show_daoqi = time_ < 31 * 1000;
+      if (!minutes && !seconds && milliseconds < 10) {
+        this.time = 1;
+        this.$refs.countDown.pause();
+        this.$refs.countDown.reset();
+      }
+    },
     // 端内加载背景SVGA动画
     loadBg(dom, url, is_loop = true) {
       const downloader = new Downloader();

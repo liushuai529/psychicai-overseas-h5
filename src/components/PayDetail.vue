@@ -183,7 +183,7 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/24049b44461fceb64a04b15edd6b2a8bb79e.png',
       new_user_icon:
         'https://psychicai-static.psychicai.pro/imgs/24040fcec5baef7f4fcea5a1eed3552d734e.png',
-      time: 15 * 60 * 1000,
+      time: 0,
       // time: 5 * 1000,
       time_str_1: '',
       time_str_2: '',
@@ -196,7 +196,6 @@ export default {
       no_check_icon:
         'https://psychicai-static.psychicai.pro/imgs/2404f091a163349f45d3909f82e4660cc3c6.png',
       start_down: false,
-      new_time: new Date().getTime().valueOf(),
       is_show_shandong: false,
       is_show_daoqi: false,
     };
@@ -296,6 +295,11 @@ export default {
     },
   },
   created() {
+    // 首次挽留的弹窗计时
+    this.time =
+      +localStorage.getItem(`mlxz_new_time_down_${this.product_key}`) ||
+      15 * 60 * 1000;
+    localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
     this.getProductionList();
     this.getPayMethod();
 
@@ -316,10 +320,10 @@ export default {
     getTime(val) {
       const { minutes, seconds, milliseconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
+      // 是否展示首次挽留弹窗 0 1展示 2不展示  并缓存当前时间用于弹窗倒计时
       let notice_num = localStorage.getItem(
         `mlxz_show_notice_${this.product_key}`
       );
-      console.log('notice_num', notice_num);
       if (notice_num) {
         if (+notice_num === 1) {
           localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);

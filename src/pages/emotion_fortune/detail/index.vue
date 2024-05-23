@@ -295,7 +295,6 @@ export default {
      */
     async formateQueryUserInfo(string) {
       let arr = string.split('|');
-
       this.year = arr[3];
       this.month = arr[4];
       this.date = arr[5];

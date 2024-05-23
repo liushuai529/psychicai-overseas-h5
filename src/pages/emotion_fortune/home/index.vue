@@ -296,10 +296,10 @@ export default {
     },
   },
   created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'x1em8r',
-      });
+    // window.Adjust &&
+    //   window.Adjust.trackEvent({
+    //     eventToken: 'x1em8r',
+    //   });
     this.$store.dispatch('common/getProduction');
     utils.firebaseLogEvent(
       '10006',
@@ -632,12 +632,10 @@ export default {
           })
         );
         let num_ = localStorage.getItem(`mlxz_show_notice_${this.product_key}`);
-
         localStorage.setItem(
           `mlxz_show_notice_${this.product_key}`,
           num_ ? 2 : 1
         );
-
         this.product_price = price || '-';
         this.$router.push({ path });
         return;
@@ -778,7 +776,8 @@ export default {
             : false
           : false;
         let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
-        this.count_down = time_ ? +time_ : 0;
+        let set_time_ = (5 * 60 + 48) * 1000 + 280;
+        this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
       }, 500);
     },
     // 关闭当前报告的挽留弹窗

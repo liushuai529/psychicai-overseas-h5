@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-08 20:35:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-10 14:45:17
+ * @LastEditTime: 2024-05-23 15:19:04
  * @Description: 
 -->
 <template>
@@ -191,7 +191,12 @@ export default {
       }
     );
     this.query_user_string = this.$route.query.querystring;
+
     await this.formateQueryUserInfo(this.query_user_string);
+    let pay_modal = this.$route.query.pay_modal;
+    if (pay_modal) {
+      this.pay_modal = true;
+    }
     this.getUserBazi();
   },
   filters: {

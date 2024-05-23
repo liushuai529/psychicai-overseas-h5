@@ -160,6 +160,12 @@
       @getOrderId="getOrderId"
     ></combinePayPop> -->
     <HomeFooter v-if="showFixedBtn" product_key="h5_wealth2024" />
+    <PopNotice
+      v-if="is_show_notice"
+      @close="closeNotice"
+      :count_down="count_down"
+      :product_key="product_key"
+    />
   </div>
 </template>
 
@@ -202,6 +208,7 @@ import tw_card4 from '../../../assets/img/tw_mlxz/wealth_24/home/4.png';
 
 import cn_order from '../../../assets/img/mlxz/lucky_year_report/order.png';
 import tw_order from '../../../assets/img/tw_mlxz/wealth_24/home/order.png';
+import PopNotice from '../../../components/PopNotice.vue';
 let channel = utils.getQueryStr('channel');
 
 export default {
@@ -211,6 +218,7 @@ export default {
     HeaderNotice,
     combinePayPop,
     HomeFooter,
+    PopNotice,
   },
   data() {
     return {
@@ -259,6 +267,9 @@ export default {
       pay_modal: false,
       query_user_string: '',
       product_price: '',
+      // 挽留弹窗
+      is_show_notice: false, // 是否展示挽留弹窗
+      count_down: 0, // 挽留弹窗倒计时
     };
   },
   computed: {
@@ -286,10 +297,10 @@ export default {
     },
   },
   created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'e6huul',
-      });
+    // window.Adjust &&
+    //   window.Adjust.trackEvent({
+    //     eventToken: 'e6huul',
+    //   });
     this.$store.dispatch('common/getProduction');
 
     utils.firebaseLogEvent(
@@ -306,6 +317,8 @@ export default {
     this.has_pay = has_pay ? has_pay : '';
   },
   mounted() {
+    this.showNoticePop();
+
     // 赋默认值
     let storaged_userInfo = window.localStorage.getItem(
       'etouch_luck_userinfo_new'
@@ -534,7 +547,18 @@ export default {
           item => item.product_key === this.product_key
         );
         const { price, unit, product_id, google_goods_id, product_key } = same_;
-
+        localStorage.setItem(
+          `mlxz_user_info_${this.product_key}`,
+          JSON.stringify({
+            user_info: querystring,
+            product_key: this.product_key,
+          })
+        );
+        let num_ = localStorage.getItem(`mlxz_show_notice_${this.product_key}`);
+        localStorage.setItem(
+          `mlxz_show_notice_${this.product_key}`,
+          num_ ? 2 : 1
+        );
         this.$router.push({ path });
         return;
         this.product_price = price || '-';
@@ -635,6 +659,28 @@ export default {
         };
       }
       return params;
+    },
+    // 展示挽留弹窗  通过定时器
+    showNoticePop() {
+      setInterval(() => {
+        let is_show_notice = localStorage.getItem(
+          `mlxz_show_notice_${this.product_key}`
+        );
+        this.is_show_notice = is_show_notice
+          ? +is_show_notice === 1
+            ? true
+            : false
+          : false;
+        let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
+        let set_time_ = (5 * 60 + 48) * 1000 + 280;
+        this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
+      }, 500);
+    },
+    // 关闭当前报告的挽留弹窗
+    closeNotice() {
+      localStorage.setItem(`mlxz_show_notice_${this.product_key}`, 2);
+      localStorage.removeItem(`mlxz_count_down_${this.product_key}`);
+      this.is_show_notice = false;
     },
   },
 };

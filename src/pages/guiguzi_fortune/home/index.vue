@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-15 19:19:26
+ * @LastEditTime: 2024-05-23 15:16:34
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -160,6 +160,12 @@
       @getOrderId="getOrderId"
     ></combinePayPop> -->
     <HomeFooter v-if="showFixedBtn" product_key="h5_bai_gua" />
+    <PopNotice
+      v-if="is_show_notice"
+      @close="closeNotice"
+      :count_down="count_down"
+      :product_key="product_key"
+    />
   </div>
 </template>
 
@@ -192,6 +198,9 @@ import tw_tags from '../../../assets/img/mlxz/svga/ggz/tw_tags.svga';
 
 import cn_order from '../../../assets/img/mlxz/guiguzi/bgm_lsdd.png';
 import tw_order from '../../../assets/img/mlxz/downloadBtn/tw/ggz_order.png';
+
+import PopNotice from '../../../components/PopNotice.vue';
+
 let show_popup = utils.getQueryString('show_popup');
 
 // 组合测算相关参数
@@ -207,6 +216,7 @@ export default {
     combinePayPop,
     HeaderNotice,
     HomeFooter,
+    PopNotice,
   },
   data() {
     return {
@@ -255,6 +265,9 @@ export default {
       is_show_btn: true,
       pay_modal: false,
       product_price: '',
+      // 挽留弹窗
+      is_show_notice: false, // 是否展示挽留弹窗
+      count_down: 0, // 挽留弹窗倒计时
     };
   },
   computed: {
@@ -282,10 +295,10 @@ export default {
     },
   },
   created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: '2a8f3m',
-      });
+    // window.Adjust &&
+    //   window.Adjust.trackEvent({
+    //     eventToken: '2a8f3m',
+    //   });
     this.$store.dispatch('common/getProduction');
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
@@ -301,6 +314,8 @@ export default {
     );
   },
   mounted() {
+    this.showNoticePop();
+
     // 赋默认值
     let storaged_userInfo = localStorage.getItem('_guiguzi_overseas_info');
     if (storaged_userInfo) {
@@ -534,6 +549,20 @@ export default {
           );
           const { price, unit, product_id, google_goods_id, product_key } =
             same_;
+          localStorage.setItem(
+            `mlxz_user_info_${this.product_key}`,
+            JSON.stringify({
+              user_info: querystring,
+              product_key: this.product_key,
+            })
+          );
+          let num_ = localStorage.getItem(
+            `mlxz_show_notice_${this.product_key}`
+          );
+          localStorage.setItem(
+            `mlxz_show_notice_${this.product_key}`,
+            num_ ? 2 : 1
+          );
           this.$router.push({ path });
           return;
           this.product_price = price || '-';
@@ -635,6 +664,29 @@ export default {
         };
       }
       return params;
+    },
+
+    // 展示挽留弹窗  通过定时器
+    showNoticePop() {
+      setInterval(() => {
+        let is_show_notice = localStorage.getItem(
+          `mlxz_show_notice_${this.product_key}`
+        );
+        this.is_show_notice = is_show_notice
+          ? +is_show_notice === 1
+            ? true
+            : false
+          : false;
+        let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
+        let set_time_ = (5 * 60 + 48) * 1000 + 280;
+        this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
+      }, 500);
+    },
+    // 关闭当前报告的挽留弹窗
+    closeNotice() {
+      localStorage.setItem(`mlxz_show_notice_${this.product_key}`, 2);
+      localStorage.removeItem(`mlxz_count_down_${this.product_key}`);
+      this.is_show_notice = false;
     },
   },
 };

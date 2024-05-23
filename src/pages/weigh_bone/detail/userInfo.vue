@@ -139,6 +139,10 @@ export default {
     },
   },
   created() {
+    let pay_modal = this.$route.query.pay_modal;
+    if (pay_modal) {
+      this.pay_modal = true;
+    }
     let arr = this.user_detail.split('|');
 
     let [

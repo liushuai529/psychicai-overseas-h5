@@ -199,6 +199,10 @@ export default {
 
     this.query_user_string = this.$route.query.querystring;
     this.formateQueryUserInfo(this.query_user_string);
+    let pay_modal = this.$route.query.pay_modal;
+    if (pay_modal) {
+      this.pay_modal = true;
+    }
   },
 
   computed: {
