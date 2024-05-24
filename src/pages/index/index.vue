@@ -649,17 +649,36 @@
     />
 
     <ResultPop v-if="show_result" @close="show_result = false" />
+    <FixedOrder
+      v-if="show_fixed_order"
+      :new_order_key="new_order_key"
+      name="local"
+      top="4.7rem"
+      :time="local_time"
+      @payOrder="checkOrder"
+      @jumpDetail="jumpOrder"
+    />
+    <FixedOrder
+      v-if="show_api_order"
+      :last_order="last_order"
+      name="api"
+      top="6.7rem"
+      :time="api_time"
+      @payOrder="checkOrder"
+      @jumpDetail="jumpOrder"
+    />
   </div>
 </template>
 
 <script>
+import FixedOrder from '../../components/FixedOrder.vue';
 // @ts-ignore
 import Recommend from './recommend.vue';
 // @ts-ignore
 import Fortune from './fortune.vue';
 import utils from '../../libs/utils';
 import PayPopup from '../../components/PayPopup.vue';
-import { banner_enums } from '../../libs/enum';
+import { banner_enums, reportName, path_enums } from '../../libs/enum';
 import { Toast, Indicator } from 'mint-ui';
 
 import PopResult from './pay_result.vue';
@@ -672,6 +691,8 @@ import {
   getResultAPI,
   checkSendEventApi,
   sendEventApi,
+  getLastOrderAPI,
+  payOrderAPI,
 } from '../../api/api';
 
 import longnianImg from '../../assets/img/mlxz/cold_start/banner-2024caiyun@3x.png';
@@ -997,7 +1018,15 @@ const new_pop_list = [
 ];
 
 export default {
-  components: { ResultPop, Recommend, Fortune, PayPopup, PopResult, PayModal },
+  components: {
+    ResultPop,
+    Recommend,
+    Fortune,
+    PayPopup,
+    PopResult,
+    PayModal,
+    FixedOrder,
+  },
   data() {
     return {
       cn_order_btn:
@@ -1070,6 +1099,14 @@ export default {
       today_sort_list: [],
       banner_list: [],
       payed_combine_price: null,
+      // 悬浮订单
+      fix_order_info: null, //最新一个订单信息
+      new_order_key: '',
+      reportName,
+      show_api_order: false,
+      last_order: null,
+      api_time: 0,
+      local_time: 0,
     };
   },
   computed: {
@@ -1582,6 +1619,21 @@ export default {
         }
       }
     },
+    show_fixed_order() {
+      // return true;
+      if (this.last_order) {
+        if (
+          this.last_order.product_key === this.new_order_key &&
+          this.last_order.status !== 'PAYED'
+        ) {
+          return false;
+        }
+      }
+
+      return this.fix_order_info && this.new_order_key !== this.product_key
+        ? true
+        : false;
+    },
   },
   watch: {
     sale_visible(val) {
@@ -1694,6 +1746,10 @@ export default {
     });
   },
   async mounted() {
+    this.showNoticePop();
+
+    this.getLastOrder();
+
     utils.firebaseLogEvent('10001', '-10001', 'page_view_h5main', 'page_view', {
       args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
@@ -1714,20 +1770,85 @@ export default {
         }
       }
     }
-
-    setInterval(() => {
-      let is_reload = localStorage.getItem('mlxz_reload_page_home');
-      if (is_reload) {
-        this.payed_order_three_list = [];
-        this.getPayedOrderList();
-      }
-    }, 2000);
   },
   beforeDestroy() {
     console.log('destory');
   },
   methods: {
     getProductions,
+    showNoticePop() {
+      setInterval(() => {
+        this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
+        this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
+        this.local_time =
+          +localStorage.getItem('mlxz_fixed_local_order_time') ||
+          15 * 60 * 1000;
+        let is_reload = localStorage.getItem('mlxz_reload_page_home');
+        if (is_reload) {
+          this.payed_order_three_list = [];
+          this.getPayedOrderList();
+        }
+      }, 1000);
+    },
+    // 获取最新一个订单信息
+    async getLastOrder() {
+      const res = await getLastOrderAPI();
+      if (res.status !== 1000) return;
+      this.last_order = res.data;
+      if (
+        this.last_order.status !== 'PAYED' &&
+        this.last_order.product_key !== this.product_key
+      ) {
+        //
+        if (
+          +localStorage.getItem('mlxz_fixed_api_order_id') ===
+          this.last_order.id
+        ) {
+          this.api_time = +localStorage.getItem('mlxz_fixed_api_order_time');
+          this.show_api_order = true;
+          return;
+        }
+        this.api_time =
+          +localStorage.getItem('mlxz_fixed_api_order_time') || 15 * 60 * 1000;
+        localStorage.setItem('mlxz_fixed_api_order_id', this.last_order.id);
+        this.show_api_order = true;
+      }
+    },
+
+    // api订单下单
+    async checkOrder() {
+      Indicator.open(tipsArr5[utils.getLanguage()]);
+      const { ext, pay_method, product_key, product_id, payment } =
+        this.last_order;
+      if (this.last_order.status === 'PAYED') return;
+      let params = {
+        pay_method: pay_method,
+        product_key: product_key,
+        product_id: product_id,
+        platform: 'WEB',
+        extra_ce_suan: ext,
+        callback_url: `${location.origin}${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}`,
+      };
+
+      const res = await payOrderAPI(params);
+      Indicator.close();
+      if (res.status !== 1000) return;
+      localStorage.removeItem('mlxz_fixed_api_order_id');
+      localStorage.removeItem('mlxz_fixed_api_order_time');
+      await utils.asleep(1000);
+      location.href = res.data.pay_url;
+    },
+    jumpOrder() {
+      let path =
+        'detail?querystring=' +
+        this.fix_order_info +
+        '&pay_modal=1' +
+        '&use_fixed_time=1';
+
+      location.href = `${location.origin}/${
+        path_enums[this.new_order_key]
+      }.html#/${path}`;
+    },
     /**
      * @description: 校验是否上报埋点
      * @return {*}

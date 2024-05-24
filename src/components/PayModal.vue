@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-23 15:07:30
+ * @LastEditTime: 2024-05-23 19:51:42
  * @Description: 支付弹窗
 -->
 <template>
@@ -330,9 +330,11 @@ export default {
       if (notice_num) {
         if (+notice_num === 1) {
           localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
+          localStorage.setItem(`mlxz_fixed_local_order_time`, time_);
         }
       } else {
         localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
+        localStorage.setItem(`mlxz_fixed_local_order_time`, time_);
       }
       // this.is_show_shandong = time_ < 60 * 1000;
       // this.is_show_daoqi = time_ < 31 * 1000;
@@ -476,6 +478,9 @@ export default {
         const res = await payOrderAPI(params);
         Indicator.close();
         localStorage.removeItem('mlxz_set_event_times');
+        localStorage.removeItem('mlxz_fixed_order_info');
+        localStorage.removeItem('mlxz_fixed_order_key');
+        localStorage.removeItem('mlxz_fixed_local_order_time');
         if (res.status !== 1000) return;
         localStorage.setItem('report_order_id', res.data.id);
       } else {
@@ -491,7 +496,9 @@ export default {
         const res = await payOrderAPI(pay_max_params);
         Indicator.close();
         localStorage.removeItem('mlxz_set_event_times');
-
+        localStorage.removeItem('mlxz_fixed_order_info');
+        localStorage.removeItem('mlxz_fixed_order_key');
+        localStorage.removeItem('mlxz_fixed_local_order_time');
         if (res.status !== 1000) return;
         await utils.asleep(1000);
         location.href = res.data.pay_url;

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-21 10:10:17
+ * @LastEditTime: 2024-05-23 17:21:59
  * @Description:
  */
 export * from './fortune';
@@ -163,4 +163,10 @@ export const sendEventApi = async data => {
 export const sortProductsAPI = async data => {
   await visitorLoginAPI();
   return request(`/web/event/products/sort`, 'GET', data);
+};
+
+// 查询最近一笔订单
+export const getLastOrderAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/trade/orders/ce_suan/recent`, 'POST', data);
 };
