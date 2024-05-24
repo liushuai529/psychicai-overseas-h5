@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-25 00:16:57
+ * @LastEditTime: 2024-05-25 00:30:48
  * @Description: 
 -->
 <template>
@@ -116,7 +116,8 @@
                   'rgb-light': is_show_shandong,
                 }"
               >
-                <span :class="{ mill: time_ === 1 }">
+                <!-- :class="{ mill: time_ === 1 }" -->
+                <span>
                   {{ timeData.milliseconds | filterTime }}
                 </span>
               </span>

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 23:29:32
+ * @LastEditTime: 2024-05-25 00:29:55
  * @Description: 支付弹窗
 -->
 <template>
@@ -398,7 +398,7 @@ export default {
       // this.is_show_shandong = time_ < 60 * 1000;
       // this.is_show_daoqi = time_ < 31 * 1000;
       if (!minutes && !seconds && milliseconds < 10) {
-        this.time = 1;
+        this.time = 0;
         this.$refs.countDown.pause();
         this.$refs.countDown.reset();
       }
