@@ -445,13 +445,15 @@ export default {
           this.query_user_string
         ),
       };
-
+      let user_time = this.$route.query.use_fixed_time;
       if (pay_method === 'google_pay') {
         const res = await payOrderAPI(params);
         localStorage.removeItem('mlxz_set_event_times');
-        localStorage.removeItem('mlxz_fixed_order_info');
-        localStorage.removeItem('mlxz_fixed_order_key');
-        localStorage.removeItem('mlxz_fixed_local_order_time');
+        if (user_time) {
+          localStorage.removeItem('mlxz_fixed_order_info');
+          localStorage.removeItem('mlxz_fixed_order_key');
+          localStorage.removeItem('mlxz_fixed_local_order_time');
+        }
         Indicator.close();
         if (res.status !== 1000) return;
         localStorage.setItem('report_order_id', res.data.id);
@@ -467,9 +469,11 @@ export default {
         }`;
         const res = await payOrderAPI(pay_max_params);
         localStorage.removeItem('mlxz_set_event_times');
-        localStorage.removeItem('mlxz_fixed_order_info');
-        localStorage.removeItem('mlxz_fixed_order_key');
-        localStorage.removeItem('mlxz_fixed_local_order_time');
+        if (user_time) {
+          localStorage.removeItem('mlxz_fixed_order_info');
+          localStorage.removeItem('mlxz_fixed_order_key');
+          localStorage.removeItem('mlxz_fixed_local_order_time');
+        }
 
         Indicator.close();
 
