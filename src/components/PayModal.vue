@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 18:36:07
+ * @LastEditTime: 2024-05-24 19:02:30
  * @Description: 支付弹窗
 -->
 <template>
@@ -532,6 +532,7 @@ export default {
           this.query_user_string
         ),
       };
+      let discount_pay = this.$route.query.discount_pay;
       // let user_time = this.$route.query.use_fixed_time;
       let user_time = true;
       if (pay_method === 'google_pay') {
@@ -556,7 +557,7 @@ export default {
           location.pathname
         }#/result?path=${path_enums[this.product_key]}&report_price=${
           this.product.price
-        }`;
+        }&discount_pay=${discount_pay}`;
         const res = await payOrderAPI(pay_max_params);
         Indicator.close();
         localStorage.removeItem('mlxz_set_event_times');
