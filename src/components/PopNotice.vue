@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 14:06:09
+ * @LastEditTime: 2024-05-24 17:28:09
  * @Description: 
 -->
 <template>
@@ -161,6 +161,18 @@ export default {
       type: String,
       default: '',
     },
+    e_id: {
+      type: String,
+      default: '',
+    },
+    c_id: {
+      type: String,
+      default: '',
+    },
+    c_name: {
+      type: String,
+      default: '',
+    },
   },
   components: {
     CountDown,
@@ -222,11 +234,16 @@ export default {
   },
   methods: {
     toDetailPage() {
+      utils.firebaseLogEvent(e_id, c_id, c_name, 'click', {
+        args_name: c_name,
+        channel: utils.getFBChannel(),
+      });
       let path = 'detail?querystring=' + this.user_.user_info + '&pay_modal=1';
       localStorage.setItem(
         `mlxz_new_time_down_${this.product_key}`,
         this.new_time
       );
+
       this.$emit('close');
       this.$router.push({ path });
     },

@@ -422,3 +422,55 @@ export const reportName = {
     tw: '袁天剛秤骨',
   },
 };
+
+export const maidianEnum = {
+  h5_marriage: {
+    main_id: '10007',
+    click_id: '-10016',
+    view_id: '-10015',
+    click_name: 'click_marriage_discount2',
+    view_name: 'view_marriage_discount2',
+  },
+  h5_emotion2024: {
+    main_id: '10006',
+    click_id: '-10023',
+    view_id: '-10022',
+    click_name: 'click_2024lovely_discount2',
+    view_name: 'view_2024lovely_discount2',
+  },
+  h5_annual2024: {
+    main_id: '10003',
+    click_id: '-10016',
+    view_id: '-10015',
+    click_name: 'click_2024report_discount2',
+    view_name: 'view_2024report_discount2',
+  },
+  h5_wealth2024: {
+    main_id: '10005',
+    click_id: '-10016',
+    view_id: '-10015',
+    click_name: 'click_2024wealty_discount2',
+    view_name: 'viwe_2024wealty_discount2',
+  },
+  h5_career2024: {
+    main_id: '10004',
+    click_id: '-10016',
+    view_id: '-10015',
+    click_name: 'click_2024career_discount2',
+    view_name: 'view_2024career_discount2',
+  },
+  h5_bai_gua: {
+    main_id: '10008',
+    click_id: '-10016',
+    view_id: '-10015',
+    click_name: 'click_64gua_discount2',
+    view_name: 'view_64gua_discount2',
+  },
+  h5_weigh_bone: {
+    main_id: '10009',
+    click_id: '-10016',
+    view_id: '-10015',
+    click_name: 'click_chenggu_discount2',
+    view_name: 'view_chenggu_discount2',
+  },
+};

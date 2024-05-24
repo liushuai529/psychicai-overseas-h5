@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-20 20:02:17
+ * @LastEditTime: 2024-05-24 18:16:38
  * @Description: 
 -->
 <template>
@@ -281,11 +281,24 @@ export default {
     async handleSendEvent() {
       let report_price = +utils.getQueryStr('report_price');
       let report_status = utils.getQueryStr('status');
+      let discount_pay = utils.getQueryStr('discount_pay');
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
         mlxz_order_status: report_status,
       });
       if (report_status === 'SUCCESS' || report_status === 'PAYED') {
+        if (discount_pay) {
+          utils.firebaseLogEvent(
+            '10003',
+            '-10017',
+            'event_status_2024reportdiscont_pay_success',
+            'event_status',
+            {
+              args_name: 'event_status_2024reportdiscont_pay_success',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '开始上报firebase埋点',
           mlxz_order_status: report_status,
@@ -332,6 +345,18 @@ export default {
         });
         this.sendEvent();
       } else {
+        if (discount_pay) {
+          utils.firebaseLogEvent(
+            '10003',
+            '-10018',
+            'event_status_2024reportdiscount_pay_fail',
+            'event_status',
+            {
+              args_name: 'event_status_2024reportdiscount_pay_fail',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '开始上报埋点',
           mlxz_order_status: report_status,

@@ -25,7 +25,7 @@ import utils from './../../../libs/utils.js';
 import contentDetail from './contentDetail.vue';
 // @ts-ignore
 import userInfo from './userInfo.vue';
-
+import { maidianEnum } from '../../../libs/enum';
 export default {
   components: {
     userInfo,
@@ -151,11 +151,24 @@ export default {
     async handleSendEvent() {
       let report_price = +utils.getQueryStr('report_price');
       let report_status = utils.getQueryStr('status');
+      let discount_pay = utils.getQueryStr('discount_pay');
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
         mlxz_order_status: report_status,
       });
       if (report_status === 'SUCCESS' || report_status === 'PAYED') {
+        if (discount_pay) {
+          utils.firebaseLogEvent(
+            '10004',
+            '-10017',
+            'event_status_2024careerdiscont_pay_success',
+            'event_status',
+            {
+              args_name: 'event_status_2024careerdiscont_pay_success',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '开始上报firebase埋点',
           mlxz_order_status: report_status,
@@ -206,6 +219,18 @@ export default {
           mlxz_action_desc: '开始上报埋点',
           mlxz_order_status: report_status,
         });
+        if (discount_pay) {
+          utils.firebaseLogEvent(
+            '10004',
+            '-10018',
+            'event_status_2024careerdiscount_pay_fail',
+            'event_status',
+            {
+              args_name: 'event_status_2024careerdiscount_pay_fail',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
         utils.firebaseLogEvent(
           '10004',
           '-10008',

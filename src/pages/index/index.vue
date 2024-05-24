@@ -680,7 +680,12 @@ import Recommend from './recommend.vue';
 import Fortune from './fortune.vue';
 import utils from '../../libs/utils';
 import PayPopup from '../../components/PayPopup.vue';
-import { banner_enums, reportName, path_enums } from '../../libs/enum';
+import {
+  banner_enums,
+  reportName,
+  path_enums,
+  maidianEnum,
+} from '../../libs/enum';
 import { Toast, Indicator } from 'mint-ui';
 
 import PopResult from './pay_result.vue';
@@ -1637,9 +1642,20 @@ export default {
         }
       }
 
-      return this.fix_order_info && this.new_order_key !== this.product_key
-        ? true
-        : false;
+      let flag =
+        this.fix_order_info && this.new_order_key !== this.product_key
+          ? true
+          : false;
+
+      if (flag) {
+        const { main_id, click_id, view_id, click_name, view_name } =
+          maidianEnum[this.new_order_key];
+        utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
+          args_name: view_name,
+          channel: utils.getFBChannel(),
+        });
+      }
+      return flag;
     },
     local_title() {
       return utils.getTitle(this.new_order_key);
@@ -1825,6 +1841,12 @@ export default {
 
     // api订单下单
     async checkOrder() {
+      const { main_id, click_id, view_id, click_name, view_name } =
+        maidianEnum[this.new_order_key];
+      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
+        args_name: click_name,
+        channel: utils.getFBChannel(),
+      });
       Indicator.open(tipsArr5[utils.getLanguage()]);
       const { ext, pay_method, product_key, product_id, payment } =
         this.last_order;
@@ -1835,7 +1857,7 @@ export default {
         product_id: product_id,
         platform: 'WEB',
         extra_ce_suan: ext,
-        callback_url: `${location.origin}/${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}`,
+        callback_url: `${location.origin}/${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}&discount_pay=1`,
       };
       const res = await payOrderAPI(params);
       localStorage.removeItem('mlxz_fixed_api_order_id');
@@ -1846,6 +1868,12 @@ export default {
       location.href = res.data.pay_url;
     },
     jumpOrder() {
+      const { main_id, click_id, view_id, click_name, view_name } =
+        maidianEnum[this.new_order_key];
+      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
+        args_name: click_name,
+        channel: utils.getFBChannel(),
+      });
       let path =
         'detail?querystring=' +
         this.fix_order_info +

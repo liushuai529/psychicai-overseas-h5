@@ -150,6 +150,9 @@
       @close="closeNotice"
       :count_down="count_down"
       :product_key="product_key"
+      e_id="10003"
+      c_id="-10014"
+      c_name="click_2024report_discount1"
     />
 
     <FixedOrder
@@ -213,7 +216,12 @@ import tw_card_4 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_tw.png
 
 import cn_card_5 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai5.png';
 import tw_card_5 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai5.png';
-import { reportEnum, reportName, path_enums } from '../../../libs/enum';
+import {
+  reportEnum,
+  reportName,
+  path_enums,
+  maidianEnum,
+} from '../../../libs/enum';
 import combinePayPop from '../../../components/combinePayPop.vue';
 import cn_new_user_btn from '../../../assets/img/mlxz/year_of_lucky_2024/nianyun_btn_jiexiao.png';
 import tw_new_user_btn from '../../../assets/img/tw_mlxz/year_24/nianyun_btn_jiexiao_fanti.png';
@@ -345,11 +353,29 @@ export default {
 
     show_fixed_order() {
       // return true;
-      return this.fix_order_info &&
-        this.new_order_key !== this.product_key &&
-        this.new_order_key !== this.last_order.product_key
-        ? true
-        : false;
+      if (this.last_order) {
+        if (
+          this.last_order.product_key === this.new_order_key &&
+          this.last_order.status !== 'PAYED'
+        ) {
+          return false;
+        }
+      }
+
+      let flag =
+        this.fix_order_info && this.new_order_key !== this.product_key
+          ? true
+          : false;
+
+      if (flag) {
+        const { main_id, click_id, view_id, click_name, view_name } =
+          maidianEnum[this.new_order_key];
+        utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
+          args_name: view_name,
+          channel: utils.getFBChannel(),
+        });
+      }
+      return flag;
     },
   },
   created() {
@@ -468,6 +494,20 @@ export default {
         if (new_.length > 20) {
           this.username = new_.slice(0, 20);
         }
+      }
+    },
+    is_show_notice(val) {
+      if (val) {
+        utils.firebaseLogEvent(
+          '10003',
+          '-10013',
+          'view_2024report_discount1',
+          'view',
+          {
+            args_name: 'view_2024report_discount1',
+            channel: utils.getFBChannel(),
+          }
+        );
       }
     },
   },
@@ -856,6 +896,12 @@ export default {
 
     // api订单下单
     async checkOrder() {
+      const { main_id, click_id, view_id, click_name, view_name } =
+        maidianEnum[this.new_order_key];
+      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
+        args_name: click_name,
+        channel: utils.getFBChannel(),
+      });
       Indicator.open(tipsArr5[utils.getLanguage()]);
       const { ext, pay_method, product_key, product_id, payment } =
         this.last_order;
@@ -866,7 +912,7 @@ export default {
         product_id: product_id,
         platform: 'WEB',
         extra_ce_suan: ext,
-        callback_url: `${location.origin}/${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}`,
+        callback_url: `${location.origin}/${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}&discount_pay=1`,
       };
 
       const res = await payOrderAPI(params);
@@ -879,6 +925,12 @@ export default {
       location.href = res.data.pay_url;
     },
     jumpOrder() {
+      const { main_id, click_id, view_id, click_name, view_name } =
+        maidianEnum[this.new_order_key];
+      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
+        args_name: click_name,
+        channel: utils.getFBChannel(),
+      });
       let path =
         'detail?querystring=' +
         this.fix_order_info +

@@ -453,11 +453,24 @@ export default {
     async handleSendEvent() {
       let report_price = +utils.getQueryStr('report_price');
       let report_status = utils.getQueryStr('status');
+      let discount_pay = utils.getQueryStr('discount_pay');
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
         mlxz_order_status: report_status,
       });
       if (report_status === 'SUCCESS' || report_status === 'PAYED') {
+        if (discount_pay) {
+          utils.firebaseLogEvent(
+            '10007',
+            '-10017',
+            'event_status_marriagediscont_pay_success',
+            'event_status',
+            {
+              args_name: 'event_status_marriagediscont_pay_success',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '开始上报firebase埋点',
           mlxz_order_status: report_status,
@@ -504,6 +517,18 @@ export default {
         });
         this.sendEvent();
       } else {
+        if (discount_pay) {
+          utils.firebaseLogEvent(
+            '10007',
+            '-10018',
+            'event_status_marriagediscount_pay_fail',
+            'event_status',
+            {
+              args_name: 'event_status_marriagediscount_pay_fail',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '开始上报埋点',
           mlxz_order_status: report_status,
