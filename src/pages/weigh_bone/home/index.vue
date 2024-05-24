@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 20:12:27
+ * @LastEditTime: 2024-05-24 20:27:39
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -315,7 +315,7 @@ export default {
     is_show_notice(val) {
       if (val) {
         utils.firebaseLogEvent(
-          '10008',
+          '10009',
           '-10013',
           'view_chenggu_discount1',
           'view',
