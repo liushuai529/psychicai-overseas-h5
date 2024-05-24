@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 19:14:51
+ * @LastEditTime: 2024-05-24 19:31:27
  * @Description: 八字合婚
 -->
 <template>
@@ -961,7 +961,11 @@ export default {
         product_id: product_id,
         platform: 'WEB',
         extra_ce_suan: ext,
-        callback_url: `${location.origin}/${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}&discount_pay=1`,
+        callback_url: `${location.origin}/${utils.getFBChannel()}/${
+          path_enums[product_key]
+        }.html#/result?path=${
+          path_enums[product_key]
+        }&report_price=${payment}&discount_pay=1`,
       };
 
       const res = await payOrderAPI(params);
@@ -986,7 +990,7 @@ export default {
         '&pay_modal=1' +
         '&use_fixed_time=1&discount_pay=1';
 
-      location.href = `${location.origin}/${
+      location.href = `${location.origin}/${utils.getFBChannel()}/${
         path_enums[this.new_order_key]
       }.html#/${path}`;
     },

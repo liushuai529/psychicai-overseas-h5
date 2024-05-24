@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 19:18:18
+ * @LastEditTime: 2024-05-24 19:30:59
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -797,6 +797,7 @@ export default {
         this.last_order ? this.last_order.product_key : ''
       );
       if (
+        this.last_order &&
         this.last_order.status !== 'PAYED' &&
         this.last_order.product_key !== this.product_key
       ) {
@@ -835,7 +836,11 @@ export default {
         product_id: product_id,
         platform: 'WEB',
         extra_ce_suan: ext,
-        callback_url: `${location.origin}/${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}&discount_pay=1`,
+        callback_url: `${location.origin}/${utils.getFBChannel()}/${
+          path_enums[product_key]
+        }.html#/result?path=${
+          path_enums[product_key]
+        }&report_price=${payment}&discount_pay=1`,
       };
 
       const res = await payOrderAPI(params);
@@ -862,7 +867,7 @@ export default {
         let female_str = marry_info.female_str;
         let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
 &pay_modal=1&use_fixed_time=1&discount_pay=1`;
-        location.href = `${location.origin}/${
+        location.href = `${location.origin}/${utils.getFBChannel()}/${
           path_enums[this.new_order_key]
         }.html#/${path}`;
 
