@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 20:18:09
+ * @LastEditTime: 2024-05-24 20:48:07
  * @Description: 支付弹窗
 -->
 <template>
@@ -533,20 +533,20 @@ export default {
         ),
       };
       let discount_pay = this.$route.query.discount_pay;
-      // let user_time = this.$route.query.use_fixed_time;
-      let user_time = true;
+      let user_time = this.$route.query.use_fixed_time;
+      // let user_time = true;
       if (pay_method === 'google_pay') {
         const res = await payOrderAPI(params);
         Indicator.close();
         localStorage.removeItem('mlxz_set_event_times');
 
         if (res.status !== 1000) return;
-        if (user_time) {
-          localStorage.removeItem('mlxz_fixed_order_info');
-          localStorage.removeItem('mlxz_fixed_order_key');
-          localStorage.removeItem('mlxz_fixed_local_order_time');
-          localStorage.removeItem('mlxz_fixed_api_order_time');
-        }
+        // if (user_time) {
+        //   localStorage.removeItem('mlxz_fixed_order_info');
+        //   localStorage.removeItem('mlxz_fixed_order_key');
+        //   localStorage.removeItem('mlxz_fixed_local_order_time');
+        //   localStorage.removeItem('mlxz_fixed_api_order_time');
+        // }
         localStorage.setItem('report_order_id', res.data.id);
       } else {
         let pay_max_params = Object.assign({}, params, {
@@ -563,12 +563,12 @@ export default {
         localStorage.removeItem('mlxz_set_event_times');
 
         if (res.status !== 1000) return;
-        if (user_time) {
-          localStorage.removeItem('mlxz_fixed_order_info');
-          localStorage.removeItem('mlxz_fixed_order_key');
-          localStorage.removeItem('mlxz_fixed_local_order_time');
-          localStorage.removeItem('mlxz_fixed_api_order_time');
-        }
+        // if (user_time) {
+        //   localStorage.removeItem('mlxz_fixed_order_info');
+        //   localStorage.removeItem('mlxz_fixed_order_key');
+        //   localStorage.removeItem('mlxz_fixed_local_order_time');
+        //   localStorage.removeItem('mlxz_fixed_api_order_time');
+        // }
         await utils.asleep(1000);
         location.href = res.data.pay_url;
       }

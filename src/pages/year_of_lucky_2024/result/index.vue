@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 18:16:38
+ * @LastEditTime: 2024-05-24 20:49:49
  * @Description: 
 -->
 <template>
@@ -183,7 +183,12 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
   },
-  created() {},
+  created() {
+    localStorage.removeItem('mlxz_fixed_order_info');
+    localStorage.removeItem('mlxz_fixed_order_key');
+    localStorage.removeItem('mlxz_fixed_local_order_time');
+    localStorage.removeItem('mlxz_fixed_api_order_time');
+  },
   async mounted() {
     window.scrollTo(0, 0);
 

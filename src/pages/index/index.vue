@@ -1845,6 +1845,7 @@ export default {
 
     // api订单下单
     async checkOrder() {
+      console.log(this.new_order_key);
       const { main_id, click_id, view_id, click_name, view_name } =
         maidianEnum[this.new_order_key];
       utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {

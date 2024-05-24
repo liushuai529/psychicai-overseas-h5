@@ -84,7 +84,12 @@ export default {
       tw_code_btn,
     };
   },
-  created() {},
+  created() {
+    localStorage.removeItem('mlxz_fixed_order_info');
+    localStorage.removeItem('mlxz_fixed_order_key');
+    localStorage.removeItem('mlxz_fixed_local_order_time');
+    localStorage.removeItem('mlxz_fixed_api_order_time');
+  },
   async mounted() {
     window.scrollTo(0, 0);
     this.order_id = this.$route.query.order_id;

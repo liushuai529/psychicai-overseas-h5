@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 19:51:30
+ * @LastEditTime: 2024-05-24 20:40:21
  * @Description: 
 -->
 <template>
@@ -484,6 +484,7 @@ export default {
       width: 100%;
       justify-content: center;
       align-items: center;
+      margin-top: 0.05rem;
       .left {
         font-size: 0.3rem;
         font-weight: 600;
@@ -498,7 +499,7 @@ export default {
 
 .cp-box {
   width: 5.02rem;
-  min-height: 1.4rem;
+  // min-height: 1.4rem;
   background: #fffcfa;
   border-radius: 0.12rem;
   display: flex;
@@ -591,7 +592,7 @@ export default {
   padding-top: 1.9rem;
 }
 .pt-182 {
-  padding-top: 1.82rem;
+  padding-top: 1.9rem;
 }
 
 .mt-30 {
@@ -642,6 +643,7 @@ export default {
   align-items: center;
   justify-content: center;
   color: #fff;
+  font-weight: 700;
   background-color: #e24c2e; /* 初始背景色 */
 }
 
@@ -703,7 +705,7 @@ export default {
   height: 0.9rem;
   border-radius: 0.16rem;
   border: 0.02rem solid #ffd192;
-  margin-top: 0.73rem;
+  margin-top: 0.65rem;
   .text {
     width: 100%;
     height: 100%;

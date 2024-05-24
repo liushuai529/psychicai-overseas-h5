@@ -350,7 +350,12 @@ export default {
       return utils.getShortStr(val, 4);
     },
   },
-  created() {},
+  created() {
+    localStorage.removeItem('mlxz_fixed_order_info');
+    localStorage.removeItem('mlxz_fixed_order_key');
+    localStorage.removeItem('mlxz_fixed_local_order_time');
+    localStorage.removeItem('mlxz_fixed_api_order_time');
+  },
   async mounted() {
     this.order_id = this.$route.query.order_id;
 

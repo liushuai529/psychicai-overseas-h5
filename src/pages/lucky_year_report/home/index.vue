@@ -388,6 +388,10 @@ export default {
     },
   },
   created() {
+    localStorage.removeItem('mlxz_fixed_order_info');
+    localStorage.removeItem('mlxz_fixed_order_key');
+    localStorage.removeItem('mlxz_fixed_local_order_time');
+    localStorage.removeItem('mlxz_fixed_api_order_time');
     // window.Adjust &&
     //   window.Adjust.trackEvent({
     //     eventToken: 'e6huul',

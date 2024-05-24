@@ -263,11 +263,13 @@ export default {
   height: 100%;
   font-size: 0.26rem;
   border-radius: 0.1rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   background-color: #e24c2e; /* 初始背景色 */
+  padding-top: 0.01rem;
 }
 
 .time-box {
