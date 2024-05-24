@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 11:52:57
+ * @LastEditTime: 2024-05-24 12:23:18
  * @Description: 
 -->
 <template>
@@ -377,7 +377,6 @@ export default {
       .logo {
         width: 1.66rem;
         height: 1.66rem;
-        margin-right: 0.25rem;
       }
       .title {
         width: 100%;
