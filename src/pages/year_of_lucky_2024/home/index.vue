@@ -365,6 +365,7 @@ export default {
   },
   mounted() {
     this.showNoticePop();
+    this.getLastOrder();
 
     // 赋默认值
     let storaged_userInfo = localStorage.getItem('year_of_lucky_info');
@@ -446,8 +447,6 @@ export default {
       1
     );
     this.loadBg('#canvas3', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
-
-    this.getLastOrder();
   },
   watch: {
     username(val) {
@@ -806,8 +805,7 @@ export default {
         this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
 
         this.local_time =
-          +localStorage.getItem('mlxz_fixed_local_order_time') ||
-          15 * 60 * 1000;
+          +localStorage.getItem('mlxz_fixed_local_order_time') || 10;
       }, 500);
     },
     // 关闭当前报告的挽留弹窗

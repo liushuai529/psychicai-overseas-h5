@@ -766,6 +766,10 @@ import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_
 
 import PayModal from './components/payModal.vue';
 import ResultPop from '../../components/ResultPop.vue';
+const tipsArr5 = {
+  'zh-CN': '订单创建中...',
+  'zh-TW': '訂單創建中...',
+};
 const hotRecommendProduction = [
   //  {
   //   name:'良缘合婚',

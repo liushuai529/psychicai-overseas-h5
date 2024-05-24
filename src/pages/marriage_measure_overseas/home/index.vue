@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-23 20:49:35
+ * @LastEditTime: 2024-05-24 10:23:46
  * @Description: 八字合婚
 -->
 <template>
@@ -859,8 +859,7 @@ export default {
         let set_time_ = (5 * 60 + 48) * 1000 + 280;
         this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
         this.local_time =
-          +localStorage.getItem('mlxz_fixed_local_order_time') ||
-          15 * 60 * 1000;
+          +localStorage.getItem('mlxz_fixed_local_order_time') || 10;
       }, 500);
     },
     // 关闭当前报告的挽留弹窗

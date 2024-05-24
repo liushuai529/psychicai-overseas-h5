@@ -727,8 +727,7 @@ export default {
             : +time_
           : 30 * 60 * 1000;
         this.local_time =
-          +localStorage.getItem('mlxz_fixed_local_order_time') ||
-          15 * 60 * 1000;
+          +localStorage.getItem('mlxz_fixed_local_order_time') || 10;
       }, 500);
     },
     // 关闭当前报告的挽留弹窗

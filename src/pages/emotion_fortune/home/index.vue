@@ -835,8 +835,7 @@ export default {
         let set_time_ = (5 * 60 + 48) * 1000 + 280;
         this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
         this.local_time =
-          +localStorage.getItem('mlxz_fixed_local_order_time') ||
-          15 * 60 * 1000;
+          +localStorage.getItem('mlxz_fixed_local_order_time') || 10;
       }, 500);
     },
     // 关闭当前报告的挽留弹窗
