@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 20:27:39
+ * @LastEditTime: 2024-05-24 21:33:50
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -767,15 +767,16 @@ export default {
     },
     // api订单下单
     async checkOrder() {
+      const { ext, pay_method, product_key, product_id, payment } =
+        this.last_order;
       const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[this.new_order_key];
+        maidianEnum[product_key];
       utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
         args_name: click_name,
         channel: utils.getFBChannel(),
       });
       Indicator.open(tipsArr5[utils.getLanguage()]);
-      const { ext, pay_method, product_key, product_id, payment } =
-        this.last_order;
+
       if (this.last_order.status === 'PAYED') return;
       let params = {
         pay_method: pay_method,
