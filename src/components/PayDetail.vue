@@ -453,12 +453,12 @@ export default {
 
         Indicator.close();
         if (res.status !== 1000) return;
-        // if (user_time) {
-        //   localStorage.removeItem('mlxz_fixed_order_info');
-        //   localStorage.removeItem('mlxz_fixed_order_key');
-        //   localStorage.removeItem('mlxz_fixed_local_order_time');
-        //   localStorage.removeItem('mlxz_fixed_api_order_time');
-        // }
+        if (user_time) {
+          localStorage.removeItem('mlxz_fixed_order_info');
+          localStorage.removeItem('mlxz_fixed_order_key');
+          localStorage.removeItem('mlxz_fixed_local_order_time');
+          localStorage.removeItem('mlxz_fixed_api_order_time');
+        }
         localStorage.setItem('report_order_id', res.data.id);
       } else {
         let pay_max_params = Object.assign({}, params, {
@@ -476,12 +476,12 @@ export default {
         Indicator.close();
 
         if (res.status !== 1000) return;
-        // if (user_time) {
-        //   localStorage.removeItem('mlxz_fixed_order_info');
-        //   localStorage.removeItem('mlxz_fixed_order_key');
-        //   localStorage.removeItem('mlxz_fixed_local_order_time');
-        //   localStorage.removeItem('mlxz_fixed_api_order_time');
-        // }
+        if (user_time) {
+          localStorage.removeItem('mlxz_fixed_order_info');
+          localStorage.removeItem('mlxz_fixed_order_key');
+          localStorage.removeItem('mlxz_fixed_local_order_time');
+          localStorage.removeItem('mlxz_fixed_api_order_time');
+        }
         await utils.asleep(1000);
         location.href = res.data.pay_url;
       }

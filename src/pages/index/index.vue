@@ -1633,7 +1633,6 @@ export default {
       }
     },
     show_fixed_order() {
-      // return true;
       if (this.last_order) {
         if (
           this.last_order.product_key === this.new_order_key &&
