@@ -447,6 +447,8 @@ export default {
         ),
       };
       let user_time = this.$route.query.use_fixed_time;
+      let discount_pay = this.$route.query.discount_pay || 0;
+
       if (pay_method === 'google_pay') {
         const res = await payOrderAPI(params);
         localStorage.removeItem('mlxz_set_event_times');
@@ -469,7 +471,7 @@ export default {
           location.pathname
         }#/result?path=${path_enums[this.product_key]}&report_price=${
           this.product.price
-        }`;
+        }&discount_pay=${discount_pay}`;
         const res = await payOrderAPI(pay_max_params);
         localStorage.removeItem('mlxz_set_event_times');
 

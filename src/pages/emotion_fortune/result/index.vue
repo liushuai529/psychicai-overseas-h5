@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 22:31:05
+ * @LastEditTime: 2024-05-24 23:19:14
  * @Description: 
 -->
 <template>
@@ -236,7 +236,7 @@ export default {
     async handleSendEvent() {
       let report_price = +utils.getQueryStr('report_price');
       let report_status = utils.getQueryStr('status');
-      let discount_pay = utils.getQueryStr('discount_pay');
+      let discount_pay = +utils.getQueryStr('discount_pay');
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
         mlxz_order_status: report_status,

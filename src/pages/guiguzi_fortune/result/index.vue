@@ -190,7 +190,7 @@ export default {
     async handleSendEvent() {
       let report_price = +utils.getQueryStr('report_price');
       let report_status = utils.getQueryStr('status');
-      let discount_pay = utils.getQueryStr('discount_pay');
+      let discount_pay = +utils.getQueryStr('discount_pay');
 
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
