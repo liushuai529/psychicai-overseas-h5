@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 18:04:39
+ * @LastEditTime: 2024-05-24 18:38:20
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -315,7 +315,6 @@ export default {
       last_order: null,
       api_time: 0,
       local_time: 0,
-      local_title: '',
     };
   },
   computed: {

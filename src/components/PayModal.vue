@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 17:07:01
+ * @LastEditTime: 2024-05-24 18:36:07
  * @Description: 支付弹窗
 -->
 <template>
@@ -43,7 +43,50 @@
             <div class="right">
               <div class="title">{{ tips1 }}</div>
               <div class="desc">
-                <count-down :time="time" @change="getTime" format="mm:ss" />
+                <!-- <count-down :time="time" @change="getTime" format="mm:ss" /> -->
+                <count-down
+                  ref="countDown"
+                  :time="time"
+                  millisecond
+                  class="time-box"
+                  @change="getTime"
+                >
+                  <template #default="timeData">
+                    <span
+                      :class="{
+                        block: true,
+                        'rgb-light': is_show_shandong,
+                      }"
+                      >{{ timeData.minutes | filterTime }}</span
+                    >
+                    <span
+                      :class="{ colon: true, 'rgb-color': is_show_shandong }"
+                      >:</span
+                    >
+                    <span
+                      :class="{
+                        block: true,
+                        'rgb-light': is_show_shandong,
+                      }"
+                      >{{ timeData.seconds | filterTime }}</span
+                    >
+                    <span
+                      :class="{ colon: true, 'rgb-color': is_show_shandong }"
+                      >:</span
+                    >
+
+                    <span
+                      :class="{
+                        block: true,
+                        'rgb-light': is_show_shandong,
+                      }"
+                    >
+                      <span :class="{ mill: time === 1 }">
+                        {{ timeData.milliseconds | filterTime }}
+                      </span>
+                    </span>
+                  </template>
+                </count-down>
               </div>
             </div>
           </div>
@@ -164,6 +207,8 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/24048e756ae2d40f436184b0bc8018199fbb.png',
       no_check_icon:
         'https://psychicai-static.psychicai.pro/imgs/2404f091a163349f45d3909f82e4660cc3c6.png',
+      is_show_shandong: false,
+      is_show_daoqi: false,
     };
   },
   props: {
@@ -317,6 +362,18 @@ export default {
     show(val) {
       if (!val) {
         this.closeModal();
+      }
+    },
+  },
+  filters: {
+    filterTime(val_) {
+      let val = val_.toString();
+      if (val.length === 1) {
+        return '0' + val;
+      } else if (val.length === 2) {
+        return val;
+      } else {
+        return (val / 10).toFixed(0);
       }
     },
   },
@@ -738,5 +795,77 @@ export default {
   span {
     margin: 0 0.1rem;
   }
+}
+
+.time-box {
+  display: flex;
+  flex-direction: row;
+  height: 0.4rem !important;
+}
+@keyframes noticeTime {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.mill {
+  animation: noticeTime 0.24s infinite;
+}
+
+@keyframes rgb-light {
+  0% {
+    background-color: #e24c2e;
+  }
+  33.333% {
+    background-color: #f5ae00;
+  }
+  66.666% {
+    background-color: #662cf3;
+  }
+  100% {
+    background-color: #e24c2e;
+  }
+}
+
+.rgb-light {
+  animation: rgb-light 720ms infinite linear;
+}
+
+.rgb-color {
+  animation: rgb-text 720ms infinite linear;
+}
+@keyframes rgb-text {
+  0% {
+    color: #e24c2e;
+  }
+  33.333% {
+    color: #f5ae00;
+  }
+  66.666% {
+    color: #662cf3;
+  }
+  100% {
+    color: #e24c2e;
+  }
+}
+
+.colon {
+  margin: 0 0.02rem;
+  display: flex;
+  align-items: center;
+  color: #e24c2e;
+}
+.block {
+  width: 0.4rem;
+  height: 100%;
+  font-size: 0.26rem;
+  border-radius: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: #e24c2e; /* 初始背景色 */
 }
 </style>
