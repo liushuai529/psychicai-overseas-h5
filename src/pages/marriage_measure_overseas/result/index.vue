@@ -464,6 +464,10 @@ export default {
         mlxz_order_status: report_status,
       });
       if (report_status === 'SUCCESS' || report_status === 'PAYED') {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '开始上报firebase埋点',
+          mlxz_order_status: report_status,
+        });
         if (discount_pay) {
           utils.firebaseLogEvent(
             '10007',
@@ -475,21 +479,19 @@ export default {
               channel: utils.getFBChannel(),
             }
           );
+        } else {
+          utils.firebaseLogEvent(
+            '10007',
+            '-10007',
+            'event_status_marriage_pay_success',
+            'event_status',
+            {
+              args_name: 'event_status_marriage_pay_success',
+              channel: utils.getFBChannel(),
+            }
+          );
         }
-        utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: '开始上报firebase埋点',
-          mlxz_order_status: report_status,
-        });
-        utils.firebaseLogEvent(
-          '10007',
-          '-10007',
-          'event_status_marriage_pay_success',
-          'event_status',
-          {
-            args_name: 'event_status_marriage_pay_success',
-            channel: utils.getFBChannel(),
-          }
-        );
+
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成firebase埋点上报',
           mlxz_order_status: report_status,
@@ -522,6 +524,10 @@ export default {
         });
         this.sendEvent();
       } else {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '开始上报埋点',
+          mlxz_order_status: report_status,
+        });
         if (discount_pay) {
           utils.firebaseLogEvent(
             '10007',
@@ -533,21 +539,19 @@ export default {
               channel: utils.getFBChannel(),
             }
           );
+        } else {
+          utils.firebaseLogEvent(
+            '10007',
+            '-10008',
+            'event_status_marriage_pay_fail',
+            'event_status',
+            {
+              args_name: 'event_status_marriage_pay_fail',
+              channel: utils.getFBChannel(),
+            }
+          );
         }
-        utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: '开始上报埋点',
-          mlxz_order_status: report_status,
-        });
-        utils.firebaseLogEvent(
-          '10007',
-          '-10008',
-          'event_status_marriage_pay_fail',
-          'event_status',
-          {
-            args_name: 'event_status_marriage_pay_fail',
-            channel: utils.getFBChannel(),
-          }
-        );
+
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成上报埋点',
           mlxz_order_status: report_status,

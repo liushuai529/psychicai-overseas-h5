@@ -409,13 +409,7 @@ export default {
     this.getLastOrder();
   },
   mounted() {
-    this.showNoticePop();
     if (utils.isProd()) {
-      utils.gcyLog(`查看感情运首页`, {
-        mlxz_action_desc: '查看感情运首页FB上报',
-        mlxz_action_type: 'view',
-        mlxz_channel: `pageview_main_${utils.getFBChannel()}`,
-      });
       try {
         fbq('trackCustom', 'CustomChannel', {
           channel: `pageview_main_${utils.getFBChannel()}`,
@@ -429,6 +423,8 @@ export default {
         console.log('no fbq:', err);
       }
     }
+    this.showNoticePop();
+
     // 赋默认值
     let storaged_userInfo = window.localStorage.getItem(
       '_emotion_fortune_info'

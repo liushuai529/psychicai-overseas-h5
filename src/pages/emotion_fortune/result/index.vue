@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 21:10:58
+ * @LastEditTime: 2024-05-24 22:31:05
  * @Description: 
 -->
 <template>
@@ -242,6 +242,10 @@ export default {
         mlxz_order_status: report_status,
       });
       if (report_status === 'SUCCESS' || report_status === 'PAYED') {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '开始上报firebase埋点',
+          mlxz_order_status: report_status,
+        });
         if (discount_pay) {
           utils.firebaseLogEvent(
             '10006',
@@ -253,21 +257,19 @@ export default {
               channel: utils.getFBChannel(),
             }
           );
+        } else {
+          utils.firebaseLogEvent(
+            '10006',
+            '-10007',
+            'event_status_2024lovely_pay_success',
+            'event_status',
+            {
+              args_name: 'event_status_2024lovely_pay_success',
+              channel: utils.getFBChannel(),
+            }
+          );
         }
-        utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: '开始上报firebase埋点',
-          mlxz_order_status: report_status,
-        });
-        utils.firebaseLogEvent(
-          '10006',
-          '-10007',
-          'event_status_2024lovely_pay_success',
-          'event_status',
-          {
-            args_name: 'event_status_2024lovely_pay_success',
-            channel: utils.getFBChannel(),
-          }
-        );
+
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成firebase埋点上报',
           mlxz_order_status: report_status,
@@ -315,17 +317,19 @@ export default {
               channel: utils.getFBChannel(),
             }
           );
+        } else {
+          utils.firebaseLogEvent(
+            '10006',
+            '-10008',
+            'event_status_2024lovely_pay_fail',
+            'event_status',
+            {
+              args_name: 'event_status_2024lovely_pay_fail',
+              channel: utils.getFBChannel(),
+            }
+          );
         }
-        utils.firebaseLogEvent(
-          '10006',
-          '-10008',
-          'event_status_2024lovely_pay_fail',
-          'event_status',
-          {
-            args_name: 'event_status_2024lovely_pay_fail',
-            channel: utils.getFBChannel(),
-          }
-        );
+
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成上报埋点',
           mlxz_order_status: report_status,

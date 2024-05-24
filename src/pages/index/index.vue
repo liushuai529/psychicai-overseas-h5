@@ -1646,7 +1646,8 @@ export default {
         this.fix_order_info && this.new_order_key !== this.product_key
           ? true
           : false;
-
+      console.log(this.fix_order_info, this.new_order_key, this.product_key);
+      console.log(flag);
       if (flag) {
         const { main_id, click_id, view_id, click_name, view_name } =
           maidianEnum[this.new_order_key];
@@ -1826,7 +1827,7 @@ export default {
           this.payed_order_three_list = [];
           this.getPayedOrderList();
         }
-      }, 500);
+      }, 1000);
     },
     // 获取最新一个订单信息
     async getLastOrder() {
