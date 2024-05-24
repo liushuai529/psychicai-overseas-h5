@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 15:00:03
+ * @LastEditTime: 2024-05-24 15:06:43
  * @Description: 支付弹窗
 -->
 <template>
@@ -268,7 +268,6 @@ export default {
     let use_fixed_time = this.$route.query.use_fixed_time;
     if (use_fixed_time) {
       this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
-      localStorage.removeItem('mlxz_fixed_local_order_time');
     } else {
       this.time =
         +localStorage.getItem(`mlxz_new_time_down_${this.product_key}`) ||
@@ -335,12 +334,12 @@ export default {
       if (notice_num) {
         if (+notice_num === 1) {
           localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
-          localStorage.setItem(`mlxz_fixed_local_order_time`, time_);
         }
       } else {
         localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
-        localStorage.setItem(`mlxz_fixed_local_order_time`, time_);
       }
+      localStorage.setItem(`mlxz_fixed_local_order_time`, time_);
+
       // this.is_show_shandong = time_ < 60 * 1000;
       // this.is_show_daoqi = time_ < 31 * 1000;
       if (!minutes && !seconds && milliseconds < 10) {

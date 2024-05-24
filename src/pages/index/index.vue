@@ -1785,8 +1785,7 @@ export default {
         this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
         this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
         this.local_time =
-          +localStorage.getItem('mlxz_fixed_local_order_time') ||
-          15 * 60 * 1000;
+          +localStorage.getItem('mlxz_fixed_local_order_time') || 10;
         let is_reload = localStorage.getItem('mlxz_reload_page_home');
         if (is_reload) {
           this.payed_order_three_list = [];
