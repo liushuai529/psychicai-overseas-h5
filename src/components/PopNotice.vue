@@ -2,44 +2,65 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 10:49:14
+ * @LastEditTime: 2024-05-24 11:52:57
  * @Description: 
 -->
 <template>
   <div class="pop-notice">
-    <div
-      :class="{
-        container: true,
-        'normal-box': product_key !== 'h5_marriage',
-        'big-box': product_key === 'h5_marriage',
-        'cn-bg': lang && product_key !== 'h5_marriage',
-        'tw-bg': !lang && product_key !== 'h5_marriage',
-        'cn-big-bg': lang && product_key === 'h5_marriage',
-        'tw-big-bg': !lang && product_key === 'h5_marriage',
-        'pt-182': product_key !== 'h5_marriage',
-        'pt-190': product_key === 'h5_marriage',
-      }"
-    >
-      <div class="one">
-        <img :src="getIcon()" class="logo" lt="" />
-        <div class="title">{{ title }}</div>
-        <div v-if="product_key === 'h5_marriage'" class="cp-box">
-          <div class="male">
-            <div class="name">{{ male_info.name | filter_name }}</div>
+    <div @click="closeModal" class="whole">
+      <div
+        @click="e => e.stopPropagation()"
+        :class="{
+          container: true,
+          'normal-box': product_key !== 'h5_marriage',
+          'big-box': product_key === 'h5_marriage',
+          'cn-bg': lang && product_key !== 'h5_marriage',
+          'tw-bg': !lang && product_key !== 'h5_marriage',
+          'cn-big-bg': lang && product_key === 'h5_marriage',
+          'tw-big-bg': !lang && product_key === 'h5_marriage',
+          'pt-182': product_key !== 'h5_marriage',
+          'pt-190': product_key === 'h5_marriage',
+        }"
+      >
+        <div class="one">
+          <img :src="getIcon()" class="logo" lt="" />
+          <div class="title">{{ title }}</div>
+          <div v-if="product_key === 'h5_marriage'" class="cp-box">
+            <div class="male">
+              <div class="name">{{ male_info.name | filter_name }}</div>
+              <div class="birth">
+                {{ male_info.birth }}
+                <img
+                  src="../assets/img/pop/cn/h5_icon_man.png"
+                  class="sex"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="male mt-30">
+              <div class="name">{{ female_info.name | filter_name }}</div>
+              <div class="birth">
+                {{ female_info.birth }}
+                <img
+                  src="../assets/img/pop/cn/h5_icon_girl.png"
+                  class="sex"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+          <div v-else class="single-box">
+            <div class="name">{{ user_info.name | filter_name }}</div>
             <div class="birth">
-              {{ male_info.birth }}
+              {{ user_info.birth }}
               <img
+                v-if="user_info.sex"
                 src="../assets/img/pop/cn/h5_icon_man.png"
                 class="sex"
                 alt=""
               />
-            </div>
-          </div>
-          <div class="male mt-30">
-            <div class="name">{{ female_info.name | filter_name }}</div>
-            <div class="birth">
-              {{ female_info.birth }}
               <img
+                v-else
                 src="../assets/img/pop/cn/h5_icon_girl.png"
                 class="sex"
                 alt=""
@@ -47,80 +68,62 @@
             </div>
           </div>
         </div>
-        <div v-else class="single-box">
-          <div class="name">{{ user_info.name | filter_name }}</div>
-          <div class="birth">
-            {{ user_info.birth }}
-            <img
-              v-if="user_info.sex"
-              src="../assets/img/pop/cn/h5_icon_man.png"
-              class="sex"
-              alt=""
-            />
-            <img
-              v-else
-              src="../assets/img/pop/cn/h5_icon_girl.png"
-              class="sex"
-              alt=""
-            />
+        <div class="divider">
+          <div v-for="it in 50" :key="it" class="line"></div>
+        </div>
+        <div class="two">
+          <div :class="{ left: true, 'rgb-color': is_show_shandong }">
+            {{ tips1 }}
           </div>
-        </div>
-      </div>
-      <div class="divider">
-        <div v-for="it in 50" :key="it" class="line"></div>
-      </div>
-      <div class="two">
-        <div :class="{ left: true, 'rgb-light': is_show_shandong }">
-          {{ tips1 }}
-        </div>
-        <count-down
-          ref="countDown"
-          :time="time_"
-          millisecond
-          class="time-box"
-          @change="getTime"
-        >
-          <template #default="timeData">
-            <span
-              :class="{
-                block: true,
-                'rgb-light': is_show_shandong,
-              }"
-              >{{ timeData.minutes | filterTime }}</span
-            >
-            <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
-              >:</span
-            >
-            <span
-              :class="{
-                block: true,
-                'rgb-light': is_show_shandong,
-              }"
-              >{{ timeData.seconds | filterTime }}</span
-            >
-            <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
-              >:</span
-            >
+          <count-down
+            ref="countDown"
+            :time="time_"
+            millisecond
+            class="time-box"
+            @change="getTime"
+          >
+            <template #default="timeData">
+              <span
+                :class="{
+                  block: true,
+                  'rgb-light': is_show_shandong,
+                }"
+                >{{ timeData.minutes | filterTime }}</span
+              >
+              <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
+                >:</span
+              >
+              <span
+                :class="{
+                  block: true,
+                  'rgb-light': is_show_shandong,
+                }"
+                >{{ timeData.seconds | filterTime }}</span
+              >
+              <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
+                >:</span
+              >
 
-            <span
-              :class="{
-                block: true,
-                'rgb-light': is_show_shandong,
-              }"
-              >{{ timeData.milliseconds | filterTime }}</span
-            >
-          </template>
-        </count-down>
+              <span
+                :class="{
+                  block: true,
+                  'rgb-light': is_show_shandong,
+                }"
+                >{{ timeData.milliseconds | filterTime }}</span
+              >
+            </template>
+          </count-down>
+        </div>
+        <div @click="toDetailPage()" class="get-btn">
+          <div class="text">{{ tips2 }}</div>
+        </div>
+        <img
+          @click="closeModal"
+          src="../assets/img/pop/icon_close.png"
+          class="close"
+          alt=""
+        />
       </div>
-      <div @click="toDetailPage()" class="get-btn">
-        <div class="text">{{ tips2 }}</div>
-      </div>
-      <img
-        @click="closeModal"
-        src="../assets/img/pop/icon_close.png"
-        class="close"
-        alt=""
-      />
     </div>
   </div>
 </template>
@@ -222,7 +225,6 @@ export default {
         this.new_time
       );
       this.$emit('close');
-
       this.$router.push({ path });
     },
     getIcon() {
@@ -299,7 +301,6 @@ export default {
     },
 
     formateCPUserInfo(str) {
-      console.log(str);
       let arr = str.split('|');
       let year = arr[3];
       let month = arr[4];
@@ -345,12 +346,22 @@ export default {
   align-items: center;
   justify-content: center;
   z-index: 101;
+  .whole {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .container {
     width: 6.3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
+    z-index: 101;
     .close {
       width: 0.8rem;
       height: 0.8rem;
@@ -400,6 +411,8 @@ export default {
           color: #726056;
           line-height: 0.26rem;
           margin-top: 0.16rem;
+          display: flex;
+          align-items: center;
         }
       }
     }
@@ -492,6 +505,8 @@ export default {
     color: #726056;
     height: 0.3rem;
     line-height: 0.3rem;
+    display: flex;
+    align-items: center;
   }
   .sex {
     width: 0.26rem;

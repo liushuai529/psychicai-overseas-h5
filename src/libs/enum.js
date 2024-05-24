@@ -398,8 +398,8 @@ export const reportName = {
     tw: '八字合婚',
   },
   h5_emotion2024: {
-    cn: '2024年爱情运势',
-    tw: '2024年愛情運勢',
+    cn: '八字姻缘',
+    tw: '八字姻緣',
   },
   h5_annual2024: {
     cn: '2024年年运',

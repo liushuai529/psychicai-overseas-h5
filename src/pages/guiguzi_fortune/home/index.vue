@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 10:23:04
+ * @LastEditTime: 2024-05-24 11:16:35
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -735,7 +735,8 @@ export default {
           : false;
         let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
         let set_time_ = (5 * 60 + 48) * 1000 + 280;
-        this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
+        this.count_down = +time_ || 10;
+        // this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
         this.local_time =
           +localStorage.getItem('mlxz_fixed_local_order_time') || 10;
       }, 500);
