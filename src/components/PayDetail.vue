@@ -304,10 +304,8 @@ export default {
       this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
       localStorage.removeItem('mlxz_fixed_local_order_time');
     } else {
-      this.time =
-        +localStorage.getItem(`mlxz_new_time_down_${this.product_key}`) ||
-        15 * 60 * 1000;
-      localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
+      this.time = 15 * 60 * 1000;
+      // localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
     }
 
     this.getProductionList();

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 15:25:50
+ * @LastEditTime: 2024-05-24 17:07:01
  * @Description: 支付弹窗
 -->
 <template>
@@ -269,9 +269,7 @@ export default {
     if (use_fixed_time) {
       this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
     } else {
-      this.time =
-        +localStorage.getItem(`mlxz_new_time_down_${this.product_key}`) ||
-        15 * 60 * 1000;
+      this.time = 15 * 60 * 1000;
       localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
     }
   },

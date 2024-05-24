@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 15:29:22
+ * @LastEditTime: 2024-05-24 17:08:36
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -168,6 +168,7 @@
     />
     <FixedOrder
       v-if="show_fixed_order && !is_show_notice"
+      :title="local_title"
       :is_show_move="is_show_notice"
       :new_order_key="new_order_key"
       name="local"
@@ -178,6 +179,7 @@
     />
     <FixedOrder
       v-if="show_api_order && !is_show_notice"
+      :title="last_title"
       :is_show_move="is_show_notice"
       :last_order="last_order"
       name="api"
@@ -305,6 +307,7 @@ export default {
       last_order: null,
       api_time: 0,
       local_time: 0,
+      local_title: '',
     };
   },
   computed: {
@@ -329,6 +332,9 @@ export default {
       return this.fix_order_info && this.new_order_key !== this.product_key
         ? true
         : false;
+    },
+    local_title() {
+      return utils.getTitle(this.new_order_key);
     },
   },
   watch: {
@@ -605,6 +611,8 @@ export default {
           // 缓存最新一个订单信息
           localStorage.setItem('mlxz_fixed_order_info', querystring);
           localStorage.setItem('mlxz_fixed_order_key', this.product_key);
+          localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
+
           localStorage.setItem(
             `mlxz_user_info_${this.product_key}`,
             JSON.stringify({
@@ -753,6 +761,8 @@ export default {
       const res = await getLastOrderAPI();
       if (res.status !== 1000) return;
       this.last_order = res.data;
+      this.last_title = utils.getTitle(this.last_order.product_key);
+
       if (
         this.last_order.status !== 'PAYED' &&
         this.last_order.product_key !== this.product_key

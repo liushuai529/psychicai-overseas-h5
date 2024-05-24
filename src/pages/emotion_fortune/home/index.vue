@@ -176,6 +176,7 @@
     />
     <FixedOrder
       v-if="show_fixed_order && !is_show_notice"
+      :title="local_title"
       :is_show_move="is_show_notice"
       :new_order_key="new_order_key"
       name="local"
@@ -186,6 +187,7 @@
     />
     <FixedOrder
       v-if="show_api_order && !is_show_notice"
+      :title="last_title"
       :is_show_move="is_show_notice"
       :last_order="last_order"
       name="api"
@@ -303,6 +305,7 @@ export default {
       last_order: null,
       api_time: 0,
       local_time: 0,
+      last_title: '',
     };
   },
   computed: {
@@ -328,6 +331,9 @@ export default {
       return this.fix_order_info && this.new_order_key !== this.product_key
         ? true
         : false;
+    },
+    local_title() {
+      return utils.getTitle(this.new_order_key);
     },
   },
   watch: {
@@ -680,6 +686,11 @@ export default {
         localStorage.setItem('mlxz_fixed_order_info', querystring);
         localStorage.setItem('mlxz_fixed_order_key', this.product_key);
         localStorage.setItem(
+          `mlxz_new_time_down_${this.product_key}`,
+          15 * 60 * 1000
+        );
+
+        localStorage.setItem(
           `mlxz_user_info_${this.product_key}`,
           JSON.stringify({
             user_info: querystring,
@@ -852,6 +863,8 @@ export default {
       const res = await getLastOrderAPI();
       if (res.status !== 1000) return;
       this.last_order = res.data;
+      this.last_title = utils.getTitle(this.last_order.product_key);
+
       if (
         this.last_order.status !== 'PAYED' &&
         this.last_order.product_key !== this.product_key

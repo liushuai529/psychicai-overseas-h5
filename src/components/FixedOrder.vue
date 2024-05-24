@@ -99,6 +99,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    title: {
+      type: String,
+      default: '',
+    },
   },
   filters: {
     filterTime(val_) {
@@ -115,7 +119,6 @@ export default {
   watch: {},
   data() {
     return {
-      title: '',
       new_time: 0,
       is_show_shandong: false,
       is_show_daoqi: false,
@@ -163,11 +166,12 @@ export default {
   },
   mounted() {
     this.new_time = this.time;
-    if (this.new_order_key) {
-      this.title = this.getTitle(this.new_order_key);
-    } else {
-      this.title = this.getTitle(this.last_order.product_key);
-    }
+    // setInterval(() => {
+    //   if (this.name === 'local') {
+    //     this.new_time = +localStorage.getItem('mlxz_fixed_local_order_time');
+    //     this.$refs.countDown.reset();
+    //   }
+    // }, 500);
   },
 };
 </script>

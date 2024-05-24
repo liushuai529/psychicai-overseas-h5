@@ -651,6 +651,7 @@
     <ResultPop v-if="show_result" @close="show_result = false" />
     <FixedOrder
       v-if="show_fixed_order"
+      :title="local_title"
       :new_order_key="new_order_key"
       name="local"
       top="4.7rem"
@@ -660,6 +661,7 @@
     />
     <FixedOrder
       v-if="show_api_order"
+      :title="last_title"
       :last_order="last_order"
       name="api"
       top="6.7rem"
@@ -1111,6 +1113,7 @@ export default {
       last_order: null,
       api_time: 0,
       local_time: 0,
+      last_title: '',
     };
   },
   computed: {
@@ -1638,6 +1641,9 @@ export default {
         ? true
         : false;
     },
+    local_title() {
+      return utils.getTitle(this.new_order_key);
+    },
   },
   watch: {
     sale_visible(val) {
@@ -1784,7 +1790,6 @@ export default {
         this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
         this.local_time =
           +localStorage.getItem('mlxz_fixed_local_order_time') || 10;
-        // this.getLastOrder()
         let is_reload = localStorage.getItem('mlxz_reload_page_home');
         if (is_reload) {
           this.payed_order_three_list = [];
@@ -1797,6 +1802,7 @@ export default {
       const res = await getLastOrderAPI();
       if (res.status !== 1000) return;
       this.last_order = res.data;
+      this.last_title = utils.getTitle(this.last_order.product_key);
       if (
         this.last_order.status !== 'PAYED' &&
         this.last_order.product_key !== this.product_key

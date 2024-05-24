@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-20 20:21:53
+ * @LastEditTime: 2024-05-24 16:11:32
  * @Description: 工具函数
  */
 import moment from 'moment';
@@ -1555,8 +1555,17 @@ const gcyLog = (title, args) => {
   args_.mlxz_outer_open_uid = localStorage.getItem('mlxz_outer_open_uid') || '';
   window.DATAFLUX_RUM && window.DATAFLUX_RUM.addAction(title, args_);
 };
+import { reportName } from '../libs/enum';
+const getTitle = val => {
+  return val
+    ? getLanguage() === 'zh-CN'
+      ? reportName[val].cn
+      : reportName[val].tw
+    : '';
+};
 
 export default {
+  getTitle,
   gcyLog,
   resetPageUrl,
   getUrlParams,
