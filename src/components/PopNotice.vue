@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 17:28:09
+ * @LastEditTime: 2024-05-24 18:25:35
  * @Description: 
 -->
 <template>
@@ -29,7 +29,9 @@
             <div class="male">
               <div class="name">{{ male_info.name | filter_name }}</div>
               <div class="birth">
-                {{ male_info.birth }}
+                <span>
+                  {{ male_info.birth }}
+                </span>
                 <img
                   src="../assets/img/pop/cn/h5_icon_man.png"
                   class="sex"
@@ -40,7 +42,9 @@
             <div class="male mt-30">
               <div class="name">{{ female_info.name | filter_name }}</div>
               <div class="birth">
-                {{ female_info.birth }}
+                <span>
+                  {{ female_info.birth }}
+                </span>
                 <img
                   src="../assets/img/pop/cn/h5_icon_girl.png"
                   class="sex"
@@ -52,7 +56,9 @@
           <div v-else class="single-box">
             <div class="name">{{ user_info.name | filter_name }}</div>
             <div class="birth">
-              {{ user_info.birth }}
+              <span>
+                {{ user_info.birth }}
+              </span>
               <img
                 v-if="user_info.sex"
                 src="../assets/img/pop/cn/h5_icon_man.png"
@@ -421,6 +427,8 @@ export default {
           color: #726056;
           line-height: 0.3rem;
           margin-top: 0.26rem;
+          white-space: normal;
+          overflow: hidden;
         }
         .birth {
           width: 100%;
@@ -485,6 +493,8 @@ export default {
       color: #726056;
       height: 0.3rem;
       line-height: 0.3rem;
+      white-space: normal;
+      overflow: hidden;
     }
     .birth {
       font-weight: 400;
@@ -492,6 +502,15 @@ export default {
       color: #726056;
       height: 0.3rem;
       line-height: 0.3rem;
+      white-space: nowrap;
+
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        height: 100%;
+        width: 90%;
+        display: inline-block;
+      }
     }
     .sex {
       width: 0.26rem;
@@ -517,6 +536,8 @@ export default {
     color: #726056;
     height: 0.3rem;
     line-height: 0.3rem;
+    white-space: normal;
+    overflow: hidden;
   }
   .birth {
     font-weight: 400;
@@ -526,6 +547,15 @@ export default {
     line-height: 0.3rem;
     display: flex;
     align-items: center;
+    white-space: nowrap;
+
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      height: 100%;
+      width: 90%;
+      display: inline-block;
+    }
   }
   .sex {
     width: 0.26rem;
