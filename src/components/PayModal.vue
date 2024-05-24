@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 15:06:43
+ * @LastEditTime: 2024-05-24 15:25:50
  * @Description: 支付弹窗
 -->
 <template>
@@ -477,8 +477,8 @@ export default {
           this.query_user_string
         ),
       };
-      let user_time = this.$route.query.use_fixed_time;
-
+      // let user_time = this.$route.query.use_fixed_time;
+      let user_time = true;
       if (pay_method === 'google_pay') {
         const res = await payOrderAPI(params);
         Indicator.close();
@@ -487,6 +487,7 @@ export default {
           localStorage.removeItem('mlxz_fixed_order_info');
           localStorage.removeItem('mlxz_fixed_order_key');
           localStorage.removeItem('mlxz_fixed_local_order_time');
+          localStorage.removeItem('mlxz_fixed_api_order_time');
         }
 
         if (res.status !== 1000) return;
@@ -508,6 +509,7 @@ export default {
           localStorage.removeItem('mlxz_fixed_order_info');
           localStorage.removeItem('mlxz_fixed_order_key');
           localStorage.removeItem('mlxz_fixed_local_order_time');
+          localStorage.removeItem('mlxz_fixed_api_order_time');
         }
         if (res.status !== 1000) return;
         await utils.asleep(1000);

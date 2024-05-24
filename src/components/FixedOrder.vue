@@ -149,9 +149,13 @@ export default {
         this.$refs.countDown.reset();
       }
     },
-    orderReport() {
+    async orderReport() {
       if (this.name === 'api') {
         this.$emit('payOrder');
+        this.$refs.countDown.pause();
+        await utils.asleep(3000);
+        this.new_time = 15 * 60 * 1000;
+        this.$refs.countDown.reset();
       } else {
         this.$emit('jumpDetail');
       }

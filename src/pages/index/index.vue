@@ -1718,10 +1718,10 @@ export default {
   },
   created() {
     document.title = this.$t('dom-title');
+    this.getLastOrder();
 
     this.is_show_combine =
       ['enjoy03', 'panda03'].includes(utils.getFBChannel()) || !utils.isProd();
-    console.log('is_show_combine', this.is_show_combine);
 
     let url_query = utils.getUrlParams();
     let order_id = url_query.order_id;
@@ -1751,8 +1751,6 @@ export default {
   },
   async mounted() {
     this.showNoticePop();
-
-    this.getLastOrder();
 
     utils.firebaseLogEvent('10001', '-10001', 'page_view_h5main', 'page_view', {
       args_name: 'page_view_h5main',
@@ -1786,12 +1784,13 @@ export default {
         this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
         this.local_time =
           +localStorage.getItem('mlxz_fixed_local_order_time') || 10;
+        // this.getLastOrder()
         let is_reload = localStorage.getItem('mlxz_reload_page_home');
         if (is_reload) {
           this.payed_order_three_list = [];
           this.getPayedOrderList();
         }
-      }, 1000);
+      }, 500);
     },
     // 获取最新一个订单信息
     async getLastOrder() {
@@ -1807,12 +1806,12 @@ export default {
           +localStorage.getItem('mlxz_fixed_api_order_id') ===
           this.last_order.id
         ) {
-          this.api_time = +localStorage.getItem('mlxz_fixed_api_order_time');
+          this.api_time =
+            +localStorage.getItem('mlxz_fixed_api_order_time') || 10;
           this.show_api_order = true;
           return;
         }
-        this.api_time =
-          +localStorage.getItem('mlxz_fixed_api_order_time') || 15 * 60 * 1000;
+        this.api_time = 15 * 60 * 1000;
         localStorage.setItem('mlxz_fixed_api_order_id', this.last_order.id);
         this.show_api_order = true;
       }
@@ -1832,12 +1831,11 @@ export default {
         extra_ce_suan: ext,
         callback_url: `${location.origin}/${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}`,
       };
-
       const res = await payOrderAPI(params);
-      Indicator.close();
-      if (res.status !== 1000) return;
       localStorage.removeItem('mlxz_fixed_api_order_id');
       localStorage.removeItem('mlxz_fixed_api_order_time');
+      Indicator.close();
+      if (res.status !== 1000) return;
       await utils.asleep(1000);
       location.href = res.data.pay_url;
     },

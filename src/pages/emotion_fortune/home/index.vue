@@ -888,10 +888,11 @@ export default {
       };
 
       const res = await payOrderAPI(params);
-      Indicator.close();
-      if (res.status !== 1000) return;
       localStorage.removeItem('mlxz_fixed_api_order_id');
       localStorage.removeItem('mlxz_fixed_api_order_time');
+      Indicator.close();
+      if (res.status !== 1000) return;
+
       await utils.asleep(1000);
       location.href = res.data.pay_url;
     },

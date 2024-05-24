@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 14:52:48
+ * @LastEditTime: 2024-05-24 15:29:55
  * @Description: 八字合婚
 -->
 <template>
@@ -912,10 +912,11 @@ export default {
       };
 
       const res = await payOrderAPI(params);
-      Indicator.close();
-      if (res.status !== 1000) return;
       localStorage.removeItem('mlxz_fixed_api_order_id');
       localStorage.removeItem('mlxz_fixed_api_order_time');
+      Indicator.close();
+      if (res.status !== 1000) return;
+
       await utils.asleep(1000);
       location.href = res.data.pay_url;
     },
