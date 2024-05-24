@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-23 16:32:21
+ * @LastEditTime: 2024-05-24 10:49:14
  * @Description: 
 -->
 <template>
@@ -248,7 +248,6 @@ export default {
       this.user_ = JSON.parse(
         localStorage.getItem(`mlxz_user_info_${this.product_key}`)
       );
-
       if (this.user_.product_key === this.product_key) {
         if (this.product_key !== 'h5_marriage') {
           this.formateSingleUserInfo(this.user_.user_info);
@@ -257,7 +256,6 @@ export default {
           this.female_info = this.formateCPUserInfo(this.user_.female_str);
         }
       }
-      console.log(this.male_info);
     },
     /**
      * @description: 格式化用户信息
@@ -297,7 +295,7 @@ export default {
       this.user_info.birth = this.gongli_nongli
         ? this.picker_date_yangli
         : this.picker_date_nongli;
-      this.user_info.sex = sex;
+      this.user_info.sex = this.sex;
     },
 
     formateCPUserInfo(str) {
