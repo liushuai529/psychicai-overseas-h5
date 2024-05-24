@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 19:16:32
+ * @LastEditTime: 2024-05-24 19:33:02
  * @Description: 
 -->
 <template>
@@ -350,7 +350,7 @@ export default {
             date
           )} ${picker_hour}`;
       let picker_date_yangli = gongli_nongli
-        ? `${year}-${month}-${date} ${this.picker_hour}`
+        ? `${year}-${month}-${date} ${picker_hour}`
         : `${Lunar.fromYmd(+year, +month, +date)
             .getSolar()
             .toString()} ${picker_hour}`;

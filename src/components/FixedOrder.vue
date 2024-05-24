@@ -179,10 +179,13 @@ export default {
 <style scoped lang="less">
 @keyframes moveRight {
   0% {
+    opacity: 1;
     right: -2.56rem;
   }
+
   100% {
     right: 0;
+    opacity: 1;
     transition: right 0.5s;
   }
 }
@@ -196,6 +199,7 @@ export default {
   background-size: contain;
   position: fixed;
   right: 0;
+  opacity: 0;
   z-index: 101;
   padding-top: 0.3rem;
   display: flex;
