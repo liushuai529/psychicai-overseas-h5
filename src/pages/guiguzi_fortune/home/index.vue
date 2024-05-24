@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 21:41:25
+ * @LastEditTime: 2024-05-24 23:04:49
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -818,6 +818,8 @@ export default {
 
         localStorage.setItem('mlxz_fixed_api_order_id', this.last_order.id);
         this.show_api_order = true;
+      } else {
+        this.show_api_order = false;
       }
     },
     logDiscountEvent() {
@@ -862,6 +864,7 @@ export default {
       localStorage.removeItem('mlxz_fixed_api_order_time');
       Indicator.close();
       if (res.status !== 1000) return;
+      this.show_api_order = false;
 
       await utils.asleep(1000);
       location.href = res.data.pay_url;

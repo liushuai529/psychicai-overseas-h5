@@ -1646,8 +1646,7 @@ export default {
         this.fix_order_info && this.new_order_key !== this.product_key
           ? true
           : false;
-      console.log(this.fix_order_info, this.new_order_key, this.product_key);
-      console.log(flag);
+
       if (flag) {
         const { main_id, click_id, view_id, click_name, view_name } =
           maidianEnum[this.new_order_key];
@@ -1856,6 +1855,8 @@ export default {
         this.api_time = 15 * 60 * 1000;
         localStorage.setItem('mlxz_fixed_api_order_id', this.last_order.id);
         this.show_api_order = true;
+      } else {
+        this.show_api_order = false;
       }
     },
     logDiscountEvent() {
@@ -1899,6 +1900,7 @@ export default {
       localStorage.removeItem('mlxz_fixed_api_order_time');
       Indicator.close();
       if (res.status !== 1000) return;
+      this.show_api_order = false;
       await utils.asleep(1000);
       location.href = res.data.pay_url;
     },

@@ -346,8 +346,9 @@ export default {
       Indicator.close();
       Toast(this.$t('fail-tip'));
       setTimeout(() => {
+        return;
         location.href = 'career_fortune_2024.html';
-      }, 1000);
+      }, 5000);
     },
     /**
      * @description: 格式化测算结果数据
