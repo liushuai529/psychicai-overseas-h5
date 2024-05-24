@@ -957,7 +957,7 @@ export default {
         '&pay_modal=1' +
         '&use_fixed_time=1&discount_pay=1';
 
-      location.href = `${location.origin}/${
+      location.href = `${location.origin}/${utils.getFBChannel()}/${
         path_enums[this.new_order_key]
       }.html#/${path}`;
     },

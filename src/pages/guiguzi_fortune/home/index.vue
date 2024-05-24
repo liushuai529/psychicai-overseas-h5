@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 19:54:34
+ * @LastEditTime: 2024-05-24 20:08:11
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -879,7 +879,7 @@ export default {
         '&pay_modal=1' +
         '&use_fixed_time=1&discount_pay=1';
 
-      location.href = `${location.origin}/${
+      location.href = `${location.origin}/${utils.getFBChannel()}/${
         path_enums[this.new_order_key]
       }.html#/${path}`;
     },
