@@ -1820,7 +1820,7 @@ export default {
         this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
         this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
         this.local_time =
-          +localStorage.getItem('mlxz_fixed_local_order_time') || 10;
+          +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
         let is_reload = localStorage.getItem('mlxz_reload_page_home');
         if (is_reload) {
           this.payed_order_three_list = [];
@@ -1848,7 +1848,7 @@ export default {
           this.last_order.id
         ) {
           this.api_time =
-            +localStorage.getItem('mlxz_fixed_api_order_time') || 10;
+            +localStorage.getItem('mlxz_fixed_api_order_time') || 0;
           this.show_api_order = true;
           return;
         }

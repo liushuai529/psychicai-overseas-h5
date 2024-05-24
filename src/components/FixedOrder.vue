@@ -148,8 +148,10 @@ export default {
       this.new_time = time_;
       if (!minutes && !seconds && milliseconds < 10) {
         this.new_time = 1;
-        this.$refs.countDown.pause();
-        this.$refs.countDown.reset();
+        if (this.$refs.countDown) {
+          this.$refs.countDown.pause();
+          this.$refs.countDown.reset();
+        }
       }
     },
     async orderReport() {

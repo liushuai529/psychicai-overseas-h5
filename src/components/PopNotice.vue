@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 20:40:21
+ * @LastEditTime: 2024-05-24 23:54:47
  * @Description: 
 -->
 <template>
@@ -286,9 +286,11 @@ export default {
       this.is_show_daoqi = time_ < 31 * 1000;
       this.new_time = time_;
       if (!minutes && !seconds && milliseconds < 10) {
-        this.time_ = 1;
-        this.$refs.countDown.pause();
-        this.$refs.countDown.reset();
+        this.time_ = 0;
+        if (this.$refs.countDown) {
+          this.$refs.countDown.pause();
+          this.$refs.countDown.reset();
+        }
       }
     },
     getUserInfo() {
