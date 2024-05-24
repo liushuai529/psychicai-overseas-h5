@@ -1772,6 +1772,21 @@ export default {
     });
   },
   async mounted() {
+    if (utils.isProd()) {
+      try {
+        fbq('trackCustom', 'CustomChannel', {
+          channel: `pageview_main_${utils.getFBChannel()}`,
+        });
+        utils.gcyLog(`主页`, {
+          mlxz_action_desc: '主页FB渠道上报',
+          mlxz_action_type: 'view',
+          mlxz_channel: `pageview_main_${utils.getFBChannel()}`,
+        });
+      } catch (err) {
+        console.log('no fbq:', err);
+      }
+    }
+
     this.showNoticePop();
 
     utils.firebaseLogEvent('10001', '-10001', 'page_view_h5main', 'page_view', {
