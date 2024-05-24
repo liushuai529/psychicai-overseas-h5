@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 19:31:39
+ * @LastEditTime: 2024-05-24 19:55:09
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -317,10 +317,10 @@ export default {
         utils.firebaseLogEvent(
           '10008',
           '-10013',
-          'view_64gua_discount1',
+          'view_chenggu_discount1',
           'view',
           {
-            args_name: 'view_64gua_discount1',
+            args_name: 'view_chenggu_discount1',
             channel: utils.getFBChannel(),
           }
         );

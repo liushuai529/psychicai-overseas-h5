@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 19:30:59
+ * @LastEditTime: 2024-05-24 19:54:34
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -374,10 +374,10 @@ export default {
         utils.firebaseLogEvent(
           '10008',
           '-10013',
-          'view_chenggu_discount1',
+          'view_64gua_discount1',
           'view',
           {
-            args_name: 'view_chenggu_discount1',
+            args_name: 'view_64gua_discount1',
             channel: utils.getFBChannel(),
           }
         );

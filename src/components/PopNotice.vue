@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 19:33:02
+ * @LastEditTime: 2024-05-24 19:51:30
  * @Description: 
 -->
 <template>
@@ -140,7 +140,7 @@
 <script>
 import utils from '../libs/utils';
 import { CountDown } from 'vant';
-import { banner_enums, reportName } from '../libs/enum';
+import { banner_enums, reportName, path_enums } from '../libs/enum';
 import { Solar, Lunar } from 'lunar-javascript';
 
 const tipsArr1 = {
@@ -244,6 +244,25 @@ export default {
         args_name: this.c_name,
         channel: utils.getFBChannel(),
       });
+      if (this.product_key === 'h5_marriage') {
+        let marry_info = JSON.parse(
+          localStorage.getItem('mlxz_user_info_h5_marriage')
+        );
+        let male_str = marry_info.male_str;
+        let female_str = marry_info.female_str;
+        let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
+&pay_modal=1&use_fixed_time=1&discount_pay=1`;
+        location.href = `${location.origin}/${utils.getFBChannel()}/${
+          path_enums[this.product_key]
+        }.html#/${path}`;
+        localStorage.setItem(
+          `mlxz_new_time_down_${this.product_key}`,
+          this.new_time
+        );
+        this.$emit('close');
+        this.$router.push({ path });
+        return;
+      }
       let path = 'detail?querystring=' + this.user_.user_info + '&pay_modal=1';
       localStorage.setItem(
         `mlxz_new_time_down_${this.product_key}`,
