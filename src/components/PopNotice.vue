@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 18:25:35
+ * @LastEditTime: 2024-05-24 18:53:26
  * @Description: 
 -->
 <template>
@@ -240,8 +240,8 @@ export default {
   },
   methods: {
     toDetailPage() {
-      utils.firebaseLogEvent(e_id, c_id, c_name, 'click', {
-        args_name: c_name,
+      utils.firebaseLogEvent(this.e_id, this.c_id, this.c_name, 'click', {
+        args_name: this.c_name,
         channel: utils.getFBChannel(),
       });
       let path = 'detail?querystring=' + this.user_.user_info + '&pay_modal=1';

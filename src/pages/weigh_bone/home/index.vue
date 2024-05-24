@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 18:05:09
+ * @LastEditTime: 2024-05-24 18:52:22
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -800,6 +800,20 @@ export default {
         args_name: click_name,
         channel: utils.getFBChannel(),
       });
+      if (this.new_order_key === 'h5_marriage') {
+        let marry_info = JSON.parse(
+          localStorage.getItem('mlxz_user_info_h5_marriage')
+        );
+        let male_str = marry_info.male_str;
+        let female_str = marry_info.female_str;
+        let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
+&pay_modal=1&use_fixed_time=1`;
+        location.href = `${location.origin}/${
+          path_enums[this.new_order_key]
+        }.html#/${path}`;
+
+        return;
+      }
       let path =
         'detail?querystring=' +
         this.fix_order_info +
