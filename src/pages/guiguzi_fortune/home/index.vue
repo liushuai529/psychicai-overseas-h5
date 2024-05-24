@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 20:08:11
+ * @LastEditTime: 2024-05-24 20:12:11
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -165,9 +165,9 @@
       @close="closeNotice"
       :count_down="count_down"
       :product_key="product_key"
-      e_id="10009"
+      e_id="10008"
       c_id="-10014"
-      c_name="click_chenggu_discount1"
+      c_name="click_64gua_discount1"
     />
     <FixedOrder
       v-if="show_fixed_order && !is_show_notice"
