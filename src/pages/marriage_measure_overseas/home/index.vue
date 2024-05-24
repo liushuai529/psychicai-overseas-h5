@@ -981,7 +981,7 @@ export default {
         'detail?querystring=' +
         this.fix_order_info +
         '&pay_modal=1' +
-        '&use_fixed_time=1';
+        '&use_fixed_time=1&discount_pay=1';
 
       location.href = `${location.origin}/${
         path_enums[this.new_order_key]

@@ -1881,7 +1881,7 @@ export default {
         let male_str = marry_info.male_str;
         let female_str = marry_info.female_str;
         let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
-&pay_modal=1&use_fixed_time=1`;
+&pay_modal=1&use_fixed_time=1&discount_pay=1`;
         location.href = `${location.origin}/${
           path_enums[this.new_order_key]
         }.html#/${path}`;
@@ -1892,7 +1892,7 @@ export default {
         'detail?querystring=' +
         this.fix_order_info +
         '&pay_modal=1' +
-        '&use_fixed_time=1';
+        '&use_fixed_time=1&discount_pay=1';
 
       location.href = `${location.origin}/${
         path_enums[this.new_order_key]
