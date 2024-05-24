@@ -768,7 +768,7 @@ export default {
         this.count_down = +time_ || 10;
         this.local_time =
           +localStorage.getItem('mlxz_fixed_local_order_time') || 10;
-      }, 500);
+      }, 1000);
     },
     // 关闭当前报告的挽留弹窗
     closeNotice() {

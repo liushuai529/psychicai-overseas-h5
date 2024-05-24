@@ -451,14 +451,15 @@ export default {
       if (pay_method === 'google_pay') {
         const res = await payOrderAPI(params);
         localStorage.removeItem('mlxz_set_event_times');
+
+        Indicator.close();
+        if (res.status !== 1000) return;
         if (user_time) {
           localStorage.removeItem('mlxz_fixed_order_info');
           localStorage.removeItem('mlxz_fixed_order_key');
           localStorage.removeItem('mlxz_fixed_local_order_time');
           localStorage.removeItem('mlxz_fixed_api_order_time');
         }
-        Indicator.close();
-        if (res.status !== 1000) return;
         localStorage.setItem('report_order_id', res.data.id);
       } else {
         let pay_max_params = Object.assign({}, params, {
@@ -472,16 +473,16 @@ export default {
         }`;
         const res = await payOrderAPI(pay_max_params);
         localStorage.removeItem('mlxz_set_event_times');
+
+        Indicator.close();
+
+        if (res.status !== 1000) return;
         if (user_time) {
           localStorage.removeItem('mlxz_fixed_order_info');
           localStorage.removeItem('mlxz_fixed_order_key');
           localStorage.removeItem('mlxz_fixed_local_order_time');
           localStorage.removeItem('mlxz_fixed_api_order_time');
         }
-
-        Indicator.close();
-
-        if (res.status !== 1000) return;
         await utils.asleep(1000);
         location.href = res.data.pay_url;
       }
