@@ -789,7 +789,10 @@ export default {
         this.last_order.status !== 'PAYED' &&
         this.last_order.product_key !== this.product_key
       ) {
+        this.logDiscountEvent();
+
         //
+
         if (
           +localStorage.getItem('mlxz_fixed_api_order_id') ===
           this.last_order.id
@@ -803,6 +806,16 @@ export default {
         localStorage.setItem('mlxz_fixed_api_order_id', this.last_order.id);
         this.show_api_order = true;
       }
+    },
+    logDiscountEvent() {
+      const { ext, pay_method, product_key, product_id, payment } =
+        this.last_order;
+      const { main_id, click_id, view_id, click_name, view_name } =
+        maidianEnum[product_key];
+      utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
+        args_name: view_name,
+        channel: utils.getFBChannel(),
+      });
     },
 
     // api订单下单
