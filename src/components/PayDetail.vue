@@ -446,9 +446,9 @@ export default {
           this.query_user_string
         ),
       };
-      let user_time = this.$route.query.use_fixed_time;
+      // let user_time = this.$route.query.use_fixed_time;
       let discount_pay = this.$route.query.discount_pay || 0;
-
+      let user_time = true;
       if (pay_method === 'google_pay') {
         const res = await payOrderAPI(params);
         localStorage.removeItem('mlxz_set_event_times');
