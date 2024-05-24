@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 18:59:44
+ * @LastEditTime: 2024-05-24 19:18:18
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -793,8 +793,9 @@ export default {
       const res = await getLastOrderAPI();
       if (res.status !== 1000) return;
       this.last_order = res.data;
-      this.last_title = utils.getTitle(this.last_order.product_key);
-
+      this.last_title = utils.getTitle(
+        this.last_order ? this.last_order.product_key : ''
+      );
       if (
         this.last_order.status !== 'PAYED' &&
         this.last_order.product_key !== this.product_key

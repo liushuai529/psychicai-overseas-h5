@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 19:00:49
+ * @LastEditTime: 2024-05-24 19:18:59
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -742,8 +742,9 @@ export default {
       const res = await getLastOrderAPI();
       if (res.status !== 1000) return;
       this.last_order = res.data;
-      this.last_title = utils.getTitle(this.last_order.product_key);
-
+      this.last_title = utils.getTitle(
+        this.last_order ? this.last_order.product_key : ''
+      );
       if (
         this.last_order.status !== 'PAYED' &&
         this.last_order.product_key !== this.product_key

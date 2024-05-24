@@ -789,8 +789,9 @@ export default {
       const res = await getLastOrderAPI();
       if (res.status !== 1000) return;
       this.last_order = res.data;
-      this.last_title = utils.getTitle(this.last_order.product_key);
-
+      this.last_title = utils.getTitle(
+        this.last_order ? this.last_order.product_key : ''
+      );
       if (
         this.last_order.status !== 'PAYED' &&
         this.last_order.product_key !== this.product_key

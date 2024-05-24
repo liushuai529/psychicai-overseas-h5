@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 18:53:26
+ * @LastEditTime: 2024-05-24 19:16:32
  * @Description: 
 -->
 <template>
@@ -284,6 +284,8 @@ export default {
           this.female_info = this.formateCPUserInfo(this.user_.female_str);
         }
       }
+
+      console.log(this.male_info);
     },
     /**
      * @description: 格式化用户信息
@@ -342,19 +344,19 @@ export default {
         new Date(utils.isAndroid() ? android_date : ios_date)
       );
       let lunar = solar.getLunar();
-      let picker_date_nongli = +this.gongli_nongli
+      let picker_date_nongli = gongli_nongli
         ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${picker_hour}`
         : `${year}年${utils.formateNongliMonth(month)}${utils.formateNongliDate(
             date
           )} ${picker_hour}`;
-      let picker_date_yangli = +gongli_nongli
+      let picker_date_yangli = gongli_nongli
         ? `${year}-${month}-${date} ${this.picker_hour}`
         : `${Lunar.fromYmd(+year, +month, +date)
             .getSolar()
             .toString()} ${picker_hour}`;
       return {
         name: username,
-        birth: gongli_nongli ? picker_date_nongli : picker_date_yangli,
+        birth: !gongli_nongli ? picker_date_nongli : picker_date_yangli,
       };
     },
   },
@@ -503,6 +505,8 @@ export default {
       height: 0.3rem;
       line-height: 0.3rem;
       white-space: nowrap;
+      display: flex;
+      align-items: center;
 
       span {
         white-space: nowrap;
