@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 10:42:07
+ * @LastEditTime: 2024-05-24 15:00:03
  * @Description: 支付弹窗
 -->
 <template>
@@ -265,10 +265,16 @@ export default {
   },
   created() {
     // 首次挽留的弹窗计时
-    this.time =
-      +localStorage.getItem(`mlxz_new_time_down_${this.product_key}`) ||
-      15 * 60 * 1000;
-    localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
+    let use_fixed_time = this.$route.query.use_fixed_time;
+    if (use_fixed_time) {
+      this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
+      localStorage.removeItem('mlxz_fixed_local_order_time');
+    } else {
+      this.time =
+        +localStorage.getItem(`mlxz_new_time_down_${this.product_key}`) ||
+        15 * 60 * 1000;
+      localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
+    }
   },
 
   watch: {

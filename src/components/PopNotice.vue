@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 12:23:18
+ * @LastEditTime: 2024-05-24 14:06:09
  * @Description: 
 -->
 <template>
@@ -109,8 +109,11 @@
                   block: true,
                   'rgb-light': is_show_shandong,
                 }"
-                >{{ timeData.milliseconds | filterTime }}</span
               >
+                <span :class="{ mill: time_ === 1 }">
+                  {{ timeData.milliseconds | filterTime }}
+                </span>
+              </span>
             </template>
           </count-down>
         </div>

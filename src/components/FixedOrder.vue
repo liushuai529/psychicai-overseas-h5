@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed-order"
+    :class="{ 'fixed-order': true, 'move-right': !is_show_move }"
     :style="{
       top: top,
     }"
@@ -43,8 +43,11 @@
             block: true,
             'rgb-light': is_show_shandong,
           }"
-          >{{ timeData.milliseconds | filterTime }}</span
         >
+          <span :class="{ mill: new_time === 1 }">
+            {{ timeData.milliseconds | filterTime }}
+          </span>
+        </span>
       </template>
     </count-down>
   </div>
@@ -60,6 +63,10 @@ export default {
     CountDown,
   },
   props: {
+    show_pop: {
+      type: Boolean,
+      default: false,
+    },
     new_order_key: {
       type: String,
       default: '',
@@ -88,6 +95,10 @@ export default {
       type: Function,
       default: () => {},
     },
+    is_show_move: {
+      type: Boolean,
+      default: false,
+    },
   },
   filters: {
     filterTime(val_) {
@@ -101,7 +112,7 @@ export default {
       }
     },
   },
-
+  watch: {},
   data() {
     return {
       title: '',
@@ -158,6 +169,18 @@ export default {
 </script>
 
 <style scoped lang="less">
+@keyframes moveRight {
+  0% {
+    right: -2.56rem;
+  }
+  100% {
+    right: 0;
+    transition: right 0.5s;
+  }
+}
+.move-right {
+  animation: moveRight 0.5s forwards;
+}
 .fixed-order {
   width: 2.56rem;
   height: 1.9rem;

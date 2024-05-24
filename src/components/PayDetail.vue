@@ -62,7 +62,10 @@
                     block: true,
                     'rgb-light': is_show_shandong,
                   }"
-                  >{{ timeData.milliseconds | filterTime }}</span
+                >
+                  <span :class="{ mill: time === 1 }">
+                    {{ timeData.milliseconds | filterTime }}
+                  </span></span
                 >
               </template>
             </count-down>

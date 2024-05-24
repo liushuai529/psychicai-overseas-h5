@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 11:16:17
+ * @LastEditTime: 2024-05-24 14:53:15
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -134,7 +134,8 @@
       :product_key="product_key"
     />
     <FixedOrder
-      v-if="show_fixed_order"
+      v-if="show_fixed_order && !is_show_notice"
+      :is_show_move="is_show_notice"
       :new_order_key="new_order_key"
       name="local"
       top="4.7rem"
@@ -143,7 +144,8 @@
       @jumpDetail="jumpOrder"
     />
     <FixedOrder
-      v-if="show_api_order"
+      v-if="show_api_order && !is_show_notice"
+      :is_show_move="is_show_notice"
       :last_order="last_order"
       name="api"
       top="6.7rem"
@@ -305,10 +307,10 @@ export default {
 
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
+    this.getLastOrder();
   },
   mounted() {
     this.showNoticePop();
-    this.getLastOrder();
 
     // 赋默认值
     let storaged_userInfo = localStorage.getItem('weigh_bone_info');
@@ -727,7 +729,7 @@ export default {
         product_id: product_id,
         platform: 'WEB',
         extra_ce_suan: ext,
-        callback_url: `${location.origin}${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}`,
+        callback_url: `${location.origin}/${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}`,
       };
 
       const res = await payOrderAPI(params);

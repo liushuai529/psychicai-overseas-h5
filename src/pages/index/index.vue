@@ -1831,7 +1831,7 @@ export default {
         product_id: product_id,
         platform: 'WEB',
         extra_ce_suan: ext,
-        callback_url: `${location.origin}${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}`,
+        callback_url: `${location.origin}/${path_enums[product_key]}.html#/result?path=${path_enums[product_key]}&report_price=${payment}`,
       };
 
       const res = await payOrderAPI(params);
