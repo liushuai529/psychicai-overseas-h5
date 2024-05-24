@@ -44,7 +44,8 @@
             'rgb-light': is_show_shandong,
           }"
         >
-          <span :class="{ mill: new_time === 1 }">
+          <!-- :class="{ mill: new_time === 1 }" -->
+          <span>
             {{ timeData.milliseconds | filterTime }}
           </span>
         </span>
@@ -147,7 +148,7 @@ export default {
       this.is_show_daoqi = time_ < 31 * 1000;
       this.new_time = time_;
       if (!minutes && !seconds && milliseconds < 10) {
-        this.new_time = 1;
+        this.new_time = 0;
         if (this.$refs.countDown) {
           this.$refs.countDown.pause();
           this.$refs.countDown.reset();
