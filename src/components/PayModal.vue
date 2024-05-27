@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-27 21:12:51
+ * @LastEditTime: 2024-05-27 21:15:42
  * @Description: 支付弹窗
 -->
 <template>
@@ -22,7 +22,7 @@
         alt=""
       />
       <div :style="title_style" class="username">
-        {{ title }}{{ is_android }}
+        {{ title }}
       </div>
       <div v-if="product_key === 'h5_marriage'" class="modal-bg">
         <img :src="bg" class="init-bg" alt="" />
