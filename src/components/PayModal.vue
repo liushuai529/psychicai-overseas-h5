@@ -2,11 +2,18 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-25 00:37:30
+ * @LastEditTime: 2024-05-27 21:12:51
  * @Description: 支付弹窗
 -->
 <template>
-  <mt-popup v-model="show" position="bottom" class="pay-modal">
+  <mt-popup
+    v-model="show"
+    position="bottom"
+    :style="{
+      height: is_android ? '13.2rem' : '12rem',
+    }"
+    class="pay-modal"
+  >
     <div class="pay-content">
       <img
         @click="closeModal"
@@ -15,7 +22,7 @@
         alt=""
       />
       <div :style="title_style" class="username">
-        {{ title }}
+        {{ title }}{{ is_android }}
       </div>
       <div v-if="product_key === 'h5_marriage'" class="modal-bg">
         <img :src="bg" class="init-bg" alt="" />
@@ -117,7 +124,14 @@
       </div>
       <!-- 支付按钮 -->
 
-      <div v-if="pay_methods.length" @click="payMoney()" class="pay-btn">
+      <div
+        :style="{
+          bottom: is_android ? '1.4rem' : '0.2rem',
+        }"
+        v-if="pay_methods.length"
+        @click="payMoney()"
+        class="pay-btn"
+      >
         {{ tips3 }}<span>{{ now_price }}</span
         >{{ tips4 }}
       </div>
@@ -303,9 +317,11 @@ export default {
             this.product.origin_price_str
         : '-';
     },
-
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
+    },
+    is_android() {
+      return utils.isAndroid();
     },
   },
   created() {
@@ -622,7 +638,7 @@ export default {
 .pay-modal {
   width: 7.5rem;
   // height: 100vh;
-  height: 12rem;
+  // height: 12rem;
   font-family: system-ui, sans-serif;
   z-index: 999 !important;
   .pay-content {
@@ -792,7 +808,7 @@ export default {
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 0.2rem;
+  // bottom: 0.2rem;
   left: 0.6rem;
   z-index: 99;
   span {
