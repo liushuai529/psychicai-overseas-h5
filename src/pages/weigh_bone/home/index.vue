@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 14:30:45
+ * @LastEditTime: 2024-05-28 16:51:05
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -258,6 +258,7 @@ export default {
       api_time: 0,
       local_time: 0,
       last_title: '',
+      timer: null,
     };
   },
   computed: {
@@ -343,6 +344,11 @@ export default {
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
     this.getLastOrder();
+  },
+  beforeDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   },
   mounted() {
     this.showNoticePop();
@@ -727,7 +733,7 @@ export default {
         // this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
         this.local_time =
           +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
-      }, 500);
+      }, 1000);
     },
     // 关闭当前报告的挽留弹窗
     closeNotice() {

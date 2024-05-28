@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 16:05:55
+ * @LastEditTime: 2024-05-28 16:50:39
  * @Description: 八字合婚
 -->
 <template>
@@ -312,6 +312,7 @@ export default {
       api_time: 0,
       local_time: 0,
       last_title: '',
+      timer: null,
     };
   },
 
@@ -330,6 +331,11 @@ export default {
       }
     );
     this.getLastOrder();
+  },
+  beforeDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   },
   mounted() {
     this.showNoticePop();
@@ -904,7 +910,7 @@ export default {
         // this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
         this.local_time =
           +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
-      }, 500);
+      }, 1000);
     },
     // 关闭当前报告的挽留弹窗
     closeNotice() {

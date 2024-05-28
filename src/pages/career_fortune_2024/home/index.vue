@@ -324,6 +324,7 @@ export default {
       api_time: 0,
       local_time: 0,
       last_title: '',
+      timer: null,
     };
   },
   computed: {
@@ -410,6 +411,12 @@ export default {
     );
     this.getLastOrder();
   },
+  beforeDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+  },
+
   async mounted() {
     this.showNoticePop();
 
@@ -750,7 +757,7 @@ export default {
 
     // 展示挽留弹窗  通过定时器
     showNoticePop() {
-      setInterval(() => {
+      this.timer = setInterval(() => {
         this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
         this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
         let is_show_notice = localStorage.getItem(

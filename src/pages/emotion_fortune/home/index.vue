@@ -314,6 +314,7 @@ export default {
       api_time: 0,
       local_time: 0,
       last_title: '',
+      timer: null,
     };
   },
   computed: {
@@ -403,6 +404,11 @@ export default {
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
     this.getLastOrder();
+  },
+  beforeDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   },
   mounted() {
     if (utils.isProd()) {
@@ -881,7 +887,7 @@ export default {
     },
     // 展示挽留弹窗  通过定时器
     showNoticePop() {
-      setInterval(() => {
+      this.timer = setInterval(() => {
         this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
         this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
         let is_show_notice = localStorage.getItem(
@@ -898,7 +904,7 @@ export default {
         // this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
         this.local_time =
           +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
-      }, 500);
+      }, 1000);
     },
     // 关闭当前报告的挽留弹窗
     closeNotice() {

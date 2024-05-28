@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 16:00:23
+ * @LastEditTime: 2024-05-28 16:48:16
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -315,6 +315,7 @@ export default {
       last_order: null,
       api_time: 0,
       local_time: 0,
+      timer: null,
     };
   },
   computed: {
@@ -399,6 +400,11 @@ export default {
       }
     );
     this.getLastOrder();
+  },
+  beforeDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   },
   mounted() {
     this.showNoticePop();
@@ -763,7 +769,7 @@ export default {
 
     // 展示挽留弹窗  通过定时器
     showNoticePop() {
-      setInterval(() => {
+      this.timer = setInterval(() => {
         this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
         this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
         let is_show_notice = localStorage.getItem(
@@ -780,7 +786,7 @@ export default {
         // this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
         this.local_time =
           +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
-      }, 500);
+      }, 1000);
     },
     // 关闭当前报告的挽留弹窗
     closeNotice() {

@@ -318,6 +318,7 @@ export default {
       api_time: 0,
       local_time: 0,
       last_title: '',
+      timer: null,
     };
   },
   computed: {
@@ -437,12 +438,12 @@ export default {
           this.$refs.sex_male.click();
           setTimeout(() => {
             this.$refs.sex_female.click();
-          }, 10);
+          }, 500);
         } else {
           this.$refs.sex_female.click();
           setTimeout(() => {
             this.$refs.sex_male.click();
-          }, 10);
+          }, 500);
         }
       });
     }
@@ -481,6 +482,11 @@ export default {
       1
     );
     this.loadBg('#canvas3', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
+  },
+  beforeDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   },
   watch: {
     username(val) {
@@ -840,7 +846,7 @@ export default {
 
     // 展示挽留弹窗  通过定时器
     showNoticePop() {
-      setInterval(() => {
+      this.timer = setInterval(() => {
         // 最新一个订单信息
         this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
         this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
@@ -860,7 +866,7 @@ export default {
 
         this.local_time =
           +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
-      }, 500);
+      }, 1000);
     },
     // 关闭当前报告的挽留弹窗
     closeNotice() {
