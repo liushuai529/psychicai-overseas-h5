@@ -403,7 +403,7 @@ export default {
 
 .footer {
   width: 100%;
-  height: 1.8rem;
+  height: 3rem;
 }
 
 .card-box {
@@ -421,7 +421,7 @@ export default {
   width: 5.8rem;
   height: 1.24rem;
   position: fixed;
-  bottom: 0;
+  bottom: 1.2rem;
   z-index: 2;
 }
 

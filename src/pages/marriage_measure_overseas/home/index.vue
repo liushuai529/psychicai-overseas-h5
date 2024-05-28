@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 14:29:55
+ * @LastEditTime: 2024-05-28 16:05:55
  * @Description: 八字合婚
 -->
 <template>
@@ -1036,7 +1036,7 @@ export default {
   background-repeat: no-repeat;
   min-height: 100vh;
   font-size: 0;
-  padding-bottom: 1.6rem;
+  padding-bottom: 2.8rem;
   position: relative;
 }
 
@@ -1125,7 +1125,7 @@ export default {
   width: 6.89rem;
   left: 50%;
   margin-left: -3.46rem;
-  bottom: 0.3rem;
+  bottom: 1.5rem;
   z-index: 2;
   animation: btnMove 1s infinite ease-in-out alternate;
 }

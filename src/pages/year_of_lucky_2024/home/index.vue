@@ -377,6 +377,10 @@ export default {
       }
       return flag;
     },
+
+    is_android() {
+      return utils.isAndroid();
+    },
   },
   created() {
     this.$store.dispatch('common/getProduction');
@@ -997,7 +1001,7 @@ export default {
 .fix-btn {
   width: 5.19rem;
   height: 1.03rem;
-  bottom: 0.2rem;
+  bottom: 1.4rem;
   z-index: 2;
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }
@@ -1175,6 +1179,6 @@ export default {
 }
 
 .last-card {
-  margin-bottom: 1.52rem !important;
+  margin-bottom: 2.7rem !important;
 }
 </style>

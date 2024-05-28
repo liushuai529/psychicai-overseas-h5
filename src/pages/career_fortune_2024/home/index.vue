@@ -1055,7 +1055,7 @@ export default {
   align-items: center;
   background-size: contain;
   background-repeat: no-repeat;
-  padding-bottom: 1.6rem;
+  padding-bottom: 2.8rem;
   padding-top: 6.38rem;
   position: relative;
   .info {
@@ -1195,7 +1195,7 @@ export default {
     position: fixed;
     width: 4.98rem;
     height: 1rem;
-    bottom: 0.2rem;
+    bottom: 1.4rem;
     z-index: 2;
     // animation: scaleBtn 1s infinite ease-in-out alternate;
   }

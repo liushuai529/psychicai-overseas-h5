@@ -445,7 +445,7 @@ export default {
 <style scoped lang="less">
 .footer {
   width: 7.5rem;
-  height: 1.4rem;
+  height: 2.6rem;
 }
 .new-pay-box {
   width: 7.1rem;
@@ -709,6 +709,6 @@ export default {
 
 .fix-box {
   position: fixed !important;
-  bottom: 0;
+  bottom: 1.2rem;
 }
 </style>

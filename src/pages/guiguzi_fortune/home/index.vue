@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 14:12:38
+ * @LastEditTime: 2024-05-28 16:00:23
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -940,7 +940,7 @@ export default {
   background-image: url('https://psychicai-static.psychicai.pro/imgs/24048f0d358d051f4890abe8ad40ec6cbe48.png');
   background-size: contain;
   background-repeat: no-repeat;
-  padding-bottom: 1.6rem;
+  padding-bottom: 2.8rem;
   padding-top: 7.16rem;
   .tags {
     width: 6.86rem;
@@ -1087,7 +1087,7 @@ export default {
     width: 5.86rem;
     left: 50%;
     margin-left: -2.93rem;
-    bottom: 0.3rem;
+    bottom: 1.5rem;
     z-index: 2;
   }
 }

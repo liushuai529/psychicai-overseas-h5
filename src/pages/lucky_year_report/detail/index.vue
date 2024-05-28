@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-08 20:35:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 14:20:54
+ * @LastEditTime: 2024-05-28 15:49:25
  * @Description: 
 -->
 <template>
@@ -57,15 +57,14 @@
     <img class="card" :src="is_cn ? cn_zhong_3 : tw_zhong_3" alt="" />
     <img class="card" :src="is_cn ? cn_zhong_4 : tw_zhong_4" alt="" />
     <img class="card" :src="is_cn ? cn_zhong_5 : tw_zhong_5" alt="" />
-    <div class="footer-box">
-      <img
-        v-if="showFixedBtn"
-        @click="showPayModal"
-        class="btn fix-box"
-        :src="is_cn ? cn_pay_btn : tw_pay_btn"
-        alt=""
-      />
-    </div>
+    <img
+      v-if="showFixedBtn"
+      @click="showPayModal"
+      class="btn fix-box"
+      :src="is_cn ? cn_pay_btn : tw_pay_btn"
+      alt=""
+    />
+    <div class="footer-box"></div>
     <payModal
       :product_key="product_key"
       v-model="pay_modal"
@@ -409,10 +408,10 @@ export default {
   }
   .footer-box {
     width: 7.5rem;
-    height: 1.46rem;
-    background: url('../../../assets/img/mlxz/lucky_year_report/detail/new_detail/img_btn_bj.png')
-      no-repeat;
-    background-size: contain;
+    height: 2.46rem;
+    // background: url('../../../assets/img/mlxz/lucky_year_report/detail/new_detail/img_btn_bj.png')
+    //   no-repeat;
+    // background-size: contain;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -425,6 +424,6 @@ export default {
 }
 .fix-box {
   position: fixed !important;
-  bottom: 0.1rem;
+  bottom: 1.3rem;
 }
 </style>

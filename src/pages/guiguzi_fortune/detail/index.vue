@@ -462,10 +462,10 @@ export default {
 
 .fix-box {
   position: fixed !important;
-  bottom: 0.1rem;
+  bottom: 1.3rem;
 }
 .footer-box {
   width: 100%;
-  height: 1.3rem;
+  height: 2.5rem;
 }
 </style>

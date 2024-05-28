@@ -6,6 +6,9 @@
       'cn-bg': is_cn,
       'tw-bg': !is_cn,
     }"
+    :style="{
+      'padding-bottom': '2.8rem',
+    }"
   >
     <header-notice v-if="has_pay"></header-notice>
     <canvas class="canvas1" id="canvas1"></canvas>
@@ -127,6 +130,9 @@
     <img
       v-show="showFixedBtn"
       class="btn-fixed huxi-btn"
+      :style="{
+        bottom: '1.5rem',
+      }"
       :src="is_cn ? cn_btn : tw_btn"
       @click="check"
     />
@@ -936,7 +942,7 @@ export default {
   background-color: #f8de95;
   background-size: 7.5rem 9.4rem;
   background-repeat: no-repeat;
-  padding-bottom: 1.6rem;
+  // padding-bottom: 1.6rem;
   padding-top: 7.4rem;
   position: relative;
   .header {
@@ -1096,7 +1102,7 @@ export default {
     width: 5.86rem;
     left: 50%;
     margin-left: -2.93rem;
-    bottom: 0.3rem;
+    // bottom: 0.3rem;
     z-index: 2;
   }
 }

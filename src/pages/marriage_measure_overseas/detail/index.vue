@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 14:29:50
+ * @LastEditTime: 2024-05-28 16:08:33
  * @Description: 八字合婚
 -->
 
@@ -90,7 +90,7 @@
     <img class="module" :src="language === 'zh-CN' ? cn_mokuai6 : tw_mokuai6" />
     <img
       class="module"
-      style="margin-bottom: 1.59rem"
+      style="margin-bottom: 2.7rem"
       :src="language === 'zh-CN' ? cn_mokuai7 : tw_mokuai7"
     />
     <!-- <div v-if="showFixedBtn" @click="showPayModal" class="pay-btn fix-box">
@@ -117,7 +117,7 @@
       class="btn-fixed"
       :src="language === 'zh-CN' ? cn_btn : tw_btn"
     />
-    <div class="footer-box"></div>
+    <!-- <div class="footer-box"></div> -->
   </div>
 </template>
 
@@ -484,19 +484,19 @@ export default {
   width: 6.89rem;
   left: 50%;
   margin-left: -3.46rem;
-  bottom: 0.3rem;
+  bottom: 1.5rem;
   z-index: 4;
   animation: btnMove 1s infinite ease-in-out alternate;
 }
 
 .footer-box {
   width: 7.5rem;
-  height: 1.96rem;
-  background: url('../../../assets/img/bzhh_v2/bazihehun_img_btnmengban.png')
-    no-repeat;
-  background-size: contain;
-  position: fixed;
-  bottom: 0;
+  height: 3rem;
+  // background: url('../../../assets/img/bzhh_v2/bazihehun_img_btnmengban.png')
+  //   no-repeat;
+  // background-size: contain;
+  // position: fixed;
+  // bottom: 0;
   z-index: 3;
 }
 

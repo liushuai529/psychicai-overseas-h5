@@ -416,7 +416,7 @@ export default {
 
 .fix-box {
   position: fixed !important;
-  bottom: 0;
+  bottom: 1.2rem;
 }
 
 .card-bg {
@@ -426,6 +426,6 @@ export default {
 }
 .footer {
   width: 7.5rem;
-  height: 1.2rem;
+  height: 2.4rem;
 }
 </style>

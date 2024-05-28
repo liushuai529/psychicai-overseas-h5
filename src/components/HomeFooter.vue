@@ -2,11 +2,16 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-15 18:40:32
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-15 19:26:30
+ * @LastEditTime: 2024-05-28 15:38:52
  * @Description: 
 -->
 <template>
-  <div class="footer-tab">
+  <div
+    class="footer-tab"
+    :style="{
+      bottom: is_android ? '1.2rem' : '0',
+    }"
+  >
     <img :src="bg_obj[product_key]" alt="" />
   </div>
 </template>
@@ -18,7 +23,7 @@ import career from '../assets/img/common/shiye_img_btnmengban.png';
 import wealth from '../assets/img/common/caiyun_img_btnmengban.png';
 import year from '../assets/img/common/nianyun_img_btnmengban.png';
 import ggz from '../assets/img/common/guiguzi_img_btnmengban.png';
-
+import utils from '../libs/utils';
 const bg_obj = {
   h5_marriage: bzhh,
   h5_emotion2024: emotion,
@@ -40,6 +45,11 @@ export default {
       bg_obj,
     };
   },
+  computed: {
+    is_android() {
+      return utils.isAndroid();
+    },
+  },
 
   methods: {},
   mounted() {},
@@ -51,7 +61,8 @@ export default {
   width: 7.5rem;
   height: 1.96rem;
   position: fixed;
-  bottom: 0;
+  display: none;
+  // bottom: 0;
   img {
     width: 100%;
     height: 100%;

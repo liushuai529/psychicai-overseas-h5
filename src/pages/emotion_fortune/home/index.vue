@@ -1059,6 +1059,7 @@ export default {
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
+  padding-bottom: 1.2rem;
   .title {
     position: relative;
     z-index: 10;
@@ -1215,7 +1216,7 @@ export default {
   width: 5.8rem;
   height: 1.24rem;
   position: fixed;
-  bottom: 0;
+  bottom: 1.2rem;
   z-index:2
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }
