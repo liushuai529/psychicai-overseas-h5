@@ -637,7 +637,14 @@ export default {
       window.localStorage.setItem('mlxz_career_2024_info', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
-
+      if (utils.isProd()) {
+        await utils.checkFB();
+        try {
+          fbq('track', 'Lead');
+        } catch (err) {
+          console.error('Lead  error message:', err);
+        }
+      }
       if (show_popup) {
         this.visible = true;
       } else if (is_combine) {

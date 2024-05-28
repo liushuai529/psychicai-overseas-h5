@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 23:57:02
+ * @LastEditTime: 2024-05-28 13:47:38
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -561,10 +561,10 @@ export default {
     },
     // 确认提交
     async check() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'kd1mv1',
-        });
+      // window.Adjust &&
+      //   window.Adjust.trackEvent({
+      //     eventToken: 'kd1mv1',
+      //   });
 
       utils.firebaseLogEvent('10008', '-10002', 'click_64gua_main', 'click', {
         args_name: 'click_64gua_main',
@@ -613,6 +613,14 @@ export default {
       window.localStorage.setItem('_guiguzi_overseas_info', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
+      if (utils.isProd()) {
+        await utils.checkFB();
+        try {
+          fbq('track', 'Lead');
+        } catch (err) {
+          console.error('Lead  error message:', err);
+        }
+      }
       if (show_popup) {
         this.visible = true;
       } else if (is_combine) {
