@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-27 21:15:42
+ * @LastEditTime: 2024-05-28 11:44:52
  * @Description: 支付弹窗
 -->
 <template>
@@ -562,6 +562,7 @@ export default {
           localStorage.removeItem('mlxz_fixed_local_order_time');
           localStorage.removeItem('mlxz_fixed_api_order_time');
         }
+
         if (res.status !== 1000) return;
 
         localStorage.setItem('report_order_id', res.data.id);

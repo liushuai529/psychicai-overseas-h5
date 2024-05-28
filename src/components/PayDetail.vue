@@ -447,6 +447,7 @@ export default {
         ),
       };
       // let user_time = this.$route.query.use_fixed_time;
+
       let discount_pay = this.$route.query.discount_pay || 0;
       let user_time = true;
       if (pay_method === 'google_pay') {
@@ -461,6 +462,7 @@ export default {
           localStorage.removeItem('mlxz_fixed_local_order_time');
           localStorage.removeItem('mlxz_fixed_api_order_time');
         }
+
         localStorage.setItem('report_order_id', res.data.id);
       } else {
         let pay_max_params = Object.assign({}, params, {
