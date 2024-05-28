@@ -123,6 +123,7 @@ export default {
       new_time: 0,
       is_show_shandong: false,
       is_show_daoqi: false,
+      second_: null,
     };
   },
   computed: {},
@@ -138,12 +139,15 @@ export default {
     getTime(val) {
       const { minutes, seconds, milliseconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
-
-      if (this.name === 'api') {
-        localStorage.setItem('mlxz_fixed_api_order_time', time_);
-      } else {
-        localStorage.setItem('mlxz_fixed_local_order_time', time_);
+      if (seconds !== this.second_) {
+        if (this.name === 'api') {
+          localStorage.setItem('mlxz_fixed_api_order_time', time_);
+        } else {
+          localStorage.setItem('mlxz_fixed_local_order_time', time_);
+        }
       }
+      this.second_ = seconds;
+
       this.is_show_shandong = time_ < 60 * 1000;
       this.is_show_daoqi = time_ < 31 * 1000;
       this.new_time = time_;
