@@ -379,10 +379,6 @@ export default {
     },
   },
   created() {
-    // window.Adjust &&
-    //   window.Adjust.trackEvent({
-    //     eventToken: '3c1nyu',
-    //   });
     this.$store.dispatch('common/getProduction');
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
@@ -631,11 +627,6 @@ export default {
      * @return {*}
      */
     async check() {
-      // window.Adjust &&
-      //   window.Adjust.trackEvent({
-      //     eventToken: 'vq6u1b',
-      //   });
-
       utils.firebaseLogEvent(
         '10003',
         '-10002',

@@ -182,11 +182,6 @@ export default {
     },
   },
   created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'ltooty',
-      });
-
     utils.firebaseLogEvent(
       '10004',
       '-10003',
@@ -430,10 +425,6 @@ export default {
      * @return {*}
      */
     showPayModal() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: '53e6wh',
-        });
       utils.firebaseLogEvent(
         '10004',
         '-10004',

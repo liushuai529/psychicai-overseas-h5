@@ -365,10 +365,7 @@ export default {
           pay_type: click_.title,
         }
       );
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: '1le9tm',
-        });
+
       const { pay_method, trade_pay_type, trade_target_org } = click_;
       if (click_.pay_method === 'google_pay') {
         let params = {

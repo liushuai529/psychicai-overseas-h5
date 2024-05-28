@@ -2308,25 +2308,13 @@ export default {
      */
     async handleReport(val, index) {
       if (index === 1) {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'd1cle9',
-          });
-        console.log('Adjust', 'd1cle9');
+        console.log('d1cle9');
       }
       if (index === 2) {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: '5ts44a',
-          });
-        console.log('Adjust', '5ts44a');
+        console.log('5ts44a');
       }
       if (index === 3) {
-        window.Adjust &&
-          window.Adjust.trackEvent({
-            eventToken: 'vzsv9y',
-          });
-        console.log('Adjust', 'vzsv9y');
+        console.log('vzsv9y');
       }
       if (index === 5) {
         this.logHome();
@@ -2438,10 +2426,6 @@ export default {
           channel: utils.getFBChannel(),
         }
       );
-      // window.Adjust &&
-      //   window.Adjust.trackEvent({
-      //     eventToken: 'exr1zn',
-      //   });
 
       await utils.asleep(500);
 
@@ -2466,7 +2450,6 @@ export default {
         });
       }
 
-      // window.Adjust && window.Adjust.trackEvent({ eventToken: ad_e });
       await utils.asleep(500);
       location.href = `${url}.html`;
     },

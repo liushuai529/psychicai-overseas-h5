@@ -182,10 +182,6 @@ export default {
   },
   computed: {},
   async created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: '7xbio7',
-      });
     utils.firebaseLogEvent(
       '10008',
       '-10003',
@@ -318,10 +314,6 @@ export default {
      * @return {*}
      */
     showPayModal() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'qp9ymz',
-        });
       utils.firebaseLogEvent('10008', '-10004', 'click_64gua_mid', 'click', {
         args_name: 'click_64gua_mid',
         channel: utils.getFBChannel(),

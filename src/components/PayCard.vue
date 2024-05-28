@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 14:09:51
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-08 18:55:57
+ * @LastEditTime: 2024-05-28 14:11:04
  * @Description: 融合支付
 -->
 <template>
@@ -514,11 +514,6 @@ export default {
           pay_type: click_.title,
         }
       );
-
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: '1le9tm',
-        });
 
       const { pay_method, trade_pay_type, trade_target_org } = click_;
       if (click_.pay_method === 'google_pay') {

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-19 10:41:34
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-15 10:03:16
+ * @LastEditTime: 2024-05-28 14:10:58
  * @Description: 更多精彩
 -->
 <template>
@@ -160,15 +160,9 @@ export default {
     async handleCopyCode(val) {
       utils.copyText('mlxz-' + this.transfer_code);
       Toast(tips_arr4[lang]);
-      // window.Adjust.trackEvent({
-      //   eventToken: 'lcrtcc',
-      // });
 
       // utils.logCopyEvent(val);
       if (!val) {
-        window.Adjust.trackEvent({
-          eventToken: this.a_token,
-        });
         utils.firebaseLogEvent(this.e_id, this.c_id, this.e_name, 'click', {
           args_name: this.e_name,
           channel: utils.getFBChannel(),
@@ -178,9 +172,7 @@ export default {
         return;
       }
       this.$emit('showModal');
-      // window.Adjust.trackEvent({
-      //   eventToken: 'id6k2k',
-      // });
+
       // utils.logCopyOther();
     },
   },

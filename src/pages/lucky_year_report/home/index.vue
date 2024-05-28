@@ -388,10 +388,6 @@ export default {
     },
   },
   created() {
-    // window.Adjust &&
-    //   window.Adjust.trackEvent({
-    //     eventToken: 'e6huul',
-    //   });
     this.$store.dispatch('common/getProduction');
 
     utils.firebaseLogEvent(
@@ -557,11 +553,6 @@ export default {
       location.href = url;
     },
     async check() {
-      // window.Adjust &&
-      //   window.Adjust.trackEvent({
-      //     eventToken: 'k9jxcj',
-      //   });
-
       utils.firebaseLogEvent(
         '10005',
         '-10002',

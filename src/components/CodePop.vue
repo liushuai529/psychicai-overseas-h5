@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-11 15:05:47
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-04-25 13:57:53
+ * @LastEditTime: 2024-05-28 14:10:40
  * @Description: 
 -->
 <template>
@@ -124,11 +124,6 @@ export default {
      * @return {*}
      */
     async downloadApp() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: this.m_id === '20004' ? 'u0jp7q' : 'd5162o',
-        });
-
       utils.firebaseLogEvent(
         this.m_id,
         this.m_id === '20004' ? '-10003' : '-10004',

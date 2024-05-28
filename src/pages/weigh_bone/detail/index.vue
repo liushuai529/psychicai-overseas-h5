@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-23 15:27:28
+ * @LastEditTime: 2024-05-28 14:30:24
  * @Description: 袁天罡称骨 支付页
 -->
 <template>
@@ -64,10 +64,6 @@ export default {
     };
   },
   created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'u4fi8s',
-      });
     utils.firebaseLogEvent(
       '10009',
       '-10003',
@@ -86,12 +82,7 @@ export default {
      * @description: 埋点上报
      * @return {*}
      */
-    logEventFun() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'p4jzgk',
-        });
-    },
+    logEventFun() {},
   },
 };
 </script>

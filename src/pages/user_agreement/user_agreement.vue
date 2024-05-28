@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-01-04 10:06:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-04-19 16:33:24
+ * @LastEditTime: 2024-05-28 14:30:19
  * @Description: 用户协议
 -->
 <template>
@@ -33,12 +33,6 @@ export default {
   },
 
   created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'mw9slj',
-      });
-    console.log('Adjust', 'mw9slj');
-
     this.language = utils.getLanguage();
     document.title = titleEnum[this.language];
   },
