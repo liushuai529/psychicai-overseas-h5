@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-25 00:51:19
+ * @LastEditTime: 2024-05-28 10:01:08
  * @Description: 支付弹窗
 -->
 <template>
@@ -533,7 +533,6 @@ export default {
         ),
       };
       let discount_pay = this.$route.query.discount_pay || 0;
-      let clear_local = +this.$route.query.use_fixed_time;
       // let user_time = this.$route.query.use_fixed_time;
       let user_time = true;
       if (pay_method === 'google_pay') {
@@ -542,16 +541,12 @@ export default {
         localStorage.removeItem('mlxz_set_event_times');
 
         if (user_time) {
-          // localStorage.removeItem('mlxz_fixed_order_info');
-          // localStorage.removeItem('mlxz_fixed_order_key');
-          // localStorage.removeItem('mlxz_fixed_local_order_time');
-          localStorage.removeItem('mlxz_fixed_api_order_time');
-        }
-        if (clear_local) {
           localStorage.removeItem('mlxz_fixed_order_info');
           localStorage.removeItem('mlxz_fixed_order_key');
           localStorage.removeItem('mlxz_fixed_local_order_time');
+          localStorage.removeItem('mlxz_fixed_api_order_time');
         }
+
         if (res.status !== 1000) return;
 
         localStorage.setItem('report_order_id', res.data.id);

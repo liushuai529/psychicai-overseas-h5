@@ -447,7 +447,6 @@ export default {
         ),
       };
       // let user_time = this.$route.query.use_fixed_time;
-      let clear_local = +this.$route.query.use_fixed_time;
 
       let discount_pay = this.$route.query.discount_pay || 0;
       let user_time = true;
@@ -458,16 +457,12 @@ export default {
         Indicator.close();
         if (res.status !== 1000) return;
         if (user_time) {
-          // localStorage.removeItem('mlxz_fixed_order_info');
-          // localStorage.removeItem('mlxz_fixed_order_key');
-          // localStorage.removeItem('mlxz_fixed_local_order_time');
-          localStorage.removeItem('mlxz_fixed_api_order_time');
-        }
-        if (clear_local) {
           localStorage.removeItem('mlxz_fixed_order_info');
           localStorage.removeItem('mlxz_fixed_order_key');
           localStorage.removeItem('mlxz_fixed_local_order_time');
+          localStorage.removeItem('mlxz_fixed_api_order_time');
         }
+
         localStorage.setItem('report_order_id', res.data.id);
       } else {
         let pay_max_params = Object.assign({}, params, {
