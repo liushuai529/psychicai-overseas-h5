@@ -689,7 +689,14 @@ export default {
       window.localStorage.setItem('year_of_lucky_info', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
-
+      if (utils.isProd()) {
+        await utils.checkFB();
+        try {
+          fbq('track', 'Lead');
+        } catch (err) {
+          console.error('Lead  error message:', err);
+        }
+      }
       let { has_pay, order_id, product_key } = this.$route.query;
       if (has_pay) {
         if (has_pay === 'SUCCESS') {

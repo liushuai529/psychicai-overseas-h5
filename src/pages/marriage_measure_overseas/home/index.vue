@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 23:58:16
+ * @LastEditTime: 2024-05-28 13:48:30
  * @Description: 八字合婚
 -->
 <template>
@@ -714,7 +714,14 @@ export default {
         '&female_str=' +
         female_str;
       this.query_user_string = querystring;
-
+      if (utils.isProd()) {
+        await utils.checkFB();
+        try {
+          fbq('track', 'Lead');
+        } catch (err) {
+          console.error('Lead  error message:', err);
+        }
+      }
       if (show_popup) {
         this.visible = true;
       } else if (is_combine) {

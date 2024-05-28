@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 23:58:35
+ * @LastEditTime: 2024-05-28 13:49:12
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -504,10 +504,10 @@ export default {
     },
     // 支付选择
     async check() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'wtjjau',
-        });
+      // window.Adjust &&
+      //   window.Adjust.trackEvent({
+      //     eventToken: 'wtjjau',
+      //   });
 
       utils.firebaseLogEvent('10009', '-10002', 'click_chenggu_main', 'click', {
         args_name: 'click_chenggu_main',
@@ -556,7 +556,14 @@ export default {
       window.localStorage.setItem('weigh_bone_info', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
-
+      if (utils.isProd()) {
+        await utils.checkFB();
+        try {
+          fbq('track', 'Lead');
+        } catch (err) {
+          console.error('Lead  error message:', err);
+        }
+      }
       if (show_popup) {
         this.visible = true;
       } else if (is_combine) {
