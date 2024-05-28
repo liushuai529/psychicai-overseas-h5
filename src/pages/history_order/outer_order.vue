@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-21 11:15:29
+ * @LastEditTime: 2024-05-28 14:12:48
  * @Description: 历史订单
 -->
 <template>
@@ -410,10 +410,6 @@ export default {
     },
 
     async openApp() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'u0jp7q',
-        });
       utils.firebaseLogEvent(
         '10002',
         '-10002',

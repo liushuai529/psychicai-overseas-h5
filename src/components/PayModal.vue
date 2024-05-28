@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 11:44:52
+ * @LastEditTime: 2024-05-28 14:31:57
  * @Description: 支付弹窗
 -->
 <template>
@@ -359,10 +359,6 @@ export default {
               channel: utils.getFBChannel(),
             }
           );
-          // window.Adjust &&
-          //   window.Adjust.trackEvent({
-          //     eventToken: this.a_view_token,
-          //   });
         } else {
           if (this.parser) {
             this.parser.destroy();
@@ -503,10 +499,6 @@ export default {
      * @return {*}
      */
     async payMoney() {
-      // window.Adjust &&
-      //   window.Adjust.trackEvent({
-      //     eventToken: this.a_click_token,
-      //   });
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
         await utils.checkFB();

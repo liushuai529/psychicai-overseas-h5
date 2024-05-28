@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-23 15:39:44
+ * @LastEditTime: 2024-05-28 14:29:50
  * @Description: 八字合婚
 -->
 
@@ -230,10 +230,6 @@ export default {
   },
 
   created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'dfhs0r',
-      });
     utils.firebaseLogEvent(
       '10007',
       '-10003',

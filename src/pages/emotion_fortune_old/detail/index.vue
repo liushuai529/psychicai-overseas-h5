@@ -172,10 +172,6 @@ export default {
     },
   },
   async created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'og1swe',
-      });
     utils.firebaseLogEvent(
       '10006',
       '-10003',
@@ -320,10 +316,7 @@ export default {
           channel: utils.getFBChannel(),
         }
       );
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: 'ampab1',
-        });
+
       this.pay_modal = true;
     },
   },

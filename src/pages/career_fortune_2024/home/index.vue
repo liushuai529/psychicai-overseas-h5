@@ -397,10 +397,6 @@ export default {
 
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
-    // window.Adjust &&
-    //   window.Adjust.trackEvent({
-    //     eventToken: '5ewewi',
-    //   });
 
     utils.firebaseLogEvent(
       '10004',
@@ -582,11 +578,6 @@ export default {
      * @return {*}
      */
     async check() {
-      // window.Adjust &&
-      //   window.Adjust.trackEvent({
-      //     eventToken: 'femk1d',
-      //   });
-
       utils.firebaseLogEvent(
         '10004',
         '-10002',

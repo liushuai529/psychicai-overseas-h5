@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 13:47:38
+ * @LastEditTime: 2024-05-28 14:12:38
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -385,10 +385,6 @@ export default {
     },
   },
   created() {
-    // window.Adjust &&
-    //   window.Adjust.trackEvent({
-    //     eventToken: '2a8f3m',
-    //   });
     this.$store.dispatch('common/getProduction');
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
@@ -561,11 +557,6 @@ export default {
     },
     // 确认提交
     async check() {
-      // window.Adjust &&
-      //   window.Adjust.trackEvent({
-      //     eventToken: 'kd1mv1',
-      //   });
-
       utils.firebaseLogEvent('10008', '-10002', 'click_64gua_main', 'click', {
         args_name: 'click_64gua_main',
         channel: utils.getFBChannel(),

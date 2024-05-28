@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 13:49:12
+ * @LastEditTime: 2024-05-28 14:30:45
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -328,10 +328,6 @@ export default {
     },
   },
   created() {
-    // window.Adjust &&
-    //   window.Adjust.trackEvent({
-    //     eventToken: 'yg9eg4',
-    //   });
     utils.firebaseLogEvent(
       '10009',
       '-10001',
@@ -504,11 +500,6 @@ export default {
     },
     // 支付选择
     async check() {
-      // window.Adjust &&
-      //   window.Adjust.trackEvent({
-      //     eventToken: 'wtjjau',
-      //   });
-
       utils.firebaseLogEvent('10009', '-10002', 'click_chenggu_main', 'click', {
         args_name: 'click_chenggu_main',
         channel: utils.getFBChannel(),

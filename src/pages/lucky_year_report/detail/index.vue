@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-08 20:35:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-23 15:19:04
+ * @LastEditTime: 2024-05-28 14:20:54
  * @Description: 
 -->
 <template>
@@ -176,10 +176,6 @@ export default {
     },
   },
   async created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'b1ze8a',
-      });
     utils.firebaseLogEvent(
       '10005',
       '-10003',
@@ -321,10 +317,6 @@ export default {
      * @return {*}
      */
     showPayModal() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: '6abhf0',
-        });
       utils.firebaseLogEvent(
         '10005',
         '-10004',

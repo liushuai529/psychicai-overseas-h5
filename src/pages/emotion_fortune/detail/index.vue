@@ -205,10 +205,6 @@ export default {
     },
   },
   async created() {
-    // window.Adjust &&
-    //   window.Adjust.trackEvent({
-    //     eventToken: 'og1swe',
-    //   });
     utils.firebaseLogEvent(
       '10006',
       '-10003',

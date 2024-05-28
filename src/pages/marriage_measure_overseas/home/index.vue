@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 13:48:30
+ * @LastEditTime: 2024-05-28 14:29:55
  * @Description: 八字合婚
 -->
 <template>
@@ -316,10 +316,6 @@ export default {
   },
 
   created() {
-    // window.Adjust &&
-    //   window.Adjust.trackEvent({
-    //     eventToken: 'jsjb8g',
-    //   });
     this.$store.dispatch('common/getProduction');
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
@@ -604,11 +600,6 @@ export default {
       location.href = url;
     },
     async check() {
-      // window.Adjust &&
-      //   window.Adjust.trackEvent({
-      //     eventToken: 'z82ece',
-      //   });
-
       utils.firebaseLogEvent(
         '10007',
         '-10002',

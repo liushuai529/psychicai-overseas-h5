@@ -281,10 +281,6 @@ export default {
     },
   },
   created() {
-    window.Adjust &&
-      window.Adjust.trackEvent({
-        eventToken: 'x1em8r',
-      });
     this.$store.dispatch('common/getProduction');
     utils.firebaseLogEvent(
       '10006',
@@ -527,11 +523,6 @@ export default {
      * @return {*}
      */
     async check() {
-      window.Adjust &&
-        window.Adjust.trackEvent({
-          eventToken: '2rv42m',
-        });
-
       utils.firebaseLogEvent(
         '10006',
         '-10002',
