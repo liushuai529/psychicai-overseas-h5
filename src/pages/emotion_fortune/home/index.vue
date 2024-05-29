@@ -406,11 +406,10 @@ export default {
     this.has_pay = has_pay ? has_pay : '';
     this.getLastOrder();
     // 埋点事件上传
-    let channel = utils.getFBChannel();
-    channel === "enjoy02" && reportBuryingEventAPI({
-      event: 'page_view_2024lovely_main',
-      channel,
-    }).then().catch(err=>{console.warn(`埋点事件上传失败${err}`)})
+    reportBuryingEventAPI({
+        event: 'page_view_2024lovely_main',
+        channel: utils.getFBChannel(),
+      }).then().catch(err=>{console.warn(`埋点事件上传失败${err}`)})
     
   },
   beforeDestroy() {
