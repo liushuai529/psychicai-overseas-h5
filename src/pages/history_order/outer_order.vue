@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 16:48:53
+ * @LastEditTime: 2024-05-29 18:37:13
  * @Description: 历史订单
 -->
 <template>
@@ -77,9 +77,13 @@
                 !item.can_write &&
                 item.status == 'PAYED',
               'bg-2-nopay':
-                item.status !== 'PAYED' && item.product_key === 'h5_marriage',
+                item.status !== 'PAYED' &&
+                (item.product_key === 'h5_marriage' ||
+                  ['h5_combo3', 'h5_combo2'].includes(item.product_key)),
               'bg-1-nopay':
-                item.status !== 'PAYED' && item.product_key !== 'h5_marriage',
+                item.status !== 'PAYED' &&
+                item.product_key !== 'h5_marriage' &&
+                !['h5_combo3', 'h5_combo2'].includes(item.product_key),
             }"
             v-for="(item, k) in list"
             :key="'order' + k"
@@ -110,9 +114,17 @@
                 'one-info':
                   item.product_key !== 'h5_marriage' && item.status === 'PAYED',
                 'no-pay-1':
-                  item.status !== 'PAYED' && item.product_key !== 'h5_marriage',
+                  item.status !== 'PAYED' &&
+                  item.product_key !== 'h5_marriage' &&
+                  !['h5_combo3', 'h5_combo2'].includes(item.product_key),
                 'no-pay-2':
-                  item.status !== 'PAYED' && item.product_key === 'h5_marriage',
+                  item.status !== 'PAYED' &&
+                  (item.product_key === 'h5_marriage' ||
+                    ['h5_combo3', 'h5_combo2'].includes(item.product_key)),
+                'ml-24':
+                  item.status !== 'PAYED' &&
+                  (item.product_key === 'h5_marriage' ||
+                    ['h5_combo3', 'h5_combo2'].includes(item.product_key)),
               }"
             >
               <div v-if="item.ext.name || item.ext.male_name" class="left">
@@ -186,6 +198,28 @@
                     >
                     <img class="sex" :src="female_icon" alt="" />
                   </div>
+                </div>
+              </div>
+              <div
+                v-else-if="
+                  ['h5_combo3', 'h5_combo2'].includes(item.product_key)
+                "
+                class="combine-whole"
+              >
+                <div class="combine-box">
+                  <div
+                    v-for="(i, index) in item.combine_product_names"
+                    :key="index"
+                    class="one"
+                  >
+                    {{ i }}
+                  </div>
+                </div>
+                <div
+                  @click="handleJump(item)"
+                  class="right-btn status-other no-pay-btn2"
+                >
+                  <div class="status-text status-btn">重新测算</div>
                 </div>
               </div>
               <div v-else class="no-user">
@@ -309,7 +343,7 @@ const event_enums = {
     c_name: 'click_history_2024report_repay',
   },
   h5_emotion2024: {
-    c_id: '-1004',
+    c_id: '-10004',
     c_name: 'click_history_2024lovely_repay',
   },
 };
@@ -526,6 +560,7 @@ export default {
         }
       } else {
         Indicator.open(this.$t('tips-17'));
+
         const {
           status,
           payment,
@@ -535,7 +570,54 @@ export default {
           ext,
           trade_pay_type,
           trade_target_org,
+          combine_product_ids,
         } = item;
+        console.log(item);
+        if (combine_product_ids.length) {
+          let length_ = combine_product_ids.length;
+          let params = {
+            pay_method,
+            product_key,
+            product_id,
+            platform: 'WEB',
+            extra_ce_suan: {},
+            trade_pay_type,
+            trade_target_org,
+            combine_product_ids: combine_product_ids,
+            callback_url:
+              location.origin +
+              `/${utils.getFBChannel()}/` +
+              'index.html' +
+              '?pay_index=' +
+              length_ +
+              '&report_price=' +
+              payment +
+              '&repay=1',
+          };
+          utils.firebaseLogEvent(
+            '10002',
+            length_ === 2 ? '-10010' : '-10011',
+            length_ === 2
+              ? '-click_history_report2_repay'
+              : '-click_history_report2_repay',
+            'event_status',
+            {
+              args_name:
+                length_ === 2
+                  ? '-click_history_report2_repay'
+                  : '-click_history_report2_repay',
+              channel: utils.getFBChannel(),
+            }
+          );
+          const res = await payOrderAPI(params);
+
+          Indicator.close();
+
+          if (res.status !== 1000) return;
+
+          location.href = res.data.pay_url;
+          return;
+        }
         utils.firebaseLogEvent(
           '10002',
           event_enums[product_key].c_id,
@@ -1264,5 +1346,33 @@ export default {
 }
 .w-140 {
   width: 1.4rem;
+}
+
+.combine-whole {
+  width: 4.4rem;
+  height: 1.28rem;
+}
+.combine-box {
+  width: 4.4rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #dcece5;
+  border-radius: 0.12rem;
+  padding: 0 0.24rem;
+
+  font-size: 0.28rem;
+  font-weight: 500;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.ab-3 {
+  position: absolute;
+}
+
+.ml-24 {
+  margin-left: 0.24rem;
 }
 </style>

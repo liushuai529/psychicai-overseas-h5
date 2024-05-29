@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-19 10:41:34
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 14:10:58
+ * @LastEditTime: 2024-05-29 17:54:27
  * @Description: 更多精彩
 -->
 <template>
@@ -233,14 +233,16 @@ export default {
 }
 
 .emotion-box {
-  width: 7.06rem;
-  height: 7.11rem;
+  width: 7.11rem;
+  height: 6.94rem;
   padding-top: 1.53rem;
-  background: url('../assets/img/mlxz/moreResult/emotion_content.png') no-repeat;
+  background: url('../assets/img/emotion_v2/new/cn/result/img_xiazai_jian.png')
+    no-repeat;
   background-size: 100% 100%;
 }
 .emotion-code {
-  background: url('../assets/img//mlxz/moreResult/emotion_bg.png') no-repeat;
+  background: url('../assets/img/emotion_v2/new/cn/result/img_shibiema_card.png')
+    no-repeat;
   background-size: 100% 100%;
 }
 

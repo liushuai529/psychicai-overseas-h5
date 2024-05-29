@@ -26,6 +26,7 @@
         class="name"
         :style="{
           borderColor: border_color,
+          color: text_color,
         }"
       >
         <span>姓名：</span>
@@ -34,6 +35,7 @@
       <tr
         :style="{
           borderColor: border_color,
+          color: text_color,
         }"
         class="birth name"
       >
@@ -107,6 +109,7 @@
       <tr
         :style="{
           borderColor: border_color,
+          color: text_color,
         }"
         class="v-nayin bottom-1"
       >
@@ -131,6 +134,7 @@
           <div
             :style="{
               borderColor: border_color,
+              color: text_color,
             }"
             class="bottom-1 minge-row"
           >
@@ -140,6 +144,7 @@
           <div
             :style="{
               borderColor: border_color,
+              color: text_color,
             }"
             class="bottom-1 minge-row"
           >
@@ -153,6 +158,7 @@
           <div
             :style="{
               borderColor: border_color,
+              color: text_color,
             }"
             v-else
             class="minge-row"
@@ -176,6 +182,7 @@
           <div
             :style="{
               borderColor: border_color,
+              color: text_color,
             }"
             class="bottom-1 minge-row"
           >
@@ -185,6 +192,7 @@
           <div
             :style="{
               borderColor: border_color,
+              color: text_color,
             }"
             class="bottom-1 minge-row"
           >
@@ -192,11 +200,23 @@
             <div>{{ getStarNum(hun_yin_num) }}</div>
           </div>
 
-          <div v-if="!is_show_taohua" class="minge-row">
+          <div
+            v-if="!is_show_taohua"
+            class="minge-row"
+            :style="{
+              color: text_color,
+            }"
+          >
             <div class="label-100">{{ tips5 }}</div>
             <div>{{ getStarNum(shi_ye_num) }}</div>
           </div>
-          <div v-else class="minge-row">
+          <div
+            v-else
+            class="minge-row"
+            :style="{
+              color: text_color,
+            }"
+          >
             <div class="label-100">{{ tips7 }}</div>
             <div>{{ fuqigong ? fuqigong : '？' }}</div>
           </div>
