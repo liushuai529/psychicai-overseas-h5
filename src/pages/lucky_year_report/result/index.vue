@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 11:34:10
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 14:25:58
+ * @LastEditTime: 2024-05-29 20:43:15
  * @Description: 
 -->
 <template>
@@ -35,6 +35,7 @@
         text_color="#C18204"
         minge_color="#C18204"
         :show_daji="false"
+        :change_color="false"
       ></BaziTable>
     </div>
     <!-- <user-info :userInfo="userInfo" :dayun="dayun" :orderId="adverTise_order" /> -->

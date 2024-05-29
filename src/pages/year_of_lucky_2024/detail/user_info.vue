@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-04-22 18:10:25
+ * @LastEditTime: 2024-05-29 20:38:59
  * @Description: 
 -->
 <template>
@@ -32,6 +32,7 @@
       :riyuanqiangruo="riyuanqiangruo"
       :shi_ye_num="shi_ye_num"
       :wuxingqiang="wuxingqiang"
+      :change_color="false"
     ></BaziTable>
 
     <!-- 折线图 -->

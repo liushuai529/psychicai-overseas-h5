@@ -26,7 +26,7 @@
         class="name"
         :style="{
           borderColor: border_color,
-          color: text_color,
+          color: change_color ? text_color : '',
         }"
       >
         <span>姓名：</span>
@@ -35,7 +35,7 @@
       <tr
         :style="{
           borderColor: border_color,
-          color: text_color,
+          color: change_color ? text_color : '',
         }"
         class="birth name"
       >
@@ -44,7 +44,11 @@
         }}
       </tr>
       <tr
-        :style="{ color: text_color, borderColor: border_color }"
+        :style="{
+          color: change_color ? text_color : '',
+
+          borderColor: border_color,
+        }"
         class="name c-zhu"
       >
         <td
@@ -109,7 +113,7 @@
       <tr
         :style="{
           borderColor: border_color,
-          color: text_color,
+          color: change_color ? text_color : '',
         }"
         class="v-nayin bottom-1"
       >
@@ -125,7 +129,11 @@
       </tr>
       <tr class="v-minge">
         <td
-          :style="{ color: text_color, borderColor: border_color }"
+          :style="{
+            color: change_color ? text_color : '',
+
+            borderColor: border_color,
+          }"
           class="label-minge"
         >
           {{ tips1 }}
@@ -134,7 +142,7 @@
           <div
             :style="{
               borderColor: border_color,
-              color: text_color,
+              color: change_color ? text_color : '',
             }"
             class="bottom-1 minge-row"
           >
@@ -144,7 +152,7 @@
           <div
             :style="{
               borderColor: border_color,
-              color: text_color,
+              color: change_color ? text_color : '',
             }"
             class="bottom-1 minge-row"
           >
@@ -158,7 +166,7 @@
           <div
             :style="{
               borderColor: border_color,
-              color: text_color,
+              color: change_color ? text_color : '',
             }"
             v-else
             class="minge-row"
@@ -182,7 +190,7 @@
           <div
             :style="{
               borderColor: border_color,
-              color: text_color,
+              color: change_color ? text_color : '',
             }"
             class="bottom-1 minge-row"
           >
@@ -192,7 +200,7 @@
           <div
             :style="{
               borderColor: border_color,
-              color: text_color,
+              color: change_color ? text_color : '',
             }"
             class="bottom-1 minge-row"
           >
@@ -204,7 +212,7 @@
             v-if="!is_show_taohua"
             class="minge-row"
             :style="{
-              color: text_color,
+              color: change_color ? text_color : '',
             }"
           >
             <div class="label-100">{{ tips5 }}</div>
@@ -214,7 +222,7 @@
             v-else
             class="minge-row"
             :style="{
-              color: text_color,
+              color: change_color ? text_color : '',
             }"
           >
             <div class="label-100">{{ tips7 }}</div>
@@ -372,6 +380,10 @@ export default {
     border_color: {
       type: String,
       default: '#cb6735',
+    },
+    change_color: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

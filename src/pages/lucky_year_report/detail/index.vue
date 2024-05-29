@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-08 20:35:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 15:32:15
+ * @LastEditTime: 2024-05-29 20:38:10
  * @Description: 
 -->
 <template>
@@ -23,6 +23,7 @@
         text_color="#C18204"
         minge_color="#C18204"
         :show_daji="false"
+        :change_color="false"
       ></BaziTable>
       <div class="name-gua">
         {{ username | filter_name }}的{{ $t('tips-gua') }}

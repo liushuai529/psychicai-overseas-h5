@@ -28,6 +28,7 @@
           minge_color="#E34A42"
           :show_daji="true"
           :is_career="true"
+          :change_color="false"
         ></BaziTable>
 
         <!-- 折线图 -->

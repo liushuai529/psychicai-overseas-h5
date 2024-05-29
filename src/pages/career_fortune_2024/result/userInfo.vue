@@ -28,6 +28,7 @@
           text_color="#E34A42"
           minge_color="#E34A42"
           :show_daji="false"
+          :change_color="false"
           :is_career="true"
         ></BaziTable>
       </div>

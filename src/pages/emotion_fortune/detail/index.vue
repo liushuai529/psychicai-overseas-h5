@@ -34,6 +34,7 @@
         table_border="0.02rem solid #EC436B"
         border_color="#EC436B"
         :is_show_taohua="1"
+        :change_color="true"
       ></BaziTable>
     </div>
     <div :class="['method-box', is_cn ? 'cn-method' : 'tw-method']">

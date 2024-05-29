@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 17:31:37
+ * @LastEditTime: 2024-05-29 20:42:31
  * @Description: 
 -->
 <template>
@@ -35,6 +35,7 @@
         table_border="0.02rem solid #EC436B"
         border_color="#EC436B"
         :is_show_taohua="1"
+        :change_color="true"
       />
     </div>
 
