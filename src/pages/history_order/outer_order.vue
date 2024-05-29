@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 15:48:22
+ * @LastEditTime: 2024-05-29 16:48:53
  * @Description: 历史订单
 -->
 <template>
@@ -556,7 +556,11 @@ export default {
           trade_target_org,
         };
 
-        params.callback_url = `${location.origin}/${url}.html#/result?path=${path_enums[product_key]}&report_price=${payment}&repay=1`;
+        params.callback_url = `${
+          location.origin
+        }/${utils.getFBChannel()}/${url}.html#/result?path=${
+          path_enums[product_key]
+        }&report_price=${payment}&repay=1`;
         const res = await payOrderAPI(params);
 
         Indicator.close();
