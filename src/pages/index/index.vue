@@ -315,16 +315,15 @@
         "
         :class="[item.is_big ? 'big-item' : 'normal-item']"
       >
+        <!-- // item.is_big
+            //   ? is_cn
+            //     ? item.icon_item.big.cn
+            //     : item.icon_item.big.tw
+            //   : is_cn
+            //   ? item.icon_item.small.cn
+            //   : item.icon_item.small.tw -->
         <img
-          :src="
-            item.is_big
-              ? is_cn
-                ? item.icon_item.big.cn
-                : item.icon_item.big.tw
-              : is_cn
-              ? item.icon_item.small.cn
-              : item.icon_item.small.tw
-          "
+          :src="getBannerIcon(item)"
           :class="[item.is_big ? 'big-icon' : 'normal-icon']"
           alt=""
         />
@@ -1996,7 +1995,7 @@ export default {
         +utils.getQueryString('report_price') || this.payed_combine_price;
       let report_status =
         utils.getQueryString('status') || this.order_id ? 'SUCCESS' : '';
-      let repay = +utils.getQueryStr('repay');
+      let repay = +utils.getQueryString('repay');
 
       // let pay_index = +utils.getQueryString('pay_index') ;
       let pay_index;
@@ -2897,6 +2896,24 @@ export default {
       });
       // 将banner_list的第一个放到第三个
       this.banner_list.splice(2, 0, this.banner_list.shift());
+    },
+
+    getBannerIcon(item) {
+      const { product_key, is_big, icon_item } = item;
+      const is_01 = ['enjoy01', 'panda01'].includes(utils.getFBChannel());
+      if (product_key === 'h5_emotion2024') {
+        if (is_01) {
+          return is_big ? icon_item.new_01.big : icon_item.new_01.small;
+        } else {
+          return is_big ? icon_item.new_other.big : icon_item.new_other.small;
+        }
+      } else {
+        if (is_big) {
+          return this.is_cn ? icon_item.big.cn : icon_item.big.tw;
+        } else {
+          return this.is_cn ? icon_item.small.cn : icon_item.small.tw;
+        }
+      }
     },
   },
 };
