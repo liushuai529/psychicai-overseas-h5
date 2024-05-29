@@ -267,6 +267,8 @@ import shiyeyun from '../assets/img/mlxz/history_order/dingdan_img_shiye.png';
 import caiyun from '../assets/img/mlxz/history_order/dingdan_img_caiyun.png';
 import hehun from '../assets/img/mlxz/history_order/dingdan_img_hehun.png';
 
+import combine2 from '../assets/img/emotion_v2/new/dingdan_img_er.png';
+import combine3 from '../assets/img/emotion_v2/new/dingdan_img_san.png';
 export const getHistoryOrderImg = {
   h5_weigh_bone: yuantiangang,
   h5_bai_gua: guiguzi,
@@ -275,6 +277,8 @@ export const getHistoryOrderImg = {
   h5_wealth2024: caiyun,
   h5_marriage: hehun,
   h5_annual2024: nianyun,
+  h5_combo3: combine3,
+  h5_combo2: combine2,
 };
 
 export const report_id_arr = {
@@ -319,6 +323,12 @@ import tw_big_year from '../assets/img/common/banner/big/tw/h5_chang_fan_nianyun
 import tw_big_gggz from '../assets/img/common/banner/big/tw/h5_chang_fan_guiguzi.png';
 import tw_big_weighbone from '../assets/img/common/banner/big/tw/h5_chang_fan_yuantiangang.png';
 
+import new_ganqing_small from '../assets/img/emotion_v2/new/banner_ganqing_fang.png';
+import new_ganqing_big from '../assets/img/emotion_v2/new/banner_ganqing_chang.png';
+
+import new_ganqing_small_xinren from '../assets/img/emotion_v2/new/banner_ganqing_fang_tag.png';
+import new_ganqing_big_xinren from '../assets/img/emotion_v2/new/banner_ganqing_chang_tag.png';
+
 export const banner_enums = {
   h5_marriage: {
     big: {
@@ -338,6 +348,14 @@ export const banner_enums = {
     small: {
       cn: cn_small_love,
       tw: tw_small_love,
+    },
+    new_other: {
+      small: new_ganqing_small,
+      big: new_ganqing_big,
+    },
+    new_01: {
+      small: new_ganqing_small_xinren,
+      big: new_ganqing_big_xinren,
     },
   },
   h5_annual2024: {

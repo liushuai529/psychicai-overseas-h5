@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 18:37:13
+ * @LastEditTime: 2024-05-29 19:29:32
  * @Description: 历史订单
 -->
 <template>
@@ -92,7 +92,7 @@
               <div class="left">
                 <img :src="icon_arr[item.product_key]" alt="" />
                 <div class="title">
-                  {{ item.product_name }}
+                  {{ getTitle(item) }}
                   <span
                     :class="`btn-${item.status} btn-common ${getStyleTag(
                       item
@@ -373,7 +373,7 @@ export default {
       query: {
         status: '',
         page: 1,
-        page_size: 10,
+        page_size: 50,
       },
       list: [], // 列表数据
       status_enum: all_status_enums(),
@@ -572,8 +572,7 @@ export default {
           trade_target_org,
           combine_product_ids,
         } = item;
-        console.log(item);
-        if (combine_product_ids.length) {
+        if (combine_product_ids && combine_product_ids.length) {
           let length_ = combine_product_ids.length;
           let params = {
             pay_method,
@@ -598,14 +597,14 @@ export default {
             '10002',
             length_ === 2 ? '-10010' : '-10011',
             length_ === 2
-              ? '-click_history_report2_repay'
-              : '-click_history_report2_repay',
-            'event_status',
+              ? 'click_history_report2_repay'
+              : 'click_history_report2_repay',
+            'click',
             {
               args_name:
                 length_ === 2
-                  ? '-click_history_report2_repay'
-                  : '-click_history_report2_repay',
+                  ? 'click_history_report2_repay'
+                  : 'click_history_report2_repay',
               channel: utils.getFBChannel(),
             }
           );
@@ -834,6 +833,17 @@ export default {
         } else {
           return 'no-pay-btn2';
         }
+      }
+    },
+
+    getTitle(item) {
+      const { product_key, product_name } = item;
+      if (product_key === 'h5_combo3') {
+        return this.is_cn ? '多买多折扣三项优惠' : '多買多折扣三項優惠';
+      } else if (product_key === 'h5_combo2') {
+        return this.is_cn ? '多买多折扣两项优惠' : '多買多折扣兩項優惠';
+      } else {
+        return product_name;
       }
     },
   },
@@ -1361,10 +1371,9 @@ export default {
   background: #dcece5;
   border-radius: 0.12rem;
   padding: 0 0.24rem;
-
   font-size: 0.28rem;
-  font-weight: 500;
-  color: #333333;
+  font-weight: 300;
+  color: #314a46;
   white-space: nowrap;
 }
 

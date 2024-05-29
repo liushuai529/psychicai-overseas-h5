@@ -497,7 +497,7 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
-    self.loadBg('#bg-svga', self.is_cn ? cn_header : tw_header);
+    // self.loadBg('#bg-svga', self.is_cn ? cn_header : tw_header);
     // self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
   },
   methods: {
