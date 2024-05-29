@@ -16,7 +16,7 @@
       />
       <div class="right">{{ is_cn ? '首页' : '首頁' }}</div>
     </div>
-    <canvas id="bg-svga"></canvas>
+    <!-- <canvas id="bg-svga"></canvas> -->
     <img
       class="order-icon"
       @click="toOrder"
@@ -26,7 +26,7 @@
     <div :class="['info', language === 'zh-CN' ? 'cn-info-bg' : 'tw-info-bg']">
       <div class="info-content">
         <div class="info-item">
-          <div class="info-label">{{ $t('name-label') }}</div>
+          <div class="info-label">{{ $t('name-label') }}:</div>
           <div class="info-input">
             <input
               type="text"
@@ -36,9 +36,9 @@
             />
           </div>
         </div>
-
+        <div class="divider-line"></div>
         <div class="info-item">
-          <div class="info-label">{{ $t('birth-label') }}</div>
+          <div class="info-label">{{ $t('birth-label') }}:</div>
           <div class="info-input">
             <div
               class="info-birth"
@@ -50,29 +50,21 @@
             <img
               @click="openPicker"
               class="info-arrow"
-              src="../../../assets/img/emotion/icon_you.png"
+              src="../../../assets/img/emotion_v2/new/icon_you.png"
             />
           </div>
         </div>
+        <div class="divider-line"></div>
+
         <div class="info-item">
-          <div class="info-label">{{ $t('sex-label') }}</div>
+          <div class="info-label">{{ $t('sex-label') }}:</div>
           <div class="info-input">
             <div
-              class="sex-tab"
+              class="sex-tab left-tab"
               :class="{ active: sex === '1' }"
               ref="sex_male"
               @click="changeSex(1)"
             >
-              <img
-                v-if="sex === '1'"
-                class="sex-icon"
-                src="../../../assets/img/emotion/icon_boy_w.png"
-              />
-              <img
-                v-else
-                class="sex-icon"
-                src="../../../assets/img/emotion/icon_boy_b.png"
-              />
               <div class="sex-text">男</div>
             </div>
             <div
@@ -81,16 +73,6 @@
               ref="sex_female"
               @click="changeSex(0)"
             >
-              <img
-                v-if="sex === '0'"
-                class="sex-icon"
-                src="../../../assets/img/emotion/icon_girl_w.png"
-              />
-              <img
-                v-else
-                class="sex-icon"
-                src="../../../assets/img/emotion/icon_girl_b.png"
-              />
               <div class="sex-text">女</div>
             </div>
           </div>
@@ -122,11 +104,17 @@
         </div>
       </div>
     </div>
-    <div class="card-box">
+    <!-- <div class="card-box">
       <canvas id="qian"></canvas>
-    </div>
-    <img class="card" :src="is_cn ? cn_card_1 : tw_card_1" />
-    <img class="card" :src="is_cn ? cn_card_2 : tw_card_2" />
+    </div> -->
+    <!-- <img class="card" :src="is_cn ? cn_card_1 : tw_card_1" />
+    <img class="card" :src="is_cn ? cn_card_2 : tw_card_2" /> -->
+    <img class="card mt-180" :src="is_cn ? cn_icon_1 : tw_card_1" />
+    <img class="card" :src="is_cn ? cn_icon_2 : tw_card_2" />
+    <img class="card" :src="is_cn ? cn_icon_3 : tw_card_3" />
+    <img class="card" :src="is_cn ? cn_icon_4 : tw_card_4" />
+    <img class="card" :src="is_cn ? cn_icon_5 : tw_card_5" />
+
     <img
       v-if="showFixedBtn"
       class="fix-btn huxi-btn"
@@ -225,8 +213,8 @@ import {
   maidianEnum,
 } from '../../../libs/enum';
 
-import cn_home_btn from '../../../assets/img/emotion_v2/cn/home_btn.png';
-import tw_home_btn from '../../../assets/img/emotion_v2/tw/home_btn.png';
+import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.png';
+import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.png';
 
 import combinePayPop from '../../../components/combinePayPop.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
@@ -245,6 +233,18 @@ import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/emotion24_
 
 import HotProduct from '../../../components/hotProduct.vue';
 import PopNotice from '../../../components/PopNotice.vue';
+
+import cn_icon_1 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home1.png';
+import cn_icon_2 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home2.png';
+import cn_icon_3 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home3.png';
+import cn_icon_4 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home4.png';
+import cn_icon_5 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home5.png';
+
+import tw_icon_1 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home1_fanti.png';
+import tw_icon_2 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home2_fanti.png';
+import tw_icon_3 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_fanti.png';
+import tw_icon_4 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.png';
+import tw_icon_5 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.png';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
 const tipsArr5 = {
@@ -264,6 +264,16 @@ export default {
   },
   data() {
     return {
+      cn_icon_1,
+      cn_icon_2,
+      cn_icon_3,
+      cn_icon_4,
+      cn_icon_5,
+      tw_icon_1,
+      tw_icon_2,
+      tw_icon_3,
+      tw_icon_4,
+      tw_icon_5,
       cn_history_order,
       tw_history_order,
       cn_header,
@@ -468,19 +478,6 @@ export default {
         birth_hour: arr[6],
       };
       this.picker_date_obj = pick_date;
-      this.$nextTick(() => {
-        if (this.sex !== '1') {
-          this.$refs.sex_male.click();
-          setTimeout(() => {
-            this.$refs.sex_female.click();
-          }, 10);
-        } else {
-          this.$refs.sex_female.click();
-          setTimeout(() => {
-            this.$refs.sex_male.click();
-          }, 10);
-        }
-      });
     }
     let self = this;
 
@@ -508,7 +505,7 @@ export default {
         initialWindowHeight > window.innerHeight ? false : true;
     });
     self.loadBg('#bg-svga', self.is_cn ? cn_header : tw_header);
-    self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
+    // self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
   },
   methods: {
     // 获取订单ID
@@ -1049,10 +1046,10 @@ export default {
   }
 }
 .cn-bg {
-  background-image: url('../../../assets/img/emotion/img_head.png');
+  background-image: url('../../../assets/img/emotion_v2/new/cn/bg.png');
 }
 .tw-bg {
-  background-image: url('../../../assets/img/tw_mlxz/emotion/img_head.png');
+  background-image: url('../../../assets/img/emotion_v2/new/cn/bg.png');
 }
 #bg-svga {
   position: absolute;
@@ -1067,7 +1064,7 @@ export default {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: top center;
-  background-color: #ffdaf5;
+  background-color: #EC436B;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1084,22 +1081,22 @@ export default {
     }
   }
   .cn-info-bg {
-    background-image: url('../../../assets/img/emotion/img_name_bg.png');
+    background-image: url('../../../assets/img/emotion_v2/new/cn/info.png');
   }
   .tw-info-bg {
-    background-image: url('../../../assets/img/tw_mlxz/emotion/img_name_bg.png');
+    background-image: url('../../../assets/img/emotion_v2/new/tw/info.png');
   }
   .info {
     justify-content: center;
     position: relative;
     display: flex;
     justify-content: center;
-    width: 7.06rem;
-    height: 7.28rem;
+    width: 7.1rem;
+    height: 4.47rem;
     margin-bottom: 0.2rem;
     // background: url('../../../assets/img/emotion/img_name_bg.png') no-repeat;
     background-size: contain;
-    margin-top: 7.36rem;
+    margin-top: 8.83rem;
     .info-bg {
       display: block;
       width: 7.22rem;
@@ -1107,20 +1104,20 @@ export default {
     }
     .info-content {
       position: absolute;
-      top: 1.5rem;
+      top: 1.14rem;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
 
       .info-item {
-        margin-bottom: 0.2rem;
+        // margin-bottom: 0.2rem;
         width: 5.8rem;
         display: flex;
         align-items: center;
         .info-label {
           flex: none;
-          color: #fff;
+          color: #222;
           font-size: 0.3rem;
           font-weight: 600;
           margin-right: 0.14rem;
@@ -1128,7 +1125,7 @@ export default {
         .info-input {
           flex: auto;
           height: 0.92rem;
-          background-color: #fff;
+          // background-color: #fff;
           border-radius: 0.12rem;
           display: flex;
           box-sizing: border-box;
@@ -1171,15 +1168,22 @@ export default {
             height: 0.22rem;
             margin-right: 0.14rem;
           }
+          .left-tab{
+              margin-left: .24rem;
+            }
           .sex-tab {
-            width: 50%;
-            height: 100%;
+            width: .58rem;
+            height: .58rem;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 0.3rem;
-            color: #333;
-            border-radius: 0.08rem;
+            color: #909090;
+            border-radius: 50%;
+            margin-right: .17rem;
+            background: #FFF2F5;
+            border: 1px solid #FFCFDA;
+
             .sex-icon {
               display: block;
               width: 0.3rem;
@@ -1188,16 +1192,16 @@ export default {
             }
             &.active {
               color: #fff;
-              background-color: #fe60b5;
+              background-color: #EC436B;
+              border:none
             }
           }
         }
       }
       .info-btn {
-        width: 5.82rem;
+        width: 6.26rem;
         height: 1.24rem;
-        margin-top: 0.1rem;
-        // animation: scaleBtn 1s infinite ease-in-out alternate;
+        margin-top: 0.6rem;
       }
       .info-bottom {
         display: flex;
@@ -1217,8 +1221,19 @@ export default {
   }
   .card {
     width: 7.06rem;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.36rem;
   }
+}
+
+.mt-180{
+  margin-top: 1.8rem;
+
+}
+.divider-line{
+  width: 5.8rem;
+height: 1px;
+background: #000000;
+opacity: 0.13;
 }
 .footer {
   width: 100%;
