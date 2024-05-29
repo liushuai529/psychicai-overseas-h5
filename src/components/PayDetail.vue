@@ -650,7 +650,7 @@ export default {
   }
 }
 .divider-line {
-  width: 5.86rem;
+  width: 6.5rem;
   height: 1px;
   background: #000000;
   opacity: 0.13;

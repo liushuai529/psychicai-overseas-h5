@@ -1990,6 +1990,8 @@ export default {
         +utils.getQueryString('report_price') || this.payed_combine_price;
       let report_status =
         utils.getQueryString('status') || this.order_id ? 'SUCCESS' : '';
+      let repay = +utils.getQueryStr('repay');
+
       // let pay_index = +utils.getQueryString('pay_index') ;
       let pay_index;
       if (utils.getQueryString('pay_index')) {
@@ -1997,7 +1999,6 @@ export default {
       } else {
         pay_index = this.payed_order_three_list.length;
       }
-      console.log(pay_index);
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
         mlxz_order_status: report_status,
@@ -2007,22 +2008,42 @@ export default {
           mlxz_action_desc: '开始上报firebase埋点',
           mlxz_order_status: report_status,
         });
-        utils.firebaseLogEvent(
-          '10001',
-          pay_index === 2 ? '-10027' : '-10028',
-          pay_index === 2
-            ? 'event_status_report2_pay_success'
-            : 'event_status_report3_pay_success',
-          'event_status',
-          {
-            args_name:
-              pay_index === 2
-                ? 'event_status_report2_pay_success'
-                : 'event_status_report3_pay_success',
+        if (repay) {
+          utils.firebaseLogEvent(
+            '10002',
+            pay_index === 2 ? '-10019' : '-10020',
 
-            channel: utils.getFBChannel(),
-          }
-        );
+            pay_index === 2
+              ? 'event_status_report2history_pay_success'
+              : 'event_status_report3history_pay_success',
+            'event_status',
+            {
+              args_name:
+                pay_index === 2
+                  ? 'event_status_report2history_pay_success'
+                  : 'event_status_report3history_pay_success',
+              channel: utils.getFBChannel(),
+            }
+          );
+        } else {
+          utils.firebaseLogEvent(
+            '10001',
+            pay_index === 2 ? '-10027' : '-10028',
+            pay_index === 2
+              ? 'event_status_report2_pay_success'
+              : 'event_status_report3_pay_success',
+            'event_status',
+            {
+              args_name:
+                pay_index === 2
+                  ? 'event_status_report2_pay_success'
+                  : 'event_status_report3_pay_success',
+
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成firebase埋点上报',
           mlxz_order_status: report_status,
@@ -2059,23 +2080,42 @@ export default {
           mlxz_action_desc: '开始上报埋点',
           mlxz_order_status: report_status,
         });
-        utils.firebaseLogEvent(
-          '10001',
-          pay_index === 2 ? '-10029' : '-10030',
-          pay_index === 2
-            ? 'event_status_report2_pay_fail'
-            : 'event_status_report3_pay_fail',
+        if (repay) {
+          utils.firebaseLogEvent(
+            '10002',
+            pay_index === 2 ? '-10028' : '-10029',
+            pay_index === 2
+              ? 'event_status_report2history_pay_fail'
+              : 'event_status_report3history_pay_fail',
+            'event_status',
+            {
+              args_name:
+                pay_index === 2
+                  ? 'event_status_report2history_pay_fail'
+                  : 'event_status_report3history_pay_fail',
+              channel: utils.getFBChannel(),
+            }
+          );
+        } else {
+          utils.firebaseLogEvent(
+            '10001',
+            pay_index === 2 ? '-10029' : '-10030',
+            pay_index === 2
+              ? 'event_status_report2_pay_fail'
+              : 'event_status_report3_pay_fail',
 
-          'event_status',
-          {
-            args_name:
-              pay_index === 2
-                ? 'event_status_report2_pay_fail'
-                : 'event_status_report3_pay_fail',
+            'event_status',
+            {
+              args_name:
+                pay_index === 2
+                  ? 'event_status_report2_pay_fail'
+                  : 'event_status_report3_pay_fail',
 
-            channel: utils.getFBChannel(),
-          }
-        );
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成上报埋点',
           mlxz_order_status: report_status,

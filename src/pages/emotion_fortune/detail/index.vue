@@ -1,7 +1,12 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
+    <img
+      class="header-title"
+      :src="is_cn ? cn_info_title : tw_info_title"
+      alt=""
+    />
+
     <div :class="{ 'pay-box': true, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
-      <!-- <img class="title" :src="is_cn ? cn_info_title : tw_info_title" alt="" /> -->
       <BaziTable
         :sex="sex"
         :is_result="is_result"
@@ -21,15 +26,17 @@
         :wuxingqiang="wuxingqiang"
         :tao_hua_num="0"
         fuqigong=""
-        text_color="#000"
-        minge_color="#ED1A86"
+        text_color="#6D2215"
+        minge_color="#EC436B"
         :show_daji="false"
         bg="#fff"
-        width="6.14rem"
-        table_border="0.02rem solid #FD1E96"
-        border_color="#FD1E96"
+        width="6.5rem"
+        table_border="0.02rem solid #EC436B"
+        border_color="#EC436B"
         :is_show_taohua="1"
       ></BaziTable>
+    </div>
+    <div :class="['method-box', is_cn ? 'cn-method' : 'tw-method']">
       <PayDetail
         className="pay-method"
         ref="payDetail"
@@ -44,30 +51,13 @@
         e_click_name="click_2024lovely_pay"
         a_click_token="2rov44"
       />
-      <!-- <img
-        id="info-btn"
-        @click="showPayModal"
-        class="ce-btn huxi-btn"
-        :src="language === 'zh-CN' ? cn_pay_btn : tw_pay_btn"
-        alt=""
-      /> -->
-      <!-- <PayCard
-        ref="paycard"
-        :type="product_id"
-        :product_key="product_key"
-        :query_user_string="query_user_string"
-        btn_width="5.9rem"
-        back_url="emotion_fortune"
-        lucky_re_id="600010"
-      >
-        <div class="price">吉时价 RM68</div>
-      </PayCard> -->
     </div>
-    <div class="card-box">
+    <!-- <div class="card-box">
       <canvas id="qian"></canvas>
-    </div>
-    <img class="module" :src="is_cn ? cn_zhong3 : tw_zhong3" />
-    <img class="module" :src="is_cn ? cn_zhong4 : tw_zhong4" />
+    </div> -->
+    <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" />
+    <img class="module" :src="is_cn ? cn_bg_2 : tw_bg_2" />
+    <img class="module" :src="is_cn ? cn_bg_3 : tw_bg_3" />
     <div class="footer"></div>
     <!-- <img
       v-if="showFixedBtn"
@@ -108,6 +98,8 @@ import utils from '../../../libs/utils';
 import UserInfo from './user_info.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import cn_pay_btn from '../../../assets/img/emotion/home_btn.png';
+import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.png';
+import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.png';
 import PayCard from '../../../components/PayCard.vue';
 import cn_card_1 from '../../../assets/img/emotion/home_card1.png';
 import tw_card_1 from '../../../assets/img/tw_mlxz/emotion/home_card1.png';
@@ -118,17 +110,23 @@ import BaziTable from '../../../components/baziTable.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
 import cn_qian from '../../../assets/img/mlxz/svga/emotion24/cn_qian.svga';
 import tw_qian from '../../../assets/img/mlxz/svga/emotion24/tw_qian.svga';
-import cn_info_title from '../../../assets/img/emotion/new/pay_title1.png';
-import tw_info_title from '../../../assets/img/emotion/new/tw/info_title.png';
+import cn_info_title from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_toutu.png';
+import tw_info_title from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_toutu.png';
 import cn_zhong3 from '../../../assets/img/emotion/new/zhong_3.png';
 import tw_zhong3 from '../../../assets/img/emotion/new/tw/zhong_3.png';
 import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.png';
 import tw_zhong4 from '../../../assets/img/emotion/new/tw/zhong_4.png';
 import { report_id_arr } from '../../../libs/enum';
-import cn_home_btn from '../../../assets/img/emotion_v2/cn/home_btn.png';
-import tw_home_btn from '../../../assets/img/emotion_v2/tw/home_btn.png';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import PayDetail from '../../../components/PayDetail.vue';
+
+import cn_bg_1 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_1.png';
+import cn_bg_2 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_2.png';
+import cn_bg_3 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_3.png';
+import tw_bg_1 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_1_fanti.png';
+import tw_bg_2 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_2_fanti.png';
+import tw_bg_3 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_3_fanti.png';
+
 export default {
   components: {
     UserInfo,
@@ -140,6 +138,12 @@ export default {
   },
   data() {
     return {
+      cn_bg_1,
+      cn_bg_2,
+      cn_bg_3,
+      tw_bg_1,
+      tw_bg_2,
+      tw_bg_3,
       cn_home_btn,
       tw_home_btn,
       cn_zhong3,
@@ -230,7 +234,7 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
-    self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
+    // self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
     this.$nextTick(() => {
       let dom = document.querySelector('.fix-btn');
       if (dom) {
@@ -358,28 +362,50 @@ export default {
 </script>
 
 <style scoped lang="less">
+.header-title {
+  width: 7.5rem;
+  height: 3rem;
+}
+
+.method-box {
+  width: 7.1rem;
+  height: 7.71rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 1.14rem;
+  margin-bottom: 0.36rem;
+}
+.cn-method {
+  background: url('../../../assets/img/emotion_v2/new/cn/detail/img_zhifu_jian.png')
+    no-repeat;
+  background-size: contain;
+}
+.tw-method {
+  background: url('../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_fan.png')
+    no-repeat;
+  background-size: contain;
+}
 .detail {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 0.43rem;
-  background-color: #ffdaf5;
+  background: #ec436b;
   .pay-box {
-    margin-bottom: 0.21rem;
-    width: 7.06rem;
-    height: 13.58rem;
-    padding-top: 1.4rem;
+    margin-bottom: 0.36rem;
+    width: 7.1rem;
+    height: 7.09rem;
+    padding-top: 1.1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   .cn-bg {
-    background: url(../../../assets/img/emotion_v2/cn/result_name_bg.png)
+    background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.png)
       no-repeat;
     background-size: 100% 100%;
   }
   .tw-bg {
-    background: url(../../../assets/img/emotion_v2/tw/result_name_bg.png)
+    background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.png)
       no-repeat;
     background-size: 100% 100%;
   }
@@ -391,7 +417,8 @@ export default {
 
   .module {
     width: 7.02rem;
-    margin-bottom: 0.24rem;
+
+    margin-bottom: 0.36rem;
   }
 
   .fixed-btn {
@@ -434,19 +461,19 @@ export default {
   }
 }
 .fix-btn {
-  width: 5.8rem;
-  height: 1.24rem;
+  width: 6.26rem;
+  height: 1.34rem;
   position: fixed;
   bottom: 1.2rem;
   z-index: 2;
 }
 
 .pay-method {
-  width: 6.14rem;
+  width: 6.5rem;
   min-height: 5.8rem;
   font-family: system-ui, sans-serif;
   margin-top: -0.11rem;
-  background: #ffffff;
+  // background: #ffffff;
   border-radius: 0.1rem;
 }
 </style>

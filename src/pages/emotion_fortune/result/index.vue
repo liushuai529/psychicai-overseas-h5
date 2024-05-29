@@ -2,20 +2,11 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 14:22:42
+ * @LastEditTime: 2024-05-29 17:31:37
  * @Description: 
 -->
 <template>
   <div class="result">
-    <!-- <UserInfo
-      :username="username"
-      :sex="sex"
-      :picker_date_yangli="picker_date_yangli"
-      :picker_date_nongli="picker_date_nongli"
-      :gan="gan"
-      :zhi="zhi"
-      :is_result="false"
-    /> -->
     <div :class="['info-box', lang ? 'cn-bg' : 'tw-bg']">
       <BaziTable
         :sex="sex"
@@ -36,13 +27,13 @@
         :wuxingqiang="wuxingqiang"
         :tao_hua_num="tao_hua_num"
         :fuqigong="fuqigong"
-        text_color="#000"
-        minge_color="#ED1A86"
+        text_color="#6D2215"
+        minge_color="#EC436B"
         :show_daji="false"
-        bg="#FFE9F5"
-        width="6.14rem"
-        table_border="0.02rem solid #FD1E96"
-        border_color="#FD1E96"
+        bg="#FFFAFA"
+        width="6.5rem"
+        table_border="0.02rem solid #EC436B"
+        border_color="#EC436B"
         :is_show_taohua="1"
       />
     </div>
@@ -611,22 +602,24 @@ export default {
 <style scoped lang="less">
 .result {
   padding: 0.43rem 0.22rem 0.5rem;
-  background: #ffdaf5;
+  background-image: url('../../../assets/img/emotion_v2/new/cn/result/jieguo_ig_bj.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #ec436b;
 }
 
 .cn-bg {
-  background-image: url('../../../assets/img/emotion/new/result_info_bg.png');
+  background-image: url('../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.png');
 }
 .tw-bg {
-  background-image: url('../../../assets/img/emotion/new/tw/result_info_bg.png');
+  background-image: url('../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.png');
 }
 .info-box {
-  width: 7.06rem;
-  height: 7.81rem;
+  width: 7.1rem;
+  height: 7.09rem;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  padding-top: 1.5rem;
-  margin-bottom: 0.2rem;
+  padding-top: 1rem;
+  margin-bottom: 0.36rem;
 }
 </style>
-../../../api/api.js
