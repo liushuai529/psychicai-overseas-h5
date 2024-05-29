@@ -225,6 +225,22 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
   },
+  watch: {
+    showFixedBtn(val) {
+      if (val) {
+        utils.firebaseLogEvent(
+          '10003',
+          '-10019',
+          'view_2024report_button',
+          'view',
+          {
+            args_name: 'view_2024report_button',
+            channel: utils.getFBChannel(),
+          }
+        );
+      }
+    },
+  },
   async created() {
     utils.firebaseLogEvent(
       '10003',

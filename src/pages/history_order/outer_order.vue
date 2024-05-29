@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 15:03:49
+ * @LastEditTime: 2024-05-29 15:42:44
  * @Description: 历史订单
 -->
 <template>
@@ -378,7 +378,7 @@ export default {
         this.list = [];
         this.getData();
       }
-    }, 1000);
+    }, 2000);
   },
 
   mounted() {
@@ -562,6 +562,7 @@ export default {
         Indicator.close();
 
         if (res.status !== 1000) return;
+        localStorage.setItem('mlxz_reload_page_history', 1);
 
         location.href = res.data.pay_url;
 

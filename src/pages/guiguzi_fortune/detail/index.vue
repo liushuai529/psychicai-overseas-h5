@@ -206,6 +206,16 @@ export default {
       return `${utils.getShortStr(this.username)}的${this.$t('dom-title')}`;
     },
   },
+  watch: {
+    showFixedBtn(val) {
+      if (val) {
+        utils.firebaseLogEvent('10008', '-10019', 'view_64gua_button', 'view', {
+          args_name: 'view_64gua_button',
+          channel: utils.getFBChannel(),
+        });
+      }
+    },
+  },
   mounted() {
     window.scrollTo(0, 0);
     let btn = document.getElementById('info-btn');

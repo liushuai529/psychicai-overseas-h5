@@ -200,6 +200,22 @@ export default {
       this.pay_modal = true;
     }
   },
+  watch: {
+    showFixedBtn(val) {
+      if (val) {
+        utils.firebaseLogEvent(
+          '10004',
+          '-10019',
+          'view_2024career_button',
+          'view',
+          {
+            args_name: 'view_2024career_button',
+            channel: utils.getFBChannel(),
+          }
+        );
+      }
+    },
+  },
   mounted() {
     window.scrollTo(0, 0);
     this.$nextTick(async () => {

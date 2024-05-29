@@ -220,6 +220,7 @@ export default {
     await this.formateQueryUserInfo(this.query_user_string);
     this.getUserBazi();
   },
+
   mounted() {
     window.scrollTo(0, 0);
     let self = this;
@@ -230,6 +231,21 @@ export default {
         initialWindowHeight > window.innerHeight ? false : true;
     });
     self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
+    this.$nextTick(() => {
+      let dom = document.querySelector('.fix-btn');
+      if (dom) {
+        utils.firebaseLogEvent(
+          '10006',
+          '-10019',
+          'view_2024lovely_button',
+          'view',
+          {
+            args_name: 'view_2024lovely_button',
+            channel: utils.getFBChannel(),
+          }
+        );
+      }
+    });
   },
   methods: {
     // 端内加载背景SVGA动画

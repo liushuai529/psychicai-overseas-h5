@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 16:08:33
+ * @LastEditTime: 2024-05-29 15:38:43
  * @Description: 八字合婚
 -->
 
@@ -260,6 +260,21 @@ export default {
     window.addEventListener('resize', function () {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
+    });
+    this.$nextTick(() => {
+      let dom = document.querySelector('.btn-fixed');
+      if (dom) {
+        utils.firebaseLogEvent(
+          '10007',
+          '-10019',
+          'view_ marriage_button',
+          'view',
+          {
+            args_name: 'view_ marriage_button',
+            channel: utils.getFBChannel(),
+          }
+        );
+      }
     });
   },
   methods: {

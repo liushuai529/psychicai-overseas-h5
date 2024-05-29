@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-08 20:35:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 15:49:25
+ * @LastEditTime: 2024-05-29 15:32:15
  * @Description: 
 -->
 <template>
@@ -172,6 +172,22 @@ export default {
 
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
+    },
+  },
+  watch: {
+    showFixedBtn(val) {
+      if (val) {
+        utils.firebaseLogEvent(
+          '10005',
+          '-10019',
+          'view_2024wealty_button',
+          'view',
+          {
+            args_name: 'view_2024wealty_button',
+            channel: utils.getFBChannel(),
+          }
+        );
+      }
     },
   },
   async created() {
