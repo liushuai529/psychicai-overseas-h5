@@ -1203,7 +1203,7 @@ export default {
       }
       .info-btn {
         width: 6.26rem;
-        height: 1.24rem;
+        height: 1.34rem;
         margin-top: 0.7rem;
       }
       .info-bottom {
