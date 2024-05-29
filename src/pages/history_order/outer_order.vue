@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 15:42:44
+ * @LastEditTime: 2024-05-29 15:48:22
  * @Description: 历史订单
 -->
 <template>
@@ -1187,7 +1187,7 @@ export default {
 }
 
 .btn-CREATED,
-.btn-CANCEL,
+.btn-CANCELED,
 .btn-FAIL {
   background: linear-gradient(180deg, #ffb07d 0%, #ff5048 100%);
 }
