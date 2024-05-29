@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-12-20 14:26:33
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 19:56:09
+ * @LastEditTime: 2024-05-29 21:39:10
  * @Description: 
 -->
 <template>
@@ -270,12 +270,12 @@ export default {
     // background: url('../../../assets/img/emotion/result_kuang_bg3.png')
     //   no-repeat;
     background-size: contain;
-    margin-top: -1.5rem;
+    margin-top: -2.6rem;
   }
 }
 .emo-back-box {
   width: 100%;
-  height: 0.84rem;
+  height: 0.9rem;
   position: absolute;
   display: flex;
   align-items: center;
@@ -283,7 +283,7 @@ export default {
   top: -0.13rem;
   img {
     width: 6.68rem;
-    height: 100%;
+    height: 0.9rem;
   }
 }
 

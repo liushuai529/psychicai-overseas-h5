@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 20:55:47
+ * @LastEditTime: 2024-05-29 21:47:54
  * @Description: 历史订单
 -->
 <template>
@@ -223,6 +223,12 @@
                     v-for="(i, index) in item.combine_product_names"
                     :key="index"
                     class="one"
+                    :style="{
+                      'margin-bottom':
+                        index !== item.combine_product_names.length - 1
+                          ? '.24rem'
+                          : '',
+                    }"
                   >
                     {{ i }}
                   </div>
@@ -230,7 +236,8 @@
                 <div
                   @click="handleJump(item)"
                   :style="{
-                    top: item.product_key === 'h5_combo2' ? '1.1rem' : '1.4rem',
+                    top:
+                      item.product_key === 'h5_combo2' ? '1.1rem' : '1.15rem',
                   }"
                   class="right-btn status-other no-pay-btn3"
                 >
@@ -1094,7 +1101,8 @@ export default {
               font-size: 0.28rem;
               display: flex;
               align-items: center;
-              color: #333333;
+              color: #314a46;
+
               line-height: 0.28rem;
               white-space: nowrap;
               .birth {
@@ -1405,7 +1413,7 @@ export default {
   .one {
     height: 0.28rem;
     line-height: 0.28rem;
-    margin-bottom: 0.12rem;
+    // margin-bottom: 0.12rem;
   }
 }
 

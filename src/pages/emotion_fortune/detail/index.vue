@@ -59,6 +59,8 @@
     <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" />
     <img class="module" :src="is_cn ? cn_bg_2 : tw_bg_2" />
     <img class="module" :src="is_cn ? cn_bg_3 : tw_bg_3" />
+    <div class="ab-footer"></div>
+
     <div class="footer"></div>
     <!-- <img
       v-if="showFixedBtn"
@@ -370,7 +372,7 @@ export default {
 
 .method-box {
   width: 7.1rem;
-  height: 6.8rem;
+  height: 7.71rem;
   display: flex;
   justify-content: center;
   padding-top: 1.14rem;
@@ -395,7 +397,7 @@ export default {
     margin-bottom: 0.36rem;
     width: 7.1rem;
     height: 7.09rem;
-    padding-top: 1rem;
+    padding-top: 1.1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -489,5 +491,14 @@ export default {
 }
 .emo-btn {
   animation: emoBtn 1s infinite ease-in-out alternate;
+}
+.ab-footer {
+  position: fixed;
+  background: #000;
+  opacity: 0.5;
+  width: 100%;
+  height: 2.8rem;
+  z-index: 1;
+  bottom: 0;
 }
 </style>

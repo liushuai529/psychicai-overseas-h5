@@ -154,7 +154,7 @@
       url="emotion_fortune"
       e_id="10006"
     />
-
+    <div v-if="showFixedBtn" class="ab-footer"></div>
     <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
     <PopNotice
       v-if="is_show_notice"
@@ -1085,6 +1085,7 @@ export default {
   }
   .cn-info-bg {
     background-image: url('../../../assets/img/emotion_v2/new/cn/info.png');
+
   }
   .tw-info-bg {
     background-image: url('../../../assets/img/emotion_v2/new/tw/info.png');
@@ -1097,6 +1098,7 @@ export default {
     width: 7.1rem;
     height: 4.47rem;
     margin-bottom: 0.2rem;
+    background-repeat: no-repeat;
     // background: url('../../../assets/img/emotion/img_name_bg.png') no-repeat;
     background-size: contain;
     margin-top: 8.83rem;
@@ -1107,7 +1109,7 @@ export default {
     }
     .info-content {
       position: absolute;
-      top: 1.14rem;
+      top: 1rem;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -1213,7 +1215,7 @@ export default {
         color: #fff;
         font-size: 0.22rem;
         line-height: 0.3rem;
-        // margin-top: 0.14rem;
+        margin-top: 0.14rem;
         img {
           width: 0.3rem;
           height: 0.3rem;
@@ -1229,7 +1231,7 @@ export default {
 }
 
 .mt-180{
-  margin-top: 1.8rem;
+  margin-top: 2.4rem;
 
 }
 .divider-line{
@@ -1237,6 +1239,8 @@ export default {
 height: 1px;
 background: #000000;
 opacity: 0.13;
+margin-bottom: .2rem;
+
 }
 .footer {
   width: 100%;
@@ -1245,7 +1249,7 @@ opacity: 0.13;
 
 .fix-btn {
   width: 5.8rem;
-  height: 1.24rem;
+  height: 1.34rem;
   position: fixed;
   bottom: 1.2rem;
   z-index:2
@@ -1275,6 +1279,16 @@ opacity: 0.13;
   width: 7.5rem;
   height: 1.6rem;
 
+}
+
+.ab-footer{
+  position: fixed;
+  background: #000;
+  opacity: .5;
+  width: 100%;
+  height: 2.8rem;
+  z-index: 1;
+  bottom: 0;
 }
 
 .back-box {
