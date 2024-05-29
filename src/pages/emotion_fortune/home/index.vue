@@ -210,6 +210,7 @@ import {
   getPayOrderInfoAPI,
   payOrderAPI,
   getLastOrderAPI,
+  reportBuryingEventAPI
 } from '../../../api/api';
 import moment from 'moment';
 // @ts-ignore
@@ -404,6 +405,13 @@ export default {
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
     this.getLastOrder();
+    // 埋点事件上传
+    let channel = utils.getFBChannel();
+    channel === "enjoy02" && reportBuryingEventAPI({
+      event: 'page_view_2024lovely_main',
+      channel,
+    }).then().catch(err=>{console.warn(`埋点事件上传失败${err}`)})
+    
   },
   beforeDestroy() {
     if (this.timer) {

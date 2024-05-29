@@ -700,6 +700,7 @@ import {
   sendEventApi,
   getLastOrderAPI,
   payOrderAPI,
+  reportBuryingEventAPI
 } from '../../api/api';
 
 import longnianImg from '../../assets/img/mlxz/cold_start/banner-2024caiyun@3x.png';
@@ -1810,6 +1811,11 @@ export default {
         }
       }
     }
+    // 埋点事件上传
+    reportBuryingEventAPI({
+        event: 'page_view_h5main',
+        channel: utils.getFBChannel(),
+      }).then().catch(err=>{console.warn(`埋点事件上传失败${err}`)})
   },
   beforeDestroy() {
     if (this.timer) {
