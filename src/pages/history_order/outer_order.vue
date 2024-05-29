@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 20:25:16
+ * @LastEditTime: 2024-05-29 20:29:18
  * @Description: 历史订单
 -->
 <template>
@@ -613,13 +613,13 @@ export default {
             length_ === 2 ? '-10010' : '-10011',
             length_ === 2
               ? 'click_history_report2_repay'
-              : 'click_history_report2_repay',
+              : 'click_history_report3_repay',
             'click',
             {
               args_name:
                 length_ === 2
                   ? 'click_history_report2_repay'
-                  : 'click_history_report2_repay',
+                  : 'click_history_report3_repay',
               channel: utils.getFBChannel(),
             }
           );
