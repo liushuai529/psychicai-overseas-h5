@@ -85,7 +85,7 @@
     /> -->
     <img
       @click="payOrder"
-      class="fix-btn huxi-btn"
+      class="fix-btn emo-btn"
       :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
     />
     <HomeFooter product_key="h5_emotion2024" />
@@ -295,7 +295,7 @@ export default {
         hour: this.birth_hour,
         minute: '0',
         is_gongli: this.gongli_nongli,
-        leap_month: is_leap ? '1' : '0',
+        leap_month: '0',
         gender: this.sex,
       };
       const { status, data } = await getBaziAPI(params);
@@ -384,7 +384,7 @@ export default {
 .tw-method {
   background: url('../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_fan.png')
     no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
 }
 .detail {
   display: flex;
@@ -476,5 +476,18 @@ export default {
   margin-top: -0.11rem;
   // background: #ffffff;
   border-radius: 0.1rem;
+}
+
+@keyframes emoBtn {
+  0% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+.emo-btn {
+  animation: emoBtn 1s infinite ease-in-out alternate;
 }
 </style>

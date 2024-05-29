@@ -118,7 +118,7 @@ export default {
         hour: this.birth_hour,
         minute: '0',
         is_gongli: this.gongli_nongli,
-        leap_month: is_leap ? '1' : '0',
+        leap_month: '0',
         gender: this.sex,
       };
       const { status, data } = await getBaziAPI(data_);

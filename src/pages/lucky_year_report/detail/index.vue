@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-08 20:35:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 20:38:10
+ * @LastEditTime: 2024-05-29 21:20:33
  * @Description: 
 -->
 <template>
@@ -283,7 +283,7 @@ export default {
         hour: this.birth_hour,
         minute: '0',
         is_gongli: this.gongli_nongli,
-        leap_month: is_leap ? '1' : '0',
+        leap_month: '0',
         gender: this.sex,
       };
       const { status, data } = await getBaziAPI(data_);

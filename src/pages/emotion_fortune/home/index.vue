@@ -79,7 +79,7 @@
         </div>
         <img
           id="info-btn"
-          class="info-btn huxi-btn"
+          class="info-btn emo-btn"
           :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
           @click="check"
         />
@@ -117,7 +117,7 @@
 
     <img
       v-if="showFixedBtn"
-      class="fix-btn huxi-btn"
+      class="fix-btn emo-btn"
       :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
       @click="check"
     />
@@ -1298,5 +1298,16 @@ opacity: 0.13;
     height: 0.32rem;
   }
 }
+@keyframes emoBtn {
+        0% {
+          transform: scale(0.95);
+        }
+
+        100% {
+          transform: scale(1.1);
+        }
+      }
+      .emo-btn {
+        animation: emoBtn 1s infinite ease-in-out alternate;
+      }
 </style>
-../../../api/api.js../../../libs/enum.js
