@@ -141,6 +141,12 @@ export const reportEventAPI = async data => {
   return request(`/web/event/report`, 'POST', data);
 };
 
+// 埋点事件上报
+export const reportBuryingEventAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/event/report_burying`, 'POST', data);
+};
+
 // 排序事件
 export const sortByEvent = async data => {
   await visitorLoginAPI();
