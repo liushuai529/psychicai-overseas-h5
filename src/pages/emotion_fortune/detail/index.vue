@@ -369,7 +369,7 @@ export default {
 
 .method-box {
   width: 7.1rem;
-  height: 7.71rem;
+  height: 6.8rem;
   display: flex;
   justify-content: center;
   padding-top: 1.14rem;
@@ -378,7 +378,7 @@ export default {
 .cn-method {
   background: url('../../../assets/img/emotion_v2/new/cn/detail/img_zhifu_jian.png')
     no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
 }
 .tw-method {
   background: url('../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_fan.png')
@@ -394,7 +394,7 @@ export default {
     margin-bottom: 0.36rem;
     width: 7.1rem;
     height: 7.09rem;
-    padding-top: 1.1rem;
+    padding-top: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 19:29:32
+ * @LastEditTime: 2024-05-29 20:25:16
  * @Description: 历史订单
 -->
 <template>
@@ -78,8 +78,16 @@
                 item.status == 'PAYED',
               'bg-2-nopay':
                 item.status !== 'PAYED' &&
-                (item.product_key === 'h5_marriage' ||
-                  ['h5_combo3', 'h5_combo2'].includes(item.product_key)),
+                item.product_key === 'h5_marriage' &&
+                !['h5_combo3', 'h5_combo2'].includes(item.product_key),
+              'bg-3-nopay':
+                item.status !== 'PAYED' &&
+                item.product_key !== 'h5_marriage' &&
+                ['h5_combo3'].includes(item.product_key),
+              'bg-4-nopay':
+                item.status !== 'PAYED' &&
+                item.product_key !== 'h5_marriage' &&
+                ['h5_combo2'].includes(item.product_key),
               'bg-1-nopay':
                 item.status !== 'PAYED' &&
                 item.product_key !== 'h5_marriage' &&
@@ -204,6 +212,10 @@
                 v-else-if="
                   ['h5_combo3', 'h5_combo2'].includes(item.product_key)
                 "
+                :style="{
+                  height:
+                    item.product_key === 'h5_combo2' ? '1.28rem' : '1.8rem',
+                }"
                 class="combine-whole"
               >
                 <div class="combine-box">
@@ -217,7 +229,10 @@
                 </div>
                 <div
                   @click="handleJump(item)"
-                  class="right-btn status-other no-pay-btn2"
+                  :style="{
+                    top: item.product_key === 'h5_combo2' ? '1.1rem' : '1.4rem',
+                  }"
+                  class="right-btn status-other no-pay-btn3"
                 >
                   <div class="status-text status-btn">重新测算</div>
                 </div>
@@ -1022,7 +1037,7 @@ export default {
       .item {
         width: 7.1rem;
         background-size: 100% 100%;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.24rem;
         overflow-x: hidden;
         .title-box {
           display: flex;
@@ -1078,7 +1093,6 @@ export default {
               font-size: 0.28rem;
               display: flex;
               align-items: center;
-              font-weight: 500;
               color: #333333;
               line-height: 0.28rem;
               white-space: nowrap;
@@ -1316,6 +1330,13 @@ export default {
   background-size: contain;
   position: relative;
 }
+.bg-4-nopay {
+  width: 7.1rem;
+  height: 2.44rem;
+  background: url('../../assets/img/pop/status-bg-2.png') no-repeat;
+  background-size: contain;
+  position: relative;
+}
 .bg-1-nopay {
   height: 1.92rem;
   background: url('../../assets/img/pop/status-bg-1.png') no-repeat;
@@ -1347,6 +1368,11 @@ export default {
   right: 0.2rem;
   top: 1.2rem;
 }
+.no-pay-btn3 {
+  position: absolute;
+  right: 0.2rem;
+  top: 1.4rem;
+}
 
 .hidden-one {
   white-space: nowrap;
@@ -1360,7 +1386,7 @@ export default {
 
 .combine-whole {
   width: 4.4rem;
-  height: 1.28rem;
+  height: 1.8rem;
 }
 .combine-box {
   width: 4.4rem;
@@ -1372,9 +1398,14 @@ export default {
   border-radius: 0.12rem;
   padding: 0 0.24rem;
   font-size: 0.28rem;
-  font-weight: 300;
+  font-weight: 400;
   color: #314a46;
   white-space: nowrap;
+  .one {
+    height: 0.28rem;
+    line-height: 0.28rem;
+    margin-bottom: 0.12rem;
+  }
 }
 
 .ab-3 {
@@ -1383,5 +1414,12 @@ export default {
 
 .ml-24 {
   margin-left: 0.24rem;
+}
+.bg-3-nopay {
+  height: 2.96rem;
+  background: url('../../assets/img/emotion_v2/new/home_img_card_dingdan.png')
+    no-repeat;
+  background-size: contain;
+  position: relative;
 }
 </style>

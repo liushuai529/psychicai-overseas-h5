@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-12-20 14:26:33
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 18:01:25
+ * @LastEditTime: 2024-05-29 19:56:09
  * @Description: 
 -->
 <template>
@@ -243,7 +243,7 @@ export default {
   margin-bottom: 0.36rem;
   .header-box {
     width: 100%;
-    height: 2.26rem;
+    height: 2rem;
     // background: url('../../../assets/img/emotion/result_kuang_bg1.png')
     // no-repeat;
     background-size: contain;
@@ -255,12 +255,13 @@ export default {
     background-size: 100% auto;
     margin-top: -1rem;
     font-size: 0.28rem;
-    font-family: PingFangSC, PingFang SC;
-    font-weight: 600;
+    font-family: PingFangSC;
+    font-weight: normal;
     line-height: 0.4rem;
     .text-box {
       width: 6.5rem;
       min-height: 2rem;
+      line-height: 0.4rem;
     }
   }
   .footer-box {
@@ -281,7 +282,7 @@ export default {
   justify-content: center;
   top: -0.13rem;
   img {
-    width: 4.68rem;
+    width: 6.68rem;
     height: 100%;
   }
 }
@@ -291,11 +292,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.7rem;
   .title-3 {
     width: 5.16rem;
     height: 0.72rem;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.4rem;
   }
 }
 
@@ -311,12 +312,13 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('../../../assets/img/emotion/result_img_ci.png') no-repeat;
+    background: url('../../../assets/img/emotion_v2/new/cn/result/result_img_ci.png')
+      no-repeat;
     background-size: contain;
     font-size: 0.44rem;
-    font-family: PingFangSC, PingFang SC;
+    font-family: PingFangSC;
     font-weight: 600;
-    color: #ff4455;
+    color: #fff;
     line-height: 0.62rem;
   }
 }

@@ -270,7 +270,7 @@ export default {
   .header-box {
     width: 7.1rem;
     height: 1.1rem;
-    background: #f96cb7;
+    background: #ff678b;
     border-radius: 0.2rem 0.2rem 0 0;
     border: 0.04rem solid #fff9fc;
     display: flex;

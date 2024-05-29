@@ -198,7 +198,7 @@ import {
   getPayOrderInfoAPI,
   payOrderAPI,
   getLastOrderAPI,
-  reportBuryingEventAPI
+  reportBuryingEventAPI,
 } from '../../../api/api';
 import moment from 'moment';
 // @ts-ignore
@@ -228,8 +228,8 @@ import cn_card_1 from '../../../assets/img/emotion/new/2.png';
 import tw_card_1 from '../../../assets/img/emotion/new/tw/2.png';
 import cn_card_2 from '../../../assets/img/emotion/new/3.png';
 import tw_card_2 from '../../../assets/img/emotion/new/tw/3.png';
-import cn_history_order from '../../../assets/img/mlxz/downloadBtn/emotion24.png';
-import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/emotion24_order.png';
+import cn_history_order from '../../../assets/img/emotion_v2/new/bgm_lsdd.png';
+import tw_history_order from '../../../assets/img/emotion_v2/new/bgm_lsdd_fan.png';
 
 import HotProduct from '../../../components/hotProduct.vue';
 import PopNotice from '../../../components/PopNotice.vue';
@@ -417,10 +417,13 @@ export default {
     this.getLastOrder();
     // 埋点事件上传
     reportBuryingEventAPI({
-        event: 'page_view_2024lovely_main',
-        channel: utils.getFBChannel(),
-      }).then().catch(err=>{console.warn(`埋点事件上传失败${err}`)})
-    
+      event: 'page_view_2024lovely_main',
+      channel: utils.getFBChannel(),
+    })
+      .then()
+      .catch(err => {
+        console.warn(`埋点事件上传失败${err}`);
+      });
   },
   beforeDestroy() {
     if (this.timer) {
@@ -1112,14 +1115,13 @@ export default {
 
       .info-item {
         // margin-bottom: 0.2rem;
-        width: 5.8rem;
+        width: 6.5rem;
         display: flex;
         align-items: center;
         .info-label {
           flex: none;
           color: #222;
           font-size: 0.3rem;
-          font-weight: 600;
           margin-right: 0.14rem;
         }
         .info-input {
@@ -1157,7 +1159,7 @@ export default {
             }
           }
           .info-birth {
-            flex: auto;
+            // flex: auto;
             font-size: 0.3rem;
             line-height: 0.42rem;
             margin-left: 0.24rem;
@@ -1167,6 +1169,7 @@ export default {
             width: 0.12rem;
             height: 0.22rem;
             margin-right: 0.14rem;
+            margin-left: .1rem;
           }
           .left-tab{
               margin-left: .24rem;
@@ -1201,7 +1204,7 @@ export default {
       .info-btn {
         width: 6.26rem;
         height: 1.24rem;
-        margin-top: 0.6rem;
+        margin-top: 0.7rem;
       }
       .info-bottom {
         display: flex;
@@ -1210,7 +1213,7 @@ export default {
         color: #fff;
         font-size: 0.22rem;
         line-height: 0.3rem;
-        margin-top: 0.14rem;
+        // margin-top: 0.14rem;
         img {
           width: 0.3rem;
           height: 0.3rem;
@@ -1230,7 +1233,7 @@ export default {
 
 }
 .divider-line{
-  width: 5.8rem;
+  width: 6.5rem;
 height: 1px;
 background: #000000;
 opacity: 0.13;
@@ -1251,9 +1254,9 @@ opacity: 0.13;
 .order-icon {
   position: fixed;
   right: 0;
-  top: 2.86rem;
-  width: 1.08rem;
-  height: 1.56rem;
+  top: 4.21rem;
+  width: 1.3rem;
+  height: 1.87rem;
   z-index: 100;
 }
 
