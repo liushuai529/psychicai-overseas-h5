@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 11:54:40
+ * @LastEditTime: 2024-05-29 15:03:49
  * @Description: 历史订单
 -->
 <template>
@@ -119,15 +119,21 @@
                 <div v-if="item.ext.name" class="one">
                   <div class="name">
                     <span>{{ item.ext.name | filterName }}</span>
-                    <span class="birth">{{
-                      formateTime(
-                        item.ext.is_gongli,
-                        item.ext.birth_year,
-                        item.ext.birth_month,
-                        item.ext.birth_date,
-                        item.ext.birth_hour
-                      )
-                    }}</span>
+                    <span
+                      :class="{
+                        birth: true,
+                        'hidden-one': item.status !== 'PAYED',
+                      }"
+                      >{{
+                        formateTime(
+                          item.ext.is_gongli,
+                          item.ext.birth_year,
+                          item.ext.birth_month,
+                          item.ext.birth_date,
+                          item.ext.birth_hour
+                        )
+                      }}</span
+                    >
                     <img
                       v-if="item.ext.sex"
                       class="sex"
@@ -143,29 +149,41 @@
                 <div v-else>
                   <div class="name">
                     <span>{{ item.ext.male_name | filterName }}</span>
-                    <span class="birth">{{
-                      formateTime(
-                        item.ext.male_is_gongli,
-                        item.ext.male_birth_year,
-                        item.ext.male_birth_month,
-                        item.ext.male_birth_date,
-                        item.ext.male_birth_hour
-                      )
-                    }}</span>
+                    <span
+                      :class="{
+                        birth: true,
+                        'hidden-one': item.status !== 'PAYED',
+                      }"
+                      >{{
+                        formateTime(
+                          item.ext.male_is_gongli,
+                          item.ext.male_birth_year,
+                          item.ext.male_birth_month,
+                          item.ext.male_birth_date,
+                          item.ext.male_birth_hour
+                        )
+                      }}</span
+                    >
                     <img class="sex" :src="male_icon" alt="" />
                   </div>
                   <div class="name mt-28">
                     <span>{{ item.ext.female_name | filterName }}</span>
 
-                    <span class="birth">{{
-                      formateTime(
-                        item.ext.female_is_gongli,
-                        item.ext.female_birth_year,
-                        item.ext.female_birth_month,
-                        item.ext.female_birth_date,
-                        item.ext.female_birth_hour
-                      )
-                    }}</span>
+                    <span
+                      :class="{
+                        birth: true,
+                        'hidden-one': item.status !== 'PAYED',
+                      }"
+                      >{{
+                        formateTime(
+                          item.ext.female_is_gongli,
+                          item.ext.female_birth_year,
+                          item.ext.female_birth_month,
+                          item.ext.female_birth_date,
+                          item.ext.female_birth_hour
+                        )
+                      }}</span
+                    >
                     <img class="sex" :src="female_icon" alt="" />
                   </div>
                 </div>
@@ -263,6 +281,37 @@ const page_enums = {
   h5_weigh_bone: 'weigh_bone',
   h5_bai_gua: 'guiguzi_fortune',
   h5_annual2024: 'year_of_lucky_2024',
+};
+
+const event_enums = {
+  h5_wealth2024: {
+    c_id: '-10005',
+    c_name: 'click_history_2024wealty_repay',
+  },
+  h5_career2024: {
+    c_id: '-10006',
+    c_name: 'click_history_2024career_repay',
+  },
+  h5_marriage: {
+    c_id: '-10007',
+    c_name: 'click_histroy_marriage_repay',
+  },
+  h5_weigh_bone: {
+    c_id: '-10009',
+    c_name: 'click_history_chenggu_repay',
+  },
+  h5_bai_gua: {
+    c_id: '-10008',
+    c_name: 'click_history_64gua_repay',
+  },
+  h5_annual2024: {
+    c_id: '-10003',
+    c_name: 'click_history_2024report_repay',
+  },
+  h5_emotion2024: {
+    c_id: '-1004',
+    c_name: 'click_history_2024lovely_repay',
+  },
 };
 
 export default {
@@ -487,6 +536,16 @@ export default {
           trade_pay_type,
           trade_target_org,
         } = item;
+        utils.firebaseLogEvent(
+          '10002',
+          event_enums[product_key].c_id,
+          event_enums[product_key].c_name,
+          'click',
+          {
+            args_name: event_enums[product_key].c_name,
+            channel: utils.getFBChannel(),
+          }
+        );
         let params = {
           pay_method,
           product_key,
@@ -497,8 +556,7 @@ export default {
           trade_target_org,
         };
 
-        params.callback_url = `${location.origin}/${url}.html#/result?path=${path_enums[product_key]}&report_price=${payment}`;
-        console.log(params);
+        params.callback_url = `${location.origin}/${url}.html#/result?path=${path_enums[product_key]}&report_price=${payment}&repay=1`;
         const res = await payOrderAPI(params);
 
         Indicator.close();
@@ -659,17 +717,12 @@ export default {
             ? this.$t('tips-15')
             : ''
           : '';
-      } else if (status === 'CREATED') {
-        return '待支付';
-      } else if (status === 'FAIL') {
-        return '去支付';
       } else {
-        return '';
+        return '待支付';
       }
     },
     getStyleTag(item) {
       const { status, ext } = item;
-
       if (status === 'PAYED') {
         if (ext && (!ext.name || !ext.male_name)) {
           return 'btn-unlock';
@@ -931,6 +984,7 @@ export default {
               font-weight: 500;
               color: #333333;
               line-height: 0.28rem;
+              white-space: nowrap;
               .birth {
                 margin-left: 0.24rem;
               }
@@ -1131,13 +1185,10 @@ export default {
   margin-left: 0.1rem;
 }
 
-.btn-CREATED {
-  background: linear-gradient(180deg, #ffb07d 0%, #ff5048 100%);
-}
-
+.btn-CREATED,
 .btn-CANCEL,
 .btn-FAIL {
-  background: linear-gradient(180deg, #c3c8d1 0%, #afb2b9 100%);
+  background: linear-gradient(180deg, #ffb07d 0%, #ff5048 100%);
 }
 
 .btn-unlock {
@@ -1198,5 +1249,15 @@ export default {
   position: absolute;
   right: 0.2rem;
   top: 1.2rem;
+}
+
+.hidden-one {
+  white-space: nowrap;
+  overflow: hidden;
+  width: 2.4rem;
+  text-overflow: ellipsis;
+}
+.w-140 {
+  width: 1.4rem;
 }
 </style>

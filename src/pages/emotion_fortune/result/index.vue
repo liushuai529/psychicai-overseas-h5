@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-24 23:19:14
+ * @LastEditTime: 2024-05-29 14:22:42
  * @Description: 
 -->
 <template>
@@ -237,6 +237,7 @@ export default {
       let report_price = +utils.getQueryStr('report_price');
       let report_status = utils.getQueryStr('status');
       let discount_pay = +utils.getQueryStr('discount_pay');
+      let repay = +utils.getQueryStr('repay');
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
         mlxz_order_status: report_status,
@@ -257,7 +258,20 @@ export default {
               channel: utils.getFBChannel(),
             }
           );
-        } else {
+        }
+        if (repay) {
+          utils.firebaseLogEvent(
+            '10002',
+            '-10013',
+            'event_status_2024lovelyhistory_pay_success',
+            'event_status',
+            {
+              args_name: 'event_status_2024lovelyhistory_pay_success',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+        if (!discount_pay && !repay) {
           utils.firebaseLogEvent(
             '10006',
             '-10007',
@@ -317,7 +331,20 @@ export default {
               channel: utils.getFBChannel(),
             }
           );
-        } else {
+        }
+        if (repay) {
+          utils.firebaseLogEvent(
+            '10002',
+            '-10022',
+            'event_status_2024lovelyhistory_pay_fail',
+            'event_status',
+            {
+              args_name: 'event_status_2024lovelyhistory_pay_fail',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+        if (!discount_pay && !repay) {
           utils.firebaseLogEvent(
             '10006',
             '-10008',

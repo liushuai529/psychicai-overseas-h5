@@ -163,6 +163,8 @@ export default {
       let report_price = +utils.getQueryStr('report_price');
       let report_status = utils.getQueryStr('status');
       let discount_pay = +utils.getQueryStr('discount_pay');
+      let repay = +utils.getQueryStr('repay');
+
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
         mlxz_order_status: report_status,
@@ -183,7 +185,21 @@ export default {
               channel: utils.getFBChannel(),
             }
           );
-        } else {
+        }
+        if (repay) {
+          utils.firebaseLogEvent(
+            '10002',
+            '-10017',
+            'event_status_chegguhistory_pay_success',
+            'event_status',
+            {
+              args_name: 'event_status_chegguhistory_pay_success',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+
+        if (!discount_pay && !repay) {
           utils.firebaseLogEvent(
             '10009',
             '-10007',
@@ -243,7 +259,20 @@ export default {
               channel: utils.getFBChannel(),
             }
           );
-        } else {
+        }
+        if (repay) {
+          utils.firebaseLogEvent(
+            '10002',
+            '-10026',
+            'event_status_chegguhistory_pay_fail',
+            'event_status',
+            {
+              args_name: 'event_status_chegguhistory_pay_fail',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+        if (!discount_pay && !repay) {
           utils.firebaseLogEvent(
             '10009',
             '-10008',
