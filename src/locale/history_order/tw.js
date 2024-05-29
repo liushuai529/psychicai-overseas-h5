@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-01-12 17:15:01
  * @LastEditors: wujiang
- * @LastEditTime: 2024-04-22 11:10:15
+ * @LastEditTime: 2024-05-29 11:19:32
  * @Description:
  */
 export default {
@@ -20,4 +20,8 @@ export default {
   'tips-11': '時',
   'tips-12': '復製成功',
   'tips-13': '聯系',
+  'tips-14': '開始測算',
+  'tips-15': '已解鎖',
+  'tips-16': '重新測算',
+  'tips-17': '支付中...',
 };

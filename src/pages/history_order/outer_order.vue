@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 14:12:48
+ * @LastEditTime: 2024-05-29 11:54:40
  * @Description: 历史订单
 -->
 <template>
@@ -67,9 +67,19 @@
           <div
             :class="{
               item: true,
-              'two-bg': item.product_key === 'h5_marriage' && !item.can_write,
-              'write-bg': item.can_write,
-              'one-bg': item.product_key !== 'h5_marriage' && !item.can_write,
+              'two-bg':
+                item.product_key === 'h5_marriage' &&
+                !item.can_write &&
+                item.status == 'PAYED',
+              'write-bg': item.can_write && item.status == 'PAYED',
+              'one-bg':
+                item.product_key !== 'h5_marriage' &&
+                !item.can_write &&
+                item.status == 'PAYED',
+              'bg-2-nopay':
+                item.status !== 'PAYED' && item.product_key === 'h5_marriage',
+              'bg-1-nopay':
+                item.status !== 'PAYED' && item.product_key !== 'h5_marriage',
             }"
             v-for="(item, k) in list"
             :key="'order' + k"
@@ -77,7 +87,16 @@
             <div class="title-box">
               <div class="left">
                 <img :src="icon_arr[item.product_key]" alt="" />
-                <div class="title">{{ item.product_name }}</div>
+                <div class="title">
+                  {{ item.product_name }}
+                  <span
+                    :class="`btn-${item.status} btn-common ${getStyleTag(
+                      item
+                    )}`"
+                  >
+                    {{ getTagName(item) }}
+                  </span>
+                </div>
               </div>
               <div class="right">{{ $t('tips-4') }}{{ item.id }}</div>
             </div>
@@ -85,8 +104,15 @@
               :class="{
                 info: !item.can_write,
                 'two-info':
-                  item.product_key === 'h5_marriage' && !item.can_write,
-                'one-info': item.product_key !== 'h5_marriage',
+                  item.product_key === 'h5_marriage' &&
+                  !item.can_write &&
+                  item.status === 'PAYED',
+                'one-info':
+                  item.product_key !== 'h5_marriage' && item.status === 'PAYED',
+                'no-pay-1':
+                  item.status !== 'PAYED' && item.product_key !== 'h5_marriage',
+                'no-pay-2':
+                  item.status !== 'PAYED' && item.product_key === 'h5_marriage',
               }"
             >
               <div v-if="item.ext.name || item.ext.male_name" class="left">
@@ -147,20 +173,22 @@
               <div v-else class="no-user">
                 <div class="left-box">
                   <div class="one">{{ $t('tips-5') }}</div>
-                  <div class="tag">已解锁</div>
                 </div>
                 <div @click="handleJump(item)" class="right-btn">
-                  <div class="text">开始测算</div>
+                  <div class="text">{{ $t('tips-14') }}</div>
                 </div>
               </div>
-              <!-- <div v-else class="left">
-                <div class="name color-999">{{ $t('tips-5') }}</div>
-                <div class="time color-999">{{ $t('tips-6') }}</div>
-              </div> -->
             </div>
             <div v-if="!item.can_write" class="code-box">
               <div
-                :class="['left', item.transfer_code ? '' : ' visible-hidden']"
+                :class="[
+                  'left',
+                  item.status !== 'PAYED'
+                    ? 'hidden-btn'
+                    : item.transfer_code
+                    ? ''
+                    : ' visible-hidden',
+                ]"
               >
                 <span>{{ $t('tips-7') }}{{ item.transfer_code || '-' }}</span>
                 <span @click="copyCode(item.transfer_code)" class="copy">{{
@@ -172,19 +200,13 @@
                 @click="handleJump(item)"
                 :class="[
                   'right-btn',
-                  `${
-                    item.status === 'FAIL'
-                      ? 'right-2'
-                      : ['CANCELED'].includes(item.status)
-                      ? 'cancel-btn'
-                      : item.status === 'PAYED' &&
-                        (item.ext.name || item.ext.male_name)
-                      ? 'right-1'
-                      : 'right-2'
-                  }`,
+                  `${getStatusStyle(item)}`,
+                  getAbsoluteStyle(item),
                 ]"
               >
-                {{ statusShow(item) }}
+                <div class="status-text status-btn">
+                  {{ statusShow(item) }}
+                </div>
               </div>
             </div>
           </div>
@@ -200,7 +222,7 @@
 import { Indicator, Toast } from 'mint-ui';
 import utils from '@/libs/utils';
 import { path_enums } from '../../libs/enum';
-import { getHistoryOrderAPI } from '../../api/api';
+import { getHistoryOrderAPI, payOrderAPI } from '../../api/api';
 import gif_nianyun from '../../assets/img/mlxz/index/gif/24年运-简体.gif';
 import gif_ganqing from '../../assets/img/mlxz/index/gif/感情运势-简体.gif';
 import { getHistoryOrderImg } from '../../libs/enum';
@@ -263,7 +285,7 @@ export default {
           v: 3,
         },
       ],
-      active_tab: 3, // 当前tab
+      active_tab: 1, // 当前tab
       has_next: false,
       query: {
         status: '',
@@ -429,19 +451,19 @@ export default {
      * @param {*} item
      * @return {*}
      */
-    handleJump(item) {
+    async handleJump(item) {
       // 2秒的防抖
       if (this.jump_loading) return;
       this.jump_loading = true;
       setTimeout(() => {
         this.jump_loading = false;
       }, 2000);
-      let can_continue = ['CREATED', 'PAYED', 'FAIL'].includes(item.status)
-        ? true
-        : false;
-      if (!can_continue) {
-        return;
-      }
+      // let can_continue = ['CREATED', 'PAYED', 'FAIL'].includes(item.status)
+      //   ? true
+      //   : false;
+      // if (!can_continue) {
+      //   return;
+      // }
       let url = path_enums[item.product_key];
       if (item.status === 'PAYED') {
         if (item.ext.name || item.ext.male_name) {
@@ -454,6 +476,38 @@ export default {
           location.href = `${url}.html#/?has_pay=SUCCESS&order_id=${item.id}&product_key=${item.product_key}`;
         }
       } else {
+        Indicator.open(this.$t('tips-17'));
+        const {
+          status,
+          payment,
+          pay_method,
+          product_key,
+          product_id,
+          ext,
+          trade_pay_type,
+          trade_target_org,
+        } = item;
+        let params = {
+          pay_method,
+          product_key,
+          product_id,
+          platform: 'WEB',
+          extra_ce_suan: ext,
+          trade_pay_type,
+          trade_target_org,
+        };
+
+        params.callback_url = `${location.origin}/${url}.html#/result?path=${path_enums[product_key]}&report_price=${payment}`;
+        console.log(params);
+        const res = await payOrderAPI(params);
+
+        Indicator.close();
+
+        if (res.status !== 1000) return;
+
+        location.href = res.data.pay_url;
+
+        return;
         // 待支付直接调用item.pay_url
         // 支付失败跳转测算报告首页
         if (item.status === 'CREATED') {
@@ -485,17 +539,9 @@ export default {
      */
     statusShow(it) {
       if (it.status === 'PAYED') {
-        return it.ext.name || it.ext.male_name ? '查看' : '去添加';
-      } else if (it.status === 'CREATED') {
-        return '去支付';
-      } else if (it.status === 'CANCELED') {
-        return '已取消';
-      } else if (it.status === 'FAIL') {
-        return '支付失败';
-      } else if (it.status === 'REFUNDED') {
-        return '已退款';
+        return it.ext.name || it.ext.male_name ? '查看' : this.$t('tips-14');
       } else {
-        return '未知状态';
+        return this.$t('tips-16');
       }
     },
 
@@ -603,6 +649,52 @@ export default {
 
     backPage() {
       history.back();
+    },
+
+    getTagName(item) {
+      const { status, ext } = item;
+      if (status === 'PAYED') {
+        return ext
+          ? !ext.name || !ext.male_name
+            ? this.$t('tips-15')
+            : ''
+          : '';
+      } else if (status === 'CREATED') {
+        return '待支付';
+      } else if (status === 'FAIL') {
+        return '去支付';
+      } else {
+        return '';
+      }
+    },
+    getStyleTag(item) {
+      const { status, ext } = item;
+
+      if (status === 'PAYED') {
+        if (ext && (!ext.name || !ext.male_name)) {
+          return 'btn-unlock';
+        }
+      }
+    },
+    getStatusStyle(item) {
+      const { status, ext } = item;
+      if (status === 'PAYED') {
+        if (ext && (ext.name || ext.male_name)) {
+          return 'status-PAYED';
+        }
+      } else {
+        return 'status-other';
+      }
+    },
+    getAbsoluteStyle(item) {
+      const { status, ext, product_key } = item;
+      if (status !== 'PAYED') {
+        if (product_key !== 'h5_marriage') {
+          return 'no-pay-btn1';
+        } else {
+          return 'no-pay-btn2';
+        }
+      }
     },
   },
 };
@@ -804,6 +896,8 @@ export default {
               font-weight: 600;
               color: #314a46;
               white-space: nowrap;
+              display: flex;
+              align-items: center;
             }
           }
           .right {
@@ -883,7 +977,14 @@ export default {
   border-radius: 0.16rem;
   font-size: 0.28rem;
   font-weight: 600;
-  color: #fef8eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.status-btn {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.16rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -976,14 +1077,13 @@ export default {
   .right-btn {
     width: 1.44rem;
     height: 0.68rem;
-    background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
     border-radius: 0.16rem;
-    border: 0.02rem solid #ffd192;
     font-weight: 600;
     font-size: 0.28rem;
-    color: #fef8eb;
+    color: #e3453d;
     margin-left: 0.24rem;
-
+    background: transparent;
+    border: 0.02rem solid #e79999;
     .text {
       width: 100%;
       height: 100%;
@@ -1016,5 +1116,87 @@ export default {
     left: 0.2rem;
     top: 0.22rem;
   }
+}
+
+.btn-common {
+  width: 0.82rem;
+  height: 0.36rem;
+  border-radius: 0.08rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.22rem;
+  color: #fef8eb;
+  margin-left: 0.1rem;
+}
+
+.btn-CREATED {
+  background: linear-gradient(180deg, #ffb07d 0%, #ff5048 100%);
+}
+
+.btn-CANCEL,
+.btn-FAIL {
+  background: linear-gradient(180deg, #c3c8d1 0%, #afb2b9 100%);
+}
+
+.btn-unlock {
+  background: linear-gradient(180deg, #5de3a8 0%, #22ba77 100%);
+}
+
+.status-PAYED {
+  background: #dcece5;
+  border: 0.02rem solid #b0d5cf;
+  border-radius: 0.16rem;
+  color: #314a46;
+}
+
+.status-other {
+  border-radius: 0.16rem;
+  border: 0.02rem solid #ffd192;
+  .status-text {
+    color: #fef8eb;
+    border-radius: 0.16rem;
+    background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
+  }
+}
+
+.bg-2-nopay {
+  width: 7.1rem;
+  height: 2.44rem;
+  background: url('../../assets/img/pop/status-bg-2.png') no-repeat;
+  background-size: contain;
+  position: relative;
+}
+.bg-1-nopay {
+  height: 1.92rem;
+  background: url('../../assets/img/pop/status-bg-1.png') no-repeat;
+  background-size: contain;
+  position: relative;
+}
+.no-pay-1 {
+  width: 4.4rem;
+  height: 0.76rem;
+  background: #dcece5;
+  border-radius: 0.12rem;
+}
+.no-pay-2 {
+  width: 4.4rem;
+  height: 1.28rem;
+  background: #dcece5;
+  border-radius: 0.12rem;
+}
+.hidden-btn {
+  display: none;
+}
+.no-pay-btn1 {
+  position: absolute;
+  right: 0.2rem;
+  top: 0.9rem;
+}
+.no-pay-btn2 {
+  position: absolute;
+  right: 0.2rem;
+  top: 1.2rem;
 }
 </style>
