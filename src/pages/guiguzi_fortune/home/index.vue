@@ -2,7 +2,11 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
+<<<<<<< HEAD
+ * @LastEditTime: 2024-05-30 19:36:33
+=======
  * @LastEditTime: 2024-05-30 18:36:51
+>>>>>>> online
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -565,17 +569,16 @@ export default {
     },
     // 确认提交
     async check() {
-      utils.firebaseLogEvent('10008', '-10002', 'click_64gua_main', 'click', {
-        args_name: 'click_64gua_main',
-        channel: utils.getFBChannel(),
-      });
-      await utils.asleep(500);
-
       let username = this.username;
       let sex = this.sex;
       let gongli_nongli = this.gongli_nongli;
       let time_obj = this.picker_date_obj;
       if (username == '') {
+        utils.firebaseLogEvent('10008', '-10002', 'click_64gua_main', 'click', {
+          args_name: 'click_64gua_main',
+          channel: utils.getFBChannel(),
+          click_type: 'error',
+        });
         Toast(this.$t('name-tips'));
         let dom = document.getElementById('username');
         dom.focus();
@@ -586,10 +589,20 @@ export default {
       //   return;
       // }
       if (time_obj == null) {
+        utils.firebaseLogEvent('10008', '-10002', 'click_64gua_main', 'click', {
+          args_name: 'click_64gua_main',
+          channel: utils.getFBChannel(),
+          click_type: 'error',
+        });
         Toast(this.$t('birth-tips'));
         return;
       }
       if (!this.privacyChecked) {
+        utils.firebaseLogEvent('10008', '-10002', 'click_64gua_main', 'click', {
+          args_name: 'click_64gua_main',
+          channel: utils.getFBChannel(),
+          click_type: 'error',
+        });
         Toast(this.$t('xieyi-tips'));
         return;
       }
@@ -612,6 +625,11 @@ export default {
       window.localStorage.setItem('_guiguzi_overseas_info', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
+      utils.firebaseLogEvent('10008', '-10002', 'click_64gua_main', 'click', {
+        args_name: 'click_64gua_main',
+        channel: utils.getFBChannel(),
+        click_type: 'screen_tracking',
+      });
       if (utils.isProd()) {
         await utils.checkFB();
         try {

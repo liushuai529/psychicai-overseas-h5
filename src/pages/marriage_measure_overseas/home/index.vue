@@ -2,7 +2,11 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
+<<<<<<< HEAD
+ * @LastEditTime: 2024-05-30 19:37:35
+=======
  * @LastEditTime: 2024-05-30 18:46:24
+>>>>>>> online
  * @Description: 八字合婚
 -->
 <template>
@@ -608,26 +612,36 @@ export default {
       location.href = url;
     },
     async check() {
-      utils.firebaseLogEvent(
-        '10007',
-        '-10002',
-        'click_marriage_main',
-        'click',
-        {
-          args_name: 'click_marriage_main',
-          channel: utils.getFBChannel(),
-        }
-      );
-      await utils.asleep(500);
-
       let gongli_nongli = this.gongli_nongli;
       if (this.male.username == '') {
+        utils.firebaseLogEvent(
+          '10007',
+          '-10002',
+          'click_marriage_main',
+          'click',
+          {
+            args_name: 'click_marriage_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('male-name-check'));
         let dom = document.getElementById('maleusername');
         dom.focus();
         return;
       }
       if (this.female.username == '') {
+        utils.firebaseLogEvent(
+          '10007',
+          '-10002',
+          'click_marriage_main',
+          'click',
+          {
+            args_name: 'click_marriage_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('female-name-check'));
         let dom2 = document.getElementById('femaleusername');
         dom2.focus();
@@ -642,14 +656,47 @@ export default {
       //   return;
       // }
       if (this.male.picker_date_obj == null) {
+        utils.firebaseLogEvent(
+          '10007',
+          '-10002',
+          'click_marriage_main',
+          'click',
+          {
+            args_name: 'click_marriage_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('male-date-check'));
         return;
       }
       if (this.female.picker_date_obj == null) {
+        utils.firebaseLogEvent(
+          '10007',
+          '-10002',
+          'click_marriage_main',
+          'click',
+          {
+            args_name: 'click_marriage_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('female-date-check'));
         return;
       }
       if (!this.privacyChecked) {
+        utils.firebaseLogEvent(
+          '10007',
+          '-10002',
+          'click_marriage_main',
+          'click',
+          {
+            args_name: 'click_marriage_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('agree-check'));
         return;
       }
@@ -713,6 +760,17 @@ export default {
         '&female_str=' +
         female_str;
       this.query_user_string = querystring;
+      utils.firebaseLogEvent(
+        '10007',
+        '-10002',
+        'click_marriage_main',
+        'click',
+        {
+          args_name: 'click_marriage_main',
+          channel: utils.getFBChannel(),
+          click_type: 'screen_tracking',
+        }
+      );
       if (utils.isProd()) {
         await utils.checkFB();
         try {
