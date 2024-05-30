@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-30 19:39:27
+ * @LastEditTime: 2024-05-30 20:19:26
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -583,7 +583,7 @@ export default {
       utils.firebaseLogEvent('10009', '-10002', 'click_chenggu_main', 'click', {
         args_name: 'click_chenggu_main',
         channel: utils.getFBChannel(),
-        click_type: 'error',
+        click_type: 'screen_tracking',
       });
       if (utils.isProd()) {
         await utils.checkFB();
