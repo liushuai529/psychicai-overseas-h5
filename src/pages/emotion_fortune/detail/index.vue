@@ -59,7 +59,7 @@
     <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" />
     <img class="module" :src="is_cn ? cn_bg_2 : tw_bg_2" />
     <img class="module" :src="is_cn ? cn_bg_3 : tw_bg_3" />
-    <div class="ab-footer"></div>
+    <NewFooter />
 
     <div class="footer"></div>
     <!-- <img
@@ -129,7 +129,7 @@ import cn_bg_3 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_
 import tw_bg_1 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_1_fanti.png';
 import tw_bg_2 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_2_fanti.png';
 import tw_bg_3 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_3_fanti.png';
-
+import NewFooter from '../../../components/NewFooter.vue';
 export default {
   components: {
     UserInfo,
@@ -138,6 +138,7 @@ export default {
     BaziTable,
     HomeFooter,
     PayDetail,
+    NewFooter,
   },
   data() {
     return {

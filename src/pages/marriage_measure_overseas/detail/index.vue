@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 15:38:43
+ * @LastEditTime: 2024-05-30 18:47:46
  * @Description: 八字合婚
 -->
 
@@ -117,6 +117,7 @@
       class="btn-fixed"
       :src="language === 'zh-CN' ? cn_btn : tw_btn"
     />
+    <NewFooter />
     <!-- <div class="footer-box"></div> -->
   </div>
 </template>
@@ -157,6 +158,7 @@ import cn_btn from './../../../assets/img/bzhh_v2/cn/img_btn.png';
 import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import PayDetail from '../../../components/PayDetail.vue';
+import NewFooter from '../../../components/NewFooter.vue';
 
 const mockTipsArr = {
   'zh-CN': '成功解锁了八字合婚的详细解析',
@@ -179,6 +181,7 @@ export default {
     shengxiao,
     HomeFooter,
     PayDetail,
+    NewFooter,
   },
   data() {
     return {
@@ -499,7 +502,7 @@ export default {
   width: 6.89rem;
   left: 50%;
   margin-left: -3.46rem;
-  bottom: 1.5rem;
+  bottom: 1.4rem;
   z-index: 4;
   animation: btnMove 1s infinite ease-in-out alternate;
 }

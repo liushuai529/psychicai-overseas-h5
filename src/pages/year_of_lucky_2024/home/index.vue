@@ -177,6 +177,7 @@
       @payOrder="checkOrder"
       @jumpDetail="jumpOrder"
     />
+    <NewFooter v-if="showFixedBtn" />
   </div>
 </template>
 <script>
@@ -235,6 +236,7 @@ import tw_card_svga from '../../../assets/img/mlxz/svga/year24/tw_card.svga';
 import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/year_order.png';
 import cn_history_order from '../../../assets/img/mlxz/downloadBtn/year.png';
 import PopNotice from '../../../components/PopNotice.vue';
+import NewFooter from '../../../components/NewFooter.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
 const tipsArr5 = {
@@ -252,6 +254,7 @@ export default {
     HomeFooter,
     PopNotice,
     FixedOrder,
+    NewFooter,
   },
   data() {
     return {

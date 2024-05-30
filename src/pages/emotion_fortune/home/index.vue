@@ -154,7 +154,7 @@
       url="emotion_fortune"
       e_id="10006"
     />
-    <div v-if="showFixedBtn" class="ab-footer"></div>
+    <NewFooter v-if="showFixedBtn" />
     <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
     <PopNotice
       v-if="is_show_notice"
@@ -245,6 +245,7 @@ import tw_icon_2 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home2_f
 import tw_icon_3 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_fanti.png';
 import tw_icon_4 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.png';
 import tw_icon_5 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.png';
+import NewFooter from '../../../components/NewFooter.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
 const tipsArr5 = {
@@ -261,6 +262,7 @@ export default {
     HomeFooter,
     PopNotice,
     FixedOrder,
+    NewFooter,
   },
   data() {
     return {
