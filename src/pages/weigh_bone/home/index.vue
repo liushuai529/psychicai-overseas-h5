@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 16:51:05
+ * @LastEditTime: 2024-05-30 19:39:27
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -506,18 +506,22 @@ export default {
     },
     // 支付选择
     async check() {
-      utils.firebaseLogEvent('10009', '-10002', 'click_chenggu_main', 'click', {
-        args_name: 'click_chenggu_main',
-        channel: utils.getFBChannel(),
-      });
-
-      await utils.asleep(500);
-
       let username = this.username;
       let sex = this.sex;
       let gongli_nongli = this.gongli_nongli;
       let time_obj = this.picker_date_obj;
       if (username == '') {
+        utils.firebaseLogEvent(
+          '10009',
+          '-10002',
+          'click_chenggu_main',
+          'click',
+          {
+            args_name: 'click_chenggu_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('tips-1'));
         let dom = document.getElementById('username');
         dom.focus();
@@ -528,10 +532,33 @@ export default {
       //   return;
       // }
       if (time_obj == null) {
+        utils.firebaseLogEvent(
+          '10009',
+          '-10002',
+          'click_chenggu_main',
+          'click',
+          {
+            args_name: 'click_chenggu_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('tips-3'));
         return;
       }
       if (!this.privacyChecked) {
+        utils.firebaseLogEvent(
+          '10009',
+          '-10002',
+          'click_chenggu_main',
+          'click',
+          {
+            args_name: 'click_chenggu_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
+
         Toast(this.$t('tips-4'));
         return;
       }
@@ -553,6 +580,11 @@ export default {
       window.localStorage.setItem('weigh_bone_info', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
+      utils.firebaseLogEvent('10009', '-10002', 'click_chenggu_main', 'click', {
+        args_name: 'click_chenggu_main',
+        channel: utils.getFBChannel(),
+        click_type: 'error',
+      });
       if (utils.isProd()) {
         await utils.checkFB();
         try {

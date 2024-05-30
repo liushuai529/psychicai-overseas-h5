@@ -585,21 +585,22 @@ export default {
      * @return {*}
      */
     async check() {
-      utils.firebaseLogEvent(
-        '10004',
-        '-10002',
-        'click_2024career_main',
-        'click',
-        {
-          args_name: 'click_2024career_main',
-          channel: utils.getFBChannel(),
-        }
-      );
       let username = this.username;
       let sex = this.sex;
       let gongli_nongli = this.gongli_nongli;
       let time_obj = this.picker_date_obj;
       if (username == '') {
+        utils.firebaseLogEvent(
+          '10004',
+          '-10002',
+          'click_2024career_main',
+          'click',
+          {
+            args_name: 'click_2024career_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('tips-1'));
         let dom = document.getElementById('username');
         dom.focus();
@@ -610,10 +611,32 @@ export default {
       //   return;
       // }
       if (time_obj == null) {
+        utils.firebaseLogEvent(
+          '10004',
+          '-10002',
+          'click_2024career_main',
+          'click',
+          {
+            args_name: 'click_2024career_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('tips-3'));
         return;
       }
       if (!this.privacyChecked) {
+        utils.firebaseLogEvent(
+          '10004',
+          '-10002',
+          'click_2024career_main',
+          'click',
+          {
+            args_name: 'click_2024career_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('tips-4'));
         return;
       }
@@ -635,6 +658,17 @@ export default {
       window.localStorage.setItem('mlxz_career_2024_info', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
+      utils.firebaseLogEvent(
+        '10004',
+        '-10002',
+        'click_2024career_main',
+        'click',
+        {
+          args_name: 'click_2024career_main',
+          channel: utils.getFBChannel(),
+          click_type: 'screen_tracking',
+        }
+      );
       if (utils.isProd()) {
         await utils.checkFB();
         try {
