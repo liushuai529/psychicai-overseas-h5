@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-23 17:21:59
+ * @LastEditTime: 2024-05-30 18:25:49
  * @Description:
  */
 export * from './fortune';
@@ -117,8 +117,10 @@ export const visitorLoginAPI = async data => {
   if (
     localStorage.getItem('mlxz_outer_open_uid') ||
     localStorage.getItem('mlxz_outer_access_token') ||
-    localStorage.getItem('mlxz_outer_visitor_id')
+    localStorage.getItem('mlxz_outer_visitor_id') ||
+    localStorage.getItem('mlxz_get_visitor')
   ) {
+    console.log('已登录');
     return true;
   }
   const res = await request('/web/login/visitor', 'POST', data);
@@ -126,7 +128,9 @@ export const visitorLoginAPI = async data => {
   localStorage.setItem('mlxz_outer_open_uid', res.data.open_uid);
   localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
   localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
-  return true;
+  console.log('首次登录');
+
+  return res.data;
 };
 
 // 已支付待填写子订单查询
