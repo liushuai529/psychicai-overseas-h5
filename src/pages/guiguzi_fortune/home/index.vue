@@ -10,7 +10,6 @@
     <header-notice v-if="has_pay"></header-notice>
     <canvas id="canvasbg"></canvas>
     <canvas id="canvastag"></canvas>
-
     <div class="info">
       <div class="info-content">
         <div class="info-item">
@@ -195,6 +194,7 @@
 </template>
 
 <script>
+import NavigationBar from '../../../components/NavigationBar.vue'
 import FixedOrder from '../../../components/FixedOrder.vue';
 
 import HomeFooter from '../../../components/HomeFooter.vue';
@@ -257,6 +257,7 @@ export default {
     HomeFooter,
     PopNotice,
     FixedOrder,
+    NavigationBar
   },
   data() {
     return {

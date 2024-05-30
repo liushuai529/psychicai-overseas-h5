@@ -8,7 +8,6 @@
       :src="is_cn ? cn_order_btn : tw_order_btn"
       alt=""
     />
-
     <div class="header-box">
       <mt-swipe :auto="3000" :showIndicators="true" class="swiper-contain">
         <mt-swipe-item
