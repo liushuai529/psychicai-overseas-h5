@@ -77,6 +77,7 @@
       e_click_name="click_2024career_pay"
       a_click_token="889e3j"
     />
+    <NewFooter v-if="showFixedBtn" />
   </div>
 </template>
 
@@ -102,6 +103,7 @@ import tw_bg from '../../../assets/img/tw_mlxz/career_24/2.png';
 import cn_word3 from '../../../assets/img/mlxz/career_2024/detail/img_word3.png';
 import tw_word3 from '../../../assets/img/tw_mlxz/career_24/tw_word3.png';
 import { report_id_arr } from '../../../libs/enum';
+import NewFooter from '../../../components/NewFooter.vue';
 const Getmonth = () => {
   let arr = [];
   for (let i = 0; i < 12; i++) {
@@ -115,6 +117,7 @@ export default {
     Marquee,
     payModal,
     BaziTable,
+    NewFooter,
   },
   data() {
     return {
@@ -718,6 +721,7 @@ export default {
   margin-bottom: 0.2rem;
   // animation: scaleBtn 1s infinite ease-in-out alternate;
   margin-top: 0.4rem;
+  z-index: 2;
 }
 .huode {
   width: 5.95rem;

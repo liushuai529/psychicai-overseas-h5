@@ -2,7 +2,11 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
+<<<<<<< HEAD
  * @LastEditTime: 2024-05-30 19:37:35
+=======
+ * @LastEditTime: 2024-05-30 18:46:24
+>>>>>>> online
  * @Description: 八字合婚
 -->
 <template>
@@ -163,6 +167,7 @@
       @payOrder="checkOrder"
       @jumpDetail="jumpOrder"
     />
+    <NewFooter v-if="showFixedBtn" />
   </div>
 </template>
 
@@ -217,7 +222,7 @@ import cn_header from '../../../assets/img/mlxz/svga/bzhh/cn_header.svga';
 import tw_header from '../../../assets/img/mlxz/svga/bzhh/tw_header.svga';
 import { Downloader, Parser, Player } from 'svga.lite';
 import PopNotice from '../../../components/PopNotice.vue';
-
+import NewFooter from '../../../components/NewFooter.vue';
 const tipsArr5 = {
   'zh-CN': '订单创建中...',
   'zh-TW': '訂單創建中...',
@@ -242,6 +247,7 @@ export default {
     HomeFooter,
     PopNotice,
     FixedOrder,
+    NewFooter,
   },
   data() {
     return {

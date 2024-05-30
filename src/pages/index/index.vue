@@ -699,7 +699,7 @@ import {
   sendEventApi,
   getLastOrderAPI,
   payOrderAPI,
-  reportBuryingEventAPI
+  reportBuryingEventAPI,
 } from '../../api/api';
 
 import longnianImg from '../../assets/img/mlxz/cold_start/banner-2024caiyun@3x.png';
@@ -1756,21 +1756,30 @@ export default {
 
     this.randomBuyList();
     this.getProductSort();
-    getProductionsAPI('ceh5').then(res => {
-      this.all_list = res.data;
-      if (!this.is_show_combine) return;
-      if (order_id && pay_status === 'SUCCESS' && remove_flag === 2) {
-        localStorage.removeItem(
-          pay_index === 3 ? 'mlxz_web_select_list' : 'mlxz_web_select_list_two'
-        );
-        localStorage.setItem('mlxz_remove_flag', 1);
+    let timer = setInterval(() => {
+      let visitor_id = localStorage.getItem('mlxz_outer_visitor_id');
+      if (visitor_id) {
+        getProductionsAPI('ceh5').then(res => {
+          clearInterval(timer);
+          this.all_list = res.data;
+          if (!this.is_show_combine) return;
+          if (order_id && pay_status === 'SUCCESS' && remove_flag === 2) {
+            localStorage.removeItem(
+              pay_index === 3
+                ? 'mlxz_web_select_list'
+                : 'mlxz_web_select_list_two'
+            );
+            localStorage.setItem('mlxz_remove_flag', 1);
+          }
+          this.getSelectTagList();
+          this.getPayedOrderList();
+          this.getLocalChecked('three_list', 'mlxz_web_select_list');
+          this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
+          this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
+        });
       }
-      this.getSelectTagList();
-      this.getPayedOrderList();
-      this.getLocalChecked('three_list', 'mlxz_web_select_list');
-      this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
-      this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
-    });
+    }, 1000);
+    console.log(timer);
   },
   async mounted() {
     if (utils.isProd()) {
@@ -1812,9 +1821,13 @@ export default {
     }
     // 埋点事件上传
     reportBuryingEventAPI({
-        event: 'page_view_h5main',
-        channel: utils.getFBChannel(),
-      }).then().catch(err=>{console.warn(`埋点事件上传失败${err}`)})
+      event: 'page_view_h5main',
+      channel: utils.getFBChannel(),
+    })
+      .then()
+      .catch(err => {
+        console.warn(`埋点事件上传失败${err}`);
+      });
   },
   beforeDestroy() {
     if (this.timer) {

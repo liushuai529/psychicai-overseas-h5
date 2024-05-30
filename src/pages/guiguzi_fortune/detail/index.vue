@@ -108,6 +108,7 @@
       e_click_name="click_64gua_pay"
       a_click_token="y33o5l"
     />
+    <NewFooter v-show="showFixedBtn" />
   </div>
 </template>
 
@@ -127,11 +128,13 @@ import tw_card_2 from '../../../assets/img/tw_mlxz/guiguzi/home_img_mo2.png';
 import tw_model_bg from '../../../assets/img/mlxz/guiguzi/guiguzi_tw.png';
 import payModal from '../../../components/PayModal.vue';
 import { report_id_arr } from '../../../libs/enum';
+import NewFooter from '../../../components/NewFooter.vue';
 export default {
   components: {
     PayCard,
     Marquee,
     payModal,
+    NewFooter,
   },
   data() {
     return {
@@ -473,6 +476,7 @@ export default {
 .fix-box {
   position: fixed !important;
   bottom: 1.3rem;
+  z-index: 2;
 }
 .footer-box {
   width: 100%;

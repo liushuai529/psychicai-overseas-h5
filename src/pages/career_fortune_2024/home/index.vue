@@ -202,12 +202,13 @@
       @payOrder="checkOrder"
       @jumpDetail="jumpOrder"
     />
+    <NewFooter v-if="showFixedBtn" />
   </div>
 </template>
 
 <script>
 import FixedOrder from '../../../components/FixedOrder.vue';
-
+import NewFooter from '../../../components/NewFooter.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
 import { Downloader, Parser, Player } from 'svga.lite';
@@ -265,6 +266,7 @@ export default {
     HomeFooter,
     PopNotice,
     FixedOrder,
+    NewFooter,
   },
   data() {
     return {

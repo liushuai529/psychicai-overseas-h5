@@ -2,7 +2,11 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
+<<<<<<< HEAD
  * @LastEditTime: 2024-05-30 19:36:33
+=======
+ * @LastEditTime: 2024-05-30 18:36:51
+>>>>>>> online
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -191,12 +195,13 @@
       @payOrder="checkOrder"
       @jumpDetail="jumpOrder"
     />
+    <NewFooter v-show="showFixedBtn" />
   </div>
 </template>
 
 <script>
 import FixedOrder from '../../../components/FixedOrder.vue';
-
+import NewFooter from '../../../components/NewFooter.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
 import { Downloader, Parser, Player } from 'svga.lite';
@@ -257,6 +262,7 @@ export default {
     HomeFooter,
     PopNotice,
     FixedOrder,
+    NewFooter,
   },
   data() {
     return {
