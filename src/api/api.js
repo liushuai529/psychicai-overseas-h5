@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-30 18:25:49
+ * @LastEditTime: 2024-05-30 19:55:32
  * @Description:
  */
 export * from './fortune';
@@ -130,7 +130,7 @@ export const visitorLoginAPI = async data => {
   localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
   console.log('首次登录');
 
-  return res.data;
+  return true;
 };
 
 // 已支付待填写子订单查询
