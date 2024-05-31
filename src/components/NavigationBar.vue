@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-07 21:00:52
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 11:11:12
+ * @LastEditTime: 2024-05-31 12:38:58
  * @Description: 
 -->
 <style coped>
@@ -173,7 +173,7 @@ export default {
         args_name: e_name,
         channel: utils.getFBChannel(),
       });
-      const url = `${this.origin}/${this.channel}/${routeName}.html`;
+      const url = `${this.origin}/${this.channel}${routeName}.html`;
       location.href = url;
     },
     async sendEventFbq() {
