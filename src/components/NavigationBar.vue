@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-07 21:00:52
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 10:50:53
+ * @LastEditTime: 2024-05-31 11:11:12
  * @Description: 
 -->
 <style coped>
@@ -68,7 +68,7 @@
     <div class="psychicai-navbar-header">
       <div
         class="left-home"
-        @click="goRoute('/index')"
+        @click="goRoute('/index', 'h5_home')"
         style="vertical-align: middle"
       >
         <img
@@ -83,7 +83,7 @@
       <div
         class="right-order"
         style="vertical-align: middle"
-        @click="goRoute('/history_order')"
+        @click="goRoute('/history_order', 'h5_order')"
       >
         <img
           src="../../src/assets/img/navtation_bar_icon/h5_icon_dingdan.png"
@@ -110,7 +110,7 @@ import Vue from 'vue';
 import Vant from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Vant);
-import { url_enums, reportName } from '../../src/libs/enum';
+import { url_enums, reportName, tabEventEnums } from '../../src/libs/enum';
 import utils from '../../src/libs/utils';
 export default {
   props: {
@@ -138,6 +138,7 @@ export default {
   },
   methods: {
     activeKeySync(key) {
+      console.log(key);
       this.activeKey = key;
     },
     dataInit() {
@@ -154,14 +155,36 @@ export default {
       this.tabList = list;
     },
     skipPage() {
+      const { c_id, e_name } = tabEventEnums[this.activeKey];
+      this.sendEventFbq();
+      utils.firebaseLogEvent('10007', c_id, e_name, 'click', {
+        args_name: e_name,
+        channel: utils.getFBChannel(),
+      });
       const url = `${this.origin}/${this.channel}/${
         url_enums[this.activeKey]
       }.html`;
       location.href = url;
     },
-    goRoute(routeName) {
+    goRoute(routeName, key) {
+      const { c_id, e_name } = tabEventEnums[key];
+      this.sendEventFbq();
+      utils.firebaseLogEvent('10007', c_id, e_name, 'click', {
+        args_name: e_name,
+        channel: utils.getFBChannel(),
+      });
       const url = `${this.origin}/${this.channel}/${routeName}.html`;
       location.href = url;
+    },
+    async sendEventFbq() {
+      if (utils.isProd()) {
+        await utils.checkFB();
+        try {
+          fbq('track', 'CompleteRegistration');
+        } catch (err) {
+          console.error('CompleteRegistration  error message:', err);
+        }
+      }
     },
   },
 };
