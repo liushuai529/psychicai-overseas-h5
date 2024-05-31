@@ -1756,30 +1756,21 @@ export default {
 
     this.randomBuyList();
     this.getProductSort();
-    let timer = setInterval(() => {
-      let visitor_id = localStorage.getItem('mlxz_outer_visitor_id');
-      if (visitor_id) {
-        getProductionsAPI('ceh5').then(res => {
-          clearInterval(timer);
-          this.all_list = res.data;
-          if (!this.is_show_combine) return;
-          if (order_id && pay_status === 'SUCCESS' && remove_flag === 2) {
-            localStorage.removeItem(
-              pay_index === 3
-                ? 'mlxz_web_select_list'
-                : 'mlxz_web_select_list_two'
-            );
-            localStorage.setItem('mlxz_remove_flag', 1);
-          }
-          this.getSelectTagList();
-          this.getPayedOrderList();
-          this.getLocalChecked('three_list', 'mlxz_web_select_list');
-          this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
-          this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
-        });
+    getProductionsAPI('ceh5').then(res => {
+      this.all_list = res.data;
+      if (!this.is_show_combine) return;
+      if (order_id && pay_status === 'SUCCESS' && remove_flag === 2) {
+        localStorage.removeItem(
+          pay_index === 3 ? 'mlxz_web_select_list' : 'mlxz_web_select_list_two'
+        );
+        localStorage.setItem('mlxz_remove_flag', 1);
       }
-    }, 1000);
-    console.log(timer);
+      this.getSelectTagList();
+      this.getPayedOrderList();
+      this.getLocalChecked('three_list', 'mlxz_web_select_list');
+      this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
+      this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
+    });
   },
   async mounted() {
     if (utils.isProd()) {
