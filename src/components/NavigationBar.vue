@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-07 21:00:52
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 15:19:50
+ * @LastEditTime: 2024-05-31 15:50:21
  * @Description: 
 -->
 <style>
@@ -62,6 +62,10 @@
 }
 .psychicai-navbar-header .title > span {
   font-size: 0.36rem;
+}
+
+.psychicai-navbar-banner .van-tabs__line {
+  height: 2px;
 }
 .bar-box {
   width: 100%;
