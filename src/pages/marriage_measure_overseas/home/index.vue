@@ -2,123 +2,121 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
-<<<<<<< HEAD
- * @LastEditTime: 2024-05-30 19:37:35
-=======
- * @LastEditTime: 2024-05-30 18:46:24
->>>>>>> online
+ * @LastEditTime: 2024-05-31 10:39:26
  * @Description: 八字合婚
 -->
 <template>
-  <div
-    :class="{
-      home: true,
-      'fix-box': choose_time ? true : false,
-      'cn-bg': is_cn,
-      'tw-bg': !is_cn,
-    }"
-    id="home"
-  >
-    <header-notice v-if="has_pay"></header-notice>
-    <div class="top-banner">
-      <canvas id="canvas"></canvas>
+  <div>
+    <NavigationBar v-if="is_channel_01" />
+    <div
+      :class="{
+        home: true,
+        'fix-box': choose_time ? true : false,
+        'cn-bg': is_cn,
+        'tw-bg': !is_cn,
+      }"
+      id="home"
+    >
+      <header-notice v-if="has_pay"></header-notice>
+      <div class="top-banner">
+        <canvas id="canvas"></canvas>
 
-      <img
-        v-if="language === 'zh-CN'"
-        class="top-banner-img"
-        src="./../../../assets/img/mlxz/bzhh/bzhh_bg.png"
-      />
-      <img
-        v-else
-        class="top-banner-img"
-        src="./../../../assets/img/tw_mlxz/bazihehun/home/top-banner.png"
-      />
-      <div class="top-content">
-        <info
-          class="info-card"
-          :malename="male.username"
-          :femalename="female.username"
-          :maledate="male.picker_date"
-          :malehour="male.picker_hour"
-          :femaledate="female.picker_date"
-          :femalehour="female.picker_hour"
-        />
-        <div class="privacy">
-          <img
-            v-if="privacyChecked"
-            src="./../../../assets/img/mlxz/bzhh/check.png"
-            @click="privacyChecked = !privacyChecked"
-          />
-          <img
-            v-else
-            src="./../../../assets/img/mlxz/bzhh/nocheck.png"
-            @click="privacyChecked = !privacyChecked"
-          />
-          <span>{{ $t('check-label') }}</span>
-          <span
-            style="color: #b1031f"
-            @click="toService('user_agreement.html')"
-            >{{ $t('user-agreement') }}</span
-          >
-          <span>和</span>
-          <span style="color: #b1031f" @click="toService('privacy.html')">{{
-            $t('privacy-policy')
-          }}</span>
-        </div>
         <img
-          id="info-btn"
-          class="btn"
-          :src="language === 'zh-CN' ? cn_btn : tw_btn"
-          @click="check"
+          v-if="language === 'zh-CN'"
+          class="top-banner-img"
+          src="./../../../assets/img/mlxz/bzhh/bzhh_bg.png"
         />
-        <div class="user">
-          <div>已有</div>
-          <span>{{ user_number }}人</span>
-          <div>{{ $t('cesuan-label') }}</div>
+        <img
+          v-else
+          class="top-banner-img"
+          src="./../../../assets/img/tw_mlxz/bazihehun/home/top-banner.png"
+        />
+        <div class="top-content">
+          <info
+            class="info-card"
+            :malename="male.username"
+            :femalename="female.username"
+            :maledate="male.picker_date"
+            :malehour="male.picker_hour"
+            :femaledate="female.picker_date"
+            :femalehour="female.picker_hour"
+          />
+          <div class="privacy">
+            <img
+              v-if="privacyChecked"
+              src="./../../../assets/img/mlxz/bzhh/check.png"
+              @click="privacyChecked = !privacyChecked"
+            />
+            <img
+              v-else
+              src="./../../../assets/img/mlxz/bzhh/nocheck.png"
+              @click="privacyChecked = !privacyChecked"
+            />
+            <span>{{ $t('check-label') }}</span>
+            <span
+              style="color: #b1031f"
+              @click="toService('user_agreement.html')"
+              >{{ $t('user-agreement') }}</span
+            >
+            <span>和</span>
+            <span style="color: #b1031f" @click="toService('privacy.html')">{{
+              $t('privacy-policy')
+            }}</span>
+          </div>
+          <img
+            id="info-btn"
+            class="btn"
+            :src="language === 'zh-CN' ? cn_btn : tw_btn"
+            @click="check"
+          />
+          <div class="user">
+            <div>已有</div>
+            <span>{{ user_number }}人</span>
+            <div>{{ $t('cesuan-label') }}</div>
+          </div>
         </div>
       </div>
-    </div>
-    <img class="card" :src="language === 'zh-CN' ? cn_card1 : tw_card1" />
-    <img class="card" :src="language === 'zh-CN' ? cn_card2 : tw_card2" />
-    <img class="card" :src="language === 'zh-CN' ? cn_card3 : tw_card3" />
-    <img class="card" :src="language === 'zh-CN' ? cn_card4 : tw_card4" />
-    <img class="card" :src="language === 'zh-CN' ? cn_card5 : tw_card5" />
-    <img
-      class="order"
-      :src="language === 'zh-CN' ? cn_order : tw_order"
-      @click="toOrderUrl()"
-    />
-    <img
-      v-show="showFixedBtn"
-      class="btn-fixed"
-      :src="language === 'zh-CN' ? cn_btn : tw_btn"
-      @click="check"
-    />
+      <img class="card" :src="language === 'zh-CN' ? cn_card1 : tw_card1" />
+      <img class="card" :src="language === 'zh-CN' ? cn_card2 : tw_card2" />
+      <img class="card" :src="language === 'zh-CN' ? cn_card3 : tw_card3" />
+      <img class="card" :src="language === 'zh-CN' ? cn_card4 : tw_card4" />
+      <img class="card" :src="language === 'zh-CN' ? cn_card5 : tw_card5" />
+      <img
+        class="order"
+        :src="language === 'zh-CN' ? cn_order : tw_order"
+        @click="toOrderUrl()"
+      />
+      <img
+        v-show="showFixedBtn"
+        class="btn-fixed"
+        :src="language === 'zh-CN' ? cn_btn : tw_btn"
+        @click="check"
+      />
 
-    <!-- 時間選擇控件 -->
-    <DatetimePicker
-      :male="sex"
-      start="1959"
-      end="2008"
-      :year="year"
-      :month="month"
-      :date="date"
-      :birth_hour="birth_hour"
-      v-show="choose_time && !show_nongli"
-    />
-    <NongliPicker
-      :male="sex"
-      start="1959"
-      end="2008"
-      :year="year"
-      :month="month"
-      :date="date"
-      :birth_hour="birth_hour"
-      v-show="choose_time && show_nongli"
-    />
+      <!-- 時間選擇控件 -->
+      <DatetimePicker
+        :male="sex"
+        start="1959"
+        end="2008"
+        :year="year"
+        :month="month"
+        :date="date"
+        :birth_hour="birth_hour"
+        v-show="choose_time && !show_nongli"
+      />
+      <NongliPicker
+        :male="sex"
+        start="1959"
+        end="2008"
+        :year="year"
+        :month="month"
+        :date="date"
+        :birth_hour="birth_hour"
+        v-show="choose_time && show_nongli"
+      />
 
-    <!-- Popup -->
-    <!-- <PayPopup
+      <!-- Popup -->
+      <!-- <PayPopup
       ref="PayPopup"
       :visible="visible"
       :product_key="product_key"
@@ -126,7 +124,7 @@
       @update-visible="visible = false"
     ></PayPopup> -->
 
-    <!-- <combinePayPop
+      <!-- <combinePayPop
       :visible="pay_modal"
       :all_list="productList"
       :product_key="product_key"
@@ -135,45 +133,46 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
-    <HomeFooter v-if="showFixedBtn" product_key="h5_marriage" />
-    <PopNotice
-      v-if="is_show_notice"
-      @close="closeNotice"
-      :count_down="count_down"
-      :product_key="product_key"
-      e_id="10007"
-      c_id="-10014"
-      c_name="click_marriage_discount1"
-    />
-    <FixedOrder
-      v-if="show_fixed_order && !is_show_notice"
-      :title="local_title"
-      :is_show_move="is_show_notice"
-      :new_order_key="new_order_key"
-      name="local"
-      top="4.7rem"
-      :time="local_time"
-      @payOrder="checkOrder"
-      @jumpDetail="jumpOrder"
-    />
-    <FixedOrder
-      v-if="show_api_order && !is_show_notice"
-      :title="last_title"
-      :is_show_move="is_show_notice"
-      :last_order="last_order"
-      name="api"
-      top="6.7rem"
-      :time="api_time"
-      @payOrder="checkOrder"
-      @jumpDetail="jumpOrder"
-    />
-    <NewFooter v-if="showFixedBtn" />
+      <HomeFooter v-if="showFixedBtn" product_key="h5_marriage" />
+      <PopNotice
+        v-if="is_show_notice"
+        @close="closeNotice"
+        :count_down="count_down"
+        :product_key="product_key"
+        e_id="10007"
+        c_id="-10014"
+        c_name="click_marriage_discount1"
+      />
+      <FixedOrder
+        v-if="show_fixed_order && !is_show_notice"
+        :title="local_title"
+        :is_show_move="is_show_notice"
+        :new_order_key="new_order_key"
+        name="local"
+        top="4.7rem"
+        :time="local_time"
+        @payOrder="checkOrder"
+        @jumpDetail="jumpOrder"
+      />
+      <FixedOrder
+        v-if="show_api_order && !is_show_notice"
+        :title="last_title"
+        :is_show_move="is_show_notice"
+        :last_order="last_order"
+        name="api"
+        top="6.7rem"
+        :time="api_time"
+        @payOrder="checkOrder"
+        @jumpDetail="jumpOrder"
+      />
+      <NewFooter v-if="showFixedBtn" />
+    </div>
   </div>
 </template>
 
 <script>
 import FixedOrder from '../../../components/FixedOrder.vue';
-
+import NavigationBar from '../../../components/NavigationBar.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import utils from './../../../libs/utils.js';
 import topBanner from './top_banner.vue';
@@ -248,6 +247,7 @@ export default {
     PopNotice,
     FixedOrder,
     NewFooter,
+    NavigationBar,
   },
   data() {
     return {
@@ -476,6 +476,9 @@ export default {
     },
     local_title() {
       return utils.getTitle(this.new_order_key);
+    },
+    is_channel_01() {
+      return utils.getFBChannel().indexOf('01') > -1;
     },
   },
   watch: {

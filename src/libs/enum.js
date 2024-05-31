@@ -492,3 +492,27 @@ export const maidianEnum = {
     view_name: 'view_chenggu_discount2',
   },
 };
+export const url_enums = {
+  h5_marriage: 'marriage_measure_overseas',
+  h5_fortune2023: 'new_year_luck_overseas',
+  h5_love: 'marriage_divination_overseas',
+  h5_wealth2023: 'wealth_boutique_overseas',
+  h5_career: 'career_divination_overseas',
+  h5_wealth2024: 'lucky_year_report',
+  h5_weigh_bone: 'weigh_bone',
+  h5_bai_gua: 'guiguzi_fortune',
+  h5_annual2024: 'year_of_lucky_2024',
+  h5_emotion2024: 'emotion_fortune',
+  h5_career2024: 'career_fortune_2024',
+};
+
+export const tabEventEnums = {
+  h5_home: {
+    c_id: '',
+    e_name: '',
+  },
+  h5_order: {
+    c_id: '',
+    e_name: '',
+  },
+};

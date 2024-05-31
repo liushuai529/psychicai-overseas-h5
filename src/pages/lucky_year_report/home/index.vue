@@ -1,162 +1,173 @@
 <template>
-  <div
-    :class="{
-      container: true,
-      'fix-box': choose_time ? true : false,
-      'cn-bg': is_cn,
-      'tw-bg': !is_cn,
-    }"
-    :style="{
-      'padding-bottom': '2.8rem',
-    }"
-  >
-    <header-notice v-if="has_pay"></header-notice>
-    <canvas class="canvas1" id="canvas1"></canvas>
+  <div>
+    <NavigationBar v-if="is_channel_01" />
+    <div
+      :class="{
+        container: true,
+        'fix-box': choose_time ? true : false,
+        'cn-bg': is_cn,
+        'tw-bg': !is_cn,
+      }"
+      :style="{
+        'padding-bottom': '2.8rem',
+      }"
+    >
+      <header-notice v-if="has_pay"></header-notice>
+      <canvas class="canvas1" id="canvas1"></canvas>
 
-    <div class="info">
-      <img
-        class="info-bg"
-        src="../../../assets/img/mlxz/lucky_year_report/card.png"
-      />
-      <div class="info-content">
-        <img class="info-title" :src="is_cn ? cn_info_title : tw_info_title" />
-        <div class="info-item">
-          <div class="info-label">姓名</div>
-          <div class="info-input">
-            <input
-              type="text"
-              id="username"
-              v-model="username"
-              :placeholder="$t('name-placeholder')"
-            />
-          </div>
-        </div>
-        <div class="info-item">
-          <div class="info-label">性别</div>
-          <div class="info-input">
-            <div
-              class="sex-tab"
-              :class="{ active: sex === 'male' }"
-              ref="sex_male"
-              @click="changeSex('male')"
-            >
-              <img
-                v-if="sex === 'male'"
-                class="sex-icon"
-                src="../../../assets/img/mlxz/lucky_year_report/male-active.png"
-              />
-              <img
-                v-else
-                class="sex-icon"
-                src="../../../assets/img/mlxz/lucky_year_report/male.png"
-              />
-              <div class="sex-text">男</div>
-            </div>
-            <div
-              class="sex-tab"
-              :class="{ active: sex === 'female' }"
-              ref="sex_female"
-              @click="changeSex('female')"
-            >
-              <img
-                v-if="sex === 'female'"
-                class="sex-icon"
-                src="../../../assets/img/mlxz/lucky_year_report/female-active.png"
-              />
-              <img
-                v-else
-                class="sex-icon"
-                src="../../../assets/img/mlxz/lucky_year_report/female.png"
-              />
-              <div class="sex-text">女</div>
-            </div>
-          </div>
-        </div>
-        <div class="info-item">
-          <div class="info-label">生日</div>
-          <div class="info-input">
-            <div
-              class="info-birth"
-              :style="{ color: picker_date ? '#c18204' : ' #C5A667' }"
-              @click="openPicker"
-            >
-              {{ picker_date || $t('birth-placeholder') }}
-            </div>
-            <img
-              @click="openPicker"
-              class="info-arrow"
-              src="../../../assets/img/mlxz/lucky_year_report/arrow.png"
-            />
-          </div>
-        </div>
+      <div class="info">
         <img
-          id="info-btn"
-          class="info-btn"
-          :src="is_cn ? cn_btn : tw_btn"
-          @click="check"
+          class="info-bg"
+          src="../../../assets/img/mlxz/lucky_year_report/card.png"
         />
-        <div class="info-bottom">
+        <div class="info-content">
           <img
-            v-if="privacyChecked"
-            class="info-check"
-            src="../../../assets/img/mlxz/lucky_year_report/check.png"
-            @click="privacyChecked = !privacyChecked"
+            class="info-title"
+            :src="is_cn ? cn_info_title : tw_info_title"
           />
+          <div class="info-item">
+            <div class="info-label">姓名</div>
+            <div class="info-input">
+              <input
+                type="text"
+                id="username"
+                v-model="username"
+                :placeholder="$t('name-placeholder')"
+              />
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">性别</div>
+            <div class="info-input">
+              <div
+                class="sex-tab"
+                :class="{ active: sex === 'male' }"
+                ref="sex_male"
+                @click="changeSex('male')"
+              >
+                <img
+                  v-if="sex === 'male'"
+                  class="sex-icon"
+                  src="../../../assets/img/mlxz/lucky_year_report/male-active.png"
+                />
+                <img
+                  v-else
+                  class="sex-icon"
+                  src="../../../assets/img/mlxz/lucky_year_report/male.png"
+                />
+                <div class="sex-text">男</div>
+              </div>
+              <div
+                class="sex-tab"
+                :class="{ active: sex === 'female' }"
+                ref="sex_female"
+                @click="changeSex('female')"
+              >
+                <img
+                  v-if="sex === 'female'"
+                  class="sex-icon"
+                  src="../../../assets/img/mlxz/lucky_year_report/female-active.png"
+                />
+                <img
+                  v-else
+                  class="sex-icon"
+                  src="../../../assets/img/mlxz/lucky_year_report/female.png"
+                />
+                <div class="sex-text">女</div>
+              </div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">生日</div>
+            <div class="info-input">
+              <div
+                class="info-birth"
+                :style="{ color: picker_date ? '#c18204' : ' #C5A667' }"
+                @click="openPicker"
+              >
+                {{ picker_date || $t('birth-placeholder') }}
+              </div>
+              <img
+                @click="openPicker"
+                class="info-arrow"
+                src="../../../assets/img/mlxz/lucky_year_report/arrow.png"
+              />
+            </div>
+          </div>
           <img
-            v-else
-            class="info-check"
-            src="../../../assets/img/mlxz/lucky_year_report/uncheck.png"
-            @click="privacyChecked = !privacyChecked"
+            id="info-btn"
+            class="info-btn"
+            :src="is_cn ? cn_btn : tw_btn"
+            @click="check"
           />
-          查看
-          <span @click="link('user_agreement.html')">{{
-            $t('user-agreement')
-          }}</span
-          >和
-          <span @click="link('privacy.html')">{{ $t('privacy-policy') }}</span>
+          <div class="info-bottom">
+            <img
+              v-if="privacyChecked"
+              class="info-check"
+              src="../../../assets/img/mlxz/lucky_year_report/check.png"
+              @click="privacyChecked = !privacyChecked"
+            />
+            <img
+              v-else
+              class="info-check"
+              src="../../../assets/img/mlxz/lucky_year_report/uncheck.png"
+              @click="privacyChecked = !privacyChecked"
+            />
+            查看
+            <span @click="link('user_agreement.html')">{{
+              $t('user-agreement')
+            }}</span
+            >和
+            <span @click="link('privacy.html')">{{
+              $t('privacy-policy')
+            }}</span>
+          </div>
         </div>
       </div>
-    </div>
-    <img class="card" :src="is_cn ? cn_card1 : tw_card1" />
-    <div
-      :style="`background-image:url(${is_cn ? cn_card2 : cn_card2})`"
-      class="canvas2"
-    >
-      <canvas id="canvas2"></canvas>
-    </div>
-    <img class="card" :src="is_cn ? cn_card3 : tw_card3" />
-    <img class="card" :src="is_cn ? cn_card4 : tw_card4" />
-    <img class="order" :src="is_cn ? cn_order : tw_order" @click="toOrder()" />
-    <img
-      v-show="showFixedBtn"
-      class="btn-fixed huxi-btn"
-      :style="{
-        bottom: '1.5rem',
-      }"
-      :src="is_cn ? cn_btn : tw_btn"
-      @click="check"
-    />
+      <img class="card" :src="is_cn ? cn_card1 : tw_card1" />
+      <div
+        :style="`background-image:url(${is_cn ? cn_card2 : cn_card2})`"
+        class="canvas2"
+      >
+        <canvas id="canvas2"></canvas>
+      </div>
+      <img class="card" :src="is_cn ? cn_card3 : tw_card3" />
+      <img class="card" :src="is_cn ? cn_card4 : tw_card4" />
+      <img
+        class="order"
+        :src="is_cn ? cn_order : tw_order"
+        @click="toOrder()"
+      />
+      <img
+        v-show="showFixedBtn"
+        class="btn-fixed huxi-btn"
+        :style="{
+          bottom: '1.5rem',
+        }"
+        :src="is_cn ? cn_btn : tw_btn"
+        @click="check"
+      />
 
-    <!-- 时间选择控件 -->
-    <datetime-picker
-      start="1960"
-      end="2000"
-      :year="year"
-      :month="month"
-      :date="date"
-      :birth_hour="birth_hour"
-      v-show="choose_time && !show_nongli"
-    ></datetime-picker>
-    <nongli-picker
-      start="1960"
-      end="2000"
-      :year="year"
-      :month="month"
-      :date="date"
-      :birth_hour="birth_hour"
-      v-show="choose_time && show_nongli"
-    ></nongli-picker>
-    <!-- <combinePayPop
+      <!-- 时间选择控件 -->
+      <datetime-picker
+        start="1960"
+        end="2000"
+        :year="year"
+        :month="month"
+        :date="date"
+        :birth_hour="birth_hour"
+        v-show="choose_time && !show_nongli"
+      ></datetime-picker>
+      <nongli-picker
+        start="1960"
+        end="2000"
+        :year="year"
+        :month="month"
+        :date="date"
+        :birth_hour="birth_hour"
+        v-show="choose_time && show_nongli"
+      ></nongli-picker>
+      <!-- <combinePayPop
       :visible="pay_modal"
       :all_list="productList"
       :product_key="product_key"
@@ -165,39 +176,40 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
-    <HomeFooter v-if="showFixedBtn" product_key="h5_wealth2024" />
-    <PopNotice
-      v-if="is_show_notice"
-      @close="closeNotice"
-      :count_down="count_down"
-      :product_key="product_key"
-      e_id="10005"
-      c_id="-10014"
-      c_name="click_2024wealty_discount1"
-    />
-    <FixedOrder
-      v-if="show_fixed_order && !is_show_notice"
-      :title="local_title"
-      :is_show_move="is_show_notice"
-      :new_order_key="new_order_key"
-      name="local"
-      top="4.7rem"
-      :time="local_time"
-      @payOrder="checkOrder"
-      @jumpDetail="jumpOrder"
-    />
-    <FixedOrder
-      v-if="show_api_order && !is_show_notice"
-      :title="last_title"
-      :is_show_move="is_show_notice"
-      :last_order="last_order"
-      name="api"
-      top="6.7rem"
-      :time="api_time"
-      @payOrder="checkOrder"
-      @jumpDetail="jumpOrder"
-    />
-    <NewFooter v-if="showFixedBtn" />
+      <HomeFooter v-if="showFixedBtn" product_key="h5_wealth2024" />
+      <PopNotice
+        v-if="is_show_notice"
+        @close="closeNotice"
+        :count_down="count_down"
+        :product_key="product_key"
+        e_id="10005"
+        c_id="-10014"
+        c_name="click_2024wealty_discount1"
+      />
+      <FixedOrder
+        v-if="show_fixed_order && !is_show_notice"
+        :title="local_title"
+        :is_show_move="is_show_notice"
+        :new_order_key="new_order_key"
+        name="local"
+        top="4.7rem"
+        :time="local_time"
+        @payOrder="checkOrder"
+        @jumpDetail="jumpOrder"
+      />
+      <FixedOrder
+        v-if="show_api_order && !is_show_notice"
+        :title="last_title"
+        :is_show_move="is_show_notice"
+        :last_order="last_order"
+        name="api"
+        top="6.7rem"
+        :time="api_time"
+        @payOrder="checkOrder"
+        @jumpDetail="jumpOrder"
+      />
+      <NewFooter v-if="showFixedBtn" />
+    </div>
   </div>
 </template>
 
@@ -252,6 +264,7 @@ import tw_card4 from '../../../assets/img/tw_mlxz/wealth_24/home/4.png';
 import cn_order from '../../../assets/img/mlxz/lucky_year_report/order.png';
 import tw_order from '../../../assets/img/tw_mlxz/wealth_24/home/order.png';
 import PopNotice from '../../../components/PopNotice.vue';
+import NavigationBar from '../../../components/NavigationBar.vue';
 let channel = utils.getQueryStr('channel');
 const tipsArr5 = {
   'zh-CN': '订单创建中...',
@@ -267,6 +280,7 @@ export default {
     PopNotice,
     FixedOrder,
     NewFooter,
+    NavigationBar,
   },
   data() {
     return {
@@ -365,6 +379,9 @@ export default {
     },
     local_title() {
       return utils.getTitle(this.new_order_key);
+    },
+    is_channel_01() {
+      return utils.getFBChannel().indexOf('01') > -1;
     },
   },
   watch: {
