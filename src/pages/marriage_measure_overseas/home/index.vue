@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 11:47:47
+ * @LastEditTime: 2024-05-31 12:28:50
  * @Description: 八字合婚
 -->
 <template>
@@ -338,8 +338,8 @@ export default {
         channel: utils.getFBChannel(),
       }
     );
-
     this.getLastOrder();
+
     // 埋点事件上传
     reportBuryingEventAPI({
       event: 'page_view_marriage_main',

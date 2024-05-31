@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-30 20:16:12
+ * @LastEditTime: 2024-05-31 12:28:23
  * @Description:
  */
 export * from './fortune';
@@ -117,13 +117,12 @@ export const visitorLoginAPI = async data => {
   if (
     localStorage.getItem('mlxz_outer_open_uid') ||
     localStorage.getItem('mlxz_outer_access_token') ||
-    localStorage.getItem('mlxz_outer_visitor_id') ||
-    localStorage.getItem('mlxz_get_visitor')
+    localStorage.getItem('mlxz_outer_visitor_id')
   ) {
     console.log('已登录');
     return true;
   }
-  localStorage.setItem('mlxz_get_visitor', 1);
+  // localStorage.setItem('mlxz_get_visitor', 1);
 
   const res = await request('/web/login/visitor', 'POST', data);
   if (res.status !== 1000) return;
