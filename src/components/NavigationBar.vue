@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-07 21:00:52
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 15:50:21
+ * @LastEditTime: 2024-05-31 16:33:59
  * @Description: 
 -->
 <style>
@@ -80,10 +80,16 @@
   width: 7.5rem;
   height: 0.06rem;
 }
+.logo-name {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+}
 </style>
 <template>
   <div class="bar-box">
-    <div class="psychicai-navbar-header">
+    <div class="psychicai-navbar-header" style="position: relative">
       <div
         class="left-home"
         @click="goRoute('/index', 'h5_home')"
@@ -95,7 +101,7 @@
         />
         <span style="display: block" class="bold-text">{{ tips1 }}</span>
       </div>
-      <div class="title">
+      <div class="title logo-name">
         <span
           :style="{
             height: '0.36rem',
