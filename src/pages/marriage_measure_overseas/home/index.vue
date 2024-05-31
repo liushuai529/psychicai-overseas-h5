@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 10:39:26
+ * @LastEditTime: 2024-05-31 11:40:07
  * @Description: 八字合婚
 -->
 <template>
@@ -82,6 +82,7 @@
       <img class="card" :src="language === 'zh-CN' ? cn_card4 : tw_card4" />
       <img class="card" :src="language === 'zh-CN' ? cn_card5 : tw_card5" />
       <img
+        v-if="!is_channel_01"
         class="order"
         :src="language === 'zh-CN' ? cn_order : tw_order"
         @click="toOrderUrl()"

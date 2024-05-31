@@ -72,9 +72,7 @@ export default {
           display: 'inline',
           lang: 'en',
         });
-      if (self.ele.mobiscroll()) {
-        self.ele.mobiscroll('setValue', self.value, true);
-      }
+      self.ele.mobiscroll('setValue', self.value, true);
     }, 0);
   },
   computed: {

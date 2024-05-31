@@ -10,7 +10,7 @@
       }"
     >
       <header-notice v-if="has_pay"></header-notice>
-      <div @click="backHome()" class="back-box">
+      <div v-if="!is_channel_01" @click="backHome()" class="back-box">
         <img
           src="../../../assets/img/common/baogao_icon_home.png"
           class="left"
@@ -20,6 +20,7 @@
       </div>
       <!-- <canvas id="bg-svga"></canvas> -->
       <img
+        v-if="!is_channel_01"
         class="order-icon"
         @click="toOrder"
         :src="is_cn ? cn_history_order : tw_history_order"
@@ -1307,7 +1308,7 @@ margin-bottom: .2rem;
 .order-icon {
   position: fixed;
   right: 0;
-  top: 4.21rem;
+  top: 6rem;
   width: 1.3rem;
   height: 1.87rem;
   z-index: 100;

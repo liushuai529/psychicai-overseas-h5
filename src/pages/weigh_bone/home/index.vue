@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 10:44:02
+ * @LastEditTime: 2024-05-31 11:40:55
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -78,7 +78,7 @@
             $t('privacy-policy')
           }}</span>
         </div>
-        <div class="info-history" @click="toOrder">
+        <div v-if="!is_channel_01" class="info-history" @click="toOrder">
           <span>{{ $t('history-order') }}</span>
           <img src="../../../assets/img/mlxz/weigh_bone/img_arrow.png" />
         </div>

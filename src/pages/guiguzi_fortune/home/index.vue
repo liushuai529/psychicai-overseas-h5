@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 10:43:57
+ * @LastEditTime: 2024-05-31 11:37:18
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -117,6 +117,7 @@
       <img class="card" :src="language === 'zh-CN' ? cn_card_2 : tw_card_2" />
 
       <img
+        v-if="!is_channel_01"
         class="order"
         :src="is_cn ? cn_order : tw_order"
         @click="toOrder()"
@@ -950,7 +951,7 @@ export default {
   width: 7.5rem;
   height: 2rem;
   position: absolute;
-  top: 5.16rem;
+  top: 6.7rem;
   z-index: 2;
 }
 @keyframes scaleBtn {

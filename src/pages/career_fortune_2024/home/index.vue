@@ -124,6 +124,7 @@
       <img class="card" :src="language === 'zh-CN' ? cn_card_3 : tw_card_3" />
 
       <img
+        v-if="!is_channel_01"
         class="order"
         :src="is_cn ? cn_history_order : tw_history_order"
         @click="toOrder()"

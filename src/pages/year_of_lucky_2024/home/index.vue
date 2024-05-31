@@ -11,6 +11,7 @@
     >
       <header-notice v-if="has_pay"></header-notice>
       <img
+        v-if="!is_channel_01"
         class="order-icon"
         @click="toOrder"
         :src="is_cn ? cn_history_order : tw_history_order"
@@ -1221,7 +1222,7 @@ export default {
 .order-icon {
   position: fixed;
   right: -0.02rem;
-  top: 5.33rem;
+  top: 2.33rem;
   width: 0.56rem;
   height: 1.54rem;
   z-index: 100;

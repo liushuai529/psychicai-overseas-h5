@@ -134,6 +134,7 @@
       <img class="card" :src="is_cn ? cn_card3 : tw_card3" />
       <img class="card" :src="is_cn ? cn_card4 : tw_card4" />
       <img
+        v-if="!is_channel_01"
         class="order"
         :src="is_cn ? cn_order : tw_order"
         @click="toOrder()"
