@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-07 21:00:52
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 14:43:33
+ * @LastEditTime: 2024-05-31 15:19:50
  * @Description: 
 -->
 <style>
@@ -120,7 +120,7 @@
       alt=""
     />
     <nav class="psychicai-navbar-banner">
-      <van-tabs v-model="activeKey" @change="skipPage()">
+      <van-tabs v-model="activeKey" @change="skipPage">
         <van-tab
           v-for="item in tabList"
           :title="item.value"
@@ -174,7 +174,6 @@ export default {
     this.dataInit();
     for (let key in url_enums) {
       if (this.pathname.includes(url_enums[key])) {
-        console.log(key);
         this.activeKeySync(key);
         return false;
       }
@@ -182,7 +181,6 @@ export default {
   },
   methods: {
     activeKeySync(key) {
-      console.log(key);
       this.activeKey = key;
     },
     dataInit() {
@@ -198,7 +196,8 @@ export default {
       }
       this.tabList = list;
     },
-    skipPage() {
+    async skipPage() {
+      await utils.asleep(500);
       const { c_id, e_name } = tabEventEnums[this.activeKey];
       this.sendEventFbq();
       utils.firebaseLogEvent('10007', c_id, e_name, 'click', {
@@ -233,5 +232,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="less"></style>
