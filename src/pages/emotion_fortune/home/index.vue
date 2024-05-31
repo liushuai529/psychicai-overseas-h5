@@ -1308,7 +1308,7 @@ margin-bottom: .2rem;
 .order-icon {
   position: fixed;
   right: 0;
-  top: 6rem;
+  top: 3rem;
   width: 1.3rem;
   height: 1.87rem;
   z-index: 100;

@@ -2,10 +2,10 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-07 21:00:52
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 12:38:58
+ * @LastEditTime: 2024-05-31 14:43:33
  * @Description: 
 -->
-<style coped>
+<style>
 .psychicai-navbar-banner .van-tabs--line .van-tabs__wrap {
   height: 0.76rem;
 }
@@ -16,13 +16,17 @@
   bottom: 0;
   width: 1.12rem;
   background-color: #e3453d;
+  border-radius: 0;
 }
 .psychicai-navbar-banner .van-tab--active {
-  color: #e3453d;
+  color: #e3453d !important;
 }
 .psychicai-navbar-banner .van-nav-bar__text {
   color: #314a46;
   font-size: 0.26rem;
+}
+.psychicai-navbar-banner .van-tab {
+  color: #818484;
 }
 
 .psychicai-navbar-header {
@@ -51,9 +55,10 @@
 .psychicai-navbar-header span {
   color: #314a46;
   font-size: 0.26rem;
-  line-height: 0.3rem;
+  line-height: 0.26rem;
   text-align: center;
-  height: 0.3rem;
+  height: 0.26rem;
+  margin-top: 0.02rem;
 }
 .psychicai-navbar-header .title > span {
   font-size: 0.36rem;
@@ -61,6 +66,15 @@
 .bar-box {
   width: 100%;
   background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.bold-text {
+  font-weight: 700;
+}
+.divider-line {
+  width: 7.5rem;
+  height: 0.06rem;
 }
 </style>
 <template>
@@ -75,10 +89,18 @@
           src="../../src/assets/img/navtation_bar_icon/h5_icon_home.png"
           alt=""
         />
-        <span style="display: block">首页</span>
+        <span style="display: block" class="bold-text">{{ tips1 }}</span>
       </div>
       <div class="title">
-        <span>命理寻真</span>
+        <span
+          :style="{
+            height: '0.36rem',
+            'line-height': '0.36rem',
+            'font-size': '0.36rem',
+          }"
+          class="bold-text"
+          >{{ tips2 }}</span
+        >
       </div>
       <div
         class="right-order"
@@ -89,9 +111,14 @@
           src="../../src/assets/img/navtation_bar_icon/h5_icon_dingdan.png"
           alt=""
         />
-        <span>我的订单</span>
+        <span class="bold-text">{{ tips3 }}</span>
       </div>
     </div>
+    <img
+      src="../assets/img/navtation_bar_icon/daohang_img_jianbian.png"
+      class="divider-line"
+      alt=""
+    />
     <nav class="psychicai-navbar-banner">
       <van-tabs v-model="activeKey" @change="skipPage()">
         <van-tab
@@ -112,10 +139,24 @@ import 'vant/lib/index.css';
 Vue.use(Vant);
 import { url_enums, reportName, tabEventEnums } from '../../src/libs/enum';
 import utils from '../../src/libs/utils';
+
+const tipsArr1 = {
+  'zh-CN': '首页',
+  'zh-TW': '首頁',
+};
+const tipsArr2 = {
+  'zh-CN': '命理寻真',
+  'zh-TW': '命理尋真',
+};
+const tipsArr3 = {
+  'zh-CN': '我的订单',
+  'zh-TW': '我的訂單',
+};
 export default {
   props: {
     callback: Function,
   },
+
   data() {
     return {
       activeKey: '',
@@ -123,6 +164,9 @@ export default {
       origin: '',
       tabList: [],
       channel: utils.getFBChannel(),
+      tips1: tipsArr1[utils.getLanguage()],
+      tips2: tipsArr2[utils.getLanguage()],
+      tips3: tipsArr3[utils.getLanguage()],
     };
   },
 

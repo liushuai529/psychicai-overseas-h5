@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-07 21:00:52
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 14:18:02
+ * @LastEditTime: 2024-05-31 14:21:50
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -84,7 +84,6 @@
     ></script>
     <script>
       const is_prod = !/(localhost|192\.168|test-|console)/.test(location.href);
-      console.log('is_prod:', is_prod);
       is_prod &&
         window.DATAFLUX_RUM &&
         window.DATAFLUX_RUM.init({
