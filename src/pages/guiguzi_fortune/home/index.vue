@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 11:37:18
+ * @LastEditTime: 2024-05-31 14:17:04
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -944,14 +944,14 @@ export default {
   width: 7.5rem;
   height: 8.9rem;
   position: absolute;
-  top: 1.65rem;
+  top: 0;
   z-index: 1;
 }
 #canvastag {
   width: 7.5rem;
   height: 2rem;
   position: absolute;
-  top: 6.7rem;
+  top: 5rem;
   z-index: 2;
 }
 @keyframes scaleBtn {
@@ -978,6 +978,7 @@ export default {
   background-repeat: no-repeat;
   padding-bottom: 2.8rem;
   padding-top: 7.16rem;
+  position: relative;
   .tags {
     width: 6.86rem;
     height: 0.78rem;

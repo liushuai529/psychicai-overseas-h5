@@ -2,13 +2,12 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-31 12:28:23
+ * @LastEditTime: 2024-05-31 14:09:03
  * @Description:
  */
 export * from './fortune';
 export * from './combine';
 import request from './request';
-import utils from '../libs/utils';
 
 /**
  * @description: 查询测算商品列表
