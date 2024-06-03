@@ -195,6 +195,7 @@ const tipsArr6 = {
   'zh-TW': '請稍等...',
 };
 export default {
+
   data() {
     return {
       tips1: tipsArr1[utils.getLanguage()],
@@ -223,6 +224,8 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/2404f091a163349f45d3909f82e4660cc3c6.png',
       is_show_shandong: false,
       is_show_daoqi: false,
+      payCanClick : false,
+      pay_lock_time:0
     };
   },
   props: {
@@ -499,6 +502,15 @@ export default {
      * @return {*}
      */
     async payMoney() {
+      //防抖
+      if(this.payCanClick){
+        return false
+      } 
+      this.payCanClick = true
+      clearTimeout(this.pay_lock_time)
+      this.pay_lock_time = setTimeout(() => {
+        this.payCanClick = false
+      }, 2000);
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
         await utils.checkFB();

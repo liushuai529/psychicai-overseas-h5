@@ -201,6 +201,8 @@ export default {
       start_down: false,
       is_show_shandong: false,
       is_show_daoqi: false,
+      payCanClick : false,
+      pay_lock_time:0
     };
   },
   props: {
@@ -405,6 +407,15 @@ export default {
      * @return {*}
      */
     async payMoney() {
+      //防抖
+      if(this.payCanClick){
+        return false
+      } 
+      this.payCanClick = true
+      clearTimeout(this.pay_lock_time)
+      this.pay_lock_time = setTimeout(() => {
+        this.payCanClick = false
+      }, 2000);
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
         await utils.checkFB();
