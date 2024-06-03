@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="form"
-    :style="{
-      width: width * 0.95 + 'px',
-      height: (width * 0.95 * 5) / 7 + 'px',
-    }"
-  >
+  <div class="form">
     <img
       class="title"
       src="../../../assets/img/mlxz/bzhh/ziliao_word.png"
