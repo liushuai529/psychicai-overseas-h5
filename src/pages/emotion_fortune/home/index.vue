@@ -114,7 +114,7 @@
     <img class="card" :src="is_cn ? cn_icon_3 : tw_card_3" />
     <img class="card" :src="is_cn ? cn_icon_4 : tw_card_4" />
     <img class="card" :src="is_cn ? cn_icon_5 : tw_card_5" />
-
+    <!-- <GejuInfo mode="Notdefault" user_desc="小强，女，2002年2月2日生人" :dataList="[{key:'all',content:'all测试测测试测试测试试测试测试测试测试'},{key:'love',content:'love测试测试测试测试测试测试测试测试测试测试测测试测试测试测试测试测试测试测试测试测试测试试测试测试测试测试测试测试'},{key:'cause',content:'cause测试测试测试测试测试测试测试测试测试测试测试'}]"/> -->
     <img
       v-if="showFixedBtn"
       class="fix-btn emo-btn"
@@ -245,6 +245,8 @@ import tw_icon_2 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home2_f
 import tw_icon_3 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_fanti.png';
 import tw_icon_4 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.png';
 import tw_icon_5 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.png';
+
+import GejuInfo from '../../../components/GejuInfo.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
 const tipsArr5 = {
@@ -261,6 +263,7 @@ export default {
     HomeFooter,
     PopNotice,
     FixedOrder,
+    GejuInfo
   },
   data() {
     return {
