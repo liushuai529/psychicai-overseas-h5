@@ -37,7 +37,9 @@
         :change_color="true"
       ></BaziTable>
     </div>
-    <div :class="['method-box', is_cn ? 'cn-method' : 'tw-method']">
+    <div :class="['method-box']">
+      <img class="method-title-img" :src="is_cn? img_zhifu_jian: img_zhifu_fan"/>
+    
       <PayDetail
         className="pay-method"
         ref="payDetail"
@@ -129,6 +131,8 @@ import cn_bg_3 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_
 import tw_bg_1 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_1_fanti.png';
 import tw_bg_2 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_2_fanti.png';
 import tw_bg_3 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_3_fanti.png';
+import img_zhifu_jian from '../../../assets/img/emotion_v2/new/cn/detail/img_zhifu_jian.png';
+import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_fan.png';
 import NewFooter from '../../../components/NewFooter.vue';
 export default {
   components: {
@@ -373,21 +377,22 @@ export default {
 
 .method-box {
   width: 7.1rem;
-  height: 7.71rem;
+  height: 11.06rem;
   display: flex;
-  justify-content: center;
-  padding-top: 1.14rem;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  /* padding-top: 1.14rem; */
   margin-bottom: 0.36rem;
-}
-.cn-method {
-  background: url('../../../assets/img/emotion_v2/new/cn/detail/img_zhifu_jian.png')
-    no-repeat;
-  background-size: 100% 100%;
-}
-.tw-method {
-  background: url('../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_fan.png')
-    no-repeat;
-  background-size: 100% 100%;
+  background: #FFFAFA;
+  border-radius: 0.16rem;
+  border: 1px solid red;
+  .method-title-img {
+    width: 6.68rem;
+    height: 0.93rem;
+    border: 1px solid red;
+    margin-top: -0.13rem;
+  }
 }
 .detail {
   display: flex;
