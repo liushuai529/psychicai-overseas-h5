@@ -257,6 +257,12 @@ import tw_icon_3 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_f
 import tw_icon_4 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.png';
 import tw_icon_5 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.png';
 import NewFooter from '../../../components/NewFooter.vue';
+
+import tStatistic from 'tstatistic';
+tStatistic.init({
+  app_key: 20002003,
+});
+
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
 const tipsArr5 = {
@@ -418,6 +424,16 @@ export default {
     },
   },
   created() {
+    tStatistic.send({
+      event: 'page_view',
+      md: 10006,
+      c_id: -10001,
+      channel: utils.getFBChannel(),
+      args: {
+        args_name: 'page_view_2024lovely_main',
+        channel: utils.getFBChannel(),
+      },
+    });
     this.$store.dispatch('common/getProduction');
     utils.firebaseLogEvent(
       '10006',

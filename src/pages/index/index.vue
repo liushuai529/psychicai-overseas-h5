@@ -1748,6 +1748,7 @@ export default {
       event: 'page_view',
       md: 10001,
       c_id: -10001,
+      channel: e_channel,
       args: {
         args_name: 'page_view_h5main',
         channel: e_channel,

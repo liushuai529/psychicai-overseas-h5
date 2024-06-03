@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-31 12:28:50
+ * @LastEditTime: 2024-06-03 15:02:21
  * @Description: 八字合婚
 -->
 <template>
@@ -224,6 +224,10 @@ import tw_header from '../../../assets/img/mlxz/svga/bzhh/tw_header.svga';
 import { Downloader, Parser, Player } from 'svga.lite';
 import PopNotice from '../../../components/PopNotice.vue';
 import NewFooter from '../../../components/NewFooter.vue';
+import tStatistic from 'tstatistic';
+tStatistic.init({
+  app_key: 20002003,
+});
 const tipsArr5 = {
   'zh-CN': '订单创建中...',
   'zh-TW': '訂單創建中...',
@@ -325,6 +329,16 @@ export default {
   },
 
   created() {
+    tStatistic.send({
+      event: 'page_view',
+      md: 10007,
+      c_id: -10001,
+      channel: utils.getFBChannel(),
+      args: {
+        args_name: 'page_view_marriage_main',
+        channel: utils.getFBChannel(),
+      },
+    });
     this.$store.dispatch('common/getProduction');
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
