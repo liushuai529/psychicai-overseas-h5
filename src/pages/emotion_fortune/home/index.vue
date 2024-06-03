@@ -261,6 +261,7 @@ import NewFooter from '../../../components/NewFooter.vue';
 import tStatistic from 'tstatistic';
 tStatistic.init({
   app_key: 20002003,
+  channel: utils.getFBChannel(),
 });
 
 // 组合测算相关参数
@@ -428,7 +429,6 @@ export default {
       event: 'page_view',
       md: 10006,
       c_id: -10001,
-      channel: utils.getFBChannel(),
       args: {
         args_name: 'page_view_2024lovely_main',
         channel: utils.getFBChannel(),

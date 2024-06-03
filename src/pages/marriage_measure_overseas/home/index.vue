@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-06-03 15:02:21
+ * @LastEditTime: 2024-06-03 15:20:21
  * @Description: 八字合婚
 -->
 <template>
@@ -227,6 +227,7 @@ import NewFooter from '../../../components/NewFooter.vue';
 import tStatistic from 'tstatistic';
 tStatistic.init({
   app_key: 20002003,
+  channel: utils.getFBChannel(),
 });
 const tipsArr5 = {
   'zh-CN': '订单创建中...',
@@ -333,7 +334,6 @@ export default {
       event: 'page_view',
       md: 10007,
       c_id: -10001,
-      channel: utils.getFBChannel(),
       args: {
         args_name: 'page_view_marriage_main',
         channel: utils.getFBChannel(),
