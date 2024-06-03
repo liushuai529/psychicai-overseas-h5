@@ -426,7 +426,7 @@ export default {
   },
   created() {
     tStatistic.send({
-      event: 'page_view',
+      event: 'page_view_2024lovely_main',
       md: 10006,
       c_id: -10001,
       args: {

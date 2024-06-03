@@ -1745,7 +1745,7 @@ export default {
   },
   created() {
     tStatistic.send({
-      event: 'page_view',
+      event: 'page_view_h5main',
       md: 10001,
       c_id: -10001,
       args: {
