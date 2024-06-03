@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-06-03 15:54:35
+ * @LastEditTime: 2024-06-03 16:00:06
  * @Description: 八字合婚
 -->
 <template>
@@ -330,15 +330,17 @@ export default {
   },
 
   created() {
-    tStatistic.send({
-      event: 'page_view_marriage_main',
-      md: 10007,
-      c_id: -10001,
-      args: {
-        args_name: 'page_view_marriage_main',
-        channel: utils.getFBChannel(),
-      },
-    });
+    utils.isProd() &&
+      tStatistic &&
+      tStatistic.send({
+        event: 'page_view_marriage_main',
+        md: 10007,
+        c_id: -10001,
+        args: {
+          args_name: 'page_view_marriage_main',
+          channel: utils.getFBChannel(),
+        },
+      });
     this.$store.dispatch('common/getProduction');
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';

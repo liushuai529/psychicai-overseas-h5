@@ -425,15 +425,17 @@ export default {
     },
   },
   created() {
-    tStatistic.send({
-      event: 'page_view_2024lovely_main',
-      md: 10006,
-      c_id: -10001,
-      args: {
-        args_name: 'page_view_2024lovely_main',
-        channel: utils.getFBChannel(),
-      },
-    });
+    utils.isProd() &&
+      tStatistic &&
+      tStatistic.send({
+        event: 'page_view_2024lovely_main',
+        md: 10006,
+        c_id: -10001,
+        args: {
+          args_name: 'page_view_2024lovely_main',
+          channel: utils.getFBChannel(),
+        },
+      });
     this.$store.dispatch('common/getProduction');
     utils.firebaseLogEvent(
       '10006',

@@ -1744,15 +1744,17 @@ export default {
     },
   },
   created() {
-    tStatistic.send({
-      event: 'page_view_h5main',
-      md: 10001,
-      c_id: -10001,
-      args: {
-        args_name: 'page_view_h5main',
-        channel: utils.getFBChannel(),
-      },
-    });
+    utils.isProd() &&
+      tStatistic &&
+      tStatistic.send({
+        event: 'page_view_h5main',
+        md: 10001,
+        c_id: -10001,
+        args: {
+          args_name: 'page_view_h5main',
+          channel: utils.getFBChannel(),
+        },
+      });
     document.title = this.$t('dom-title');
     this.getLastOrder();
 
