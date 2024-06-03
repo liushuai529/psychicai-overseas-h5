@@ -772,7 +772,12 @@ import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_
 
 import PayModal from './components/payModal.vue';
 import ResultPop from '../../components/ResultPop.vue';
+import tStatistic from 'tstatistic';
+tStatistic.init({
+  app_key: 20002003,
+});
 
+const e_channel = utils.getFBChannel() || '';
 const tipsArr5 = {
   'zh-CN': '订单创建中...',
   'zh-TW': '訂單創建中...',
@@ -1739,6 +1744,15 @@ export default {
     },
   },
   created() {
+    tStatistic.send({
+      event: 'page_view',
+      md: 10001,
+      c_id: -10001,
+      args: {
+        args_name: 'page_view_h5main',
+        channel: e_channel,
+      },
+    });
     document.title = this.$t('dom-title');
     this.getLastOrder();
 
@@ -2541,6 +2555,15 @@ export default {
           this.pay_modal2 = true;
           return;
         }
+        tStatistic.send({
+          event: 'click',
+          md: 10001,
+          c_id: -10031,
+          args: {
+            args_name: 'click_main_choise2group',
+            channel: e_channel,
+          },
+        });
         utils.firebaseLogEvent(
           '10001',
           '-10031',
@@ -2559,6 +2582,15 @@ export default {
         this.pay_modal = true;
         return;
       }
+      tStatistic.send({
+        event: 'click',
+        md: 10001,
+        c_id: -10032,
+        args: {
+          args_name: 'click_main_choise3group',
+          channel: e_channel,
+        },
+      });
       utils.firebaseLogEvent(
         '10001',
         '-10032',
