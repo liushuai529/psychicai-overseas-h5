@@ -166,7 +166,7 @@
               :class="['it']"
             >
               <img
-                v-if="three_list.length"
+                v-if="it.product_key"
                 :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
                 class="check-icon"
                 alt=""
@@ -250,7 +250,7 @@
               :class="['it']"
             >
               <img
-                v-if="two_list.length"
+                v-if="it.product_key"
                 :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
                 class="check-icon"
                 alt=""
@@ -529,7 +529,7 @@
           <div @click="new_sale_modal = false" class="left">取消</div>
           <div class="center">任选三项享特惠</div>
           <div
-            v-if="pick_list.length === 3"
+            v-if="confirm_btn_3"
             @click="submitPopList()"
             class="right-common right-check"
           >
@@ -583,7 +583,7 @@
           <div @click="new_sale_modal2 = false" class="left">取消</div>
           <div class="center">任选两项享特惠</div>
           <div
-            v-if="pick_list2.length === 2"
+            v-if="confirm_btn_2"
             @click="submitPopList(2)"
             class="right-common right-check"
           >
@@ -1665,6 +1665,26 @@ export default {
     local_title() {
       return utils.getTitle(this.new_order_key);
     },
+    // 遍历是否每一项都有product_key
+
+    confirm_btn_3() {
+      if (this.pick_list.length < 3) {
+        return false;
+      }
+      let flag = this.pick_list.every(it => {
+        return it.product_key;
+      });
+      return flag;
+    },
+    confirm_btn_2() {
+      if (this.pick_list2.length < 2) {
+        return false;
+      }
+      let flag = this.pick_list2.every(it => {
+        return it.product_key;
+      });
+      return flag;
+    },
   },
   watch: {
     sale_visible(val) {
@@ -2659,11 +2679,19 @@ export default {
     },
     // 获取本地缓存选择的商品
     getLocalChecked(list, key) {
+      // 本地缓存 三个缓存感情运 两个缓存袁天罡
+      let init_1 = this.new_pop_list.find(
+        it => it.product_key === 'h5_emotion2024'
+      );
+      let init_2 = this.new_pop_list.find(
+        it => it.product_key === 'h5_weigh_bone'
+      );
       this.new_pop_list.forEach(it => {
         it.checked = false;
       });
+      let set_list = list === 'three_list' ? [init_1, '', ''] : [init_2, ''];
       let arr = localStorage.getItem(key);
-      this[list] = arr ? JSON.parse(arr) : [];
+      this[list] = arr ? JSON.parse(arr) : set_list;
       this[list].forEach(item => {
         this.new_pop_list.forEach(it => {
           if (it.product_key === item.product_key) {
@@ -2672,12 +2700,17 @@ export default {
         });
       });
     },
+
     // 获取组合订单信息
     getSelectTagList(val) {
       if (val > 0) {
-        if (!this.two_list.length) return;
+        if (!this.two_list.length) {
+          return;
+        }
       } else {
-        if (!this.three_list.length) return;
+        if (!this.three_list.length) {
+          return;
+        }
       }
 
       if (val > 0) {
@@ -2721,6 +2754,7 @@ export default {
       }
       this.pick_list = JSON.parse(JSON.stringify(this.three_list));
       this.pick_list2 = JSON.parse(JSON.stringify(this.two_list));
+      console.log(this.pick_list);
     },
 
     // 获取已下单未填写订单信息
