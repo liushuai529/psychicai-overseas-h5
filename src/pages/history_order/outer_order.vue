@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-06-04 15:24:25
+ * @LastEditTime: 2024-06-04 18:33:39
  * @Description: 历史订单
 -->
 <template>
@@ -454,6 +454,9 @@ export default {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
+    productList() {
+      return this.$store.state.common.productList;
+    },
   },
   filters: {
     filterName(val) {
@@ -461,6 +464,8 @@ export default {
     },
   },
   created() {
+    this.$store.dispatch('common/getProduction');
+
     setInterval(() => {
       let is_reload = localStorage.getItem('mlxz_reload_page_history');
       if (is_reload) {
@@ -639,7 +644,35 @@ export default {
             trade_pay_type,
             trade_target_org,
             combine_product_ids: combine_product_ids,
-            callback_url:
+          };
+          if (product_key === 'h5_combo2_attach') {
+            let same_product = this.productList.find(
+              item => item.product_id === combine_product_ids[0]
+            );
+            const back_url = path_enums[same_product.product_key];
+            params.extra_ce_suan = ext;
+            params.callback_url = `${
+              location.origin
+            }/${utils.getFBChannel()}/${back_url}.html#/result?path=${
+              path_enums[same_product.product_key]
+            }&report_price=${payment}&repay=1`;
+          } else {
+            utils.firebaseLogEvent(
+              '10002',
+              length_ === 2 ? '-10010' : '-10011',
+              length_ === 2
+                ? 'click_history_report2_repay'
+                : 'click_history_report3_repay',
+              'click',
+              {
+                args_name:
+                  length_ === 2
+                    ? 'click_history_report2_repay'
+                    : 'click_history_report3_repay',
+                channel: utils.getFBChannel(),
+              }
+            );
+            params.callback_url =
               location.origin +
               `/${utils.getFBChannel()}/` +
               'index.html' +
@@ -647,23 +680,9 @@ export default {
               length_ +
               '&report_price=' +
               payment +
-              '&repay=1',
-          };
-          utils.firebaseLogEvent(
-            '10002',
-            length_ === 2 ? '-10010' : '-10011',
-            length_ === 2
-              ? 'click_history_report2_repay'
-              : 'click_history_report3_repay',
-            'click',
-            {
-              args_name:
-                length_ === 2
-                  ? 'click_history_report2_repay'
-                  : 'click_history_report3_repay',
-              channel: utils.getFBChannel(),
-            }
-          );
+              '&repay=1';
+          }
+
           const res = await payOrderAPI(params);
 
           Indicator.close();
