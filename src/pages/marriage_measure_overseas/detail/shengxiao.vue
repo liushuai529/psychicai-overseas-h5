@@ -8,7 +8,7 @@
       <div :class="`center ${relStyle(shengxiao.rel)}`">
         >
         <span>{{ shengxiao.rel }}</span>
-        <
+        &lt;
       </div>
       <div :class="`right circle ${getAnimal(shengxiao.female)}`">
         {{ shengxiao.female }}
@@ -24,7 +24,7 @@
         <span>
           {{ riyuan.rel }}
         </span>
-        <
+        &lt;
       </div>
       <div :class="`right circle ${styleColor(riyuan.female)}`">
         {{ riyuan.female }}
@@ -40,7 +40,7 @@
         <span>
           {{ fuqigong.rel }}
         </span>
-        <
+        &lt;
       </div>
       <div :class="`right circle ${styleColor(fuqigong.female)}`">
         {{ fuqigong.female }}
@@ -56,7 +56,7 @@
         <span>
           {{ zinvgong.rel }}
         </span>
-        <
+        &lt;
       </div>
       <div :class="`right circle ${styleColor(zinvgong.female)}`">
         {{ zinvgong.female }}
@@ -70,7 +70,7 @@
       <div class="center visibility-h">
         >
         <span> - </span>
-        <
+        &lt;
       </div>
       <div class="right circle star-box">
         {{ is_result ? taohua.female : '?' }}颗
@@ -84,7 +84,7 @@
       <div class="center visibility-h">
         >
         <span> - </span>
-        <
+        &lt;
       </div>
       <div class="right circle star-box">
         {{ is_result ? hunyin.female : '?' }}颗

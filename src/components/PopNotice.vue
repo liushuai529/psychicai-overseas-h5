@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-23 10:03:54
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-25 00:30:48
+ * @LastEditTime: 2024-05-31 13:53:33
  * @Description: 
 -->
 <template>
@@ -251,8 +251,7 @@ export default {
         );
         let male_str = marry_info.male_str;
         let female_str = marry_info.female_str;
-        let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
-&pay_modal=1&use_fixed_time=1&discount_pay=0`;
+        let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}&pay_modal=1&use_fixed_time=1&discount_pay=0`;
         location.href = `${location.origin}/${utils.getFBChannel()}/${
           path_enums[this.product_key]
         }.html#/${path}`;

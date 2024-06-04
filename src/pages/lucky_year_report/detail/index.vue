@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-08 20:35:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 21:20:33
+ * @LastEditTime: 2024-05-30 18:45:06
  * @Description: 
 -->
 <template>
@@ -81,6 +81,7 @@
       e_click_name="click_2024wealty_pay"
       a_click_token="rckacf"
     />
+    <NewFooter v-if="showFixedBtn" />
   </div>
 </template>
 
@@ -115,8 +116,9 @@ import cn_zhong_5 from '../../../assets/img/mlxz/lucky_year_report/detail/new_de
 import tw_zhong_5 from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_5.png';
 import tw_modal_bg from '../../../assets/img/tw_mlxz/wealth_24/detail/modal_bg.png';
 import { report_id_arr } from '../../../libs/enum';
+import NewFooter from '../../../components/NewFooter.vue';
 export default {
-  components: { PayCard, BaziTable, payModal },
+  components: { PayCard, BaziTable, payModal, NewFooter },
   computed: {},
   data() {
     return {
@@ -442,5 +444,6 @@ export default {
 .fix-box {
   position: fixed !important;
   bottom: 1.3rem;
+  z-index: 2;
 }
 </style>

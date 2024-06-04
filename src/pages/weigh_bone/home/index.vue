@@ -2,116 +2,118 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 16:51:05
+ * @LastEditTime: 2024-05-31 11:40:55
  * @Description: 袁天罡称骨
 -->
 <template>
-  <div :class="{ container: true, 'fix-box': choose_time ? true : false }">
-    <header-notice v-if="has_pay"></header-notice>
-    <canvas class="canvas" id="canvas"></canvas>
-    <div class="info">
-      <div class="info-name">
-        <input
-          v-model="username"
-          class="info-input"
-          id="username"
-          type="text"
-          :placeholder="$t('name-placeholder')"
-        />
+  <div>
+    <NavigationBar v-if="is_channel_01" />
+    <div :class="{ container: true, 'fix-box': choose_time ? true : false }">
+      <header-notice v-if="has_pay"></header-notice>
+      <canvas class="canvas" id="canvas"></canvas>
+      <div class="info">
+        <div class="info-name">
+          <input
+            v-model="username"
+            class="info-input"
+            id="username"
+            type="text"
+            :placeholder="$t('name-placeholder')"
+          />
 
-        <img
-          v-if="sex === '1'"
-          class="sex"
-          src="../../../assets/img/mlxz/weigh_bone/img_boy.png"
-          ref="sex_male"
-          @click="changeSex(0)"
-        />
-        <img
-          v-else
-          class="sex"
-          src="../../../assets/img/mlxz/weigh_bone/img_gril.png"
-          ref="sex_female"
-          @click="changeSex(1)"
-        />
-      </div>
-      <div class="info-time">
-        <div
-          class="info-input"
-          :style="{ color: picker_date ? '#aeb5d9' : '#aeb5d9' }"
-          @click="openPicker"
-        >
-          {{ picker_date || $t('birth-placeholder') }}
+          <img
+            v-if="sex === '1'"
+            class="sex"
+            src="../../../assets/img/mlxz/weigh_bone/img_boy.png"
+            ref="sex_male"
+            @click="changeSex(0)"
+          />
+          <img
+            v-else
+            class="sex"
+            src="../../../assets/img/mlxz/weigh_bone/img_gril.png"
+            ref="sex_female"
+            @click="changeSex(1)"
+          />
+        </div>
+        <div class="info-time">
+          <div
+            class="info-input"
+            :style="{ color: picker_date ? '#aeb5d9' : '#aeb5d9' }"
+            @click="openPicker"
+          >
+            {{ picker_date || $t('birth-placeholder') }}
+          </div>
+          <img
+            class="calendar"
+            src="../../../assets/img/mlxz/weigh_bone/icon_rili.png"
+            @click="openPicker"
+          />
         </div>
         <img
-          class="calendar"
-          src="../../../assets/img/mlxz/weigh_bone/icon_rili.png"
-          @click="openPicker"
+          id="info-btn"
+          class="info-btn"
+          :src="is_cn ? cn_btn : tw_btn"
+          @click="check"
         />
+        <div class="info-privacy">
+          <img
+            v-if="privacyChecked"
+            class="check"
+            src="../../../assets/img/career_divination_overseas/home/checked.png"
+            @click="privacyChecked = !privacyChecked"
+          />
+          <img
+            v-else
+            class="check"
+            src="../../../assets/img/career_divination_overseas/home/unchecked.png"
+            @click="privacyChecked = !privacyChecked"
+          />
+          <span>查看</span>
+          <span class="link" @click="link('user_agreement.html')">{{
+            $t('user-agreement')
+          }}</span>
+          <span>和</span>
+          <span class="link" @click="link('privacy.html')">{{
+            $t('privacy-policy')
+          }}</span>
+        </div>
+        <div v-if="!is_channel_01" class="info-history" @click="toOrder">
+          <span>{{ $t('history-order') }}</span>
+          <img src="../../../assets/img/mlxz/weigh_bone/img_arrow.png" />
+        </div>
       </div>
-      <img
-        id="info-btn"
-        class="info-btn"
-        :src="is_cn ? cn_btn : tw_btn"
-        @click="check"
-      />
-      <div class="info-privacy">
-        <img
-          v-if="privacyChecked"
-          class="check"
-          src="../../../assets/img/career_divination_overseas/home/checked.png"
-          @click="privacyChecked = !privacyChecked"
-        />
-        <img
-          v-else
-          class="check"
-          src="../../../assets/img/career_divination_overseas/home/unchecked.png"
-          @click="privacyChecked = !privacyChecked"
-        />
-        <span>查看</span>
-        <span class="link" @click="link('user_agreement.html')">{{
-          $t('user-agreement')
-        }}</span>
-        <span>和</span>
-        <span class="link" @click="link('privacy.html')">{{
-          $t('privacy-policy')
-        }}</span>
-      </div>
-      <div class="info-history" @click="toOrder">
-        <span>{{ $t('history-order') }}</span>
-        <img src="../../../assets/img/mlxz/weigh_bone/img_arrow.png" />
-      </div>
-    </div>
-    <footerBanner />
+      <footerBanner />
 
-    <!-- <img
+      <!-- <img
       v-show="showFixedBtn"
       class="btn-fixed"
       src="../../../assets/img/mlxz/career/img_btn.png"
       @click="check"
     /> -->
 
-    <!-- 時间选择控件 -->
-    <DatetimePicker
-      start="1960"
-      end="2000"
-      :year="year"
-      :month="month"
-      :date="date"
-      :birth_hour="birth_hour"
-      v-show="choose_time && !show_nongli"
-    ></DatetimePicker>
-    <NongliPicker
-      start="1960"
-      end="2000"
-      :year="year"
-      :month="month"
-      :date="date"
-      :birth_hour="birth_hour"
-      v-show="choose_time && show_nongli"
-    ></NongliPicker>
+      <!-- 時间选择控件 -->
+      <DatetimePicker
+        start="1960"
+        end="2000"
+        :year="year"
+        :month="month"
+        :date="date"
+        :birth_hour="birth_hour"
+        v-show="choose_time && !show_nongli"
+      ></DatetimePicker>
+      <NongliPicker
+        start="1960"
+        end="2000"
+        :year="year"
+        :month="month"
+        :date="date"
+        :birth_hour="birth_hour"
+        v-show="choose_time && show_nongli"
+      ></NongliPicker>
 
-    <!-- Popup -->
-    <!-- <PayPopup
+      <!-- Popup -->
+      <!-- <PayPopup
       ref="PayPopup"
       :visible="visible"
       :product_key="product_key"
@@ -127,42 +129,43 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
-    <PopNotice
-      v-if="is_show_notice"
-      @close="closeNotice"
-      :count_down="count_down"
-      :product_key="product_key"
-      e_id="10009"
-      c_id="-10014"
-      c_name="click_chenggu_discount1"
-    />
-    <FixedOrder
-      v-if="show_fixed_order && !is_show_notice"
-      :title="local_title"
-      :is_show_move="is_show_notice"
-      :new_order_key="new_order_key"
-      name="local"
-      top="4.7rem"
-      :time="local_time"
-      @payOrder="checkOrder"
-      @jumpDetail="jumpOrder"
-    />
-    <FixedOrder
-      v-if="show_api_order && !is_show_notice"
-      :title="last_title"
-      :is_show_move="is_show_notice"
-      :last_order="last_order"
-      name="api"
-      top="6.7rem"
-      :time="api_time"
-      @payOrder="checkOrder"
-      @jumpDetail="jumpOrder"
-    />
+      <PopNotice
+        v-if="is_show_notice"
+        @close="closeNotice"
+        :count_down="count_down"
+        :product_key="product_key"
+        e_id="10009"
+        c_id="-10014"
+        c_name="click_chenggu_discount1"
+      />
+      <FixedOrder
+        v-if="show_fixed_order && !is_show_notice"
+        :title="local_title"
+        :is_show_move="is_show_notice"
+        :new_order_key="new_order_key"
+        name="local"
+        top="4.7rem"
+        :time="local_time"
+        @payOrder="checkOrder"
+        @jumpDetail="jumpOrder"
+      />
+      <FixedOrder
+        v-if="show_api_order && !is_show_notice"
+        :title="last_title"
+        :is_show_move="is_show_notice"
+        :last_order="last_order"
+        name="api"
+        top="6.7rem"
+        :time="api_time"
+        @payOrder="checkOrder"
+        @jumpDetail="jumpOrder"
+      />
+    </div>
   </div>
 </template>
 <script>
 import FixedOrder from '../../../components/FixedOrder.vue';
-
+import NavigationBar from '../../../components/NavigationBar.vue';
 import { Toast, Indicator } from 'mint-ui';
 import { Downloader, Parser, Player } from 'svga.lite';
 import DatetimePicker from '../../../components/DatetimePicker';
@@ -211,6 +214,7 @@ export default {
     footerBanner,
     PopNotice,
     FixedOrder,
+    NavigationBar,
   },
   data() {
     return {
@@ -297,6 +301,9 @@ export default {
         });
       }
       return flag;
+    },
+    is_channel_01() {
+      return utils.getFBChannel().indexOf('01') > -1;
     },
   },
   watch: {
@@ -506,18 +513,22 @@ export default {
     },
     // 支付选择
     async check() {
-      utils.firebaseLogEvent('10009', '-10002', 'click_chenggu_main', 'click', {
-        args_name: 'click_chenggu_main',
-        channel: utils.getFBChannel(),
-      });
-
-      await utils.asleep(500);
-
       let username = this.username;
       let sex = this.sex;
       let gongli_nongli = this.gongli_nongli;
       let time_obj = this.picker_date_obj;
       if (username == '') {
+        utils.firebaseLogEvent(
+          '10009',
+          '-10002',
+          'click_chenggu_main',
+          'click',
+          {
+            args_name: 'click_chenggu_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('tips-1'));
         let dom = document.getElementById('username');
         dom.focus();
@@ -528,10 +539,33 @@ export default {
       //   return;
       // }
       if (time_obj == null) {
+        utils.firebaseLogEvent(
+          '10009',
+          '-10002',
+          'click_chenggu_main',
+          'click',
+          {
+            args_name: 'click_chenggu_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('tips-3'));
         return;
       }
       if (!this.privacyChecked) {
+        utils.firebaseLogEvent(
+          '10009',
+          '-10002',
+          'click_chenggu_main',
+          'click',
+          {
+            args_name: 'click_chenggu_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
+
         Toast(this.$t('tips-4'));
         return;
       }
@@ -553,6 +587,11 @@ export default {
       window.localStorage.setItem('weigh_bone_info', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
+      utils.firebaseLogEvent('10009', '-10002', 'click_chenggu_main', 'click', {
+        args_name: 'click_chenggu_main',
+        channel: utils.getFBChannel(),
+        click_type: 'screen_tracking',
+      });
       if (utils.isProd()) {
         await utils.checkFB();
         try {

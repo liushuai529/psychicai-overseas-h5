@@ -2,13 +2,12 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-06 16:45:56
  * @LastEditors: wujiang
- * @LastEditTime: 2024-05-23 17:21:59
+ * @LastEditTime: 2024-05-31 14:09:03
  * @Description:
  */
 export * from './fortune';
 export * from './combine';
 import request from './request';
-import utils from '../libs/utils';
 
 /**
  * @description: 查询测算商品列表
@@ -119,13 +118,18 @@ export const visitorLoginAPI = async data => {
     localStorage.getItem('mlxz_outer_access_token') ||
     localStorage.getItem('mlxz_outer_visitor_id')
   ) {
+    console.log('已登录');
     return true;
   }
+  // localStorage.setItem('mlxz_get_visitor', 1);
+
   const res = await request('/web/login/visitor', 'POST', data);
   if (res.status !== 1000) return;
   localStorage.setItem('mlxz_outer_open_uid', res.data.open_uid);
   localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
   localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
+  console.log('首次登录');
+
   return true;
 };
 

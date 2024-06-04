@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-07 21:00:52
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 17:16:10
+ * @LastEditTime: 2024-05-31 14:18:52
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -77,6 +77,33 @@
         var vConsole = new VConsole();
       }
     </script>
+    <script
+      src="https://static.guance.com/browser-sdk/v3/dataflux-rum.js"
+      type="text/javascript"
+    ></script>
+    <script>
+      const is_prod = !/(localhost|192\.168|test-|console)/.test(location.href);
+
+      is_prod &&
+        window.DATAFLUX_RUM &&
+        window.DATAFLUX_RUM.init({
+          applicationId: 'psychicai_h5',
+          datakitOrigin: 'https://future-datakit.wekoi.ai', // 协议（包括：//），域名（或IP地址）[和端口号],
+          env: /(localhost|192\.168|test|console)/.test(location.href)
+            ? 'test'
+            : 'prod',
+          version: '1.0.0',
+          service: 'browser',
+          sessionSampleRate: 100,
+          sessionReplaySampleRate: 70,
+          trackInteractions: true,
+          traceType: 'ddtrace', // 非必填，默认为ddtrace，目前支持 ddtrace、zipkin、skywalking_v3、jaeger、zipkin_single_header、w3c_traceparent 6种类型
+          allowedTracingOrigins: [], // 非必填，允许注入trace采集器所需header头部的所有请求列表。可以是请求的origin，也可以是是正则
+        });
+      is_prod &&
+        window.DATAFLUX_RUM &&
+        window.DATAFLUX_RUM.startSessionReplayRecording();
+    </script>
 
     <style>
       body {
@@ -144,28 +171,6 @@
   </head>
 
   <body>
-    <script
-      src="https://static.guance.com/browser-sdk/v3/dataflux-rum.js"
-      type="text/javascript"
-    ></script>
-    <script>
-      window.DATAFLUX_RUM &&
-        window.DATAFLUX_RUM.init({
-          applicationId: 'psychicai_h5',
-          datakitOrigin: 'https://future-datakit.wekoi.ai', // 协议（包括：//），域名（或IP地址）[和端口号],
-          env: /(localhost|192\.168|test|console)/.test(location.href)
-            ? 'test'
-            : 'prod',
-          version: '1.0.0',
-          service: 'browser',
-          sessionSampleRate: 100,
-          sessionReplaySampleRate: 70,
-          trackInteractions: true,
-          traceType: 'ddtrace', // 非必填，默认为ddtrace，目前支持 ddtrace、zipkin、skywalking_v3、jaeger、zipkin_single_header、w3c_traceparent 6种类型
-          allowedTracingOrigins: [], // 非必填，允许注入trace采集器所需header头部的所有请求列表。可以是请求的origin，也可以是是正则
-        });
-      window.DATAFLUX_RUM && window.DATAFLUX_RUM.startSessionReplayRecording();
-    </script>
     <!--通用px单位解决方案-->
     <script>
       !(function (e, t) {

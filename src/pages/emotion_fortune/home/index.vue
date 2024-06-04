@@ -1,146 +1,155 @@
 <template>
-  <div
-    :class="{
-      container: true,
-      'fix-box': choose_time ? true : false,
-      'cn-bg': language === 'zh-CN',
-      'tw-bg': language === 'zh-TW',
-    }"
-  >
-    <header-notice v-if="has_pay"></header-notice>
-    <div @click="backHome()" class="back-box">
+  <div>
+    <NavigationBar v-if="is_channel_01" />
+    <div
+      :class="{
+        container: true,
+        'fix-box': choose_time ? true : false,
+        'cn-bg': language === 'zh-CN',
+        'tw-bg': language === 'zh-TW',
+      }"
+    >
+      <header-notice v-if="has_pay"></header-notice>
+      <div v-if="!is_channel_01" @click="backHome()" class="back-box">
+        <img
+          src="../../../assets/img/common/baogao_icon_home.png"
+          class="left"
+          alt=""
+        />
+        <div class="right">{{ is_cn ? '首页' : '首頁' }}</div>
+      </div>
+      <!-- <canvas id="bg-svga"></canvas> -->
       <img
-        src="../../../assets/img/common/baogao_icon_home.png"
-        class="left"
+        v-if="!is_channel_01"
+        class="order-icon"
+        @click="toOrder"
+        :src="is_cn ? cn_history_order : tw_history_order"
         alt=""
       />
-      <div class="right">{{ is_cn ? '首页' : '首頁' }}</div>
-    </div>
-    <!-- <canvas id="bg-svga"></canvas> -->
-    <img
-      class="order-icon"
-      @click="toOrder"
-      :src="is_cn ? cn_history_order : tw_history_order"
-      alt=""
-    />
-    <div :class="['info', language === 'zh-CN' ? 'cn-info-bg' : 'tw-info-bg']">
-      <div class="info-content">
-        <div class="info-item">
-          <div class="info-label">{{ $t('name-label') }}:</div>
-          <div class="info-input">
-            <input
-              type="text"
-              id="username"
-              v-model="username"
-              :placeholder="$t('name-placeholder')"
-            />
-          </div>
-        </div>
-        <div class="divider-line"></div>
-        <div class="info-item">
-          <div class="info-label">{{ $t('birth-label') }}:</div>
-          <div class="info-input">
-            <div
-              class="info-birth"
-              :style="{ color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)' }"
-              @click="openPicker"
-            >
-              {{ picker_date || $t('birth-placeholder') }}
+      <div
+        :class="['info', language === 'zh-CN' ? 'cn-info-bg' : 'tw-info-bg']"
+      >
+        <div class="info-content">
+          <div class="info-item">
+            <div class="info-label">{{ $t('name-label') }}:</div>
+            <div class="info-input">
+              <input
+                type="text"
+                id="username"
+                v-model="username"
+                :placeholder="$t('name-placeholder')"
+              />
             </div>
-            <img
-              @click="openPicker"
-              class="info-arrow"
-              src="../../../assets/img/emotion_v2/new/icon_you.png"
-            />
           </div>
-        </div>
-        <div class="divider-line"></div>
+          <div class="divider-line"></div>
+          <div class="info-item">
+            <div class="info-label">{{ $t('birth-label') }}:</div>
+            <div class="info-input">
+              <div
+                class="info-birth"
+                :style="{
+                  color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
+                }"
+                @click="openPicker"
+              >
+                {{ picker_date || $t('birth-placeholder') }}
+              </div>
+              <img
+                @click="openPicker"
+                class="info-arrow"
+                src="../../../assets/img/emotion_v2/new/icon_you.png"
+              />
+            </div>
+          </div>
+          <div class="divider-line"></div>
 
-        <div class="info-item">
-          <div class="info-label">{{ $t('sex-label') }}:</div>
-          <div class="info-input">
-            <div
-              class="sex-tab left-tab"
-              :class="{ active: sex === '1' }"
-              ref="sex_male"
-              @click="changeSex(1)"
-            >
-              <div class="sex-text">男</div>
-            </div>
-            <div
-              class="sex-tab"
-              :class="{ active: sex === '0' }"
-              ref="sex_female"
-              @click="changeSex(0)"
-            >
-              <div class="sex-text">女</div>
+          <div class="info-item">
+            <div class="info-label">{{ $t('sex-label') }}:</div>
+            <div class="info-input">
+              <div
+                class="sex-tab left-tab"
+                :class="{ active: sex === '1' }"
+                ref="sex_male"
+                @click="changeSex(1)"
+              >
+                <div class="sex-text">男</div>
+              </div>
+              <div
+                class="sex-tab"
+                :class="{ active: sex === '0' }"
+                ref="sex_female"
+                @click="changeSex(0)"
+              >
+                <div class="sex-text">女</div>
+              </div>
             </div>
           </div>
-        </div>
-        <img
-          id="info-btn"
-          class="info-btn emo-btn"
-          :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
-          @click="check"
-        />
-        <div class="info-bottom">
           <img
-            v-if="privacyChecked"
-            class="info-check"
-            src="../../../assets/img/emotion/xieyi-checked.png"
-            @click="privacyChecked = !privacyChecked"
+            id="info-btn"
+            class="info-btn emo-btn"
+            :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
+            @click="check"
           />
-          <img
-            v-else
-            class="info-check"
-            src="../../../assets/img/emotion/xieyi-no-check.png"
-            @click="privacyChecked = !privacyChecked"
-          />
-          {{ $t('check-label') }}
-          <span @click="link('user_agreement.html')"
-            >{{ $t('user-agreement') }} </span
-          >{{ $t('and') }}
-          <span @click="link('privacy.html')">{{ $t('privacy-policy') }}</span>
+          <div class="info-bottom">
+            <img
+              v-if="privacyChecked"
+              class="info-check"
+              src="../../../assets/img/emotion/xieyi-checked.png"
+              @click="privacyChecked = !privacyChecked"
+            />
+            <img
+              v-else
+              class="info-check"
+              src="../../../assets/img/emotion/xieyi-no-check.png"
+              @click="privacyChecked = !privacyChecked"
+            />
+            {{ $t('check-label') }}
+            <span @click="link('user_agreement.html')"
+              >{{ $t('user-agreement') }} </span
+            >{{ $t('and') }}
+            <span @click="link('privacy.html')">{{
+              $t('privacy-policy')
+            }}</span>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- <div class="card-box">
+      <!-- <div class="card-box">
       <canvas id="qian"></canvas>
     </div> -->
-    <!-- <img class="card" :src="is_cn ? cn_card_1 : tw_card_1" />
+      <!-- <img class="card" :src="is_cn ? cn_card_1 : tw_card_1" />
     <img class="card" :src="is_cn ? cn_card_2 : tw_card_2" /> -->
-    <img class="card mt-180" :src="is_cn ? cn_icon_1 : tw_card_1" />
-    <img class="card" :src="is_cn ? cn_icon_2 : tw_card_2" />
-    <img class="card" :src="is_cn ? cn_icon_3 : tw_card_3" />
-    <img class="card" :src="is_cn ? cn_icon_4 : tw_card_4" />
-    <img class="card" :src="is_cn ? cn_icon_5 : tw_card_5" />
-    <!-- <GejuInfo mode="Notdefault" user_desc="小强，女，2002年2月2日生人" :dataList="[{key:'all',content:'all测试测测试测试测试试测试测试测试测试'},{key:'love',content:'love测试测试测试测试测试测试测试测试测试测试测测试测试测试测试测试测试测试测试测试测试测试试测试测试测试测试测试测试'},{key:'cause',content:'cause测试测试测试测试测试测试测试测试测试测试测试'}]"/> -->
-    <img
-      v-if="showFixedBtn"
-      class="fix-btn emo-btn"
-      :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
-      @click="check"
-    />
-    <!-- 時间选择控件 -->
-    <DatetimePicker
-      start="1960"
-      end="2000"
-      :year="year"
-      :month="month"
-      :date="date"
-      :birth_hour="birth_hour"
-      v-show="choose_time && !show_nongli"
-    ></DatetimePicker>
-    <NongliPicker
-      start="1960"
-      end="2000"
-      :year="year"
-      :month="month"
-      :date="date"
-      :birth_hour="birth_hour"
-      v-show="choose_time && show_nongli"
-    ></NongliPicker>
-    <!-- <combinePayPop
+      <img class="card mt-180" :src="is_cn ? cn_icon_1 : tw_card_1" />
+      <img class="card" :src="is_cn ? cn_icon_2 : tw_card_2" />
+      <img class="card" :src="is_cn ? cn_icon_3 : tw_card_3" />
+      <img class="card" :src="is_cn ? cn_icon_4 : tw_card_4" />
+      <img class="card" :src="is_cn ? cn_icon_5 : tw_card_5" />
+      <CalculateBar/>
+      <img
+        v-if="showFixedBtn"
+        class="fix-btn emo-btn"
+        :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
+        @click="check"
+      />
+      <!-- 時间选择控件 -->
+      <DatetimePicker
+        start="1960"
+        end="2000"
+        :year="year"
+        :month="month"
+        :date="date"
+        :birth_hour="birth_hour"
+        v-show="choose_time && !show_nongli"
+      ></DatetimePicker>
+      <NongliPicker
+        start="1960"
+        end="2000"
+        :year="year"
+        :month="month"
+        :date="date"
+        :birth_hour="birth_hour"
+        v-show="choose_time && show_nongli"
+      ></NongliPicker>
+      <!-- <combinePayPop
       :visible="pay_modal"
       :all_list="productList"
       :product_key="product_key"
@@ -149,47 +158,50 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
-    <HotProduct
-      product_key="h5_emotion2024"
-      url="emotion_fortune"
-      e_id="10006"
-    />
-    <div v-if="showFixedBtn" class="ab-footer"></div>
-    <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
-    <PopNotice
-      v-if="is_show_notice"
-      @close="closeNotice"
-      :count_down="count_down"
-      :product_key="product_key"
-      e_id="10006"
-      c_id="-10021"
-      c_name="click_2024lovely_discount1"
-    />
-    <FixedOrder
-      v-if="show_fixed_order && !is_show_notice"
-      :title="local_title"
-      :is_show_move="is_show_notice"
-      :new_order_key="new_order_key"
-      name="local"
-      top="4.7rem"
-      :time="local_time"
-      @payOrder="checkOrder"
-      @jumpDetail="jumpOrder"
-    />
-    <FixedOrder
-      v-if="show_api_order && !is_show_notice"
-      :title="last_title"
-      :is_show_move="is_show_notice"
-      :last_order="last_order"
-      name="api"
-      top="6.7rem"
-      :time="api_time"
-      @payOrder="checkOrder"
-      @jumpDetail="jumpOrder"
-    />
+      <HotProduct
+        product_key="h5_emotion2024"
+        url="emotion_fortune"
+        e_id="10006"
+      />
+      <NewFooter v-if="showFixedBtn" />
+      <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
+      <PopNotice
+        v-if="is_show_notice"
+        @close="closeNotice"
+        :count_down="count_down"
+        :product_key="product_key"
+        e_id="10006"
+        c_id="-10021"
+        c_name="click_2024lovely_discount1"
+      />
+      <FixedOrder
+        v-if="show_fixed_order && !is_show_notice"
+        :title="local_title"
+        :is_show_move="is_show_notice"
+        :new_order_key="new_order_key"
+        name="local"
+        top="4.7rem"
+        :time="local_time"
+        @payOrder="checkOrder"
+        @jumpDetail="jumpOrder"
+      />
+      <FixedOrder
+        v-if="show_api_order && !is_show_notice"
+        :title="last_title"
+        :is_show_move="is_show_notice"
+        :last_order="last_order"
+        name="api"
+        top="6.7rem"
+        :time="api_time"
+        @payOrder="checkOrder"
+        @jumpDetail="jumpOrder"
+      />
+    </div>
   </div>
 </template>
 <script>
+import NavigationBar from '../../../components/NavigationBar.vue';
+import CalculateBar from '../../../components/CalculateBar.vue';
 import FixedOrder from '../../../components/FixedOrder.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
@@ -214,7 +226,7 @@ import {
 } from '../../../libs/enum';
 
 import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.png';
-import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.png';
+import tw_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.png';
 
 import combinePayPop from '../../../components/combinePayPop.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
@@ -245,8 +257,14 @@ import tw_icon_2 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home2_f
 import tw_icon_3 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_fanti.png';
 import tw_icon_4 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.png';
 import tw_icon_5 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.png';
+import NewFooter from '../../../components/NewFooter.vue';
 
-import GejuInfo from '../../../components/GejuInfo.vue';
+import tStatistic from 'tstatistic';
+tStatistic.init({
+  app_key: 20002003,
+  channel: utils.getFBChannel(),
+});
+
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
 const tipsArr5 = {
@@ -263,7 +281,9 @@ export default {
     HomeFooter,
     PopNotice,
     FixedOrder,
-    GejuInfo
+    NewFooter,
+    NavigationBar,
+    CalculateBar
   },
   data() {
     return {
@@ -369,6 +389,9 @@ export default {
     local_title() {
       return utils.getTitle(this.new_order_key);
     },
+    is_channel_01() {
+      return utils.getFBChannel().indexOf('01') > -1;
+    },
   },
   watch: {
     is_show_notice(val) {
@@ -404,6 +427,17 @@ export default {
     },
   },
   created() {
+    utils.isProd() &&
+      tStatistic &&
+      tStatistic.send({
+        event: 'page_view_2024lovely_main',
+        md: 10006,
+        c_id: -10001,
+        args: {
+          args_name: 'page_view_2024lovely_main',
+          channel: utils.getFBChannel(),
+        },
+      });
     this.$store.dispatch('common/getProduction');
     utils.firebaseLogEvent(
       '10006',
@@ -664,22 +698,22 @@ export default {
      * @return {*}
      */
     async check() {
-      utils.firebaseLogEvent(
-        '10006',
-        '-10002',
-        'click_2024lovely_main',
-        'click',
-        {
-          args_name: 'click_2024lovely_main',
-          channel: utils.getFBChannel(),
-        }
-      );
-      await utils.asleep(500);
       let username = this.username;
       let sex = this.sex;
       let gongli_nongli = this.gongli_nongli;
       let time_obj = this.picker_date_obj;
       if (username == '') {
+        utils.firebaseLogEvent(
+          '10006',
+          '-10002',
+          'click_2024lovely_main',
+          'click',
+          {
+            args_name: 'click_2024lovely_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('name-tips'));
         let dom = document.getElementById('username');
         dom.focus();
@@ -691,10 +725,32 @@ export default {
       //   return;
       // }
       if (time_obj == null) {
+        utils.firebaseLogEvent(
+          '10006',
+          '-10002',
+          'click_2024lovely_main',
+          'click',
+          {
+            args_name: 'click_2024lovely_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('birth-tips'));
         return;
       }
       if (!this.privacyChecked) {
+        utils.firebaseLogEvent(
+          '10006',
+          '-10002',
+          'click_2024lovely_main',
+          'click',
+          {
+            args_name: 'click_2024lovely_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('xieyi-tips'));
         return;
       }
@@ -718,6 +774,17 @@ export default {
 
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
+      utils.firebaseLogEvent(
+        '10006',
+        '-10002',
+        'click_2024lovely_main',
+        'click',
+        {
+          args_name: 'click_2024lovely_main',
+          channel: utils.getFBChannel(),
+          click_type: 'screen_tracking',
+        }
+      );
       if (utils.isProd()) {
         await utils.checkFB();
         try {
@@ -1261,7 +1328,7 @@ margin-bottom: .2rem;
 .order-icon {
   position: fixed;
   right: 0;
-  top: 4.21rem;
+  top: 3rem;
   width: 1.3rem;
   height: 1.87rem;
   z-index: 100;

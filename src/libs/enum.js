@@ -492,3 +492,55 @@ export const maidianEnum = {
     view_name: 'view_chenggu_discount2',
   },
 };
+export const url_enums = {
+  h5_marriage: 'marriage_measure_overseas',
+  h5_fortune2023: 'new_year_luck_overseas',
+  h5_love: 'marriage_divination_overseas',
+  h5_wealth2023: 'wealth_boutique_overseas',
+  h5_career: 'career_divination_overseas',
+  h5_wealth2024: 'lucky_year_report',
+  h5_weigh_bone: 'weigh_bone',
+  h5_bai_gua: 'guiguzi_fortune',
+  h5_annual2024: 'year_of_lucky_2024',
+  h5_emotion2024: 'emotion_fortune',
+  h5_career2024: 'career_fortune_2024',
+};
+
+export const tabEventEnums = {
+  h5_home: {
+    c_id: '-10019',
+    e_name: 'click_marriage_h5home',
+  },
+  h5_order: {
+    c_id: '-10020',
+    e_name: 'click_marriage_history',
+  },
+  h5_marriage: {
+    c_id: '-10027',
+    e_name: 'click_marriage_home',
+  },
+  h5_career2024: {
+    c_id: '-10022',
+    e_name: 'click_2024career_home',
+  },
+  h5_wealth2024: {
+    c_id: '-10023',
+    e_name: 'click_2024wealty_home',
+  },
+  h5_annual2024: {
+    c_id: '-10021',
+    e_name: 'click_2024report_home',
+  },
+  h5_emotion2024: {
+    c_id: '-10024',
+    e_name: 'click_2024lovely_home',
+  },
+  h5_bai_gua: {
+    c_id: '-10025',
+    e_name: 'click_64gua_home',
+  },
+  h5_weigh_bone: {
+    c_id: '-10026',
+    e_name: 'click_chenggu_home',
+  },
+};

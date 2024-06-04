@@ -62,6 +62,7 @@
       a_click_token="pil6oj"
       @close="pay_modal = false"
     />
+    <NewFooter v-if="showFixedBtn" />
   </div>
 </template>
 
@@ -104,6 +105,8 @@ import tw_card_6 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_6.
 import tw_card_7 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_7.png';
 import tw_card_8 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_8.png';
 import tw_card_9 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_9.png';
+
+import NewFooter from '../../../components/NewFooter.vue';
 const topic1 = [
   '23年事业是否变动？',
   '财运是否受到影响？',
@@ -149,6 +152,7 @@ export default {
     UserInfo,
     analyzeModal,
     payModal,
+    NewFooter,
   },
   data() {
     return {
@@ -433,6 +437,7 @@ export default {
 .fix-box {
   position: fixed !important;
   bottom: 1.2rem;
+  z-index: 2;
 }
 
 .card-bg {
