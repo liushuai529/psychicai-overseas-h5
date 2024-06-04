@@ -1,6 +1,10 @@
 <template>
   <div>
     <NavigationBar v-if="is_channel_01" />
+    <CalculateBar
+      :is_home="false"
+      :product_key="h5_marriage"
+    />
     <div
       :class="{
         container: true,
@@ -353,6 +357,10 @@ export default {
     };
   },
   computed: {
+    //套餐支付显示逻辑
+    is_show_combination() {
+      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+    },
     productList() {
       return this.$store.state.common.productList;
     },

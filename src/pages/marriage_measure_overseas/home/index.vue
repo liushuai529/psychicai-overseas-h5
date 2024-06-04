@@ -8,6 +8,10 @@
 <template>
   <div>
     <NavigationBar v-if="is_channel_01" />
+    <CalculateBar
+      :is_home="false"
+      :product_key="h5_marriage"
+    />
     <div
       :class="{
         home: true,
@@ -174,6 +178,7 @@
 <script>
 import FixedOrder from '../../../components/FixedOrder.vue';
 import NavigationBar from '../../../components/NavigationBar.vue';
+import CalculateBar from '../../../components/CalculateBar.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import utils from './../../../libs/utils.js';
 import topBanner from './top_banner.vue';
@@ -255,6 +260,7 @@ export default {
     FixedOrder,
     NewFooter,
     NavigationBar,
+    CalculateBar,
   },
   data() {
     return {
@@ -466,6 +472,10 @@ export default {
     self.loadBg('#canvas', self.is_cn ? self.cn_header : self.tw_header);
   },
   computed: {
+    //套餐支付显示逻辑
+    is_show_combination() {
+      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+    },
     user_number() {
       return this.$store.state.year_user;
     },

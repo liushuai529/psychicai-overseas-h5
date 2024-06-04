@@ -55,7 +55,7 @@
         a_click_token="2rov44"
       />
     </div>
-    <GejuInfo style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="mingge_desc" :dataList="gejujiedu"/>
+    <GejuInfo style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="[mingge_desc]" :dataList="[gejujiedu]"/>
     <!-- <div class="card-box">
       <canvas id="qian"></canvas>
     </div> -->

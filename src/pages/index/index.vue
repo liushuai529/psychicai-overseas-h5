@@ -56,6 +56,11 @@
         />
       </div>
     </div>
+    <CalculateBar
+      style="margin-top: 0.1rem;" 
+      :is_home="true"
+      :product_key="h5_marriage"
+    />
     <!-- 新版多买多折扣 -->
     <van-swipe
       v-if="is_show_combine"
@@ -772,6 +777,8 @@ import tw_check_icon_year from "../../assets/img/new_combine/sale_small/h5_zuhe_
 
 import PayModal from './components/payModal.vue';
 import ResultPop from '../../components/ResultPop.vue';
+import CalculateBar from '../../components/CalculateBar.vue';
+
 import tStatistic from 'tstatistic';
 tStatistic.init({
   app_key: 20002003,
@@ -1042,6 +1049,7 @@ export default {
     PopResult,
     PayModal,
     FixedOrder,
+    CalculateBar,
   },
   data() {
     return {
@@ -1128,6 +1136,10 @@ export default {
     };
   },
   computed: {
+    //套餐支付显示逻辑
+    is_show_combination() {
+      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+    },
     // 顶部广告
     header_list() {
       return [
