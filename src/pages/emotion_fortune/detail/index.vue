@@ -152,6 +152,8 @@ export default {
       tw_bg_1,
       tw_bg_2,
       tw_bg_3,
+      img_zhifu_jian,
+      img_zhifu_fan,
       cn_home_btn,
       tw_home_btn,
       cn_zhong3,
@@ -386,11 +388,9 @@ export default {
   margin-bottom: 0.36rem;
   background: #FFFAFA;
   border-radius: 0.16rem;
-  border: 1px solid red;
   .method-title-img {
     width: 6.68rem;
     height: 0.93rem;
-    border: 1px solid red;
     margin-top: -0.13rem;
   }
 }

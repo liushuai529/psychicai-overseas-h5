@@ -224,6 +224,7 @@ export default {
       is_show_daoqi: false,
       h5_combo2_attach:undefined,//组合下单信息
       combine_product_ids: [],//组合下单ID集合，由前端拼接
+
       all_product: [],//所有测算报告、组合优惠
     };
   },
@@ -471,8 +472,8 @@ export default {
       const { pay_method, trade_pay_type, trade_target_org } = pick_method;
       let params = {
         pay_method: pay_method,
-        product_key: this.product_key,
-        product_id: this.product.product_id,
+        product_key: this.combine_product_ids.length ? this.h5_combo2_attach.product_key: this.product_key,
+        product_id: this.combine_product_ids.length ? this.h5_combo2_attach.product_id: this.product.product_id,
         combine_product_ids: this.combine_product_ids,
         platform: 'WEB',
         extra_ce_suan: utils.getExtraParams(
@@ -510,9 +511,7 @@ export default {
         }&discount_pay=${discount_pay}`;
         const res = await payOrderAPI(pay_max_params);
         localStorage.removeItem('mlxz_set_event_times');
-
         Indicator.close();
-
         if (res.status !== 1000) return;
         if (user_time) {
           localStorage.removeItem('mlxz_fixed_order_info');

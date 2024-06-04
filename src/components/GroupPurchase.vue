@@ -160,10 +160,7 @@ import buy_choose from "../assets/img/img_buy_choose.png";
 import cn_small_bzhh from "../assets/img/common/banner/small/cn/h5_fang_jian_bazihehun.png";
 import tw_small_bzhh from "../assets/img/common/banner/small/tw/h5_fang_fan_bazihhehun.png";
 import new_ganqing_small from "../assets/img/emotion_v2/new/banner_ganqing_fang.png";
-const originPriceArr = {
-  "zh-CN": "原价 ",
-  "zh-TW": "原價 ",
-};
+
 export default {
   props: {
     index: {
@@ -415,19 +412,16 @@ export default {
           width: 1rem;
           height: 1rem;
           margin-top: 0.08rem;
-          border: 1px solid red;
         }
         .desc {
           width: 0.96rem;
           height: 0.54rem;
-          /* border: 1px solid red; */
           margin-top: 0.08rem;
           font-weight: 400;
           font-size: 0.22rem;
           color: #564c4a;
           text-align: center;
           font-style: normal;
-          border: 1px solid red;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -437,7 +431,6 @@ export default {
         margin-top: 0.08rem;
         width: 3.05rem;
         height: 1.78rem;
-        border: 0.01rem solid #e24c2e;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -459,19 +452,16 @@ export default {
             width: 1rem;
             height: 1rem;
             margin-top: 0.08rem;
-            border: 1px solid red;
           }
           .desc {
             width: 0.96rem;
             height: 0.54rem;
-            /* border: 1px solid red; */
             margin-top: 0.08rem;
             font-weight: 400;
             font-size: 0.22rem;
             color: #564c4a;
             text-align: center;
             font-style: normal;
-            border: 1px solid red;
             display: flex;
             align-items: center;
             justify-content: center;
