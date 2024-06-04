@@ -139,6 +139,12 @@ export const getComboListAPI = async data => {
   return request(`/web/auth/trade/orders/cesuan/combo`, 'GET', data);
 };
 
+// 已支付待填写子订单组合测算查询(附加)
+export const getComboAttachAPI = async (data) => {
+  await visitorLoginAPI();
+  return request(`/web/auth/trade/orders/cesuan/combo_attach`, 'GET', data);
+};
+
 // 事件上报
 export const reportEventAPI = async data => {
   await visitorLoginAPI();

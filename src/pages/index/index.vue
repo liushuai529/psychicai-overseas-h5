@@ -57,9 +57,11 @@
       </div>
     </div>
     <CalculateBar
+      v-if="comboAttachData && is_show_combination"
       style="margin-top: 0.1rem;" 
       :is_home="true"
-      :product_key="h5_marriage"
+      product_key="h5_marriage"
+      :call_back="startCalculateClick"
     />
     <!-- 新版多买多折扣 -->
     <van-swipe
@@ -696,6 +698,7 @@ import { getProductions } from "../../libs/common_api";
 import {
   getProductionsAPI,
   getComboListAPI,
+  getComboAttachAPI,
   reportEventAPI,
   sortProductsAPI,
   getResultAPI,
@@ -1133,6 +1136,7 @@ export default {
       local_time: 0,
       last_title: "",
       timer: null,
+      comboAttachData: null,//套餐支付引导标识
     };
   },
   computed: {
@@ -1800,9 +1804,10 @@ export default {
     });
   },
   async mounted() {
+    this.showComboAttach();
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") {
-        console.log("浏览器的当前页签onShow时，do something");
+        this.showComboAttach();
       }
     });
     if (utils.isProd()) {
@@ -1859,6 +1864,26 @@ export default {
   },
   methods: {
     getProductions,
+    //开始测算
+    async startCalculateClick() {
+      let same_ = this.all_list.find(
+          (it) => it.product_id === this.comboAttachData.product_id
+        );
+       let product_key = same_.product_key;
+       location.href = `${path_enums[product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${product_key}`;
+    },
+    //请求接口，是否展示引导标识
+    async showComboAttach() {
+      const res = await getComboAttachAPI();
+      if (res.status !== 1000) return;
+      if(res.data) {
+        let sub_orders =  res.data.combine.sub_orders.find(item=>!item.extra_ce_suan);
+        //获取到未测算的报告信息，可以与当前页面报告类型比较
+        this.comboAttachData = {product_id: sub_orders.product_id, order_id: sub_orders.order_id};
+      } else {
+        this.comboAttachData = null
+      }
+    },
     showNoticePop() {
       this.timer = setInterval(() => {
         this.fix_order_info = localStorage.getItem("mlxz_fixed_order_info");

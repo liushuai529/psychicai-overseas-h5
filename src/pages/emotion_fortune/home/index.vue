@@ -3,7 +3,7 @@
     <NavigationBar v-if="is_channel_01" />
     <CalculateBar
       :is_home="false"
-      :product_key="h5_marriage"
+      product_key="h5_marriage"
     />
     <div
       :class="{
@@ -127,7 +127,6 @@
       <img class="card" :src="is_cn ? cn_icon_3 : tw_card_3" />
       <img class="card" :src="is_cn ? cn_icon_4 : tw_card_4" />
       <img class="card" :src="is_cn ? cn_icon_5 : tw_card_5" />
-      <CalculateBar/>
       <img
         v-if="showFixedBtn"
         class="fix-btn emo-btn"

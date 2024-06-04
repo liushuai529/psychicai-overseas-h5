@@ -93,7 +93,7 @@
             <div class="desc_content">填写信息开始测算</div>
         </div>
     </div>
-    <div class="calculate">
+    <div class="calculate" @click="call_back()">
         <span class="calculate_text">开始测算</span>
     </div>
   </div>
@@ -115,6 +115,9 @@ export default {
         is_home:{
             type:Boolean,
             default:true
+        },
+        call_back: {
+            type: Function,
         }
     },
     data(){

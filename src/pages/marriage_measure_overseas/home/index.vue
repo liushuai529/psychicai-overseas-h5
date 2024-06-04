@@ -9,8 +9,10 @@
   <div>
     <NavigationBar v-if="is_channel_01" />
     <CalculateBar
+      v-if="comboAttachData && is_show_combination"
       :is_home="false"
-      :product_key="h5_marriage"
+      :product_key=comboAttachData.product_key
+      :call_back="startCalculateClick"
     />
     <div
       :class="{
@@ -196,6 +198,7 @@ import {
   payOrderAPI,
   getLastOrderAPI,
   reportBuryingEventAPI,
+  getComboAttachAPI,
 } from '../../../api/api';
 import moment from 'moment';
 import HeaderNotice from '../../../components/headerNotice.vue';
@@ -332,10 +335,17 @@ export default {
       local_time: 0,
       last_title: '',
       timer: null,
+      comboAttachData: null,
     };
   },
 
   created() {
+    this.showComboAttach();
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        this.showComboAttach();
+      }
+    });
     utils.isProd() &&
       tStatistic &&
       tStatistic.send({
@@ -536,6 +546,26 @@ export default {
     },
   },
   methods: {
+      //开始测算
+      async startCalculateClick() {
+      let same_ = this.productList.find(
+          (it) => it.product_id === this.comboAttachData.product_id
+        );
+       let product_key = same_.product_key;
+       location.href = `${path_enums[product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${product_key}`;
+    },
+    //请求接口，是否展示引导标识
+    async showComboAttach() {
+      const res = await getComboAttachAPI();
+      if (res.status !== 1000) return;
+      if(res.data) {
+        let sub_orders =  res.data.combine.sub_orders.find(item=>!item.extra_ce_suan);
+        //获取到未测算的报告信息，可以与当前页面报告类型比较
+        this.comboAttachData = {product_id: sub_orders.product_id, order_id: sub_orders.order_id};
+      } else {
+        this.comboAttachData = null
+      }
+    },
     getOrderId(val) {
       this.order_id = val;
     },
