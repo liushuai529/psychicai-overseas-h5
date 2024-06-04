@@ -4,8 +4,8 @@
       <mt-spinner type="fading-circle" :size="60"></mt-spinner>
     </div>
     <div v-else class="pay-list">
-      <!-- 限时优惠 -->
-      <div class="discount">
+      <!-- 老版限时优惠 -->
+      <div class="discount" v-if="1==2">
         <div class="left">
           <img
             :src="is_new_user ? new_user_icon : xsyh_icon"
@@ -80,7 +80,26 @@
           </div>
         </div>
       </div>
+
+        <div class="discount-comb" v-else>
+            <GroupPurchase
+            :product=this.product
+            :h5_combo2_attach=this.h5_combo2_attach
+            :all_product=this.all_product
+            @get_combine_product_ids="getCombineProductIds"
+            :product_key=this.product_key
+            />
+          
+        </div>
+      
+
+     
+
+
+      
+      
       <div class="divider-line"></div>
+      
       <div class="pay-type">支付方式</div>
       <div class="buy-people">
         今日已有<span>{{ buy_people }}</span
@@ -122,6 +141,7 @@ import { path_enums } from '../libs/enum';
 import { CountDown } from 'vant';
 import 'vant/lib/index.css';
 import moment from 'moment';
+import GroupPurchase from '../components/GroupPurchase.vue';
 
 const e_id_arr = {
   h5_wealth2024: '60001',
@@ -172,6 +192,7 @@ const tipsArr6 = {
 export default {
   components: {
     CountDown,
+    GroupPurchase,
   },
   data() {
     return {
@@ -202,7 +223,11 @@ export default {
       is_show_shandong: false,
       is_show_daoqi: false,
       payCanClick : false,
-      pay_lock_time:0
+      pay_lock_time:0,
+      h5_combo2_attach:undefined,//组合下单信息
+      combine_product_ids: [],//组合下单ID集合，由前端拼接
+
+      all_product: [],//所有测算报告、组合优惠
     };
   },
   props: {
@@ -251,9 +276,7 @@ export default {
       type: String,
       default: '',
     },
-  },
-  components: {
-    CountDown,
+    
   },
 
   computed: {
@@ -286,6 +309,9 @@ export default {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
+    is_show_combination() {
+      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+    }
   },
   filters: {
     filterTime(val_) {
@@ -327,6 +353,10 @@ export default {
   mounted() {},
 
   methods: {
+    getCombineProductIds(product_ids) {
+      this.combine_product_ids = product_ids;
+      console.warn('this.combine_product_ids',this.combine_product_ids);
+    },
     getTime(val) {
       const { minutes, seconds, milliseconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
@@ -361,6 +391,10 @@ export default {
       const { status, data } = await getProductionsAPI('ceh5');
       if (status === 1000) {
         this.product = data.find(item => item.product_key === this.product_key);
+        //获取所有报告以及套餐
+        this.all_product = data;
+        //组合两项优惠
+        this.h5_combo2_attach = data.find(item => item.product_key === 'h5_combo2_attach');
         this.is_new_user = this.product
           ? this.product.tags
             ? this.product.tags.includes('newcomer_discount')
@@ -449,8 +483,9 @@ export default {
       const { pay_method, trade_pay_type, trade_target_org } = pick_method;
       let params = {
         pay_method: pay_method,
-        product_key: this.product_key,
-        product_id: this.product.product_id,
+        product_key: this.combine_product_ids.length ? this.h5_combo2_attach.product_key: this.product_key,
+        product_id: this.combine_product_ids.length ? this.h5_combo2_attach.product_id: this.product.product_id,
+        combine_product_ids: this.combine_product_ids,
         platform: 'WEB',
         extra_ce_suan: utils.getExtraParams(
           this.product_key,
@@ -487,9 +522,7 @@ export default {
         }&discount_pay=${discount_pay}`;
         const res = await payOrderAPI(pay_max_params);
         localStorage.removeItem('mlxz_set_event_times');
-
         Indicator.close();
-
         if (res.status !== 1000) return;
         if (user_time) {
           localStorage.removeItem('mlxz_fixed_order_info');
@@ -592,6 +625,10 @@ export default {
   .right div:first-child {
     margin-bottom: 0.08rem;
   }
+}
+.discount-comb {
+  height: 4.86rem;
+  width: 100%;
 }
 .buy-people {
   width: 100%;

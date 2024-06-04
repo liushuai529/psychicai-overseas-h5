@@ -4,20 +4,14 @@
 
     <!-- 新版信息start -->
     <div v-if="!loading && hasData" class="pay-box">
-      <img
-        class="banner"
-        :src="language === 'zh-CN' ? cn_img_title : tw_img_title"
-      />
+      <img class="banner" :src="language === 'zh-CN' ? cn_img_title : tw_img_title" />
       <div class="user-info">
         <div class="male-info">
           <div class="info-name">{{ user_ext.male_name | nameFilter }}</div>
           <div class="info-birth">{{ mbirth }}</div>
           <baziInfo v-if="show_bazi" :user_info="init_male_str" />
         </div>
-        <img
-          class="heart"
-          src="../../../assets/img/marriage_measure_overseas/detail/heart.png"
-        />
+        <img class="heart" src="../../../assets/img/marriage_measure_overseas/detail/heart.png" />
         <div class="female-info">
           <div class="info-name">{{ user_ext.female_name | nameFilter }}</div>
           <div class="info-birth">{{ fbirth }}</div>
@@ -26,28 +20,17 @@
       </div>
 
       <div class="bazi-box">
-        <shengxiao
-          v-if="show_bazi"
-          :male_str="init_male_str"
-          :female_str="init_female_str"
-          :is_result="true"
-        />
+        <shengxiao v-if="show_bazi" :male_str="init_male_str" :female_str="init_female_str" :is_result="true" />
       </div>
     </div>
     <!-- 新版信息 end -->
-    <div
-      v-if="!loading && hasData"
-      style="display: none"
-      class="info_container"
-    >
+    <div v-if="!loading && hasData" style="display: none" class="info_container">
       <div class="user_info">
-        <div
-          :class="{
-            message: true,
-            youdayun: data_obj.dayun,
-            'border-line': true,
-          }"
-        >
+        <div :class="{
+          message: true,
+          youdayun: data_obj.dayun,
+          'border-line': true,
+        }">
           <p>男方</p>
           <p>
             姓名：{{ decodeUnicode(maleinfo.name) }}
@@ -99,130 +82,69 @@
     </div>
 
     <div v-if="!loading && hasData" class="main-outer">
-      <img
-        v-if="data_obj.hemu_rate"
-        :src="language === 'zh-CN' ? cn_hemu : tw_hemu"
-        alt
-        class="info_img"
-      />
+      <img v-if="data_obj.hemu_rate" :src="language === 'zh-CN' ? cn_hemu : tw_hemu" alt class="info_img" />
       <div class="common_cn" v-if="data_obj.hemu_rate">
         <p class="zm">
-          <span
-            >女宅命官：{{ data_obj.hemu_rate.fm }}（{{
-              data_obj.hemu_rate.fdx
-            }}）</span
-          >
+          <span>女宅命官：{{ data_obj.hemu_rate.fm }}（{{
+            data_obj.hemu_rate.fdx
+            }}）</span>
         </p>
         <p class="zm" style="margin-top: 0.1rem">
-          <span
-            >男宅命官：{{ data_obj.hemu_rate.mm }}（{{
-              data_obj.hemu_rate.mdx
-            }}）</span
-          >
+          <span>男宅命官：{{ data_obj.hemu_rate.mm }}（{{
+            data_obj.hemu_rate.mdx
+            }}）</span>
         </p>
         <p class="fenge" style="font-weight: bold">{{ $t('hepan-label') }}</p>
         <p v-html="data_obj.hemu_rate.hepan"></p>
         <p class="fenge" style="font-weight: bold">{{ $t('yiju-label') }}</p>
         <p v-html="data_obj.hemu_rate.juzhu"></p>
       </div>
-      <img
-        v-if="data_obj.energy"
-        :src="language === 'zh-CN' ? cn_nengliang : tw_nengliang"
-        class="info_img"
-      />
+      <img v-if="data_obj.energy" :src="language === 'zh-CN' ? cn_nengliang : tw_nengliang" class="info_img" />
       <div v-if="data_obj.energy" class="common_cn">
         <p class="zm">
           <span>女方生肖：{{ data_obj.energy.fsx }}</span>
-          <span style="float: right; margin-right: 0.4rem"
-            >男方生肖：{{ data_obj.energy.msx }}</span
-          >
+          <span style="float: right; margin-right: 0.4rem">男方生肖：{{ data_obj.energy.msx }}</span>
         </p>
         <p class="zm fenge">男女生肖合盘：{{ data_obj.energy.title }}</p>
         <p v-html="data_obj.energy.total"></p>
       </div>
-      <img
-        v-if="data_obj.career"
-        :src="language === 'zh-CN' ? cn_career : tw_career"
-        alt
-        class="info_img"
-      />
+      <img v-if="data_obj.career" :src="language === 'zh-CN' ? cn_career : tw_career" alt class="info_img" />
       <div class="common_cn" v-if="data_obj.career">
         <p v-html="data_obj.career"></p>
       </div>
-      <img
-        v-if="data_obj.family"
-        :src="language === 'zh-CN' ? cn_family : tw_family"
-        alt
-        class="info_img"
-      />
+      <img v-if="data_obj.family" :src="language === 'zh-CN' ? cn_family : tw_family" alt class="info_img" />
       <div class="common_cn" v-if="data_obj.family">
         <p v-html="data_obj.family"></p>
       </div>
-      <img
-        v-if="data_obj.character"
-        src="../../../assets/img/mlxz/bzhh/result/character.jpg"
-        alt
-        class="info_img"
-      />
+      <img v-if="data_obj.character" src="../../../assets/img/mlxz/bzhh/result/character.jpg" alt class="info_img" />
       <div class="common_cn" v-if="data_obj.character">
         <p v-html="data_obj.character"></p>
       </div>
-      <img
-        v-if="data_obj.parents"
-        :src="language === 'zh-CN' ? cn_parents : tw_parents"
-        alt
-        class="info_img"
-      />
+      <img v-if="data_obj.parents" :src="language === 'zh-CN' ? cn_parents : tw_parents" alt class="info_img" />
       <div class="common_cn" v-if="data_obj.parents">
         <p class="zm">婆媳关系</p>
         <p class="fenge" v-html="data_obj.parents.poxi"></p>
         <p class="zm">丈夫关系</p>
         <p class="fenge" v-html="data_obj.parents.fuzhang"></p>
       </div>
-      <img
-        v-if="data_obj.blossom"
-        :src="language === 'zh-CN' ? cn_blossom : tw_blossom"
-        alt
-        class="info_img"
-      />
+      <img v-if="data_obj.blossom" :src="language === 'zh-CN' ? cn_blossom : tw_blossom" alt class="info_img" />
       <div class="common_cn" v-if="data_obj.blossom">
         <p v-html="data_obj.blossom"></p>
       </div>
-      <img
-        v-if="data_obj.all"
-        :src="language === 'zh-CN' ? cn_all : tw_all"
-        alt
-        class="info_img"
-      />
+      <img v-if="data_obj.all" :src="language === 'zh-CN' ? cn_all : tw_all" alt class="info_img" />
       <div class="common_cn" v-if="data_obj.all">
         <div class="star">
-          <img
-            v-for="item in getStarts(data_obj.all.score)"
-            :src="item"
-            alt
-            :key="item.index"
-          />
+          <img v-for="item in getStarts(data_obj.all.score)" :src="item" alt :key="item.index" />
         </div>
         <p v-html="data_obj.all.desc"></p>
       </div>
-      <CopyCode
-        :set_title="true"
+      <CopyCode :set_title="true"
         title_icon="https://psychicai-static.psychicai.pro/imgs/2404e7ce06d17d704985b300bbb80fd6080c.png"
-        title_icon_style="width: 5.26rem;height: .92rem;margin:.24rem auto .44rem;"
-        className="marry-box"
-        tips1_color="#222"
-        code_color="#B1031F"
-        :transfer_code="transfer_code"
-        codeClass="marry-code"
-        :code_btn="is_cn ? cn_code_btn : tw_code_btn"
-        code_text_style="margin:.27rem auto .39rem;color:#6E6E6E"
-        tips5_style="width: 6.34rem;height: .92rem;"
-        @showModal="code_modal = true"
-        a_token="bkl8h9"
-        e_id="10007"
-        c_id="-10010"
-        e_name="click_marriage_result"
-      />
+        title_icon_style="width: 5.26rem;height: .92rem;margin:.24rem auto .44rem;" className="marry-box"
+        tips1_color="#222" code_color="#B1031F" :transfer_code="transfer_code" codeClass="marry-code"
+        :code_btn="is_cn ? cn_code_btn : tw_code_btn" code_text_style="margin:.27rem auto .39rem;color:#6E6E6E"
+        tips5_style="width: 6.34rem;height: .92rem;" @showModal="code_modal = true" a_token="bkl8h9" e_id="10007"
+        c_id="-10010" e_name="click_marriage_result" />
     </div>
     <CodePop v-if="code_modal" @close="code_modal = false" />
   </div>
@@ -631,15 +553,19 @@ export default {
       getResultAPI({ order_id: this.$route.query.order_id }).then(res => {
         let can_store =
           (res.data && ['PAYED', 'FAIL'].includes(res.data.status)) ||
-          (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
+            (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
             ? true
             : false;
 
         if (res.data.status === 'PAYED') {
-          this.renderResult(res);
-          this.loading = false;
-          this.hasData = true;
-          Indicator.close();
+          //是否组合订单
+          if (res.data.sub_orders) {
+            getResultAPI({ order_id: res.data.sub_orders[0].order_id }).then(response => {
+              this.renderResultAndComplete(response);
+            })
+          } else {
+            this.renderResultAndComplete(res);
+          }
         } else if (this.count < 6) {
           if (['PAYED', 'FAIL', 'REFUNDED'].includes(res.data.status)) {
             this.backNotice();
@@ -682,6 +608,13 @@ export default {
       this.data_obj.all = responseData.zhpp;
       this.data_obj.dayun = responseData.dayun;
     },
+    renderResultAndComplete(res) {
+      this.renderResult(res);
+      this.loading = false;
+      this.hasData = true;
+      Indicator.close();
+    },
+
 
     getFormateStr() {
       let maleusername = this.user_ext.male_name;
@@ -746,9 +679,8 @@ export default {
       // 男性生日農曆
       if (query_user_string_array[10] === '0') {
         let mday = this.getGlDate(myear, mmonth, mdate);
-        this.mbirth = `${this.$t('nongli-label')} ${myear}年${mday.nmonthstr}${
-          mday.ndatestr
-        }`;
+        this.mbirth = `${this.$t('nongli-label')} ${myear}年${mday.nmonthstr}${mday.ndatestr
+          }`;
       } else {
         this.mbirth = `${this.$t(
           'gongli-label'
@@ -757,9 +689,8 @@ export default {
       // 女性生日農曆
       if (query_user_string_array[11] === '0') {
         let fday = this.getGlDate(fyear, fmonth, fdate);
-        this.fbirth = `${this.$t('nongli-label')} ${fyear}年${fday.nmonthstr}${
-          fday.ndatestr
-        }`;
+        this.fbirth = `${this.$t('nongli-label')} ${fyear}年${fday.nmonthstr}${fday.ndatestr
+          }`;
       } else {
         this.fbirth = `${this.$t(
           'gongli-label'
@@ -828,17 +759,20 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .title {
     width: 5.26rem;
     height: 0.92rem;
     margin-top: 0.24rem;
   }
+
   .logo {
     margin-top: 0.44rem;
     width: 3.05rem;
     height: 0.82rem;
     margin-bottom: 0.32rem;
   }
+
   .tips {
     height: 0.28rem;
     font-weight: 400;
@@ -847,11 +781,11 @@ export default {
     line-height: 0.28rem;
     margin-bottom: 0.4rem;
   }
+
   .code {
     width: 5.5rem;
     min-height: 1.04rem;
-    background: url('https://psychicai-static.psychicai.pro/imgs/240463fde6a15d8e44cfa0e7dcbc58abfa67.png')
-      no-repeat;
+    background: url('https://psychicai-static.psychicai.pro/imgs/240463fde6a15d8e44cfa0e7dcbc58abfa67.png') no-repeat;
     background-size: 100% 100%;
     font-weight: 600;
     font-size: 0.32rem;
@@ -860,16 +794,19 @@ export default {
     align-items: center;
     justify-content: space-around;
     margin-bottom: 0.2rem;
+
     span {
       margin-left: 0.1rem;
       text-decoration: underline;
     }
   }
+
   .desc {
     margin-bottom: 0.1rem;
     color: #999;
     font-size: 0.24rem;
   }
+
   .copy {
     width: 6.3rem;
     height: 0.88rem;
@@ -885,6 +822,7 @@ export default {
     color: #fef8eb;
   }
 }
+
 .common_cn {
   padding: 0.3rem;
   background-color: #fff;
@@ -936,6 +874,7 @@ export default {
   padding-bottom: 0.2rem;
   /* border-bottom: 1px solid #050100; */
 }
+
 .border-line {
   border-bottom: 1px solid #050100;
 }
@@ -1044,6 +983,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .banner {
     position: absolute;
     top: -0.45rem;
@@ -1052,6 +992,7 @@ export default {
     width: 4.49rem;
     height: 0.89rem;
   }
+
   .user-info {
     width: 100%;
     display: flex;
@@ -1059,15 +1000,18 @@ export default {
     justify-content: center;
     margin: 0.68rem 0 0.49rem;
     padding: 0 0.28rem;
+
     .heart {
       width: 1.4rem;
       flex: none;
     }
+
     .male-info,
     .female-info {
       color: #6f3300;
       text-align: center;
       width: 2.25rem;
+
       .info-name {
         font-size: 0.32rem;
         line-height: 0.45rem;
@@ -1078,13 +1022,16 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
       }
+
       .info-birth {
         font-size: 0.24rem;
         line-height: 0.33rem;
       }
+
       flex: 1;
     }
   }
+
   .line {
     width: 5.57rem;
   }

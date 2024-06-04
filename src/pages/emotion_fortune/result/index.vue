@@ -8,35 +8,12 @@
 <template>
   <div class="result">
     <div :class="['info-box', lang ? 'cn-bg' : 'tw-bg']">
-      <BaziTable
-        :sex="sex"
-        :is_result="true"
-        :username="username"
-        :gongli_nongli="gongli_nongli"
-        :picker_date_yangli="picker_date_yangli"
-        :picker_date_nongli="picker_date_nongli"
-        :gan="gan"
-        :zhi="zhi"
-        :nayin="nayin"
-        :cai_bo_num="cai_bo_num"
-        :gui_ren_num="gui_ren_num"
-        :hun_yin_num="hun_yin_num"
-        :ming_ge="ming_ge"
-        :riyuanqiangruo="riyuanqiangruo"
-        :shi_ye_num="shi_ye_num"
-        :wuxingqiang="wuxingqiang"
-        :tao_hua_num="tao_hua_num"
-        :fuqigong="fuqigong"
-        text_color="#6D2215"
-        minge_color="#EC436B"
-        :show_daji="false"
-        bg="#FFFAFA"
-        width="6.5rem"
-        table_border="0.02rem solid #EC436B"
-        border_color="#EC436B"
-        :is_show_taohua="1"
-        :change_color="true"
-      />
+      <BaziTable :sex="sex" :is_result="true" :username="username" :gongli_nongli="gongli_nongli"
+        :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
+        :nayin="nayin" :cai_bo_num="cai_bo_num" :gui_ren_num="gui_ren_num" :hun_yin_num="hun_yin_num" :ming_ge="ming_ge"
+        :riyuanqiangruo="riyuanqiangruo" :shi_ye_num="shi_ye_num" :wuxingqiang="wuxingqiang" :tao_hua_num="tao_hua_num"
+        :fuqigong="fuqigong" text_color="#6D2215" minge_color="#EC436B" :show_daji="false" bg="#FFFAFA" width="6.5rem"
+        table_border="0.02rem solid #EC436B" border_color="#EC436B" :is_show_taohua="1" :change_color="true" />
     </div>
 
     <contentDetail v-if="fortune.qian" :result="fortune.qian" :item_index="2" />
@@ -407,15 +384,18 @@ export default {
       getResultAPI({ order_id: this.$route.query.order_id }).then(res => {
         let can_store =
           (res.data && ['PAYED', 'FAIL'].includes(res.data.status)) ||
-          (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
+            (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
             ? true
             : false;
-
         if (res.data.status === 'PAYED') {
-          this.renderResult(res);
-          this.loading = false;
-          this.hasData = true;
-          Indicator.close();
+          //是否组合订单
+          if (res.data.sub_orders) {
+            getResultAPI({ order_id: res.data.sub_orders[0].order_id }).then(response => {
+              this.renderResultAndComplete(response);
+            })
+          } else {
+            this.renderResultAndComplete(res);
+          }
         } else if (this.count < 6) {
           if (['PAYED', 'FAIL', 'REFUNDED'].includes(res.data.status)) {
             this.backNotice();
@@ -472,10 +452,10 @@ export default {
           road_forecast === '吉'
             ? 1
             : road_forecast === '小吉'
-            ? 2
-            : road_forecast === '平'
-            ? 3
-            : 4;
+              ? 2
+              : road_forecast === '平'
+                ? 3
+                : 4;
 
         this.fortune.concept = concept.replace(/\n/g, '<br/>');
         this.fortune.review = review.replace(/\n/g, '<br/>');
@@ -487,6 +467,15 @@ export default {
         }
       }
     },
+
+    renderResultAndComplete(res) {
+      this.renderResult(res);
+      this.loading = false;
+      this.hasData = true;
+      Indicator.close();
+    },
+
+
 
     /**
      * @description: 获取八字数据
@@ -584,17 +573,16 @@ export default {
       );
       let lunar = solar.getLunar();
       this.picker_date_nongli = +is_gongli
-        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${
-            this.picker_hour
-          }`
+        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${this.picker_hour
+        }`
         : `${birth_year}年${utils.formateNongliMonth(
-            birth_month
-          )}${utils.formateNongliDate(birth_date)} ${this.picker_hour}`;
+          birth_month
+        )}${utils.formateNongliDate(birth_date)} ${this.picker_hour}`;
       this.picker_date_yangli = +is_gongli
         ? `${birth_year}-${birth_month}-${birth_date} ${this.picker_hour}`
         : `${Lunar.fromYmd(+birth_year, +birth_month, +birth_date)
-            .getSolar()
-            .toString()} ${this.picker_hour}`;
+          .getSolar()
+          .toString()} ${this.picker_hour}`;
     },
   },
 };
@@ -612,9 +600,11 @@ export default {
 .cn-bg {
   background-image: url('../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.png');
 }
+
 .tw-bg {
   background-image: url('../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.png');
 }
+
 .info-box {
   width: 7.1rem;
   height: 7.09rem;

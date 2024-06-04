@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'NewFooter',
+  name: "NewFooter",
 };
 </script>
 
@@ -22,7 +22,7 @@ export default {
   opacity: 0.5;
   width: 100%;
   height: 2.8rem;
-  z-index: 1;
+  z-index: 2;
   bottom: 0;
 }
 </style>
