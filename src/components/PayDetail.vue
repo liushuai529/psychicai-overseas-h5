@@ -5,7 +5,7 @@
     </div>
     <div v-else class="pay-list">
       <!-- 老版限时优惠 -->
-      <div class="discount" v-if="1==2">
+      <div class="discount" v-if="!is_show_combination">
         <div class="left">
           <img
             :src="is_new_user ? new_user_icon : xsyh_icon"
