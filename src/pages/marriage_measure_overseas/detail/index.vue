@@ -21,7 +21,7 @@
         <div class="male-info">
           <div class="info-name">{{ mname | nameFilter }}</div>
           <div class="info-birth">{{ mbirth }}</div>
-          <baziInfo :user_info="male_user_string" />
+          <baziInfo :key="0" :user_info="male_user_string" @get_user_info="getUserInfo"/>
         </div>
         <img
           class="heart"
@@ -30,7 +30,7 @@
         <div class="female-info">
           <div class="info-name">{{ fname | nameFilter }}</div>
           <div class="info-birth">{{ fbirth }}</div>
-          <baziInfo :user_info="female_user_string" />
+          <baziInfo :key="1" :user_info="female_user_string" @get_user_info="getUserInfo"/>
         </div>
       </div>
       <!-- <img
@@ -80,6 +80,8 @@
       product_key="h5_marriage"
       class="user"
     />
+
+    <GejuInfo style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="mingge_desc" :dataList="[mingge_minfo, mingge_finfo]"/>
 
     <img class="text" :src="language === 'zh-CN' ? cn_img_word : tw_img_word" />
     <img class="module" :src="language === 'zh-CN' ? cn_mokuai1 : tw_mokuai1" />
@@ -159,6 +161,7 @@ import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import PayDetail from '../../../components/PayDetail.vue';
 import NewFooter from '../../../components/NewFooter.vue';
+import GejuInfo from '../../../components/GejuInfo.vue';
 
 const mockTipsArr = {
   'zh-CN': '成功解锁了八字合婚的详细解析',
@@ -182,6 +185,7 @@ export default {
     HomeFooter,
     PayDetail,
     NewFooter,
+    GejuInfo,
   },
   data() {
     return {
@@ -224,6 +228,9 @@ export default {
       tw_modal_bg,
       cn_modal_bg:
         'https://psychicai-static.psychicai.pro/imgs/240439e6ef4d89894c5d88378c3cbd7790fb.png',
+      mingge_desc:[],//命格生日信息展示  
+      mingge_minfo:[],//命格男性信息
+      mingge_finfo:[],//命格女性信息
     };
   },
   filters: {
@@ -282,6 +289,14 @@ export default {
   },
   methods: {
    
+    getUserInfo(sex, info) {
+      if(sex === 0) {
+        this.mingge_finfo = info;
+      } else {
+        this.mingge_minfo = info;
+      }
+      
+    },
 
     /**
      * @description: 获取随机用户列表
@@ -322,10 +337,12 @@ export default {
         this.mbirth = `${this.$t('nongli-label')} ${myear}年${mday.nmonthstr}${
           mday.ndatestr
         }`;
+        this.mingge_desc.push(`${this.mname}，男，${myear}年${mday.nmonthstr}月${mday.ndatestr}日生人，`)
       } else {
         this.mbirth = `${this.$t(
           'gongli-label'
         )} ${myear}年${mmonth}月${mdate}日`;
+        this.mingge_desc.push(`${this.mname}，男，${myear}年${mmonth}月${mdate}日生人，`)
       }
       // 女性生日農曆
       if (query_user_string_array[11] === '0') {
@@ -333,10 +350,12 @@ export default {
         this.fbirth = `${this.$t('nongli-label')} ${fyear}年${fday.nmonthstr}${
           fday.ndatestr
         }`;
+        this.mingge_desc.push(`${this.fname}，女，${fyear}年${fday.nmonthstr}月${fday.ndatestr}日生人`)
       } else {
         this.fbirth = `${this.$t(
           'gongli-label'
         )} ${fyear}年${fmonth}月${fdate}日`;
+        this.mingge_desc.push(`${this.fname}，女，${fyear}年${fmonth}月${fdate}日生人`)
       }
     },
 

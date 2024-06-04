@@ -55,6 +55,7 @@
         a_click_token="2rov44"
       />
     </div>
+    <GejuInfo style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="mingge_desc" :dataList="gejujiedu"/>
     <!-- <div class="card-box">
       <canvas id="qian"></canvas>
     </div> -->
@@ -134,6 +135,7 @@ import tw_bg_3 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_
 import img_zhifu_jian from '../../../assets/img/emotion_v2/new/cn/detail/img_zhifu_jian.png';
 import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_fan.png';
 import NewFooter from '../../../components/NewFooter.vue';
+import GejuInfo from '../../../components/GejuInfo.vue';
 export default {
   components: {
     UserInfo,
@@ -143,6 +145,7 @@ export default {
     HomeFooter,
     PayDetail,
     NewFooter,
+    GejuInfo,
   },
   data() {
     return {
@@ -205,9 +208,14 @@ export default {
       is_result: false,
       showFixedBtn: false,
       is_show_btn: true,
+      gejujiedu: [],//格局信息
     };
   },
   computed: {
+    //套餐支付显示逻辑
+    is_show_combination() {
+      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+    },
     username_title() {
       return `${utils.getShortStr(this.username)}的2024年${this.$t(
         'report-title'
@@ -312,6 +320,8 @@ export default {
       this.gan = data.gan;
       this.zhi = data.zhi;
       this.nayin = data.nayin;
+      this.gejujiedu = data.gejujiedu;
+      console.warn('this.gejujiedu', this.gejujiedu)
     },
 
     /**
@@ -347,6 +357,7 @@ export default {
         : `${Lunar.fromYmd(+this.year, +this.month, +this.date)
             .getSolar()
             .toString()} ${this.picker_hour}`;
+      this.mingge_desc =this.gongli_nongli ?  `${this.username = arr[0]}，${this.sex === 0? '女':'男'}，${this.year}年${this.month}月${this.date}日生人` : `${this.username = arr[0]}，${this.sex === 0? '女':'男'}，${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}日生人`  
     },
 
     // 支付弹窗
