@@ -123,7 +123,7 @@ export default {
       };
       const { status, data } = await getBaziAPI(data_);
       if (status !== 1000) return;
-      this.$emit('get_user_info', this.sex, res.data.gejujiedu)
+      this.$emit('get_user_info', this.sex, data.gejujiedu)
       this.gan = data.gan;
       this.zhi = data.zhi;
     },

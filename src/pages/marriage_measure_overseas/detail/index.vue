@@ -350,12 +350,12 @@ export default {
         this.fbirth = `${this.$t('nongli-label')} ${fyear}年${fday.nmonthstr}${
           fday.ndatestr
         }`;
-        this.mingge_desc.push(`${this.fname}，女，${fyear}年${fday.nmonthstr}月${fday.ndatestr}日生人，`)
+        this.mingge_desc.push(`${this.fname}，女，${fyear}年${fday.nmonthstr}月${fday.ndatestr}日生人`)
       } else {
         this.fbirth = `${this.$t(
           'gongli-label'
         )} ${fyear}年${fmonth}月${fdate}日`;
-        this.mingge_desc.push(`${this.fname}，女，${fyear}年${fmonth}月${fdate}日生人，`)
+        this.mingge_desc.push(`${this.fname}，女，${fyear}年${fmonth}月${fdate}日生人`)
       }
     },
 
