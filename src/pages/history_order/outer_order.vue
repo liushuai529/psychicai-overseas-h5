@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 21:47:54
+ * @LastEditTime: 2024-06-04 15:24:25
  * @Description: 历史订单
 -->
 <template>
@@ -79,7 +79,9 @@
               'bg-2-nopay':
                 item.status !== 'PAYED' &&
                 item.product_key === 'h5_marriage' &&
-                !['h5_combo3', 'h5_combo2'].includes(item.product_key),
+                !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                  item.product_key
+                ),
               'bg-3-nopay':
                 item.status !== 'PAYED' &&
                 item.product_key !== 'h5_marriage' &&
@@ -87,11 +89,13 @@
               'bg-4-nopay':
                 item.status !== 'PAYED' &&
                 item.product_key !== 'h5_marriage' &&
-                ['h5_combo2'].includes(item.product_key),
+                ['h5_combo2', 'h5_combo2_attach'].includes(item.product_key),
               'bg-1-nopay':
                 item.status !== 'PAYED' &&
                 item.product_key !== 'h5_marriage' &&
-                !['h5_combo3', 'h5_combo2'].includes(item.product_key),
+                !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                  item.product_key
+                ),
             }"
             v-for="(item, k) in list"
             :key="'order' + k"
@@ -124,18 +128,30 @@
                 'no-pay-1':
                   item.status !== 'PAYED' &&
                   item.product_key !== 'h5_marriage' &&
-                  !['h5_combo3', 'h5_combo2'].includes(item.product_key),
+                  !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                    item.product_key
+                  ),
                 'no-pay-2':
                   item.status !== 'PAYED' &&
                   (item.product_key === 'h5_marriage' ||
-                    ['h5_combo3', 'h5_combo2'].includes(item.product_key)),
+                    ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                      item.product_key
+                    )),
                 'ml-24':
                   item.status !== 'PAYED' &&
                   (item.product_key === 'h5_marriage' ||
-                    ['h5_combo3', 'h5_combo2'].includes(item.product_key)),
+                    ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                      item.product_key
+                    )),
               }"
             >
-              <div v-if="item.ext.name || item.ext.male_name" class="left">
+              <div
+                v-if="
+                  (item.ext.name || item.ext.male_name) &&
+                  item.product_key !== 'h5_combo2_attach'
+                "
+                class="left"
+              >
                 <div v-if="item.ext.name" class="one">
                   <div class="name">
                     <span>{{ item.ext.name | filterName }}</span>
@@ -210,15 +226,27 @@
               </div>
               <div
                 v-else-if="
-                  ['h5_combo3', 'h5_combo2'].includes(item.product_key)
+                  ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                    item.product_key
+                  )
                 "
                 :style="{
-                  height:
-                    item.product_key === 'h5_combo2' ? '1.28rem' : '1.8rem',
+                  height: ['h5_combo2_attach', 'h5_combo2'].includes(
+                    item.product_key
+                  )
+                    ? '1.28rem'
+                    : '1.8rem',
                 }"
                 class="combine-whole"
               >
-                <div class="combine-box">
+                <div
+                  :style="{
+                    padding: ['h5_combo2_attach'].includes(item.product_key)
+                      ? '0'
+                      : '0 .24rem',
+                  }"
+                  class="combine-box"
+                >
                   <div
                     v-for="(i, index) in item.combine_product_names"
                     :key="index"
@@ -236,8 +264,11 @@
                 <div
                   @click="handleJump(item)"
                   :style="{
-                    top:
-                      item.product_key === 'h5_combo2' ? '1.1rem' : '1.15rem',
+                    top: ['h5_combo2_attach', 'h5_combo2'].includes(
+                      item.product_key
+                    )
+                      ? '1.1rem'
+                      : '',
                   }"
                   class="right-btn status-other no-pay-btn3"
                 >
@@ -253,7 +284,10 @@
                 </div>
               </div>
             </div>
-            <div v-if="!item.can_write" class="code-box">
+            <div
+              v-if="!item.can_write && item.product_key !== 'h5_combo2_attach'"
+              class="code-box"
+            >
               <div
                 :class="[
                   'left',
@@ -638,6 +672,7 @@ export default {
           localStorage.setItem('mlxz_reload_page_history', 1);
 
           location.href = res.data.pay_url;
+          // 组合下单结束
           return;
         }
         utils.firebaseLogEvent(
@@ -851,7 +886,10 @@ export default {
     getAbsoluteStyle(item) {
       const { status, ext, product_key } = item;
       if (status !== 'PAYED') {
-        if (product_key !== 'h5_marriage') {
+        if (
+          product_key !== 'h5_marriage' &&
+          product_key !== 'h5_combo2_attach'
+        ) {
           return 'no-pay-btn1';
         } else {
           return 'no-pay-btn2';
