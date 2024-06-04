@@ -118,38 +118,37 @@
     </div> -->
       <!-- <img class="card" :src="is_cn ? cn_card_1 : tw_card_1" />
     <img class="card" :src="is_cn ? cn_card_2 : tw_card_2" /> -->
-      <img class="card mt-180" :src="is_cn ? cn_icon_1 : tw_card_1" />
-      <img class="card" :src="is_cn ? cn_icon_2 : tw_card_2" />
-      <img class="card" :src="is_cn ? cn_icon_3 : tw_card_3" />
-      <img class="card" :src="is_cn ? cn_icon_4 : tw_card_4" />
-      <img class="card" :src="is_cn ? cn_icon_5 : tw_card_5" />
-
-      <img
-        v-if="showFixedBtn"
-        class="fix-btn emo-btn"
-        :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
-        @click="check"
-      />
-      <!-- 時间选择控件 -->
-      <DatetimePicker
-        start="1960"
-        end="2000"
-        :year="year"
-        :month="month"
-        :date="date"
-        :birth_hour="birth_hour"
-        v-show="choose_time && !show_nongli"
-      ></DatetimePicker>
-      <NongliPicker
-        start="1960"
-        end="2000"
-        :year="year"
-        :month="month"
-        :date="date"
-        :birth_hour="birth_hour"
-        v-show="choose_time && show_nongli"
-      ></NongliPicker>
-      <!-- <combinePayPop
+    <img class="card mt-180" :src="is_cn ? cn_icon_1 : tw_card_1" />
+    <img class="card" :src="is_cn ? cn_icon_2 : tw_card_2" />
+    <img class="card" :src="is_cn ? cn_icon_3 : tw_card_3" />
+    <img class="card" :src="is_cn ? cn_icon_4 : tw_card_4" />
+    <img class="card" :src="is_cn ? cn_icon_5 : tw_card_5" />
+    <img
+      v-if="showFixedBtn"
+      class="fix-btn emo-btn"
+      :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
+      @click="check"
+    />
+    <!-- 時间选择控件 -->
+    <DatetimePicker
+      start="1960"
+      end="2000"
+      :year="year"
+      :month="month"
+      :date="date"
+      :birth_hour="birth_hour"
+      v-show="choose_time && !show_nongli"
+    ></DatetimePicker>
+    <NongliPicker
+      start="1960"
+      end="2000"
+      :year="year"
+      :month="month"
+      :date="date"
+      :birth_hour="birth_hour"
+      v-show="choose_time && show_nongli"
+    ></NongliPicker>
+    <!-- <combinePayPop
       :visible="pay_modal"
       :all_list="productList"
       :product_key="product_key"
@@ -263,6 +262,7 @@ tStatistic.init({
   app_key: 20002003,
   channel: utils.getFBChannel(),
 });
+
 
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
