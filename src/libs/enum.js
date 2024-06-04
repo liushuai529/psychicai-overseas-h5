@@ -269,6 +269,7 @@ import hehun from '../assets/img/mlxz/history_order/dingdan_img_hehun.png';
 
 import combine2 from '../assets/img/emotion_v2/new/dingdan_img_er.png';
 import combine3 from '../assets/img/emotion_v2/new/dingdan_img_san.png';
+import combo2_attach from '../assets/img/new_order/dingdan_img_er.png';
 export const getHistoryOrderImg = {
   h5_weigh_bone: yuantiangang,
   h5_bai_gua: guiguzi,
@@ -279,6 +280,7 @@ export const getHistoryOrderImg = {
   h5_annual2024: nianyun,
   h5_combo3: combine3,
   h5_combo2: combine2,
+  h5_combo2_attach: combo2_attach,
 };
 
 export const report_id_arr = {
