@@ -21,7 +21,7 @@
         }
     }
 
-    &>.nav_item {
+    .nav_item {
         width: 6.5rem;
         padding: 0.10rem 0 0.3rem;
 
@@ -84,40 +84,42 @@
             <img v-if="product_key === 'h5_emotion2024'" src="../assets/img/geju/tittle_img_gejujiedu_jian.png" alt="">
             <img v-else src='../assets/img/geju/img_title_jian.png' alt="">
         </div>
-        <div class="nav_item">
-            <div class="nav_header">
-                {{ user_desc }}
+        <div v-for="item,idx in renderData" :key="idx">
+            <div class="nav_item" >
+                <div class="nav_header">
+                    {{ item.user_desc }}
+                </div>
+                <div class="nav_desc" v-html="item.all">
+                </div>
             </div>
-            <div class="nav_desc" v-html="renderData.all">
+            <div class="nav_item">
+                <div class="nav_header" v-if="product_key === 'h5_emotion2024'">
+                    <img src="../assets/img/geju/left_heart.png" alt="">
+                    <span>感情方面</span>
+                    <img src="../assets/img/geju/right_heart.png" alt="">
+                </div>
+                <div class="nav_header" v-else>
+                    <img src="../assets/img/geju/left_bird.png" alt="">
+                    <span>感情方面</span>
+                    <img src="../assets/img/geju/right_bird.png" alt="">
+                </div>
+                <div class="nav_desc" v-html="item.love">
+                </div>
             </div>
-        </div>
-        <div class="nav_item">
-            <div class="nav_header" v-if="product_key === 'h5_emotion2024'">
-                <img src="../assets/img/geju/left_heart.png" alt="">
-                <span>感情方面</span>
-                <img src="../assets/img/geju/right_heart.png" alt="">
-            </div>
-            <div class="nav_header" v-else>
-                <img src="../assets/img/geju/left_bird.png" alt="">
-                <span>感情方面</span>
-                <img src="../assets/img/geju/right_bird.png" alt="">
-            </div>
-            <div class="nav_desc" v-html="renderData.love">
-            </div>
-        </div>
-        <div class="nav_item">
-            <div class="nav_header" v-if="product_key === 'h5_emotion2024'">
-                <img src="../assets/img/geju/left_heart.png" alt="">
-                <span>{{ is_cn ? "事业方面 " : "事業方面" }}</span>
-                <img src="../assets/img/geju/right_heart.png" alt="">
-            </div>
-            <div class="nav_header" v-else>
-                <img src="../assets/img/geju/left_bird.png" alt="">
-                <span>{{ is_cn ? "事业方面 " : "事業方面" }}</span>
-                <img src="../assets/img/geju/right_bird.png" alt="">
-            </div>
-            <div class="nav_desc" v-html="renderData.cause">
+            <div class="nav_item">
+                <div class="nav_header" v-if="product_key === 'h5_emotion2024'">
+                    <img src="../assets/img/geju/left_heart.png" alt="">
+                    <span>{{ is_cn ? "事业方面 " : "事業方面" }}</span>
+                    <img src="../assets/img/geju/right_heart.png" alt="">
+                </div>
+                <div class="nav_header" v-else>
+                    <img src="../assets/img/geju/left_bird.png" alt="">
+                    <span>{{ is_cn ? "事业方面 " : "事業方面" }}</span>
+                    <img src="../assets/img/geju/right_bird.png" alt="">
+                </div>
+                <div class="nav_desc" v-html="item.cause">
 
+                </div>
             </div>
         </div>
     </div>
@@ -149,16 +151,21 @@ export default {
     },
     data() {
         return {
-            renderData: {}
+            renderData: []
         }
     },
     watch: {
-        dataList(val) {
-            if (val.length) {
-                const dataByFormat = this.dataList.reduce((acc, cur) => {
-                    acc[cur.key] = cur.content
-                    return acc
-                }, {})
+        dataList(newVal) {
+            if (newVal.length) {
+                const dataByFormat = newVal.map((item,index)=>{
+                    let result =  item.reduce((acc, cur) => {
+                        acc[cur.key] = cur.content
+                        return acc
+                    }, {})
+                    result.user_desc = this.user_desc[index]
+                    return result
+                }
+            )
                 this.renderData = dataByFormat
             }
         },
@@ -167,7 +174,6 @@ export default {
         is_cn() {
             return utils.getLanguage() === 'zh-CN';
         },
-    },
-
+    }
 }
 </script>
