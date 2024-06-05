@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-06-04 18:33:39
+ * @LastEditTime: 2024-06-05 18:54:07
  * @Description: 历史订单
 -->
 <template>
@@ -655,7 +655,20 @@ export default {
               location.origin
             }/${utils.getFBChannel()}/${back_url}.html#/result?path=${
               path_enums[same_product.product_key]
-            }&report_price=${payment}&repay=1`;
+            }&report_price=${payment}&repay=3`;
+
+            let e_name =
+              same_product.product_key === 'h5_emotion2024'
+                ? 'click_history_2024lovelymarriage_repay'
+                : 'click_history_marriage2024lovely_repay';
+            let e_id =
+              same_product.product_key === 'h5_emotion2024'
+                ? '-10030'
+                : '-10031';
+            utils.firebaseLogEvent('10002', e_id, e_name, 'click', {
+              args_name: e_name,
+              channel: utils.getFBChannel(),
+            });
           } else {
             utils.firebaseLogEvent(
               '10002',

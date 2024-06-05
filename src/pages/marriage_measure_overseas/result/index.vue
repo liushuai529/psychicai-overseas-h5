@@ -4,14 +4,20 @@
 
     <!-- 新版信息start -->
     <div v-if="!loading && hasData" class="pay-box">
-      <img class="banner" :src="language === 'zh-CN' ? cn_img_title : tw_img_title" />
+      <img
+        class="banner"
+        :src="language === 'zh-CN' ? cn_img_title : tw_img_title"
+      />
       <div class="user-info">
         <div class="male-info">
           <div class="info-name">{{ user_ext.male_name | nameFilter }}</div>
           <div class="info-birth">{{ mbirth }}</div>
           <baziInfo v-if="show_bazi" :user_info="init_male_str" />
         </div>
-        <img class="heart" src="../../../assets/img/marriage_measure_overseas/detail/heart.png" />
+        <img
+          class="heart"
+          src="../../../assets/img/marriage_measure_overseas/detail/heart.png"
+        />
         <div class="female-info">
           <div class="info-name">{{ user_ext.female_name | nameFilter }}</div>
           <div class="info-birth">{{ fbirth }}</div>
@@ -20,17 +26,28 @@
       </div>
 
       <div class="bazi-box">
-        <shengxiao v-if="show_bazi" :male_str="init_male_str" :female_str="init_female_str" :is_result="true" />
+        <shengxiao
+          v-if="show_bazi"
+          :male_str="init_male_str"
+          :female_str="init_female_str"
+          :is_result="true"
+        />
       </div>
     </div>
     <!-- 新版信息 end -->
-    <div v-if="!loading && hasData" style="display: none" class="info_container">
+    <div
+      v-if="!loading && hasData"
+      style="display: none"
+      class="info_container"
+    >
       <div class="user_info">
-        <div :class="{
-          message: true,
-          youdayun: data_obj.dayun,
-          'border-line': true,
-        }">
+        <div
+          :class="{
+            message: true,
+            youdayun: data_obj.dayun,
+            'border-line': true,
+          }"
+        >
           <p>男方</p>
           <p>
             姓名：{{ decodeUnicode(maleinfo.name) }}
@@ -82,69 +99,130 @@
     </div>
 
     <div v-if="!loading && hasData" class="main-outer">
-      <img v-if="data_obj.hemu_rate" :src="language === 'zh-CN' ? cn_hemu : tw_hemu" alt class="info_img" />
+      <img
+        v-if="data_obj.hemu_rate"
+        :src="language === 'zh-CN' ? cn_hemu : tw_hemu"
+        alt
+        class="info_img"
+      />
       <div class="common_cn" v-if="data_obj.hemu_rate">
         <p class="zm">
-          <span>女宅命官：{{ data_obj.hemu_rate.fm }}（{{
-            data_obj.hemu_rate.fdx
-            }}）</span>
+          <span
+            >女宅命官：{{ data_obj.hemu_rate.fm }}（{{
+              data_obj.hemu_rate.fdx
+            }}）</span
+          >
         </p>
         <p class="zm" style="margin-top: 0.1rem">
-          <span>男宅命官：{{ data_obj.hemu_rate.mm }}（{{
-            data_obj.hemu_rate.mdx
-            }}）</span>
+          <span
+            >男宅命官：{{ data_obj.hemu_rate.mm }}（{{
+              data_obj.hemu_rate.mdx
+            }}）</span
+          >
         </p>
         <p class="fenge" style="font-weight: bold">{{ $t('hepan-label') }}</p>
         <p v-html="data_obj.hemu_rate.hepan"></p>
         <p class="fenge" style="font-weight: bold">{{ $t('yiju-label') }}</p>
         <p v-html="data_obj.hemu_rate.juzhu"></p>
       </div>
-      <img v-if="data_obj.energy" :src="language === 'zh-CN' ? cn_nengliang : tw_nengliang" class="info_img" />
+      <img
+        v-if="data_obj.energy"
+        :src="language === 'zh-CN' ? cn_nengliang : tw_nengliang"
+        class="info_img"
+      />
       <div v-if="data_obj.energy" class="common_cn">
         <p class="zm">
           <span>女方生肖：{{ data_obj.energy.fsx }}</span>
-          <span style="float: right; margin-right: 0.4rem">男方生肖：{{ data_obj.energy.msx }}</span>
+          <span style="float: right; margin-right: 0.4rem"
+            >男方生肖：{{ data_obj.energy.msx }}</span
+          >
         </p>
         <p class="zm fenge">男女生肖合盘：{{ data_obj.energy.title }}</p>
         <p v-html="data_obj.energy.total"></p>
       </div>
-      <img v-if="data_obj.career" :src="language === 'zh-CN' ? cn_career : tw_career" alt class="info_img" />
+      <img
+        v-if="data_obj.career"
+        :src="language === 'zh-CN' ? cn_career : tw_career"
+        alt
+        class="info_img"
+      />
       <div class="common_cn" v-if="data_obj.career">
         <p v-html="data_obj.career"></p>
       </div>
-      <img v-if="data_obj.family" :src="language === 'zh-CN' ? cn_family : tw_family" alt class="info_img" />
+      <img
+        v-if="data_obj.family"
+        :src="language === 'zh-CN' ? cn_family : tw_family"
+        alt
+        class="info_img"
+      />
       <div class="common_cn" v-if="data_obj.family">
         <p v-html="data_obj.family"></p>
       </div>
-      <img v-if="data_obj.character" src="../../../assets/img/mlxz/bzhh/result/character.jpg" alt class="info_img" />
+      <img
+        v-if="data_obj.character"
+        src="../../../assets/img/mlxz/bzhh/result/character.jpg"
+        alt
+        class="info_img"
+      />
       <div class="common_cn" v-if="data_obj.character">
         <p v-html="data_obj.character"></p>
       </div>
-      <img v-if="data_obj.parents" :src="language === 'zh-CN' ? cn_parents : tw_parents" alt class="info_img" />
+      <img
+        v-if="data_obj.parents"
+        :src="language === 'zh-CN' ? cn_parents : tw_parents"
+        alt
+        class="info_img"
+      />
       <div class="common_cn" v-if="data_obj.parents">
         <p class="zm">婆媳关系</p>
         <p class="fenge" v-html="data_obj.parents.poxi"></p>
         <p class="zm">丈夫关系</p>
         <p class="fenge" v-html="data_obj.parents.fuzhang"></p>
       </div>
-      <img v-if="data_obj.blossom" :src="language === 'zh-CN' ? cn_blossom : tw_blossom" alt class="info_img" />
+      <img
+        v-if="data_obj.blossom"
+        :src="language === 'zh-CN' ? cn_blossom : tw_blossom"
+        alt
+        class="info_img"
+      />
       <div class="common_cn" v-if="data_obj.blossom">
         <p v-html="data_obj.blossom"></p>
       </div>
-      <img v-if="data_obj.all" :src="language === 'zh-CN' ? cn_all : tw_all" alt class="info_img" />
+      <img
+        v-if="data_obj.all"
+        :src="language === 'zh-CN' ? cn_all : tw_all"
+        alt
+        class="info_img"
+      />
       <div class="common_cn" v-if="data_obj.all">
         <div class="star">
-          <img v-for="item in getStarts(data_obj.all.score)" :src="item" alt :key="item.index" />
+          <img
+            v-for="item in getStarts(data_obj.all.score)"
+            :src="item"
+            alt
+            :key="item.index"
+          />
         </div>
         <p v-html="data_obj.all.desc"></p>
       </div>
-      <CopyCode :set_title="true"
+      <CopyCode
+        :set_title="true"
         title_icon="https://psychicai-static.psychicai.pro/imgs/2404e7ce06d17d704985b300bbb80fd6080c.png"
-        title_icon_style="width: 5.26rem;height: .92rem;margin:.24rem auto .44rem;" className="marry-box"
-        tips1_color="#222" code_color="#B1031F" :transfer_code="transfer_code" codeClass="marry-code"
-        :code_btn="is_cn ? cn_code_btn : tw_code_btn" code_text_style="margin:.27rem auto .39rem;color:#6E6E6E"
-        tips5_style="width: 6.34rem;height: .92rem;" @showModal="code_modal = true" a_token="bkl8h9" e_id="10007"
-        c_id="-10010" e_name="click_marriage_result" />
+        title_icon_style="width: 5.26rem;height: .92rem;margin:.24rem auto .44rem;"
+        className="marry-box"
+        tips1_color="#222"
+        code_color="#B1031F"
+        :transfer_code="transfer_code"
+        codeClass="marry-code"
+        :code_btn="is_cn ? cn_code_btn : tw_code_btn"
+        code_text_style="margin:.27rem auto .39rem;color:#6E6E6E"
+        tips5_style="width: 6.34rem;height: .92rem;"
+        @showModal="code_modal = true"
+        a_token="bkl8h9"
+        e_id="10007"
+        c_id="-10010"
+        e_name="click_marriage_result"
+      />
     </div>
     <CodePop v-if="code_modal" @close="code_modal = false" />
   </div>
@@ -405,13 +483,17 @@ export default {
           );
         }
         if (repay) {
+          let history_name =
+            repay == 3
+              ? 'event_status_2024lovelymarriagehistory_pay_success'
+              : 'event_status_marriagehistory_pay_success';
           utils.firebaseLogEvent(
             '10002',
-            '-10018',
-            'event_status_marriagehistory_pay_success',
+            repay == 3 ? '-10032' : '-10018',
+            history_name,
             'event_status',
             {
-              args_name: 'event_status_marriagehistory_pay_success',
+              args_name: history_name,
               channel: utils.getFBChannel(),
             }
           );
@@ -429,7 +511,7 @@ export default {
           );
         }
 
-        if(combine_product_ids) {
+        if (combine_product_ids) {
           //成功
           utils.firebaseLogEvent(
             '10007',
@@ -493,13 +575,17 @@ export default {
         }
 
         if (repay) {
+          let history_name =
+            repay == 3
+              ? 'event_status_2024lovelymarriagehistory_pay_fail'
+              : 'event_status_marriagehistory_pay_fail';
           utils.firebaseLogEvent(
             '10002',
-            '-10027',
-            'event_status_marriagehistory_pay_fail',
+            repay === 3 ? '-10033' : '-10027',
+            history_name,
             'event_status',
             {
-              args_name: 'event_status_marriagehistory_pay_fail',
+              args_name: history_name,
               channel: utils.getFBChannel(),
             }
           );
@@ -517,7 +603,7 @@ export default {
           );
         }
 
-        if(combine_product_ids) {
+        if (combine_product_ids) {
           //失败
           utils.firebaseLogEvent(
             '10007',
@@ -582,16 +668,18 @@ export default {
       getResultAPI({ order_id: this.$route.query.order_id }).then(res => {
         let can_store =
           (res.data && ['PAYED', 'FAIL'].includes(res.data.status)) ||
-            (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
+          (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
             ? true
             : false;
 
         if (res.data.status === 'PAYED') {
           //是否组合订单
           if (res.data.sub_orders) {
-            getResultAPI({ order_id: res.data.sub_orders[0].order_id }).then(response => {
-              this.renderResultAndComplete(response);
-            })
+            getResultAPI({ order_id: res.data.sub_orders[0].order_id }).then(
+              response => {
+                this.renderResultAndComplete(response);
+              }
+            );
           } else {
             this.renderResultAndComplete(res);
           }
@@ -643,7 +731,6 @@ export default {
       this.hasData = true;
       Indicator.close();
     },
-
 
     getFormateStr() {
       let maleusername = this.user_ext.male_name;
@@ -708,8 +795,9 @@ export default {
       // 男性生日農曆
       if (query_user_string_array[10] === '0') {
         let mday = this.getGlDate(myear, mmonth, mdate);
-        this.mbirth = `${this.$t('nongli-label')} ${myear}年${mday.nmonthstr}${mday.ndatestr
-          }`;
+        this.mbirth = `${this.$t('nongli-label')} ${myear}年${mday.nmonthstr}${
+          mday.ndatestr
+        }`;
       } else {
         this.mbirth = `${this.$t(
           'gongli-label'
@@ -718,8 +806,9 @@ export default {
       // 女性生日農曆
       if (query_user_string_array[11] === '0') {
         let fday = this.getGlDate(fyear, fmonth, fdate);
-        this.fbirth = `${this.$t('nongli-label')} ${fyear}年${fday.nmonthstr}${fday.ndatestr
-          }`;
+        this.fbirth = `${this.$t('nongli-label')} ${fyear}年${fday.nmonthstr}${
+          fday.ndatestr
+        }`;
       } else {
         this.fbirth = `${this.$t(
           'gongli-label'
@@ -814,7 +903,8 @@ export default {
   .code {
     width: 5.5rem;
     min-height: 1.04rem;
-    background: url('https://psychicai-static.psychicai.pro/imgs/240463fde6a15d8e44cfa0e7dcbc58abfa67.png') no-repeat;
+    background: url('https://psychicai-static.psychicai.pro/imgs/240463fde6a15d8e44cfa0e7dcbc58abfa67.png')
+      no-repeat;
     background-size: 100% 100%;
     font-weight: 600;
     font-size: 0.32rem;

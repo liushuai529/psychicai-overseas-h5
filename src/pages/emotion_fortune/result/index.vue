@@ -2,18 +2,41 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-15 11:33:50
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 21:20:10
+ * @LastEditTime: 2024-06-05 18:56:46
  * @Description: 
 -->
 <template>
   <div class="result">
     <div :class="['info-box', lang ? 'cn-bg' : 'tw-bg']">
-      <BaziTable :sex="sex" :is_result="true" :username="username" :gongli_nongli="gongli_nongli"
-        :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
-        :nayin="nayin" :cai_bo_num="cai_bo_num" :gui_ren_num="gui_ren_num" :hun_yin_num="hun_yin_num" :ming_ge="ming_ge"
-        :riyuanqiangruo="riyuanqiangruo" :shi_ye_num="shi_ye_num" :wuxingqiang="wuxingqiang" :tao_hua_num="tao_hua_num"
-        :fuqigong="fuqigong" text_color="#6D2215" minge_color="#EC436B" :show_daji="false" bg="#FFFAFA" width="6.5rem"
-        table_border="0.02rem solid #EC436B" border_color="#EC436B" :is_show_taohua="1" :change_color="true" />
+      <BaziTable
+        :sex="sex"
+        :is_result="true"
+        :username="username"
+        :gongli_nongli="gongli_nongli"
+        :picker_date_yangli="picker_date_yangli"
+        :picker_date_nongli="picker_date_nongli"
+        :gan="gan"
+        :zhi="zhi"
+        :nayin="nayin"
+        :cai_bo_num="cai_bo_num"
+        :gui_ren_num="gui_ren_num"
+        :hun_yin_num="hun_yin_num"
+        :ming_ge="ming_ge"
+        :riyuanqiangruo="riyuanqiangruo"
+        :shi_ye_num="shi_ye_num"
+        :wuxingqiang="wuxingqiang"
+        :tao_hua_num="tao_hua_num"
+        :fuqigong="fuqigong"
+        text_color="#6D2215"
+        minge_color="#EC436B"
+        :show_daji="false"
+        bg="#FFFAFA"
+        width="6.5rem"
+        table_border="0.02rem solid #EC436B"
+        border_color="#EC436B"
+        :is_show_taohua="1"
+        :change_color="true"
+      />
     </div>
 
     <contentDetail v-if="fortune.qian" :result="fortune.qian" :item_index="2" />
@@ -230,13 +253,18 @@ export default {
           );
         }
         if (repay) {
+          let history_name =
+            repay == 3
+              ? 'event_status_2024lovelymarriagehistory_pay_success'
+              : 'event_status_2024lovelyhistory_pay_success';
+
           utils.firebaseLogEvent(
             '10002',
-            '-10013',
-            'event_status_2024lovelyhistory_pay_success',
+            repay == 3 ? '-10032' : '-10013',
+            history_name,
             'event_status',
             {
-              args_name: 'event_status_2024lovelyhistory_pay_success',
+              args_name: history_name,
               channel: utils.getFBChannel(),
             }
           );
@@ -253,7 +281,7 @@ export default {
             }
           );
         }
-        if(combine_product_ids) {
+        if (combine_product_ids) {
           //成功
           utils.firebaseLogEvent(
             '10006',
@@ -316,13 +344,17 @@ export default {
           );
         }
         if (repay) {
+          let history_name =
+            repay == 3
+              ? 'event_status_2024lovelymarriagehistory_pay_fail'
+              : 'event_status_2024lovelyhistory_pay_fail';
           utils.firebaseLogEvent(
             '10002',
-            '-10022',
-            'event_status_2024lovelyhistory_pay_fail',
+            repay === 3 ? '-10033' : '-10022',
+            history_name,
             'event_status',
             {
-              args_name: 'event_status_2024lovelyhistory_pay_fail',
+              args_name: history_name,
               channel: utils.getFBChannel(),
             }
           );
@@ -339,7 +371,7 @@ export default {
             }
           );
         }
-        if(combine_product_ids) {
+        if (combine_product_ids) {
           //失败
           utils.firebaseLogEvent(
             '10006',
@@ -411,15 +443,17 @@ export default {
       getResultAPI({ order_id: this.$route.query.order_id }).then(res => {
         let can_store =
           (res.data && ['PAYED', 'FAIL'].includes(res.data.status)) ||
-            (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
+          (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
             ? true
             : false;
         if (res.data.status === 'PAYED') {
           //是否组合订单
           if (res.data.sub_orders) {
-            getResultAPI({ order_id: res.data.sub_orders[0].order_id }).then(response => {
-              this.renderResultAndComplete(response);
-            })
+            getResultAPI({ order_id: res.data.sub_orders[0].order_id }).then(
+              response => {
+                this.renderResultAndComplete(response);
+              }
+            );
           } else {
             this.renderResultAndComplete(res);
           }
@@ -479,10 +513,10 @@ export default {
           road_forecast === '吉'
             ? 1
             : road_forecast === '小吉'
-              ? 2
-              : road_forecast === '平'
-                ? 3
-                : 4;
+            ? 2
+            : road_forecast === '平'
+            ? 3
+            : 4;
 
         this.fortune.concept = concept.replace(/\n/g, '<br/>');
         this.fortune.review = review.replace(/\n/g, '<br/>');
@@ -501,8 +535,6 @@ export default {
       this.hasData = true;
       Indicator.close();
     },
-
-
 
     /**
      * @description: 获取八字数据
@@ -600,16 +632,17 @@ export default {
       );
       let lunar = solar.getLunar();
       this.picker_date_nongli = +is_gongli
-        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${this.picker_hour
-        }`
+        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${
+            this.picker_hour
+          }`
         : `${birth_year}年${utils.formateNongliMonth(
-          birth_month
-        )}${utils.formateNongliDate(birth_date)} ${this.picker_hour}`;
+            birth_month
+          )}${utils.formateNongliDate(birth_date)} ${this.picker_hour}`;
       this.picker_date_yangli = +is_gongli
         ? `${birth_year}-${birth_month}-${birth_date} ${this.picker_hour}`
         : `${Lunar.fromYmd(+birth_year, +birth_month, +birth_date)
-          .getSolar()
-          .toString()} ${this.picker_hour}`;
+            .getSolar()
+            .toString()} ${this.picker_hour}`;
     },
   },
 };
