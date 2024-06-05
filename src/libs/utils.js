@@ -741,7 +741,7 @@ const copyToClipboard = text => {
  */
 const isProd = () => {
   // return true;
-  return ['192.168', 'localhost', 'test', '10.1.9', '10.206.0.133'].every(
+  return ['192.168', 'localhost', 'test', '10.1.9', '10.206.0.133', '10.'].every(
     item => {
       return window.location.href.indexOf(item) < 0;
     }
