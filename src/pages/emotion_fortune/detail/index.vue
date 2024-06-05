@@ -429,7 +429,7 @@ export default {
   align-items: center;
   background: #ec436b;
   .pay-box {
-    margin-bottom: 0.36rem;
+    margin-bottom: 0.49rem;
     width: 7.1rem;
     height: 7.09rem;
     padding-top: 1.1rem;

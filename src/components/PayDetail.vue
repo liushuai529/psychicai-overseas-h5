@@ -336,7 +336,9 @@ export default {
       // localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
     }
 
+   
     this.getProductionList();
+
     this.getPayMethod();
 
     utils.firebaseLogEvent(
@@ -441,6 +443,7 @@ export default {
      * @return {*}
      */
     async payMoney() {
+      if(this.all_product.length === 0) return
       //防抖
       if(this.payCanClick){
         return false
