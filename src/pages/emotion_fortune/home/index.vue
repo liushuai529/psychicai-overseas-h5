@@ -16,7 +16,7 @@
       }"
     >
       <header-notice v-if="has_pay"></header-notice>
-      <div v-if="!is_channel_01" @click="backHome()" class="back-box">
+      <div v-if="!is_channel_01" @click="backHome()" :class="['back-box']" :style="getStyle">
         <img
           src="../../../assets/img/common/baogao_icon_home.png"
           class="left"
@@ -360,6 +360,13 @@ export default {
     };
   },
   computed: {
+    getStyle() {
+      if(this.comboAttachData && !this.has_pay) {
+        return 'top: 0.5rem'
+      } else if(this.comboAttachData && this.has_pay) {
+        return 'top: 0.7rem'
+      }
+    },
     //套餐支付显示逻辑
     is_show_combination() {
       return !["enjoy03", "panda03"].includes(utils.getFBChannel());
@@ -1422,6 +1429,9 @@ margin-bottom: .2rem;
     width: 0.32rem;
     height: 0.32rem;
   }
+}
+.back-box-combo {
+  top: 0.4rem;
 }
 @keyframes emoBtn {
         0% {

@@ -365,7 +365,14 @@ export default {
         : `${Lunar.fromYmd(+this.year, +this.month, +this.date)
             .getSolar()
             .toString()} ${this.picker_hour}`;
-      this.mingge_desc =this.gongli_nongli ?  `${this.username = arr[0]}，${this.sex === 0? '女':'男'}，${this.year}年${this.month}月${this.date}日生人` : `${this.username = arr[0]}，${this.sex === 0? '女':'男'}，${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}日生人`  
+            console.warn('this.gongli_nongli ', this.gongli_nongli )
+
+      let nongli_desc = +this.gongli_nongli
+        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} `
+        : `${this.year}年${utils.formateNongliMonth(
+            this.month
+          )}${utils.formateNongliDate(this.date)}`;
+      this.mingge_desc = +this.gongli_nongli ?  `${this.username = utils.getShortStr(arr[0], 4)}，${this.sex === 0? '女':'男'}，${this.year}年${this.month}月${this.date}日生人` : `${this.username = utils.getShortStr(arr[0], 4)}，${this.sex === 0? '女':'男'}，${nongli_desc}生人`  
     },
 
     // 支付弹窗
