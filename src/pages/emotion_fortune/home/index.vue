@@ -367,11 +367,14 @@ export default {
     getStyle() {
       //有未使用报告引导框、没有支付提醒tips
       if (this.comboAttachData && this.comboAttachData.product_key && !this.has_pay) {
+        console.warn('有未使用报告引导框、没有支付提醒tips')
         return 'top: 0.5rem';
       } else if (this.comboAttachData && this.comboAttachData.product_key && this.has_pay) {
         //有未使用报告引导框、有支付提醒tips
+        console.warn('有未使用报告引导框、有支付提醒tips')
         return 'top: 0.7rem';
       } else if(this.comboAttachData && !this.comboAttachData.product_key && this.has_pay) {
+        console.warn('没有有未使用报告引导框、有支付提醒tips')
         //没有有未使用报告引导框、有支付提醒tips
         return 'top: 0.5rem';
       }
@@ -1443,7 +1446,7 @@ margin-bottom: .2rem;
 
 .back-box {
   position: absolute;
-  top: 0.2rem;
+  top: 0.5rem;
   left: 0.2rem;
   width: 1.32rem;
   height: 0.6rem;
