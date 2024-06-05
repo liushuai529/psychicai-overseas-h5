@@ -60,7 +60,7 @@
       v-if="comboAttachData && is_show_combination"
       style="margin-top: 0.1rem"
       :is_home="true"
-      product_key="h5_marriage"
+      :product_key="comboAttachData.product_key"
       :call_back="startCalculateClick"
     />
     <!-- 新版多买多折扣 -->
