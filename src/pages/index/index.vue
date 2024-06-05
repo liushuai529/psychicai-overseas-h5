@@ -1968,7 +1968,7 @@ export default {
     async showComboAttach() {
       const res = await getComboAttachAPI();
       if (res.status !== 1000) return;
-      if (res.data) {
+      if (res.data && res.data.combine) {
         //组合套餐中未测算的报告
         let sub_orders = res.data.combine.sub_orders.find(
           item => !item.extra_ce_suan
