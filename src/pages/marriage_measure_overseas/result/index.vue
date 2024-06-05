@@ -381,6 +381,7 @@ export default {
       let report_price = +utils.getQueryStr('report_price');
       let report_status = utils.getQueryStr('status');
       let discount_pay = +utils.getQueryStr('discount_pay');
+      let combine_product_ids = +utils.getQueryStr('combine_product_ids');
       let repay = +utils.getQueryStr('repay');
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
@@ -415,7 +416,7 @@ export default {
             }
           );
         }
-        if (!discount_pay && !repay) {
+        if (!discount_pay && !repay && !combine_product_ids) {
           utils.firebaseLogEvent(
             '10007',
             '-10007',
@@ -423,6 +424,20 @@ export default {
             'event_status',
             {
               args_name: 'event_status_marriage_pay_success',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+
+        if(combine_product_ids) {
+          //成功
+          utils.firebaseLogEvent(
+            '10007',
+            '-10028',
+            'event_status_marriagelovely_pay_success',
+            'event_status',
+            {
+              args_name: 'event_status_marriagelovely_pay_success',
               channel: utils.getFBChannel(),
             }
           );
@@ -489,7 +504,7 @@ export default {
             }
           );
         }
-        if (!discount_pay && !repay) {
+        if (!discount_pay && !repay && !combine_product_ids) {
           utils.firebaseLogEvent(
             '10007',
             '-10008',
@@ -497,6 +512,20 @@ export default {
             'event_status',
             {
               args_name: 'event_status_marriage_pay_fail',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+
+        if(combine_product_ids) {
+          //失败
+          utils.firebaseLogEvent(
+            '10007',
+            '-10029',
+            'event_status_marriagelovely_pay_fail',
+            'event_status',
+            {
+              args_name: 'event_status_marriagelovely_pay_fail',
               channel: utils.getFBChannel(),
             }
           );

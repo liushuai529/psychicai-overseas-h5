@@ -163,10 +163,7 @@ import new_ganqing_small from "../assets/img/emotion_v2/new/banner_ganqing_fang.
 
 export default {
   props: {
-    index: {
-      default: 0,
-      type: Number,
-    },
+  
 
     product_key: {
       type: String,
@@ -220,11 +217,15 @@ export default {
       this.time = 15 * 60 * 1000;
       // localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
     }
+
+  },
+  mounted() {
+    setTimeout(() => {
+      this.$emit('get_combine_product_ids', this.getCombineProductIds());
+    }, 1500);
   },
   watch: {
-    index(val) {
-      this.selectIndex = val;
-    },
+   
   },
   components: {
     CountDown,

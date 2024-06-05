@@ -464,17 +464,36 @@ export default {
         e_name: 'pay_click',
         product_id: this.product.product_id,
       });
-      utils.firebaseLogEvent(
-        this.e_view_id,
-        this.c_click_id,
-        this.e_click_name,
-        'click',
-        {
-          args_name: this.e_click_name,
-          pay_type: this.pay_methods[this.check_index].title,
-          channel: utils.getFBChannel(),
-        }
-      );
+      //组合套餐购买埋点上报
+      if(this.combine_product_ids.length) {
+        utils.firebaseLogEvent(
+          this.product_key ==='h5_emotion2024'? 10006: 10007,
+          this.product_key ==='h5_emotion2024'?-10028: -10030,
+          this.product_key ==='h5_emotion2024'?'click_2024lovelymarriage_pay': 'click_marriage2024lovely_pay',
+          'click',
+          {
+            args_name: this.product_key ==='h5_emotion2024'?'click_2024lovelymarriage_pay': 'click_marriage2024lovely_pay',
+            pay_type: this.pay_methods[this.check_index].title,
+            channel: utils.getFBChannel(),
+          }
+        );
+      } else {
+          utils.firebaseLogEvent(
+          this.e_view_id,
+          this.c_click_id,
+          this.e_click_name,
+          'click',
+          {
+            args_name: this.e_click_name,
+            pay_type: this.pay_methods[this.check_index].title,
+            channel: utils.getFBChannel(),
+          }
+        );
+      }
+      
+
+      
+
 
       localStorage.setItem('report_price', this.product.price);
 
@@ -519,7 +538,7 @@ export default {
           location.pathname
         }#/result?path=${path_enums[this.product_key]}&report_price=${
           this.product.price
-        }&discount_pay=${discount_pay}`;
+        }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length? 1: 0}`;
         const res = await payOrderAPI(pay_max_params);
         localStorage.removeItem('mlxz_set_event_times');
         Indicator.close();
