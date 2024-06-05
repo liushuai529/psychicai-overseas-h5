@@ -80,7 +80,7 @@
           </div>
         </div>
       </div>
-      
+
         <div class="discount-comb" v-else>
             <GroupPurchase
               :product=product
@@ -407,7 +407,9 @@ export default {
         this.all_product = data;
         //组合两项优惠
         this.h5_combo2_attach = data.find(item => item.product_key === 'h5_combo2_attach');
-        this.combine_product_ids = this.getCombineProductIdsBySelf();
+        if(this.is_show_combination) {
+          this.combine_product_ids = this.getCombineProductIdsBySelf();
+        }
         this.is_new_user = this.product
           ? this.product.tags
             ? this.product.tags.includes('newcomer_discount')
