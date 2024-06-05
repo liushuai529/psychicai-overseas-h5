@@ -153,9 +153,9 @@ export default {
     },
     methods:{
         imgSrcVerify(){
-            const src = this.imgMap[this.product_key][!this.is_cn ? 'cn' : 'tw']
+            const src = this.imgMap[this.product_key][this.is_cn ? 'cn' : 'tw']
             src && (this.show_imgSrc = src)
-            const title = this.titleMap[this.product_key][!this.is_cn ? 'cn' : 'tw']
+            const title = this.titleMap[this.product_key][this.is_cn ? 'cn' : 'tw']
             title && (this.show_title = title)
 
         }
