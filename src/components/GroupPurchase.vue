@@ -34,8 +34,8 @@
           class="bottom-container"
           :style="{ background: this.selectIndex ? '#DFDFDF' : '#E24C2E' }"
         >
-          <div class="left">{{ this.now_price }}</div>
-          <div class="right">{{ this.origin_price }}</div>
+          <div :class="['left', this.selectIndex ? 'left-unselect' : null]" >{{ this.now_price }}</div>
+          <div :class="['right', this.selectIndex ? 'right-unselect' : null]">{{ this.origin_price }}</div>
         </div>
       </div>
       <div
@@ -95,8 +95,8 @@
           class="bottom-container"
           :style="{ background: this.selectIndex ? '#E24C2E' : '#DFDFDF' }"
         >
-          <div class="left">{{ this.now_price_combo }}</div>
-          <div class="right">{{ this.origin_price_combo }}</div>
+          <div :class="['left', !this.selectIndex ? 'left-unselect' : null]" >{{ this.now_price_combo }}</div>
+          <div :class="['right', !this.selectIndex ? 'right-unselect' : null]">{{ this.origin_price_combo }}</div>
         </div>
       </div>
     </div>
@@ -381,6 +381,7 @@ export default {
         position: absolute;
         top: 0;
         right: -0.025rem;
+        
         /* right: 0rem; */
         width: 0.44rem;
         height: 0.44rem;
@@ -479,7 +480,8 @@ export default {
         width: 100%;
         height: 0.64rem;
         /* background: #e24c2e; */
-        border-radius: 0px 0px 0.1rem 0.1rem;
+        border-radius: 0rem 0rem 0.05rem 0.05rem;
+
         margin-bottom: 0rem;
         display: flex;
         justify-content: space-evenly;
@@ -491,12 +493,22 @@ export default {
           text-align: left;
           font-style: normal;
         }
+        .left-unselect {
+          font-weight: 600;
+          font-size: 0.28rem;
+          color: #E24C2E;
+        }
         .right {
           font-weight: 400;
           font-size: 0.26rem;
           color: rgba(255, 255, 255, 0.5);
           font-style: normal;
           text-decoration: line-through;
+        }
+        .right-unselect {
+          font-weight: 400;
+          font-size: 0.22rem;
+          color: #99999A;
         }
       }
     }
