@@ -1125,7 +1125,7 @@ export default {
     left: 50%;
     margin-left: -2.93rem;
     bottom: 1.5rem;
-    z-index: 2;
+    z-index: 99;
   }
 }
 </style>

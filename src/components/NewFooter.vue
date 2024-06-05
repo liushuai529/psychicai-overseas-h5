@@ -22,7 +22,7 @@ export default {
   opacity: 0.5;
   width: 100%;
   height: 2.8rem;
-  z-index: 2;
+  z-index: 98;
   bottom: 0;
 }
 </style>

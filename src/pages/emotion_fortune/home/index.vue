@@ -1370,7 +1370,7 @@ margin-bottom: .2rem;
   height: 1.34rem;
   position: fixed;
   bottom: 1.2rem;
-  z-index:2
+  z-index:99
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }
 .order-icon {

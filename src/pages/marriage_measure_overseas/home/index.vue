@@ -1266,7 +1266,7 @@ export default {
   left: 50%;
   margin-left: -3.46rem;
   bottom: 1.5rem;
-  z-index: 2;
+  z-index: 99;
   animation: btnMove 1s infinite ease-in-out alternate;
 }
 </style>

@@ -82,7 +82,7 @@
       class="user"
     />
 
-    <GejuInfo style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="mingge_desc" :dataList="[mingge_minfo, mingge_finfo]"/>
+    <GejuInfo v-if="is_show_combination"  style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="mingge_desc" :dataList="[mingge_minfo, mingge_finfo]"/>
 
     <img class="text" :src="language === 'zh-CN' ? cn_img_word : tw_img_word" />
     <img class="module" :src="language === 'zh-CN' ? cn_mokuai1 : tw_mokuai1" />
@@ -538,7 +538,7 @@ export default {
   left: 50%;
   margin-left: -3.46rem;
   bottom: 1.4rem;
-  z-index: 4;
+  z-index: 99;
   animation: btnMove 1s infinite ease-in-out alternate;
 }
 

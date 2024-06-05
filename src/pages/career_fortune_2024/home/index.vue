@@ -1251,7 +1251,7 @@ export default {
     width: 4.98rem;
     height: 1rem;
     bottom: 1.4rem;
-    z-index: 2;
+    z-index: 99;
     // animation: scaleBtn 1s infinite ease-in-out alternate;
   }
 }

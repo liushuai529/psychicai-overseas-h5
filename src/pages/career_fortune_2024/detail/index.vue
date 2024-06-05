@@ -721,7 +721,7 @@ export default {
   margin-bottom: 0.2rem;
   // animation: scaleBtn 1s infinite ease-in-out alternate;
   margin-top: 0.4rem;
-  z-index: 2;
+  z-index: 99;
 }
 .huode {
   width: 5.95rem;

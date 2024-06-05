@@ -54,7 +54,7 @@
         a_click_token="2rov44"
       />
     </div>
-    <GejuInfo style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="[mingge_desc]" :dataList="[gejujiedu]"/>
+    <GejuInfo v-if="is_show_combination" style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="[mingge_desc]" :dataList="[gejujiedu]"/>
     <!-- <div class="card-box">
       <canvas id="qian"></canvas>
     </div> -->
@@ -503,7 +503,7 @@ export default {
   height: 1.34rem;
   position: fixed;
   bottom: 1.2rem;
-  z-index: 2;
+  z-index: 99;
 }
 
 .pay-method {
