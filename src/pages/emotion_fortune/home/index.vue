@@ -365,10 +365,15 @@ export default {
   },
   computed: {
     getStyle() {
+      //有未使用报告引导框、没有支付提醒tips
       if (this.comboAttachData && this.comboAttachData.product_key && !this.has_pay) {
         return 'top: 0.5rem';
       } else if (this.comboAttachData && this.comboAttachData.product_key && this.has_pay) {
+        //有未使用报告引导框、有支付提醒tips
         return 'top: 0.7rem';
+      } else if(this.comboAttachData && !this.comboAttachData.product_key && this.has_pay) {
+        //没有有未使用报告引导框、有支付提醒tips
+        return 'top: 0.5rem';
       }
     },
     //套餐支付显示逻辑
