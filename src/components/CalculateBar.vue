@@ -87,7 +87,7 @@
         <img :src="show_imgSrc" class="detail_img">
         <div class="detail_desc">
             <div class="desc_header">
-                <span class="header_left">八字合婚</span>
+                <span class="header_left">{{ show_title }}</span>
                 <span class="header_right">已解锁</span>
             </div>
             <div class="desc_content">填写信息开始测算</div>
@@ -132,7 +132,18 @@ export default {
                     "tw":new_ganqing_small
                 }
             },
-            show_imgSrc:cn_small_bzhh//默认第一张
+            titleMap:{
+                "h5_marriage":{
+                    "cn":'八字合婚',
+                    "tw":'八字合婚'
+                },
+                "h5_emotion2024":{
+                    "cn":'感情运',
+                    "tw":'感情運'
+                }
+            },
+            show_imgSrc:cn_small_bzhh,//默认第一张
+            show_title: '',
         }
     },
     computed:{
@@ -144,6 +155,9 @@ export default {
         imgSrcVerify(){
             const src = this.imgMap[this.product_key][!this.is_cn ? 'cn' : 'tw']
             src && (this.show_imgSrc = src)
+            const title = this.titleMap[this.product_key][!this.is_cn ? 'cn' : 'tw']
+            title && (this.show_title = title)
+
         }
     },
     created() {
