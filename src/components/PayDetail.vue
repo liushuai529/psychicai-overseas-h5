@@ -80,14 +80,14 @@
           </div>
         </div>
       </div>
-
+      
         <div class="discount-comb" v-else>
             <GroupPurchase
-            :product=this.product
-            :h5_combo2_attach=this.h5_combo2_attach
-            :all_product=this.all_product
-            @get_combine_product_ids="getCombineProductIds"
-            :product_key=this.product_key
+              :product=product
+              :h5_combo2_attach=h5_combo2_attach
+              :all_product=all_product
+              @get_combine_product_ids="getCombineProductIds"
+              :product_key=product_key
             />
           
         </div>
@@ -336,7 +336,9 @@ export default {
       // localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
     }
 
+   
     this.getProductionList();
+
     this.getPayMethod();
 
     utils.firebaseLogEvent(
@@ -382,6 +384,16 @@ export default {
       }
     },
 
+    //获取组合套餐商品id集合
+    getCombineProductIdsBySelf() {
+      let array = [this.product.product_id];
+      let tags = this.h5_combo2_attach.tags;
+      let otherProductKey = tags.filter(item=>item !== this.product.product_key)[0];
+      let otherProductId = this.all_product.filter(item=>item.product_key === otherProductKey)[0].product_id;
+      array.push(otherProductId);
+      return array;
+    },
+
     /**
      * @description: 获取当前商品信息
      * @return {*}
@@ -395,6 +407,7 @@ export default {
         this.all_product = data;
         //组合两项优惠
         this.h5_combo2_attach = data.find(item => item.product_key === 'h5_combo2_attach');
+        this.combine_product_ids = this.getCombineProductIdsBySelf();
         this.is_new_user = this.product
           ? this.product.tags
             ? this.product.tags.includes('newcomer_discount')
@@ -441,6 +454,7 @@ export default {
      * @return {*}
      */
     async payMoney() {
+      if(this.all_product.length === 0) return
       //防抖
       if(this.payCanClick){
         return false

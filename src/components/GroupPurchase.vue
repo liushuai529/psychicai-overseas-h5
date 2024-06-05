@@ -221,9 +221,8 @@ export default {
     
   },
   watch: {
-    h5_combo2_attach(val) {
-      if(val) {
-        console.warn('val', val)
+    all_product(val) {
+      if(val.length) {
         this.$emit('get_combine_product_ids', this.getCombineProductIds());
       }
     }
@@ -391,7 +390,7 @@ export default {
         font-weight: 600;
         font-size: 0.36rem;
         color: #e24c2e;
-        margin-top: 0.2rem;
+        // margin-top: 0.2rem;
       }
       .title-unselect {
         font-family: PingFangSC, PingFang SC;
@@ -421,6 +420,7 @@ export default {
           margin-top: 0.08rem;
           font-weight: 400;
           font-size: 0.22rem;
+          line-height: 0.24rem;
           color: #564c4a;
           text-align: center;
           font-style: normal;
