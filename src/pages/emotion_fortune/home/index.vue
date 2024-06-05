@@ -365,9 +365,9 @@ export default {
   },
   computed: {
     getStyle() {
-      if (this.comboAttachData && !this.has_pay) {
+      if (this.comboAttachData && this.comboAttachData.product_key && !this.has_pay) {
         return 'top: 0.5rem';
-      } else if (this.comboAttachData && this.has_pay) {
+      } else if (this.comboAttachData && this.comboAttachData.product_key && this.has_pay) {
         return 'top: 0.7rem';
       }
     },
