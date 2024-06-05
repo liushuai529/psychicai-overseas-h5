@@ -136,7 +136,10 @@
         <div class="item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
-            <div v-if="combine_info.price" class="new-price">
+            <div
+              v-if="combine_info.price && is_show_reechoes_3"
+              class="new-price"
+            >
               <span class="one">{{
                 combine_info.unit
                   ? `${combine_info.unit + combine_info.origin_price_str}`
@@ -158,7 +161,16 @@
           </div>
 
           <!-- 新版 商品选择 -->
-          <div class="three-list">
+          <div
+            :style="{
+              'margin-top': !channel03
+                ? '.6rem'
+                : is_show_reechoes_3
+                ? '.3rem'
+                : '.6rem',
+            }"
+            class="three-list"
+          >
             <div
               @click="showModal()"
               v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
@@ -177,7 +189,9 @@
                 class="check-icon"
                 alt=""
               />
-              <div v-if="three_list.length" class="tag">待解锁</div>
+              <div v-if="three_list.length && !channel03" class="tag">
+                待解锁
+              </div>
             </div>
             <div class="divider-line-left">
               <div class="one"></div>
@@ -189,21 +203,30 @@
               <div class="three"></div>
             </div>
           </div>
+          <!-- 倒计时 -->
+          <div v-if="!channel03 && is_show_reechoes_3" class="empty-card"></div>
+          <TimeDown
+            v-if="is_show_reechoes_3 && channel03"
+            ref="timeDown3"
+            :time_key="3"
+            :count_time="time_3"
+            :list="three_list"
+          />
           <div
             @click="changeSale(0)"
             class="pick-btn"
-            :style="{ 'margin-top': three_list.length ? '0.3rem' : '0.52rem' }"
+            :style="{ 'margin-top': !is_show_reechoes_3 ? '0.8rem' : '0.1rem' }"
           >
-            {{ !three_list.length ? '选择组合' : '解锁命运密码' }}
+            {{ !is_show_reechoes_3 ? '选择组合' : '领取我的专属优惠' }}
             <img
-              v-if="three_list.length"
+              v-if="is_show_reechoes_3"
               src="../../assets/img/new_combine/home_tag_58_big.png"
               class="absolute-zhe discount-tag"
               alt=""
             />
           </div>
           <div
-            v-show="three_list.length"
+            v-show="is_show_reechoes_3"
             class="reset-select"
             @click="restartChoose()"
           >
@@ -220,7 +243,10 @@
         <div class="item" id="card-item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
-            <div v-if="combine_info2.price" class="new-price">
+            <div
+              v-if="combine_info2.price && is_show_reechoes_2"
+              class="new-price"
+            >
               <span class="one">{{
                 combine_info2.unit
                   ? `${combine_info2.unit + combine_info2.origin_price_str}`
@@ -242,7 +268,16 @@
           </div>
 
           <!-- 新版 商品选择 -->
-          <div class="three-list">
+          <div
+            :style="{
+              'margin-top': !channel03
+                ? '.6rem'
+                : is_show_reechoes_2
+                ? '.3rem'
+                : '.6rem',
+            }"
+            class="three-list"
+          >
             <div
               @click="showModal2()"
               v-for="(it, k) in two_list.length ? two_list : ['', '']"
@@ -261,7 +296,7 @@
                 class="check-icon"
                 alt=""
               />
-              <div v-if="two_list.length" class="tag">待解锁</div>
+              <div v-if="two_list.length && !channel03" class="tag">待解锁</div>
             </div>
             <div class="divider-line-left">
               <div class="one"></div>
@@ -273,21 +308,30 @@
               <div class="three"></div>
             </div>
           </div>
+          <div v-if="!channel03 && is_show_reechoes_2" class="empty-card"></div>
+
+          <TimeDown
+            v-if="is_show_reechoes_2 && channel03"
+            ref="timeDown2"
+            :time_key="2"
+            :count_time="time_2"
+            :list="two_list"
+          />
           <div
             @click="changeSale(2)"
             class="pick-btn"
-            :style="{ 'margin-top': two_list.length ? '0.3rem' : '0.48rem' }"
+            :style="{ 'margin-top': is_show_reechoes_2 ? '0.1rem' : '0.8rem' }"
           >
-            {{ !two_list.length ? '选择组合' : '解锁命运密码' }}
+            {{ !is_show_reechoes_2 ? '选择组合' : '领取我的专属优惠' }}
             <img
-              v-if="two_list.length"
+              v-if="is_show_reechoes_2"
               src="../../assets/img/new_combine/home_tag_68_big.png"
               class="absolute-zhe discount-tag"
               alt=""
             />
           </div>
           <div
-            v-show="two_list.length"
+            v-show="is_show_reechoes_2"
             class="reset-select"
             @click="restartChoose(2)"
           >
@@ -772,6 +816,7 @@ import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_
 
 import PayModal from './components/payModal.vue';
 import ResultPop from '../../components/ResultPop.vue';
+import TimeDown from './components/timeDown.vue';
 import tStatistic from 'tstatistic';
 tStatistic.init({
   app_key: 20002003,
@@ -1042,6 +1087,7 @@ export default {
     PopResult,
     PayModal,
     FixedOrder,
+    TimeDown,
   },
   data() {
     return {
@@ -1125,6 +1171,10 @@ export default {
       local_time: 0,
       last_title: '',
       timer: null,
+      time_start_3: false,
+      time_start_2: false,
+      time_3: 0,
+      time_2: 0,
     };
   },
   computed: {
@@ -1685,6 +1735,23 @@ export default {
       });
       return flag;
     },
+    is_show_reechoes_3() {
+      return (
+        this.three_list.length && this.three_list.every(it => it.product_key)
+      );
+    },
+    is_full_3() {
+      return this.three_list.every(it => it.product_key);
+    },
+    is_show_reechoes_2() {
+      return this.two_list.length && this.two_list.every(it => it.product_key);
+    },
+    is_full_2() {
+      return this.two_list.every(it => it.product_key);
+    },
+    channel03() {
+      return utils.getFBChannel().indexOf('03') > -1;
+    },
   },
   watch: {
     sale_visible(val) {
@@ -1764,6 +1831,11 @@ export default {
     },
   },
   created() {
+    let store_time_3 = localStorage.getItem('mlxz_combine_3');
+    let store_time_2 = localStorage.getItem('mlxz_combine_2');
+    this.time_3 = store_time_3 ? +store_time_3 : 15 * 60 * 1000;
+    this.time_2 = store_time_2 ? +store_time_2 : 15 * 60 * 1000;
+
     utils.isProd() &&
       tStatistic &&
       tStatistic.send({
@@ -2573,7 +2645,7 @@ export default {
     // 打开选择弹窗
     async changeSale(val) {
       if (val) {
-        if (this.two_list.length) {
+        if (this.two_list.length && this.is_full_2) {
           this.pay_modal2 = true;
           return;
         }
@@ -2592,7 +2664,7 @@ export default {
 
         return;
       }
-      if (this.three_list.length) {
+      if (this.three_list.length && this.is_full_3) {
         this.pay_modal = true;
         return;
       }
@@ -2640,6 +2712,18 @@ export default {
     // 提交已选商品
     submitPopList(val) {
       if (val) {
+        if (this.channel03) {
+          let old_arr = this.two_list.map(it => it.product_key);
+          let new_arr = this.pick_list2.map(it => it.product_key);
+          if (
+            this.is_full_2 &&
+            old_arr.sort().join('') !== new_arr.sort().join('')
+          ) {
+            this.time_2 = 15 * 60 * 1000;
+            this.$refs.timeDown2.restartTime(this.time_2);
+          }
+        }
+
         this.two_list = JSON.parse(JSON.stringify(this.pick_list2));
         this.getSelectTagList(val);
         localStorage.setItem(
@@ -2657,8 +2741,22 @@ export default {
           }
         );
         this.new_sale_modal2 = false;
+
         return;
       }
+
+      if (this.channel03) {
+        let old_arr = this.three_list.map(it => it.product_key);
+        let new_arr = this.pick_list.map(it => it.product_key);
+        if (
+          this.is_full_3 &&
+          old_arr.sort().join('') !== new_arr.sort().join('')
+        ) {
+          this.time_3 = 15 * 60 * 1000;
+          this.$refs.timeDown3.restartTime(this.time_3);
+        }
+      }
+
       this.three_list = JSON.parse(JSON.stringify(this.pick_list));
       this.getSelectTagList();
       localStorage.setItem(
@@ -2675,17 +2773,18 @@ export default {
           channel: utils.getFBChannel(),
         }
       );
+
       this.new_sale_modal = false;
     },
     // 获取本地缓存选择的商品
     getLocalChecked(list, key) {
       // 本地缓存 三个缓存感情运 两个缓存袁天罡
-      let init_1 = this.new_pop_list.find(
-        it => it.product_key === 'h5_emotion2024'
-      );
-      let init_2 = this.new_pop_list.find(
-        it => it.product_key === 'h5_weigh_bone'
-      );
+      let init_1 = !this.channel03
+        ? ''
+        : this.new_pop_list.find(it => it.product_key === 'h5_emotion2024');
+      let init_2 = !this.channel03
+        ? ''
+        : this.new_pop_list.find(it => it.product_key === 'h5_weigh_bone');
       this.new_pop_list.forEach(it => {
         it.checked = false;
       });
@@ -2752,9 +2851,19 @@ export default {
         );
         this.combine_info.combine_product_ids = combine_ids;
       }
-      this.pick_list = JSON.parse(JSON.stringify(this.three_list));
-      this.pick_list2 = JSON.parse(JSON.stringify(this.two_list));
-      console.log(this.pick_list);
+      this.pick_list = JSON.parse(
+        JSON.stringify(this.three_list.filter(it => it))
+      );
+      // this.time_start_3 =
+      //   this.pick_list &&
+      //   this.pick_list.length === 3 &&
+      //   this.pick_list.every(it => it.product_key)
+      //     ? true
+      //     : false;
+
+      this.pick_list2 = JSON.parse(
+        JSON.stringify(this.two_list.filter(it => it))
+      );
     },
 
     // 获取已下单未填写订单信息
@@ -3573,17 +3682,16 @@ export default {
 
 .discount-box {
   width: 7.5rem;
-  height: 4.08rem;
+  height: 4.88rem;
   margin: 0.4rem auto 0.2rem;
-  // padding-left: 0.2em;
   .sale-item {
     width: 6.54rem !important;
     height: 100%;
     margin-left: 0.2rem;
     .item {
       width: 6.54rem !important;
-      height: 4.08rem !important;
-      background: url('../../assets/img/new_combine/home_img_headcard.png')
+      height: 4.88rem !important;
+      background: url('../../assets/img/new_combine/new_discount_bg.png')
         no-repeat;
       background-size: 100% 100%;
       position: relative;
@@ -3652,7 +3760,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.3rem;
+  // margin-top: 0.8rem;
   position: relative;
   .it {
     width: 1.8rem;
@@ -3712,13 +3820,13 @@ export default {
 }
 .reset-select {
   width: 100%;
-  height: 0.26rem;
-  font-weight: 400;
-  font-size: 0.26rem;
+  height: 0.28rem;
+  font-weight: 600;
+  font-size: 0.28rem;
   color: #8da5a1;
-  line-height: 0.26rem;
+  line-height: 0.28rem;
   text-align: center;
-  margin-top: 0.2rem;
+  margin-top: 0.24rem;
 }
 .divider-line-left {
   position: absolute;
@@ -4002,5 +4110,10 @@ export default {
 }
 .discount-tag {
   animation: scaleNewBtn 0.6s infinite ease-in-out alternate;
+}
+
+.empty-card {
+  width: 100%;
+  height: 0.5rem;
 }
 </style>

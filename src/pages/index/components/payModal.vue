@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2024-05-15 14:18:24
  * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-20 21:08:16
+ * @LastEditTime: 2024-06-05 16:52:43
  * @Description: 
 -->
 <template>
@@ -109,6 +109,11 @@ export default {
       }
     },
   },
+  computed: {
+    channel03() {
+      return utils.getFBChannel().indexOf('03') > -1;
+    },
+  },
   created() {},
   methods: {
     async getPayMethod() {
@@ -196,6 +201,12 @@ export default {
       if (res.status !== 1000) return;
       await utils.asleep(1000);
       this.pop_modal = false;
+      if (this.channel03) {
+        localStorage.removeItem(
+          combine_product_ids.length === 3 ? 'mlxz_combine_3' : 'mlxz_combine_2'
+        );
+      }
+
       location.href = res.data.pay_url;
     },
   },
