@@ -223,7 +223,6 @@ export default {
   watch: {
     all_product(val) {
       if(val.length) {
-        console.warn('val', val)
         this.$emit('get_combine_product_ids', this.getCombineProductIds());
       }
     }
