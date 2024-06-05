@@ -1866,7 +1866,7 @@ export default {
     getProductions,
     //开始测算
     async startCalculateClick() {
-      location.href = `${path_enums[product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${this.comboAttachData.product_key}`;
+      location.href = `${path_enums[this.comboAttachData.product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${this.comboAttachData.product_key}`;
     },
     //请求接口，是否展示引导标识
     async showComboAttach() {
