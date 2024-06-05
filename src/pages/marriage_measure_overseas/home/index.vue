@@ -549,11 +549,12 @@ export default {
       //顶部引导横幅，开始测算
       async startCalculateClick() {
         //顶部套餐报告与当前报告不同
-        if(this.comboAttachData.product_key !== this.product_key) {
-          location.href = `${path_enums[product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${this.comboAttachData.product_key}`;
-        } else {
+        // if(this.comboAttachData.product_key !== this.product_key) {
+        //   location.href = `${path_enums[product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${this.comboAttachData.product_key}`;
+        // } else {
           
-        }
+        // }
+        location.href = `${path_enums[this.comboAttachData.product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${this.comboAttachData.product_key}`;
     },
     //请求接口，是否展示引导标识
     async showComboAttach() {
