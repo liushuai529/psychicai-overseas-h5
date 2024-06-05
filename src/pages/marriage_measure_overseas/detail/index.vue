@@ -351,12 +351,12 @@ export default {
         this.mbirth = `${this.$t('nongli-label')} ${myear}年${mday.nmonthstr}${
           mday.ndatestr
         }`;
-        this.mingge_desc.push(`${this.mname}，男，${myear}年${mday.nmonthstr}月${mday.ndatestr}日生人，`)
+        this.mingge_desc.push(`${utils.getShortStr(this.mname, 4)}，男，${myear}年${mday.nmonthstr}月${mday.ndatestr}生人，`)
       } else {
         this.mbirth = `${this.$t(
           'gongli-label'
         )} ${myear}年${mmonth}月${mdate}日`;
-        this.mingge_desc.push(`${this.mname}，男，${myear}年${mmonth}月${mdate}日生人，`)
+        this.mingge_desc.push(`${utils.getShortStr(this.mname, 4)}，男，${myear}年${mmonth}月${mdate}日生人，`)
       }
       // 女性生日農曆
       if (query_user_string_array[11] === '0') {
@@ -364,12 +364,12 @@ export default {
         this.fbirth = `${this.$t('nongli-label')} ${fyear}年${fday.nmonthstr}${
           fday.ndatestr
         }`;
-        this.mingge_desc.push(`${this.fname}，女，${fyear}年${fday.nmonthstr}月${fday.ndatestr}日生人`)
+        this.mingge_desc.push(`${utils.getShortStr(this.fname, 4)}，女，${fyear}年${fday.nmonthstr}月${fday.ndatestr}生人`)
       } else {
         this.fbirth = `${this.$t(
           'gongli-label'
         )} ${fyear}年${fmonth}月${fdate}日`;
-        this.mingge_desc.push(`${this.fname}，女，${fyear}年${fmonth}月${fdate}日生人`)
+        this.mingge_desc.push(`${utils.getShortStr(this.fname, 4)}，女，${fyear}年${fmonth}月${fdate}日生人`)
       }
     },
 
