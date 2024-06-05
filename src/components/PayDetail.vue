@@ -83,11 +83,11 @@
 
         <div class="discount-comb" v-else>
             <GroupPurchase
-            :product=this.product
-            :h5_combo2_attach=this.h5_combo2_attach
-            :all_product=this.all_product
-            @get_combine_product_ids="getCombineProductIds"
-            :product_key=this.product_key
+              :product=product
+              :h5_combo2_attach=h5_combo2_attach
+              :all_product=all_product
+              @get_combine_product_ids="getCombineProductIds"
+              :product_key=product_key
             />
           
         </div>
