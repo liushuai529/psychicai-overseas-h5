@@ -58,7 +58,7 @@
     </div>
     <CalculateBar
       v-if="comboAttachData && is_show_combination"
-      style="margin-top: 0.1rem;" 
+      style="margin-top: 0.1rem"
       :is_home="true"
       product_key="h5_marriage"
       :call_back="startCalculateClick"
@@ -116,10 +116,10 @@
               </div>
               <div :class="`status-${it.status} status-common`">
                 <div @click="toWriteInfo(it)" class="text">
-                  {{ it.status ? "查看结果" : "开始测算" }}
+                  {{ it.status ? '查看结果' : '开始测算' }}
                 </div>
               </div>
-              <div class="tips-ce">{{ it.status ? "已测算" : "还未测算" }}</div>
+              <div class="tips-ce">{{ it.status ? '已测算' : '还未测算' }}</div>
             </div>
             <div class="divider-line-left">
               <div class="one"></div>
@@ -143,17 +143,20 @@
         <div class="item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
-            <div v-if="combine_info.price" class="new-price">
+            <div
+              v-if="combine_info.price && is_show_reechoes_3"
+              class="new-price"
+            >
               <span class="one">{{
                 combine_info.unit
                   ? `${combine_info.unit + combine_info.origin_price_str}`
-                  : "RM-"
+                  : 'RM-'
               }}</span>
               <span class="two">-42%</span>
               <span class="large">{{
                 combine_info.unit
                   ? `${combine_info.unit + combine_info.price}`
-                  : "RM-"
+                  : 'RM-'
               }}</span>
             </div>
             <img
@@ -165,7 +168,16 @@
           </div>
 
           <!-- 新版 商品选择 -->
-          <div class="three-list">
+          <div
+            :style="{
+              'margin-top': !channel03
+                ? '.6rem'
+                : is_show_reechoes_3
+                ? '.3rem'
+                : '.6rem',
+            }"
+            class="three-list"
+          >
             <div
               @click="showModal()"
               v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
@@ -173,7 +185,7 @@
               :class="['it']"
             >
               <img
-                v-if="three_list.length"
+                v-if="it.product_key"
                 :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
                 class="check-icon"
                 alt=""
@@ -184,7 +196,9 @@
                 class="check-icon"
                 alt=""
               />
-              <div v-if="three_list.length" class="tag">待解锁</div>
+              <div v-if="three_list.length && !channel03" class="tag">
+                待解锁
+              </div>
             </div>
             <div class="divider-line-left">
               <div class="one"></div>
@@ -196,21 +210,30 @@
               <div class="three"></div>
             </div>
           </div>
+          <!-- 倒计时 -->
+          <div v-if="!channel03 && is_show_reechoes_3" class="empty-card"></div>
+          <TimeDown
+            v-if="is_show_reechoes_3 && channel03"
+            ref="timeDown3"
+            :time_key="3"
+            :count_time="time_3"
+            :list="three_list"
+          />
           <div
             @click="changeSale(0)"
             class="pick-btn"
-            :style="{ 'margin-top': three_list.length ? '0.3rem' : '0.52rem' }"
+            :style="{ 'margin-top': !is_show_reechoes_3 ? '0.8rem' : '0.1rem' }"
           >
-            {{ !three_list.length ? "选择组合" : "解锁命运密码" }}
+            {{ !is_show_reechoes_3 ? '选择组合' : '领取我的专属优惠' }}
             <img
-              v-if="three_list.length"
+              v-if="is_show_reechoes_3"
               src="../../assets/img/new_combine/home_tag_58_big.png"
               class="absolute-zhe discount-tag"
               alt=""
             />
           </div>
           <div
-            v-show="three_list.length"
+            v-show="is_show_reechoes_3"
             class="reset-select"
             @click="restartChoose()"
           >
@@ -227,17 +250,20 @@
         <div class="item" id="card-item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
-            <div v-if="combine_info2.price" class="new-price">
+            <div
+              v-if="combine_info2.price && is_show_reechoes_2"
+              class="new-price"
+            >
               <span class="one">{{
                 combine_info2.unit
                   ? `${combine_info2.unit + combine_info2.origin_price_str}`
-                  : "RM-"
+                  : 'RM-'
               }}</span>
               <span class="two">-42%</span>
               <span class="large">{{
                 combine_info2.unit
                   ? `${combine_info2.unit + combine_info2.price}`
-                  : "RM-"
+                  : 'RM-'
               }}</span>
             </div>
             <img
@@ -249,7 +275,16 @@
           </div>
 
           <!-- 新版 商品选择 -->
-          <div class="three-list">
+          <div
+            :style="{
+              'margin-top': !channel03
+                ? '.6rem'
+                : is_show_reechoes_2
+                ? '.3rem'
+                : '.6rem',
+            }"
+            class="three-list"
+          >
             <div
               @click="showModal2()"
               v-for="(it, k) in two_list.length ? two_list : ['', '']"
@@ -257,7 +292,7 @@
               :class="['it']"
             >
               <img
-                v-if="two_list.length"
+                v-if="it.product_key"
                 :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
                 class="check-icon"
                 alt=""
@@ -268,7 +303,7 @@
                 class="check-icon"
                 alt=""
               />
-              <div v-if="two_list.length" class="tag">待解锁</div>
+              <div v-if="two_list.length && !channel03" class="tag">待解锁</div>
             </div>
             <div class="divider-line-left">
               <div class="one"></div>
@@ -280,21 +315,30 @@
               <div class="three"></div>
             </div>
           </div>
+          <div v-if="!channel03 && is_show_reechoes_2" class="empty-card"></div>
+
+          <TimeDown
+            v-if="is_show_reechoes_2 && channel03"
+            ref="timeDown2"
+            :time_key="2"
+            :count_time="time_2"
+            :list="two_list"
+          />
           <div
             @click="changeSale(2)"
             class="pick-btn"
-            :style="{ 'margin-top': two_list.length ? '0.3rem' : '0.48rem' }"
+            :style="{ 'margin-top': is_show_reechoes_2 ? '0.1rem' : '0.8rem' }"
           >
-            {{ !two_list.length ? "选择组合" : "解锁命运密码" }}
+            {{ !is_show_reechoes_2 ? '选择组合' : '领取我的专属优惠' }}
             <img
-              v-if="two_list.length"
+              v-if="is_show_reechoes_2"
               src="../../assets/img/new_combine/home_tag_68_big.png"
               class="absolute-zhe discount-tag"
               alt=""
             />
           </div>
           <div
-            v-show="two_list.length"
+            v-show="is_show_reechoes_2"
             class="reset-select"
             @click="restartChoose(2)"
           >
@@ -339,9 +383,9 @@
               {{ is_cn ? item.cn_desc : item.tw_desc }}
             </div>
             <div class="tips flex-start">
-              <div class="buy-num">{{ item.buy_num }}{{ $t("tips-5") }}</div>
+              <div class="buy-num">{{ item.buy_num }}{{ $t('tips-5') }}</div>
               <div class="review-num ml-40">
-                {{ item.review_num }}{{ $t("tips-4") }}
+                {{ item.review_num }}{{ $t('tips-4') }}
               </div>
             </div>
           </div>
@@ -356,9 +400,9 @@
             {{ is_cn ? item.cn_desc : item.tw_desc }}
           </div>
           <div class="tips">
-            <div class="buy-num">{{ item.buy_num }}{{ $t("tips-5") }}</div>
+            <div class="buy-num">{{ item.buy_num }}{{ $t('tips-5') }}</div>
             <div class="review-num">
-              {{ item.review_num }}{{ $t("tips-4") }}
+              {{ item.review_num }}{{ $t('tips-4') }}
             </div>
           </div>
         </div>
@@ -368,7 +412,7 @@
     <!-- 多买多折扣 -->
     <div style="display: none" class="sale-box">
       <div class="title-box">
-        <div class="left">{{ $t("buy-zhekou") }}</div>
+        <div class="left">{{ $t('buy-zhekou') }}</div>
         <div class="right">
           <div v-if="zhekouList[zhekou].total" class="total">
             {{ zhekouList[zhekou].total }}RM
@@ -396,7 +440,7 @@
         </div>
       </div>
       <div @click="payModal()" class="lock-btn">
-        {{ $t("order-btn") }}
+        {{ $t('order-btn') }}
         <img
           v-show="zhekou === 2"
           class="btn-icon"
@@ -411,7 +455,7 @@
         />
       </div>
       <div @click="showPop()" class="change-btn">
-        {{ $t("change-btn") }}
+        {{ $t('change-btn') }}
       </div>
     </div>
     <!-- 爆款推荐 -->
@@ -453,7 +497,7 @@
       <div class="pop-box">
         <div class="pop-header">
           <div class="left">
-            {{ $t("get-three") }}
+            {{ $t('get-three') }}
           </div>
           <img
             @click="closeSalePop()"
@@ -501,7 +545,7 @@
           }"
           @click="handleConfirm()"
         >
-          {{ $t("confirm-btn") }}
+          {{ $t('confirm-btn') }}
         </div>
       </div>
     </mt-popup>
@@ -536,7 +580,7 @@
           <div @click="new_sale_modal = false" class="left">取消</div>
           <div class="center">任选三项享特惠</div>
           <div
-            v-if="pick_list.length === 3"
+            v-if="confirm_btn_3"
             @click="submitPopList()"
             class="right-common right-check"
           >
@@ -590,7 +634,7 @@
           <div @click="new_sale_modal2 = false" class="left">取消</div>
           <div class="center">任选两项享特惠</div>
           <div
-            v-if="pick_list2.length === 2"
+            v-if="confirm_btn_2"
             @click="submitPopList(2)"
             class="right-common right-check"
           >
@@ -678,23 +722,23 @@
 </template>
 
 <script>
-import FixedOrder from "../../components/FixedOrder.vue";
+import FixedOrder from '../../components/FixedOrder.vue';
 // @ts-ignore
-import Recommend from "./recommend.vue";
+import Recommend from './recommend.vue';
 // @ts-ignore
-import Fortune from "./fortune.vue";
-import utils from "../../libs/utils";
-import PayPopup from "../../components/PayPopup.vue";
+import Fortune from './fortune.vue';
+import utils from '../../libs/utils';
+import PayPopup from '../../components/PayPopup.vue';
 import {
   banner_enums,
   reportName,
   path_enums,
   maidianEnum,
-} from "../../libs/enum";
-import { Toast, Indicator } from "mint-ui";
+} from '../../libs/enum';
+import { Toast, Indicator } from 'mint-ui';
 
-import PopResult from "./pay_result.vue";
-import { getProductions } from "../../libs/common_api";
+import PopResult from './pay_result.vue';
+import { getProductions } from '../../libs/common_api';
 import {
   getProductionsAPI,
   getComboListAPI,
@@ -707,81 +751,82 @@ import {
   getLastOrderAPI,
   payOrderAPI,
   reportBuryingEventAPI,
-} from "../../api/api";
+} from '../../api/api';
 
-import longnianImg from "../../assets/img/mlxz/cold_start/banner-2024caiyun@3x.png";
-import career_2024 from "../../assets/img/mlxz/index/banner_shiyeyunshi.png";
+import longnianImg from '../../assets/img/mlxz/cold_start/banner-2024caiyun@3x.png';
+import career_2024 from '../../assets/img/mlxz/index/banner_shiyeyunshi.png';
 
-import bzhh from "../../assets/img/mlxz/index/bahh.png";
-import nianyun_24 from "../../assets/img/mlxz/index/2024-nianyun.png";
-import ganqqingyun_24 from "../../assets/img/mlxz/index/24-ganqqingyun.png";
-import caiyun_24 from "../../assets/img/mlxz/index/2024-caiyun.png";
-import zongheyunshi from "../../assets/img/mlxz/index/24-zongheyunshi.png";
-import banner_ganqing from "../../assets/img/mlxz/index/banner_ganqing.png";
-import top_caiyun from "../../assets/img/mlxz/index/top-caiyun.png";
-import top_shiye from "../../assets/img/mlxz/index//top-shiye.png";
-import xiabanner_bazi from "../../assets/img/mlxz/index/xiabanner_bazi_jianti.png";
-import banner_yuantiangang from "../../assets/img/mlxz/index/banner-yuantiangang.png";
-import gif_nianyun from "../../assets/img/mlxz/index/gif/24年运-简体.gif";
-import gif_ganqing from "../../assets/img/mlxz/index/gif/感情运势-简体.gif";
-import gif_guiguzi from "../../assets/img/mlxz/index/gif/鬼谷子-简体.gif";
-import gif_yuantiangang from "../../assets/img/mlxz/index/gif/袁天罡-简体.gif";
+import bzhh from '../../assets/img/mlxz/index/bahh.png';
+import nianyun_24 from '../../assets/img/mlxz/index/2024-nianyun.png';
+import ganqqingyun_24 from '../../assets/img/mlxz/index/24-ganqqingyun.png';
+import caiyun_24 from '../../assets/img/mlxz/index/2024-caiyun.png';
+import zongheyunshi from '../../assets/img/mlxz/index/24-zongheyunshi.png';
+import banner_ganqing from '../../assets/img/mlxz/index/banner_ganqing.png';
+import top_caiyun from '../../assets/img/mlxz/index/top-caiyun.png';
+import top_shiye from '../../assets/img/mlxz/index//top-shiye.png';
+import xiabanner_bazi from '../../assets/img/mlxz/index/xiabanner_bazi_jianti.png';
+import banner_yuantiangang from '../../assets/img/mlxz/index/banner-yuantiangang.png';
+import gif_nianyun from '../../assets/img/mlxz/index/gif/24年运-简体.gif';
+import gif_ganqing from '../../assets/img/mlxz/index/gif/感情运势-简体.gif';
+import gif_guiguzi from '../../assets/img/mlxz/index/gif/鬼谷子-简体.gif';
+import gif_yuantiangang from '../../assets/img/mlxz/index/gif/袁天罡-简体.gif';
 
-import tw_bzhh from "../../assets/img/mlxz/index/tw/bzhh.png";
-import tw_wealth24 from "../../assets/img/mlxz/index/tw/wealth24.png";
-import tw_year24 from "../../assets/img/mlxz/index/tw/year24.png";
-import tw_web from "../../assets/img/mlxz/index/tw/web.png";
+import tw_bzhh from '../../assets/img/mlxz/index/tw/bzhh.png';
+import tw_wealth24 from '../../assets/img/mlxz/index/tw/wealth24.png';
+import tw_year24 from '../../assets/img/mlxz/index/tw/year24.png';
+import tw_web from '../../assets/img/mlxz/index/tw/web.png';
 
-import tw_wealth24_banner from "../../assets/img/mlxz/index/tw/wealth24_banner.png";
-import tw_year24_banner from "../../assets/img/mlxz/index/tw/year24_banner.png";
-import tw_bzhh_banner from "../../assets/img/mlxz/index/tw/bzhh_banner.png";
-import tw_emotion from "../../assets/img/mlxz/index/tw/emotion24_banner.png";
-import tw_career from "../../assets/img/mlxz/index/tw/career24_banner.png";
-import tw_ggz from "../../assets/img/mlxz/index/tw/ggz_banner.png";
-import tw_weigh from "../../assets/img/mlxz/index/tw/weigh_banner.png";
+import tw_wealth24_banner from '../../assets/img/mlxz/index/tw/wealth24_banner.png';
+import tw_year24_banner from '../../assets/img/mlxz/index/tw/year24_banner.png';
+import tw_bzhh_banner from '../../assets/img/mlxz/index/tw/bzhh_banner.png';
+import tw_emotion from '../../assets/img/mlxz/index/tw/emotion24_banner.png';
+import tw_career from '../../assets/img/mlxz/index/tw/career24_banner.png';
+import tw_ggz from '../../assets/img/mlxz/index/tw/ggz_banner.png';
+import tw_weigh from '../../assets/img/mlxz/index/tw/weigh_banner.png';
 
-import tw_order_btn from "../../assets/img/mlxz/index/tw/history_order.png";
-import tw_right_pay from "../../assets/img/mlxz/index/tw/right_pay.png";
+import tw_order_btn from '../../assets/img/mlxz/index/tw/history_order.png';
+import tw_right_pay from '../../assets/img/mlxz/index/tw/right_pay.png';
 
-import cn_banner_ganqin from "../../assets/img/mlxz/new_banner/h5_img_topbanner_ganqing_jian.png";
-import tw_banner_ganqin from "../../assets/img/mlxz/new_banner/h5_img_topbanner_ganqing_fan.png";
+import cn_banner_ganqin from '../../assets/img/mlxz/new_banner/h5_img_topbanner_ganqing_jian.png';
+import tw_banner_ganqin from '../../assets/img/mlxz/new_banner/h5_img_topbanner_ganqing_fan.png';
 
-import cn_modal_bzhh from "../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_bazihehun.png";
-import cn_modal_ggz from "../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_guiguzi.png";
-import cn_modal_weigh from "../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_yuantiangang.png";
-import cn_modal_emotion from "../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_ganqing.png";
-import cn_modal_career from "../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_shiye.png";
-import cn_modal_wealth from "../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_caiyun.png";
-import cn_modal_year from "../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_nianyun.png";
-import tw_modal_bzhh from "../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_bazihehun.png";
-import tw_modal_ggz from "../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_guiguzi.png";
-import tw_modal_weigh from "../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_yuantiangang.png";
-import tw_modal_emotion from "../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_ganqing.png";
-import tw_modal_career from "../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_shiye.png";
-import tw_modal_wealth from "../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_caiyun.png";
-import tw_modal_year from "../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_nianyun.png";
-import checkIcon from "../../assets/img/new_combine/zuhe_btn_choose_selected.png";
-import noCheckIcon from "../../assets/img/new_combine/zuhe_btn_choose_normal.png";
+import cn_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_bazihehun.png';
+import cn_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_guiguzi.png';
+import cn_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_yuantiangang.png';
+import cn_modal_emotion from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_ganqing.png';
+import cn_modal_career from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_shiye.png';
+import cn_modal_wealth from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_caiyun.png';
+import cn_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_nianyun.png';
+import tw_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_bazihehun.png';
+import tw_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_guiguzi.png';
+import tw_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_yuantiangang.png';
+import tw_modal_emotion from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_ganqing.png';
+import tw_modal_career from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_shiye.png';
+import tw_modal_wealth from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_caiyun.png';
+import tw_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_nianyun.png';
+import checkIcon from '../../assets/img/new_combine/zuhe_btn_choose_selected.png';
+import noCheckIcon from '../../assets/img/new_combine/zuhe_btn_choose_normal.png';
 
-import cn_check_icon_bzhh from "../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_bazihehun.png";
-import cn_check_icon_ggz from "../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_guiguzi.png";
-import cn_check_icon_weigh from "../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_yuantiangang.png";
-import cn_check_icon_emotion from "../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_ganqing.png";
-import cn_check_icon_career from "../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_shiye.png";
-import cn_check_icon_wealth from "../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_caiyun.png";
-import cn_check_icon_year from "../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_nianyun.png";
-import tw_check_icon_bzhh from "../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_bazihehun.png";
-import tw_check_icon_ggz from "../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_guiguzi.png";
-import tw_check_icon_weigh from "../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_yuantiangang.png";
-import tw_check_icon_emotion from "../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_ganqing.png";
-import tw_check_icon_career from "../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_shiye.png";
-import tw_check_icon_wealth from "../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_caiyun.png";
-import tw_check_icon_year from "../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_nianyun.png";
+import cn_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_bazihehun.png';
+import cn_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_guiguzi.png';
+import cn_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_yuantiangang.png';
+import cn_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_ganqing.png';
+import cn_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_shiye.png';
+import cn_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_caiyun.png';
+import cn_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_nianyun.png';
+import tw_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_bazihehun.png';
+import tw_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_guiguzi.png';
+import tw_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_yuantiangang.png';
+import tw_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_ganqing.png';
+import tw_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_shiye.png';
+import tw_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_caiyun.png';
+import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_nianyun.png';
 
 import PayModal from './components/payModal.vue';
 import ResultPop from '../../components/ResultPop.vue';
 import CalculateBar from '../../components/CalculateBar.vue';
 
+import TimeDown from './components/timeDown.vue';
 import tStatistic from 'tstatistic';
 tStatistic.init({
   app_key: 20002003,
@@ -789,8 +834,8 @@ tStatistic.init({
 });
 
 const tipsArr5 = {
-  "zh-CN": "订单创建中...",
-  "zh-TW": "訂單創建中...",
+  'zh-CN': '订单创建中...',
+  'zh-TW': '訂單創建中...',
 };
 const hotRecommendProduction = [
   //  {
@@ -805,158 +850,158 @@ const hotRecommendProduction = [
   //  },
   {
     id: 1,
-    name: "瞬时卦",
-    url: "mlxz://time/calculate",
-    content: "这是瞬时卦",
+    name: '瞬时卦',
+    url: 'mlxz://time/calculate',
+    content: '这是瞬时卦',
   },
   {
     id: 2,
-    name: "号码测测运",
-    url: "mlxz://numbermoney/calculate",
-    content: "这是号码测测运",
+    name: '号码测测运',
+    url: 'mlxz://numbermoney/calculate',
+    content: '这是号码测测运',
   },
   {
     id: 3,
-    name: "数字风水",
-    url: "mlxz://phonenumber/calculate",
-    content: "这是数字风水",
+    name: '数字风水',
+    url: 'mlxz://phonenumber/calculate',
+    content: '这是数字风水',
   },
 ];
 
-let index = utils.getQueryString("index") || 0;
-let channel = utils.getQueryString("channel");
+let index = utils.getQueryString('index') || 0;
+let channel = utils.getQueryString('channel');
 
-localStorage.setItem("suishen_overseas_channel", channel || "");
+localStorage.setItem('suishen_overseas_channel', channel || '');
 
-const initCheck = [{ value: "" }, { value: "" }, { value: "" }];
+const initCheck = [{ value: '' }, { value: '' }, { value: '' }];
 
 const eventProductKey = {
-  h5_wealth2024: "2024_wealty_report",
-  h5_career: "profession_bazi_report",
-  h5_marriage: "marriage_contract_report",
-  h5_love: "emotion_report",
-  h5_fortune2023: "2023_report",
-  h5_wealth2023: "2023_wealty_report",
+  h5_wealth2024: '2024_wealty_report',
+  h5_career: 'profession_bazi_report',
+  h5_marriage: 'marriage_contract_report',
+  h5_love: 'emotion_report',
+  h5_fortune2023: '2023_report',
+  h5_wealth2023: '2023_wealty_report',
 };
 
 const eventProductValue = {
-  "2024_wealty_report": "80001",
-  profession_bazi_report: "80004",
-  marriage_contract_report: "80005",
-  emotion_report: "80006",
-  "2023_report": "80007",
-  "2023_wealty_report": "80008",
+  '2024_wealty_report': '80001',
+  profession_bazi_report: '80004',
+  marriage_contract_report: '80005',
+  emotion_report: '80006',
+  '2023_report': '80007',
+  '2023_wealty_report': '80008',
 };
 
 const user_name_arr = [
-  "林**",
-  "王*",
-  "朱*",
-  "刘**",
-  "刘*",
-  "张**",
-  "韩*",
-  "陈**",
-  "孙*",
-  "乔**",
-  "陈*",
-  "祝**",
+  '林**',
+  '王*',
+  '朱*',
+  '刘**',
+  '刘*',
+  '张**',
+  '韩*',
+  '陈**',
+  '孙*',
+  '乔**',
+  '陈*',
+  '祝**',
 ];
 
-const time_arr = ["1", "2", "3"];
+const time_arr = ['1', '2', '3'];
 
 const report_arr = [
   {
-    "zh-CN": "2024年流年运势",
-    "zh-TW": "2024年流年運勢",
+    'zh-CN': '2024年流年运势',
+    'zh-TW': '2024年流年運勢',
   },
   {
-    "zh-CN": "2024年财运",
-    "zh-TW": "2024年財運",
+    'zh-CN': '2024年财运',
+    'zh-TW': '2024年財運',
   },
   {
-    "zh-CN": "2024年感情运势",
-    "zh-TW": "2024年感情運勢",
+    'zh-CN': '2024年感情运势',
+    'zh-TW': '2024年感情運勢',
   },
   {
-    "zh-CN": "2024年事业运势",
-    "zh-TW": "2024年事業運勢",
+    'zh-CN': '2024年事业运势',
+    'zh-TW': '2024年事業運勢',
   },
   {
-    "zh-CN": "八字合婚",
-    "zh-TW": "八字合婚",
+    'zh-CN': '八字合婚',
+    'zh-TW': '八字合婚',
   },
   {
-    "zh-CN": "袁天罡推背称骨",
-    "zh-TW": "袁天罡推背稱骨",
+    'zh-CN': '袁天罡推背称骨',
+    'zh-TW': '袁天罡推背稱骨',
   },
   {
-    "zh-CN": "鬼谷子百卦论命",
-    "zh-TW": "鬼谷子百卦論命",
+    'zh-CN': '鬼谷子百卦论命',
+    'zh-TW': '鬼谷子百卦論命',
   },
   {
-    "zh-CN": "六爻财运神卦",
-    "zh-TW": "六爻財運神卦",
+    'zh-CN': '六爻财运神卦',
+    'zh-TW': '六爻財運神卦',
   },
   {
-    "zh-CN": "八字流年",
-    "zh-TW": "八字流年",
+    'zh-CN': '八字流年',
+    'zh-TW': '八字流年',
   },
   {
-    "zh-CN": "今生缘分揭秘",
-    "zh-TW": "今生緣分揭秘",
+    'zh-CN': '今生缘分揭秘',
+    'zh-TW': '今生緣分揭秘',
   },
 ];
 
 const e_id_arr = [
-  "60009",
-  "60001",
-  "60010",
-  "60011",
-  "60005",
-  "60002",
-  "60003",
-  "60001",
-  "60009",
-  "60005",
+  '60009',
+  '60001',
+  '60010',
+  '60011',
+  '60005',
+  '60002',
+  '60003',
+  '60001',
+  '60009',
+  '60005',
 ];
 
 const product_key_arr = [
-  "h5_annual2024",
-  "h5_wealth2024",
-  "h5_emotion2024",
-  "h5_career2024",
-  "h5_marriage",
-  "h5_weigh_bone",
-  "h5_bai_gua",
-  "h5_wealth2024",
-  "h5_annual2024",
-  "h5_marriage",
+  'h5_annual2024',
+  'h5_wealth2024',
+  'h5_emotion2024',
+  'h5_career2024',
+  'h5_marriage',
+  'h5_weigh_bone',
+  'h5_bai_gua',
+  'h5_wealth2024',
+  'h5_annual2024',
+  'h5_marriage',
 ];
 
 const report_url = [
-  "year_of_lucky_2024",
-  "lucky_year_report",
-  "emotion_fortune",
-  "career_fortune_2024",
-  "marriage_measure_overseas",
-  "weigh_bone",
-  "guiguzi_fortune",
-  "lucky_year_report",
-  "year_of_lucky_2024",
-  "marriage_measure_overseas",
+  'year_of_lucky_2024',
+  'lucky_year_report',
+  'emotion_fortune',
+  'career_fortune_2024',
+  'marriage_measure_overseas',
+  'weigh_bone',
+  'guiguzi_fortune',
+  'lucky_year_report',
+  'year_of_lucky_2024',
+  'marriage_measure_overseas',
 ];
 
-const score_arr = ["96", "97", "98", "99", "100"];
+const score_arr = ['96', '97', '98', '99', '100'];
 
 const new_pop_list = [
   {
     id: 1,
-    name: "鬼谷子",
-    url: "guiguzi_fortune",
-    product_key: "h5_bai_gua",
-    cn_desc: "64卦预见人生，审慎应对风波，谨防危机潜伏",
-    tw_desc: "64卦預見人生，審慎應對風波，謹防危機潛伏",
+    name: '鬼谷子',
+    url: 'guiguzi_fortune',
+    product_key: 'h5_bai_gua',
+    cn_desc: '64卦预见人生，审慎应对风波，谨防危机潜伏',
+    tw_desc: '64卦預見人生，審慎應對風波，謹防危機潛伏',
     cn_pop_icon: cn_modal_ggz,
     tw_pop_icon: tw_modal_ggz,
     cn_check_icon: cn_check_icon_ggz,
@@ -965,11 +1010,11 @@ const new_pop_list = [
   },
   {
     id: 2,
-    name: "袁天罡",
-    url: "weigh_bone",
-    product_key: "h5_weigh_bone",
-    cn_desc: "称骨论命，揭露宿命重负，应对多舛命途",
-    tw_desc: "稱骨論命，揭露宿命重負，應對多舛命途",
+    name: '袁天罡',
+    url: 'weigh_bone',
+    product_key: 'h5_weigh_bone',
+    cn_desc: '称骨论命，揭露宿命重负，应对多舛命途',
+    tw_desc: '稱骨論命，揭露宿命重負，應對多舛命途',
     cn_pop_icon: cn_modal_weigh,
     tw_pop_icon: tw_modal_weigh,
     cn_check_icon: cn_check_icon_weigh,
@@ -978,11 +1023,11 @@ const new_pop_list = [
   },
   {
     id: 3,
-    name: "八字合婚",
-    url: "marriage_measure_overseas",
-    product_key: "h5_marriage",
-    cn_desc: "揭示姻缘宿命，戒备潜藏危机，慎选伴侣之道",
-    tw_desc: "揭示姻緣宿命，戒備潛藏危機，慎選伴侶之道",
+    name: '八字合婚',
+    url: 'marriage_measure_overseas',
+    product_key: 'h5_marriage',
+    cn_desc: '揭示姻缘宿命，戒备潜藏危机，慎选伴侣之道',
+    tw_desc: '揭示姻緣宿命，戒備潛藏危機，慎選伴侶之道',
     cn_pop_icon: cn_modal_bzhh,
     tw_pop_icon: tw_modal_bzhh,
     cn_check_icon: cn_check_icon_bzhh,
@@ -991,11 +1036,11 @@ const new_pop_list = [
   },
   {
     id: 4,
-    name: "感情运",
-    url: "emotion_fortune",
-    product_key: "h5_emotion2024",
-    cn_desc: "感情运势早知道，和合美满还是遗憾分手",
-    tw_desc: "感情運勢早知道，和合美滿還是遺憾分手",
+    name: '感情运',
+    url: 'emotion_fortune',
+    product_key: 'h5_emotion2024',
+    cn_desc: '感情运势早知道，和合美满还是遗憾分手',
+    tw_desc: '感情運勢早知道，和合美滿還是遺憾分手',
     cn_pop_icon: cn_modal_emotion,
     tw_pop_icon: tw_modal_emotion,
     cn_check_icon: cn_check_icon_emotion,
@@ -1004,11 +1049,11 @@ const new_pop_list = [
   },
   {
     id: 5,
-    name: "2024年运",
-    url: "year_of_lucky_2024",
-    product_key: "h5_annual2024",
-    cn_desc: "你的2024年如何度过？大师为你解读年度运势",
-    tw_desc: "你的2024年如何度過？大師為你解讀年度運勢",
+    name: '2024年运',
+    url: 'year_of_lucky_2024',
+    product_key: 'h5_annual2024',
+    cn_desc: '你的2024年如何度过？大师为你解读年度运势',
+    tw_desc: '你的2024年如何度過？大師為你解讀年度運勢',
     cn_pop_icon: cn_modal_year,
     tw_pop_icon: tw_modal_year,
     cn_check_icon: cn_check_icon_year,
@@ -1017,11 +1062,11 @@ const new_pop_list = [
   },
   {
     id: 6,
-    name: "2024财运",
-    url: "lucky_year_report",
-    product_key: "h5_wealth2024",
-    cn_desc: "预警财务危机，洞悉关键时刻，避免潜在财富风险。",
-    tw_desc: "預警財務危機，洞悉關鍵時刻，避免潛在財富風險。",
+    name: '2024财运',
+    url: 'lucky_year_report',
+    product_key: 'h5_wealth2024',
+    cn_desc: '预警财务危机，洞悉关键时刻，避免潜在财富风险。',
+    tw_desc: '預警財務危機，洞悉關鍵時刻，避免潛在財富風險。',
     cn_pop_icon: cn_modal_wealth,
     tw_pop_icon: tw_modal_wealth,
     cn_check_icon: cn_check_icon_wealth,
@@ -1030,11 +1075,11 @@ const new_pop_list = [
   },
   {
     id: 7,
-    name: "事业运势",
-    url: "career_fortune_2024",
-    product_key: "h5_career2024",
-    cn_desc: "前途迷雾重重，挑战接踵而至，开创事业新章",
-    tw_desc: "前途迷霧重重，挑戰接踵而至，開創事業新章",
+    name: '事业运势',
+    url: 'career_fortune_2024',
+    product_key: 'h5_career2024',
+    cn_desc: '前途迷雾重重，挑战接踵而至，开创事业新章',
+    tw_desc: '前途迷霧重重，挑戰接踵而至，開創事業新章',
     cn_pop_icon: cn_modal_career,
     tw_pop_icon: tw_modal_career,
     cn_check_icon: cn_check_icon_career,
@@ -1053,17 +1098,18 @@ export default {
     PayModal,
     FixedOrder,
     CalculateBar,
+    TimeDown,
   },
   data() {
     return {
       cn_order_btn:
-        "https://psychicai-static.psychicai.pro/imgs/2404db41abf620c84fbba27927577655e386.png",
+        'https://psychicai-static.psychicai.pro/imgs/2404db41abf620c84fbba27927577655e386.png',
       cn_right_pay:
-        "https://psychicai-static.psychicai.pro/imgs/24042d415768c8314aad99eb44ebcaeda4d6.png",
+        'https://psychicai-static.psychicai.pro/imgs/24042d415768c8314aad99eb44ebcaeda4d6.png',
       tw_order_btn,
       tw_right_pay,
       index,
-      emotion_report: "80001",
+      emotion_report: '80001',
       w: 750,
       visible: false,
       //
@@ -1075,13 +1121,13 @@ export default {
       pop_list: [],
       pay_visible: false,
       product_id: 0,
-      combine_ids: "",
+      combine_ids: '',
       pay_result_visible: false, //支付结果弹窗页
       can_submit: true, // 是否可以提交
       hot_product_list: hotRecommendProduction, // 爆款推荐
       all_list: [],
       result_list: [],
-      order_id: utils.getQueryString("order_id") || "",
+      order_id: utils.getQueryString('order_id') || '',
       continue: true,
       sub_orders: [],
       fix_pop: false,
@@ -1121,28 +1167,32 @@ export default {
       pay_modal2: false,
       width_dom: 0,
       show_result: false,
-      order_id: "",
+      order_id: '',
       is_show_combine: false,
       today_sort_list: [],
       banner_list: [],
       payed_combine_price: null,
       // 悬浮订单
       fix_order_info: null, //最新一个订单信息
-      new_order_key: "",
+      new_order_key: '',
       reportName,
       show_api_order: false,
       last_order: null,
       api_time: 0,
       local_time: 0,
-      last_title: "",
+      last_title: '',
       timer: null,
-      comboAttachData: null,//套餐未使用报告信息
+      comboAttachData: null, //套餐未使用报告信息
+      time_start_3: false,
+      time_start_2: false,
+      time_3: 0,
+      time_2: 0,
     };
   },
   computed: {
     //套餐支付显示逻辑
     is_show_combination() {
-      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+      return !['enjoy03', 'panda03'].includes(utils.getFBChannel());
     },
     // 顶部广告
     header_list() {
@@ -1170,33 +1220,33 @@ export default {
         {
           id: 3,
           cn_icon:
-            "https://psychicai-static.psychicai.pro/imgs/2404c53a0f34e86c4bbf90b5537bbd4c8fb0.png",
+            'https://psychicai-static.psychicai.pro/imgs/2404c53a0f34e86c4bbf90b5537bbd4c8fb0.png',
           tw_icon: tw_bzhh,
-          name: "八字合婚",
-          url: "marriage_measure_overseas",
-          a_id: "60005",
-          a_name: "marriage_contract_report",
-          product_key: "h5_marriage",
+          name: '八字合婚',
+          url: 'marriage_measure_overseas',
+          a_id: '60005',
+          a_name: 'marriage_contract_report',
+          product_key: 'h5_marriage',
         },
         {
           id: 5,
           cn_icon: cn_banner_ganqin,
           tw_icon: tw_banner_ganqin,
-          name: "2024感情运势",
-          url: "emotion_fortune",
-          a_id: "60010",
-          a_name: "2024_lovely_report",
-          product_key: "h5_emotion2024",
+          name: '2024感情运势',
+          url: 'emotion_fortune',
+          a_id: '60010',
+          a_name: '2024_lovely_report',
+          product_key: 'h5_emotion2024',
         },
         {
           id: 4,
           cn_icon:
-            "https://psychicai-static.psychicai.pro/imgs/2404da455076874c45d689335fbb5fd98c5c.png",
+            'https://psychicai-static.psychicai.pro/imgs/2404da455076874c45d689335fbb5fd98c5c.png',
           tw_icon: tw_web,
-          name: "命理寻真",
-          url: "https://www.psychicai.pro/",
-          a_id: "60099",
-          a_name: "download",
+          name: '命理寻真',
+          url: 'https://www.psychicai.pro/',
+          a_id: '60099',
+          a_name: 'download',
         },
         // {
         //   id: 80004,
@@ -1255,26 +1305,26 @@ export default {
         {
           id: 80010,
           icon: ganqqingyun_24,
-          name: "感情运",
-          url: "emotion_fortune",
+          name: '感情运',
+          url: 'emotion_fortune',
         },
         {
           id: 80005,
           icon: bzhh,
-          name: "八字合婚",
-          url: "marriage_measure_overseas",
+          name: '八字合婚',
+          url: 'marriage_measure_overseas',
         },
         {
           id: 80009,
           icon: nianyun_24,
-          name: "24年年运",
-          url: "year_of_lucky_2024",
+          name: '24年年运',
+          url: 'year_of_lucky_2024',
         },
         {
           id: 80001,
           icon: caiyun_24,
-          name: "24年财运",
-          url: "lucky_year_report",
+          name: '24年财运',
+          url: 'lucky_year_report',
         },
       ];
     },
@@ -1284,32 +1334,32 @@ export default {
         {
           id: 80009,
           icon: gif_nianyun,
-          name: "2024年年运",
-          url: "year_of_lucky_2024",
+          name: '2024年年运',
+          url: 'year_of_lucky_2024',
         },
         {
           id: 80010,
           icon: gif_ganqing,
-          name: "24年感情运",
-          url: "emotion_fortune",
+          name: '24年感情运',
+          url: 'emotion_fortune',
         },
         {
           id: 80002,
           icon: gif_yuantiangang,
-          name: "袁天罡推背称骨",
-          url: "weigh_bone",
+          name: '袁天罡推背称骨',
+          url: 'weigh_bone',
         },
         {
           id: 80003,
           icon: gif_guiguzi,
-          name: "鬼谷子",
-          url: "guiguzi_fortune",
+          name: '鬼谷子',
+          url: 'guiguzi_fortune',
         },
         {
           id: 80005,
           icon: xiabanner_bazi,
-          name: "八字合婚",
-          url: "marriage_measure_overseas",
+          name: '八字合婚',
+          url: 'marriage_measure_overseas',
         },
         //
       ];
@@ -1329,14 +1379,14 @@ export default {
           id: 2,
           num: 2,
           total: 138,
-          percent: "-37%",
+          percent: '-37%',
           price: 88,
         },
         {
           id: 3,
           num: 3,
           total: 204,
-          percent: "-47%",
+          percent: '-47%',
           price: 108,
         },
       ];
@@ -1348,10 +1398,10 @@ export default {
         arr.push({
           id: i,
           checked: false,
-          name: "2024财运",
-          desc: "預知運勢順遂，預測好運危月份，把握流年機遇！預知運勢順遂，預測好運危月份，把握流年機遇！",
-          url: "www.baidu.com",
-          icon: "https://psychic-h5.wezhaxi.com/img/prod-combine_5.759e0d4.png",
+          name: '2024财运',
+          desc: '預知運勢順遂，預測好運危月份，把握流年機遇！預知運勢順遂，預測好運危月份，把握流年機遇！',
+          url: 'www.baidu.com',
+          icon: 'https://psychic-h5.wezhaxi.com/img/prod-combine_5.759e0d4.png',
         });
       }
       return arr;
@@ -1361,132 +1411,132 @@ export default {
       return [
         {
           id: 21,
-          name: "2024年财运",
+          name: '2024年财运',
           banner_id: 80001,
           checked: false,
-          icon: "https://psychicai-static.psychicai.pro/imgs/23115681e58a5c544fee8ac8c2f259080607.png",
-          url: "lucky_year_report",
-          product_key: "h5_wealth2024",
-          tips: "2024全景扫描，预知财运高低浮沉，提前为你揭示财富脉络，帮助你致富之道，拥有财富满盈的2024年！",
+          icon: 'https://psychicai-static.psychicai.pro/imgs/23115681e58a5c544fee8ac8c2f259080607.png',
+          url: 'lucky_year_report',
+          product_key: 'h5_wealth2024',
+          tips: '2024全景扫描，预知财运高低浮沉，提前为你揭示财富脉络，帮助你致富之道，拥有财富满盈的2024年！',
           check_icon:
-            "https://psychicai-static.psychicai.pro/imgs/2311c537595a580c452fb90354ab4244bd78.png",
+            'https://psychicai-static.psychicai.pro/imgs/2311c537595a580c452fb90354ab4244bd78.png',
         },
         {
           id: 22,
-          name: "八字事业详批",
+          name: '八字事业详批',
           banner_id: 80004,
           checked: false,
-          icon: "https://psychicai-static.psychicai.pro/imgs/2311f9a18eab2fba41eb87c6b74a69c112f2.png",
-          url: "career_divination_overseas",
-          product_key: "h5_career",
-          tips: "预知事业低谷，成功时机，把握你的先天优势，让你的事业一帆风顺！",
+          icon: 'https://psychicai-static.psychicai.pro/imgs/2311f9a18eab2fba41eb87c6b74a69c112f2.png',
+          url: 'career_divination_overseas',
+          product_key: 'h5_career',
+          tips: '预知事业低谷，成功时机，把握你的先天优势，让你的事业一帆风顺！',
           check_icon:
-            "https://psychicai-static.psychicai.pro/imgs/2311ff0388985646470a8302f1547167ba46.png",
+            'https://psychicai-static.psychicai.pro/imgs/2311ff0388985646470a8302f1547167ba46.png',
         },
         {
           id: 23,
-          name: "八字合婚",
+          name: '八字合婚',
           banner_id: 80005,
           checked: false,
-          icon: "https://psychicai-static.psychicai.pro/imgs/2311b43a350070e54399beb014774e98dccd.png",
-          url: "marriage_measure_overseas",
-          product_key: "h5_marriage",
-          tips: "合八字测试姻缘，专业分析婚配指数，拥有更加幸福美满的婚姻！",
+          icon: 'https://psychicai-static.psychicai.pro/imgs/2311b43a350070e54399beb014774e98dccd.png',
+          url: 'marriage_measure_overseas',
+          product_key: 'h5_marriage',
+          tips: '合八字测试姻缘，专业分析婚配指数，拥有更加幸福美满的婚姻！',
           check_icon:
-            "https://psychicai-static.psychicai.pro/imgs/2311012132873f174e7ebcd518f2253c909a.png",
+            'https://psychicai-static.psychicai.pro/imgs/2311012132873f174e7ebcd518f2253c909a.png',
         },
         {
           id: 24,
-          name: "姻缘分析",
+          name: '姻缘分析',
           banner_id: 80006,
           checked: false,
-          icon: "https://psychicai-static.psychicai.pro/imgs/231106e4f92e19ab4095b50fcaa5075ad621.png",
-          url: "marriage_divination_overseas",
-          product_key: "h5_love",
-          tips: "姻缘分析，知己知彼，为你扫除情感障碍，帮你打造天赐良缘！",
+          icon: 'https://psychicai-static.psychicai.pro/imgs/231106e4f92e19ab4095b50fcaa5075ad621.png',
+          url: 'marriage_divination_overseas',
+          product_key: 'h5_love',
+          tips: '姻缘分析，知己知彼，为你扫除情感障碍，帮你打造天赐良缘！',
           check_icon:
-            "https://psychicai-static.psychicai.pro/imgs/231184d2494396114e79bdd2f5cdf7ab4f81.png",
+            'https://psychicai-static.psychicai.pro/imgs/231184d2494396114e79bdd2f5cdf7ab4f81.png',
         },
         {
           id: 25,
-          name: "2023年兔年运程详批",
+          name: '2023年兔年运程详批',
           banner_id: 80007,
           checked: false,
-          icon: "https://psychicai-static.psychicai.pro/imgs/23111d65fa2098a5428fb4cdb8e793a1d3de.png",
-          url: "new_year_luck_overseas",
-          product_key: "h5_fortune2023",
-          tips: "预知运势顺利，预测好运、危机出现月份，助你把握流年机遇！ ",
+          icon: 'https://psychicai-static.psychicai.pro/imgs/23111d65fa2098a5428fb4cdb8e793a1d3de.png',
+          url: 'new_year_luck_overseas',
+          product_key: 'h5_fortune2023',
+          tips: '预知运势顺利，预测好运、危机出现月份，助你把握流年机遇！ ',
           check_icon:
-            "https://psychicai-static.psychicai.pro/imgs/2311e8b5bdf1352f40ed80ec4239f8246eef.png",
+            'https://psychicai-static.psychicai.pro/imgs/2311e8b5bdf1352f40ed80ec4239f8246eef.png',
         },
         {
           id: 26,
-          name: "2023兔年一生财运",
+          name: '2023兔年一生财运',
           banner_id: 80008,
           checked: false,
-          icon: "https://psychicai-static.psychicai.pro/imgs/2311dab2e4808856460198f9fb5d00335a02.png",
-          url: "wealth_boutique_overseas",
-          product_key: "h5_wealth2023",
-          tips: "把握财运先机，揭晓财富运程，助你财运亨通，财源滚滚！",
+          icon: 'https://psychicai-static.psychicai.pro/imgs/2311dab2e4808856460198f9fb5d00335a02.png',
+          url: 'wealth_boutique_overseas',
+          product_key: 'h5_wealth2023',
+          tips: '把握财运先机，揭晓财富运程，助你财运亨通，财源滚滚！',
           check_icon:
-            "https://psychicai-static.psychicai.pro/imgs/2311451b81975b92422dba50e3ecb43a6c71.png",
+            'https://psychicai-static.psychicai.pro/imgs/2311451b81975b92422dba50e3ecb43a6c71.png',
         },
         {
           id: 27,
-          name: "袁天罡推背称骨",
+          name: '袁天罡推背称骨',
           banner_id: 80002,
           checked: false,
-          icon: "http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/af8b0b8a9c3484c4f4a5428e984c5e8c.png",
-          url: "weigh_bone",
-          product_key: "h5_weigh_bone",
-          tips: "通过袁天罡古老占算法，探究身体骨骼，揭示生命密码，为你清晰了解生涯命运走向，让你事业、爱情、健康三线并进，并在生活中找到最佳平衡！",
+          icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/af8b0b8a9c3484c4f4a5428e984c5e8c.png',
+          url: 'weigh_bone',
+          product_key: 'h5_weigh_bone',
+          tips: '通过袁天罡古老占算法，探究身体骨骼，揭示生命密码，为你清晰了解生涯命运走向，让你事业、爱情、健康三线并进，并在生活中找到最佳平衡！',
           check_icon:
-            "http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/af8b0b8a9c3484c4f4a5428e984c5e8c.png",
+            'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/af8b0b8a9c3484c4f4a5428e984c5e8c.png',
         },
         {
           id: 28,
-          name: "鬼谷子百卦论命",
+          name: '鬼谷子百卦论命',
           banner_id: 80003,
           checked: false,
-          icon: "http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/630c7179844d4b3b20f5cf3ff46ff4b6.png",
-          url: "guiguzi_fortune",
-          product_key: "h5_bai_gua",
-          tips: "关乎命运的百卦，把握生活中的转机与挑战。通过古老的易经知识演绎生活，精准预判运势，解析个性、爱情、职业、健康等生活重要环节，让你能够明察秋毫，走好人生每一步！",
+          icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/630c7179844d4b3b20f5cf3ff46ff4b6.png',
+          url: 'guiguzi_fortune',
+          product_key: 'h5_bai_gua',
+          tips: '关乎命运的百卦，把握生活中的转机与挑战。通过古老的易经知识演绎生活，精准预判运势，解析个性、爱情、职业、健康等生活重要环节，让你能够明察秋毫，走好人生每一步！',
           check_icon:
-            "http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/630c7179844d4b3b20f5cf3ff46ff4b6.png",
+            'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/630c7179844d4b3b20f5cf3ff46ff4b6.png',
         },
         {
           id: 29,
-          name: "2024年年运",
+          name: '2024年年运',
           banner_id: 80009,
           checked: false,
-          icon: "http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/21fdbe04b4913ca464cc71222552327d.png",
-          url: "year_of_lucky_2024",
-          product_key: "h5_annual2024",
-          tips: "预知全年吉凶，揭示人生起伏，明晰先机，决策无忧，助力你掌握全年运势，开启更好的2024年！",
+          icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/21fdbe04b4913ca464cc71222552327d.png',
+          url: 'year_of_lucky_2024',
+          product_key: 'h5_annual2024',
+          tips: '预知全年吉凶，揭示人生起伏，明晰先机，决策无忧，助力你掌握全年运势，开启更好的2024年！',
           check_icon:
-            "http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/21fdbe04b4913ca464cc71222552327d.png",
+            'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/21fdbe04b4913ca464cc71222552327d.png',
         },
         {
           id: 30,
-          name: "2024感情运势",
+          name: '2024感情运势',
           banner_id: 12345,
           checked: false,
-          icon: "http://imgcom.static.suishenyun.net/img_head-5e6238.png",
-          url: "emotion_fortune",
-          product_key: "h5_emotion2024",
-          tips: "2024感情运势，暂无简介",
-          check_icon: "http://imgcom.static.suishenyun.net/img_head-5e6238.png",
+          icon: 'http://imgcom.static.suishenyun.net/img_head-5e6238.png',
+          url: 'emotion_fortune',
+          product_key: 'h5_emotion2024',
+          tips: '2024感情运势，暂无简介',
+          check_icon: 'http://imgcom.static.suishenyun.net/img_head-5e6238.png',
         },
         {
           id: 31,
-          name: "2024事业运",
+          name: '2024事业运',
           banner_id: 123456,
           checked: false,
           icon: career_2024,
-          url: "career_fortune_2024",
-          product_key: "h5_career2024",
-          tips: "2024年事业运，暂无简介，2024年事业运，暂无简介",
+          url: 'career_fortune_2024',
+          product_key: 'h5_career2024',
+          tips: '2024年事业运，暂无简介，2024年事业运，暂无简介',
           check_icon: career_2024,
         },
       ];
@@ -1509,124 +1559,124 @@ export default {
       let arr2 = [
         {
           id: 7,
-          name: "八字合婚",
-          cn_desc: "揭示姻缘宿命，戒备潜藏危机，慎选伴侣之道",
-          tw_desc: "揭示姻緣宿命，戒備潛藏危機，慎選伴侶之道",
-          url: "marriage_measure_overseas",
+          name: '八字合婚',
+          cn_desc: '揭示姻缘宿命，戒备潜藏危机，慎选伴侣之道',
+          tw_desc: '揭示姻緣宿命，戒備潛藏危機，慎選伴侶之道',
+          url: 'marriage_measure_overseas',
           zh_icon:
-            "https://psychicai-static.psychicai.pro/imgs/24041ad15f947999492aabf1a307f653f794.png",
+            'https://psychicai-static.psychicai.pro/imgs/24041ad15f947999492aabf1a307f653f794.png',
           tw_icon: tw_bzhh_banner,
-          buy_num: "6324",
-          review_num: "6185",
-          e_id: "-10007",
-          e_name: "click_report_marriage",
-          ad_e: "8g4xt8",
-          report_id: "60005",
-          product_key: "h5_marriage",
+          buy_num: '6324',
+          review_num: '6185',
+          e_id: '-10007',
+          e_name: 'click_report_marriage',
+          ad_e: '8g4xt8',
+          report_id: '60005',
+          product_key: 'h5_marriage',
         },
         {
           id: 4,
-          name: "24年感情运",
-          cn_desc: "感情运势早知道，和合美满还是遗憾分手",
-          tw_desc: "感情運勢早知道，和合美滿還是遺憾分手",
-          url: "emotion_fortune",
+          name: '24年感情运',
+          cn_desc: '感情运势早知道，和合美满还是遗憾分手',
+          tw_desc: '感情運勢早知道，和合美滿還是遺憾分手',
+          url: 'emotion_fortune',
           zh_icon:
-            "https://psychicai-static.psychicai.pro/imgs/240480dc4c244a8e4dafb2c9658a953b2b7d.png",
+            'https://psychicai-static.psychicai.pro/imgs/240480dc4c244a8e4dafb2c9658a953b2b7d.png',
           tw_icon: tw_emotion,
-          buy_num: "3492",
-          review_num: "3441",
-          e_id: "-10006",
-          e_name: "click_report_2024lovely",
-          ad_e: "efy9t0",
-          report_id: "60010",
-          product_key: "h5_emotion2024",
+          buy_num: '3492',
+          review_num: '3441',
+          e_id: '-10006',
+          e_name: 'click_report_2024lovely',
+          ad_e: 'efy9t0',
+          report_id: '60010',
+          product_key: 'h5_emotion2024',
         },
         {
           id: 3,
-          name: "24年年运",
-          cn_desc: "你的2024年如何度过？大师为你解读年度运势",
-          tw_desc: "你的2024年如何度過？大師為你解讀年度運勢",
-          url: "year_of_lucky_2024",
+          name: '24年年运',
+          cn_desc: '你的2024年如何度过？大师为你解读年度运势',
+          tw_desc: '你的2024年如何度過？大師為你解讀年度運勢',
+          url: 'year_of_lucky_2024',
           zh_icon:
-            "https://psychicai-static.psychicai.pro/imgs/2404e9c969b4e1464e91b6836b7e57b7d346.png",
+            'https://psychicai-static.psychicai.pro/imgs/2404e9c969b4e1464e91b6836b7e57b7d346.png',
           tw_icon: tw_year24_banner,
-          buy_num: "8321",
-          review_num: "8238",
+          buy_num: '8321',
+          review_num: '8238',
           is_big: false,
-          e_id: "-10003",
-          e_name: "click_report_2024report",
-          ad_e: "oqfzzs",
-          report_id: "60009",
-          product_key: "h5_annual2024",
+          e_id: '-10003',
+          e_name: 'click_report_2024report',
+          ad_e: 'oqfzzs',
+          report_id: '60009',
+          product_key: 'h5_annual2024',
         },
         {
           id: 6,
-          name: "24年财运",
-          cn_desc: "预警财务危机，洞悉关键时刻，避免潜在财富风险。",
-          tw_desc: "預警財務危機，洞悉關鍵時刻，避免潛在財富風險。",
-          url: "lucky_year_report",
+          name: '24年财运',
+          cn_desc: '预警财务危机，洞悉关键时刻，避免潜在财富风险。',
+          tw_desc: '預警財務危機，洞悉關鍵時刻，避免潛在財富風險。',
+          url: 'lucky_year_report',
           zh_icon:
-            "https://psychicai-static.psychicai.pro/imgs/24048d23afe94dc94781b614ed38300c52d2.png",
+            'https://psychicai-static.psychicai.pro/imgs/24048d23afe94dc94781b614ed38300c52d2.png',
           tw_icon: tw_wealth24_banner,
-          buy_num: "7315",
-          review_num: "7044",
-          e_id: "-10005",
-          e_name: "click_report_2024wealty",
-          ad_e: "egm8a2",
-          report_id: "60001",
-          product_key: "h5_wealth2024",
+          buy_num: '7315',
+          review_num: '7044',
+          e_id: '-10005',
+          e_name: 'click_report_2024wealty',
+          ad_e: 'egm8a2',
+          report_id: '60001',
+          product_key: 'h5_wealth2024',
         },
         {
           id: 5,
-          name: "24年事业运",
-          cn_desc: "前途迷雾重重，挑战接踵而至，开创事业新章",
-          tw_desc: "前途迷霧重重，挑戰接踵而至，開創事業新章",
-          url: "career_fortune_2024",
+          name: '24年事业运',
+          cn_desc: '前途迷雾重重，挑战接踵而至，开创事业新章',
+          tw_desc: '前途迷霧重重，挑戰接踵而至，開創事業新章',
+          url: 'career_fortune_2024',
           zh_icon:
-            "https://psychicai-static.psychicai.pro/imgs/24046a9e0acaca504f16b3069e0c06a611df.png",
+            'https://psychicai-static.psychicai.pro/imgs/24046a9e0acaca504f16b3069e0c06a611df.png',
           tw_icon: tw_career,
-          buy_num: "8314",
-          review_num: "8090",
-          e_id: "-10004",
-          e_name: "click_report_2024career",
-          ad_e: "tzsnzi",
-          report_id: "60011",
-          product_key: "h5_career2024",
+          buy_num: '8314',
+          review_num: '8090',
+          e_id: '-10004',
+          e_name: 'click_report_2024career',
+          ad_e: 'tzsnzi',
+          report_id: '60011',
+          product_key: 'h5_career2024',
         },
 
         {
           id: 1,
-          name: "袁天罡",
-          cn_desc: "称骨论命，揭露宿命重负，应对多舛命途",
-          tw_desc: "稱骨論命，揭露宿命重負，應對多舛命途",
-          url: "weigh_bone",
+          name: '袁天罡',
+          cn_desc: '称骨论命，揭露宿命重负，应对多舛命途',
+          tw_desc: '稱骨論命，揭露宿命重負，應對多舛命途',
+          url: 'weigh_bone',
           zh_icon:
-            "https://psychicai-static.psychicai.pro/imgs/2404a40011fb74fd44aa9e0bf8eb8ca1dfc3.png",
+            'https://psychicai-static.psychicai.pro/imgs/2404a40011fb74fd44aa9e0bf8eb8ca1dfc3.png',
           tw_icon: tw_weigh,
-          buy_num: "6752",
-          review_num: "6518",
-          e_id: "-10009",
-          e_name: "click_report_chenggu",
-          ad_e: "kajqs3",
-          report_id: "60002",
-          product_key: "h5_weigh_bone",
+          buy_num: '6752',
+          review_num: '6518',
+          e_id: '-10009',
+          e_name: 'click_report_chenggu',
+          ad_e: 'kajqs3',
+          report_id: '60002',
+          product_key: 'h5_weigh_bone',
         },
         {
           id: 2,
-          name: "鬼谷子",
-          cn_desc: "64卦预见人生，审慎应对风波，谨防危机潜伏",
-          tw_desc: "64卦預見人生，審慎應對風波，謹防危機潛伏",
-          url: "guiguzi_fortune",
+          name: '鬼谷子',
+          cn_desc: '64卦预见人生，审慎应对风波，谨防危机潜伏',
+          tw_desc: '64卦預見人生，審慎應對風波，謹防危機潛伏',
+          url: 'guiguzi_fortune',
           zh_icon:
-            "https://psychicai-static.psychicai.pro/imgs/2404090733726e3c4fabb8a756a685bfadbf.png",
+            'https://psychicai-static.psychicai.pro/imgs/2404090733726e3c4fabb8a756a685bfadbf.png',
           tw_icon: tw_ggz,
-          buy_num: "9522",
-          review_num: "9277",
-          e_id: "-10008",
-          e_name: "click_report_64gua",
-          ad_e: "jd4oen",
-          report_id: "60003",
-          product_key: "h5_bai_gua",
+          buy_num: '9522',
+          review_num: '9277',
+          e_id: '-10008',
+          e_name: 'click_report_64gua',
+          ad_e: 'jd4oen',
+          report_id: '60003',
+          product_key: 'h5_bai_gua',
         },
       ];
 
@@ -1634,22 +1684,22 @@ export default {
     },
 
     is_cn() {
-      return utils.getLanguage() === "zh-CN";
+      return utils.getLanguage() === 'zh-CN';
     },
     scrollStyle() {
       if (this.payed_order_three_list.length) {
         if (this.combine_index === -1) {
-          return "0px";
+          return '0px';
         } else if (this.combine_index === 0) {
-          return "0.8rem";
+          return '0.8rem';
         } else {
-          return "2.05rem";
+          return '2.05rem';
         }
       } else {
         if (this.combine_index) {
-          return this.combine_index !== -1 ? "1.3rem" : "0px";
+          return this.combine_index !== -1 ? '1.3rem' : '0px';
         } else {
-          return "0px";
+          return '0px';
         }
       }
     },
@@ -1657,7 +1707,7 @@ export default {
       if (this.last_order) {
         if (
           this.last_order.product_key === this.new_order_key &&
-          this.last_order.status !== "PAYED"
+          this.last_order.status !== 'PAYED'
         ) {
           return false;
         }
@@ -1671,7 +1721,7 @@ export default {
       if (flag) {
         const { main_id, click_id, view_id, click_name, view_name } =
           maidianEnum[this.new_order_key];
-        utils.firebaseLogEvent(main_id, view_id, view_name, "view", {
+        utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
           args_name: view_name,
           channel: utils.getFBChannel(),
         });
@@ -1680,6 +1730,43 @@ export default {
     },
     local_title() {
       return utils.getTitle(this.new_order_key);
+    },
+    // 遍历是否每一项都有product_key
+
+    confirm_btn_3() {
+      if (this.pick_list.length < 3) {
+        return false;
+      }
+      let flag = this.pick_list.every(it => {
+        return it.product_key;
+      });
+      return flag;
+    },
+    confirm_btn_2() {
+      if (this.pick_list2.length < 2) {
+        return false;
+      }
+      let flag = this.pick_list2.every(it => {
+        return it.product_key;
+      });
+      return flag;
+    },
+    is_show_reechoes_3() {
+      return (
+        this.three_list.length && this.three_list.every(it => it.product_key)
+      );
+    },
+    is_full_3() {
+      return this.three_list.every(it => it.product_key);
+    },
+    is_show_reechoes_2() {
+      return this.two_list.length && this.two_list.every(it => it.product_key);
+    },
+    is_full_2() {
+      return this.two_list.every(it => it.product_key);
+    },
+    channel03() {
+      return utils.getFBChannel().indexOf('03') > -1;
     },
   },
   watch: {
@@ -1705,17 +1792,17 @@ export default {
       if (val) {
         // 查看多买多折扣列表3项
         utils.firebaseLogEvent(
-          "10001",
-          "-10020",
-          "view_reportlist_choise3",
-          "view",
+          '10001',
+          '-10020',
+          'view_reportlist_choise3',
+          'view',
           {
-            args_name: "view_reportlist_choise3",
+            args_name: 'view_reportlist_choise3',
             channel: utils.getFBChannel(),
           }
         );
 
-        this.getLocalChecked("three_list", "mlxz_web_select_list");
+        this.getLocalChecked('three_list', 'mlxz_web_select_list');
         this.pick_list = JSON.parse(JSON.stringify(this.three_list));
       } else {
         this.pick_list = [];
@@ -1725,17 +1812,17 @@ export default {
       if (val) {
         // 查看多买多折扣列表2项
         utils.firebaseLogEvent(
-          "10001",
-          "-10019",
-          "view_reportlist_choise2",
-          "view",
+          '10001',
+          '-10019',
+          'view_reportlist_choise2',
+          'view',
           {
-            args_name: "view_reportlist_choise2",
+            args_name: 'view_reportlist_choise2',
             channel: utils.getFBChannel(),
           }
         );
 
-        this.getLocalChecked("two_list", "mlxz_web_select_list_two");
+        this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
         this.pick_list2 = JSON.parse(JSON.stringify(this.two_list));
       } else {
         this.pick_list2 = [];
@@ -1744,7 +1831,7 @@ export default {
 
     combine_index: {
       handler(val) {
-        console.log("combine_index", val);
+        console.log('combine_index', val);
       },
       immediate: true,
     },
@@ -1760,6 +1847,11 @@ export default {
     },
   },
   created() {
+    let store_time_3 = localStorage.getItem('mlxz_combine_3');
+    let store_time_2 = localStorage.getItem('mlxz_combine_2');
+    this.time_3 = store_time_3 ? +store_time_3 : 15 * 60 * 1000;
+    this.time_2 = store_time_2 ? +store_time_2 : 15 * 60 * 1000;
+
     utils.isProd() &&
       tStatistic &&
       tStatistic.send({
@@ -1775,36 +1867,36 @@ export default {
     this.getLastOrder();
 
     this.is_show_combine =
-      ["enjoy03", "panda03"].includes(utils.getFBChannel()) || !utils.isProd();
+      ['enjoy03', 'panda03'].includes(utils.getFBChannel()) || !utils.isProd();
 
     let url_query = utils.getUrlParams();
     let order_id = url_query.order_id;
-    this.order_id = order_id || "";
+    this.order_id = order_id || '';
     let pay_status = url_query.status;
     let pay_index = +url_query.pay_index;
 
-    let remove_flag = +localStorage.getItem("mlxz_remove_flag"); // 1:已经删除 ,2:未删除
+    let remove_flag = +localStorage.getItem('mlxz_remove_flag'); // 1:已经删除 ,2:未删除
 
     this.randomBuyList();
     this.getProductSort();
-    getProductionsAPI("ceh5").then((res) => {
+    getProductionsAPI('ceh5').then(res => {
       this.all_list = res.data;
       if (!this.is_show_combine) return;
-      if (order_id && pay_status === "SUCCESS" && remove_flag === 2) {
+      if (order_id && pay_status === 'SUCCESS' && remove_flag === 2) {
         localStorage.removeItem(
-          pay_index === 3 ? "mlxz_web_select_list" : "mlxz_web_select_list_two"
+          pay_index === 3 ? 'mlxz_web_select_list' : 'mlxz_web_select_list_two'
         );
-        localStorage.setItem("mlxz_remove_flag", 1);
+        localStorage.setItem('mlxz_remove_flag', 1);
       }
       this.getSelectTagList();
       this.getPayedOrderList();
       this.showComboAttach();
-      this.getLocalChecked("three_list", "mlxz_web_select_list");
-      this.getLocalChecked("two_list", "mlxz_web_select_list_two");
+      this.getLocalChecked('three_list', 'mlxz_web_select_list');
+      this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
       this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
     });
-    document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible") {
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
         this.showComboAttach();
       }
     });
@@ -1812,35 +1904,35 @@ export default {
   async mounted() {
     if (utils.isProd()) {
       try {
-        fbq("trackCustom", "CustomChannel", {
+        fbq('trackCustom', 'CustomChannel', {
           channel: `pageview_main_${utils.getFBChannel()}`,
         });
         utils.gcyLog(`主页`, {
-          mlxz_action_desc: "主页FB渠道上报",
-          mlxz_action_type: "view",
+          mlxz_action_desc: '主页FB渠道上报',
+          mlxz_action_type: 'view',
           mlxz_channel: `pageview_main_${utils.getFBChannel()}`,
         });
       } catch (err) {
-        console.log("no fbq:", err);
+        console.log('no fbq:', err);
       }
     }
 
     this.showNoticePop();
 
-    utils.firebaseLogEvent("10001", "-10001", "page_view_h5main", "page_view", {
-      args_name: "page_view_h5main",
+    utils.firebaseLogEvent('10001', '-10001', 'page_view_h5main', 'page_view', {
+      args_name: 'page_view_h5main',
       channel: utils.getFBChannel(),
     });
     if (this.order_id) {
       let check_result = await this.checkWithTimeout();
       if (check_result !== null) {
         utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: "已经获取了是否上报埋点的状态",
+          mlxz_action_desc: '已经获取了是否上报埋点的状态',
           mlxz_attribution_status: check_result.data.status,
         });
         if (check_result.data.status) {
           utils.gcyLog(`order_id:${this.order_id}`, {
-            mlxz_action_desc: "准备执行上报埋点",
+            mlxz_action_desc: '准备执行上报埋点',
             mlxz_check_status: check_result.data.status,
           });
           this.handleSendEvent();
@@ -1849,11 +1941,11 @@ export default {
     }
     // 埋点事件上传
     reportBuryingEventAPI({
-      event: "page_view_h5main",
+      event: 'page_view_h5main',
       channel: utils.getFBChannel(),
     })
       .then()
-      .catch((err) => {
+      .catch(err => {
         console.warn(`埋点事件上传失败${err}`);
       });
   },
@@ -1866,28 +1958,38 @@ export default {
     getProductions,
     //开始测算
     async startCalculateClick() {
-      location.href = `${path_enums[this.comboAttachData.product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${this.comboAttachData.product_key}`;
+      location.href = `${
+        path_enums[this.comboAttachData.product_key]
+      }.html#/?has_pay=SUCCESS&order_id=${
+        this.comboAttachData.order_id
+      }&product_key=${this.comboAttachData.product_key}`;
     },
     //请求接口，是否展示引导标识
     async showComboAttach() {
       const res = await getComboAttachAPI();
       if (res.status !== 1000) return;
-      if(res.data) {
+      if (res.data) {
         //组合套餐中未测算的报告
-        let sub_orders =  res.data.combine.sub_orders.find(item=>!item.extra_ce_suan);
+        let sub_orders = res.data.combine.sub_orders.find(
+          item => !item.extra_ce_suan
+        );
         //获取到未测算的报告信息
-        this.comboAttachData = {product_id: sub_orders.product_id, order_id: sub_orders.order_id, product_key: sub_orders.product_key};
+        this.comboAttachData = {
+          product_id: sub_orders.product_id,
+          order_id: sub_orders.order_id,
+          product_key: sub_orders.product_key,
+        };
       } else {
-        this.comboAttachData = null
+        this.comboAttachData = null;
       }
     },
     showNoticePop() {
       this.timer = setInterval(() => {
-        this.fix_order_info = localStorage.getItem("mlxz_fixed_order_info");
-        this.new_order_key = localStorage.getItem("mlxz_fixed_order_key");
+        this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
+        this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
         this.local_time =
-          +localStorage.getItem("mlxz_fixed_local_order_time") || 0;
-        let is_reload = localStorage.getItem("mlxz_reload_page_home");
+          +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
+        let is_reload = localStorage.getItem('mlxz_reload_page_home');
         if (is_reload) {
           this.payed_order_three_list = [];
           this.getPayedOrderList();
@@ -1900,26 +2002,26 @@ export default {
       if (res.status !== 1000) return;
       this.last_order = res.data;
       this.last_title = utils.getTitle(
-        this.last_order ? this.last_order.product_key : ""
+        this.last_order ? this.last_order.product_key : ''
       );
       if (
         this.last_order &&
-        this.last_order.status !== "PAYED" &&
+        this.last_order.status !== 'PAYED' &&
         this.last_order.product_key !== this.product_key
       ) {
         this.logDiscountEvent();
         //
         if (
-          +localStorage.getItem("mlxz_fixed_api_order_id") ===
+          +localStorage.getItem('mlxz_fixed_api_order_id') ===
           this.last_order.id
         ) {
           this.api_time =
-            +localStorage.getItem("mlxz_fixed_api_order_time") || 0;
+            +localStorage.getItem('mlxz_fixed_api_order_time') || 0;
           this.show_api_order = true;
           return;
         }
         this.api_time = 15 * 60 * 1000;
-        localStorage.setItem("mlxz_fixed_api_order_id", this.last_order.id);
+        localStorage.setItem('mlxz_fixed_api_order_id', this.last_order.id);
         this.show_api_order = true;
       } else {
         this.show_api_order = false;
@@ -1930,7 +2032,7 @@ export default {
         this.last_order;
       const { main_id, click_id, view_id, click_name, view_name } =
         maidianEnum[product_key];
-      utils.firebaseLogEvent(main_id, view_id, view_name, "view", {
+      utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
         args_name: view_name,
         channel: utils.getFBChannel(),
       });
@@ -1942,18 +2044,18 @@ export default {
         this.last_order;
       const { main_id, click_id, view_id, click_name, view_name } =
         maidianEnum[product_key];
-      utils.firebaseLogEvent(main_id, click_id, click_name, "click", {
+      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
         args_name: click_name,
         channel: utils.getFBChannel(),
       });
       Indicator.open(tipsArr5[utils.getLanguage()]);
 
-      if (this.last_order.status === "PAYED") return;
+      if (this.last_order.status === 'PAYED') return;
       let params = {
         pay_method: pay_method,
         product_key: product_key,
         product_id: product_id,
-        platform: "WEB",
+        platform: 'WEB',
         extra_ce_suan: ext,
         callback_url: `${location.origin}/${utils.getFBChannel()}/${
           path_enums[product_key]
@@ -1962,8 +2064,8 @@ export default {
         }&report_price=${payment}&discount_pay=1`,
       };
       const res = await payOrderAPI(params);
-      localStorage.removeItem("mlxz_fixed_api_order_id");
-      localStorage.removeItem("mlxz_fixed_api_order_time");
+      localStorage.removeItem('mlxz_fixed_api_order_id');
+      localStorage.removeItem('mlxz_fixed_api_order_time');
       Indicator.close();
       if (res.status !== 1000) return;
       this.show_api_order = false;
@@ -1973,13 +2075,13 @@ export default {
     jumpOrder() {
       const { main_id, click_id, view_id, click_name, view_name } =
         maidianEnum[this.new_order_key];
-      utils.firebaseLogEvent(main_id, click_id, click_name, "click", {
+      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
         args_name: click_name,
         channel: utils.getFBChannel(),
       });
-      if (this.new_order_key === "h5_marriage") {
+      if (this.new_order_key === 'h5_marriage') {
         let marry_info = JSON.parse(
-          localStorage.getItem("mlxz_user_info_h5_marriage")
+          localStorage.getItem('mlxz_user_info_h5_marriage')
         );
         let male_str = marry_info.male_str;
         let female_str = marry_info.female_str;
@@ -1992,10 +2094,10 @@ export default {
         return;
       }
       let path =
-        "detail?querystring=" +
+        'detail?querystring=' +
         this.fix_order_info +
-        "&pay_modal=1" +
-        "&use_fixed_time=1&discount_pay=1";
+        '&pay_modal=1' +
+        '&use_fixed_time=1&discount_pay=1';
 
       location.href = `${location.origin}/${utils.getFBChannel()}/${
         path_enums[this.new_order_key]
@@ -2008,7 +2110,7 @@ export default {
     async checkWithTimeout() {
       try {
         utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: "开始调用校验上报埋点接口",
+          mlxz_action_desc: '开始调用校验上报埋点接口',
         });
         const result = await Promise.race([
           checkSendEventApi({ order_id: this.order_id }),
@@ -2020,26 +2122,26 @@ export default {
         if (result !== null) {
           // 如果有返回数据，则直接返回
           utils.gcyLog(`order_id:${this.order_id}`, {
-            mlxz_action_desc: "已校验是否上报埋点",
+            mlxz_action_desc: '已校验是否上报埋点',
             mlxz_check_result_status: result.data.status,
           });
           return result;
         } else {
           utils.gcyLog(`order_id:${this.order_id}`, {
-            mlxz_action_desc: "接口超时，重新调用校验上报埋点接口",
+            mlxz_action_desc: '接口超时，重新调用校验上报埋点接口',
           });
           // 等待 6 秒后再次调用 checkSendEventApi
           const retryResult = await checkSendEventApi({
             order_id: this.order_id,
           });
           utils.gcyLog(`order_id:${this.order_id}`, {
-            mlxz_action_desc: "接口超时，完成重试调用上报埋点接口",
+            mlxz_action_desc: '接口超时，完成重试调用上报埋点接口',
           });
           return retryResult;
         }
       } catch (error) {
         utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: "接口报错，停止校验",
+          mlxz_action_desc: '接口报错，停止校验',
         });
         throw error;
       }
@@ -2050,57 +2152,57 @@ export default {
      */
     async handleSendEvent() {
       let report_price =
-        +utils.getQueryString("report_price") || this.payed_combine_price;
+        +utils.getQueryString('report_price') || this.payed_combine_price;
       let report_status =
-        utils.getQueryString("status") || this.order_id ? "SUCCESS" : "";
-      let repay = +utils.getQueryString("repay");
+        utils.getQueryString('status') || this.order_id ? 'SUCCESS' : '';
+      let repay = +utils.getQueryString('repay');
 
       // let pay_index = +utils.getQueryString('pay_index') ;
       let pay_index;
-      if (utils.getQueryString("pay_index")) {
-        pay_index = +utils.getQueryString("pay_index");
+      if (utils.getQueryString('pay_index')) {
+        pay_index = +utils.getQueryString('pay_index');
       } else {
         pay_index = this.payed_order_three_list.length;
       }
       utils.gcyLog(`order_id:${this.order_id}`, {
-        mlxz_action_desc: "准备上报埋点，获取订单状态",
+        mlxz_action_desc: '准备上报埋点，获取订单状态',
         mlxz_order_status: report_status,
       });
-      if (report_status === "SUCCESS" || report_status === "PAYED") {
+      if (report_status === 'SUCCESS' || report_status === 'PAYED') {
         utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: "开始上报firebase埋点",
+          mlxz_action_desc: '开始上报firebase埋点',
           mlxz_order_status: report_status,
         });
         if (repay) {
           utils.firebaseLogEvent(
-            "10002",
-            pay_index === 2 ? "-10019" : "-10020",
+            '10002',
+            pay_index === 2 ? '-10019' : '-10020',
 
             pay_index === 2
-              ? "event_status_report2history_pay_success"
-              : "event_status_report3history_pay_success",
-            "event_status",
+              ? 'event_status_report2history_pay_success'
+              : 'event_status_report3history_pay_success',
+            'event_status',
             {
               args_name:
                 pay_index === 2
-                  ? "event_status_report2history_pay_success"
-                  : "event_status_report3history_pay_success",
+                  ? 'event_status_report2history_pay_success'
+                  : 'event_status_report3history_pay_success',
               channel: utils.getFBChannel(),
             }
           );
         } else {
           utils.firebaseLogEvent(
-            "10001",
-            pay_index === 2 ? "-10027" : "-10028",
+            '10001',
+            pay_index === 2 ? '-10027' : '-10028',
             pay_index === 2
-              ? "event_status_report2_pay_success"
-              : "event_status_report3_pay_success",
-            "event_status",
+              ? 'event_status_report2_pay_success'
+              : 'event_status_report3_pay_success',
+            'event_status',
             {
               args_name:
                 pay_index === 2
-                  ? "event_status_report2_pay_success"
-                  : "event_status_report3_pay_success",
+                  ? 'event_status_report2_pay_success'
+                  : 'event_status_report3_pay_success',
 
               channel: utils.getFBChannel(),
             }
@@ -2108,71 +2210,71 @@ export default {
         }
 
         utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: "完成firebase埋点上报",
+          mlxz_action_desc: '完成firebase埋点上报',
           mlxz_order_status: report_status,
         });
         if (utils.isProd()) {
           await utils.checkFB();
           try {
             utils.gcyLog(`order_id:${this.order_id}`, {
-              mlxz_action_desc: "开始上报FB埋点，Purchase",
+              mlxz_action_desc: '开始上报FB埋点，Purchase',
               mlxz_value: report_price.toFixed(2),
-              mlxz_currency: "MYR",
+              mlxz_currency: 'MYR',
               mlxz_order_status: report_status,
             });
-            fbq("track", "Purchase", {
+            fbq('track', 'Purchase', {
               value: report_price.toFixed(2),
-              currency: "MYR",
+              currency: 'MYR',
             });
             utils.gcyLog(`order_id:${this.order_id}`, {
-              mlxz_action_desc: "完成FB埋点上报，Purchase",
+              mlxz_action_desc: '完成FB埋点上报，Purchase',
               mlxz_value: report_price.toFixed(2),
-              mlxz_currency: "MYR",
+              mlxz_currency: 'MYR',
               mlxz_order_status: report_status,
             });
           } catch (err) {
-            console.error("error message:", err);
+            console.error('error message:', err);
           }
         }
         utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: "完成埋点上报，开始与接口通信，通知完成上报",
+          mlxz_action_desc: '完成埋点上报，开始与接口通信，通知完成上报',
         });
         this.sendEvent();
       } else {
         utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: "开始上报埋点",
+          mlxz_action_desc: '开始上报埋点',
           mlxz_order_status: report_status,
         });
         if (repay) {
           utils.firebaseLogEvent(
-            "10002",
-            pay_index === 2 ? "-10028" : "-10029",
+            '10002',
+            pay_index === 2 ? '-10028' : '-10029',
             pay_index === 2
-              ? "event_status_report2history_pay_fail"
-              : "event_status_report3history_pay_fail",
-            "event_status",
+              ? 'event_status_report2history_pay_fail'
+              : 'event_status_report3history_pay_fail',
+            'event_status',
             {
               args_name:
                 pay_index === 2
-                  ? "event_status_report2history_pay_fail"
-                  : "event_status_report3history_pay_fail",
+                  ? 'event_status_report2history_pay_fail'
+                  : 'event_status_report3history_pay_fail',
               channel: utils.getFBChannel(),
             }
           );
         } else {
           utils.firebaseLogEvent(
-            "10001",
-            pay_index === 2 ? "-10029" : "-10030",
+            '10001',
+            pay_index === 2 ? '-10029' : '-10030',
             pay_index === 2
-              ? "event_status_report2_pay_fail"
-              : "event_status_report3_pay_fail",
+              ? 'event_status_report2_pay_fail'
+              : 'event_status_report3_pay_fail',
 
-            "event_status",
+            'event_status',
             {
               args_name:
                 pay_index === 2
-                  ? "event_status_report2_pay_fail"
-                  : "event_status_report3_pay_fail",
+                  ? 'event_status_report2_pay_fail'
+                  : 'event_status_report3_pay_fail',
 
               channel: utils.getFBChannel(),
             }
@@ -2180,11 +2282,11 @@ export default {
         }
 
         utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: "完成上报埋点",
+          mlxz_action_desc: '完成上报埋点',
           mlxz_order_status: report_status,
         });
         utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: "完成埋点上报，开始与接口通信，通知完成上报",
+          mlxz_action_desc: '完成埋点上报，开始与接口通信，通知完成上报',
         });
         this.sendEvent();
       }
@@ -2192,27 +2294,27 @@ export default {
 
     async sendEvent() {
       utils.gcyLog(`order_id:${this.order_id}`, {
-        mlxz_action_desc: "开始调用接口，通知已上报",
+        mlxz_action_desc: '开始调用接口，通知已上报',
       });
       const res = await sendEventApi({ order_id: this.order_id });
       if (res.status === 1000) {
         utils.gcyLog(`order_id:${this.order_id}`, {
-          mlxz_action_desc: "已通知已上报",
+          mlxz_action_desc: '已通知已上报',
           mlxz_attribution_status: res.status,
           mlxz_attribution_desc: res.desc,
         });
       }
     },
     showModal() {
-      utils.firebaseLogEvent("10001", "-10017", "click_main_choise3", "click", {
-        args_name: "click_main_choise3",
+      utils.firebaseLogEvent('10001', '-10017', 'click_main_choise3', 'click', {
+        args_name: 'click_main_choise3',
         channel: utils.getFBChannel(),
       });
       this.new_sale_modal = true;
     },
     showModal2() {
-      utils.firebaseLogEvent("10001", "-10015", "click_main_choise2", "click", {
-        args_name: "click_main_choise2",
+      utils.firebaseLogEvent('10001', '-10015', 'click_main_choise2', 'click', {
+        args_name: 'click_main_choise2',
         channel: utils.getFBChannel(),
       });
       this.new_sale_modal2 = true;
@@ -2220,7 +2322,7 @@ export default {
     // 查询订单支付结果
     async getOrderResult() {
       if (!this.continue || !this.order_id) return;
-      Indicator.open(this.$t("order-result-loading"));
+      Indicator.open(this.$t('order-result-loading'));
       const { status, data } = await getResultAPI({ order_id: this.order_id });
       Indicator.close();
       this.continue = false;
@@ -2231,8 +2333,8 @@ export default {
     // 两个数组中的key相同的合并成一个数组
     mergeArray(arr1, arr2) {
       let arr = [];
-      arr1.forEach((it) => {
-        arr2.forEach((item) => {
+      arr1.forEach(it => {
+        arr2.forEach(item => {
           if (it.product_key === item.product_key) {
             arr.push(Object.assign(it, item));
           }
@@ -2246,10 +2348,10 @@ export default {
      * @return {*}
      */
     getStoreChecked() {
-      let arr = localStorage.getItem("mlxz_checked_list");
+      let arr = localStorage.getItem('mlxz_checked_list');
       this.checked_list = arr ? JSON.parse(arr) : initCheck;
       let i = 0;
-      this.checked_list.forEach((it) => {
+      this.checked_list.forEach(it => {
         if (it.product_key) {
           i++;
         }
@@ -2264,8 +2366,8 @@ export default {
      * @return {*}
      */
     formatProductList(arr1, arr2) {
-      arr1.forEach((it) => {
-        arr2.forEach((item) => {
+      arr1.forEach(it => {
+        arr2.forEach(item => {
           it.checked = it.product_key === item.product_key ? true : false;
         });
       });
@@ -2277,14 +2379,14 @@ export default {
      * @return {*}
      */
     showPop() {
-      let arr = localStorage.getItem("mlxz_checked_list");
+      let arr = localStorage.getItem('mlxz_checked_list');
       if (arr) {
         this.checked_list = JSON.parse(arr);
       }
       this.pop_list = this.formatProductList(this.pop_list, this.checked_list);
 
       let id_arr = [];
-      this.checked_list.forEach((it) => {
+      this.checked_list.forEach(it => {
         if (it.id) {
           id_arr.push(it.id);
         }
@@ -2293,8 +2395,8 @@ export default {
         this.sale_visible = true;
         return;
       }
-      id_arr.forEach((it) => {
-        this.pop_list.forEach((item) => {
+      id_arr.forEach(it => {
+        this.pop_list.forEach(item => {
           if (item.id === it) {
             item.checked = true;
           }
@@ -2327,7 +2429,7 @@ export default {
      */
     formatChecked() {
       let i = 0;
-      this.pop_list.forEach((it) => {
+      this.pop_list.forEach(it => {
         if (it.checked) {
           i++;
         }
@@ -2357,31 +2459,31 @@ export default {
      */
     handleConfirm() {
       let i = 0;
-      this.pop_list.forEach((it) => {
+      this.pop_list.forEach(it => {
         if (it.checked) {
           i++;
         }
       });
       if (i < 2) {
-        Toast(this.$t("less-get-two-tips"));
+        Toast(this.$t('less-get-two-tips'));
         return false;
       }
       this.checked_list = [];
-      this.pop_list.forEach((it) => {
+      this.pop_list.forEach(it => {
         if (it.checked) {
           this.checked_list.push(it);
         }
       });
       if (this.checked_list.length < 3) {
         for (let i = 0; i < 4 - this.checked_list.length; i++) {
-          this.checked_list.push({ value: "" });
+          this.checked_list.push({ value: '' });
         }
       }
       let has_num = this.formatChecked();
       this.zhekou = has_num > 0 ? has_num - 1 : 2;
       this.sortData(this.checked_list);
       localStorage.setItem(
-        "mlxz_checked_list",
+        'mlxz_checked_list',
         JSON.stringify(this.checked_list)
       );
 
@@ -2394,13 +2496,13 @@ export default {
      */
     payModal() {
       let i = 0;
-      this.checked_list.find((it) => {
+      this.checked_list.find(it => {
         if (it.id) {
           i++;
         }
       });
       if (i < 2) {
-        Toast(this.$t("less-get-two-tips"));
+        Toast(this.$t('less-get-two-tips'));
         return;
       }
 
@@ -2414,24 +2516,24 @@ export default {
      */
     async handleReport(val, index) {
       if (index === 1) {
-        console.log("d1cle9");
+        console.log('d1cle9');
       }
       if (index === 2) {
-        console.log("5ts44a");
+        console.log('5ts44a');
       }
       if (index === 3) {
-        console.log("vzsv9y");
+        console.log('vzsv9y');
       }
       if (index === 5) {
         this.logHome();
 
         utils.firebaseLogEvent(
-          "10001",
-          "-10002",
-          "click_h5main_banner",
-          "click",
+          '10001',
+          '-10002',
+          'click_h5main_banner',
+          'click',
           {
-            args_name: "click_h5main_banner",
+            args_name: 'click_h5main_banner',
             report_id: val.a_id,
             channel: utils.getFBChannel(),
           }
@@ -2439,11 +2541,11 @@ export default {
       }
       if (val.product_key) {
         let same_ = this.all_list.find(
-          (it) => it.product_key === val.product_key
+          it => it.product_key === val.product_key
         );
 
         await this.logEventForSort({
-          e_name: "content_click",
+          e_name: 'content_click',
           product_id: same_.product_id,
         });
       }
@@ -2453,7 +2555,7 @@ export default {
     },
 
     backUrl() {
-      location.href = "mlxz://back";
+      location.href = 'mlxz://back';
     },
 
     hasPayReport(item) {
@@ -2471,16 +2573,16 @@ export default {
       );
       let maxHeight = lineHeight * 2; // 两行文本的高度
       if (element.offsetHeight > maxHeight) {
-        element.style.webkitLineClamp = "2";
-        element.style.webkitBoxOrient = "vertical";
-        element.style.display = "-webkit-box";
-        element.style.overflow = "hidden";
+        element.style.webkitLineClamp = '2';
+        element.style.webkitBoxOrient = 'vertical';
+        element.style.display = '-webkit-box';
+        element.style.overflow = 'hidden';
       }
     },
     hiddenText(text) {
       // return text;
       if (text.length > 23) {
-        return text.substring(0, 23) + "......";
+        return text.substring(0, 23) + '......';
       } else {
         return text;
       }
@@ -2496,38 +2598,38 @@ export default {
         let num4 = Math.floor(Math.random() * 4);
         this.buy_list.push(
           `${user_name_arr[num1]}${time_arr[num2]}${this.$t(
-            "tips-1"
-          )}之前${this.$t("tips-2")}了`
+            'tips-1'
+          )}之前${this.$t('tips-2')}了`
         );
         this.mock_report_list.push({
           name: report_arr[num3][utils.getLanguage()],
           id: num3,
         });
         this.score_list.push(
-          `，${this.$t("tips-3")}${score_arr[num4]}分${this.$t("tips-4")}`
+          `，${this.$t('tips-3')}${score_arr[num4]}分${this.$t('tips-4')}`
         );
       }
     },
     async jumpPage(index) {
       if (product_key_arr[index]) {
         let same_ = this.all_list.find(
-          (it) => it.product_key === product_key_arr[index]
+          it => it.product_key === product_key_arr[index]
         );
 
         await this.logEventForSort({
-          e_name: "content_click",
+          e_name: 'content_click',
           product_id: same_.product_id,
         });
       }
       await this.logHome();
 
       utils.firebaseLogEvent(
-        "10001",
-        "-10011",
-        "click_main_scrollbar",
-        "click",
+        '10001',
+        '-10011',
+        'click_main_scrollbar',
+        'click',
         {
-          args_name: "click_main_scrollbar",
+          args_name: 'click_main_scrollbar',
           report_id: e_id_arr[index],
           channel: utils.getFBChannel(),
         }
@@ -2544,14 +2646,14 @@ export default {
     async jumpUrl(url, e_id, e_name, ad_e, report_id, product_key) {
       await this.logHome();
 
-      utils.firebaseLogEvent("10001", e_id, e_name, "click", {
+      utils.firebaseLogEvent('10001', e_id, e_name, 'click', {
         args_name: e_name,
         channel: utils.getFBChannel(),
       });
       if (product_key) {
-        let same_ = this.all_list.find((it) => it.product_key === product_key);
+        let same_ = this.all_list.find(it => it.product_key === product_key);
         await this.logEventForSort({
-          e_name: "content_click",
+          e_name: 'content_click',
           product_id: same_.product_id,
         });
       }
@@ -2572,9 +2674,9 @@ export default {
       if (utils.isProd()) {
         await utils.checkFB();
         try {
-          fbq("track", "CompleteRegistration");
+          fbq('track', 'CompleteRegistration');
         } catch (err) {
-          console.error("CompleteRegistration  error message:", err);
+          console.error('CompleteRegistration  error message:', err);
         }
       }
     },
@@ -2592,18 +2694,18 @@ export default {
     // 打开选择弹窗
     async changeSale(val) {
       if (val) {
-        if (this.two_list.length) {
+        if (this.two_list.length && this.is_full_2) {
           this.pay_modal2 = true;
           return;
         }
 
         utils.firebaseLogEvent(
-          "10001",
-          "-10031",
-          "click_main_choise2group",
-          "click",
+          '10001',
+          '-10031',
+          'click_main_choise2group',
+          'click',
           {
-            args_name: "click_main_choise2group",
+            args_name: 'click_main_choise2group',
             channel: utils.getFBChannel(),
           }
         );
@@ -2611,18 +2713,18 @@ export default {
 
         return;
       }
-      if (this.three_list.length) {
+      if (this.three_list.length && this.is_full_3) {
         this.pay_modal = true;
         return;
       }
 
       utils.firebaseLogEvent(
-        "10001",
-        "-10032",
-        "click_main_choise3group",
-        "click",
+        '10001',
+        '-10032',
+        'click_main_choise3group',
+        'click',
         {
-          args_name: "click_main_choise3group",
+          args_name: 'click_main_choise3group',
           channel: utils.getFBChannel(),
         }
       );
@@ -2631,17 +2733,17 @@ export default {
 
     // 删除选中的商品
     getDeleteIndex(list, key) {
-      return list.findIndex((item) => item.product_key === key);
+      return list.findIndex(item => item.product_key === key);
     },
     ToastSubmit(val) {
       Toast(`请选择${val}项报告`);
     },
 
     // 选择商品
-    chooseNewSale(it, k, val, key = "pick_list") {
+    chooseNewSale(it, k, val, key = 'pick_list') {
       if (this[key].length >= (val ? 2 : 3)) {
         if (!it.checked) {
-          Toast(`最多选择${val ? "两" : "三"}项报告`);
+          Toast(`最多选择${val ? '两' : '三'}项报告`);
           return;
         } else {
           this.new_pop_list[k].checked = !this.new_pop_list[k].checked;
@@ -2659,107 +2761,158 @@ export default {
     // 提交已选商品
     submitPopList(val) {
       if (val) {
+        if (this.channel03) {
+          let old_arr = this.two_list.map(it => it.product_key);
+          let new_arr = this.pick_list2.map(it => it.product_key);
+          if (
+            this.is_full_2 &&
+            old_arr.sort().join('') !== new_arr.sort().join('')
+          ) {
+            this.time_2 = 15 * 60 * 1000;
+            this.$refs.timeDown2.restartTime(this.time_2);
+          }
+        }
+
         this.two_list = JSON.parse(JSON.stringify(this.pick_list2));
         this.getSelectTagList(val);
         localStorage.setItem(
-          "mlxz_web_select_list_two",
+          'mlxz_web_select_list_two',
           JSON.stringify(this.two_list)
         );
         utils.firebaseLogEvent(
-          "10001",
-          "-10025",
-          "click_reportlist_check2",
-          "click",
+          '10001',
+          '-10025',
+          'click_reportlist_check2',
+          'click',
           {
-            args_name: "click_reportlist_check2",
+            args_name: 'click_reportlist_check2',
             channel: utils.getFBChannel(),
           }
         );
         this.new_sale_modal2 = false;
+
         return;
       }
+
+      if (this.channel03) {
+        let old_arr = this.three_list.map(it => it.product_key);
+        let new_arr = this.pick_list.map(it => it.product_key);
+        if (
+          this.is_full_3 &&
+          old_arr.sort().join('') !== new_arr.sort().join('')
+        ) {
+          this.time_3 = 15 * 60 * 1000;
+          this.$refs.timeDown3.restartTime(this.time_3);
+        }
+      }
+
       this.three_list = JSON.parse(JSON.stringify(this.pick_list));
       this.getSelectTagList();
       localStorage.setItem(
-        "mlxz_web_select_list",
+        'mlxz_web_select_list',
         JSON.stringify(this.three_list)
       );
       utils.firebaseLogEvent(
-        "10001",
-        "-10026",
-        "click_reportlist_check3",
-        "click",
+        '10001',
+        '-10026',
+        'click_reportlist_check3',
+        'click',
         {
-          args_name: "click_reportlist_check3",
+          args_name: 'click_reportlist_check3',
           channel: utils.getFBChannel(),
         }
       );
+
       this.new_sale_modal = false;
     },
     // 获取本地缓存选择的商品
     getLocalChecked(list, key) {
-      this.new_pop_list.forEach((it) => {
+      // 本地缓存 三个缓存感情运 两个缓存袁天罡
+      let init_1 = !this.channel03
+        ? ''
+        : this.new_pop_list.find(it => it.product_key === 'h5_emotion2024');
+      let init_2 = !this.channel03
+        ? ''
+        : this.new_pop_list.find(it => it.product_key === 'h5_weigh_bone');
+      this.new_pop_list.forEach(it => {
         it.checked = false;
       });
+      let set_list = list === 'three_list' ? [init_1, '', ''] : [init_2, ''];
       let arr = localStorage.getItem(key);
-      this[list] = arr ? JSON.parse(arr) : [];
-      this[list].forEach((item) => {
-        this.new_pop_list.forEach((it) => {
+      this[list] = arr ? JSON.parse(arr) : set_list;
+      this[list].forEach(item => {
+        this.new_pop_list.forEach(it => {
           if (it.product_key === item.product_key) {
             it.checked = true;
           }
         });
       });
     },
+
     // 获取组合订单信息
     getSelectTagList(val) {
       if (val > 0) {
-        if (!this.two_list.length) return;
+        if (!this.two_list.length) {
+          return;
+        }
       } else {
-        if (!this.three_list.length) return;
+        if (!this.three_list.length) {
+          return;
+        }
       }
 
       if (val > 0) {
-        let product_key2 = "h5_combo2";
-        let pick_list = this.two_list.map((item) => item.product_key);
+        let product_key2 = 'h5_combo2';
+        let pick_list = this.two_list.map(item => item.product_key);
         let combine_ids2 = [];
 
-        this.two_list.forEach((it) => {
-          this.all_list.forEach((item) => {
+        this.two_list.forEach(it => {
+          this.all_list.forEach(item => {
             if (it.product_key === item.product_key) {
               combine_ids2.push(item.product_id);
             }
           });
         });
         this.combine_info2 = this.all_list.find(
-          (it) =>
+          it =>
             it.product_key === product_key2 &&
             it.tags.length &&
-            it.tags.sort().join("").indexOf(pick_list.sort().join("")) > -1
+            it.tags.sort().join('').indexOf(pick_list.sort().join('')) > -1
         );
         this.combine_info2.combine_product_ids = combine_ids2;
       } else {
-        let product_key = "h5_combo3";
-        let pick_list = this.three_list.map((item) => item.product_key);
+        let product_key = 'h5_combo3';
+        let pick_list = this.three_list.map(item => item.product_key);
         let combine_ids = [];
 
-        this.three_list.forEach((it) => {
-          this.all_list.forEach((item) => {
+        this.three_list.forEach(it => {
+          this.all_list.forEach(item => {
             if (it.product_key === item.product_key) {
               combine_ids.push(item.product_id);
             }
           });
         });
         this.combine_info = this.all_list.find(
-          (it) =>
+          it =>
             it.product_key === product_key &&
             it.tags.length &&
-            it.tags.sort().join("").indexOf(pick_list.sort().join("")) > -1
+            it.tags.sort().join('').indexOf(pick_list.sort().join('')) > -1
         );
         this.combine_info.combine_product_ids = combine_ids;
       }
-      this.pick_list = JSON.parse(JSON.stringify(this.three_list));
-      this.pick_list2 = JSON.parse(JSON.stringify(this.two_list));
+      this.pick_list = JSON.parse(
+        JSON.stringify(this.three_list.filter(it => it))
+      );
+      // this.time_start_3 =
+      //   this.pick_list &&
+      //   this.pick_list.length === 3 &&
+      //   this.pick_list.every(it => it.product_key)
+      //     ? true
+      //     : false;
+
+      this.pick_list2 = JSON.parse(
+        JSON.stringify(this.two_list.filter(it => it))
+      );
     },
 
     // 获取已下单未填写订单信息
@@ -2768,7 +2921,7 @@ export default {
 
       const res = await getComboListAPI();
       if (res.data) {
-        localStorage.removeItem("mlxz_reload_page_home");
+        localStorage.removeItem('mlxz_reload_page_home');
       }
       if (res.status !== 1000 || !res.data.combine) {
         this.payed_order_three_list = [];
@@ -2786,8 +2939,8 @@ export default {
       this.logPageView(this.combine_index);
 
       let arr_ = [];
-      sub_orders.forEach((item) => {
-        this.all_list.forEach((it) => {
+      sub_orders.forEach(item => {
+        this.all_list.forEach(it => {
           if (it.product_id === item.product_id) {
             arr_.push(it.product_key);
             arr_.push({
@@ -2800,8 +2953,8 @@ export default {
         });
       });
 
-      arr_.forEach((item) => {
-        new_pop_list.forEach((it) => {
+      arr_.forEach(item => {
+        new_pop_list.forEach(it => {
           if (it.product_key === item.product_key) {
             let it_ = Object.assign({}, it);
             it_.status = item.status;
@@ -2815,26 +2968,26 @@ export default {
       if (order_id) {
         this.order_id = order_id;
         let payed_key_list = this.payed_order_three_list.map(
-          (item) => item.product_key
+          item => item.product_key
         );
         let product_key =
-          this.payed_order_three_list.length === 3 ? "h5_combo3" : "h5_combo2";
+          this.payed_order_three_list.length === 3 ? 'h5_combo3' : 'h5_combo2';
         let pay_combine_info = this.all_list.find(
-          (it) =>
+          it =>
             it.product_key === product_key &&
             it.tags.length &&
-            it.tags.sort().join("").indexOf(payed_key_list.sort().join("")) > -1
+            it.tags.sort().join('').indexOf(payed_key_list.sort().join('')) > -1
         );
         this.payed_combine_price = pay_combine_info.price;
         let check_result = await this.checkWithTimeout();
         if (check_result !== null) {
           utils.gcyLog(`order_id:${this.order_id}`, {
-            mlxz_action_desc: "已经获取了是否上报埋点的状态",
+            mlxz_action_desc: '已经获取了是否上报埋点的状态',
             mlxz_attribution_status: check_result.data.status,
           });
           if (check_result.data.status) {
             utils.gcyLog(`order_id:${this.order_id}`, {
-              mlxz_action_desc: "准备执行上报埋点",
+              mlxz_action_desc: '准备执行上报埋点',
               mlxz_check_status: check_result.data.status,
             });
             this.handleSendEvent();
@@ -2844,22 +2997,22 @@ export default {
     },
     logPageView(val) {
       let channel = utils.getFBChannel();
-      if (!["enjoy03", "panda03"].includes(channel)) {
+      if (!['enjoy03', 'panda03'].includes(channel)) {
         return;
       }
       if (val === 0) {
-        utils.firebaseLogEvent("10001", "-10012", "view_main_report3", "view", {
-          args_name: "view_main_report3",
+        utils.firebaseLogEvent('10001', '-10012', 'view_main_report3', 'view', {
+          args_name: 'view_main_report3',
           channel: utils.getFBChannel(),
         });
       } else if (val > 0) {
-        utils.firebaseLogEvent("10001", "-10013", "view_main_report2", "view", {
-          args_name: "view_main_report2",
+        utils.firebaseLogEvent('10001', '-10013', 'view_main_report2', 'view', {
+          args_name: 'view_main_report2',
           channel: utils.getFBChannel(),
         });
       } else {
-        utils.firebaseLogEvent("10001", "-10014", "view_main_results", "view", {
-          args_name: "view_main_results",
+        utils.firebaseLogEvent('10001', '-10014', 'view_main_results', 'view', {
+          args_name: 'view_main_results',
           channel: utils.getFBChannel(),
         });
       }
@@ -2867,16 +3020,16 @@ export default {
 
     async toWriteInfo(item) {
       const { status, url, order_id } = item;
-      let channle = utils.getFBChannel() === "own" ? "" : utils.getFBChannel();
+      let channle = utils.getFBChannel() === 'own' ? '' : utils.getFBChannel();
 
-      localStorage.setItem("mlxz_reload_page_home", 1);
+      localStorage.setItem('mlxz_reload_page_home', 1);
       location.href = `${location.origin}/${channle}/${url}.html#/${
-        status ? "result" : ""
+        status ? 'result' : ''
       }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
     },
     isShowBannerSort() {
       let channel = utils.getFBChannel();
-      return ["enjoy02", "panda02"].includes(channel) ? false : true;
+      return ['enjoy02', 'panda02'].includes(channel) ? false : true;
     },
     // 事件排序
     async logEventForSort(it) {
@@ -2894,24 +3047,24 @@ export default {
     restartChoose(val) {
       if (val) {
         utils.firebaseLogEvent(
-          "10001",
-          "-10016",
-          "click_main_rechoise2",
-          "click",
+          '10001',
+          '-10016',
+          'click_main_rechoise2',
+          'click',
           {
-            args_name: "click_main_rechoise2",
+            args_name: 'click_main_rechoise2',
             channel: utils.getFBChannel(),
           }
         );
         this.new_sale_modal2 = true;
       } else {
         utils.firebaseLogEvent(
-          "10001",
-          "-10018",
-          "click_main_rechoise3",
-          "click",
+          '10001',
+          '-10018',
+          'click_main_rechoise3',
+          'click',
           {
-            args_name: "click_main_rechoise3",
+            args_name: 'click_main_rechoise3',
             channel: utils.getFBChannel(),
           }
         );
@@ -2920,10 +3073,10 @@ export default {
     },
 
     getSortInitList() {
-      this.sale_list.forEach((it) => {
+      this.sale_list.forEach(it => {
         it.icon_item = banner_enums[it.product_key];
 
-        if (it.product_key === "h5_annual2024") {
+        if (it.product_key === 'h5_annual2024') {
           it.is_big = true;
         }
       });
@@ -2943,15 +3096,15 @@ export default {
         this.getSortInitList();
       }
       this.today_sort_list = res.data;
-      this.sale_list.forEach((item) => {
+      this.sale_list.forEach(item => {
         item.icon_item = banner_enums[item.product_key];
         // 将第一个置为大图
         item.is_big = item.product_key === this.today_sort_list[0];
       });
       // 给banner_list按照排序值赋值
-      this.today_sort_list.forEach((it) => {
+      this.today_sort_list.forEach(it => {
         this.banner_list.push(
-          this.sale_list.find((item) => item.product_key === it)
+          this.sale_list.find(item => item.product_key === it)
         );
       });
       // 将banner_list的第一个放到第三个
@@ -2960,8 +3113,8 @@ export default {
 
     getBannerIcon(item) {
       const { product_key, is_big, icon_item } = item;
-      const is_01 = ["enjoy01", "panda01"].includes(utils.getFBChannel());
-      if (product_key === "h5_emotion2024") {
+      const is_01 = ['enjoy01', 'panda01'].includes(utils.getFBChannel());
+      if (product_key === 'h5_emotion2024') {
         if (is_01) {
           return is_big ? icon_item.new_01.big : icon_item.new_01.small;
         } else {
@@ -3012,8 +3165,8 @@ export default {
 </style>
 
 <style scoped lang="less">
-@import "./../../less/reset.less";
-@import "./../../less/common.less";
+@import './../../less/reset.less';
+@import './../../less/common.less';
 
 .flex-row {
   display: flex;
@@ -3055,7 +3208,7 @@ export default {
       width: 4.16rem;
       height: 0.8rem;
       margin: 0.3rem auto;
-      background-image: url("../../assets/img/3.0/slide.png");
+      background-image: url('../../assets/img/3.0/slide.png');
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
@@ -3096,7 +3249,7 @@ export default {
 }
 .header-box {
   width: 7.5rem;
-  background: url("https://psychicai-static.psychicai.pro/imgs/24040a66e62f96ec4d54814920ed3dcc4125.png")
+  background: url('https://psychicai-static.psychicai.pro/imgs/24040a66e62f96ec4d54814920ed3dcc4125.png')
     no-repeat;
   background-size: 7.5rem 4.22rem;
   position: relative;
@@ -3104,7 +3257,7 @@ export default {
   .buy-list {
     width: 7.1rem;
     height: 0.72rem;
-    background: url("https://psychicai-static.psychicai.pro/imgs/240498b976e40d914444b775fec84707719e.png")
+    background: url('https://psychicai-static.psychicai.pro/imgs/240498b976e40d914444b775fec84707719e.png')
       no-repeat;
     background-size: contain;
     margin-top: 0.2rem;
@@ -3168,7 +3321,7 @@ export default {
     .left {
       width: 2.52rem;
       height: 0.64rem;
-      background: url("../../assets/img/mlxz/index/ce_img_zhekoubg.png")
+      background: url('../../assets/img/mlxz/index/ce_img_zhekoubg.png')
         no-repeat;
       background-size: contain;
       font-size: 0.32rem;
@@ -3220,7 +3373,7 @@ export default {
     .item {
       width: 2.02rem;
       height: 1.3rem;
-      background: url("../../assets/img/mlxz/index/check_small.png") no-repeat;
+      background: url('../../assets/img/mlxz/index/check_small.png') no-repeat;
       background-size: contain;
       margin: 0 0.11rem;
       position: relative;
@@ -3244,7 +3397,7 @@ export default {
     position: relative;
     width: 5.86rem;
     height: 0.96rem;
-    background: url("../../assets/img/mlxz/cesuan_home/mymm_btn.png") no-repeat;
+    background: url('../../assets/img/mlxz/cesuan_home/mymm_btn.png') no-repeat;
     background-size: contain;
     margin: 0.4rem 0.62rem 0.24rem;
     font-family: PingFangSC-Semibold, PingFang SC;
@@ -3422,7 +3575,7 @@ export default {
       }
     }
     .normal-item {
-      background-image: url("../../assets/img/mlxz/cesuan_home/sale_normal_kuang.png");
+      background-image: url('../../assets/img/mlxz/cesuan_home/sale_normal_kuang.png');
     }
     .forbidden-item {
       opacity: 0.6;
@@ -3482,7 +3635,7 @@ export default {
   .normal-item {
     width: 3.46rem;
     height: 4.88rem;
-    background: url("https://psychicai-static.psychicai.pro/imgs/2404a1e37968e812485bbeea12aa4254d485.png")
+    background: url('https://psychicai-static.psychicai.pro/imgs/2404a1e37968e812485bbeea12aa4254d485.png')
       no-repeat;
     background-size: contain;
     margin: 0 0.09rem;
@@ -3518,7 +3671,7 @@ export default {
   .big-item {
     width: 7.1rem;
     height: 3.62rem;
-    background: url("https://psychicai-static.psychicai.pro/imgs/24041489a229d8c545d9bc252e1418de9766.png")
+    background: url('https://psychicai-static.psychicai.pro/imgs/24041489a229d8c545d9bc252e1418de9766.png')
       no-repeat;
     background-size: contain;
     .common-item;
@@ -3578,17 +3731,16 @@ export default {
 
 .discount-box {
   width: 7.5rem;
-  height: 4.08rem;
+  height: 4.88rem;
   margin: 0.4rem auto 0.2rem;
-  // padding-left: 0.2em;
   .sale-item {
     width: 6.54rem !important;
     height: 100%;
     margin-left: 0.2rem;
     .item {
       width: 6.54rem !important;
-      height: 4.08rem !important;
-      background: url("../../assets/img/new_combine/home_img_headcard.png")
+      height: 4.88rem !important;
+      background: url('../../assets/img/new_combine/new_discount_bg.png')
         no-repeat;
       background-size: 100% 100%;
       position: relative;
@@ -3657,7 +3809,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.3rem;
+  // margin-top: 0.8rem;
   position: relative;
   .it {
     width: 1.8rem;
@@ -3691,7 +3843,7 @@ export default {
     }
   }
   .no-it {
-    background: url("../../assets/img/new_combine/home_btn_add.png") no-repeat;
+    background: url('../../assets/img/new_combine/home_btn_add.png') no-repeat;
     background-size: contain;
   }
 }
@@ -3699,7 +3851,7 @@ export default {
 .pick-btn {
   width: 5.86rem;
   height: 0.96rem;
-  background: url("../../assets/img/new_combine/button_big.png") no-repeat;
+  background: url('../../assets/img/new_combine/button_big.png') no-repeat;
   background-size: contain;
   font-weight: 600;
   font-size: 0.32rem;
@@ -3717,13 +3869,13 @@ export default {
 }
 .reset-select {
   width: 100%;
-  height: 0.26rem;
-  font-weight: 400;
-  font-size: 0.26rem;
+  height: 0.28rem;
+  font-weight: 600;
+  font-size: 0.28rem;
   color: #8da5a1;
-  line-height: 0.26rem;
+  line-height: 0.28rem;
   text-align: center;
-  margin-top: 0.2rem;
+  margin-top: 0.24rem;
 }
 .divider-line-left {
   position: absolute;
@@ -3881,11 +4033,11 @@ export default {
       }
     }
     .item-normal {
-      background: url("../../assets/img/new_combine/sale_normal.png") no-repeat;
+      background: url('../../assets/img/new_combine/sale_normal.png') no-repeat;
       background-size: contain;
     }
     .item-checked {
-      background: url("../../assets/img/new_combine/sale_checked.png") no-repeat;
+      background: url('../../assets/img/new_combine/sale_checked.png') no-repeat;
       background-size: contain;
     }
     .opacity-20 {
@@ -4007,5 +4159,10 @@ export default {
 }
 .discount-tag {
   animation: scaleNewBtn 0.6s infinite ease-in-out alternate;
+}
+
+.empty-card {
+  width: 100%;
+  height: 0.5rem;
 }
 </style>
