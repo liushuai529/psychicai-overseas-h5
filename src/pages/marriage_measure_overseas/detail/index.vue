@@ -351,7 +351,7 @@ export default {
         this.mbirth = `${this.$t('nongli-label')} ${myear}年${mday.nmonthstr}${
           mday.ndatestr
         }`;
-        this.mingge_desc.push(`${utils.getShortStr(this.mname, 4)}，男，${myear}年${mday.nmonthstr}月${mday.ndatestr}生人，`)
+        this.mingge_desc.push(`${utils.getShortStr(this.mname, 4)}，男，${myear}年${mday.nmonthstr}${mday.ndatestr}生人，`)
       } else {
         this.mbirth = `${this.$t(
           'gongli-label'
@@ -364,7 +364,7 @@ export default {
         this.fbirth = `${this.$t('nongli-label')} ${fyear}年${fday.nmonthstr}${
           fday.ndatestr
         }`;
-        this.mingge_desc.push(`${utils.getShortStr(this.fname, 4)}，女，${fyear}年${fday.nmonthstr}月${fday.ndatestr}生人`)
+        this.mingge_desc.push(`${utils.getShortStr(this.fname, 4)}，女，${fyear}年${fday.nmonthstr}${fday.ndatestr}生人`)
       } else {
         this.fbirth = `${this.$t(
           'gongli-label'
