@@ -1061,7 +1061,7 @@ export default {
   width: 5.19rem;
   height: 1.03rem;
   bottom: 1.4rem;
-  z-index: 2;
+  z-index: 99;
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }
 .cn-bg {

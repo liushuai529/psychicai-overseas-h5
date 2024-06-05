@@ -437,7 +437,7 @@ export default {
 .fix-box {
   position: fixed !important;
   bottom: 1.2rem;
-  z-index: 2;
+  z-index: 99;
 }
 
 .card-bg {
