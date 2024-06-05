@@ -268,7 +268,7 @@ export default {
     window.scrollTo(0, 0);
     this.$nextTick(() => {
       //排除渠道3
-      if(!is_show_combination) return
+      if(!this.is_show_combination) return
       // 滚动到指定元素
       const element = document.getElementById('title-pay');
       if (element) {
