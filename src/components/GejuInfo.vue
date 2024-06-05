@@ -63,20 +63,26 @@
     background-color: #FBF8ED;
     border: 6px solid #D19A47;
 
-    &>.header_img {
+    .header_img {
         margin-top: -0.44rem;
     }
 
-    &>.nav_item {
+    .nav_item {
         .nav_header {
             color: #E13D3C;
         }
-
         .nav_desc {
-            color: #5F170B;
+            color: #6F3719;
+        }
+        .nav_line {
+            width: 100%;
+            height: 0.02rem;
+            background-color: #D19A47 ;
+            transform:scaleY(0.5)
         }
     }
 }
+
 </style>
 <template>
     <div :id="product_key !== 'h5_emotion2024' ? 'mode_middle' : ''" class="main">
@@ -120,6 +126,9 @@
                 <div class="nav_desc" v-html="item.cause">
 
                 </div>
+            </div>
+            <div class="nav_item" v-if="(product_key !== 'h5_emotion2024') && (idx !== renderData.length - 1)">
+                <div class="nav_line"></div>
             </div>
         </div>
     </div>
