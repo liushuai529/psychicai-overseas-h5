@@ -1,5 +1,5 @@
 <template>
-  <div class="group-purchase">
+  <div class="group-purchase" v-if="h5_combo2_attach">
     <div class="product-container">
       <div
         :class="[
@@ -163,8 +163,6 @@ import new_ganqing_small from "../assets/img/emotion_v2/new/banner_ganqing_fang.
 
 export default {
   props: {
-  
-
     product_key: {
       type: String,
       default: "h5_marriage",
@@ -220,12 +218,15 @@ export default {
 
   },
   mounted() {
-    setTimeout(() => {
-      this.$emit('get_combine_product_ids', this.getCombineProductIds());
-    }, 1500);
+    
   },
   watch: {
-   
+    h5_combo2_attach(val) {
+      if(val) {
+        console.warn('val', val)
+        this.$emit('get_combine_product_ids', this.getCombineProductIds());
+      }
+    }
   },
   components: {
     CountDown,
