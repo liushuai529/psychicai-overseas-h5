@@ -4,7 +4,7 @@
     <CalculateBar
       v-if="comboAttachData && is_show_combination"
       :is_home="false"
-      :product_key=comboAttachData.product_key
+      :product_key="comboAttachData.product_key"
       :call_back="startCalculateClick"
     />
     <div
@@ -16,7 +16,12 @@
       }"
     >
       <header-notice v-if="has_pay"></header-notice>
-      <div v-if="!is_channel_01" @click="backHome()" :class="['back-box']" :style="getStyle">
+      <div
+        v-if="!is_channel_01"
+        @click="backHome()"
+        :class="['back-box']"
+        :style="getStyle"
+      >
         <img
           src="../../../assets/img/common/baogao_icon_home.png"
           class="left"
@@ -271,7 +276,6 @@ tStatistic.init({
   channel: utils.getFBChannel(),
 });
 
-
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
 const tipsArr5 = {
@@ -290,7 +294,7 @@ export default {
     FixedOrder,
     NewFooter,
     NavigationBar,
-    CalculateBar
+    CalculateBar,
   },
   data() {
     return {
@@ -356,20 +360,20 @@ export default {
       local_time: 0,
       last_title: '',
       timer: null,
-      comboAttachData: null,//套餐未使用报告信息
+      comboAttachData: null, //套餐未使用报告信息
     };
   },
   computed: {
     getStyle() {
-      if(this.comboAttachData && !this.has_pay) {
-        return 'top: 0.5rem'
-      } else if(this.comboAttachData && this.has_pay) {
-        return 'top: 0.7rem'
+      if (this.comboAttachData && !this.has_pay) {
+        return 'top: 0.5rem';
+      } else if (this.comboAttachData && this.has_pay) {
+        return 'top: 0.7rem';
       }
     },
     //套餐支付显示逻辑
     is_show_combination() {
-      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+      return !['enjoy03', 'panda03'].includes(utils.getFBChannel());
     },
     productList() {
       return this.$store.state.common.productList;
@@ -447,8 +451,8 @@ export default {
   },
   created() {
     this.showComboAttach();
-    document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible") {
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
         this.showComboAttach();
       }
     });
@@ -575,25 +579,35 @@ export default {
   methods: {
     //顶部引导横幅，开始测算
     async startCalculateClick() {
-        //顶部套餐报告与当前报告不同
-        // if(this.comboAttachData.product_key !== this.product_key) {
-        //   location.href = `${path_enums[product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${this.comboAttachData.product_key}`;
-        // } else {
-          
-        // }
-        location.href = `${path_enums[this.comboAttachData.product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${this.comboAttachData.product_key}`;
+      //顶部套餐报告与当前报告不同
+      // if(this.comboAttachData.product_key !== this.product_key) {
+      //   location.href = `${path_enums[product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${this.comboAttachData.product_key}`;
+      // } else {
+
+      // }
+      location.href = `${
+        path_enums[this.comboAttachData.product_key]
+      }.html#/?has_pay=SUCCESS&order_id=${
+        this.comboAttachData.order_id
+      }&product_key=${this.comboAttachData.product_key}`;
     },
     //请求接口，是否展示引导标识
     async showComboAttach() {
       const res = await getComboAttachAPI();
       if (res.status !== 1000) return;
-      if(res.data) {
+      if (res.data) {
         //组合套餐中未测算的报告
-        let sub_orders =  res.data.combine.sub_orders.find(item=>!item.extra_ce_suan);
+        let sub_orders = res.data.combine.sub_orders.find(
+          item => !item.extra_ce_suan
+        );
         //获取到未测算的报告信息
-        this.comboAttachData = {product_id: sub_orders.product_id, order_id: sub_orders.order_id, product_key: sub_orders.product_key};
+        this.comboAttachData = {
+          product_id: sub_orders.product_id,
+          order_id: sub_orders.order_id,
+          product_key: sub_orders.product_key,
+        };
       } else {
-        this.comboAttachData = null
+        this.comboAttachData = null;
       }
     },
     // 获取订单ID
@@ -1083,8 +1097,15 @@ export default {
     },
     // api订单下单
     async checkOrder() {
-      const { ext, pay_method, product_key, product_id, payment } =
-        this.last_order;
+      const {
+        ext,
+        pay_method,
+        product_key,
+        product_id,
+        payment,
+        trade_pay_type,
+        trade_target_org,
+      } = this.last_order;
       const { main_id, click_id, view_id, click_name, view_name } =
         maidianEnum[product_key];
       utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
@@ -1100,6 +1121,8 @@ export default {
         product_id: product_id,
         platform: 'WEB',
         extra_ce_suan: ext,
+        trade_pay_type,
+        trade_target_org,
         callback_url: `${location.origin}/${utils.getFBChannel()}/${
           path_enums[product_key]
         }.html#/result?path=${

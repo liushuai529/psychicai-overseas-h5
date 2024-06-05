@@ -875,8 +875,15 @@ export default {
 
     // api订单下单
     async checkOrder() {
-      const { ext, pay_method, product_key, product_id, payment } =
-        this.last_order;
+      const {
+        ext,
+        pay_method,
+        product_key,
+        product_id,
+        payment,
+        trade_pay_type,
+        trade_target_org,
+      } = this.last_order;
       const { main_id, click_id, view_id, click_name, view_name } =
         maidianEnum[product_key];
       utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
@@ -892,6 +899,8 @@ export default {
         product_id: product_id,
         platform: 'WEB',
         extra_ce_suan: ext,
+        trade_pay_type,
+        trade_target_org,
         callback_url: `${location.origin}/${utils.getFBChannel()}/${
           path_enums[product_key]
         }.html#/result?path=${
