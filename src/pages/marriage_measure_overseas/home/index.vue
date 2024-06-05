@@ -9,7 +9,7 @@
   <div>
     <NavigationBar v-if="is_channel_01" />
     <CalculateBar
-      v-if="comboAttachData && is_show_combination"
+      v-if="comboAttachData && is_show_combination && is_show_current_combination"
       :is_home="false"
       :product_key=comboAttachData.product_key
       :call_back="startCalculateClick"
@@ -485,6 +485,10 @@ export default {
     //套餐支付显示逻辑
     is_show_combination() {
       return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+    },
+     //当前报告类型与引导类型不同，则显示
+     is_show_current_combination() {
+      return this.comboAttachData.product_key !== this.product_key;
     },
     user_number() {
       return this.$store.state.year_user;
