@@ -58,6 +58,7 @@
       </div>
     </div>
     <img
+      id="title-pay"
       class="title-pay"
       src="../../../assets/img/bzhh_v2/img_title.png"
       alt=""
@@ -258,9 +259,22 @@ export default {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
+    //套餐支付显示逻辑
+    is_show_combination() {
+      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+    },
   },
   mounted() {
     window.scrollTo(0, 0);
+    this.$nextTick(() => {
+      //排除渠道3
+      if(!is_show_combination) return
+      // 滚动到指定元素
+      const element = document.getElementById('title-pay');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
 
     let btn = document.getElementById('info-btn');
     let self = this;

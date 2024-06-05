@@ -1136,7 +1136,7 @@ export default {
       local_time: 0,
       last_title: "",
       timer: null,
-      comboAttachData: null,//套餐支付引导标识
+      comboAttachData: null,//套餐未使用报告信息
     };
   },
   computed: {
@@ -1798,18 +1798,18 @@ export default {
       }
       this.getSelectTagList();
       this.getPayedOrderList();
+      this.showComboAttach();
       this.getLocalChecked("three_list", "mlxz_web_select_list");
       this.getLocalChecked("two_list", "mlxz_web_select_list_two");
       this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
     });
-  },
-  async mounted() {
-    this.showComboAttach();
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") {
         this.showComboAttach();
       }
     });
+  },
+  async mounted() {
     if (utils.isProd()) {
       try {
         fbq("trackCustom", "CustomChannel", {
@@ -1866,20 +1866,17 @@ export default {
     getProductions,
     //开始测算
     async startCalculateClick() {
-      let same_ = this.all_list.find(
-          (it) => it.product_id === this.comboAttachData.product_id
-        );
-       let product_key = same_.product_key;
-       location.href = `${path_enums[product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${product_key}`;
+      location.href = `${path_enums[product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${this.comboAttachData.product_key}`;
     },
     //请求接口，是否展示引导标识
     async showComboAttach() {
       const res = await getComboAttachAPI();
       if (res.status !== 1000) return;
       if(res.data) {
+        //组合套餐中未测算的报告
         let sub_orders =  res.data.combine.sub_orders.find(item=>!item.extra_ce_suan);
-        //获取到未测算的报告信息，可以与当前页面报告类型比较
-        this.comboAttachData = {product_id: sub_orders.product_id, order_id: sub_orders.order_id};
+        //获取到未测算的报告信息
+        this.comboAttachData = {product_id: sub_orders.product_id, order_id: sub_orders.order_id, product_key: sub_orders.product_key};
       } else {
         this.comboAttachData = null
       }

@@ -191,7 +191,7 @@ export default {
   },
   data() {
     return {
-      selectIndex: 0,
+      selectIndex: 1,
       is_show_shandong: false,
       is_show_daoqi: false,
       time: 0,

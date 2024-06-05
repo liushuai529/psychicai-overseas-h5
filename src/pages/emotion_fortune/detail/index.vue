@@ -37,9 +37,8 @@
         :change_color="true"
       ></BaziTable>
     </div>
-    <div :class="['method-box']">
-      <img class="method-title-img" :src="is_cn? img_zhifu_jian: img_zhifu_fan"/>
-    
+    <div :class="['method-box', !is_show_combination? 'method-height': null]">
+      <img id="method-title-img" class="method-title-img" :src="is_cn? img_zhifu_jian: img_zhifu_fan"/>
       <PayDetail
         className="pay-method"
         ref="payDetail"
@@ -245,6 +244,15 @@ export default {
 
   mounted() {
     window.scrollTo(0, 0);
+    this.$nextTick(() => {
+      //排除渠道3
+      if(!is_show_combination) return
+      // 滚动到指定元素
+      const element = document.getElementById('method-title-img');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
     let self = this;
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
@@ -404,6 +412,9 @@ export default {
     height: 0.93rem;
     margin-top: -0.13rem;
   }
+}
+.method-height {
+  height: 7.71rem;
 }
 .detail {
   display: flex;
