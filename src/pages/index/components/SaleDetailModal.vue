@@ -27,6 +27,9 @@
       line-height: 0.36rem;
     }
     .center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       font-family: PingFangSC, PingFang SC;
       font-weight: 600;
       font-size: 0.36rem;
