@@ -111,7 +111,7 @@ export default {
   },
   computed: {
     channel03() {
-      return utils.getFBChannel().indexOf('99') > -1;
+      return utils.getFBChannel().indexOf('03') > -1;
     },
   },
   created() {},
