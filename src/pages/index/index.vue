@@ -1,47 +1,20 @@
 <template>
   <div :class="['container', fix_pop ? 'fix-pop' : '']">
-    <img
-      @click="
-        jumpUrl('history_order', '-10010', 'click_main_history', 'dvtjq2')
-      "
-      class="history-order"
-      :src="is_cn ? cn_order_btn : tw_order_btn"
-      alt=""
-    />
+    <img @click="
+      jumpUrl('history_order', '-10010', 'click_main_history', 'dvtjq2')
+      " class="history-order" :src="is_cn ? cn_order_btn : tw_order_btn" alt="" />
     <div class="header-box">
       <mt-swipe :auto="3000" :showIndicators="true" class="swiper-contain">
-        <mt-swipe-item
-          v-for="(item, k) in header_list"
-          :key="'swiper' + k"
-          class="swiper-item"
-        >
-          <img
-            @click="handleReport(item, 5)"
-            :src="is_cn ? item.cn_icon : item.tw_icon"
-            alt=""
-          />
+        <mt-swipe-item v-for="(item, k) in header_list" :key="'swiper' + k" class="swiper-item">
+          <img @click="handleReport(item, 5)" :src="is_cn ? item.cn_icon : item.tw_icon" alt="" />
         </mt-swipe-item>
       </mt-swipe>
       <!-- 用户已购买数据走马灯 -->
       <div @click="jumpPage(mock_report_list[cur_index].id)" class="buy-list">
-        <img
-          class="laba"
-          src="https://psychicai-static.psychicai.pro/imgs/2404148caf3a4f6e4194ba7c5431e81fa82a.png"
-          alt=""
-        />
-        <van-swipe
-          class="swiper-buy"
-          :autoplay="2000"
-          :show-indicators="false"
-          vertical
-          @change="getReportItem"
-        >
-          <van-swipe-item
-            ref="swiper"
-            class="swiper-slide"
-            v-for="(it, j) in buy_list"
-            :key="j"
-          >
+        <img class="laba" src="https://psychicai-static.psychicai.pro/imgs/2404148caf3a4f6e4194ba7c5431e81fa82a.png"
+          alt="" />
+        <van-swipe class="swiper-buy" :autoplay="2000" :show-indicators="false" vertical @change="getReportItem">
+          <van-swipe-item ref="swiper" class="swiper-slide" v-for="(it, j) in buy_list" :key="j">
             <div class="flex-row">
               <span>{{ it }}</span>
               <span class="link-url">{{ mock_report_list[j].name }}</span>
@@ -49,68 +22,38 @@
             </div>
           </van-swipe-item>
         </van-swipe>
-        <img
-          class="arrow"
-          src="https://psychicai-static.psychicai.pro/imgs/2404fe7affcbeb894bd99695760f5bd315d1.png"
-          alt=""
-        />
+        <img class="arrow" src="https://psychicai-static.psychicai.pro/imgs/2404fe7affcbeb894bd99695760f5bd315d1.png"
+          alt="" />
       </div>
     </div>
-    <CalculateBar
-      v-if="comboAttachData && is_show_combination"
-      style="margin-top: 0.1rem"
-      :is_home="true"
-      :product_key="comboAttachData.product_key"
-      :call_back="startCalculateClick"
-    />
+    <CalculateBar v-if="comboAttachData && is_show_combination" style="margin-top: 0.1rem" :is_home="true"
+      :product_key="comboAttachData.product_key" :call_back="startCalculateClick" />
     <!-- 新版多买多折扣 -->
-    <van-swipe
-      v-if="is_show_combine"
-      :loop="false"
-      :show-indicators="false"
-      :stop-propagation="false"
-      class="discount-box"
-      @change="getCombineIndex"
-    >
-      <div
-        :style="{
-          height: '100%',
-          width: scrollStyle,
-          transition: 'width 0.3s',
-        }"
-      ></div>
-      <van-swipe-item
-        v-if="payed_order_three_list.length"
-        :class="{
-          'sale-item': true,
-          // 'ml-100': combine_index === 0,
-          // 'ml-170': combine_index === 1,
-        }"
-      >
+    <van-swipe v-if="is_show_combine" :loop="false" :show-indicators="false" :stop-propagation="false"
+      class="discount-box" @change="getCombineIndex">
+      <div :style="{
+        height: '100%',
+        width: scrollStyle,
+        transition: 'width 0.3s',
+      }"></div>
+      <van-swipe-item v-if="payed_order_three_list.length" :class="{
+        'sale-item': true,
+        // 'ml-100': combine_index === 0,
+        // 'ml-170': combine_index === 1,
+      }">
         <div class="item">
           <div class="order-title">已解锁报告，快来查看！</div>
 
           <!-- 新版 商品选择 -->
-          <div
-            class="three-list"
-            :style="{
-              'margin-top': payed_order_three_list.length
-                ? '0.34rem'
-                : '0.96rem',
-            }"
-          >
-            <div
-              v-for="(it, k) in payed_order_three_list.length
-                ? payed_order_three_list
-                : ['', '', '']"
-              :key="'three' + k"
-              :class="['it', it.product_key ? '' : 'no-it', `it${k + 1}`]"
-            >
-              <img
-                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
-                class="check-icon"
-                alt=""
-              />
+          <div class="three-list" :style="{
+            'margin-top': payed_order_three_list.length
+              ? '0.34rem'
+              : '0.96rem',
+          }">
+            <div v-for="(it, k) in payed_order_three_list.length
+              ? payed_order_three_list
+              : ['', '', '']" :key="'three' + k" :class="['it', it.product_key ? '' : 'no-it', `it${k + 1}`]">
+              <img :src="!is_cn ? it.cn_check_icon : it.tw_check_icon" class="check-icon" alt="" />
               <div v-if="payed_order_three_list.length" class="tag get-tag">
                 已解锁
               </div>
@@ -134,19 +77,14 @@
         </div>
       </van-swipe-item>
 
-      <van-swipe-item
-        :class="{
-          'sale-item': true,
-          // 'ml-100': !payed_order_three_list.length && combine_index !== 0,
-        }"
-      >
+      <van-swipe-item :class="{
+        'sale-item': true,
+        // 'ml-100': !payed_order_three_list.length && combine_index !== 0,
+      }">
         <div class="item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
-            <div
-              v-if="combine_info.price && is_show_reechoes_3"
-              class="new-price"
-            >
+            <div v-if="combine_info.price && is_show_reechoes_3" class="new-price">
               <span class="one">{{
                 combine_info.unit
                   ? `${combine_info.unit + combine_info.origin_price_str}`
@@ -159,43 +97,23 @@
                   : 'RM-'
               }}</span>
             </div>
-            <img
-              v-else
-              src="../../assets/img/new_combine/home_tag_58_big.png"
-              class="zhekou-icon discount-tag"
-              alt=""
-            />
+            <img v-else src="../../assets/img/new_combine/home_tag_58_big.png" class="zhekou-icon discount-tag"
+              alt="" />
           </div>
 
           <!-- 新版 商品选择 -->
-          <div
-            :style="{
-              'margin-top': !channel03
-                ? '.6rem'
-                : is_show_reechoes_3
+          <div :style="{
+            'margin-top': !channel03
+              ? '.6rem'
+              : is_show_reechoes_3
                 ? '.3rem'
                 : '.6rem',
-            }"
-            class="three-list"
-          >
-            <div
-              @click="showModal()"
-              v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
-              :key="'three' + k"
-              :class="['it']"
-            >
-              <img
-                v-if="it.product_key"
-                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
-                class="check-icon"
-                alt=""
-              />
-              <img
-                v-else
-                src="../../assets/img/new_combine/home_btn_add.png"
-                class="check-icon"
-                alt=""
-              />
+          }" class="three-list">
+            <div @click="showModal()" v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
+              :key="'three' + k" :class="['it']">
+              <img v-if="it.product_key" :src="!is_cn ? it.cn_check_icon : it.tw_check_icon" class="check-icon"
+                alt="" />
+              <img v-else src="../../assets/img/new_combine/home_btn_add.png" class="check-icon" alt="" />
               <div v-if="three_list.length && !channel03" class="tag">
                 待解锁
               </div>
@@ -212,48 +130,27 @@
           </div>
           <!-- 倒计时 -->
           <div v-if="!channel03 && is_show_reechoes_3" class="empty-card"></div>
-          <TimeDown
-            v-if="is_show_reechoes_3 && channel03"
-            ref="timeDown3"
-            :time_key="3"
-            :count_time="time_3"
-            :list="three_list"
-          />
-          <div
-            @click="changeSale(0)"
-            class="pick-btn"
-            :style="{ 'margin-top': !is_show_reechoes_3 ? '0.8rem' : '0.1rem' }"
-          >
+          <TimeDown v-if="is_show_reechoes_3 && channel03" ref="timeDown3" :time_key="3" :count_time="time_3"
+            :list="three_list" />
+          <div @click="changeSale(0)" class="pick-btn"
+            :style="{ 'margin-top': !is_show_reechoes_3 ? '0.8rem' : '0.1rem' }">
             {{ !is_show_reechoes_3 ? '选择组合' : '领取我的专属优惠' }}
-            <img
-              v-if="is_show_reechoes_3"
-              src="../../assets/img/new_combine/home_tag_58_big.png"
-              class="absolute-zhe discount-tag"
-              alt=""
-            />
+            <img v-if="is_show_reechoes_3" src="../../assets/img/new_combine/home_tag_58_big.png"
+              class="absolute-zhe discount-tag" alt="" />
           </div>
-          <div
-            v-show="is_show_reechoes_3"
-            class="reset-select"
-            @click="restartChoose()"
-          >
+          <div v-show="is_show_reechoes_3" class="reset-select" @click="restartChoose()">
             重新选择
           </div>
         </div>
       </van-swipe-item>
       <!-- 两项选择 -->
-      <van-swipe-item
-        :class="{
-          'sale-item': true,
-        }"
-      >
+      <van-swipe-item :class="{
+        'sale-item': true,
+      }">
         <div class="item" id="card-item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
-            <div
-              v-if="combine_info2.price && is_show_reechoes_2"
-              class="new-price"
-            >
+            <div v-if="combine_info2.price && is_show_reechoes_2" class="new-price">
               <span class="one">{{
                 combine_info2.unit
                   ? `${combine_info2.unit + combine_info2.origin_price_str}`
@@ -266,43 +163,23 @@
                   : 'RM-'
               }}</span>
             </div>
-            <img
-              v-else
-              src="../../assets/img/new_combine/home_tag_68_big.png"
-              class="zhekou-icon discount-tag"
-              alt=""
-            />
+            <img v-else src="../../assets/img/new_combine/home_tag_68_big.png" class="zhekou-icon discount-tag"
+              alt="" />
           </div>
 
           <!-- 新版 商品选择 -->
-          <div
-            :style="{
-              'margin-top': !channel03
-                ? '.6rem'
-                : is_show_reechoes_2
+          <div :style="{
+            'margin-top': !channel03
+              ? '.6rem'
+              : is_show_reechoes_2
                 ? '.3rem'
                 : '.6rem',
-            }"
-            class="three-list"
-          >
-            <div
-              @click="showModal2()"
-              v-for="(it, k) in two_list.length ? two_list : ['', '']"
-              :key="'three' + k"
-              :class="['it']"
-            >
-              <img
-                v-if="it.product_key"
-                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
-                class="check-icon"
-                alt=""
-              />
-              <img
-                v-else
-                src="../../assets/img/new_combine/home_btn_add.png"
-                class="check-icon"
-                alt=""
-              />
+          }" class="three-list">
+            <div @click="showModal2()" v-for="(it, k) in two_list.length ? two_list : ['', '']" :key="'three' + k"
+              :class="['it']">
+              <img v-if="it.product_key" :src="!is_cn ? it.cn_check_icon : it.tw_check_icon" class="check-icon"
+                alt="" />
+              <img v-else src="../../assets/img/new_combine/home_btn_add.png" class="check-icon" alt="" />
               <div v-if="two_list.length && !channel03" class="tag">待解锁</div>
             </div>
             <div class="divider-line-left">
@@ -317,31 +194,15 @@
           </div>
           <div v-if="!channel03 && is_show_reechoes_2" class="empty-card"></div>
 
-          <TimeDown
-            v-if="is_show_reechoes_2 && channel03"
-            ref="timeDown2"
-            :time_key="2"
-            :count_time="time_2"
-            :list="two_list"
-          />
-          <div
-            @click="changeSale(2)"
-            class="pick-btn"
-            :style="{ 'margin-top': is_show_reechoes_2 ? '0.1rem' : '0.8rem' }"
-          >
+          <TimeDown v-if="is_show_reechoes_2 && channel03" ref="timeDown2" :time_key="2" :count_time="time_2"
+            :list="two_list" />
+          <div @click="changeSale(2)" class="pick-btn"
+            :style="{ 'margin-top': is_show_reechoes_2 ? '0.1rem' : '0.8rem' }">
             {{ !is_show_reechoes_2 ? '选择组合' : '领取我的专属优惠' }}
-            <img
-              v-if="is_show_reechoes_2"
-              src="../../assets/img/new_combine/home_tag_68_big.png"
-              class="absolute-zhe discount-tag"
-              alt=""
-            />
+            <img v-if="is_show_reechoes_2" src="../../assets/img/new_combine/home_tag_68_big.png"
+              class="absolute-zhe discount-tag" alt="" />
           </div>
-          <div
-            v-show="is_show_reechoes_2"
-            class="reset-select"
-            @click="restartChoose(2)"
-          >
+          <div v-show="is_show_reechoes_2" class="reset-select" @click="restartChoose(2)">
             重新选择
           </div>
         </div>
@@ -350,21 +211,16 @@
 
     <!-- banner位 -->
     <div class="report-container">
-      <div
-        v-for="(item, index) in banner_list"
-        :key="index"
-        @click="
-          jumpUrl(
-            item.url,
-            item.e_id,
-            item.e_name,
-            item.ad_e,
-            item.report_id,
-            item.product_key
-          )
-        "
-        :class="[item.is_big ? 'big-item' : 'normal-item']"
-      >
+      <div v-for="(item, index) in banner_list" :key="index" @click="
+        jumpUrl(
+          item.url,
+          item.e_id,
+          item.e_name,
+          item.ad_e,
+          item.report_id,
+          item.product_key
+        )
+        " :class="[item.is_big ? 'big-item' : 'normal-item']">
         <!-- // item.is_big
             //   ? is_cn
             //     ? item.icon_item.big.cn
@@ -372,11 +228,7 @@
             //   : is_cn
             //   ? item.icon_item.small.cn
             //   : item.icon_item.small.tw -->
-        <img
-          :src="getBannerIcon(item)"
-          :class="[item.is_big ? 'big-icon' : 'normal-icon']"
-          alt=""
-        />
+        <img :src="getBannerIcon(item)" :class="[item.is_big ? 'big-icon' : 'normal-icon']" alt="" />
         <div v-if="item.is_big" class="big-box">
           <div class="left">
             <div style="-webkit-box-orient: vertical" class="text">
@@ -389,11 +241,7 @@
               </div>
             </div>
           </div>
-          <img
-            class="right-btn"
-            :src="is_cn ? cn_right_pay : tw_right_pay"
-            alt=""
-          />
+          <img class="right-btn" :src="is_cn ? cn_right_pay : tw_right_pay" alt="" />
         </div>
         <div v-else class="normal-box">
           <div style="-webkit-box-orient: vertical" class="text">
@@ -424,35 +272,17 @@
         </div>
       </div>
       <div class="sale-list">
-        <div
-          @click="showPop()"
-          v-for="(it, k) in checked_list"
-          :key="'sale' + k"
-          class="item"
-        >
+        <div @click="showPop()" v-for="(it, k) in checked_list" :key="'sale' + k" class="item">
           <img v-if="it.check_icon" :src="it.check_icon" class="icon" alt="" />
-          <img
-            v-if="!it.check_icon"
-            src="../../assets/img/mlxz/index/ce_btn_jia.png"
-            class="add-icon"
-            alt=""
-          />
+          <img v-if="!it.check_icon" src="../../assets/img/mlxz/index/ce_btn_jia.png" class="add-icon" alt="" />
         </div>
       </div>
       <div @click="payModal()" class="lock-btn">
         {{ $t('order-btn') }}
-        <img
-          v-show="zhekou === 2"
-          class="btn-icon"
-          src="../../assets/img/mlxz/cold_start/cesuan_img_tag2@3x.png"
-          alt=""
-        />
-        <img
-          v-show="zhekou === 1"
-          class="btn-icon"
-          src="../../assets/img/mlxz/cold_start/cesuan_img_tag@3x.png"
-          alt=""
-        />
+        <img v-show="zhekou === 2" class="btn-icon" src="../../assets/img/mlxz/cold_start/cesuan_img_tag2@3x.png"
+          alt="" />
+        <img v-show="zhekou === 1" class="btn-icon" src="../../assets/img/mlxz/cold_start/cesuan_img_tag@3x.png"
+          alt="" />
       </div>
       <div @click="showPop()" class="change-btn">
         {{ $t('change-btn') }}
@@ -460,75 +290,35 @@
     </div>
     <!-- 爆款推荐 -->
     <div class="hot-product hidden">
-      <img
-        class="title"
-        src="../../assets/img/mlxz/index/ce_img_bao.png"
-        alt=""
-      />
+      <img class="title" src="../../assets/img/mlxz/index/ce_img_bao.png" alt="" />
       <div class="product-list">
-        <img
-          v-for="(it, k) in recommend_list"
-          :key="'reco' + k"
-          class="item"
-          :src="it.icon"
-          @click="handleReport(it, 2)"
-          alt=""
-        />
+        <img v-for="(it, k) in recommend_list" :key="'reco' + k" class="item" :src="it.icon"
+          @click="handleReport(it, 2)" alt="" />
       </div>
     </div>
 
     <!-- 广告位 -->
     <div class="ad-list hidden">
-      <img
-        v-for="(ad, k) in ad_list"
-        @click="handleReport(ad, 3)"
-        :key="'ad' + k"
-        class="item"
-        :src="ad.icon"
-      />
+      <img v-for="(ad, k) in ad_list" @click="handleReport(ad, 3)" :key="'ad' + k" class="item" :src="ad.icon" />
     </div>
 
     <!-- 选择商品弹窗 -->
-    <mt-popup
-      v-model="sale_visible"
-      :closeOnClickModal="false"
-      position="bottom"
-    >
+    <mt-popup v-model="sale_visible" :closeOnClickModal="false" position="bottom">
       <div class="pop-box">
         <div class="pop-header">
           <div class="left">
             {{ $t('get-three') }}
           </div>
-          <img
-            @click="closeSalePop()"
-            src="../../assets/img/mlxz/cesuan_home/icon_close2.png"
-            class="close"
-            alt=""
-          />
+          <img @click="closeSalePop()" src="../../assets/img/mlxz/cesuan_home/icon_close2.png" class="close" alt="" />
         </div>
         <div class="pop-content">
-          <div
-            v-for="(it, k) in pop_list"
-            :key="'sale-' + k"
-            @click="chooseSale(it, k)"
-            :class="{
-              item: true,
-              'normal-item': true,
-              'forbidden-item': !can_choose && !it.checked,
-            }"
-          >
-            <img
-              v-if="it.checked"
-              class="check-icon"
-              src="../../assets/img/mlxz/index/checked_icon.png"
-              alt=""
-            />
-            <img
-              v-else
-              class="check-icon"
-              src="../../assets/img/mlxz/index/no_check_icon.png"
-              alt=""
-            />
+          <div v-for="(it, k) in pop_list" :key="'sale-' + k" @click="chooseSale(it, k)" :class="{
+            item: true,
+            'normal-item': true,
+            'forbidden-item': !can_choose && !it.checked,
+          }">
+            <img v-if="it.checked" class="check-icon" src="../../assets/img/mlxz/index/checked_icon.png" alt="" />
+            <img v-else class="check-icon" src="../../assets/img/mlxz/index/no_check_icon.png" alt="" />
             <img class="top-icon" :src="it.icon" alt="" />
 
             <div :id="`text-${k}`" v-if="measureProduct[k]" class="bottom-box">
@@ -538,89 +328,49 @@
         </div>
         <!-- 确认 -->
 
-        <div
-          :class="{
-            'confirm-box': true,
-            'disabled-confirm': !can_submit ? true : false,
-          }"
-          @click="handleConfirm()"
-        >
+        <div :class="{
+          'confirm-box': true,
+          'disabled-confirm': !can_submit ? true : false,
+        }" @click="handleConfirm()">
           {{ $t('confirm-btn') }}
         </div>
       </div>
     </mt-popup>
     <!-- 调起支付页-->
-    <PayPopup
-      :visible="pay_visible"
-      :is_combine="true"
-      :total_money="zhekouList[zhekou].price"
-      :checked_list="checked_list"
-      :all_list="all_list"
-      :combine_ids="combine_ids"
-      @update-visible="pay_visible = false"
-    ></PayPopup>
+    <PayPopup :visible="pay_visible" :is_combine="true" :total_money="zhekouList[zhekou].price"
+      :checked_list="checked_list" :all_list="all_list" :combine_ids="combine_ids"
+      @update-visible="pay_visible = false"></PayPopup>
     <!-- 支付成功弹窗 -->
-    <PopResult
-      :visible="pay_result_visible"
-      :result_list="result_list"
-      :sub_orders="sub_orders"
-      :pop_list="pop_list"
-      @handleReport="hasPayReport"
-      @update-visible="pay_result_visible = false"
-    ></PopResult>
+    <PopResult :visible="pay_result_visible" :result_list="result_list" :sub_orders="sub_orders" :pop_list="pop_list"
+      @handleReport="hasPayReport" @update-visible="pay_result_visible = false"></PopResult>
 
     <!-- 新版选择弹窗 -->
-    <mt-popup
-      v-model="new_sale_modal"
-      :closeOnClickModal="false"
-      position="bottom"
-    >
+    <mt-popup v-model="new_sale_modal" :closeOnClickModal="false" position="bottom">
       <div class="modal-box">
         <div class="title-box">
           <div @click="new_sale_modal = false" class="left">取消</div>
           <div class="center">任选三项享特惠</div>
-          <div
-            v-if="confirm_btn_3"
-            @click="submitPopList()"
-            class="right-common right-check"
-          >
+          <div v-if="confirm_btn_3" @click="submitPopList()" class="right-common right-check">
             <div class="btn">确定</div>
           </div>
-          <div
-            v-else
-            @click="ToastSubmit('三')"
-            class="right-common disable-right"
-          >
+          <div v-else @click="ToastSubmit('三')" class="right-common disable-right">
             <div class="btn">确定</div>
           </div>
         </div>
 
         <div class="modal-list">
-          <div
-            v-for="(item, k) in new_pop_list"
-            @click="chooseNewSale(item, k)"
-            :key="k"
-            :class="{
-              item: true,
-              'item-checked': item.checked,
-              'opacity-20': pick_list.length >= 3 && !item.checked,
-              'item-normal': !item.checked,
-            }"
-          >
-          <div class="show-detail-btn" @click.stop="showDetailModal(3,item, k)">
-            <span class="btn-text">详情</span>
-            <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
-          </div>
-            <img
-              :src="item.checked ? checkIcon : noCheckIcon"
-              class="check-icon"
-              alt=""
-            />
-            <img
-              :src="is_cn ? item.cn_pop_icon : item.tw_pop_icon"
-              class="icon"
-              alt=""
-            />
+          <div v-for="(item, k) in new_pop_list" @click="chooseNewSale(item, k)" :key="k" :class="{
+            item: true,
+            'item-checked': item.checked,
+            'opacity-20': pick_list.length >= 3 && !item.checked,
+            'item-normal': !item.checked,
+          }">
+            <div class="show-detail-btn" @click.stop="showDetailModal(3, item, k)">
+              <span class="btn-text">详情</span>
+              <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
+            </div>
+            <img :src="item.checked ? checkIcon : noCheckIcon" class="check-icon" alt="" />
+            <img :src="is_cn ? item.cn_pop_icon : item.tw_pop_icon" class="icon" alt="" />
             <div class="desc" style="-webkit-box-orient: vertical">
               {{ is_cn ? item.cn_desc : item.tw_desc }}
             </div>
@@ -628,57 +378,32 @@
         </div>
       </div>
     </mt-popup>
-    <mt-popup
-      v-model="new_sale_modal2"
-      :closeOnClickModal="false"
-      position="bottom"
-    >
+    <mt-popup v-model="new_sale_modal2" :closeOnClickModal="false" position="bottom">
       <div class="modal-box">
         <div class="title-box">
           <div @click="new_sale_modal2 = false" class="left">取消</div>
           <div class="center">任选两项享特惠</div>
-          <div
-            v-if="confirm_btn_2"
-            @click="submitPopList(2)"
-            class="right-common right-check"
-          >
+          <div v-if="confirm_btn_2" @click="submitPopList(2)" class="right-common right-check">
             <div class="btn">确定</div>
           </div>
-          <div
-            v-else
-            @click="ToastSubmit('两')"
-            class="right-common disable-right"
-          >
+          <div v-else @click="ToastSubmit('两')" class="right-common disable-right">
             <div class="btn">确定</div>
           </div>
         </div>
 
         <div class="modal-list">
-          <div
-            v-for="(item, k) in new_pop_list"
-            @click="chooseNewSale(item, k, 2, 'pick_list2')"
-            :key="k"
-            :class="{
-              item: true,
-              'item-checked': item.checked,
-              'opacity-20': pick_list2.length >= 2 && !item.checked,
-              'item-normal': !item.checked,
-            }"
-          >
-          <div  class="show-detail-btn" @click.stop="showDetailModal(2,item, k,2,'pick_list2')">
-            <span class="btn-text">详情</span>
-            <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
-          </div>
-            <img
-              :src="item.checked ? checkIcon : noCheckIcon"
-              class="check-icon"
-              alt=""
-            />
-            <img
-              :src="is_cn ? item.cn_pop_icon : item.tw_pop_icon"
-              class="icon"
-              alt=""
-            />
+          <div v-for="(item, k) in new_pop_list" @click="chooseNewSale(item, k, 2, 'pick_list2')" :key="k" :class="{
+            item: true,
+            'item-checked': item.checked,
+            'opacity-20': pick_list2.length >= 2 && !item.checked,
+            'item-normal': !item.checked,
+          }">
+            <div class="show-detail-btn" @click.stop="showDetailModal(2, item, k, 2, 'pick_list2')">
+              <span class="btn-text">详情</span>
+              <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
+            </div>
+            <img :src="item.checked ? checkIcon : noCheckIcon" class="check-icon" alt="" />
+            <img :src="is_cn ? item.cn_pop_icon : item.tw_pop_icon" class="icon" alt="" />
             <div class="desc" style="-webkit-box-orient: vertical">
               {{ is_cn ? item.cn_desc : item.tw_desc }}
             </div>
@@ -686,53 +411,19 @@
         </div>
       </div>
     </mt-popup>
-    <PayModal
-      :visible="pay_modal"
-      :combine_info="combine_info"
-      @close="pay_modal = false"
-      @resetInfo="combine_info = {}"
-      @logEvent="logEventForSort"
-      :pay_index="3"
-      key_store="mlxz_web_select_list"
-    />
-    <PayModal
-      :visible="pay_modal2"
-      :combine_info="combine_info2"
-      @close="pay_modal2 = false"
-      @resetInfo="combine_info2 = {}"
-      @logEvent="logEventForSort"
-      :pay_index="2"
-      key_store="mlxz_web_select_list_two"
-    />
+    <PayModal :visible="pay_modal" :combine_info="combine_info" @close="pay_modal = false"
+      @resetInfo="combine_info = {}" @logEvent="logEventForSort" :pay_index="3" key_store="mlxz_web_select_list" />
+    <PayModal :visible="pay_modal2" :combine_info="combine_info2" @close="pay_modal2 = false"
+      @resetInfo="combine_info2 = {}" @logEvent="logEventForSort" :pay_index="2" key_store="mlxz_web_select_list_two" />
 
     <ResultPop v-if="show_result" @close="show_result = false" />
-    <FixedOrder
-      v-if="show_fixed_order"
-      :title="local_title"
-      :new_order_key="new_order_key"
-      name="local"
-      top="4.7rem"
-      :time="local_time"
-      @payOrder="checkOrder"
-      @jumpDetail="jumpOrder"
-    />
-    <FixedOrder
-      v-if="show_api_order"
-      :title="last_title"
-      :last_order="last_order"
-      name="api"
-      top="6.7rem"
-      :time="api_time"
-      @payOrder="checkOrder"
-      @jumpDetail="jumpOrder"
-    />
-    <SaleDetailModal 
-      v-model="sale_detail_modal" 
-      :callback="sale_detail_callback"
-      :product_key="sale_detail_product_key"
-      :size = saleDetailSize
-      />
-    
+    <FixedOrder v-if="show_fixed_order" :title="local_title" :new_order_key="new_order_key" name="local" top="4.7rem"
+      :time="local_time" @payOrder="checkOrder" @jumpDetail="jumpOrder" />
+    <FixedOrder v-if="show_api_order" :title="last_title" :last_order="last_order" name="api" top="6.7rem"
+      :time="api_time" @payOrder="checkOrder" @jumpDetail="jumpOrder" />
+    <SaleDetailModal v-model="sale_detail_modal" :callback="sale_detail_callback" :product_key="sale_detail_product_key"
+      :size=saleDetailSize />
+
   </div>
 </template>
 
@@ -1168,9 +859,9 @@ export default {
       three_list: [], //三项组合
       new_sale_modal: false,
       sale_detail_modal: false,
-      sale_detail_callback: () => {},
-      sale_detail_product_key:'',
-      saleDetailSize:3,
+      sale_detail_callback: () => { },
+      sale_detail_product_key: '',
+      saleDetailSize: 3,
       new_pop_list,
       checkIcon,
       noCheckIcon,
@@ -1978,11 +1669,9 @@ export default {
     getProductions,
     //开始测算
     async startCalculateClick() {
-      location.href = `${
-        path_enums[this.comboAttachData.product_key]
-      }.html#/?has_pay=SUCCESS&order_id=${
-        this.comboAttachData.order_id
-      }&product_key=${this.comboAttachData.product_key}`;
+      location.href = `${path_enums[this.comboAttachData.product_key]
+        }.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id
+        }&product_key=${this.comboAttachData.product_key}`;
     },
     //请求接口，是否展示引导标识
     async showComboAttach() {
@@ -2086,11 +1775,9 @@ export default {
         extra_ce_suan: ext,
         trade_pay_type,
         trade_target_org,
-        callback_url: `${location.origin}/${utils.getFBChannel()}/${
-          path_enums[product_key]
-        }.html#/result?path=${
-          path_enums[product_key]
-        }&report_price=${payment}&discount_pay=1`,
+        callback_url: `${location.origin}/${utils.getFBChannel()}/${path_enums[product_key]
+          }.html#/result?path=${path_enums[product_key]
+          }&report_price=${payment}&discount_pay=1`,
       };
       const res = await payOrderAPI(params);
       localStorage.removeItem('mlxz_fixed_api_order_id');
@@ -2116,9 +1803,8 @@ export default {
         let female_str = marry_info.female_str;
         let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
 &pay_modal=1&use_fixed_time=1&discount_pay=1`;
-        location.href = `${location.origin}/${utils.getFBChannel()}/${
-          path_enums[this.new_order_key]
-        }.html#/${path}`;
+        location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
+          }.html#/${path}`;
 
         return;
       }
@@ -2128,9 +1814,8 @@ export default {
         '&pay_modal=1' +
         '&use_fixed_time=1&discount_pay=1';
 
-      location.href = `${location.origin}/${utils.getFBChannel()}/${
-        path_enums[this.new_order_key]
-      }.html#/${path}`;
+      location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
+        }.html#/${path}`;
     },
     /**
      * @description: 校验是否上报埋点
@@ -3052,9 +2737,8 @@ export default {
       let channle = utils.getFBChannel() === 'own' ? '' : utils.getFBChannel();
 
       localStorage.setItem('mlxz_reload_page_home', 1);
-      location.href = `${location.origin}/${channle}/${url}.html#/${
-        status ? 'result' : ''
-      }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
+      location.href = `${location.origin}/${channle}/${url}.html#/${status ? 'result' : ''
+        }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
     },
     isShowBannerSort() {
       let channel = utils.getFBChannel();
@@ -3164,7 +2848,7 @@ export default {
       let prodect_key = arguments[1].product_key;
       this.sale_detail_product_key = prodect_key;
       this.sale_detail_size = size;
-      let callbackArg =  Array.prototype.slice.call(arguments,1)
+      let callbackArg = Array.prototype.slice.call(arguments, 1)
       this.sale_detail_callback = () => {
         this.chooseNewSale(...callbackArg)
         this.sale_detail_modal = false;
@@ -3172,82 +2856,110 @@ export default {
       this.sale_detail_modal = true;
       if (size === 2) {
         switch (prodect_key) {
-          case 'h5_marriage': utils.firebaseLogEvent('10001','-10036',             'click_reportlist2_marriage_detail', 'click', 
-          { args_name: 'click_reportlist_marriage_detail',
-            channel: utils.getFBChannel(),})
+          case 'h5_marriage': utils.firebaseLogEvent('10001', '-10036', 'click_reportlist2_marriage_detail', 'click',
+            {
+              args_name: 'click_reportlist_marriage_detail',
+              channel: utils.getFBChannel(),
+            })
             break;
 
-          case 'h5_emotion2024': utils.firebaseLogEvent('10001','-10033',             'click_reportlist2_2024lovely_detail', 'click', 
-          { args_name: 'click_reportlist_2024lovely_detail',
-            channel: utils.getFBChannel(),})
+          case 'h5_emotion2024': utils.firebaseLogEvent('10001', '-10033', 'click_reportlist2_2024lovely_detail', 'click',
+            {
+              args_name: 'click_reportlist_2024lovely_detail',
+              channel: utils.getFBChannel(),
+            })
             break;
 
-          case 'h5_annual2024': utils.firebaseLogEvent('10001','-10032',             'click_reportlist2_2024report_detail', 'click', 
-          { args_name: 'click_reportlist_2024report_detail',
-            channel: utils.getFBChannel(),})
+          case 'h5_annual2024': utils.firebaseLogEvent('10001', '-10032', 'click_reportlist2_2024report_detail', 'click',
+            {
+              args_name: 'click_reportlist_2024report_detail',
+              channel: utils.getFBChannel(),
+            })
             break;
 
-          case 'h5_wealth2024': utils.firebaseLogEvent('10001','-10035',             'click_reportlist2_2024wealty_detail', 'click', 
-          { args_name: 'click_reportlist_2024wealty_detail',
-            channel: utils.getFBChannel(),})
+          case 'h5_wealth2024': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist2_2024wealty_detail', 'click',
+            {
+              args_name: 'click_reportlist_2024wealty_detail',
+              channel: utils.getFBChannel(),
+            })
             break;
 
-          case 'h5_career2024': utils.firebaseLogEvent('10001','-10035',             'click_reportlist2_2024career_detail', 'click', 
-          { args_name: 'click_reportlist_2024career_detail',
-            channel: utils.getFBChannel(),})
+          case 'h5_career2024': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist2_2024career_detail', 'click',
+            {
+              args_name: 'click_reportlist_2024career_detail',
+              channel: utils.getFBChannel(),
+            })
             break;
 
-          case 'h5_bai_gua': utils.firebaseLogEvent('10001','-10035',             'click_reportlist2_64gua_detail', 'click', 
-          { args_name: 'click_reportlist_64gua_detail',
-            channel: utils.getFBChannel(),})
+          case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist2_64gua_detail', 'click',
+            {
+              args_name: 'click_reportlist_64gua_detail',
+              channel: utils.getFBChannel(),
+            })
             break;
-          
-          case 'h5_weigh_bone': utils.firebaseLogEvent('10001','-10038',             'click_reportlist2_chenggu_detail', 'click', 
-          { args_name: 'click_reportlist_chenggu_detail',
-            channel: utils.getFBChannel(),})
+
+          case 'h5_weigh_bone': utils.firebaseLogEvent('10001', '-10038', 'click_reportlist2_chenggu_detail', 'click',
+            {
+              args_name: 'click_reportlist_chenggu_detail',
+              channel: utils.getFBChannel(),
+            })
             break;
 
         }
       } else {
         switch (prodect_key) {
-          case 'h5_marriage': utils.firebaseLogEvent('10001','-10039',             'click_reportlist3_marriage_detail', 'click', 
-          { args_name: 'click_reportlist3_marriage_detail',
-            channel: utils.getFBChannel(),});
+          case 'h5_marriage': utils.firebaseLogEvent('10001', '-10039', 'click_reportlist3_marriage_detail', 'click',
+            {
+              args_name: 'click_reportlist3_marriage_detail',
+              channel: utils.getFBChannel(),
+            });
 
-          case 'h5_emotion2024': utils.firebaseLogEvent('10001','-10033',             'click_reportlist3_2024lovely_detail', 'click', 
-          { args_name: 'click_reportlist3_2024lovely_detail',
-            channel: utils.getFBChannel(),});
+          case 'h5_emotion2024': utils.firebaseLogEvent('10001', '-10033', 'click_reportlist3_2024lovely_detail', 'click',
+            {
+              args_name: 'click_reportlist3_2024lovely_detail',
+              channel: utils.getFBChannel(),
+            });
 
-          case 'h5_annual2024': utils.firebaseLogEvent('10001','-10032',             'click_reportlist3_2024report_detail', 'click', 
-          { args_name: 'click_reportlist3_2024report_detail',
-            channel: utils.getFBChannel(),});
+          case 'h5_annual2024': utils.firebaseLogEvent('10001', '-10032', 'click_reportlist3_2024report_detail', 'click',
+            {
+              args_name: 'click_reportlist3_2024report_detail',
+              channel: utils.getFBChannel(),
+            });
 
-          case 'h5_wealth2024': utils.firebaseLogEvent('10001','-10035',             'click_reportlist3_2024wealty_detail', 'click', 
-          { args_name: 'click_reportlist3_2024wealty_detail',
-            channel: utils.getFBChannel(),});
+          case 'h5_wealth2024': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist3_2024wealty_detail', 'click',
+            {
+              args_name: 'click_reportlist3_2024wealty_detail',
+              channel: utils.getFBChannel(),
+            });
 
-          case 'h5_career2024': utils.firebaseLogEvent('10001','-10035',             'click_reportlist3_2024career_detail', 'click', 
-          { args_name: 'click_reportlist3_2024career_detail',
-            channel: utils.getFBChannel(),});
+          case 'h5_career2024': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist3_2024career_detail', 'click',
+            {
+              args_name: 'click_reportlist3_2024career_detail',
+              channel: utils.getFBChannel(),
+            });
 
-          case 'h5_bai_gua': utils.firebaseLogEvent('10001','-10035',             'click_reportlist3_64gua_detail', 'click', 
-          { args_name: 'click_reportlist3_64gua_detail',
-            channel: utils.getFBChannel(),});
-          
-          case 'h5_weigh_bone': utils.firebaseLogEvent('10001','-10038',             'click_reportlist3_chenggu_detail', 'click', 
-          { args_name: 'click_reportlist3_chenggu_detail',
-            channel: utils.getFBChannel(),});
+          case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist3_64gua_detail', 'click',
+            {
+              args_name: 'click_reportlist3_64gua_detail',
+              channel: utils.getFBChannel(),
+            });
 
-          break;
-      }
+          case 'h5_weigh_bone': utils.firebaseLogEvent('10001', '-10038', 'click_reportlist3_chenggu_detail', 'click',
+            {
+              args_name: 'click_reportlist3_chenggu_detail',
+              channel: utils.getFBChannel(),
+            });
+
+            break;
+        }
       }
     },
-    
+
   }
 };
 </script>
 
-<style lang="less" >
+<style lang="less">
 .mint-toast {
   z-index: 2200 !important;
 }
@@ -3255,6 +2967,7 @@ export default {
 .v-modal {
   opacity: 0.7 !important;
 }
+
 .swiper-buy .van-swipe-item {
   display: flex;
   align-items: center;
@@ -3263,13 +2976,15 @@ export default {
 
 .swiper-contain .mint-swipe-indicators {
   bottom: -0.15rem !important;
+
   .mint-swipe-indicator {
     width: 0.1rem !important;
     height: 0.1rem !important;
     background: #fff !important;
-    opacity: 0.4 !important ;
+    opacity: 0.4 !important;
     border-radius: 0.05rem !important;
   }
+
   .mint-swipe-indicator.is-active {
     width: 0.24rem !important;
     height: 0.1rem !important;
@@ -3277,18 +2992,20 @@ export default {
     opacity: 1 !important;
   }
 }
-.show-detail-btn{
+
+.show-detail-btn {
   position: absolute;
   left: 0.12rem;
-  top:0.12rem;
+  top: 0.12rem;
   width: 0.74rem;
   height: 0.38rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 0.19rem;
-  &>.btn-text{
+
+  &>.btn-text {
     font-family: PingFangSC, PingFang SC;
     font-weight: 600;
     padding-right: 0.04rem;
@@ -3296,7 +3013,8 @@ export default {
     line-height: 0.38rem;
     color: #fff;
   }
-  &>.btn-img{
+
+  &>.btn-img {
     width: 0.1rem;
     height: 0.18rem;
   }
@@ -3312,6 +3030,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .link-url {
   color: #e3453d;
   text-decoration: underline;
@@ -3321,6 +3040,7 @@ export default {
   position: fixed !important;
   overflow-y: hidden;
 }
+
 .history-order {
   width: 0.56rem;
   height: 1.58rem;
@@ -3339,10 +3059,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .index-wrapper {
     position: relative;
     width: 100%;
     overflow: hidden;
+
     .header {
       width: 4.16rem;
       height: 0.8rem;
@@ -3354,11 +3076,13 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+
       .slide {
         position: relative;
         width: 3.56rem;
         height: 0.68rem;
         display: flex;
+
         .slider {
           position: absolute;
           top: 0;
@@ -3368,6 +3092,7 @@ export default {
           z-index: 1;
           transition-duration: 0.2s;
         }
+
         .tab {
           position: relative;
           z-index: 2;
@@ -3381,23 +3106,24 @@ export default {
         }
       }
     }
+
     .content {
       margin-top: 0.44rem;
     }
   }
 }
+
 .header-box {
   width: 7.5rem;
-  background: url('https://psychicai-static.psychicai.pro/imgs/24040a66e62f96ec4d54814920ed3dcc4125.png')
-    no-repeat;
+  background: url('https://psychicai-static.psychicai.pro/imgs/24040a66e62f96ec4d54814920ed3dcc4125.png') no-repeat;
   background-size: 7.5rem 4.22rem;
   position: relative;
   padding: 0.2rem 0.2rem 0;
+
   .buy-list {
     width: 7.1rem;
     height: 0.72rem;
-    background: url('https://psychicai-static.psychicai.pro/imgs/240498b976e40d914444b775fec84707719e.png')
-      no-repeat;
+    background: url('https://psychicai-static.psychicai.pro/imgs/240498b976e40d914444b775fec84707719e.png') no-repeat;
     background-size: contain;
     margin-top: 0.2rem;
     font-weight: 400;
@@ -3408,17 +3134,20 @@ export default {
     display: flex;
     align-items: center;
     position: relative;
+
     .swiper-buy {
       width: 100%;
       height: 100%;
       z-index: 1;
     }
+
     .laba {
       width: 0.36rem;
       height: 0.36rem;
       left: 0.2rem;
       position: absolute;
     }
+
     .arrow {
       width: 0.16rem;
       height: 0.24rem;
@@ -3428,21 +3157,26 @@ export default {
     }
   }
 }
+
 .swiper-contain {
   height: 2.96em;
   width: 7.1rem;
+
   .swiper-item {
     width: 100%;
     height: 100%;
+
     img {
       width: 100%;
       height: 100%;
     }
   }
 }
+
 .hidden {
   display: none !important;
 }
+
 .sale-box {
   width: 7.18rem;
   height: 4.75rem;
@@ -3450,6 +3184,7 @@ export default {
   border-radius: 0.24rem;
   margin: 0.24rem auto;
   overflow-x: hidden;
+
   .title-box {
     display: flex;
     flex-direction: row;
@@ -3457,11 +3192,11 @@ export default {
     align-items: center;
     margin: 0.3rem 0.3rem 0.34rem 0;
     font-family: PingFangSC-Semibold, PingFang SC;
+
     .left {
       width: 2.52rem;
       height: 0.64rem;
-      background: url('../../assets/img/mlxz/index/ce_img_zhekoubg.png')
-        no-repeat;
+      background: url('../../assets/img/mlxz/index/ce_img_zhekoubg.png') no-repeat;
       background-size: contain;
       font-size: 0.32rem;
       font-weight: 600;
@@ -3472,11 +3207,13 @@ export default {
       justify-content: flex-end;
       padding-right: 0.22rem;
     }
+
     .right {
       display: flex;
       flex-direction: row;
       justify-content: end;
       align-items: center;
+
       .total {
         height: 0.24rem;
         font-size: 0.24rem;
@@ -3486,6 +3223,7 @@ export default {
         text-decoration: line-through;
         margin-right: 0.05rem;
       }
+
       .percent {
         height: 0.24rem;
         font-size: 0.24rem;
@@ -3494,6 +3232,7 @@ export default {
         line-height: 0.24rem;
         margin: 0 0.04rem;
       }
+
       .price {
         height: 0.28rem;
         font-size: 0.32rem;
@@ -3503,12 +3242,14 @@ export default {
       }
     }
   }
+
   .sale-list {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     position: relative;
+
     .item {
       width: 2.02rem;
       height: 1.3rem;
@@ -3520,11 +3261,13 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+
       .icon {
         width: 100%;
         height: 100%;
       }
     }
+
     .add-icon {
       width: 0.52rem;
       height: 0.52rem;
@@ -3532,6 +3275,7 @@ export default {
       z-index: 10;
     }
   }
+
   .lock-btn {
     position: relative;
     width: 5.86rem;
@@ -3547,6 +3291,7 @@ export default {
     align-items: center;
     justify-content: center;
   }
+
   .change-btn {
     width: 100%;
     height: 0.26rem;
@@ -3571,17 +3316,20 @@ export default {
   align-items: center;
   justify-content: center;
   padding-bottom: 0.2rem;
+
   .title {
     width: 2.45rem;
     height: 0.92rem;
     margin-top: 0.2rem;
   }
+
   .product-list {
     width: 7.18rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+
     .item {
       width: 3.34rem;
       height: 3.34rem;
@@ -3589,36 +3337,46 @@ export default {
     }
   }
 }
+
 .text-1 {
   color: #8b4800;
 }
+
 .text-2 {
   color: #9b3124;
 }
+
 .text-3 {
   color: #250864;
 }
+
 .swiper-1 {
   background: #ffeddf;
 }
+
 .swiper-2 {
   background: #ffdfe2;
 }
+
 .swiper-3 {
   background: #e5dbff;
 }
+
 .ask-bg-1 {
   color: #ffeddf;
   background: #8b4800;
 }
+
 .ask-bg-2 {
   color: #ffdfe2;
   background: #9b3124;
 }
+
 .ask-bg-3 {
   color: #e5dbff;
   background: #250864;
 }
+
 .ad-list {
   width: 7.18rem;
   min-height: 4rem;
@@ -3630,6 +3388,7 @@ export default {
   justify-content: center;
   padding: 0.2rem 0.12rem;
   margin-bottom: 0.5rem;
+
   .item {
     width: 100%;
     height: 100%;
@@ -3646,6 +3405,7 @@ export default {
   word-wrap: break-word;
   -webkit-box-orient: vertical;
 }
+
 .pop-box {
   width: 7.5rem;
   height: 10.5rem;
@@ -3653,6 +3413,7 @@ export default {
   border-radius: 0.4rem 0.4rem 0 0;
   border-color: #000;
   padding: 0.4rem 0;
+
   .pop-header {
     display: flex;
     align-items: center;
@@ -3661,6 +3422,7 @@ export default {
     margin-bottom: 0.3rem;
     padding: 0 0.3rem;
     width: 100%;
+
     .left {
       font-size: 0.36rem;
       font-weight: 700;
@@ -3668,6 +3430,7 @@ export default {
       line-height: 0.36rem;
       height: 0.36rem;
     }
+
     .close {
       width: 0.28rem;
       height: 0.28rem;
@@ -3675,6 +3438,7 @@ export default {
       right: 0.2rem;
     }
   }
+
   .pop-content {
     // height: 9.6rem;
     overflow-y: auto;
@@ -3685,6 +3449,7 @@ export default {
     height: 8rem;
     width: 100%;
     margin: 0 0.15rem;
+
     .item {
       width: 3.34rem;
       height: 2.36rem;
@@ -3695,10 +3460,12 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+
       .top-icon {
         width: 100%;
         height: 1.4rem;
       }
+
       .bottom-box {
         margin-top: 0.1rem;
         font-size: 0.24rem;
@@ -3713,13 +3480,16 @@ export default {
         -webkit-line-clamp: 2;
       }
     }
+
     .normal-item {
       background-image: url('../../assets/img/mlxz/cesuan_home/sale_normal_kuang.png');
     }
+
     .forbidden-item {
       opacity: 0.6;
       // background-image: url('../../assets/img/mlxz/cesuan_home/sale_zhezhao_kuang.png');
     }
+
     .check-icon {
       width: 0.36rem;
       height: 0.36rem;
@@ -3728,6 +3498,7 @@ export default {
       top: 0.08rem;
     }
   }
+
   .confirm-box {
     width: 5.34rem;
     height: 0.88rem;
@@ -3753,6 +3524,7 @@ export default {
   top: -0.2rem;
   right: 0.18rem;
 }
+
 .disabled-confirm {
   // opacity: 0.4;
   display: none !important;
@@ -3764,6 +3536,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: 0.2rem;
+
   .common-item {
     display: flex;
     flex-direction: column;
@@ -3771,21 +3544,24 @@ export default {
     justify-content: flex-start;
     margin-bottom: 0.2rem;
   }
+
   .normal-item {
     width: 3.46rem;
     height: 4.88rem;
-    background: url('https://psychicai-static.psychicai.pro/imgs/2404a1e37968e812485bbeea12aa4254d485.png')
-      no-repeat;
+    background: url('https://psychicai-static.psychicai.pro/imgs/2404a1e37968e812485bbeea12aa4254d485.png') no-repeat;
     background-size: contain;
     margin: 0 0.09rem;
     .common-item;
+
     .normal-icon {
       width: 3.34rem;
       height: 3.34rem;
       margin: 0.06rem;
     }
+
     .normal-box {
       margin-top: 0.1rem;
+
       .text {
         width: 2.98rem;
         font-weight: 400;
@@ -3793,6 +3569,7 @@ export default {
         color: #314a46;
         .hidden-2;
       }
+
       .tips {
         display: flex;
         align-items: center;
@@ -3810,24 +3587,27 @@ export default {
   .big-item {
     width: 7.1rem;
     height: 3.62rem;
-    background: url('https://psychicai-static.psychicai.pro/imgs/24041489a229d8c545d9bc252e1418de9766.png')
-      no-repeat;
+    background: url('https://psychicai-static.psychicai.pro/imgs/24041489a229d8c545d9bc252e1418de9766.png') no-repeat;
     background-size: contain;
     .common-item;
+
     .big-icon {
       width: 6.98rem;
       height: 2.08rem;
       margin: 0.06rem;
     }
+
     .big-box {
       display: flex;
       margin-top: 0.1rem;
       align-items: flex-start;
       justify-content: space-around;
       width: 100%;
+
       .left {
         display: flex;
         flex-direction: column;
+
         .text {
           width: 4.3rem;
           font-weight: 400;
@@ -3835,6 +3615,7 @@ export default {
           color: #314a46;
           .hidden-2;
         }
+
         .tips {
           display: flex;
           align-items: center;
@@ -3847,6 +3628,7 @@ export default {
           margin-top: 0.16rem;
         }
       }
+
       .right-btn {
         width: 1.92rem;
         height: 0.72rem;
@@ -3859,6 +3641,7 @@ export default {
 .ml-40 {
   margin-left: 0.4rem;
 }
+
 .flex-start {
   justify-content: flex-start !important;
 }
@@ -3872,15 +3655,16 @@ export default {
   width: 7.5rem;
   height: 4.88rem;
   margin: 0.4rem auto 0.2rem;
+
   .sale-item {
     width: 6.54rem !important;
     height: 100%;
     margin-left: 0.2rem;
+
     .item {
       width: 6.54rem !important;
       height: 4.88rem !important;
-      background: url('../../assets/img/new_combine/new_discount_bg.png')
-        no-repeat;
+      background: url('../../assets/img/new_combine/new_discount_bg.png') no-repeat;
       background-size: 100% 100%;
       position: relative;
       overflow-x: hidden;
@@ -3890,15 +3674,19 @@ export default {
     }
   }
 }
+
 .ml-80 {
   margin-left: -0.8rem;
 }
+
 .ml-76 {
   margin-left: 0.76rem;
 }
+
 .ml-130 {
   margin-left: 1.3rem;
 }
+
 .sale-title {
   width: 2rem;
   height: 0.36rem;
@@ -3911,24 +3699,28 @@ export default {
   // top: 0.3rem;
   // left: 0.24rem;
 }
+
 .new-price {
   display: flex;
   height: 0.34rem;
   width: 100%;
   align-items: center;
   justify-content: flex-end;
+
   .one {
     font-weight: 400;
     font-size: 0.24rem;
     color: #8da5a1;
     text-decoration-line: line-through;
   }
+
   .two {
     font-weight: 400;
     font-size: 0.24rem;
     color: #314a46;
     margin: 0 0.04rem;
   }
+
   .large {
     font-weight: 600;
     font-size: 0.34rem;
@@ -3936,6 +3728,7 @@ export default {
     line-height: 0.34rem;
   }
 }
+
 .zhekou-icon {
   // position: absolute;
   // top: 0.22rem;
@@ -3950,6 +3743,7 @@ export default {
   justify-content: center;
   // margin-top: 0.8rem;
   position: relative;
+
   .it {
     width: 1.8rem;
     // height: 1.2rem;
@@ -3976,11 +3770,13 @@ export default {
       align-items: center;
       justify-content: center;
     }
+
     .check-icon {
       width: 1.86rem;
       height: 1.2rem;
     }
   }
+
   .no-it {
     background: url('../../assets/img/new_combine/home_btn_add.png') no-repeat;
     background-size: contain;
@@ -3999,6 +3795,7 @@ export default {
   text-align: center;
   position: relative;
 }
+
 .absolute-zhe {
   position: absolute;
   top: -0.14rem;
@@ -4006,6 +3803,7 @@ export default {
   width: 1.3rem;
   height: 0.44rem;
 }
+
 .reset-select {
   width: 100%;
   height: 0.28rem;
@@ -4016,6 +3814,7 @@ export default {
   text-align: center;
   margin-top: 0.24rem;
 }
+
 .divider-line-left {
   position: absolute;
   height: 0.04rem;
@@ -4023,11 +3822,13 @@ export default {
   left: 1.9rem;
   z-index: 1;
   display: flex;
+
   .one {
     width: 0.1rem;
     height: 100%;
     background: #b0d5cf;
   }
+
   .two {
     width: 0.05rem;
     height: 100%;
@@ -4035,6 +3836,7 @@ export default {
     margin-left: 0.05rem;
   }
 }
+
 .divider-line-right {
   position: absolute;
   height: 0.04rem;
@@ -4042,17 +3844,20 @@ export default {
   right: 1.9rem;
   z-index: 1;
   display: flex;
+
   .one {
     width: 0.03rem;
     height: 100%;
     background: #b0d5cf;
   }
+
   .two {
     width: 0.07rem;
     height: 100%;
     background: #b0d5cf;
     margin-left: 0.05rem;
   }
+
   .three {
     width: 0.06rem;
     height: 100%;
@@ -4067,6 +3872,7 @@ export default {
   background: linear-gradient(180deg, #d2e7de 0%, #ffffff 100%);
   border-radius: 0.2rem 0.2rem 0 0;
   overflow-x: hidden;
+
   .title-box {
     width: 100%;
     height: 0.64rem;
@@ -4078,11 +3884,13 @@ export default {
     color: #314a46;
     margin: 0.26rem auto;
     position: relative;
+
     .left {
       margin-left: 0.3rem;
       z-index: 2;
       opacity: 0.7;
     }
+
     .center {
       width: 100%;
       text-align: center;
@@ -4094,12 +3902,14 @@ export default {
       font-size: 0.36rem;
       line-height: 0.36rem;
     }
+
     .right-common {
       width: 1.36rem;
       height: 0.64rem;
       border-radius: 0.16rem;
       margin-right: 0.3rem;
       z-index: 2;
+
       .btn {
         width: 100%;
         height: 100%;
@@ -4111,6 +3921,7 @@ export default {
         border-radius: 0.16rem;
       }
     }
+
     .right-check {
       background: linear-gradient(180deg, #f47553 0%, #e92424 99%);
 
@@ -4120,14 +3931,17 @@ export default {
         border: 0.02rem solid #ffd192;
       }
     }
+
     .disable-right {
       background: linear-gradient(180deg, #fbc8ba 0%, #f6a8a8 100%);
+
       .btn {
         border: 0.02rem solid #ffedd3;
         color: #fef8eb;
       }
     }
   }
+
   .modal-list {
     display: flex;
     flex-wrap: wrap;
@@ -4136,6 +3950,7 @@ export default {
     width: 100%;
     height: 10.1rem;
     overflow-y: auto;
+
     .item {
       width: 3.35rem;
       height: 2.28rem;
@@ -4144,6 +3959,7 @@ export default {
       flex-direction: column;
       align-items: center;
       position: relative;
+
       .check-icon {
         width: 0.48rem;
         height: 0.46rem;
@@ -4151,10 +3967,12 @@ export default {
         top: 0.08rem;
         right: 0.08rem;
       }
+
       .icon {
         width: 3.31rem;
         height: 1.4rem;
       }
+
       .desc {
         width: 2.95rem;
         font-weight: 400;
@@ -4171,14 +3989,17 @@ export default {
         opacity: 0.7;
       }
     }
+
     .item-normal {
       background: url('../../assets/img/new_combine/sale_normal.png') no-repeat;
       background-size: contain;
     }
+
     .item-checked {
       background: url('../../assets/img/new_combine/sale_checked.png') no-repeat;
       background-size: contain;
     }
+
     .opacity-20 {
       opacity: 0.5;
     }
@@ -4197,6 +4018,7 @@ export default {
   margin-top: 0.3rem;
   padding-left: 0.24rem;
 }
+
 .get-tag {
   background: linear-gradient(180deg, #5de3a8 0%, #22ba77 100%) !important;
 }
@@ -4213,11 +4035,13 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .status-1 {
   border: 0.02rem solid #e79999;
 
   color: #e3453d;
 }
+
 .status-0 {
   border-radius: 0.16rem;
   border: 0.02rem solid #ffd192;
@@ -4228,6 +4052,7 @@ export default {
     border-radius: 0.16rem;
   }
 }
+
 .tips-ce {
   height: 0.24rem;
   font-weight: 400;
@@ -4245,6 +4070,7 @@ export default {
 .ml-0 {
   margin: 0 !important;
 }
+
 .pl-90 {
   padding-left: 0 !important;
 }
@@ -4257,14 +4083,17 @@ export default {
   align-items: center;
   margin-top: 0.3rem;
 }
+
 .show-box1 {
   width: 1.56rem;
   height: 100%;
 }
+
 .hid-1 {
   width: 0.8rem;
   transition: width 0.3s;
 }
+
 .show-box2 {
   width: 2.3rem;
   height: 100%;
@@ -4274,11 +4103,13 @@ export default {
   margin-left: 1.56rem !important;
   transition: margin-left 0.3s;
 }
+
 .ml-170 {
   margin-left: 2.3rem !important;
   // transition: all 0.5s;
   transition: margin-left 0.3s;
 }
+
 .empty-loading {
   width: 7.5rem;
   height: 4.08rem;
@@ -4296,6 +4127,7 @@ export default {
     transform: scale(1.1);
   }
 }
+
 .discount-tag {
   animation: scaleNewBtn 0.6s infinite ease-in-out alternate;
 }
