@@ -103,6 +103,9 @@
 }
 #h5_weigh_bone{
   --bgc-color: var(--bgc-color-h5_weigh_bone);
+  .show-item{
+    padding: 0.2rem 0 0 ;
+  }
 }
 #h5_emotion2024{
   --bgc-color: var(--bgc-color-h5_emotion2024);
