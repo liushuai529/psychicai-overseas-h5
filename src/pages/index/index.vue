@@ -2939,12 +2939,14 @@ export default {
               args_name: 'click_reportlist3_marriage_detail',
               channel: utils.getFBChannel(),
             });
+            break;
 
           case 'h5_emotion2024': utils.firebaseLogEvent('10001', '-10033', 'click_reportlist3_2024lovely_detail', 'click',
             {
               args_name: 'click_reportlist3_2024lovely_detail',
               channel: utils.getFBChannel(),
             });
+            break;
 
           case 'h5_annual2024': utils.firebaseLogEvent('10001', '-10032', 'click_reportlist3_2024report_detail', 'click',
             {
@@ -2952,11 +2954,13 @@ export default {
               channel: utils.getFBChannel(),
             });
 
+            break;
           case 'h5_wealth2024': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist3_2024wealty_detail', 'click',
             {
               args_name: 'click_reportlist3_2024wealty_detail',
               channel: utils.getFBChannel(),
             });
+            break;
 
           case 'h5_career2024': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist3_2024career_detail', 'click',
             {
@@ -2964,11 +2968,13 @@ export default {
               channel: utils.getFBChannel(),
             });
 
+            break;
           case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist3_64gua_detail', 'click',
             {
               args_name: 'click_reportlist3_64gua_detail',
               channel: utils.getFBChannel(),
             });
+            break;
 
           case 'h5_weigh_bone': utils.firebaseLogEvent('10001', '-10038', 'click_reportlist3_chenggu_detail', 'click',
             {
@@ -2981,10 +2987,16 @@ export default {
       }
     },
     select(key) {
+
       if(new_sale_modal) {
+        //3个
+        console.log(this.pick_list);
+        console.log(key);
+        return
         this.chooseNewSale(item, key)
         this.sale_detail_modal = false;
       } else {
+        //2个
         this.chooseNewSale(item, key, 2, 'pick_list2')
         this.sale_detail_modal = false;
       }
