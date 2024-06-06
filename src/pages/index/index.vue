@@ -607,6 +607,10 @@
               'item-normal': !item.checked,
             }"
           >
+          <div class="show-detail-btn" @click.stop="showDetailModal(item, k)">
+            <span class="btn-text">详情</span>
+            <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
+          </div>
             <img
               :src="item.checked ? checkIcon : noCheckIcon"
               class="check-icon"
@@ -718,6 +722,12 @@
       @payOrder="checkOrder"
       @jumpDetail="jumpOrder"
     />
+    <SaleDetailModal 
+      v-model="sale_detail_modal" 
+      :callback="sale_detail_callback"
+      :product_key="sale_detail_product_key"
+      />
+    
   </div>
 </template>
 
@@ -823,6 +833,7 @@ import tw_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuh
 import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_nianyun.png';
 
 import PayModal from './components/payModal.vue';
+import SaleDetailModal from './components/SaleDetailModal.vue'
 import ResultPop from '../../components/ResultPop.vue';
 import CalculateBar from '../../components/CalculateBar.vue';
 
@@ -1099,6 +1110,7 @@ export default {
     FixedOrder,
     CalculateBar,
     TimeDown,
+    SaleDetailModal
   },
   data() {
     return {
@@ -1151,6 +1163,9 @@ export default {
       combine_index: 0,
       three_list: [], //三项组合
       new_sale_modal: false,
+      sale_detail_modal: false,
+      sale_detail_callback: () => {},
+      sale_detail_product_key:'',
       new_pop_list,
       checkIcon,
       noCheckIcon,
@@ -3137,11 +3152,19 @@ export default {
         }
       }
     },
-  },
+    showDetailModal() {
+      this.sale_detail_product_key = arguments[0].product_key;
+      this.sale_detail_callback = () => {
+        this.chooseNewSale(...arguments)
+        this.sale_detail_modal = false;
+      };
+      this.sale_detail_modal = true;
+    },
+  }
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped >
 .mint-toast {
   z-index: 2200 !important;
 }
@@ -3169,6 +3192,30 @@ export default {
     height: 0.1rem !important;
     border-radius: 0.05rem !important;
     opacity: 1 !important;
+  }
+}
+.show-detail-btn{
+  position: absolute;
+  left: 0.12rem;
+  top:0.12rem;
+  width: 0.74rem;
+  height: 0.38rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 0.19rem;
+  &>.btn-text{
+    font-family: PingFangSC, PingFang SC;
+    font-weight: 600;
+    padding-right: 0.04rem;
+    font-size: 0.22rem;
+    line-height: 0.38rem;
+    color: #fff;
+  }
+  &>.btn-img{
+    width: 0.1rem;
+    height: 0.18rem;
   }
 }
 </style>
@@ -3935,7 +3982,7 @@ export default {
   width: 7.5rem;
   height: 11.18rem;
   background: linear-gradient(180deg, #d2e7de 0%, #ffffff 100%);
-  border-radius: 0.4rem 0.4rem 0 0;
+  border-radius: 0.2rem 0.2rem 0 0;
   overflow-x: hidden;
   .title-box {
     width: 100%;
