@@ -2887,49 +2887,49 @@ export default {
         switch (product_key) {
           case 'h5_marriage': utils.firebaseLogEvent('10001', '-10036', 'click_reportlist2_marriage_detail', 'click',
             {
-              args_name: 'click_reportlist_marriage_detail',
+              args_name: 'click_reportlist2_marriage_detail',
               channel: utils.getFBChannel(),
             })
             break;
 
           case 'h5_emotion2024': utils.firebaseLogEvent('10001', '-10033', 'click_reportlist2_2024lovely_detail', 'click',
             {
-              args_name: 'click_reportlist_2024lovely_detail',
+              args_name: 'click_reportlist2_2024lovely_detail',
               channel: utils.getFBChannel(),
             })
             break;
 
           case 'h5_annual2024': utils.firebaseLogEvent('10001', '-10032', 'click_reportlist2_2024report_detail', 'click',
             {
-              args_name: 'click_reportlist_2024report_detail',
+              args_name: 'click_reportlist2_2024report_detail',
               channel: utils.getFBChannel(),
             })
             break;
 
           case 'h5_wealth2024': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist2_2024wealty_detail', 'click',
             {
-              args_name: 'click_reportlist_2024wealty_detail',
+              args_name: 'click_reportlist2_2024wealty_detail',
               channel: utils.getFBChannel(),
             })
             break;
 
           case 'h5_career2024': utils.firebaseLogEvent('10001', '-10034', 'click_reportlist2_2024career_detail', 'click',
             {
-              args_name: 'click_reportlist_2024career_detail',
+              args_name: 'click_reportlist2_2024career_detail',
               channel: utils.getFBChannel(),
             })
             break;
 
           case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10037', 'click_reportlist2_64gua_detail', 'click',
             {
-              args_name: 'click_reportlist_64gua_detail',
+              args_name: 'click_reportlist2_64gua_detail',
               channel: utils.getFBChannel(),
             })
             break;
 
           case 'h5_weigh_bone': utils.firebaseLogEvent('10001', '-10038', 'click_reportlist2_chenggu_detail', 'click',
             {
-              args_name: 'click_reportlist_chenggu_detail',
+              args_name: 'click_reportlist2_chenggu_detail',
               channel: utils.getFBChannel(),
             })
             break;
