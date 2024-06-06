@@ -356,7 +356,7 @@ export default {
     },
     selectReport() {
       if (this.size === 2) {
-        switch (prodect_key) {
+        switch (this.prodect_key) {
           case 'h5_marriage': utils.firebaseLogEvent('10001', '-10057', 'click_detail_marriage2', 'click',
             {
               args_name: 'click_detail_marriage2',
@@ -408,7 +408,7 @@ export default {
 
         }
       } else {
-        switch (prodect_key) {
+        switch (this.prodect_key) {
           case 'h5_marriage': utils.firebaseLogEvent('10001', '-10050', 'click_detail_marriage3', 'click',
             {
               args_name: 'click_detail_marriage3',
