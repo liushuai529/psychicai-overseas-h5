@@ -1,7 +1,7 @@
 <style lang="less" scoped>
 .modal-box {
   width: 7.5rem;
-  height: 11rem;
+  height: 11.18rem;
   position: relative;
   overflow: hidden;
   .title-box {
@@ -60,10 +60,10 @@
   }
   .content-box {
     width: 100%;
-    height: 10.04rem;
+    height: 10.84rem;
     margin-top: 0.96rem;
     overflow-y: scroll;
-    background-color: #EC436B;
+    background-color: var(--bgc-color);
     &>.show-list{
       display: flex;
       flex-direction: column;
@@ -80,6 +80,37 @@
     
   }
 }
+.modal-box{
+  --bgc-color-h5_marriage: #f197ad;
+  --bgc-color-year_of_lucky_2024: #ffaa41;
+  --bgc-color-h5_bai_gua: #e2d0ba;
+  --bgc-color-h5_weigh_bone: #515fad;
+  --bgc-color-h5_emotion2024: #EC436B;
+  --bgc-color-h5_career2024 :#f7dbaf;
+  --bgc-color-h5_wealth2024: #f197ad;
+}
+#h5_marriage{
+  --bgc-color: var(--bgc-color-h5_marriage);
+}
+#year_of_lucky_2024{
+  --bgc-color: var(--bgc-color-year_of_lucky_2024);
+}
+#h5_bai_gua{
+  --bgc-color: var(--bgc-color-h5_bai_gua);
+}
+#h5_weigh_bone{
+  --bgc-color: var(--bgc-color-h5_weigh_bone);
+}
+#h5_emotion2024{
+  --bgc-color: var(--bgc-color-h5_emotion2024);
+}
+#h5_career2024{
+  --bgc-color: var(--bgc-color-h5_career2024);
+}
+#h5_wealth2024{
+  --bgc-color: var(--bgc-color-h5_wealth2024);
+}
+
 </style>
 <template>
     <mt-popup
@@ -87,20 +118,22 @@
       :closeOnClickModal="false"
       position="bottom"
     >
-      <div class="modal-box">
+      <div class="modal-box" >
         <div class="title-box">
           <div @click="close" class="left">关闭</div>
-          <div class="center">2024年事业运势</div>
+          <div class="center">
+            {{reportName[product_key][is_cn?'cn':'tw']}}
+          </div>
           <div
             class="right right-check"
           >
             <div class="btn" @click="callback">选择报告</div>
           </div>
         </div>
-        <div class="content-box">
+        <div class="content-box" :id="product_key">
           <div class="show-list">
-            <div class="show-item" v-for="item,idx in [0,1,2,3,4,5,6]" :key='idx' >
-              <img  src="../../../assets/img/yuncheng_banner.png" class="show-img"/>
+            <div class="show-item" v-for="item,idx in imgMap[product_key][is_cn?'cn':'tw']" :key='idx' >
+              <img  :src='item' class="show-img"/>
             </div>
           </div>
         </div>
@@ -109,31 +142,213 @@
 </template>
 
 <script>
+//  2024年爱情运势
+import cn_icon_1_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home1.png';
+import cn_icon_2_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home2.png';
+import cn_icon_3_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home3.png';
+import cn_icon_4_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home4.png';
+import cn_icon_5_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home5.png';
+
+import tw_icon_1_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home1_fanti.png';
+import tw_icon_2_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home2_fanti.png';
+import tw_icon_3_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_fanti.png';
+import tw_icon_4_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.png';
+import tw_icon_5_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.png';
+
+// 2024年财运
+import cn_card1_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/1.png';
+import tw_card1_h5_wealth2024 from '../../../assets/img/tw_mlxz/wealth_24/home/1.png';
+
+import cn_card2_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/2.png';
+import tw_card2_h5_wealth2024 from '../../../assets/img/tw_mlxz/wealth_24/home/2.png';
+
+import cn_card3_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/3.png';
+import tw_card3_h5_wealth2024 from '../../../assets/img/tw_mlxz/wealth_24/home/3.png';
+
+import cn_card4_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/4.png';
+import tw_card4_h5_wealth2024 from '../../../assets/img/tw_mlxz/wealth_24/home/4.png';
+ // 2024年事业运势
+ import cn_card_1_h5_career2024 from '../../../assets/img/mlxz/career_2024/home_img_mokuai2.png';
+import cn_card_2_h5_career2024 from '../../../assets/img/mlxz/career_2024/home_img_mokuai3.png';
+import cn_card_3_h5_career2024 from '../../../assets/img/mlxz/career_2024/pignjia.png';
+
+import tw_card_1_h5_career2024 from '../../../assets/img/tw_mlxz/career_24/card_1.png';
+import tw_card_2_h5_career2024 from '../../../assets/img/tw_mlxz/career_24/card_2.png';
+import tw_card_3_h5_career2024 from '../../../assets/img/tw_mlxz/career_24/card_3.png';
+//八字合婚
+import cn_card1_h5_marriage from './../../../assets/img/mlxz/bzhh/card1.png';
+import cn_card2_h5_marriage from './../../../assets/img/mlxz/bzhh/card2.png';
+import cn_card3_h5_marriage from './../../../assets/img/mlxz/bzhh/card3.png';
+import cn_card4_h5_marriage from './../../../assets/img/mlxz/bzhh/card4.png';
+import cn_card5_h5_marriage from './../../../assets/img/mlxz/bzhh/card5.png';
+
+import tw_card1_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card1.png';
+import tw_card2_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card2.png';
+import tw_card3_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card3.png';
+import tw_card4_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card4.png';
+import tw_card5_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card5.png';
+// 2024年年运
+
+import cn_card_1_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai1.png';
+import tw_card_1_year_of_lucky_2024 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai1.png';
+
+import cn_card_2_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai2.png';
+import tw_card_2_year_of_lucky_2024 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai2.png';
+
+import cn_card_3_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_cn.png';
+import tw_card_3_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_tw.png';
+
+import cn_card_4_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_cn.png';
+import tw_card_4_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_tw.png';
+
+import cn_card_5_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai5.png';
+import tw_card_5_year_of_lucky_2024 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai5.png';
+//袁天罡秤骨
+import tw_card_1_h5_weigh_bone from '../../../assets/img/weigh_bone/yulan_yuantiangang_top_fan.jpg';
+import cn_card_1_h5_weigh_bone from '../../../assets/img/weigh_bone/yulan_yuantiangang_top_jian.jpg';
+
+//鬼谷子
+import cn_card_2_h5_bai_gua from '../../../assets/img/mlxz/guiguzi/home_img_mo2@2x.png';
+import tw_card_2_h5_bai_gua from '../../../assets/img/tw_mlxz/guiguzi/home_img_mo2.png';
+
+
+
+
 import utils from '../../../libs/utils';
+import {reportName} from '../../../libs/enum'
 export default {
   name: 'SaleDetailModal',
+  data(){
+    return{
+      reportName,
+      imgMap:{
+        h5_emotion2024: {// 2024年爱情运势
+          cn:[
+            cn_icon_1_h5_emotion2024,
+            cn_icon_2_h5_emotion2024,
+            cn_icon_3_h5_emotion2024,
+            cn_icon_4_h5_emotion2024,
+            cn_icon_5_h5_emotion2024
+          ],
+          tw:[
+            tw_icon_1_h5_emotion2024,
+            tw_icon_2_h5_emotion2024,
+            tw_icon_3_h5_emotion2024,
+            tw_icon_4_h5_emotion2024,
+            tw_icon_5_h5_emotion2024
+          ]
+        },
+        h5_wealth2024: {
+          cn:[
+            cn_card1_h5_wealth2024,
+            cn_card2_h5_wealth2024,
+            cn_card3_h5_wealth2024,
+            cn_card4_h5_wealth2024
+          ],
+          tw:[
+            tw_card1_h5_wealth2024,
+            tw_card2_h5_wealth2024,
+            tw_card3_h5_wealth2024,
+            tw_card4_h5_wealth2024
+          ]
+        }, // 2024年财运
+        h5_annual2024: {
+          cn:[
+            cn_card_1_year_of_lucky_2024,
+            cn_card_2_year_of_lucky_2024,
+            cn_card_3_year_of_lucky_2024,
+            cn_card_4_year_of_lucky_2024,
+            cn_card_5_year_of_lucky_2024
+          ],
+          tw:[
+            tw_card_1_year_of_lucky_2024,
+            tw_card_2_year_of_lucky_2024,
+            tw_card_3_year_of_lucky_2024,
+            tw_card_4_year_of_lucky_2024,
+            tw_card_5_year_of_lucky_2024
+          ]
+        }, // 2024年年运
+        h5_weigh_bone: {
+          cn:[
+              cn_card_1_h5_weigh_bone
+          ],
+          tw:[
+              tw_card_1_h5_weigh_bone
+          ]
+        }, // 袁天罡秤骨
+        h5_bai_gua: {
+          cn:[
+              // 'https://psychicai-static.psychicai.pro/imgs/24048f0d358d051f4890abe8ad40ec6cbe48.png',
+              'https://psychicai-static.psychicai.pro/imgs/24044c3c7ad56f9f4e08a25d585164be739f.png',
+              cn_card_2_h5_bai_gua
+          ],
+          tw:[
+              // 'https://psychicai-static.psychicai.pro/imgs/24048f0d358d051f4890abe8ad40ec6cbe48.png',
+              'https://psychicai-static.psychicai.pro/imgs/24045923298c6eff48f1ac256edf9ed6d17d.png',
+              tw_card_2_h5_bai_gua
+          ],
+
+        }, // 鬼谷子
+        h5_marriage: {
+          cn:[
+            cn_card1_h5_marriage,
+            cn_card2_h5_marriage,
+            cn_card3_h5_marriage,
+            cn_card4_h5_marriage,
+            cn_card5_h5_marriage,
+          ],
+          tw:[
+            tw_card1_h5_marriage,
+            tw_card2_h5_marriage,
+            tw_card3_h5_marriage,
+            tw_card4_h5_marriage,
+            tw_card5_h5_marriage,
+          ]
+        },
+        h5_career2024: {
+          cn:[
+            cn_card_1_h5_career2024,
+            cn_card_2_h5_career2024,
+            cn_card_3_h5_career2024
+          ],
+          tw:[
+            tw_card_1_h5_career2024,
+            tw_card_2_h5_career2024,
+            tw_card_3_h5_career2024
+          ]
+         // 2024年事业运势
+        },
+      },
+    }
+  },
   model:{
     prop: 'show',
     event: 'close'
   },
 
   props:{
-      show:{
-          type:Boolean,
-          default:false
-      },
-      callback:{
-          type:Function,
-          default:function(){console.log('callback')}
-      },
-  },
-
-  data(){
+    show:{
+        type:Boolean,
+        default:false
+    },
+    callback:{
+        type:Function,
+        default:function(){console.log('callback')}
+    },
+    product_key:{
+        type:String,
+        default:'h5_emotion2024'
+    }
   },
   methods:{
     close(){
         this.$emit('close',false)
     },
+  },
+  computed:{
+    is_cn() {
+      return utils.getLanguage() === 'zh-CN';
+    }
   }
 }
 </script>

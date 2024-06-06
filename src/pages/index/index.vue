@@ -675,6 +675,7 @@
     <SaleDetailModal 
       v-model="sale_detail_modal" 
       :callback="sale_detail_callback"
+      :product_key="sale_detail_product_key"
       />
     
   </div>
@@ -1103,6 +1104,7 @@ export default {
       new_sale_modal: false,
       sale_detail_modal: false,
       sale_detail_callback: () => {},
+      sale_detail_product_key:'',
       new_pop_list,
       checkIcon,
       noCheckIcon,
@@ -2592,7 +2594,6 @@ export default {
 
     // 选择商品
     chooseNewSale(it, k, val, key = 'pick_list') {
-      console.log(it, k, val, key);
       if (this[key].length >= (val ? 2 : 3)) {
         if (!it.checked) {
           Toast(`最多选择${val ? '两' : '三'}项报告`);
@@ -2930,6 +2931,7 @@ export default {
       }
     },
     showDetailModal() {
+      this.sale_detail_product_key = arguments[0].product_key;
       this.sale_detail_callback = () => {
         this.chooseNewSale(...arguments)
         this.sale_detail_modal = false;
@@ -2940,7 +2942,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less" scoped >
 .mint-toast {
   z-index: 2200 !important;
 }
@@ -3759,7 +3761,7 @@ export default {
   width: 7.5rem;
   height: 11.18rem;
   background: linear-gradient(180deg, #d2e7de 0%, #ffffff 100%);
-  border-radius: 0.4rem 0.4rem 0 0;
+  border-radius: 0.2rem 0.2rem 0 0;
   overflow-x: hidden;
   .title-box {
     width: 100%;
