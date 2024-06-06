@@ -607,7 +607,7 @@
               'item-normal': !item.checked,
             }"
           >
-          <div style="display: none;" class="show-detail-btn" @click.stop="showDetailModal(item, k)">
+          <div style="display: none;" class="show-detail-btn" @click.stop="showDetailModal(3,item, k)">
             <span class="btn-text">详情</span>
             <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
           </div>
@@ -665,7 +665,7 @@
               'item-normal': !item.checked,
             }"
           >
-          <div style="display: none;" class="show-detail-btn" @click.stop="showDetailModal(item, k, 2, 'pick_list2')">
+          <div style="display: none;" class="show-detail-btn" @click.stop="showDetailModal(2, item, k, 2, 'pick_list2')">
             <span class="btn-text">详情</span>
             <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
           </div>
@@ -730,6 +730,7 @@
       v-model="sale_detail_modal" 
       :callback="sale_detail_callback"
       :product_key="sale_detail_product_key"
+      :size="new_sale_modal? 3: 2"
       />
     
   </div>
