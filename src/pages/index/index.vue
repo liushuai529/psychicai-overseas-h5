@@ -607,7 +607,7 @@
               'item-normal': !item.checked,
             }"
           >
-          <div class="show-detail-btn" @click.stop="showDetailModal(item, k)">
+          <div style="display: none;" class="show-detail-btn" @click.stop="showDetailModal(item, k)">
             <span class="btn-text">详情</span>
             <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
           </div>
@@ -665,7 +665,7 @@
               'item-normal': !item.checked,
             }"
           >
-          <div class="show-detail-btn" @click.stop="showDetailModal(item, k)">
+          <div style="display: none;" class="show-detail-btn" @click.stop="showDetailModal(item, k)">
             <span class="btn-text">详情</span>
             <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
           </div>
@@ -3168,7 +3168,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped >
+<style lang="less" >
 .mint-toast {
   z-index: 2200 !important;
 }

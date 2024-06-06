@@ -1,5 +1,11 @@
 <template>
-    <img :src="imgMap[product_key][is_cn?'cn':'tw']" @click="callback()"/>
+    <img 
+      :style="{
+        marginBottom: product_key === 'h5_marriage' ? '0.2rem' : '0',
+      }"
+      :src="imgMap[product_key][is_cn?'cn':'tw']" 
+      @click="callback()
+    "/>
 </template>
 <script>
 import utils from '../libs/utils';

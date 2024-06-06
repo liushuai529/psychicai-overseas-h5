@@ -124,10 +124,10 @@
           />
         </div>
         <!--此处引用按钮组件-->
-        <!-- <PayButton
+        <PayBtn
           :product_key="product_key"
           :callback="payMoney"
-        /> -->
+        />
         <!-- <img
           :src="cn_home_btn"
         /> -->
@@ -153,7 +153,7 @@ import { CountDown } from 'vant';
 import 'vant/lib/index.css';
 import moment from 'moment';
 import GroupPurchase from '../components/GroupPurchase.vue';
-// import PayButton from '../components/PayButton.vue';
+import PayBtn from '../components/PayBtn.vue';
 
 const e_id_arr = {
   h5_wealth2024: '60001',
@@ -205,7 +205,7 @@ export default {
   components: {
     CountDown,
     GroupPurchase,
-    // PayButton,
+    PayBtn,
   },
   data() {
     return {
