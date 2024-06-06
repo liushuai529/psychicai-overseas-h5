@@ -259,9 +259,8 @@ export default {
     }
   }
   .pay-list {
-    // height: 4.4rem;
-    // overflow-y: auto;
-
+    height: 4.0rem;
+    overflow-y: auto;
     padding: 0.6rem 0.4rem 0;
     .no-empty {
       display: flex;

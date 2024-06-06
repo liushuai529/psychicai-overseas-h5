@@ -1,5 +1,5 @@
 <template>
-  <div :class="['container', fix_pop ? 'fix-pop' : '', sale_detail_modal ? 'fix-pop' : '' ]" >
+  <div :class="['container', fix_pop || sale_detail_modal? 'fix-pop' : '', ]" >
     <img @click="
       jumpUrl('history_order', '-10010', 'click_main_history', 'dvtjq2')
       " class="history-order" :src="is_cn ? cn_order_btn : tw_order_btn" alt="" />
@@ -3085,9 +3085,10 @@ export default {
 }
 
 .fix-pop {
-  // position: fixed !important;
-  overflow: hidden;
-  height: 100vh;
+  position: fixed !important;
+  overflow-y: hidden;
+  top: 0;
+  // height: 100vh;
 }
 
 .history-order {
