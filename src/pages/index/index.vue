@@ -607,7 +607,7 @@
               'item-normal': !item.checked,
             }"
           >
-          <div style="display: none;" class="show-detail-btn" @click.stop="showDetailModal(item, k)">
+          <div class="show-detail-btn" @click.stop="showDetailModal(3,item, k)">
             <span class="btn-text">详情</span>
             <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
           </div>
@@ -665,7 +665,7 @@
               'item-normal': !item.checked,
             }"
           >
-          <div style="display: none;" class="show-detail-btn" @click.stop="showDetailModal(item, k)">
+          <div  class="show-detail-btn" @click.stop="showDetailModal(2,item, k,2,'pick_list2')">
             <span class="btn-text">详情</span>
             <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
           </div>
@@ -730,6 +730,7 @@
       v-model="sale_detail_modal" 
       :callback="sale_detail_callback"
       :product_key="sale_detail_product_key"
+      :size = saleDetailSize
       />
     
   </div>
@@ -1102,7 +1103,6 @@ const new_pop_list = [
     checked: false,
   },
 ];
-
 export default {
   components: {
     ResultPop,
@@ -1170,6 +1170,7 @@ export default {
       sale_detail_modal: false,
       sale_detail_callback: () => {},
       sale_detail_product_key:'',
+      saleDetailSize:3,
       new_pop_list,
       checkIcon,
       noCheckIcon,
@@ -3157,13 +3158,91 @@ export default {
       }
     },
     showDetailModal() {
-      this.sale_detail_product_key = arguments[0].product_key;
+      //第一个参数为size,确认2或3项
+      //之后参数顺位延用 chooseNewSale 方法参数规则
+      let size = arguments[0] || 3;
+      let prodect_key = arguments[1].product_key;
+      this.sale_detail_product_key = prodect_key;
+      this.sale_detail_size = size;
+      let callbackArg =  Array.prototype.slice.call(arguments,1)
       this.sale_detail_callback = () => {
-        this.chooseNewSale(...arguments)
+        this.chooseNewSale(...callbackArg)
         this.sale_detail_modal = false;
       };
       this.sale_detail_modal = true;
+      if (size === 2) {
+        switch (prodect_key) {
+          case 'h5_marriage': utils.firebaseLogEvent('10001','-10036',             'click_reportlist2_marriage_detail', 'click', 
+          { args_name: 'click_reportlist_marriage_detail',
+            channel: utils.getFBChannel(),})
+            break;
+
+          case 'h5_emotion2024': utils.firebaseLogEvent('10001','-10033',             'click_reportlist2_2024lovely_detail', 'click', 
+          { args_name: 'click_reportlist_2024lovely_detail',
+            channel: utils.getFBChannel(),})
+            break;
+
+          case 'h5_annual2024': utils.firebaseLogEvent('10001','-10032',             'click_reportlist2_2024report_detail', 'click', 
+          { args_name: 'click_reportlist_2024report_detail',
+            channel: utils.getFBChannel(),})
+            break;
+
+          case 'h5_wealth2024': utils.firebaseLogEvent('10001','-10035',             'click_reportlist2_2024wealty_detail', 'click', 
+          { args_name: 'click_reportlist_2024wealty_detail',
+            channel: utils.getFBChannel(),})
+            break;
+
+          case 'h5_career2024': utils.firebaseLogEvent('10001','-10035',             'click_reportlist2_2024career_detail', 'click', 
+          { args_name: 'click_reportlist_2024career_detail',
+            channel: utils.getFBChannel(),})
+            break;
+
+          case 'h5_bai_gua': utils.firebaseLogEvent('10001','-10035',             'click_reportlist2_64gua_detail', 'click', 
+          { args_name: 'click_reportlist_64gua_detail',
+            channel: utils.getFBChannel(),})
+            break;
+          
+          case 'h5_weigh_bone': utils.firebaseLogEvent('10001','-10038',             'click_reportlist2_chenggu_detail', 'click', 
+          { args_name: 'click_reportlist_chenggu_detail',
+            channel: utils.getFBChannel(),})
+            break;
+
+        }
+      } else {
+        switch (prodect_key) {
+          case 'h5_marriage': utils.firebaseLogEvent('10001','-10039',             'click_reportlist3_marriage_detail', 'click', 
+          { args_name: 'click_reportlist3_marriage_detail',
+            channel: utils.getFBChannel(),});
+
+          case 'h5_emotion2024': utils.firebaseLogEvent('10001','-10033',             'click_reportlist3_2024lovely_detail', 'click', 
+          { args_name: 'click_reportlist3_2024lovely_detail',
+            channel: utils.getFBChannel(),});
+
+          case 'h5_annual2024': utils.firebaseLogEvent('10001','-10032',             'click_reportlist3_2024report_detail', 'click', 
+          { args_name: 'click_reportlist3_2024report_detail',
+            channel: utils.getFBChannel(),});
+
+          case 'h5_wealth2024': utils.firebaseLogEvent('10001','-10035',             'click_reportlist3_2024wealty_detail', 'click', 
+          { args_name: 'click_reportlist3_2024wealty_detail',
+            channel: utils.getFBChannel(),});
+
+          case 'h5_career2024': utils.firebaseLogEvent('10001','-10035',             'click_reportlist3_2024career_detail', 'click', 
+          { args_name: 'click_reportlist3_2024career_detail',
+            channel: utils.getFBChannel(),});
+
+          case 'h5_bai_gua': utils.firebaseLogEvent('10001','-10035',             'click_reportlist3_64gua_detail', 'click', 
+          { args_name: 'click_reportlist3_64gua_detail',
+            channel: utils.getFBChannel(),});
+          
+          case 'h5_weigh_bone': utils.firebaseLogEvent('10001','-10038',             'click_reportlist3_chenggu_detail', 'click', 
+          { args_name: 'click_reportlist3_chenggu_detail',
+            channel: utils.getFBChannel(),});
+
+          break;
+      }
+      }
     },
+    
   }
 };
 </script>
