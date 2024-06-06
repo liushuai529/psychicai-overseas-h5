@@ -124,7 +124,7 @@
       :closeOnClickModal="false"
       position="bottom"
     >
-      <div v-if="product_key"  class="modal-box" >
+      <div v-if="product_key"  class="modal-box">
         <div class="title-box">
           <div @click="close" class="left">关闭</div>
           <div class="center">
@@ -141,9 +141,12 @@
             <div class="show-item" v-for="item,idx in imgMap[product_key][is_cn?'cn':'tw']" :key='idx' >
               <img  :src='item' class="show-img"/>
             </div>
+            <div style="width: 100%; height: 1rem;"></div>
           </div>
         </div>
+    
       </div>
+      
     </mt-popup>
 </template>
 
