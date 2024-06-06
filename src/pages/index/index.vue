@@ -730,7 +730,6 @@
       v-model="sale_detail_modal" 
       :callback="sale_detail_callback"
       :product_key="sale_detail_product_key"
-      :size="new_sale_modal? 3: 2"
       />
     
   </div>
@@ -3165,6 +3164,16 @@ export default {
       };
       this.sale_detail_modal = true;
     },
+    select(key) {
+      if(new_sale_modal) {
+        this.chooseNewSale(item, key)
+        this.sale_detail_modal = false;
+      } else {
+        this.chooseNewSale(item, key, 2, 'pick_list2')
+        this.sale_detail_modal = false;
+      }
+      
+    }
   }
 };
 </script>
