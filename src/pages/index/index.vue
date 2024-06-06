@@ -665,7 +665,7 @@
               'item-normal': !item.checked,
             }"
           >
-          <div style="display: none;" class="show-detail-btn" @click.stop="showDetailModal(item, k)">
+          <div style="display: none;" class="show-detail-btn" @click.stop="showDetailModal(item, k, 2, 'pick_list2')">
             <span class="btn-text">详情</span>
             <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
           </div>
