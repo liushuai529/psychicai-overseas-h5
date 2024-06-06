@@ -1,5 +1,5 @@
 <template>
-  <div :class="['container', fix_pop ? 'fix-pop' : '']">
+  <div :class="['container', fix_pop ? 'fix-pop' : '', sale_detail_modal ? 'fix-pop' : '' ]" >
     <img @click="
       jumpUrl('history_order', '-10010', 'click_main_history', 'dvtjq2')
       " class="history-order" :src="is_cn ? cn_order_btn : tw_order_btn" alt="" />
@@ -134,7 +134,7 @@
             :list="three_list" />
           <div @click="changeSale(0)" class="pick-btn"
             :style="{ 'margin-top': !is_show_reechoes_3 ? '0.8rem' : '0.1rem' }">
-            {{ !is_show_reechoes_3 ? '选择组合' : '领取我的专属优惠' }}
+            {{ '领取我的专属优惠' }}
             <img v-if="is_show_reechoes_3" src="../../assets/img/new_combine/home_tag_58_big.png"
               class="absolute-zhe discount-tag" alt="" />
           </div>
@@ -198,7 +198,7 @@
             :list="two_list" />
           <div @click="changeSale(2)" class="pick-btn"
             :style="{ 'margin-top': is_show_reechoes_2 ? '0.1rem' : '0.8rem' }">
-            {{ !is_show_reechoes_2 ? '选择组合' : '领取我的专属优惠' }}
+            {{ '领取我的专属优惠' }}
             <img v-if="is_show_reechoes_2" src="../../assets/img/new_combine/home_tag_68_big.png"
               class="absolute-zhe discount-tag" alt="" />
           </div>
@@ -2575,7 +2575,7 @@ export default {
         : this.new_pop_list.find(it => it.product_key === 'h5_emotion2024');
       let init_2 = !this.channel03
         ? ''
-        : this.new_pop_list.find(it => it.product_key === 'h5_weigh_bone');
+        : this.new_pop_list.find(it => it.product_key === 'h5_bai_gua');
       this.new_pop_list.forEach(it => {
         it.checked = false;
       });
@@ -3085,8 +3085,9 @@ export default {
 }
 
 .fix-pop {
-  position: fixed !important;
-  overflow-y: hidden;
+  // position: fixed !important;
+  overflow: hidden;
+  height: 100vh;
 }
 
 .history-order {
@@ -3101,6 +3102,7 @@ export default {
 .container {
   width: 100%;
   min-height: 100vh;
+
   position: relative;
   box-sizing: border-box;
   background: #d2e7de;
