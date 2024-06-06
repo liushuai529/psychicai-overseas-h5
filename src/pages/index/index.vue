@@ -1766,7 +1766,7 @@ export default {
       return this.two_list.every(it => it.product_key);
     },
     channel03() {
-      return utils.getFBChannel().indexOf('99') > -1;
+      return utils.getFBChannel().indexOf('03') > -1;
     },
   },
   watch: {
