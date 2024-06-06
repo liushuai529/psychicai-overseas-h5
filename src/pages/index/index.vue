@@ -2873,8 +2873,8 @@ export default {
       //第一个参数为size,确认2或3项
       //之后参数顺位延用 chooseNewSale 方法参数规则
       let size = arguments[0] || 3;
-      let prodect_key = arguments[1].product_key;
-      this.sale_detail_product_key = prodect_key;
+      let product_key = arguments[1].product_key;
+      this.sale_detail_product_key = product_key;
       let callbackArg = Array.prototype.slice.call(arguments, 1)
       this.sale_detail_callback = () => {
         console.log('sale_detail_callback111');
@@ -2884,7 +2884,7 @@ export default {
       };
       this.sale_detail_modal = true;
       if (size === 2) {
-        switch (prodect_key) {
+        switch (product_key) {
           case 'h5_marriage': utils.firebaseLogEvent('10001', '-10036', 'click_reportlist2_marriage_detail', 'click',
             {
               args_name: 'click_reportlist_marriage_detail',
@@ -2936,7 +2936,7 @@ export default {
 
         }
       } else {
-        switch (prodect_key) {
+        switch (product_key) {
           case 'h5_marriage': utils.firebaseLogEvent('10001', '-10043', 'click_reportlist3_marriage_detail', 'click',
             {
               args_name: 'click_reportlist3_marriage_detail',

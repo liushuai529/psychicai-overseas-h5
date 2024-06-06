@@ -355,8 +355,9 @@ export default {
         this.$emit('close',false)
     },
     selectReport() {
+      console.log('选择报告',this.size, this.product_key);
       if (this.size === 2) {
-        switch (this.prodect_key) {
+        switch (this.product_key) {
           case 'h5_marriage': utils.firebaseLogEvent('10001', '-10057', 'click_detail_marriage2', 'click',
             {
               args_name: 'click_detail_marriage2',
@@ -408,7 +409,7 @@ export default {
 
         }
       } else {
-        switch (this.prodect_key) {
+        switch (this.product_key) {
           case 'h5_marriage': utils.firebaseLogEvent('10001', '-10050', 'click_detail_marriage3', 'click',
             {
               args_name: 'click_detail_marriage3',
