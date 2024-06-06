@@ -338,7 +338,7 @@ export default {
     product_key:{
         type:String,
         default:'h5_emotion2024'
-    }
+    },
   },
   methods:{
     close(){
