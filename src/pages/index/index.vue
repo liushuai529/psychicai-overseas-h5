@@ -665,6 +665,10 @@
               'item-normal': !item.checked,
             }"
           >
+          <div class="show-detail-btn" @click.stop="showDetailModal(item, k)">
+            <span class="btn-text">详情</span>
+            <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
+          </div>
             <img
               :src="item.checked ? checkIcon : noCheckIcon"
               class="check-icon"
@@ -1781,7 +1785,7 @@ export default {
       return this.two_list.every(it => it.product_key);
     },
     channel03() {
-      return utils.getFBChannel().indexOf('03') > -1;
+      return utils.getFBChannel().indexOf('99') > -1;
     },
   },
   watch: {

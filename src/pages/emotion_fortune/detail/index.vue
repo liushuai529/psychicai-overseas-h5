@@ -405,7 +405,7 @@ export default {
 
 .method-box {
   width: 7.1rem;
-  height: 11.06rem;
+  // height: 11.06rem;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -421,7 +421,7 @@ export default {
   }
 }
 .method-height {
-  height: 7.71rem;
+  // height: 7.71rem;
 }
 .detail {
   display: flex;
