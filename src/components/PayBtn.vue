@@ -1,11 +1,13 @@
 <template>
     <img 
+     
       :style="{
         marginBottom: product_key === 'h5_marriage' ? '0.2rem' : '0',
+        width: '6.26rem',
+        height: '1.34rem'
       }"
       :src="imgMap[product_key][is_cn?'cn':'tw']" 
-      @click="callback()
-    "/>
+      @click="callback()"/>
 </template>
 <script>
 import utils from '../libs/utils';
@@ -48,3 +50,8 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="less">
+
+  
+</style>
