@@ -118,7 +118,7 @@
       :closeOnClickModal="false"
       position="bottom"
     >
-      <div class="modal-box" >
+      <div v-if="product_key"  class="modal-box" >
         <div class="title-box">
           <div @click="close" class="left">关闭</div>
           <div class="center">
@@ -127,7 +127,7 @@
           <div
             class="right right-check"
           >
-            <div class="btn" @click="callback">选择报告</div>
+            <div class="btn" @click="selectReport">选择报告</div>
           </div>
         </div>
         <div class="content-box" :id="product_key">
@@ -210,6 +210,7 @@ import cn_card_1_h5_weigh_bone from '../../../assets/img/weigh_bone/yulan_yuanti
 //鬼谷子
 import cn_card_2_h5_bai_gua from '../../../assets/img/mlxz/guiguzi/home_img_mo2@2x.png';
 import tw_card_2_h5_bai_gua from '../../../assets/img/tw_mlxz/guiguzi/home_img_mo2.png';
+import { Toast } from 'mint-ui';
 
 
 
@@ -326,7 +327,12 @@ export default {
     event: 'close'
   },
 
+
   props:{
+    selected_list: {
+      type: Array,
+      default: [],
+    },
     show:{
         type:Boolean,
         default:false
@@ -339,14 +345,31 @@ export default {
         type:String,
         default:'h5_emotion2024'
     },
+    size: {
+      type: Number,
+      default:3
+    },
   },
   methods:{
     close(){
         this.$emit('close',false)
     },
+    selectReport() {
+      let obj = this.selected_list.find(item=> item.product_key === this.product_key);
+      let length = this.selected_list.length;
+      if(this.size === length) {
+        !obj &&  Toast(`最多选择${this.size ===2 ? '两' : '三'}项报告`);
+      } else {
+        if(!obj) {
+          this.callback()
+        }
+      }
+      this.close()
+    }
   },
   computed:{
     is_cn() {
+      console.log('xxx', this.selected_list);
       return utils.getLanguage() === 'zh-CN';
     }
   }

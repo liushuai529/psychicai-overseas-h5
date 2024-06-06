@@ -448,7 +448,9 @@
     <FixedOrder v-if="show_api_order" :title="last_title" :last_order="last_order" name="api" top="6.7rem"
       :time="api_time" @payOrder="checkOrder" @jumpDetail="jumpOrder" />
     <SaleDetailModal v-model="sale_detail_modal" :callback="sale_detail_callback" :product_key="sale_detail_product_key"
-      :size=saleDetailSize />
+      :selected_list="new_sale_modal? pick_list: pick_list2"
+      :size="new_sale_modal? 3:2"
+     />
 
   </div>
 </template>
@@ -2876,6 +2878,7 @@ export default {
       this.sale_detail_size = size;
       let callbackArg = Array.prototype.slice.call(arguments, 1)
       this.sale_detail_callback = () => {
+        console.log('sale_detail_callback111');
         this.chooseNewSale(...callbackArg)
         this.sale_detail_modal = false;
       };
@@ -2987,7 +2990,6 @@ export default {
       }
     },
     select(key) {
-
       if(new_sale_modal) {
         //3个
         console.log(this.pick_list);
@@ -3000,7 +3002,6 @@ export default {
         this.chooseNewSale(item, key, 2, 'pick_list2')
         this.sale_detail_modal = false;
       }
-      
     }
   }
 };
