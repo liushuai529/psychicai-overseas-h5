@@ -429,7 +429,7 @@ export default {
 
           case 'h5_annual2024': utils.firebaseLogEvent('10001', '-10046', 'click_detail_2024report3', 'click',
             {
-              args_name: 'click_detail_3034report3',
+              args_name: 'click_detail_2024report3',
               channel: utils.getFBChannel(),
             });
             break;
