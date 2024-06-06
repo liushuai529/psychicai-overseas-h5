@@ -2875,12 +2875,116 @@ export default {
       let size = arguments[0] || 3;
       let prodect_key = arguments[1].product_key;
       this.sale_detail_product_key = prodect_key;
-      this.sale_detail_size = size;
       let callbackArg = Array.prototype.slice.call(arguments, 1)
       this.sale_detail_callback = () => {
         console.log('sale_detail_callback111');
         this.chooseNewSale(...callbackArg)
         this.sale_detail_modal = false;
+        if (size === 2) {
+        switch (prodect_key) {
+          case 'h5_marriage': utils.firebaseLogEvent('10001', '-10057', 'click_detail_marriage2', 'click',
+            {
+              args_name: 'click_detail_marriage2',
+              channel: utils.getFBChannel(),
+            })
+            break;
+
+          case 'h5_emotion2024': utils.firebaseLogEvent('10001', '-10054', 'click_detail_2024lovely2', 'click',
+            {
+              args_name: 'click_detail_2024lovely2',
+              channel: utils.getFBChannel(),
+            })
+            break;
+
+          case 'h5_annual2024': utils.firebaseLogEvent('10001', '-10053', 'click_detail_2024report2', 'click',
+            {
+              args_name: 'click_detail_2024report2',
+              channel: utils.getFBChannel(),
+            })
+            break;
+
+          case 'h5_wealth2024': utils.firebaseLogEvent('10001', '-10056', 'click_detail_2024wealty2', 'click',
+            {
+              args_name: 'click_detail_2024wealty2',
+              channel: utils.getFBChannel(),
+            })
+            break;
+
+          case 'h5_career2024': utils.firebaseLogEvent('10001', '-10055', 'click_detail_2024career2', 'click',
+            {
+              args_name: 'click_detail_2024career2',
+              channel: utils.getFBChannel(),
+            })
+            break;
+
+          case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10059', 'click_detail_64gua2', 'click',
+            {
+              args_name: 'click_detail_64gua2',
+              channel: utils.getFBChannel(),
+            })
+            break;
+
+          case 'h5_weigh_bone': utils.firebaseLogEvent('10001', '-10058', 'click_detail_chenggu2', 'click',
+            {
+              args_name: 'click_detail_chenggu2',
+              channel: utils.getFBChannel(),
+            })
+            break;
+
+        }
+      } else {
+        switch (prodect_key) {
+          case 'h5_marriage': utils.firebaseLogEvent('10001', '-10050', 'click_detail_marriage3', 'click',
+            {
+              args_name: 'click_detail_marriage3',
+              channel: utils.getFBChannel(),
+            });
+            break;
+
+          case 'h5_emotion2024': utils.firebaseLogEvent('10001', '-10047', 'click_detail_2024lovely3', 'click',
+            {
+              args_name: 'click_detail_2024lovely3',
+              channel: utils.getFBChannel(),
+            });
+            break;
+
+          case 'h5_annual2024': utils.firebaseLogEvent('10001', '-10046', 'click_detail_2024report3', 'click',
+            {
+              args_name: 'click_detail_3034report3',
+              channel: utils.getFBChannel(),
+            });
+            break;
+
+          case 'h5_wealth2024': utils.firebaseLogEvent('10001', '-10049', 'click_detail_2024wealty3', 'click',
+            {
+              args_name: 'click_detail_2024wealty3',
+              channel: utils.getFBChannel(),
+            });
+            break;
+
+          case 'h5_career2024': utils.firebaseLogEvent('10001', '-10048', 'click_detail_2024career3', 'click',
+            {
+              args_name: 'click_detail_2024career3',
+              channel: utils.getFBChannel(),
+            });
+            break;
+
+          case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10052', 'click_detail_64gua3', 'click',
+            {
+              args_name: 'click_detail_64gua3',
+              channel: utils.getFBChannel(),
+            });
+            break;
+
+          case 'h5_weigh_bone': utils.firebaseLogEvent('10001', '-10051', 'click_detail_chenggu3', 'click',
+            {
+              args_name: 'click_detail_chenggu3',
+              channel: utils.getFBChannel(),
+            });
+
+            break;
+        }
+      }
       };
       this.sale_detail_modal = true;
       if (size === 2) {
@@ -2913,14 +3017,14 @@ export default {
             })
             break;
 
-          case 'h5_career2024': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist2_2024career_detail', 'click',
+          case 'h5_career2024': utils.firebaseLogEvent('10001', '-10034', 'click_reportlist2_2024career_detail', 'click',
             {
               args_name: 'click_reportlist_2024career_detail',
               channel: utils.getFBChannel(),
             })
             break;
 
-          case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist2_64gua_detail', 'click',
+          case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10037', 'click_reportlist2_64gua_detail', 'click',
             {
               args_name: 'click_reportlist_64gua_detail',
               channel: utils.getFBChannel(),
@@ -2937,49 +3041,49 @@ export default {
         }
       } else {
         switch (prodect_key) {
-          case 'h5_marriage': utils.firebaseLogEvent('10001', '-10039', 'click_reportlist3_marriage_detail', 'click',
+          case 'h5_marriage': utils.firebaseLogEvent('10001', '-10043', 'click_reportlist3_marriage_detail', 'click',
             {
               args_name: 'click_reportlist3_marriage_detail',
               channel: utils.getFBChannel(),
             });
             break;
 
-          case 'h5_emotion2024': utils.firebaseLogEvent('10001', '-10033', 'click_reportlist3_2024lovely_detail', 'click',
+          case 'h5_emotion2024': utils.firebaseLogEvent('10001', '-10040', 'click_reportlist3_2024lovely_detail', 'click',
             {
               args_name: 'click_reportlist3_2024lovely_detail',
               channel: utils.getFBChannel(),
             });
             break;
 
-          case 'h5_annual2024': utils.firebaseLogEvent('10001', '-10032', 'click_reportlist3_2024report_detail', 'click',
+          case 'h5_annual2024': utils.firebaseLogEvent('10001', '-10039', 'click_reportlist3_2024report_detail', 'click',
             {
               args_name: 'click_reportlist3_2024report_detail',
               channel: utils.getFBChannel(),
             });
-
             break;
-          case 'h5_wealth2024': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist3_2024wealty_detail', 'click',
+
+          case 'h5_wealth2024': utils.firebaseLogEvent('10001', '-10042', 'click_reportlist3_2024wealty_detail', 'click',
             {
               args_name: 'click_reportlist3_2024wealty_detail',
               channel: utils.getFBChannel(),
             });
             break;
 
-          case 'h5_career2024': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist3_2024career_detail', 'click',
+          case 'h5_career2024': utils.firebaseLogEvent('10001', '-10041', 'click_reportlist3_2024career_detail', 'click',
             {
               args_name: 'click_reportlist3_2024career_detail',
               channel: utils.getFBChannel(),
             });
-
             break;
-          case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist3_64gua_detail', 'click',
+
+          case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10044', 'click_reportlist3_64gua_detail', 'click',
             {
               args_name: 'click_reportlist3_64gua_detail',
               channel: utils.getFBChannel(),
             });
             break;
 
-          case 'h5_weigh_bone': utils.firebaseLogEvent('10001', '-10038', 'click_reportlist3_chenggu_detail', 'click',
+          case 'h5_weigh_bone': utils.firebaseLogEvent('10001', '-10045', 'click_reportlist3_chenggu_detail', 'click',
             {
               args_name: 'click_reportlist3_chenggu_detail',
               channel: utils.getFBChannel(),
