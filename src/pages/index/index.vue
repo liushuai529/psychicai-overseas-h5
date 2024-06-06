@@ -1886,7 +1886,7 @@ export default {
     this.getLastOrder();
 
     this.is_show_combine =
-      ['enjoy03', 'panda03'].includes(utils.getFBChannel()) || !utils.isProd();
+      ['enjoy03', 'panda03'].includes(utils.getFBChannel());
 
     let url_query = utils.getUrlParams();
     let order_id = url_query.order_id;
