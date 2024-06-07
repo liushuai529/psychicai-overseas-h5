@@ -428,8 +428,7 @@ export default {
         const res = await getPayMethodsAPI();
         this.loading = false;
         if (res.status === 1000) {
-          // this.pay_methods = res.data;
-          this.pay_methods = [...res.data,...res.data];
+          this.pay_methods = res.data;
         }
       } catch (e) {
         this.loading = false;
