@@ -11,8 +11,8 @@
 <script>
 import utils from '../libs/utils';
 //h5_emotion2024
-import cn_h5_emotion2024 from '../assets/img/emotion_v2/new/pay.png';
-import tw_h5_emotion2024 from '../assets/img/emotion_v2/new/pay.png';
+import cn_h5_emotion2024 from '../assets/img/emotion_v2/new/cn/pay.png';
+import tw_h5_emotion2024 from '../assets/img/emotion_v2/new/tw/pay.png';
 //h5_marriage
 import tw_h5_marriage from '../assets/img//bzhh_v2/tw/img_btn.png';
 import cn_h5_marriage from '../assets/img/bzhh_v2/cn/img_btn.png';

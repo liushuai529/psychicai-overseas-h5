@@ -237,7 +237,7 @@ import {
 } from '../../../libs/enum';
 
 import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.png';
-import tw_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.png';
+import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.png';
 
 import combinePayPop from '../../../components/combinePayPop.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
