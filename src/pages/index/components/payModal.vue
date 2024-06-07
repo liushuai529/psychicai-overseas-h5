@@ -166,7 +166,7 @@ export default {
     async payMoney() {
       Indicator.open('支付中...');
 
-      const { pay_method, trade_pay_type, trade_target_org, title } =
+      const { pay_method, trade_pay_type, trade_target_org, title, fake } =
         this.pay_methods[this.check_index];
       const { price, unit, product_key, product_id, combine_product_ids } =
         this.combine_info;
@@ -177,7 +177,8 @@ export default {
         product_id,
       };
       this.$emit('logEvent', item_);
-      if(1===2) {
+      //假支付
+      if(fake) {
         Toast(this.is_cn?'请选择其他支付方式':'請選擇其他支付方式')
         return
       }

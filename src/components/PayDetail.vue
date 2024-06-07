@@ -521,8 +521,9 @@ export default {
         );
       }
       let pick_method = this.pay_methods[this.check_index];
-      const { pay_method, trade_pay_type, trade_target_org } = pick_method;
-      if(1===2) {
+      const { pay_method, trade_pay_type, trade_target_org, fake } = pick_method;
+      //假支付
+      if(fake) {
         Toast(this.is_cn?'请选择其他支付方式':'請選擇其他支付方式')
         return
       }
