@@ -359,6 +359,9 @@ export default {
       default:3
     },
   },
+  mounted() {
+    window.scrollTo(0, 0);
+  },
   methods:{
     close(){
         this.$emit('close',false)
