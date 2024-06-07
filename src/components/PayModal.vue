@@ -16,7 +16,7 @@
       <div >
         <img @click="closeModal" class="close"
           src="https://psychicai-static.psychicai.pro/imgs/240484f905eb6e7b49f19988b0f94f83c430.png" alt="" />
-        <div :style="title_style" class="username">
+        <div class="username">
           {{ title }}
         </div>
         <!-- 限时优惠 -->
