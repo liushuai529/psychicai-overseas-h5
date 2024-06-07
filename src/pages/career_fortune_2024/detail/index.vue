@@ -67,7 +67,7 @@
       :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg"
       :query_user_string="query_user_string"
       :title="username_title"
-      title_style="color:#fff"
+      title_style="color:#000"
       @close="pay_modal = false"
       e_view_id="10004"
       c_view_id="-10005"

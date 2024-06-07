@@ -69,7 +69,7 @@
       :bg="modal_bg"
       :query_user_string="query_user_string"
       title="袁天罡称骨论命"
-      title_style="color:#fff"
+      title_style="color:#000"
       @close="pay_modal = false"
       e_view_id="10009"
       c_view_id="-10005"
