@@ -729,7 +729,8 @@ export default {
   padding: 0 0.5rem;
   width: 100%;
   min-height: 4rem;
-  max-height: 10rem;
+  // max-height: 10rem;
+  max-height: 7rem;
 
   .item {
     display: flex;
