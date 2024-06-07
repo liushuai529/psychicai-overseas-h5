@@ -520,16 +520,14 @@ export default {
           }
         );
       }
-      
-
-      
-
-
-      localStorage.setItem('report_price', this.product.price);
-
-      Indicator.open(tipsArr5[utils.getLanguage()]);
       let pick_method = this.pay_methods[this.check_index];
       const { pay_method, trade_pay_type, trade_target_org } = pick_method;
+      if(1===2) {
+        Toast(this.is_cn?'请选择其他支付方式':'請選擇其他支付方式')
+        return
+      }
+      localStorage.setItem('report_price', this.product.price);
+      Indicator.open(tipsArr5[utils.getLanguage()]);
       let params = {
         pay_method: pay_method,
         product_key: this.combine_product_ids.length ? this.h5_combo2_attach.product_key: this.product_key,

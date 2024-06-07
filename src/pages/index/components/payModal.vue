@@ -177,6 +177,10 @@ export default {
         product_id,
       };
       this.$emit('logEvent', item_);
+      if(1===2) {
+        Toast(this.is_cn?'请选择其他支付方式':'請選擇其他支付方式')
+        return
+      }
 
       let params = {
         pay_method,

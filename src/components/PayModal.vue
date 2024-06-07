@@ -104,7 +104,7 @@ import {
 } from '../api/api';
 import utils from '../libs/utils';
 import { path_enums } from '../libs/enum';
-import { CountDown } from 'vant';
+import { CountDown, Toast } from 'vant';
 import { Downloader, Parser, Player } from 'svga.lite';
 import cn_bazi_modal from '../assets/img/mlxz/svga/bzhh/cn_modal.svga';
 import tw_bazi_modal from '../assets/img/mlxz/svga/bzhh/tw_modal.svga';
@@ -492,12 +492,18 @@ export default {
           channel: utils.getFBChannel(),
         }
       );
+      let pick_method = this.pay_methods[this.check_index];
+      const { pay_method, trade_pay_type, trade_target_org,  } = pick_method;
+
+      if(1===2) {
+        Toast(this.is_cn?'请选择其他支付方式':'請選擇其他支付方式')
+        return
+      }
 
       localStorage.setItem('report_price', this.product.price);
 
       Indicator.open(tipsArr5[utils.getLanguage()]);
-      let pick_method = this.pay_methods[this.check_index];
-      const { pay_method, trade_pay_type, trade_target_org } = pick_method;
+      
       let params = {
         pay_method: pay_method,
         product_key: this.product_key,
@@ -511,23 +517,7 @@ export default {
       let discount_pay = this.$route.query.discount_pay || 0;
       // let user_time = this.$route.query.use_fixed_time;
       let user_time = true;
-      if (pay_method === 'google_pay') {
-        const res = await payOrderAPI(params);
-        Indicator.close();
-        localStorage.removeItem('mlxz_set_event_times');
-
-        if (user_time) {
-          localStorage.removeItem('mlxz_fixed_order_info');
-          localStorage.removeItem('mlxz_fixed_order_key');
-          localStorage.removeItem('mlxz_fixed_local_order_time');
-          localStorage.removeItem('mlxz_fixed_api_order_time');
-        }
-
-        if (res.status !== 1000) return;
-
-        localStorage.setItem('report_order_id', res.data.id);
-      } else {
-        let pay_max_params = Object.assign({}, params, {
+      let pay_max_params = Object.assign({}, params, {
           trade_pay_type,
           trade_target_org,
         });
@@ -547,7 +537,6 @@ export default {
         }
         await utils.asleep(1000);
         location.href = res.data.pay_url;
-      }
     },
   },
 };
@@ -708,10 +697,10 @@ export default {
     font-size: 0.24rem;
     color: #e24c2e;
 
-    div {
-      height: 0.24rem;
-      line-height: 0.24rem;
-    }
+    // div {
+    //   height: 0.24rem;
+    //   line-height: 0.24rem;
+    // }
   }
 
   .right div:first-child {
