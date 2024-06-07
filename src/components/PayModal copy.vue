@@ -1,142 +1,142 @@
+<!--
+ * @Author: wujiang@weli.cn
+ * @Date: 2024-04-08 11:37:29
+ * @LastEditors: wujiang 
+ * @LastEditTime: 2024-05-28 14:31:57
+ * @Description: 支付弹窗
+-->
 <template>
-  <div :class="className">
-    <div v-if="!pay_methods.length && loading" class="no-empty">
-      <mt-spinner type="fading-circle" :size="60"></mt-spinner>
-    </div>
-    <div v-else class="pay-list">
-      <!-- 老版限时优惠 -->
-      <div class="discount" v-if="!is_show_combination">
-        <div class="left">
-          <img
-            :src="is_new_user ? new_user_icon : xsyh_icon"
-            class="xsyh"
-            alt=""
-          />
-          <div class="price-box">
-            <div class="now-price">{{ now_price }}</div>
-            <div class="origin-price">{{ origin_price }}</div>
-          </div>
+  <mt-popup
+    v-model="show"
+    position="bottom"
+    :style="{
+      height: is_android ? '13.2rem' : '12rem',
+    }"
+    class="pay-modal"
+  >
+    <div class="pay-content">
+      <img
+        @click="closeModal"
+        class="close"
+        src="https://psychicai-static.psychicai.pro/imgs/240484f905eb6e7b49f19988b0f94f83c430.png"
+        alt=""
+      />
+      <div :style="title_style" class="username">
+        {{ title }}
+      </div>
+      <div v-if="product_key === 'h5_marriage'" class="modal-bg">
+        <img :src="bg" class="init-bg" alt="" />
+        <canvas id="bg"></canvas>
+      </div>
+      <img v-else class="bg" :src="bg" alt="" />
+      <div class="pay-method">
+        <div v-if="!pay_methods.length && loading" class="no-empty">
+          <mt-spinner type="fading-circle" :size="60"></mt-spinner>
         </div>
-        <div class="right">
-          <div class="desc">
-            <!-- <div class="count-down">
-              <span class="block rgb-light">{{ time_str_1 }}</span>
-              <span class="colon rgb-color">:</span>
-              <span class="block rgb-light">{{ time_str_2 }}</span>
-              <span class="colon rgb-color">:</span>
-              <span class="block rgb-light">
-                <span :class="{ mill: !time }">{{ time_str_3 }}</span>
-              </span>
-            </div> -->
-            <count-down
-              ref="countDown"
-              :time="time"
-              millisecond
-              class="time-box"
-              @change="getTime"
+        <div v-else class="pay-list">
+          <!-- 限时优惠 -->
+          <div class="discount">
+            <div class="left">
+              <img
+                :src="is_new_user ? new_user_icon : xsyh_icon"
+                class="xsyh"
+                alt=""
+              />
+              <div class="price-box">
+                <div class="now-price">{{ now_price }}</div>
+                <div class="origin-price">{{ origin_price }}</div>
+              </div>
+            </div>
+            <div class="right">
+              <div class="title">{{ tips1 }}</div>
+              <div class="desc">
+                <!-- <count-down :time="time" @change="getTime" format="mm:ss" /> -->
+                <count-down
+                  ref="countDown"
+                  :time="time"
+                  millisecond
+                  class="time-box"
+                  @change="getTime"
+                >
+                  <template #default="timeData">
+                    <span
+                      :class="{
+                        block: true,
+                        'rgb-light': is_show_shandong,
+                      }"
+                      >{{ timeData.minutes | filterTime }}</span
+                    >
+                    <span
+                      :class="{ colon: true, 'rgb-color': is_show_shandong }"
+                      >:</span
+                    >
+                    <span
+                      :class="{
+                        block: true,
+                        'rgb-light': is_show_shandong,
+                      }"
+                      >{{ timeData.seconds | filterTime }}</span
+                    >
+                    <span
+                      :class="{ colon: true, 'rgb-color': is_show_shandong }"
+                      >:</span
+                    >
+
+                    <span
+                      :class="{
+                        block: true,
+                        'rgb-light': is_show_shandong,
+                      }"
+                    >
+                      <span :class="{ mill: time === 1 }">
+                        {{ timeData.milliseconds | filterTime }}
+                      </span>
+                    </span>
+                  </template>
+                </count-down>
+              </div>
+            </div>
+          </div>
+          <div class="buy-people">
+            今日已有<span>{{ buy_people }}</span
+            >{{ tips2 }}
+          </div>
+          <!-- 支付方式 -->
+          <div class="method-list">
+            <div
+              v-for="(it, k) in pay_methods"
+              @click="check_index = k"
+              :key="k"
+              class="item"
             >
-              <template #default="timeData">
-                <span
-                  :class="{
-                    block: true,
-                    'rgb-light': is_show_shandong,
-                  }"
-                  >{{ timeData.minutes | filterTime }}</span
-                >
-                <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
-                  >:</span
-                >
-                <span
-                  :class="{
-                    block: true,
-                    'rgb-light': is_show_shandong,
-                  }"
-                  >{{ timeData.seconds | filterTime }}</span
-                >
-                <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
-                  >:</span
-                >
-
-                <span
-                  :class="{
-                    block: true,
-                    'rgb-light': is_show_shandong,
-                  }"
-                >
-                  <span :class="{ mill: time === 1 }">
-                    {{ timeData.milliseconds | filterTime }}
-                  </span></span
-                >
-              </template>
-            </count-down>
-          </div>
-          <div
-            :class="{
-              title: true,
-              'rgb-color': is_show_shandong,
-            }"
-          >
-            {{ is_show_daoqi ? new_tips1 : tips1 }}
+              <div class="left">
+                <img :src="it.icon" alt="" />
+                <div class="name">{{ it.title }}</div>
+              </div>
+              <img
+                class="right"
+                :src="check_index === k ? checked_icon : no_check_icon"
+                alt=""
+              />
+            </div>
           </div>
         </div>
       </div>
+      <!-- 支付按钮 -->
 
-        <div class="discount-comb" v-else>
-            <GroupPurchase
-              :product=product
-              :h5_combo2_attach=h5_combo2_attach
-              :all_product=all_product
-              @get_combine_product_ids="getCombineProductIds"
-              :product_key=product_key
-            />
-          
-        </div>
-      
-
-     
-
-
-      
-      
-      <div class="divider-line"></div>
-      
-      <div class="pay-type">支付方式</div>
-      <div class="buy-people">
-        今日已有<span>{{ buy_people }}</span
-        >{{ tips2 }}
+      <div
+        :style="{
+          bottom: is_android ? '1.4rem' : '0.2rem',
+        }"
+        v-if="pay_methods.length"
+        @click="payMoney()"
+        class="pay-btn"
+      >
+        {{ tips3 }}<span>{{ now_price }}</span
+        >{{ tips4 }}
       </div>
-      <!-- 支付方式 -->
-      <div class="method-list">
-        <div
-          v-for="(it, k) in pay_methods"
-          @click="check_index = k"
-          :key="k"
-          class="item"
-        >
-          <div class="left">
-            <img :src="it.icon" alt="" />
-            <div class="name">{{ it.title }}</div>
-          </div>
-          <img
-            class="right"
-            :src="check_index === k ? checked_icon : no_check_icon"
-            alt=""
-          />
-        </div>
-        <!--此处引用按钮组件-->
-        <PayBtn
-          :product_key="product_key"
-          :callback="payMoney"
-        />
-        <!-- <img
-          :src="cn_home_btn"
-        /> -->
-        
-      </div>
-   
-
     </div>
-  </div>
+  </mt-popup>
 </template>
 
 <script>
@@ -150,11 +150,9 @@ import {
 import utils from '../libs/utils';
 import { path_enums } from '../libs/enum';
 import { CountDown } from 'vant';
-import 'vant/lib/index.css';
-import moment from 'moment';
-import GroupPurchase from '../components/GroupPurchase.vue';
-import PayBtn from '../components/PayBtn.vue';
-
+import { Downloader, Parser, Player } from 'svga.lite';
+import cn_bazi_modal from '../assets/img/mlxz/svga/bzhh/cn_modal.svga';
+import tw_bazi_modal from '../assets/img/mlxz/svga/bzhh/tw_modal.svga';
 const e_id_arr = {
   h5_wealth2024: '60001',
   h5_weigh_bone: '60002',
@@ -168,11 +166,6 @@ const e_id_arr = {
 const tipsArr1 = {
   'zh-CN': '优惠倒计时',
   'zh-TW': '優惠倒計時',
-};
-
-const newTipsArr1 = {
-  'zh-CN': '您的限时优惠即将到期',
-  'zh-TW': '您的限時優惠即將到期',
 };
 const tipsArr2 = {
   'zh-CN': '人购买当前报告',
@@ -202,18 +195,18 @@ const tipsArr6 = {
   'zh-TW': '請稍等...',
 };
 export default {
-  components: {
-    CountDown,
-    GroupPurchase,
-    PayBtn,
-  },
+
   data() {
     return {
       tips1: tipsArr1[utils.getLanguage()],
       tips2: tipsArr2[utils.getLanguage()],
       tips3: tipsArr3[utils.getLanguage()],
       tips4: tipsArr4[utils.getLanguage()],
-      new_tips1: newTipsArr1[utils.getLanguage()],
+      parser: null,
+      player: null,
+      cn_bazi_modal,
+      tw_bazi_modal,
+      show: false,
       pay_methods: [],
       loading: false,
       xsyh_icon:
@@ -221,10 +214,7 @@ export default {
       new_user_icon:
         'https://psychicai-static.psychicai.pro/imgs/24040fcec5baef7f4fcea5a1eed3552d734e.png',
       time: 0,
-      // time: 5 * 1000,
-      time_str_1: '',
-      time_str_2: '',
-      time_str_3: '',
+      time_str: '',
       product: null,
       is_new_user: false, // 是否是新用户
       check_index: 0, //选中支付方式
@@ -232,18 +222,29 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/24048e756ae2d40f436184b0bc8018199fbb.png',
       no_check_icon:
         'https://psychicai-static.psychicai.pro/imgs/2404f091a163349f45d3909f82e4660cc3c6.png',
-      start_down: false,
       is_show_shandong: false,
       is_show_daoqi: false,
       payCanClick : false,
-      pay_lock_time:0,
-      h5_combo2_attach:undefined,//组合下单信息
-      combine_product_ids: [],//组合下单ID集合，由前端拼接
-
-      all_product: [],//所有测算报告、组合优惠
+      pay_lock_time:0
     };
   },
   props: {
+    value: {
+      type: Boolean,
+      default: false,
+    },
+    bg: {
+      type: String,
+      default: '',
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    close: {
+      type: Function,
+      default: () => {},
+    },
     product_key: {
       type: String,
       default: '',
@@ -256,7 +257,10 @@ export default {
       default: '',
       type: String,
     },
-
+    title_style: {
+      type: String,
+      default: 'color:#222',
+    },
     e_view_id: {
       type: String,
       default: '',
@@ -285,11 +289,9 @@ export default {
       type: String,
       default: '',
     },
-    className: {
-      type: String,
-      default: '',
-    },
-    
+  },
+  components: {
+    CountDown,
   },
 
   computed: {
@@ -318,13 +320,65 @@ export default {
             this.product.origin_price_str
         : '-';
     },
-
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
-    is_show_combination() {
-      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+    is_android() {
+      return utils.isAndroid();
+    },
+  },
+  created() {
+    // 首次挽留的弹窗计时
+    let use_fixed_time = this.$route.query.use_fixed_time;
+    if (use_fixed_time) {
+      this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
+    } else {
+      this.time = 15 * 60 * 1000;
+      localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
     }
+  },
+
+  watch: {
+    value: {
+      handler: function (val) {
+        this.show = val;
+        if (val) {
+          this.getProductionList();
+          this.getPayMethod();
+          if (this.product_key === 'h5_marriage') {
+            this.loadBg(
+              '#bg',
+              this.is_cn ? this.cn_bazi_modal : this.tw_bazi_modal
+            );
+          }
+
+          utils.firebaseLogEvent(
+            this.e_view_id,
+            this.c_view_id,
+            this.e_view_name,
+            'view',
+            {
+              args_name: this.e_view_name,
+              channel: utils.getFBChannel(),
+            }
+          );
+        } else {
+          if (this.parser) {
+            this.parser.destroy();
+          }
+          if (this.player) {
+            this.player.destroy();
+          }
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    show(val) {
+      if (!val) {
+        this.closeModal();
+      }
+    },
   },
   filters: {
     filterTime(val_) {
@@ -338,40 +392,8 @@ export default {
       }
     },
   },
-  created() {
-    // 首次挽留的弹窗计时
-    let use_fixed_time = this.$route.query.use_fixed_time;
-    if (use_fixed_time) {
-      this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
-      localStorage.removeItem('mlxz_fixed_local_order_time');
-    } else {
-      this.time = 15 * 60 * 1000;
-      // localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
-    }
-
-   
-    this.getProductionList();
-
-    this.getPayMethod();
-
-    utils.firebaseLogEvent(
-      this.e_view_id,
-      this.c_view_id,
-      this.e_view_name,
-      'view',
-      {
-        args_name: this.e_view_name,
-        channel: utils.getFBChannel(),
-      }
-    );
-  },
-  mounted() {},
 
   methods: {
-    getCombineProductIds(product_ids) {
-      this.combine_product_ids = product_ids;
-      console.warn('this.combine_product_ids',this.combine_product_ids);
-    },
     getTime(val) {
       const { minutes, seconds, milliseconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
@@ -396,15 +418,32 @@ export default {
         this.$refs.countDown.reset();
       }
     },
+    // 端内加载背景SVGA动画
+    loadBg(dom, url, is_loop = true) {
+      const downloader = new Downloader();
+      // 默认调用 WebWorker 线程解析
+      // 可配置 new Parser({ disableWorker: true }) 禁止
+      this.parser = new Parser();
+      // #canvas 是 HTMLCanvasElement
+      this.player = new Player(dom);
 
-    //获取组合套餐商品id集合
-    getCombineProductIdsBySelf() {
-      let array = [this.product.product_id];
-      let tags = this.h5_combo2_attach.tags;
-      let otherProductKey = tags.filter(item=>item !== this.product.product_key)[0];
-      let otherProductId = this.all_product.filter(item=>item.product_key === otherProductKey)[0].product_id;
-      array.push(otherProductId);
-      return array;
+      (async () => {
+        const fileData = await downloader.get(url);
+        const svgaData = await this.parser.do(fileData);
+
+        this.player.set({ loop: is_loop });
+
+        await this.player.mount(svgaData);
+
+        // 开始播放动画
+        this.player.start();
+      })();
+    },
+
+    closeModal() {
+      this.show = false;
+      this.$emit('close', false);
+      this.$emit('update:value', false);
     },
 
     /**
@@ -416,13 +455,6 @@ export default {
       const { status, data } = await getProductionsAPI('ceh5');
       if (status === 1000) {
         this.product = data.find(item => item.product_key === this.product_key);
-        //获取所有报告以及套餐
-        this.all_product = data;
-        //组合两项优惠
-        this.h5_combo2_attach = data.find(item => item.product_key === 'h5_combo2_attach');
-        if(this.is_show_combination) {
-          this.combine_product_ids = this.getCombineProductIdsBySelf();
-        }
         this.is_new_user = this.product
           ? this.product.tags
             ? this.product.tags.includes('newcomer_discount')
@@ -436,16 +468,16 @@ export default {
      */
     async getPayMethod() {
       this.loading = true;
+
       try {
         const res = await getPayMethodsAPI();
         this.loading = false;
         if (res.status === 1000) {
-          this.start_down = true;
           this.pay_methods = res.data;
-          // this.pay_methods = [...res.data,...res.data,...res.data];
         }
       } catch (e) {
         this.loading = false;
+        this.closeModal();
       }
     },
     isShowBannerSort() {
@@ -470,7 +502,6 @@ export default {
      * @return {*}
      */
     async payMoney() {
-      if(this.all_product.length === 0) return
       //防抖
       if(this.payCanClick){
         return false
@@ -494,36 +525,17 @@ export default {
         e_name: 'pay_click',
         product_id: this.product.product_id,
       });
-      //组合套餐购买埋点上报
-      if(this.combine_product_ids.length) {
-        utils.firebaseLogEvent(
-          this.product_key ==='h5_emotion2024'? 10006: 10007,
-          this.product_key ==='h5_emotion2024'?-10028: -10030,
-          this.product_key ==='h5_emotion2024'?'click_2024lovelymarriage_pay': 'click_marriage2024lovely_pay',
-          'click',
-          {
-            args_name: this.product_key ==='h5_emotion2024'?'click_2024lovelymarriage_pay': 'click_marriage2024lovely_pay',
-            pay_type: this.pay_methods[this.check_index].title,
-            channel: utils.getFBChannel(),
-          }
-        );
-      } else {
-          utils.firebaseLogEvent(
-          this.e_view_id,
-          this.c_click_id,
-          this.e_click_name,
-          'click',
-          {
-            args_name: this.e_click_name,
-            pay_type: this.pay_methods[this.check_index].title,
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
-      
-
-      
-
+      utils.firebaseLogEvent(
+        this.e_view_id,
+        this.c_click_id,
+        this.e_click_name,
+        'click',
+        {
+          args_name: this.e_click_name,
+          pay_type: this.pay_methods[this.check_index].title,
+          channel: utils.getFBChannel(),
+        }
+      );
 
       localStorage.setItem('report_price', this.product.price);
 
@@ -532,31 +544,30 @@ export default {
       const { pay_method, trade_pay_type, trade_target_org } = pick_method;
       let params = {
         pay_method: pay_method,
-        product_key: this.combine_product_ids.length ? this.h5_combo2_attach.product_key: this.product_key,
-        product_id: this.combine_product_ids.length ? this.h5_combo2_attach.product_id: this.product.product_id,
-        combine_product_ids: this.combine_product_ids,
+        product_key: this.product_key,
+        product_id: this.product.product_id,
         platform: 'WEB',
         extra_ce_suan: utils.getExtraParams(
           this.product_key,
           this.query_user_string
         ),
       };
-      // let user_time = this.$route.query.use_fixed_time;
-
       let discount_pay = this.$route.query.discount_pay || 0;
+      // let user_time = this.$route.query.use_fixed_time;
       let user_time = true;
       if (pay_method === 'google_pay') {
         const res = await payOrderAPI(params);
+        Indicator.close();
         localStorage.removeItem('mlxz_set_event_times');
 
-        Indicator.close();
-        if (res.status !== 1000) return;
         if (user_time) {
           localStorage.removeItem('mlxz_fixed_order_info');
           localStorage.removeItem('mlxz_fixed_order_key');
           localStorage.removeItem('mlxz_fixed_local_order_time');
           localStorage.removeItem('mlxz_fixed_api_order_time');
         }
+
+        if (res.status !== 1000) return;
 
         localStorage.setItem('report_order_id', res.data.id);
       } else {
@@ -568,10 +579,11 @@ export default {
           location.pathname
         }#/result?path=${path_enums[this.product_key]}&report_price=${
           this.product.price
-        }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length? 1: 0}`;
+        }&discount_pay=${discount_pay}`;
         const res = await payOrderAPI(pay_max_params);
-        localStorage.removeItem('mlxz_set_event_times');
         Indicator.close();
+        localStorage.removeItem('mlxz_set_event_times');
+
         if (res.status !== 1000) return;
         if (user_time) {
           localStorage.removeItem('mlxz_fixed_order_info');
@@ -602,6 +614,76 @@ export default {
 // }
 </style>
 <style scoped lang="less">
+.modal-bg {
+  width: 7.5rem;
+  height: 6.6rem;
+  position: relative;
+  canvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+  .init-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+}
+.pay-method {
+  height: 4rem;
+  overflow-y: auto;
+}
+.pay-modal {
+  width: 7.5rem;
+  // height: 100vh;
+  // height: 12rem;
+  font-family: system-ui, sans-serif;
+  z-index: 999 !important;
+  .pay-content {
+    width: 100%;
+    // max-height: 13.2rem;
+    // min-height: 10rem;
+    height: 100%;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 0.4rem 0.4rem 0 0;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .bg {
+    width: 7.5rem;
+    height: 6.6rem;
+  }
+  .close {
+    position: fixed;
+    width: 0.44rem;
+    height: 0.44rem;
+    top: 0.36rem;
+    right: 0.36rem;
+    z-index: 10;
+  }
+  .username {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    height: 0.36rem;
+    font-weight: 600;
+    font-size: 0.36rem;
+    line-height: 0.36rem;
+    margin-top: 0.4rem;
+    z-index: 3;
+  }
+}
+
 .no-empty {
   display: flex;
   justify-content: center;
@@ -621,8 +703,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.14rem;
-  margin-top: 0.14rem;
+  padding: 0 0.5rem;
+  margin-top: 0.3rem;
   .left {
     display: flex;
     align-items: center;
@@ -638,10 +720,10 @@ export default {
       flex-direction: column;
       font-weight: 600;
       .now-price {
-        height: 0.4rem;
-        font-size: 0.4rem;
+        height: 0.36rem;
+        font-size: 0.36rem;
         color: #e24c2e;
-        line-height: 0.4rem;
+        line-height: 0.36rem;
         margin-bottom: 0.1rem;
       }
       .origin-price {
@@ -660,24 +742,15 @@ export default {
     justify-content: center;
     font-weight: 600;
     font-size: 0.24rem;
-    // color: #e24c2e;
-    // div {
-    //   height: 0.24rem;
-    //   line-height: 0.24rem;
-    // }
-    .title {
+    color: #e24c2e;
+    div {
       height: 0.24rem;
       line-height: 0.24rem;
-      color: #e24c2e;
     }
   }
   .right div:first-child {
-    margin-bottom: 0.08rem;
+    margin-bottom: 0.12rem;
   }
-}
-.discount-comb {
-  height: 4.86rem;
-  width: 100%;
 }
 .buy-people {
   width: 100%;
@@ -687,6 +760,7 @@ export default {
   color: #99999a;
   line-height: 0.26rem;
   text-align: center;
+  margin-top: 0.3rem;
   margin-bottom: 0.4rem;
   span {
     color: #e24c2e;
@@ -696,7 +770,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 0.14rem;
+  padding: 0 0.5rem;
   width: 100%;
   .item {
     display: flex;
@@ -739,47 +813,18 @@ export default {
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 0.2rem;
+  // bottom: 0.2rem;
   left: 0.6rem;
   z-index: 99;
   span {
     margin: 0 0.1rem;
   }
 }
-.divider-line {
-  width: 6.5rem;
-  height: 1px;
-  background: #000000;
-  opacity: 0.13;
-  margin: 0.24rem auto;
-}
 
-.colon {
-  margin: 0 0.02rem;
-  display: flex;
-  align-items: center;
-  color: #e24c2e;
-}
-.block {
-  width: 0.4rem;
-  height: 100%;
-  font-size: 0.26rem;
-  border-radius: 0.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  background-color: #e24c2e; /* 初始背景色 */
-}
-.desc {
+.time-box {
   display: flex;
   flex-direction: row;
-  height: 0.4rem;
-}
-
-.count-down {
-  height: 100%;
-  display: flex;
+  height: 0.4rem !important;
 }
 @keyframes noticeTime {
   0% {
@@ -830,20 +875,21 @@ export default {
   }
 }
 
-.pay-type {
-  width: 100%;
-  height: 0.3rem;
-  font-weight: 600;
-  font-size: 0.3rem;
-  color: #333333;
-  line-height: 0.3rem;
-  text-align: center;
-  margin-bottom: 0.19rem;
-}
-
-.time-box {
+.colon {
+  margin: 0 0.02rem;
   display: flex;
-  flex-direction: row;
-  height: 0.4rem;
+  align-items: center;
+  color: #e24c2e;
+}
+.block {
+  width: 0.4rem;
+  height: 100%;
+  font-size: 0.26rem;
+  border-radius: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: #e24c2e; /* 初始背景色 */
 }
 </style>
