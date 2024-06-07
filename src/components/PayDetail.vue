@@ -149,7 +149,7 @@ import {
 } from '../api/api';
 import utils from '../libs/utils';
 import { path_enums } from '../libs/enum';
-import { CountDown } from 'vant';
+import { CountDown, Toast } from 'vant';
 import 'vant/lib/index.css';
 import moment from 'moment';
 import GroupPurchase from '../components/GroupPurchase.vue';
