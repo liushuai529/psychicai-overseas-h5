@@ -367,33 +367,8 @@ export default {
       );
 
       const { pay_method, trade_pay_type, trade_target_org } = click_;
-      if (click_.pay_method === 'google_pay') {
-        let params = {
-          pay_method: pay_method,
-          product_key: this.product_key,
-          platform: 'ANDROID',
-          product_id: this.product_id,
-          extra_ce_suan: this.getExtra(
-            this.product_key,
-            this.query_user_string
-          ),
-        };
-        payOrderAPI(params)
-          .then(res => {
-            this.loading = false;
-            if (res.status === 1000) {
-              Indicator.close();
-              this.order_id = res.data.id;
-              this.$emit('getOrderId', res.data.id);
-            }
-          })
-          .catch(err => {
-            this.loading = false;
-            Indicator.close();
-          });
-      } else {
-        // 支付公共参数
-        let params = {
+      // 支付公共参数
+      let params = {
           pay_method: pay_method,
           platform: utils.isAndroid() ? 'ANDROID' : 'IPHONE',
           trade_pay_type: trade_pay_type,
@@ -423,7 +398,6 @@ export default {
             this.loading = false;
             Indicator.close();
           });
-      }
     },
   },
 };

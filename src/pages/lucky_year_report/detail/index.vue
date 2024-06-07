@@ -6,7 +6,7 @@
  * @Description: 
 -->
 <template>
-  <div class="detail">
+  <div :class="['detail', pay_modal? 'fix-pop': '']">
     <div class="pay-box">
       <img class="title1" :src="is_cn ? cn_txt_title : tw_txt_title" alt="" />
       <img class="title2" :src="is_cn ? cn_img_word3 : tw_img_word3" alt="" />
@@ -435,6 +435,14 @@ export default {
     align-items: center;
     justify-content: center;
   }
+}
+.fix-pop {
+  // overflow-y: hidden;
+  // height: 100vh;
+  position: fixed !important;
+  overflow-y: hidden;
+  top: 0;
+
 }
 .btn {
   width: 5.92rem;
