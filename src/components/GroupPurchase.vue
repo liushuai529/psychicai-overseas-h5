@@ -157,7 +157,6 @@ export default {
     },
   },
   created() {
-    console.warn('初始值', this.currentIndex)
     this.selectIndex = this.currentIndex;
     // 首次挽留的弹窗计时
     let use_fixed_time = this.$route.query.use_fixed_time;
