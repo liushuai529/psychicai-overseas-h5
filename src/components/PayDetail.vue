@@ -88,6 +88,7 @@
               :all_product=all_product
               @get_combine_product_ids="getCombineProductIds"
               :product_key=product_key
+              :currentIndex=0
             />
           
         </div>

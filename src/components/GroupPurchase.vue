@@ -1,70 +1,43 @@
 <template>
   <div class="group-purchase" v-if="h5_combo2_attach">
     <div class="product-container">
-      <div
-        :class="[
-          selectIndex ? 'left-product' : 'left-product-select',
-          'both-product-container',
-        ]"
-        :style="getLeftBg()"
-        @click="changeComboHandle(0)"
-      >
-        <img
-          v-if="selectIndex === 0"
-          src="../assets/img/img_buy_choose.png"
-          class="check_icon"
-        />
+      <div :class="[
+        selectIndex ? 'left-product' : 'left-product-select',
+        'both-product-container',
+      ]" :style="getLeftBg()" @click="changeComboHandle(0)">
+        <img v-if="selectIndex === 0" src="../assets/img/img_buy_choose.png" class="check_icon" />
         <div :class="['title', this.selectIndex ? 'title-unselect' : null]">
           单项购买
         </div>
         <div class="image-contaier-left">
-          <img
-            class="icon"
-            :src="
-              product_key === 'h5_marriage'
-                ? getH5MarriageIcon
-                : new_ganqing_small
-            "
-          />
+          <img class="icon" :src="product_key === 'h5_marriage'
+              ? getH5MarriageIcon
+              : new_ganqing_small
+            " />
           <div class="desc">
             {{ product_key === "h5_marriage" ? "八字合婚" : "2024年感情运势" }}
           </div>
         </div>
-        <div
-          class="bottom-container"
-          :style="{ background: this.selectIndex ? '#DFDFDF' : '#E24C2E' }"
-        >
-          <div :class="['left', this.selectIndex ? 'left-unselect' : null]" >{{ this.now_price }}</div>
+        <div class="bottom-container" :style="{ background: this.selectIndex ? '#DFDFDF' : '#E24C2E' }">
+          <div :class="['left', this.selectIndex ? 'left-unselect' : null]">{{ this.now_price }}</div>
           <div :class="['right', this.selectIndex ? 'right-unselect' : null]">{{ this.origin_price }}</div>
         </div>
       </div>
-      <div
-        :class="[
-          selectIndex ? 'right-product-select' : 'right-product',
-          'both-product-container',
-        ]"
-        :style="getRightBg()"
-        @click="changeComboHandle(1)"
-      >
-        <img
-          v-if="selectIndex === 1"
-          src="../assets/img/img_buy_choose.png"
-          class="check_icon"
-        />
+      <div :class="[
+        selectIndex ? 'right-product-select' : 'right-product',
+        'both-product-container',
+      ]" :style="getRightBg()" @click="changeComboHandle(1)">
+        <img v-if="selectIndex === 1" src="../assets/img/img_buy_choose.png" class="check_icon" />
         <div :class="['title', this.selectIndex ? null : 'title-unselect']">
           超值套餐
         </div>
 
         <div class="image-contaier-right">
           <div class="image-item-contaier">
-            <img
-              class="icon"
-              :src="
-                product_key === 'h5_marriage'
-                  ? getH5MarriageIcon
-                  : new_ganqing_small
-              "
-            />
+            <img class="icon" :src="product_key === 'h5_marriage'
+                ? getH5MarriageIcon
+                : new_ganqing_small
+              " />
             <div class="desc">
               {{
                 product_key === "h5_marriage" ? "八字合婚" : "2024年感情运势"
@@ -75,14 +48,10 @@
           <img class="icon-plus" src="../assets/img/img_buy_add_seleted.png" />
 
           <div class="image-item-contaier">
-            <img
-              class="icon"
-              :src="
-                product_key === 'h5_marriage'
-                  ? new_ganqing_small
-                  : getH5MarriageIcon
-              "
-            />
+            <img class="icon" :src="product_key === 'h5_marriage'
+                ? new_ganqing_small
+                : getH5MarriageIcon
+              " />
             <div class="desc">
               {{
                 product_key === "h5_marriage" ? "2024年感情运势" : "八字合婚"
@@ -91,11 +60,8 @@
           </div>
         </div>
 
-        <div
-          class="bottom-container"
-          :style="{ background: this.selectIndex ? '#E24C2E' : '#DFDFDF' }"
-        >
-          <div :class="['left', !this.selectIndex ? 'left-unselect' : null]" >{{ this.now_price_combo }}</div>
+        <div class="bottom-container" :style="{ background: this.selectIndex ? '#E24C2E' : '#DFDFDF' }">
+          <div :class="['left', !this.selectIndex ? 'left-unselect' : null]">{{ this.now_price_combo }}</div>
           <div :class="['right', !this.selectIndex ? 'right-unselect' : null]">{{ this.origin_price_combo }}</div>
         </div>
       </div>
@@ -106,45 +72,26 @@
         <div class="desc">限时优惠倒计时</div>
       </div>
       <div class="right-container">
-        <count-down
-          ref="countDown"
-          :time="time"
-          millisecond
-          class="time-box"
-          @change="getTime"
-        >
+        <count-down ref="countDown" :time="time" millisecond class="time-box" @change="getTime">
           <template #default="timeData">
-            <span
-              :class="{
-                block: true,
-                'rgb-light': is_show_shandong,
-              }"
-              >{{ timeData.minutes | filterTime }}</span
-            >
-            <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
-              >:</span
-            >
-            <span
-              :class="{
-                block: true,
-                'rgb-light': is_show_shandong,
-              }"
-              >{{ timeData.seconds | filterTime }}</span
-            >
-            <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
-              >:</span
-            >
+            <span :class="{
+              block: true,
+              'rgb-light': is_show_shandong,
+            }">{{ timeData.minutes | filterTime }}</span>
+            <span :class="{ colon: true, 'rgb-color': is_show_shandong }">:</span>
+            <span :class="{
+              block: true,
+              'rgb-light': is_show_shandong,
+            }">{{ timeData.seconds | filterTime }}</span>
+            <span :class="{ colon: true, 'rgb-color': is_show_shandong }">:</span>
 
-            <span
-              :class="{
-                block: true,
-                'rgb-light': is_show_shandong,
-              }"
-            >
+            <span :class="{
+              block: true,
+              'rgb-light': is_show_shandong,
+            }">
               <span :class="{ mill: time === 1 }">
                 {{ timeData.milliseconds | filterTime }}
-              </span></span
-            >
+              </span></span>
           </template>
         </count-down>
       </div>
@@ -182,7 +129,11 @@ export default {
       type: Array,
       default: [],
     },
-    
+    currentIndex: {
+      type: Number,
+      default: 0,
+    },
+
   },
   data() {
     return {
@@ -206,6 +157,8 @@ export default {
     },
   },
   created() {
+    console.warn('初始值', this.currentIndex)
+    this.selectIndex = this.currentIndex;
     // 首次挽留的弹窗计时
     let use_fixed_time = this.$route.query.use_fixed_time;
     if (use_fixed_time) {
@@ -218,11 +171,15 @@ export default {
 
   },
   mounted() {
-    
+
   },
   watch: {
-    all_product(val) {
-      if(val.length) {
+    selectIndex(newval, oldval) {
+      if (newval === 0) {
+        console.warn('00')
+        this.$emit('get_combine_product_ids', []);
+      } else {
+        console.warn('11')
         this.$emit('get_combine_product_ids', this.getCombineProductIds());
       }
     }
@@ -269,13 +226,8 @@ export default {
   },
   methods: {
     changeComboHandle(type) {
-      if(this.selectIndex !== type) {
+      if (this.selectIndex !== type) {
         this.selectIndex = type;
-        if(type === 0) {
-          this.$emit('get_combine_product_ids', []);
-        } else {
-          this.$emit('get_combine_product_ids', this.getCombineProductIds());
-        }
       }
     },
 
@@ -283,8 +235,8 @@ export default {
     getCombineProductIds() {
       let array = [this.product.product_id];
       let tags = this.h5_combo2_attach.tags;
-      let otherProductKey = tags.filter(item=>item !== this.product.product_key)[0];
-      let otherProductId = this.all_product.filter(item=>item.product_key === otherProductKey)[0].product_id;
+      let otherProductKey = tags.filter(item => item !== this.product.product_key)[0];
+      let otherProductId = this.all_product.filter(item => item.product_key === otherProductKey)[0].product_id;
       array.push(otherProductId);
       return array;
     },
@@ -343,11 +295,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .product-container {
     width: 6.5rem;
     height: 3.38rem;
     margin-top: 0.3rem;
     position: relative;
+
     .left-product-select {
       left: 0;
       top: 0;
@@ -360,6 +314,7 @@ export default {
       z-index: 2;
       position: absolute;
     }
+
     .left-product {
       left: 0;
       top: 0.15rem;
@@ -371,21 +326,24 @@ export default {
       z-index: 1;
       position: absolute;
     }
+
     .both-product-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
       position: relative;
+
       .check_icon {
         position: absolute;
         top: 0;
         right: -0.025rem;
-        
+
         /* right: 0rem; */
         width: 0.44rem;
         height: 0.44rem;
       }
+
       .title {
         font-family: PingFangSC, PingFang SC;
         font-weight: 600;
@@ -393,6 +351,7 @@ export default {
         color: #e24c2e;
         // margin-top: 0.2rem;
       }
+
       .title-unselect {
         font-family: PingFangSC, PingFang SC;
         font-weight: 600;
@@ -400,6 +359,7 @@ export default {
         color: #393939;
         margin-top: 0.16rem;
       }
+
       .image-contaier-left {
         margin-top: 0.08rem;
         width: 1.16rem;
@@ -410,11 +370,13 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+
         .icon {
           width: 1rem;
           height: 1rem;
           margin-top: 0.08rem;
         }
+
         .desc {
           width: 0.96rem;
           height: 0.54rem;
@@ -430,6 +392,7 @@ export default {
           justify-content: center;
         }
       }
+
       .image-contaier-right {
         margin-top: 0.08rem;
         width: 3.05rem;
@@ -451,11 +414,13 @@ export default {
           display: flex;
           flex-direction: column;
           align-items: center;
+
           .icon {
             width: 1rem;
             height: 1rem;
             margin-top: 0.08rem;
           }
+
           .desc {
             width: 0.96rem;
             height: 0.54rem;
@@ -470,11 +435,13 @@ export default {
             justify-content: center;
           }
         }
+
         .icon-plus {
           width: 0.48rem;
           height: 0.48rem;
         }
       }
+
       .bottom-container {
         margin-top: 0.2rem;
         width: 100%;
@@ -486,6 +453,7 @@ export default {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+
         .left {
           font-weight: 600;
           font-size: 0.32rem;
@@ -493,11 +461,13 @@ export default {
           text-align: left;
           font-style: normal;
         }
+
         .left-unselect {
           font-weight: 600;
           font-size: 0.28rem;
           color: #E24C2E;
         }
+
         .right {
           font-weight: 400;
           font-size: 0.26rem;
@@ -505,6 +475,7 @@ export default {
           font-style: normal;
           text-decoration: line-through;
         }
+
         .right-unselect {
           font-weight: 400;
           font-size: 0.22rem;
@@ -512,6 +483,7 @@ export default {
         }
       }
     }
+
     .right-product-select {
       /* right: 0; */
       left: 3.05rem;
@@ -525,6 +497,7 @@ export default {
       z-index: 2;
       position: absolute;
     }
+
     .right-product {
       right: 0;
       top: 0.15rem;
@@ -537,6 +510,7 @@ export default {
       position: absolute;
     }
   }
+
   .time-container {
     width: 6.5rem;
     height: 0.48rem;
@@ -544,16 +518,19 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin-top: 0.4rem;
+
     .left-container {
       font-weight: 600;
       font-size: 0.32rem;
       display: flex;
       align-items: center;
       color: #e24c2e;
+
       img {
         width: 0.48rem;
         height: 0.48rem;
       }
+
       .desc {
         font-weight: 600;
         font-size: 0.32rem;
@@ -569,6 +546,7 @@ export default {
     align-items: center;
     color: #e24c2e;
   }
+
   .block {
     width: 0.4rem;
     height: 100%;
@@ -578,37 +556,47 @@ export default {
     align-items: center;
     justify-content: center;
     color: #fff;
-    background-color: #e24c2e; /* 初始背景色 */
+    background-color: #e24c2e;
+    /* 初始背景色 */
   }
+
   .count-down {
     height: 100%;
     display: flex;
   }
+
   @keyframes noticeTime {
     0% {
       opacity: 0;
     }
+
     100% {
       opacity: 1;
     }
   }
+
   .mill {
     animation: noticeTime 0.24s infinite;
   }
+
   @keyframes rgb-light {
     0% {
       background-color: #e24c2e;
     }
+
     33.333% {
       background-color: #f5ae00;
     }
+
     66.666% {
       background-color: #662cf3;
     }
+
     100% {
       background-color: #e24c2e;
     }
   }
+
   .rgb-light {
     animation: rgb-light 720ms infinite linear;
   }
@@ -616,20 +604,25 @@ export default {
   .rgb-color {
     animation: rgb-text 720ms infinite linear;
   }
+
   @keyframes rgb-text {
     0% {
       color: #e24c2e;
     }
+
     33.333% {
       color: #f5ae00;
     }
+
     66.666% {
       color: #662cf3;
     }
+
     100% {
       color: #e24c2e;
     }
   }
+
   .time-box {
     display: flex;
     flex-direction: row;
