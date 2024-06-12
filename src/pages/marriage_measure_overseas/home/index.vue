@@ -24,11 +24,11 @@
         <img v-else class="top-banner-img" src="./../../../assets/img/tw_mlxz/bazihehun/home/top-banner.png" />
         <div class="top-content">
           <div class="icon-container">
-            <img v-if="language === 'zh-CN'" src="./../../../assets/img/mlxz/bzhh/left-icon.png" />
-            <img v-else  src="./../../../assets/img/tw_mlxz/bazihehun/home/left-icon.png" />
+            <img v-if="language === 'zh-CN'" class="icon-img" src="./../../../assets/img/mlxz/bzhh/left-icon.png" />
+            <img v-else  class="icon-img" src="./../../../assets/img/tw_mlxz/bazihehun/home/left-icon.png" />
 
-            <img v-if="language === 'zh-CN'"  src="./../../../assets/img/mlxz/bzhh/right-icon.png" />
-            <img v-else  src="./../../../assets/img/tw_mlxz/bazihehun/home/right-icon.png" />
+            <img v-if="language === 'zh-CN'" class="icon-img"  src="./../../../assets/img/mlxz/bzhh/right-icon.png" />
+            <img v-else class="icon-img"  src="./../../../assets/img/tw_mlxz/bazihehun/home/right-icon.png" />
 
           </div>
           <info class="info-card" :malename="male.username" :femalename="female.username" :maledate="male.picker_date"
@@ -1153,7 +1153,7 @@ export default {
     padding-right: 0.2rem;
     margin-bottom: 0.6rem;
     animation: moveUpDown 2s infinite ease-in-out alternate;
-    img {
+    .icon-img {
       width: 2.16rem;
       height: 2.16rem;
     }
