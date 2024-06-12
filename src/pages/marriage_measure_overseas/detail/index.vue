@@ -165,6 +165,7 @@ import PayDetail from '../../../components/PayDetail.vue';
 import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
 
+
 const mockTipsArr = {
   'zh-CN': '成功解锁了八字合婚的详细解析',
   'zh-TW': '成功解鎖了八字合婚的詳細解析',

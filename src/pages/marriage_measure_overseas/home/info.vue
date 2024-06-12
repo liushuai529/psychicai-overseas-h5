@@ -1,15 +1,24 @@
 <template>
   <div class="form">
-    <img
+    <!-- <img
       class="title"
       src="../../../assets/img/mlxz/bzhh/ziliao_word.png"
       alt=""
-    />
+    /> -->
+
+    <img v-if="language === 'zh-CN'"  class="title" src="./../../../assets/img/mlxz/bzhh/user-info-title.png" />
+    <img v-else  class="title"  src="./../../../assets/img/tw_mlxz/bazihehun/home/user-info-title.png" />
     <!-- 男方 -->
+
+
     <div class="input-box">
-      <div class="input-item">
+      <div class="left">
+        <img  class="left" src="./../../../assets/img/bzhh_v2/man-icon.png" />
+      </div>
+      <div class="right">
+        <div class="input-item">
         {{ maleusername }}
-        <div class="input-label">男方姓名：</div>
+        <div class="input-label">姓名：</div>
         <input
           class="input"
           id="maleusername"
@@ -18,7 +27,7 @@
         />
       </div>
       <div class="input-item">
-        <div class="input-label">男方生日：</div>
+        <div class="input-label">生日：</div>
         <div
           class="input"
           :style="{ color: maledate ? '#333' : 'rgba(51, 51, 51, 0.5)' }"
@@ -26,13 +35,23 @@
         >
           {{ maledate || $t('birth-placeholder') }}
         </div>
-        <img class="arrow" src="../../../assets/img/mlxz/bzhh/arrow.png" />
+        <!-- <img class="arrow" src="../../../assets/img/mlxz/bzhh/arrow.png" /> -->
       </div>
+      </div>
+     
     </div>
+
+
+
     <!-- 女方 -->
     <div class="input-box">
-      <div class="input-item">
-        <div class="input-label">女方姓名：</div>
+
+      <div class="left">
+        <img  class="left" src="./../../../assets/img/bzhh_v2/fman-icon.png" />
+      </div>
+      <div class="right">
+        <div class="input-item">
+        <div class="input-label">姓名：</div>
         <input
           class="input"
           id="femaleusername"
@@ -41,7 +60,7 @@
         />
       </div>
       <div class="input-item">
-        <div class="input-label">女方生日：</div>
+        <div class="input-label">生日：</div>
         <div
           class="input"
           :style="{ color: femaledate ? '#333' : 'rgba(51, 51, 51, 0.5)' }"
@@ -49,13 +68,15 @@
         >
           {{ femaledate || $t('birth-placeholder') }}
         </div>
-        <img class="arrow" src="../../../assets/img/mlxz/bzhh/arrow.png" />
+        <!-- <img class="arrow" src="../../../assets/img/mlxz/bzhh/arrow.png" /> -->
       </div>
     </div>
+      </div>
   </div>
 </template>
 
 <script>
+import utils from './../../../libs/utils.js';
 export default {
   props: [
     'malename',
@@ -73,6 +94,7 @@ export default {
 
       width: 0,
       height: 0,
+      language: utils.getLanguage(),
     };
   },
   watch: {
@@ -202,9 +224,8 @@ export default {
 <style scoped>
 .form {
   position: relative;
-  width: 7.02rem;
-  height: 5rem;
-  background-image: url('../../../assets/img/mlxz/bzhh/ziliao_bg.png');
+  width: 7.3rem;
+  height: 4.86rem;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -214,22 +235,36 @@ export default {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  background: #FFEDD8;
+  border: 0.09rem solid #B70E08;
+  border-radius: 0.2rem;
 }
 
 .title {
-  position: absolute;
+  /* position: absolute;
   top: 0.4rem;
   left: 50%;
-  margin-left: -1.5rem;
-  width: 3rem;
+  margin-left: -1.5rem; */
+  width: 7.5rem;
+  height: 1.32rem;
 }
 
 .input-box {
   width: 100%;
-  border: 0.02rem solid #e89b8a;
+  /* border: 0.02rem solid #e89b8a; */
   box-sizing: border-box;
-  padding: 0 0.2rem;
+  padding: 0 0.1rem;
   margin-bottom: 0.24rem;
+  display: flex;
+  align-items: center;
+  background: #FFF5E9;
+  border-radius: 0.08rem;
+  .left {
+    width: 1.22rem;
+    height: 1.22rem;
+    margin-right: 0.2rem;
+    
+  }
 }
 
 .input-box:last-child {
