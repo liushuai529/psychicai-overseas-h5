@@ -90,7 +90,7 @@
     <img
       @click="payOrder"
       class="fix-btn emo-btn"
-      :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
+      :src="language === 'zh-CN' ? is_show_limitTime?cn_home_xs_btn: cn_home_btn :is_show_limitTime?tw_home_xs_btn: tw_home_btn"
     />
     <HomeFooter product_key="h5_emotion2024" />
   </div>
@@ -105,6 +105,8 @@ import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import cn_pay_btn from '../../../assets/img/emotion/home_btn.png';
 import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/pay.png';
 import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/pay.png';
+import cn_home_xs_btn from '../../../assets/img/emotion_v2/new/cn/pay_xs.png';
+import tw_home_xs_btn from '../../../assets/img/emotion_v2/new/tw/pay_xs.png';
 import PayCard from '../../../components/PayCard.vue';
 import cn_card_1 from '../../../assets/img/emotion/home_card1.png';
 import tw_card_1 from '../../../assets/img/tw_mlxz/emotion/home_card1.png';
@@ -158,6 +160,8 @@ export default {
       img_zhifu_fan,
       cn_home_btn,
       tw_home_btn,
+      cn_home_xs_btn,
+      tw_home_xs_btn,
       cn_zhong3,
       cn_zhong4,
       tw_zhong3,
@@ -214,6 +218,11 @@ export default {
     //套餐支付显示逻辑
     is_show_combination() {
       return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+    },
+
+    //限时特惠
+    is_show_limitTime() {
+      return ["enjoy02", "panda02"].includes(utils.getFBChannel());
     },
     username_title() {
       return `${utils.getShortStr(this.username)}的2024年${this.$t(

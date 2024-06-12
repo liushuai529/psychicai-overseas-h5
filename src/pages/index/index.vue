@@ -1594,11 +1594,11 @@ export default {
     utils.isProd() &&
       tStatistic &&
       tStatistic.send({
-        event: 'page_view_h5main',
+        event: 'page_view_main',
         md: 10001,
         c_id: -10001,
         args: {
-          args_name: 'page_view_h5main',
+          args_name: 'page_view_main',
           channel: utils.getFBChannel(),
         },
       });

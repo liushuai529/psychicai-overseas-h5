@@ -1214,10 +1214,10 @@ export default {
 
 .order {
   position: fixed;
-  width: 0.56rem;
-  height: 1.96rem;
+  width: 0.92rem;
+  height: 1.81rem;
   top: 1.6rem;
-  right: 0.12rem;
+  right: 0rem;
   z-index: 3;
 }
 
