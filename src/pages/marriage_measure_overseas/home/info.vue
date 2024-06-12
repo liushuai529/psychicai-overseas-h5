@@ -6,39 +6,30 @@
       alt=""
     /> -->
 
-    <img v-if="language === 'zh-CN'"  class="title" src="./../../../assets/img/mlxz/bzhh/user-info-title.png" />
-    <img v-else  class="title"  src="./../../../assets/img/tw_mlxz/bazihehun/home/user-info-title.png" />
+    <img v-if="language === 'zh-CN'" class="title" src="./../../../assets/img/mlxz/bzhh/user-info-title.png" />
+    <img v-else class="title" src="./../../../assets/img/tw_mlxz/bazihehun/home/user-info-title.png" />
     <!-- 男方 -->
 
 
     <div class="input-box">
       <div class="left">
-        <img  class="left" src="./../../../assets/img/bzhh_v2/man-icon.png" />
+        <img class="left" style="width: 1.22rem;height: 1.22rem;margin-right: 0.2rem;" src="./../../../assets/img/bzhh_v2/man-icon.png" />
       </div>
       <div class="right">
         <div class="input-item">
-        {{ maleusername }}
-        <div class="input-label">姓名：</div>
-        <input
-          class="input"
-          id="maleusername"
-          :placeholder="$t('name-placeholder')"
-          v-model="maleusername"
-        />
-      </div>
-      <div class="input-item">
-        <div class="input-label">生日：</div>
-        <div
-          class="input"
-          :style="{ color: maledate ? '#333' : 'rgba(51, 51, 51, 0.5)' }"
-          @click="maleopenPicker"
-        >
-          {{ maledate || $t('birth-placeholder') }}
+          {{ maleusername }}
+          <div class="input-label">姓名：</div>
+          <input class="input" id="maleusername" :placeholder="$t('name-placeholder')" v-model="maleusername" />
         </div>
-        <!-- <img class="arrow" src="../../../assets/img/mlxz/bzhh/arrow.png" /> -->
-      </div>
-      </div>
+        <div class="input-item">
+          <div class="input-label">生日：</div>
+          <div class="input" :style="{ color: maledate ? '#333' : 'rgba(51, 51, 51, 0.5)' }" @click="maleopenPicker">
+            {{ maledate || $t('birth-placeholder') }}
+          </div>
      
+        </div>
+      </div>
+
     </div>
 
 
@@ -47,31 +38,25 @@
     <div class="input-box">
 
       <div class="left">
-        <img  class="left" src="./../../../assets/img/bzhh_v2/fman-icon.png" />
+        <img class="left" style="width: 1.22rem;height: 1.22rem;margin-right: 0.2rem;" src="./../../../assets/img/bzhh_v2/fman-icon.png" />
       </div>
       <div class="right">
         <div class="input-item">
-        <div class="input-label">姓名：</div>
-        <input
-          class="input"
-          id="femaleusername"
-          :placeholder="$t('name-placeholder')"
-          v-model="femaleusername"
-        />
-      </div>
-      <div class="input-item">
-        <div class="input-label">生日：</div>
-        <div
-          class="input"
-          :style="{ color: femaledate ? '#333' : 'rgba(51, 51, 51, 0.5)' }"
-          @click="femaleopenPicker"
-        >
-          {{ femaledate || $t('birth-placeholder') }}
+          <div class="input-label">姓名：</div>
+          <input class="input" id="femaleusername" :placeholder="$t('name-placeholder')" v-model="femaleusername" />
         </div>
-        <!-- <img class="arrow" src="../../../assets/img/mlxz/bzhh/arrow.png" /> -->
+        <div class="input-item">
+          <div class="input-label">生日：</div>
+          <div class="input" :style="{ color: femaledate ? '#333' : 'rgba(51, 51, 51, 0.5)' }"
+            @click="femaleopenPicker">
+            {{ femaledate || $t('birth-placeholder') }}
+          </div>
+     
+        </div>
       </div>
     </div>
-      </div>
+
+    
   </div>
 </template>
 
@@ -189,7 +174,7 @@ export default {
   created() {
     this.width = window.screen.width > 750 ? 750 : window.screen.width;
   },
-  mounted() {},
+  mounted() { },
   destroyed() {
     localStorage.removeItem('bazi_count');
   },
@@ -256,14 +241,15 @@ export default {
   padding: 0 0.1rem;
   margin-bottom: 0.24rem;
   display: flex;
+  flex-direction: row;
   align-items: center;
   background: #FFF5E9;
   border-radius: 0.08rem;
+
   .left {
     width: 1.22rem;
     height: 1.22rem;
     margin-right: 0.2rem;
-    
   }
 }
 
@@ -279,6 +265,7 @@ export default {
   align-items: center;
   font-weight: 600;
 }
+
 .input-item:last-child {
   border-bottom: none;
 }
@@ -312,16 +299,23 @@ export default {
 .input::input-placeholder {
   color: rgba(51, 51, 51, 0.5);
 }
+
 .input::-webkit-input-placeholder {
   color: rgba(51, 51, 51, 0.5);
 }
+
 .input::-moz-placeholder {
   color: rgba(51, 51, 51, 0.5);
 }
+
 .input::-moz-placeholder {
   color: rgba(51, 51, 51, 0.5);
 }
+
 .input::-ms-input-placeholder {
   color: rgba(51, 51, 51, 0.5);
 }
+
+
+
 </style>
