@@ -381,7 +381,7 @@ export default {
     },
     //套餐支付显示逻辑
     is_show_combination() {
-      return !['enjoy03', 'panda03'].includes(utils.getFBChannel());
+      return !["enjoy03", "panda03","enjoy02", "panda02"].includes(utils.getFBChannel());
     },
      //当前报告类型与引导类型不同，则显示
      is_show_current_combination() {

@@ -217,7 +217,7 @@ export default {
   computed: {
     //套餐支付显示逻辑
     is_show_combination() {
-      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+      return !["enjoy03", "panda03","enjoy02", "panda02"].includes(utils.getFBChannel());
     },
 
     //限时特惠
