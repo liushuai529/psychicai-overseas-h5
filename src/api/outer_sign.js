@@ -64,6 +64,8 @@ export const addOutParams = config => {
     localStorage.getItem('mlxz_outer_access_token') || '';
   config.params.language = utils.getLanguage();
   config.params.channel = utils.getFBChannel() ? utils.getFBChannel() : '';
+  config.params.os = utils.isIos() ? 'IPHONE' : utils.isAndroid()? 'ANDROID': '';
+  config.params.device_id = utils.getDeviceId();
   config.params.app_sign = getAppSign(config);
 
   return config;
