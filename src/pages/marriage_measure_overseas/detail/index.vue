@@ -12,7 +12,8 @@
       class="top-banner"
       src="../../../assets/img/mlxz/bzhh/detail/img_head.png"
     />
-    <div class="pay-box">
+    
+    <div class="pay-box" >
       <img
         class="banner"
         :src="language === 'zh-CN' ? cn_img_title : tw_img_title"
@@ -33,10 +34,7 @@
           <baziInfo :key="1" :user_info="female_user_string" @get_user_info="getUserInfo"/>
         </div>
       </div>
-      <!-- <img
-        class="line"
-        src="../../../assets/img/marriage_measure_overseas/detail/line.png"
-      /> -->
+   
       <div class="bazi-box">
         <!-- <PayCard
           ref="paycard"
@@ -47,11 +45,11 @@
           lucky_re_id="60005"
           ><div class="price">结缘价 RM68</div></PayCard
         > -->
-        <shengxiao
+        <!-- <shengxiao
           :male_str="male_user_string"
           :female_str="female_user_string"
           :is_result="false"
-        />
+        /> -->
         <!-- <div id="info-btn" @click="showPayModal" class="pay-btn">
           {{ $t('tips-1') }}
         </div> -->
@@ -137,21 +135,24 @@ import tw_img_title from '../../../assets/img/bzhh_v2/tw/img_title.png';
 import tw_img_word from '../../../assets/img/tw_mlxz/bazihehun/detail/text.png';
 import cn_img_word from '../../../assets/img/mlxz/bzhh/detail/img_word.png';
 
-import cn_mokuai1 from '../../../assets/img/mlxz/bzhh/detail/2.png';
-import cn_mokuai2 from '../../../assets/img/mlxz/bzhh/detail/3.png';
-import cn_mokuai3 from '../../../assets/img/mlxz/bzhh/detail/4.png';
-import cn_mokuai4 from '../../../assets/img/mlxz/bzhh/detail/5.png';
-import cn_mokuai5 from '../../../assets/img/mlxz/bzhh/detail/6.png';
-import cn_mokuai6 from '../../../assets/img/mlxz/bzhh/detail/7.png';
-import cn_mokuai7 from '../../../assets/img/mlxz/bzhh/detail/8.png';
+import cn_mokuai1 from '../../../assets/img/mlxz/bzhh/detail/1.png';
+import cn_mokuai2 from '../../../assets/img/mlxz/bzhh/detail/2.png';
+import cn_mokuai3 from '../../../assets/img/mlxz/bzhh/detail/3.png';
+import cn_mokuai4 from '../../../assets/img/mlxz/bzhh/detail/4.png';
+import cn_mokuai5 from '../../../assets/img/mlxz/bzhh/detail/5.png';
+import cn_mokuai6 from '../../../assets/img/mlxz/bzhh/detail/6.png';
+import cn_mokuai7 from '../../../assets/img/mlxz/bzhh/detail/7.png';
+import cn_mokuai8 from '../../../assets/img/mlxz/bzhh/detail/8.png';
 
-import tw_mokuai1 from '../../../assets/img/tw_mlxz/bazihehun/detail/2.png';
-import tw_mokuai2 from '../../../assets/img/tw_mlxz/bazihehun/detail/3.png';
-import tw_mokuai3 from '../../../assets/img/tw_mlxz/bazihehun/detail/4.png';
-import tw_mokuai4 from '../../../assets/img/tw_mlxz/bazihehun/detail/5.png';
-import tw_mokuai5 from '../../../assets/img/tw_mlxz/bazihehun/detail/6.png';
-import tw_mokuai6 from '../../../assets/img/tw_mlxz/bazihehun/detail/7.png';
-import tw_mokuai7 from '../../../assets/img/tw_mlxz/bazihehun/detail/8.png';
+import tw_mokuai1 from '../../../assets/img/tw_mlxz/bazihehun/detail/1.png';
+import tw_mokuai2 from '../../../assets/img/tw_mlxz/bazihehun/detail/2.png';
+import tw_mokuai3 from '../../../assets/img/tw_mlxz/bazihehun/detail/3.png';
+import tw_mokuai4 from '../../../assets/img/tw_mlxz/bazihehun/detail/4.png';
+import tw_mokuai5 from '../../../assets/img/tw_mlxz/bazihehun/detail/5.png';
+import tw_mokuai6 from '../../../assets/img/tw_mlxz/bazihehun/detail/6.png';
+import tw_mokuai7 from '../../../assets/img/tw_mlxz/bazihehun/detail/7.png';
+import tw_mokuai8 from '../../../assets/img/tw_mlxz/bazihehun/detail/8.png';
+
 import tw_modal_bg from '../../../assets/img/tw_mlxz/bazihehun/detail/modal_bg.png';
 import payModal from '../../../components/PayModal.vue';
 import shengxiao from './shengxiao.vue';
@@ -427,7 +428,7 @@ export default {
 
 <style scoped lang="less">
 .detail {
-  background-color: #fbf8ed;
+  background-color: #7F1416;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -436,33 +437,50 @@ export default {
     width: 100%;
     margin-bottom: 0.24rem;
   }
-
+  
   .pay-box {
     position: relative;
-    margin-top: -0.5rem;
-    width: 7.02rem;
-    border: 0.06rem solid #d19a47;
-    border-radius: 0.16rem;
-    background-color: #fbf8ed;
+    margin-top: -1.6rem;
+    // width: 7.02rem;
+    // border: 0.06rem solid #d19a47;
+    // border-radius: 0.16rem;
+    // background-color: #fbf8ed;
+    width: 7.3rem;
+    height: 4.2rem;
+    background: #FFEDD8;
+    border-radius: 0.2rem;
+    border: 0.09rem solid #B70E08;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    
     .banner {
       position: absolute;
       top: -0.45rem;
-      left: 50%;
-      margin-left: -2.245rem;
-      width: 4.49rem;
-      height: 0.89rem;
+      left: 0;
+      margin-left: -0.15rem;
+      width: 7.5rem;
+      height: 1.32rem;
     }
     .user-info {
-      width: 100%;
+      // width: 100%;
+      // display: flex;
+      // align-items: flex-start;
+      // justify-content: center;
+      // margin: 0.68rem 0 0.49rem;
+      // padding: 0 0.28rem;
+          /* width: 100%; */
+      margin-top: 1rem;
+      height: 2.76rem;
+      width: 6.7rem;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
-      margin: 0.68rem 0 0.49rem;
       padding: 0 0.28rem;
+      border: 0.03rem solid #B87F40;
+      background: #FFEDD8;
       .heart {
         width: 1.4rem;
         flex: none;
@@ -554,18 +572,18 @@ export default {
 }
 
 .method-box {
-  width: 7.02rem;
+  width: 7.3rem;
   min-height: 6rem;
   font-family: system-ui, sans-serif;
-  background: #fbf8ed;
   border-radius: 0.16rem;
-  border: 0.06rem solid #d19a47;
+  border: 0.09rem solid #B70E08;
   padding: 0.4rem 0.16rem 0;
   margin-top: -0.45rem;
+  background: #FFEDD8;
 }
 .title-pay {
-  width: 4.49rem;
-  height: 0.89rem;
+  width: 7.5rem;
+  height: 1.32rem;
   margin: 0.29rem auto 0;
   position: relative;
   z-index: 2;
@@ -573,13 +591,13 @@ export default {
 .user {
   width: 7.02rem;
   height: 0.72rem;
-  background: #fbf8ed;
+  // background: #fbf8ed;
   border-radius: 0.16rem;
-  border: 0.06rem solid #d19a47;
+  // border: 0.06rem solid #d19a47;
   margin: 0.28rem auto 0.44rem;
   font-weight: 400;
   font-size: 0.24rem;
-  color: #666666;
+  color: #F2CFCF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -597,7 +615,7 @@ export default {
     margin-right: 0.08rem;
   }
   .light-red {
-    color: #e13d3c;
+    color: #FFDA27;
   }
 }
 </style>

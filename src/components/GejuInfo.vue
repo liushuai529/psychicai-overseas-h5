@@ -21,6 +21,19 @@
         }
     }
 
+    .header_img-bzhh {
+        width: 7.5rem;
+        height: 1.32rem;
+        margin-top: -0.13rem;
+        margin-bottom: 0.2rem;
+        display: flex;
+        justify-content: center;
+
+        img {
+            height: 100%;
+        }
+    }
+
     .nav_item {
         width: 6.5rem;
         padding: 0.10rem 0 0.3rem;
@@ -60,8 +73,8 @@
 }
 
 #mode_middle {
-    background-color: #FBF8ED;
-    border: 6px solid #D19A47;
+    background-color: #FFEDD8;
+    border: 0.09rem solid #B70E08;
 
     .header_img {
         margin-top: -0.44rem;
@@ -86,10 +99,16 @@
 </style>
 <template>
     <div :id="product_key !== 'h5_emotion2024' ? 'mode_middle' : ''" class="main">
-        <div class="header_img">
-            <img v-if="product_key === 'h5_emotion2024'" src="../assets/img/geju/tittle_img_gejujiedu_jian.png" alt="">
-            <img v-else src='../assets/img/geju/img_title_jian.png' alt="">
+        <div class="header_img" v-if="product_key === 'h5_emotion2024'">
+            <img  src="../assets/img/geju/tittle_img_gejujiedu_jian.png" alt="">   
         </div>
+
+        <div class="header_img-bzhh" v-else>
+            <img src='../assets/img/geju/img_title_jian.png' alt="">
+        </div>
+
+
+
         <div v-for="item,idx in renderData" :key="idx">
             <div class="nav_item" >
                 <div class="nav_header">

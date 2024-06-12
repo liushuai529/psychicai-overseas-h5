@@ -3,7 +3,7 @@
      
       :style="{
         marginBottom: product_key === 'h5_marriage' ? '0.2rem' : '0',
-        width: '6.26rem',    
+        width: '6.26rem', display: 'flex', alignSelf: 'center'   
       }"
       :src="imgMap[product_key][is_cn?'cn':'tw']" 
       @click="callback()"/>

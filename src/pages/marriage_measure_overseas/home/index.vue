@@ -25,7 +25,7 @@
     >
       <header-notice v-if="has_pay"></header-notice>
       <div class="top-banner">
-        <canvas id="canvas"></canvas>
+        <!-- <canvas id="canvas"></canvas> -->
 
         <img
           v-if="language === 'zh-CN'"
@@ -60,12 +60,12 @@
             />
             <span>{{ $t('check-label') }}</span>
             <span
-              style="color: #b1031f"
+              style="color: #FFDA27"
               @click="toService('user_agreement.html')"
               >{{ $t('user-agreement') }}</span
             >
             <span>和</span>
-            <span style="color: #b1031f" @click="toService('privacy.html')">{{
+            <span style="color: #FFDA27" @click="toService('privacy.html')">{{
               $t('privacy-policy')
             }}</span>
           </div>
@@ -479,7 +479,7 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
-    self.loadBg('#canvas', self.is_cn ? self.cn_header : self.tw_header);
+    // self.loadBg('#canvas', self.is_cn ? self.cn_header : self.tw_header);
   },
   computed: {
     //套餐支付显示逻辑
@@ -1194,7 +1194,7 @@ export default {
 } */
 .home {
   width: 7.5rem;
-  background-color: #f197ad;
+  background-color: #7F1416;
   background-size: contain;
   background-repeat: no-repeat;
   min-height: 100vh;
@@ -1209,11 +1209,13 @@ export default {
 }
 
 .top-banner-img {
-  width: 100%;
+  width: 7.5rem;
+  height: 10.8rem;
 }
 
 .top-content {
-  position: absolute;
+  /* position: absolute; */
+  margin-top: -2.6rem;
   z-index: 2;
   width: 100%;
   height: 100%;
@@ -1246,8 +1248,8 @@ export default {
 }
 
 .btn {
-  width: 6.89rem;
-  height: 1.03rem;
+  width: 6.6rem;
+  height: 1.32rem;
   margin-bottom: 0.2rem;
   animation: btnMove 1s infinite ease-in-out alternate;
 }
@@ -1263,11 +1265,12 @@ export default {
 }
 
 .user span {
-  color: #b1031f;
+  color: #FFDA27;
 }
 
 .card {
   width: 100%;
+  margin-bottom: 0.3rem;
 }
 
 .info {
@@ -1285,10 +1288,10 @@ export default {
 
 .btn-fixed {
   position: fixed;
-  width: 6.89rem;
+  width: 6.6rem;
   left: 50%;
-  margin-left: -3.46rem;
-  bottom: 1.5rem;
+  margin-left: -3.3rem;
+  bottom: 1.2rem;
   z-index: 99;
   animation: btnMove 1s infinite ease-in-out alternate;
 }

@@ -147,7 +147,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #666;
+        color: #F2CFCF;
         .marquee-icon {
           width: 0.28rem;
           height: 0.24rem;
@@ -176,7 +176,7 @@ export default {
   margin-right: 0.08rem;
 }
 .light-red {
-  color: #e13d3c;
+  color: #FFDA27;
 }
 
 .item {
