@@ -186,8 +186,11 @@ export default {
 <style scoped lang="less">
 @keyframes moveRight {
   0% {
+    // opacity: 1;
+    // right: -2.56rem;
+    right: 0;
     opacity: 1;
-    right: -2.56rem;
+    transition: right 0.5s;
   }
 
   100% {
