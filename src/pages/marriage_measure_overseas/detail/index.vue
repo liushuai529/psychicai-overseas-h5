@@ -80,7 +80,7 @@
       class="user"
     />
 
-    <GejuInfo v-if="is_show_combination"  style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="mingge_desc" :dataList="[mingge_minfo, mingge_finfo]"/>
+    <GejuInfo v-if="is_show_combinationSpecial02"  style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="mingge_desc" :dataList="[mingge_minfo, mingge_finfo]"/>
 
     <img class="text" :src="language === 'zh-CN' ? cn_img_word : tw_img_word" />
     <img class="module" :src="language === 'zh-CN' ? cn_mokuai1 : tw_mokuai1" />
@@ -265,18 +265,23 @@ export default {
     is_show_combination() {
       return !["enjoy03", "panda03","enjoy02", "panda02"].includes(utils.getFBChannel());
     },
+    is_show_combinationSpecial02() {
+      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+    },
   },
   mounted() {
     window.scrollTo(0, 0);
-    this.$nextTick(() => {
+    setTimeout(() => {
+      this.$nextTick(() => {
       //排除渠道3
-      if(!this.is_show_combination) return
-      // 滚动到指定元素
-      const element = document.getElementById('title-pay');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+        if(!this.is_show_combinationSpecial02) return
+        // 滚动到指定元素
+        const element = document.getElementById('title-pay');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }, timeout);
 
     let btn = document.getElementById('info-btn');
     let self = this;

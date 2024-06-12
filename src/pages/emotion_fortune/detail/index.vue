@@ -54,7 +54,7 @@
         a_click_token="2rov44"
       />
     </div>
-    <GejuInfo v-if="is_show_combination" style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="[mingge_desc]" :dataList="[gejujiedu]"/>
+    <GejuInfo v-if="is_show_combinationSpecial02" style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="[mingge_desc]" :dataList="[gejujiedu]"/>
     <!-- <div class="card-box">
       <canvas id="qian"></canvas>
     </div> -->
@@ -219,6 +219,9 @@ export default {
     is_show_combination() {
       return !["enjoy03", "panda03","enjoy02", "panda02"].includes(utils.getFBChannel());
     },
+    is_show_combinationSpecial02() {
+      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+    },
 
     //限时特惠
     is_show_limitTime() {
@@ -253,15 +256,17 @@ export default {
 
   mounted() {
     window.scrollTo(0, 0);
-    this.$nextTick(() => {
+    setTimeout(() => {
+      this.$nextTick(() => {
       //排除渠道3
-      if(!this.is_show_combination) return
+      if(!this.is_show_combinationSpecial02) return
       // 滚动到指定元素
       const element = document.getElementById('method-title-img');
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     });
+    }, 1500);
     let self = this;
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
