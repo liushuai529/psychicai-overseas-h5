@@ -20,8 +20,8 @@
       <div class="top-banner">
         <!-- <canvas id="canvas"></canvas> -->
 
-        <img v-if="language === 'zh-CN'" class="top-banner-img" src="./../../../assets/img/mlxz/bzhh/bzhh_bg.png" />
-        <img v-else class="top-banner-img" src="./../../../assets/img/tw_mlxz/bazihehun/home/top-banner.png" />
+        <img v-if="language === 'zh-CN'" class="top-banner-img" src="./../../../assets/img/mlxz/bzhh/bzhh_bg.webp" />
+        <img v-else class="top-banner-img" src="./../../../assets/img/tw_mlxz/bazihehun/home/top-banner.webp" />
         <div class="top-content">
           <div class="icon-container">
             <img style="width: 2.16rem; height: 2.16rem;" v-if="language === 'zh-CN'" class="icon-img" src="./../../../assets/img/mlxz/bzhh/left-icon.png" />
