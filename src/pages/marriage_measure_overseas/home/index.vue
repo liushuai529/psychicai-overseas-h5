@@ -94,7 +94,7 @@
       <FixedOrder v-if="show_api_order && !is_show_notice" :title="last_title" :is_show_move="is_show_notice"
         :last_order="last_order" name="api" top="6.7rem" :time="api_time" @payOrder="checkOrder"
         @jumpDetail="jumpOrder" />
-      <NewFooter v-if="showFixedBtn" />
+      <NewFooter v-if="showFixedBtn" product_key="h5_marriage"/>
     </div>
   </div>
 </template>
@@ -1226,7 +1226,7 @@ export default {
   width: 6.6rem;
   left: 50%;
   margin-left: -3.3rem;
-  bottom: 1.2rem;
+  bottom: 0.4rem;
   z-index: 99;
   animation: btnMove 1s infinite ease-in-out alternate;
 }

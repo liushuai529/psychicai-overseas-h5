@@ -180,7 +180,7 @@
         @payOrder="checkOrder"
         @jumpDetail="jumpOrder"
       />
-      <NewFooter v-if="showFixedBtn" />
+      <NewFooter v-if="showFixedBtn" product_key="h5_annual2024"/>
     </div>
   </div>
 </template>
@@ -1065,7 +1065,7 @@ export default {
 .fix-btn {
   width: 5.19rem;
   height: 1.03rem;
-  bottom: 1.4rem;
+  bottom: 0.4rem;
   z-index: 99;
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }

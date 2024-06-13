@@ -143,7 +143,7 @@
         v-show="showFixedBtn"
         class="btn-fixed huxi-btn"
         :style="{
-          bottom: '1.5rem',
+          bottom: '0.4rem',
         }"
         :src="is_cn ? cn_btn : tw_btn"
         @click="check"
@@ -209,7 +209,7 @@
         @payOrder="checkOrder"
         @jumpDetail="jumpOrder"
       />
-      <NewFooter v-if="showFixedBtn" />
+      <NewFooter v-if="showFixedBtn" product_key="h5_wealth2024"/>
     </div>
   </div>
 </template>
@@ -1187,7 +1187,7 @@ export default {
     width: 5.86rem;
     left: 50%;
     margin-left: -2.93rem;
-    // bottom: 0.3rem;
+    bottom: 0.4rem;
     z-index: 99;
   }
 }

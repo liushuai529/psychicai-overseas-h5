@@ -6,23 +6,72 @@
  * @Description: 底部遮罩层
 -->
 <template>
-  <div class="new-footer"></div>
+  <div class="new-footer">
+    <img :src="imgUrl" />
+  </div>
 </template>
 
 <script>
+
+import h5_emotion2024 from '../assets/img/bottom_bg/emotion.png';
+import h5_marriage from '../assets/img/bottom_bg/h5_marriage.png';
+import h5_wealth2024 from '../assets/img/bottom_bg/h5_wealth2024.png';
+import h5_career2024 from '../assets/img/bottom_bg/h5_career2024.png';
+import h5_bai_gua from '../assets/img/bottom_bg/h5_bai_gua.png';
+import h5_annual2024 from '../assets/img/bottom_bg/h5_annual2024.png';
+
 export default {
   name: "NewFooter",
+  props: {
+    product_key: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      h5_emotion2024,
+      h5_marriage,
+      h5_wealth2024,
+      h5_career2024,
+      h5_bai_gua,
+      h5_annual2024,
+    }
+  },
+  computed: {
+    imgUrl() {
+      switch (this.product_key) {
+        case 'h5_emotion2024':
+          return this.h5_emotion2024
+        case 'h5_marriage':
+          return this.h5_marriage
+        case 'h5_wealth2024':
+          return this.h5_wealth2024
+        case 'h5_career2024':
+          return this.h5_career2024
+        case 'h5_bai_gua':
+          return this.h5_bai_gua
+        case 'h5_annual2024':
+          return this.h5_annual2024
+        default:
+          break;
+      }
+    },
+  },
 };
 </script>
 
 <style scoped lang="less">
 .new-footer {
   position: fixed;
-  background: #000;
-  opacity: 0.5;
   width: 100%;
-  height: 2.8rem;
+  height: 2rem;
   z-index: 98;
   bottom: 0;
+
+  img {
+    width: 7.5rem;
+    height: 2rem;
+  }
 }
 </style>

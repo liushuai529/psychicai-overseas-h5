@@ -81,7 +81,7 @@
       e_click_name="click_2024wealty_pay"
       a_click_token="rckacf"
     />
-    <NewFooter v-if="showFixedBtn" />
+    <NewFooter v-if="showFixedBtn" product_key="h5_wealth2024"/>
   </div>
 </template>
 
@@ -451,7 +451,7 @@ export default {
 }
 .fix-box {
   position: fixed !important;
-  bottom: 1.3rem;
+  bottom: 0.4rem;
   z-index: 99;
 }
 </style>

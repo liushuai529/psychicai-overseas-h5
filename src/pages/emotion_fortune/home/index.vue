@@ -173,7 +173,7 @@
         url="emotion_fortune"
         e_id="10006"
       />
-      <NewFooter v-if="showFixedBtn" />
+      <NewFooter v-if="showFixedBtn" product_key="h5_emotion2024"/>
       <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
       <PopNotice
         v-if="is_show_notice"
@@ -1409,8 +1409,8 @@ margin-bottom: .2rem;
   width: 5.8rem;
   height: 1.34rem;
   position: fixed;
-  bottom: 1.2rem;
-  z-index:99
+  bottom: 0.4rem;
+  z-index: 99
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }
 .order-icon {

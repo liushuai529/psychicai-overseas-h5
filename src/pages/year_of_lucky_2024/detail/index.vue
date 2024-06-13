@@ -62,7 +62,7 @@
       a_click_token="pil6oj"
       @close="pay_modal = false"
     />
-    <NewFooter v-if="showFixedBtn" />
+    <NewFooter v-if="showFixedBtn" product_key="h5_annual2024"/>
   </div>
 </template>
 
@@ -436,7 +436,7 @@ export default {
 
 .fix-box {
   position: fixed !important;
-  bottom: 1.2rem;
+  bottom: 0.4rem;
   z-index: 99;
 }
 

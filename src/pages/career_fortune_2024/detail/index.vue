@@ -77,7 +77,7 @@
       e_click_name="click_2024career_pay"
       a_click_token="889e3j"
     />
-    <NewFooter v-if="showFixedBtn" />
+    <NewFooter v-if="showFixedBtn" product_key="h5_career2024" />
   </div>
 </template>
 
@@ -730,6 +730,6 @@ export default {
 
 .fix-box {
   position: fixed !important;
-  bottom: 1.2rem;
+  bottom: 0.4rem;
 }
 </style>

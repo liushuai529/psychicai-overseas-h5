@@ -108,7 +108,7 @@
       e_click_name="click_64gua_pay"
       a_click_token="y33o5l"
     />
-    <NewFooter v-show="showFixedBtn" />
+    <NewFooter v-show="showFixedBtn" product_key="h5_bai_gua"/>
   </div>
 </template>
 
@@ -475,7 +475,7 @@ export default {
 
 .fix-box {
   position: fixed !important;
-  bottom: 1.3rem;
+  bottom: 0.4rem;
   z-index: 99;
 }
 .footer-box {

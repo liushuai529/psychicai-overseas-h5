@@ -118,7 +118,7 @@
       class="btn-fixed"
       :src="language === 'zh-CN' ? cn_btn : tw_btn"
     />
-    <NewFooter />
+    <NewFooter product_key="h5_marriage"/>
     <!-- <div class="footer-box"></div> -->
   </div>
 </template>
@@ -562,7 +562,7 @@ export default {
   width: 6.89rem;
   left: 50%;
   margin-left: -3.46rem;
-  bottom: 1.4rem;
+  bottom: 0.4rem;
   z-index: 99;
   animation: btnMove 1s infinite ease-in-out alternate;
 }

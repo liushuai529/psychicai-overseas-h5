@@ -199,7 +199,7 @@
         @payOrder="checkOrder"
         @jumpDetail="jumpOrder"
       />
-      <NewFooter v-show="showFixedBtn" />
+      <NewFooter v-show="showFixedBtn" product_key="h5_bai_gua"/>
     </div>
   </div>
 </template>
@@ -1138,7 +1138,7 @@ export default {
     width: 5.86rem;
     left: 50%;
     margin-left: -2.93rem;
-    bottom: 1.5rem;
+    bottom: 0.4rem;
     z-index: 99;
   }
 }
