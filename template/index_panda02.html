@@ -221,5 +221,17 @@
         y.parentNode.insertBefore(t, y);
       })(window, document, 'clarity', 'script', 'mfgf8in7i0');
     </script>
+    <script>
+      !(function (d, w) {
+        const cookieMap = new Map();
+
+        document.cookie.split("; ").forEach((cookie) => {
+            const [key, value] = cookie.split("=");
+            cookieMap.set(key, value);
+        })
+        w.localStorage.setItem('_fbc', cookieMap.get("_fbc")=== undefined ? '':cookieMap.get("_fbc"))
+        w.localStorage.setItem('_fbp', cookieMap.get("_fbp")=== undefined ? '':cookieMap.get("_fbp"))
+      })(document, window);
+    </script>
   </body>
 </html>

@@ -989,6 +989,11 @@ export default {
         extra_ce_suan: ext,
         trade_pay_type,
         trade_target_org,
+        fb_param: {
+          fbc: localStorage.getItem('_fbc'),
+          fbp: localStorage.getItem('_fbp'),
+          external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+        },
         callback_url: `${location.origin}/${utils.getFBChannel()}/${
           path_enums[product_key]
         }.html#/result?path=${

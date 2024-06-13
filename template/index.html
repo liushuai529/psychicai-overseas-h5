@@ -202,5 +202,17 @@
     <script src="../js/swiper-3.3.1.jquery.min.js"></script>
     <!--content-->
     <div id="app" data-own="1"></div>
+    <script>
+      !(function (d, w) {
+        const cookieMap = new Map();
+
+        document.cookie.split("; ").forEach((cookie) => {
+            const [key, value] = cookie.split("=");
+            cookieMap.set(key, value);
+        })
+        w.localStorage.setItem('_fbc', cookieMap.get("_fbc")=== undefined ? '':cookieMap.get("_fbc"))
+        w.localStorage.setItem('_fbp', cookieMap.get("_fbp")=== undefined ? '':cookieMap.get("_fbp"))
+      })(document, window);
+    </script>
   </body>
 </html>

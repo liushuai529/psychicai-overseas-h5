@@ -529,6 +529,11 @@ export default {
           this.product_key,
           this.query_user_string
         ),
+        fb_param: {
+          fbc: localStorage.getItem('_fbc'),
+          fbp: localStorage.getItem('_fbp'),
+          external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+        }
       };
       // let user_time = this.$route.query.use_fixed_time;
 

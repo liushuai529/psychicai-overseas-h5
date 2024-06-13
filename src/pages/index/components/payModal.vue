@@ -199,6 +199,11 @@ export default {
           this.pay_index +
           '&report_price=' +
           price,
+          fb_param: {
+            fbc: localStorage.getItem('_fbc'),
+            fbp: localStorage.getItem('_fbp'),
+            external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+          }
       };
       const res = await payOrderAPI(params);
 

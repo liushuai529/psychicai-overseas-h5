@@ -290,6 +290,11 @@ export default {
           .filter(it => it.product_id)
           .map(it => it.product_id),
         extra_ce_suan: {},
+        fb_param: {
+          fbc: localStorage.getItem('_fbc'),
+          fbp: localStorage.getItem('_fbp'),
+          external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+        }
       };
       params.callback_url = `${location.origin}/index.html`;
       this.paying = true;

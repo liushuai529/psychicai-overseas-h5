@@ -525,7 +525,7 @@ export default {
           extra_ce_suan: this.getExtra(
             this.product_key,
             this.query_user_string
-          ),
+          )
         };
         payOrderAPI(params)
           .then(res => {
@@ -551,6 +551,11 @@ export default {
           trade_target_org: trade_target_org || null,
           product_id: this.product_id,
           product_key: this.product_key,
+          fb_param: {
+            fbc: localStorage.getItem('_fbc'),
+            fbp: localStorage.getItem('_fbp'),
+            external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+          }
         };
         params.callback_url = `${location.origin}${
           location.pathname

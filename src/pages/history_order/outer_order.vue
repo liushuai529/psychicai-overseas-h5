@@ -644,6 +644,11 @@ export default {
             trade_pay_type,
             trade_target_org,
             combine_product_ids: combine_product_ids,
+            fb_param: {
+              fbc: localStorage.getItem('_fbc'),
+              fbp: localStorage.getItem('_fbp'),
+              external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+            }
           };
           if (product_key === 'h5_combo2_attach') {
             let same_product = this.productList.find(
@@ -725,6 +730,11 @@ export default {
           extra_ce_suan: ext,
           trade_pay_type,
           trade_target_org,
+          fb_param: {
+            fbc: localStorage.getItem('_fbc'),
+            fbp: localStorage.getItem('_fbp'),
+            external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+          },
         };
 
         params.callback_url = `${

@@ -47,6 +47,11 @@ export default {
         platform: 'ANDROID',
         product_id: product_id,
         extra_ce_suan: utils.getExtraParams(product_key, payload.querystring),
+        fb_param: {
+          fbc: localStorage.getItem('_fbc'),
+          fbp: localStorage.getItem('_fbp'),
+          external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+        },
       };
 
       const res = await payOrderAPI(params);
