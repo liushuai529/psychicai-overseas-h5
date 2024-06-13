@@ -434,6 +434,7 @@ export default {
 
 <style scoped lang="less">
 .detail {
+  overflow-x: hidden;
   background-color: #7F1416;
   display: flex;
   flex-direction: column;
