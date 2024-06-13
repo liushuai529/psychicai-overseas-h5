@@ -263,7 +263,7 @@ export default {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       });
-    }, 1500);
+    }, 500);
     let self = this;
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器

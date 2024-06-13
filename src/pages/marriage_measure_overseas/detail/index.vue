@@ -281,7 +281,7 @@ export default {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       });
-    }, 1500);
+    }, 500);
 
     let btn = document.getElementById('info-btn');
     let self = this;

@@ -2,7 +2,7 @@
   <img :style="{
     marginBottom: product_key === 'h5_marriage' ? '0.2rem' : '0',
     width: '6.26rem', display: 'flex', alignSelf: 'center'
-  }" :src="product_key === 'h5_marriage'? btn_url_marriage: btn_url" @click="callback()" />
+  }" :src="product_key === 'h5_marriage' ? btn_url_marriage : btn_url" @click="callback()" />
 </template>
 <script>
 import utils from '../libs/utils';
@@ -31,7 +31,7 @@ export default {
       tw_home_btn,
       cn_home_xs_btn,
       tw_home_xs_btn,
-      
+
     }
   },
   props: {
@@ -58,7 +58,7 @@ export default {
       return ["enjoy03", "panda03"].includes(utils.getFBChannel());
     },
     btn_url() {
-      if (this.is_cn === 'zh-CN') {
+      if (utils.getLanguage() === 'zh-CN') {
         if (this.channel1) {
           return cn_home_btn;
         } else if (this.channel2) {
@@ -77,7 +77,7 @@ export default {
       }
     },
     btn_url_marriage() {
-      if (this.is_cn === 'zh-CN') {
+      if (utils.getLanguage() === 'zh-CN') {
         return cn_h5_marriage;
       } else {
         return tw_h5_marriage;
