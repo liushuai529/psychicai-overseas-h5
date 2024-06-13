@@ -1,67 +1,32 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
-    <img
-      class="header-title"
-      :src="is_cn ? cn_info_title : tw_info_title"
-      alt=""
-    />
+    <img class="header-title" :src="is_cn ? cn_info_title : tw_info_title" alt="" />
 
     <div :class="{ 'pay-box': true, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
-      <BaziTable
-        :sex="sex"
-        :is_result="is_result"
-        :username="username"
-        :gongli_nongli="gongli_nongli"
-        :picker_date_yangli="picker_date_yangli"
-        :picker_date_nongli="picker_date_nongli"
-        :gan="gan"
-        :zhi="zhi"
-        :nayin="nayin"
-        :cai_bo_num="cai_bo_num"
-        :gui_ren_num="gui_ren_num"
-        :hun_yin_num="hun_yin_num"
-        :ming_ge="ming_ge"
-        :riyuanqiangruo="riyuanqiangruo"
-        :shi_ye_num="shi_ye_num"
-        :wuxingqiang="wuxingqiang"
-        :tao_hua_num="0"
-        fuqigong=""
-        text_color="#6D2215"
-        minge_color="#EC436B"
-        :show_daji="false"
-        bg="#fff"
-        width="6.5rem"
-        table_border="0.02rem solid #EC436B"
-        border_color="#EC436B"
-        :is_show_taohua="1"
-        :change_color="true"
-      ></BaziTable>
+      <BaziTable :sex="sex" :is_result="is_result" :username="username" :gongli_nongli="gongli_nongli"
+        :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
+        :nayin="nayin" :cai_bo_num="cai_bo_num" :gui_ren_num="gui_ren_num" :hun_yin_num="hun_yin_num" :ming_ge="ming_ge"
+        :riyuanqiangruo="riyuanqiangruo" :shi_ye_num="shi_ye_num" :wuxingqiang="wuxingqiang" :tao_hua_num="0"
+        fuqigong="" text_color="#6D2215" minge_color="#EC436B" :show_daji="false" bg="#fff" width="6.5rem"
+        table_border="0.02rem solid #EC436B" border_color="#EC436B" :is_show_taohua="1" :change_color="true">
+      </BaziTable>
     </div>
-    <div :class="['method-box', !is_show_combination? 'method-height': null]">
-      <img id="method-title-img" class="method-title-img" :src="is_cn? img_zhifu_jian: img_zhifu_fan"/>
-      <PayDetail
-        className="pay-method"
-        ref="payDetail"
-        :product_key="product_key"
-        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg"
-        :query_user_string="query_user_string"
-        e_view_id="10006"
-        c_view_id="-10005"
-        e_view_name="view_2024lovely_pay"
-        a_view_token="184kba"
-        c_click_id="-10006"
-        e_click_name="click_2024lovely_pay"
-        a_click_token="2rov44"
-      />
+    <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
+      <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
+      <PayDetail className="pay-method" ref="payDetail" :product_key="product_key"
+        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10006"
+        c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
+        e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
     </div>
-    <GejuInfo v-if="is_show_combinationSpecial02" style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="[mingge_desc]" :dataList="[gejujiedu]"/>
+    <GejuInfo v-if="is_show_combinationSpecial02" style="margin-bottom: 0.22rem;" :product_key="product_key"
+      :user_desc="[mingge_desc]" :dataList="[gejujiedu]" />
     <!-- <div class="card-box">
       <canvas id="qian"></canvas>
     </div> -->
     <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" />
     <img class="module" :src="is_cn ? cn_bg_2 : tw_bg_2" />
     <img class="module" :src="is_cn ? cn_bg_3 : tw_bg_3" />
-    <NewFooter />
+    <NewFooter product_key="h5_emotion2024" />
 
     <div class="footer"></div>
     <!-- <img
@@ -87,11 +52,8 @@
       e_click_name="click_2024lovely_pay"
       a_click_token="2rov44"
     /> -->
-    <img
-      @click="payOrder"
-      class="fix-btn emo-btn"
-      :src="language === 'zh-CN' ? is_show_limitTime?cn_home_xs_btn: cn_home_btn :is_show_limitTime?tw_home_xs_btn: tw_home_btn"
-    />
+    <img @click="payOrder" class="fix-btn emo-btn"
+      :src="btn_url" />
     <HomeFooter product_key="h5_emotion2024" />
   </div>
 </template>
@@ -103,10 +65,15 @@ import utils from '../../../libs/utils';
 import UserInfo from './user_info.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import cn_pay_btn from '../../../assets/img/emotion/home_btn.png';
+
+import cn_home_btn1 from '../../../assets/img/emotion_v2/new/cn/btn.png';
+import tw_home_btn1 from '../../../assets/img/emotion_v2/new/tw/btn.png';
 import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/pay.png';
 import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/pay.png';
 import cn_home_xs_btn from '../../../assets/img/emotion_v2/new/cn/pay_xs.png';
 import tw_home_xs_btn from '../../../assets/img/emotion_v2/new/tw/pay_xs.png';
+
+
 import PayCard from '../../../components/PayCard.vue';
 import cn_card_1 from '../../../assets/img/emotion/home_card1.png';
 import tw_card_1 from '../../../assets/img/tw_mlxz/emotion/home_card1.png';
@@ -160,6 +127,8 @@ export default {
       img_zhifu_fan,
       cn_home_btn,
       tw_home_btn,
+      cn_home_btn1,
+      tw_home_btn1,
       cn_home_xs_btn,
       tw_home_xs_btn,
       cn_zhong3,
@@ -217,7 +186,7 @@ export default {
   computed: {
     //套餐支付显示逻辑
     is_show_combination() {
-      return !["enjoy03", "panda03","enjoy02", "panda02"].includes(utils.getFBChannel());
+      return !["enjoy03", "panda03", "enjoy02", "panda02"].includes(utils.getFBChannel());
     },
     is_show_combinationSpecial02() {
       return !["enjoy03", "panda03"].includes(utils.getFBChannel());
@@ -233,8 +202,36 @@ export default {
       )}`;
     },
 
+    channel1() {
+      return ["enjoy01", "panda01"].includes(utils.getFBChannel());
+    },
+    channel2() {
+      return ["enjoy02", "panda02"].includes(utils.getFBChannel());
+    },
+    channel3() {
+      return ["enjoy03", "panda03"].includes(utils.getFBChannel());
+    },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
+    },
+    btn_url() {
+      if (this.language === 'zh-CN') {
+        if (this.channel1) {
+          return cn_home_btn;
+        } else if (this.channel2) {
+          return cn_home_xs_btn;
+        } else if (this.channel3) {
+          return cn_home_btn1;
+        }
+      } else {
+        if (this.channel1) {
+          return tw_home_btn;
+        } else if (this.channel2) {
+          return tw_home_xs_btn;
+        } else if (this.channel3) {
+          return tw_home_btn1;
+        }
+      }
     },
   },
   async created() {
@@ -258,14 +255,14 @@ export default {
     window.scrollTo(0, 0);
     setTimeout(() => {
       this.$nextTick(() => {
-      //排除渠道3
-      if(!this.is_show_combinationSpecial02) return
-      // 滚动到指定元素
-      const element = document.getElementById('method-title-img');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+        //排除渠道3
+        if (!this.is_show_combinationSpecial02) return
+        // 滚动到指定元素
+        const element = document.getElementById('method-title-img');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     }, 1500);
     let self = this;
     let initialWindowHeight = window.innerHeight;
@@ -368,25 +365,24 @@ export default {
       );
       let lunar = solar.getLunar();
       this.picker_date_nongli = +this.gongli_nongli
-        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${
-            this.picker_hour
-          }`
+        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${this.picker_hour
+        }`
         : `${this.year}年${utils.formateNongliMonth(
-            this.month
-          )}${utils.formateNongliDate(this.date)} ${this.picker_hour}`;
+          this.month
+        )}${utils.formateNongliDate(this.date)} ${this.picker_hour}`;
       this.picker_date_yangli = +this.gongli_nongli
         ? `${this.year}-${this.month}-${this.date} ${this.picker_hour}`
         : `${Lunar.fromYmd(+this.year, +this.month, +this.date)
-            .getSolar()
-            .toString()} ${this.picker_hour}`;
-            console.warn('this.gongli_nongli ', this.gongli_nongli )
+          .getSolar()
+          .toString()} ${this.picker_hour}`;
+      console.warn('this.gongli_nongli ', this.gongli_nongli)
 
       let nongli_desc = +this.gongli_nongli
         ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} `
         : `${this.year}年${utils.formateNongliMonth(
-            this.month
-          )}${utils.formateNongliDate(this.date)}`;
-      this.mingge_desc = +this.gongli_nongli ?  `${this.username = utils.getShortStr(arr[0], 4)}，${this.sex === 0? '女':'男'}，${this.year}年${this.month}月${this.date}日生人` : `${this.username = utils.getShortStr(arr[0], 4)}，${this.sex === 0? '女':'男'}，${nongli_desc}生人`  
+          this.month
+        )}${utils.formateNongliDate(this.date)}`;
+      this.mingge_desc = +this.gongli_nongli ? `${this.username = utils.getShortStr(arr[0], 4)}，${this.sex === 0 ? '女' : '男'}，${this.year}年${this.month}月${this.date}日生人` : `${this.username = utils.getShortStr(arr[0], 4)}，${this.sex === 0 ? '女' : '男'}，${nongli_desc}生人`
     },
 
     // 支付弹窗
@@ -428,20 +424,24 @@ export default {
   margin-bottom: 0.36rem;
   background: #FFFAFA;
   border-radius: 0.16rem;
+
   .method-title-img {
     width: 6.68rem;
     height: 0.93rem;
     margin-top: -0.13rem;
   }
 }
+
 .method-height {
   // height: 7.71rem;
 }
+
 .detail {
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #ec436b;
+
   .pay-box {
     margin-bottom: 0.49rem;
     width: 7.1rem;
@@ -451,14 +451,14 @@ export default {
     flex-direction: column;
     align-items: center;
   }
+
   .cn-bg {
-    background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.png)
-      no-repeat;
+    background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.png) no-repeat;
     background-size: 100% 100%;
   }
+
   .tw-bg {
-    background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.png)
-      no-repeat;
+    background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.png) no-repeat;
     background-size: 100% 100%;
   }
 
@@ -481,16 +481,19 @@ export default {
     text-align: center;
     display: flex;
     justify-content: center;
+
     img {
       width: 5.92rem;
       height: 1.06rem;
     }
   }
 }
+
 .ce-btn {
   width: 5.8rem;
   height: 1.24rem;
 }
+
 .fix-box {
   position: fixed !important;
   bottom: 0;
@@ -507,11 +510,13 @@ export default {
   background: url('../../../assets/img/emotion/new/result_card2.png') no-repeat;
   background-size: contain;
   margin-bottom: 0.2rem;
+
   #qian {
     width: 100%;
     height: 100%;
   }
 }
+
 .fix-btn {
   width: 6.26rem;
   height: 1.34rem;
@@ -538,9 +543,11 @@ export default {
     transform: scale(1.1);
   }
 }
+
 .emo-btn {
   animation: emoBtn 1s infinite ease-in-out alternate;
 }
+
 .ab-footer {
   position: fixed;
   background: #000;

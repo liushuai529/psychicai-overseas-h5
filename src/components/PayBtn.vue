@@ -1,58 +1,90 @@
 <template>
-    <img 
-     
-      :style="{
-        marginBottom: product_key === 'h5_marriage' ? '0.2rem' : '0',
-        width: '6.26rem', display: 'flex', alignSelf: 'center'   
-      }"
-      :src="imgMap[product_key][is_cn?'cn':'tw']" 
-      @click="callback()"/>
+  <img :style="{
+    marginBottom: product_key === 'h5_marriage' ? '0.2rem' : '0',
+    width: '6.26rem', display: 'flex', alignSelf: 'center'
+  }" :src="product_key === 'h5_marriage'? btn_url_marriage: btn_url" @click="callback()" />
 </template>
 <script>
 import utils from '../libs/utils';
 //h5_emotion2024
-import cn_h5_emotion2024 from '../assets/img/emotion_v2/new/cn/pay.png';
-import tw_h5_emotion2024 from '../assets/img/emotion_v2/new/tw/pay.png';
-import cn_h5_emotion2024_xs from '../assets/img/emotion_v2/new/cn/pay_xs.png';
-import tw_h5_emotion2024_xs from '../assets/img/emotion_v2/new/tw/pay_xs.png';
+// import cn_h5_emotion2024 from '../assets/img/emotion_v2/new/cn/pay.png';
+// import tw_h5_emotion2024 from '../assets/img/emotion_v2/new/tw/pay.png';
+// import cn_h5_emotion2024_xs from '../assets/img/emotion_v2/new/cn/pay_xs.png';
+// import tw_h5_emotion2024_xs from '../assets/img/emotion_v2/new/tw/pay_xs.png';
+
+import cn_home_btn1 from '../assets/img/emotion_v2/new/cn/btn.png';
+import tw_home_btn1 from '../assets/img/emotion_v2/new/tw/btn.png';
+import cn_home_btn from '../assets/img/emotion_v2/new/cn/pay.png';
+import tw_home_btn from '../assets/img/emotion_v2/new/tw/pay.png';
+import cn_home_xs_btn from '../assets/img/emotion_v2/new/cn/pay_xs.png';
+import tw_home_xs_btn from '../assets/img/emotion_v2/new/tw/pay_xs.png';
 //h5_marriage
 import tw_h5_marriage from '../assets/img//bzhh_v2/tw/img_btn.png';
 import cn_h5_marriage from '../assets/img/bzhh_v2/cn/img_btn.png';
 export default {
   name: 'PayBtn',
-  data(){
-    return{
-      imgMap:{
-        h5_emotion2024: {
-            cn:["enjoy02", "panda02"].includes(utils.getFBChannel())?cn_h5_emotion2024_xs: cn_h5_emotion2024,
-            tw:["enjoy02", "panda02"].includes(utils.getFBChannel())?tw_h5_emotion2024_xs:tw_h5_emotion2024
-        },
-        h5_marriage:{
-                cn:cn_h5_marriage,
-                tw:tw_h5_marriage
-        }
-      }
+  data() {
+    return {
+      cn_home_btn1,
+      tw_home_btn1,
+      cn_home_btn,
+      tw_home_btn,
+      cn_home_xs_btn,
+      tw_home_xs_btn,
+      
     }
   },
-  props:{
-    callback:{
-        type:Function,
-        default:function(){}
+  props: {
+    callback: {
+      type: Function,
+      default: function () { }
     },
-    product_key:{
-        type:String,
-        default:'h5_emotion2024'
+    product_key: {
+      type: String,
+      default: 'h5_emotion2024'
     }
   },
-  computed:{
+  computed: {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
+    },
+    channel1() {
+      return ["enjoy01", "panda01"].includes(utils.getFBChannel());
+    },
+    channel2() {
+      return ["enjoy02", "panda02"].includes(utils.getFBChannel());
+    },
+    channel3() {
+      return ["enjoy03", "panda03"].includes(utils.getFBChannel());
+    },
+    btn_url() {
+      if (this.is_cn === 'zh-CN') {
+        if (this.channel1) {
+          return cn_home_btn;
+        } else if (this.channel2) {
+          return cn_home_xs_btn;
+        } else if (this.channel3) {
+          return cn_home_btn1;
+        }
+      } else {
+        if (this.channel1) {
+          return tw_home_btn;
+        } else if (this.channel2) {
+          return tw_home_xs_btn;
+        } else if (this.channel3) {
+          return tw_home_btn1;
+        }
+      }
+    },
+    btn_url_marriage() {
+      if (this.is_cn === 'zh-CN') {
+        return cn_h5_marriage;
+      } else {
+        return tw_h5_marriage;
+      }
     }
   }
 }
 </script>
 
-<style scoped lang="less">
-
-  
-</style>
+<style scoped lang="less"></style>
