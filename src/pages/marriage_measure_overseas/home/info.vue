@@ -6,57 +6,81 @@
       alt=""
     /> -->
 
-    <img v-if="language === 'zh-CN'" class="title" src="./../../../assets/img/mlxz/bzhh/user-info-title.png" />
-    <img v-else class="title" src="./../../../assets/img/tw_mlxz/bazihehun/home/user-info-title.png" />
+    <img
+      v-if="language === 'zh-CN'"
+      class="title"
+      src="./../../../assets/img/mlxz/bzhh/user-info-title.png"
+    />
+    <img
+      v-else
+      class="title"
+      src="./../../../assets/img/tw_mlxz/bazihehun/home/user-info-title.png"
+    />
     <!-- 男方 -->
-
 
     <div class="input-box">
       <div class="left">
-        <img class="left" style="width: 1.22rem;height: 1.22rem;margin-right: 0.2rem;" src="./../../../assets/img/bzhh_v2/man-icon.png" />
+        <img
+          class="left"
+          style="width: 1.22rem; height: 1.22rem; margin-right: 0.2rem"
+          src="./../../../assets/img/bzhh_v2/man-icon.png"
+        />
       </div>
       <div class="right">
         <div class="input-item">
           {{ maleusername }}
           <div class="input-label">姓名：</div>
-          <input class="input" id="maleusername" :placeholder="$t('name-placeholder')" v-model="maleusername" />
+          <input
+            class="input"
+            id="maleusername"
+            :placeholder="$t('name-placeholder')"
+            v-model="maleusername"
+          />
         </div>
         <div class="input-item">
           <div class="input-label">生日：</div>
-          <div class="input" :style="{ color: maledate ? '#333' : 'rgba(51, 51, 51, 0.5)' }" @click="maleopenPicker">
+          <div
+            class="input"
+            :style="{ color: maledate ? '#333' : 'rgba(51, 51, 51, 0.5)' }"
+            @click="maleopenPicker"
+          >
             {{ maledate || $t('birth-placeholder') }}
           </div>
-     
         </div>
       </div>
-
     </div>
-
-
 
     <!-- 女方 -->
     <div class="input-box">
-
       <div class="left">
-        <img class="left" style="width: 1.22rem;height: 1.22rem;margin-right: 0.2rem;" src="./../../../assets/img/bzhh_v2/fman-icon.png" />
+        <img
+          class="left"
+          style="width: 1.22rem; height: 1.22rem; margin-right: 0.2rem"
+          src="./../../../assets/img/bzhh_v2/fman-icon.png"
+        />
       </div>
       <div class="right">
         <div class="input-item">
           <div class="input-label">姓名：</div>
-          <input class="input" id="femaleusername" :placeholder="$t('name-placeholder')" v-model="femaleusername" />
+          <input
+            class="input"
+            id="femaleusername"
+            :placeholder="$t('name-placeholder')"
+            v-model="femaleusername"
+          />
         </div>
         <div class="input-item">
           <div class="input-label">生日：</div>
-          <div class="input" :style="{ color: femaledate ? '#333' : 'rgba(51, 51, 51, 0.5)' }"
-            @click="femaleopenPicker">
+          <div
+            class="input"
+            :style="{ color: femaledate ? '#333' : 'rgba(51, 51, 51, 0.5)' }"
+            @click="femaleopenPicker"
+          >
             {{ femaledate || $t('birth-placeholder') }}
           </div>
-     
         </div>
       </div>
     </div>
-
-    
   </div>
 </template>
 
@@ -174,7 +198,7 @@ export default {
   created() {
     this.width = window.screen.width > 750 ? 750 : window.screen.width;
   },
-  mounted() { },
+  mounted() {},
   destroyed() {
     localStorage.removeItem('bazi_count');
   },
@@ -206,7 +230,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .form {
   position: relative;
   width: 7.3rem;
@@ -220,8 +244,8 @@ export default {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  background: #FFEDD8;
-  border: 0.09rem solid #B70E08;
+  background: #ffedd8;
+  border: 0.09rem solid #b70e08;
   border-radius: 0.2rem;
 }
 
@@ -243,7 +267,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: #FFF5E9;
+  background: #fff5e9;
   border-radius: 0.08rem;
 
   .left {
@@ -315,7 +339,4 @@ export default {
 .input::-ms-input-placeholder {
   color: rgba(51, 51, 51, 0.5);
 }
-
-
-
 </style>

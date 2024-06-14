@@ -1,8 +1,8 @@
 <!--
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 11:34:10
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 21:20:38
+ * @LastEditors: Tahiti
+ * @LastEditTime: 2024-06-14 20:57:30
  * @Description: 
 -->
 <template>
@@ -38,7 +38,6 @@
         :change_color="false"
       ></BaziTable>
     </div>
-    <!-- <user-info :userInfo="userInfo" :dayun="dayun" :orderId="adverTise_order" /> -->
     <div class="main-outer">
       <div class="main">
         <img
@@ -157,8 +156,6 @@
 
 <script>
 import topBanner from '@/components/wealth_boutique_2024/detail/topBanner.vue';
-import userInfo from '@/components/wealth_boutique_2024/result/userInfo.vue';
-import contentDetail from '@/components/wealth_boutique_2024/detail/contentDetail.vue';
 import {
   getResultAPI,
   resultCheckAPI,
@@ -179,8 +176,6 @@ import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 export default {
   components: {
     topBanner,
-    userInfo,
-    contentDetail,
     CodePop,
     CopyCode,
     BaziTable,
