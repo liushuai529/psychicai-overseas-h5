@@ -1,50 +1,109 @@
 <!--
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-06-05 20:54:43
+ * @LastEditors: Tahiti
+ * @LastEditTime: 2024-06-14 20:59:31
  * @Description: 八字合婚
 -->
 <template>
   <div>
     <NavigationBar v-if="is_channel_01" />
-    <CalculateBar v-if="comboAttachData && is_show_combination && is_show_current_combination" :is_home="false"
-      :product_key="comboAttachData.product_key" :call_back="startCalculateClick" />
-    <div :class="{
-      home: true,
-      'fix-box': choose_time ? true : false,
-      'cn-bg': is_cn,
-      'tw-bg': !is_cn,
-    }" id="home">
+    <CalculateBar
+      v-if="
+        comboAttachData && is_show_combination && is_show_current_combination
+      "
+      :is_home="false"
+      :product_key="comboAttachData.product_key"
+      :call_back="startCalculateClick"
+    />
+    <div
+      :class="{
+        home: true,
+        'fix-box': choose_time ? true : false,
+        'cn-bg': is_cn,
+        'tw-bg': !is_cn,
+      }"
+      id="home"
+    >
       <header-notice v-if="has_pay"></header-notice>
       <div class="top-banner">
         <!-- <canvas id="canvas"></canvas> -->
 
-        <img v-if="language === 'zh-CN'" class="top-banner-img" src="./../../../assets/img/mlxz/bzhh/bzhh_bg.webp" />
-        <img v-else class="top-banner-img" src="./../../../assets/img/tw_mlxz/bazihehun/home/top-banner.webp" />
+        <img
+          v-if="language === 'zh-CN'"
+          class="top-banner-img"
+          src="./../../../assets/img/mlxz/bzhh/bzhh_bg.webp"
+        />
+        <img
+          v-else
+          class="top-banner-img"
+          src="./../../../assets/img/tw_mlxz/bazihehun/home/top-banner.webp"
+        />
         <div class="top-content">
           <div class="icon-container">
-            <img style="width: 2.16rem; height: 2.16rem;" v-if="language === 'zh-CN'" class="icon-img" src="./../../../assets/img/mlxz/bzhh/left-icon.png" />
-            <img v-else style="width: 2.16rem; height: 2.16rem;"  class="icon-img" src="./../../../assets/img/tw_mlxz/bazihehun/home/left-icon.png" />
+            <img
+              style="width: 2.16rem; height: 2.16rem"
+              v-if="language === 'zh-CN'"
+              class="icon-img"
+              src="./../../../assets/img/mlxz/bzhh/left-icon.png"
+            />
+            <img
+              v-else
+              style="width: 2.16rem; height: 2.16rem"
+              class="icon-img"
+              src="./../../../assets/img/tw_mlxz/bazihehun/home/left-icon.png"
+            />
 
-            <img style="width: 2.16rem; height: 2.16rem;" v-if="language === 'zh-CN'" class="icon-img"  src="./../../../assets/img/mlxz/bzhh/right-icon.png" />
-            <img style="width: 2.16rem; height: 2.16rem;" v-else class="icon-img"  src="./../../../assets/img/tw_mlxz/bazihehun/home/right-icon.png" />
-
+            <img
+              style="width: 2.16rem; height: 2.16rem"
+              v-if="language === 'zh-CN'"
+              class="icon-img"
+              src="./../../../assets/img/mlxz/bzhh/right-icon.png"
+            />
+            <img
+              style="width: 2.16rem; height: 2.16rem"
+              v-else
+              class="icon-img"
+              src="./../../../assets/img/tw_mlxz/bazihehun/home/right-icon.png"
+            />
           </div>
-          <info class="info-card" :malename="male.username" :femalename="female.username" :maledate="male.picker_date"
-            :malehour="male.picker_hour" :femaledate="female.picker_date" :femalehour="female.picker_hour" />
+          <info
+            class="info-card"
+            :malename="male.username"
+            :femalename="female.username"
+            :maledate="male.picker_date"
+            :malehour="male.picker_hour"
+            :femaledate="female.picker_date"
+            :femalehour="female.picker_hour"
+          />
           <div class="privacy">
-            <img v-if="privacyChecked" src="./../../../assets/img/mlxz/bzhh/check.png"
-              @click="privacyChecked = !privacyChecked" />
-            <img v-else src="./../../../assets/img/mlxz/bzhh/nocheck.png" @click="privacyChecked = !privacyChecked" />
+            <img
+              v-if="privacyChecked"
+              src="./../../../assets/img/mlxz/bzhh/check.png"
+              @click="privacyChecked = !privacyChecked"
+            />
+            <img
+              v-else
+              src="./../../../assets/img/mlxz/bzhh/nocheck.png"
+              @click="privacyChecked = !privacyChecked"
+            />
             <span>{{ $t('check-label') }}</span>
-            <span style="color: #FFDA27" @click="toService('user_agreement.html')">{{ $t('user-agreement') }}</span>
+            <span
+              style="color: #ffda27"
+              @click="toService('user_agreement.html')"
+              >{{ $t('user-agreement') }}</span
+            >
             <span>和</span>
-            <span style="color: #FFDA27" @click="toService('privacy.html')">{{
+            <span style="color: #ffda27" @click="toService('privacy.html')">{{
               $t('privacy-policy')
-              }}</span>
+            }}</span>
           </div>
-          <img id="info-btn" class="btn" :src="language === 'zh-CN' ? cn_btn : tw_btn" @click="check" />
+          <img
+            id="info-btn"
+            class="btn"
+            :src="language === 'zh-CN' ? cn_btn : tw_btn"
+            @click="check"
+          />
           <div class="user">
             <div>已有</div>
             <span>{{ user_number }}人</span>
@@ -57,15 +116,40 @@
       <img class="card" :src="language === 'zh-CN' ? cn_card3 : tw_card3" />
       <img class="card" :src="language === 'zh-CN' ? cn_card4 : tw_card4" />
       <img class="card" :src="language === 'zh-CN' ? cn_card5 : tw_card5" />
-      <img v-if="!is_channel_01" class="order" :src="language === 'zh-CN' ? cn_order : tw_order"
-        @click="toOrderUrl()" />
-      <img v-show="showFixedBtn" class="btn-fixed" :src="language === 'zh-CN' ? cn_btn : tw_btn" @click="check" />
+      <img
+        v-if="!is_channel_01"
+        class="order"
+        :src="language === 'zh-CN' ? cn_order : tw_order"
+        @click="toOrderUrl()"
+      />
+      <img
+        v-show="showFixedBtn"
+        class="btn-fixed"
+        :src="language === 'zh-CN' ? cn_btn : tw_btn"
+        @click="check"
+      />
 
       <!-- 時間選擇控件 -->
-      <DatetimePicker :male="sex" start="1959" end="2008" :year="year" :month="month" :date="date"
-        :birth_hour="birth_hour" v-show="choose_time && !show_nongli" />
-      <NongliPicker :male="sex" start="1959" end="2008" :year="year" :month="month" :date="date"
-        :birth_hour="birth_hour" v-show="choose_time && show_nongli" />
+      <DatetimePicker
+        :male="sex"
+        start="1959"
+        end="2008"
+        :year="year"
+        :month="month"
+        :date="date"
+        :birth_hour="birth_hour"
+        v-show="choose_time && !show_nongli"
+      />
+      <NongliPicker
+        :male="sex"
+        start="1959"
+        end="2008"
+        :year="year"
+        :month="month"
+        :date="date"
+        :birth_hour="birth_hour"
+        v-show="choose_time && show_nongli"
+      />
 
       <!-- Popup -->
       <!-- <PayPopup
@@ -86,15 +170,38 @@
       @getOrderId="getOrderId"
     ></combinePayPop> -->
       <HomeFooter v-if="showFixedBtn" product_key="h5_marriage" />
-      <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"
-        e_id="10007" c_id="-10014" c_name="click_marriage_discount1" />
-      <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
-        :new_order_key="new_order_key" name="local" top="4.7rem" :time="local_time" @payOrder="checkOrder"
-        @jumpDetail="jumpOrder" />
-      <FixedOrder v-if="show_api_order && !is_show_notice" :title="last_title" :is_show_move="is_show_notice"
-        :last_order="last_order" name="api" top="6.7rem" :time="api_time" @payOrder="checkOrder"
-        @jumpDetail="jumpOrder" />
-      <NewFooter v-if="showFixedBtn" product_key="h5_marriage"/>
+      <PopNotice
+        v-if="is_show_notice"
+        @close="closeNotice"
+        :count_down="count_down"
+        :product_key="product_key"
+        e_id="10007"
+        c_id="-10014"
+        c_name="click_marriage_discount1"
+      />
+      <FixedOrder
+        v-if="show_fixed_order && !is_show_notice"
+        :title="local_title"
+        :is_show_move="is_show_notice"
+        :new_order_key="new_order_key"
+        name="local"
+        top="4.7rem"
+        :time="local_time"
+        @payOrder="checkOrder"
+        @jumpDetail="jumpOrder"
+      />
+      <FixedOrder
+        v-if="show_api_order && !is_show_notice"
+        :title="last_title"
+        :is_show_move="is_show_notice"
+        :last_order="last_order"
+        name="api"
+        top="6.7rem"
+        :time="api_time"
+        @payOrder="checkOrder"
+        @jumpDetail="jumpOrder"
+      />
+      <NewFooter v-if="showFixedBtn" product_key="h5_marriage" />
     </div>
   </div>
 </template>
@@ -406,7 +513,9 @@ export default {
   computed: {
     //套餐支付显示逻辑
     is_show_combination() {
-      return !["enjoy03", "panda03","enjoy02", "panda02"].includes(utils.getFBChannel());
+      return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(
+        utils.getFBChannel()
+      );
     },
     //当前报告类型与引导类型不同，则显示
     is_show_current_combination() {
@@ -480,9 +589,11 @@ export default {
       // } else {
 
       // }
-      location.href = `${path_enums[this.comboAttachData.product_key]
-        }.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id
-        }&product_key=${this.comboAttachData.product_key}`;
+      location.href = `${
+        path_enums[this.comboAttachData.product_key]
+      }.html#/?has_pay=SUCCESS&order_id=${
+        this.comboAttachData.order_id
+      }&product_key=${this.comboAttachData.product_key}`;
     },
     //请求接口，是否展示引导标识
     async showComboAttach() {
@@ -929,7 +1040,8 @@ export default {
           birth_date,
           birth_hour,
           date: moment(
-            `${birth_year}${+birth_month < 10 ? '0' + birth_month : birth_month
+            `${birth_year}${
+              +birth_month < 10 ? '0' + birth_month : birth_month
             }${+birth_date < 10 ? '0' + birth_date : birth_date}`
           ).format('YYYYMMDD'),
         };
@@ -1056,9 +1168,11 @@ export default {
         extra_ce_suan: ext,
         trade_pay_type,
         trade_target_org,
-        callback_url: `${location.origin}/${utils.getFBChannel()}/${path_enums[product_key]
-          }.html#/result?path=${path_enums[product_key]
-          }&report_price=${payment}&discount_pay=1`,
+        callback_url: `${location.origin}/${utils.getFBChannel()}/${
+          path_enums[product_key]
+        }.html#/result?path=${
+          path_enums[product_key]
+        }&report_price=${payment}&discount_pay=1`,
       };
 
       const res = await payOrderAPI(params);
@@ -1084,15 +1198,15 @@ export default {
         '&pay_modal=1' +
         '&use_fixed_time=1&discount_pay=1';
 
-      location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
-        }.html#/${path}`;
+      location.href = `${location.origin}/${utils.getFBChannel()}/${
+        path_enums[this.new_order_key]
+      }.html#/${path}`;
     },
   },
 };
-
 </script>
 
-<style scoped>
+<style scoped lang="less">
 #canvas {
   width: 7.5rem;
   height: 12rem;
@@ -1112,7 +1226,7 @@ export default {
 } */
 .home {
   width: 7.5rem;
-  background-color: #7F1416;
+  background-color: #7f1416;
   background-size: contain;
   background-repeat: no-repeat;
   min-height: 100vh;
@@ -1158,8 +1272,6 @@ export default {
       height: 2.16rem;
     }
   }
-
-  
 }
 
 .info-card {
@@ -1200,7 +1312,7 @@ export default {
 }
 
 .user span {
-  color: #FFDA27;
+  color: #ffda27;
 }
 
 .card {
@@ -1242,20 +1354,17 @@ export default {
   }
 }
 .icon-container {
-    width: 100%;
+  width: 100%;
+  height: 2.16rem;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  margin-bottom: 0.6rem;
+  animation: moveUpDown 2s infinite ease-in-out alternate;
+  .icon-img {
+    width: 2.16rem;
     height: 2.16rem;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 0.2rem;
-    padding-right: 0.2rem;
-    margin-bottom: 0.6rem;
-    animation: moveUpDown 2s infinite ease-in-out alternate;
-    .icon-img {
-      width: 2.16rem;
-      height: 2.16rem;
-    }
   }
-
-
-
+}
 </style>
