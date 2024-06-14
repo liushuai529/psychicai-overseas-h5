@@ -180,7 +180,7 @@
         @payOrder="checkOrder"
         @jumpDetail="jumpOrder"
       />
-      <NewFooter v-if="showFixedBtn" product_key="h5_annual2024"/>
+      <NewFooter v-if="showFixedBtn" product_key="h5_annual2024" />
     </div>
   </div>
 </template>
@@ -232,10 +232,6 @@ import combinePayPop from '../../../components/combinePayPop.vue';
 import cn_new_user_btn from '../../../assets/img/mlxz/year_of_lucky_2024/nianyun_btn_jiexiao.png';
 import tw_new_user_btn from '../../../assets/img/tw_mlxz/year_24/nianyun_btn_jiexiao_fanti.png';
 
-import cn_header_svga from '../../../assets/img/mlxz/svga/year24/cn_header.svga';
-import tw_header_svga from '../../../assets/img/mlxz/svga/year24/tw_header.svga';
-import cn_tag_svga from '../../../assets/img/mlxz/svga/year24/cn_tag.svga';
-import tw_tag_svga from '../../../assets/img/mlxz/svga/year24/tw_tag.svga';
 import cn_card_svga from '../../../assets/img/mlxz/svga/year24/cn_card.svga';
 import tw_card_svga from '../../../assets/img/mlxz/svga/year24/tw_card.svga';
 import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/year_order.png';
@@ -309,10 +305,14 @@ export default {
       product_price: '',
       cn_new_user_btn,
       tw_new_user_btn,
-      cn_header_svga,
-      tw_header_svga,
-      cn_tag_svga,
-      tw_tag_svga,
+      cn_header_svga:
+        'https://psychicai-static.psychicai.pro/imgs/2406ce0cb03241ea456db046b71c40ee417c.svga',
+      tw_header_svga:
+        'https://psychicai-static.psychicai.pro/imgs/240699790b16f7ff4bdcb0d22c167fcb76d8.svga',
+      cn_tag_svga:
+        'https://psychicai-static.psychicai.pro/imgs/2406d412215566e64563b9f288d8e6ce1781.svga',
+      tw_tag_svga:
+        'https://psychicai-static.psychicai.pro/imgs/2406f7acfeff41b54aa491aed151218685a9.svga',
       cn_card_svga,
       tw_card_svga,
       // 挽留弹窗
