@@ -745,7 +745,7 @@ export default {
   height: 1px;
   background: #000000;
   opacity: 0.13;
-  margin: 0.24rem auto;
+  margin: 0.3rem auto;
 }
 
 .colon {
@@ -828,7 +828,7 @@ export default {
   width: 100%;
   height: 0.3rem;
   font-weight: 600;
-  font-size: 0.3rem;
+  font-size: 0.36rem;
   color: #333333;
   line-height: 0.3rem;
   text-align: center;

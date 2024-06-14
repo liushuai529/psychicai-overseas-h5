@@ -436,7 +436,7 @@ export default {
 
 .fix-box {
   position: fixed !important;
-  bottom: 0.4rem;
+  bottom: 0.2rem;
   z-index: 99;
 }
 

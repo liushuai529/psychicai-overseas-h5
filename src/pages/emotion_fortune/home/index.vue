@@ -1365,6 +1365,7 @@ export default {
         width: 6.26rem;
         height: 1.34rem;
         margin-top: 0.7rem;
+        object-fit:contain;
       }
       .info-bottom {
         display: flex;
@@ -1406,11 +1407,13 @@ margin-bottom: .2rem;
 }
 
 .fix-btn {
+  object-fit: contain;
   width: 5.8rem;
   height: 1.34rem;
   position: fixed;
-  bottom: 0.4rem;
-  z-index: 99
+  bottom: 0.2rem;
+  z-index: 99;
+
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }
 .order-icon {

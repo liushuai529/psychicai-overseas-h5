@@ -1065,7 +1065,7 @@ export default {
 .fix-btn {
   width: 5.19rem;
   height: 1.03rem;
-  bottom: 0.4rem;
+  bottom: 0.2rem;
   z-index: 99;
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }

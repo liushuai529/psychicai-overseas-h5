@@ -18,7 +18,7 @@
         c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
         e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
     </div>
-    <GejuInfo v-if="is_show_combinationSpecial02" style="margin-bottom: 0.22rem;" :product_key="product_key"
+    <GejuInfo v-if="is_show_combinationSpecial02" style="margin-bottom: 0.36rem;" :product_key="product_key"
       :user_desc="[mingge_desc]" :dataList="[gejujiedu]" />
     <!-- <div class="card-box">
       <canvas id="qian"></canvas>
@@ -421,7 +421,7 @@ export default {
   /* justify-content: center; */
   align-items: center;
   /* padding-top: 1.14rem; */
-  margin-bottom: 0.36rem;
+  margin-bottom: 0.49rem;
   background: #FFFAFA;
   border-radius: 0.16rem;
 
@@ -450,6 +450,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: -0.9rem;
   }
 
   .cn-bg {
@@ -521,7 +522,7 @@ export default {
   width: 6.26rem;
   height: 1.34rem;
   position: fixed;
-  bottom: 0.4rem;
+  bottom: 0.2rem;
   z-index: 99;
 }
 

@@ -26,6 +26,7 @@ module.exports = {
         : config.dev.assetsPublicPath,
   },
   resolve: {
+    mainFields: ['jsnext:main', 'main'],//减小打包体积
     extensions: ['.js', '.vue', '.json'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',

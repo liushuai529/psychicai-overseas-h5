@@ -1138,7 +1138,7 @@ export default {
     width: 5.86rem;
     left: 50%;
     margin-left: -2.93rem;
-    bottom: 0.4rem;
+    bottom: 0.2rem;
     z-index: 99;
   }
 }
