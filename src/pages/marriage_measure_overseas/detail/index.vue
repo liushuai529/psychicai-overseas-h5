@@ -525,7 +525,7 @@ export default {
   }
 
   .module {
-    width: 7.02rem;
+    width: 7.5rem;
     margin-bottom: 0.24rem;
   }
 }
