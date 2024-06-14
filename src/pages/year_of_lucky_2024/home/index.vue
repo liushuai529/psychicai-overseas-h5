@@ -200,7 +200,7 @@ import {
   payOrderAPI,
   getLastOrderAPI,
 } from '../../../api/api';
-import moment from 'moment';
+import moment from 'dayjs';
 import HeaderNotice from '../../../components/headerNotice.vue';
 
 import cn_tag from '../../../assets/img/mlxz/year_of_lucky_2024/img_4tag.png';

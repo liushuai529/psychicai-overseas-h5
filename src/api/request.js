@@ -74,11 +74,16 @@ const request = (url, method, data) => {
         }
       })
       .catch(err => {
-        if (err && err.code === 1008) {
+        if(err === 'Network Error') {
+
         } else {
-          Toast(err);
-          Indicator.close();
-          reject(err);
+          if (err && err.code === 1008) {
+            Indicator.close();
+          } else {
+            Toast(err);
+            Indicator.close();
+            reject(err);
+          }
         }
       });
   });

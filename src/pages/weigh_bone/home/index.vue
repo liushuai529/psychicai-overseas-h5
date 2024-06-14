@@ -178,7 +178,7 @@ import {
   payOrderAPI,
   getLastOrderAPI,
 } from '../../../api/api';
-import moment from 'moment';
+import moment from 'dayjs';
 import HeaderNotice from '../../../components/headerNotice.vue';
 import footerBanner from './footer.vue';
 import {

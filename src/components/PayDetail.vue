@@ -152,7 +152,6 @@ import utils from '../libs/utils';
 import { path_enums } from '../libs/enum';
 import { CountDown, Toast } from 'vant';
 import 'vant/lib/index.css';
-import moment from 'moment';
 import GroupPurchase from '../components/GroupPurchase.vue';
 import PayBtn from '../components/PayBtn.vue';
 

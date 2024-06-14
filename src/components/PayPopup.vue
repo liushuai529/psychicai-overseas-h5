@@ -45,7 +45,7 @@
 </template>
 <script>
 import { Popup, Indicator } from 'mint-ui';
-import moment from 'moment';
+import moment from 'dayjs';
 import {
   getGoodsListAPI,
   orderAPI,

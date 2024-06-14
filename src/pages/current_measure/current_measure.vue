@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import moment from 'moment';
 import { Indicator } from 'mint-ui';
 
 const allMeasure = () => {

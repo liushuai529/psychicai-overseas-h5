@@ -5,7 +5,7 @@
  * @LastEditTime: 2024-06-05 17:30:01
  * @Description: 工具函数
  */
-import moment from 'moment';
+import moment from 'dayjs';
 
 /**
  * @description: 获取FB代理渠道

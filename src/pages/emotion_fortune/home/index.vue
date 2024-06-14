@@ -223,7 +223,7 @@ import {
   getComboAttachAPI,
   reportBuryingEventAPI,
 } from '../../../api/api';
-import moment from 'moment';
+import moment from 'dayjs';
 // @ts-ignore
 import HeaderNotice from '../../../components/headerNotice.vue';
 

@@ -55,7 +55,6 @@
 import utils from './../../../libs/utils.js';
 import wnl from './../../../libs/suishen.wnl.js';
 import Picker from './../../../components/Picker';
-import { lang } from 'moment';
 
 let pick_timer;
 const month_name = [

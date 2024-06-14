@@ -74,7 +74,7 @@
 </template>
 <script>
 import { Popup } from 'mint-ui';
-import moment from 'moment';
+import moment from 'dayjs';
 import utils from '../../libs/utils';
 
 let order_id = utils.getQueryString('order_id');

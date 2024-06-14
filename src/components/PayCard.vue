@@ -182,7 +182,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import moment from 'dayjs';
 import { Indicator } from 'mint-ui';
 import {
   getGoodsListAPI,
