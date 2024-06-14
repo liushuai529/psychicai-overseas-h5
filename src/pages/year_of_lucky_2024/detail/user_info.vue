@@ -45,6 +45,7 @@
       <div id="haoyun" class="tag-2 com-text haoyun">{{ $t('tips-3') }}</div>
       <div id="echarts" class="echarts"></div>
     </div>
+
   </div>
 </template>
 
@@ -52,10 +53,9 @@
 import utils from '../../../libs/utils.js';
 import cn_title_1 from '../../../assets/img/mlxz/year_of_lucky_2024/result_img_word.png';
 import tw_title_1 from '../../../assets/img/tw_mlxz/year_24/detail/result_img_word.png';
-
 import cn_title_2 from '../../../assets/img/mlxz/year_of_lucky_2024/img_word3.png';
 import tw_title_2 from '../../../assets/img/mlxz/year_of_lucky_2024/img_word3.png';
-import * as echarts from 'echarts';
+// import * as echarts from 'echarts';
 
 import BaziTable from '../../../components/baziTable.vue';
 const Getmonth = () => {
@@ -207,7 +207,7 @@ export default {
             data: self.score,
             showSymbol: false,
             areaStyle: {
-              color: echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
                   offset: 0,
                   color: '#FFF1E3',

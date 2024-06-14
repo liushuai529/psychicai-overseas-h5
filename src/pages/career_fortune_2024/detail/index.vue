@@ -89,7 +89,7 @@ import { getBaziAPI } from '../../../api/api';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import payModal from '../../../components/PayModal.vue';
 import BaziTable from '../../../components/baziTable.vue';
-import * as echarts from 'echarts';
+// import * as echarts from 'echarts';
 
 import cn_info_title from '../../../assets/img/mlxz/career_2024/detail/yu_img_title.png';
 import cn_hude from '../../../assets/img/mlxz/career_2024/detail/huode.png';
@@ -423,7 +423,7 @@ export default {
             data: self.score,
             showSymbol: false,
             areaStyle: {
-              color: echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
                   offset: 0,
                   color: '#FFF1E3',

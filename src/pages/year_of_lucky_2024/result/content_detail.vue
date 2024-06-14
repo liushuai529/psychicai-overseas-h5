@@ -85,7 +85,7 @@ import tw_title6 from './../../../assets/img/tw_mlxz/year_24/result/title/result
 import tw_title9 from './../../../assets/img/tw_mlxz/year_24/result/title/result_title_7.png';
 import tw_title8 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_6.png';
 
-import * as echarts from 'echarts';
+// import * as echarts from 'echarts';
 import { color_enums, icon_enums } from '../../../libs/enum';
 
 import directionIcon1 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_1@3x.png';
@@ -421,7 +421,7 @@ export default {
             data: self.result,
             showSymbol: false,
             areaStyle: {
-              color: echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
                   offset: 0,
                   color: '#FFF1E3',
