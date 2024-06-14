@@ -460,7 +460,6 @@ import FixedOrder from '../../components/FixedOrder.vue';
 // @ts-ignore
 import Recommend from './recommend.vue';
 // @ts-ignore
-import Fortune from './fortune.vue';
 import utils from '../../libs/utils';
 import PayPopup from '../../components/PayPopup.vue';
 import {
@@ -826,7 +825,6 @@ export default {
   components: {
     ResultPop,
     Recommend,
-    Fortune,
     PayPopup,
     PopResult,
     PayModal,

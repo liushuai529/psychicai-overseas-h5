@@ -652,7 +652,6 @@ export default {
 <style scoped lang="less">
 @import './../../less/reset.less';
 @import './../../less/common.less';
-@import './fortune.less';
 
 .recommend-container {
   width: 100%;

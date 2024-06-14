@@ -48,17 +48,64 @@ var webpackConfig = merge(baseWebpackConfig, {
       },
     }),
     // split vendor js into its own file
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module, count) {
-        // any required modules inside node_modules are extracted to vendor
-        return (
-          module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0
-        );
-      },
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   minChunks: function (module, count) {
+    //     // any required modules inside node_modules are extracted to vendor
+    //     return (
+    //       module.resource &&
+    //       /\.js$/.test(module.resource) &&
+    //       module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0
+    //     );
+    //   },
+    // }),
+
+
+
+    // 从vendor中抽离需要的模块数据
+new webpack.optimize.CommonsChunkPlugin({
+  name: 'echarts',
+  chunks: ['vendor'],
+  minChunks (module) {
+    // any required modules inside node_modules are extracted to vendor
+    return (
+      module.resource &&
+      /echarts|zrender/.test(module.resource)
+    )
+  }
+}),
+new webpack.optimize.CommonsChunkPlugin({
+  name: 'element-ui',
+  chunks: ['vendor'],
+  minChunks (module) {
+    // any required modules inside node_modules are extracted to vendor
+    return (
+      module.resource &&
+      /element-ui/.test(module.resource)
+    )
+  }
+}),
+new webpack.optimize.CommonsChunkPlugin({
+  name: 'vue',
+  chunks: ['vendor'],
+  minChunks (module) {
+    // any required modules inside node_modules are extracted to vendor
+    return (
+      module.resource &&
+      /vue/.test(module.resource)
+    )
+  }
+}),
+
+
+
+
+
+
+
+
+
+
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
