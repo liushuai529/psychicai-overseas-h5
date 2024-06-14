@@ -1,28 +1,38 @@
 <!--
  * @Author: wujiang@weli.cn
  * @Date: 2024-04-08 11:37:29
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-28 14:31:57
+ * @LastEditors: Tahiti
+ * @LastEditTime: 2024-06-15 00:11:11
  * @Description: 支付弹窗
 -->
 <template>
-  <mt-popup v-model="show" position="bottom" :style="{
-    height: is_android ? '13.2rem' : '12rem',
-  }" class="pay-modal">
+  <mt-popup
+    v-model="show"
+    position="bottom"
+    :style="{
+      height: is_android ? '13.2rem' : '12rem',
+    }"
+    class="pay-modal"
+  >
     <div class="pay-content">
-
-
-
-      <div >
-        <img @click="closeModal" class="close"
-          src="https://psychicai-static.psychicai.pro/imgs/240484f905eb6e7b49f19988b0f94f83c430.png" alt="" />
+      <div>
+        <img
+          @click="closeModal"
+          class="close"
+          src="https://psychicai-static.psychicai.pro/imgs/240484f905eb6e7b49f19988b0f94f83c430.png"
+          alt=""
+        />
         <div :style="title_style" class="username">
           {{ title }}
         </div>
         <!-- 限时优惠 -->
         <div class="discount">
           <div class="left">
-            <img :src="is_new_user ? new_user_icon : xsyh_icon" class="xsyh" alt="" />
+            <img
+              :src="is_new_user ? new_user_icon : xsyh_icon"
+              class="xsyh"
+              alt=""
+            />
             <div class="price-box">
               <div class="now-price">{{ now_price }}</div>
               <div class="origin-price">{{ origin_price }}</div>
@@ -32,23 +42,41 @@
             <div class="title">{{ tips1 }}</div>
             <div class="desc">
               <!-- <count-down :time="time" @change="getTime" format="mm:ss" /> -->
-              <count-down ref="countDown" :time="time" millisecond class="time-box" @change="getTime">
+              <count-down
+                ref="countDown"
+                :time="time"
+                millisecond
+                class="time-box"
+                @change="getTime"
+              >
                 <template #default="timeData">
-                  <span :class="{
-                    block: true,
-                    'rgb-light': is_show_shandong,
-                  }">{{ timeData.minutes | filterTime }}</span>
-                  <span :class="{ colon: true, 'rgb-color': is_show_shandong }">:</span>
-                  <span :class="{
-                    block: true,
-                    'rgb-light': is_show_shandong,
-                  }">{{ timeData.seconds | filterTime }}</span>
-                  <span :class="{ colon: true, 'rgb-color': is_show_shandong }">:</span>
+                  <span
+                    :class="{
+                      block: true,
+                      'rgb-light': is_show_shandong,
+                    }"
+                    >{{ timeData.minutes | filterTime }}</span
+                  >
+                  <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
+                    >:</span
+                  >
+                  <span
+                    :class="{
+                      block: true,
+                      'rgb-light': is_show_shandong,
+                    }"
+                    >{{ timeData.seconds | filterTime }}</span
+                  >
+                  <span :class="{ colon: true, 'rgb-color': is_show_shandong }"
+                    >:</span
+                  >
 
-                  <span :class="{
-                    block: true,
-                    'rgb-light': is_show_shandong,
-                  }">
+                  <span
+                    :class="{
+                      block: true,
+                      'rgb-light': is_show_shandong,
+                    }"
+                  >
                     <span :class="{ mill: time === 1 }">
                       {{ timeData.milliseconds | filterTime }}
                     </span>
@@ -59,36 +87,49 @@
           </div>
         </div>
         <div class="buy-people">
-          今日已有<span>{{ buy_people }}</span>{{ tips2 }}
+          今日已有<span>{{ buy_people }}</span
+          >{{ tips2 }}
         </div>
       </div>
-
-
 
       <div class="pay-method">
         <div v-if="!pay_methods.length && loading" class="no-empty">
           <mt-spinner type="fading-circle" :size="60"></mt-spinner>
         </div>
         <div v-else class="pay-list">
-
           <!-- 支付方式 -->
           <div class="method-list">
-            <div v-for="(it, k) in pay_methods" @click="check_index = k" :key="k" class="item">
+            <div
+              v-for="(it, k) in pay_methods"
+              @click="check_index = k"
+              :key="k"
+              class="item"
+            >
               <div class="left">
                 <img :src="it.icon" alt="" />
                 <div class="name">{{ it.title }}</div>
               </div>
-              <img class="right" :src="check_index === k ? checked_icon : no_check_icon" alt="" />
+              <img
+                class="right"
+                :src="check_index === k ? checked_icon : no_check_icon"
+                alt=""
+              />
             </div>
           </div>
         </div>
       </div>
       <!-- 支付按钮 -->
 
-      <div :style="{
-        bottom: is_android ? '1.4rem' : '0.2rem',
-      }" v-if="pay_methods.length" @click="payMoney()" class="pay-btn">
-        {{ tips3 }}<span>{{ now_price }}</span>{{ tips4 }}
+      <div
+        :style="{
+          bottom: is_android ? '1.4rem' : '0.2rem',
+        }"
+        v-if="pay_methods.length"
+        @click="payMoney()"
+        class="pay-btn"
+      >
+        {{ tips3 }}<span>{{ now_price }}</span
+        >{{ tips4 }}
       </div>
     </div>
   </mt-popup>
@@ -106,8 +147,6 @@ import utils from '../libs/utils';
 import { path_enums } from '../libs/enum';
 import { CountDown, Toast } from 'vant';
 import { Downloader, Parser, Player } from 'svga.lite';
-import cn_bazi_modal from '../assets/img/mlxz/svga/bzhh/cn_modal.svga';
-import tw_bazi_modal from '../assets/img/mlxz/svga/bzhh/tw_modal.svga';
 const e_id_arr = {
   h5_wealth2024: '60001',
   h5_weigh_bone: '60002',
@@ -150,7 +189,6 @@ const tipsArr6 = {
   'zh-TW': '請稍等...',
 };
 export default {
-
   data() {
     return {
       tips1: tipsArr1[utils.getLanguage()],
@@ -159,8 +197,7 @@ export default {
       tips4: tipsArr4[utils.getLanguage()],
       parser: null,
       player: null,
-      cn_bazi_modal,
-      tw_bazi_modal,
+
       show: false,
       pay_methods: [],
       loading: false,
@@ -180,7 +217,7 @@ export default {
       is_show_shandong: false,
       is_show_daoqi: false,
       payCanClick: false,
-      pay_lock_time: 0
+      pay_lock_time: 0,
     };
   },
   props: {
@@ -198,7 +235,7 @@ export default {
     },
     close: {
       type: Function,
-      default: () => { },
+      default: () => {},
     },
     product_key: {
       type: String,
@@ -270,9 +307,9 @@ export default {
     origin_price() {
       return this.product
         ? originPriceArr[utils.getLanguage()] +
-        this.product.unit +
-        ' ' +
-        this.product.origin_price_str
+            this.product.unit +
+            ' ' +
+            this.product.origin_price_str
         : '-';
     },
     is_cn() {
@@ -301,10 +338,10 @@ export default {
           this.getProductionList();
           this.getPayMethod();
           if (this.product_key === 'h5_marriage') {
-            this.loadBg(
-              '#bg',
-              this.is_cn ? this.cn_bazi_modal : this.tw_bazi_modal
-            );
+            // this.loadBg(
+            //   '#bg',
+            //   this.is_cn ? this.cn_bazi_modal : this.tw_bazi_modal
+            // );
           }
 
           utils.firebaseLogEvent(
@@ -459,12 +496,12 @@ export default {
     async payMoney() {
       //防抖
       if (this.payCanClick) {
-        return false
+        return false;
       }
-      this.payCanClick = true
-      clearTimeout(this.pay_lock_time)
+      this.payCanClick = true;
+      clearTimeout(this.pay_lock_time);
       this.pay_lock_time = setTimeout(() => {
-        this.payCanClick = false
+        this.payCanClick = false;
       }, 2000);
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
@@ -492,18 +529,19 @@ export default {
         }
       );
       let pick_method = this.pay_methods[this.check_index];
-      const { pay_method, trade_pay_type, trade_target_org, fake } = pick_method;
+      const { pay_method, trade_pay_type, trade_target_org, fake } =
+        pick_method;
 
       //假支付
-      if(fake) {
-        Toast(this.is_cn?'请选择其他支付方式':'請選擇其他支付方式')
-        return
+      if (fake) {
+        Toast(this.is_cn ? '请选择其他支付方式' : '請選擇其他支付方式');
+        return;
       }
 
       localStorage.setItem('report_price', this.product.price);
 
       Indicator.open(tipsArr5[utils.getLanguage()]);
-      
+
       let params = {
         pay_method: pay_method,
         product_key: this.product_key,
@@ -514,34 +552,36 @@ export default {
           this.query_user_string
         ),
         fb_param: {
-            fbc: localStorage.getItem('_fbc'),
-            fbp: localStorage.getItem('_fbp'),
-            external_id: localStorage.getItem('mlxz_outer_visitor_id'),
-          }
+          fbc: localStorage.getItem('_fbc'),
+          fbp: localStorage.getItem('_fbp'),
+          external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+        },
       };
       let discount_pay = this.$route.query.discount_pay || 0;
       // let user_time = this.$route.query.use_fixed_time;
       let user_time = true;
       let pay_max_params = Object.assign({}, params, {
-          trade_pay_type,
-          trade_target_org,
-        });
-        pay_max_params.callback_url = `${location.origin}${location.pathname
-          }#/result?path=${path_enums[this.product_key]}&report_price=${this.product.price
-          }&discount_pay=${discount_pay}`;
-        const res = await payOrderAPI(pay_max_params);
-        Indicator.close();
-        localStorage.removeItem('mlxz_set_event_times');
+        trade_pay_type,
+        trade_target_org,
+      });
+      pay_max_params.callback_url = `${location.origin}${
+        location.pathname
+      }#/result?path=${path_enums[this.product_key]}&report_price=${
+        this.product.price
+      }&discount_pay=${discount_pay}`;
+      const res = await payOrderAPI(pay_max_params);
+      Indicator.close();
+      localStorage.removeItem('mlxz_set_event_times');
 
-        if (res.status !== 1000) return;
-        if (user_time) {
-          localStorage.removeItem('mlxz_fixed_order_info');
-          localStorage.removeItem('mlxz_fixed_order_key');
-          localStorage.removeItem('mlxz_fixed_local_order_time');
-          localStorage.removeItem('mlxz_fixed_api_order_time');
-        }
-        await utils.asleep(1000);
-        location.href = res.data.pay_url;
+      if (res.status !== 1000) return;
+      if (user_time) {
+        localStorage.removeItem('mlxz_fixed_order_info');
+        localStorage.removeItem('mlxz_fixed_order_key');
+        localStorage.removeItem('mlxz_fixed_local_order_time');
+        localStorage.removeItem('mlxz_fixed_api_order_time');
+      }
+      await utils.asleep(1000);
+      location.href = res.data.pay_url;
     },
   },
 };
@@ -562,7 +602,8 @@ export default {
 
 // .van-count-down {
 //   font-family: 'Courier New', Courier, monospace;
-// }</style>
+// }
+</style>
 <style scoped lang="less">
 .modal-bg {
   width: 7.5rem;

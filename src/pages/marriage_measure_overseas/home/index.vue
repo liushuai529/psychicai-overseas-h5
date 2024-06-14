@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: Tahiti
- * @LastEditTime: 2024-06-14 20:59:31
+ * @LastEditTime: 2024-06-15 00:06:37
  * @Description: 八字合婚
 -->
 <template>
@@ -256,8 +256,6 @@ import tw_card3 from './../../../assets/img/tw_mlxz/bazihehun/home/card3.png';
 import tw_card4 from './../../../assets/img/tw_mlxz/bazihehun/home/card4.png';
 import tw_card5 from './../../../assets/img/tw_mlxz/bazihehun/home/card5.png';
 import combinePayPop from '../../../components/combinePayPop.vue';
-import cn_header from '../../../assets/img/mlxz/svga/bzhh/cn_header.svga';
-import tw_header from '../../../assets/img/mlxz/svga/bzhh/tw_header.svga';
 import { Downloader, Parser, Player } from 'svga.lite';
 import PopNotice from '../../../components/PopNotice.vue';
 import NewFooter from '../../../components/NewFooter.vue';
@@ -296,8 +294,6 @@ export default {
   },
   data() {
     return {
-      cn_header,
-      tw_header,
       privacyChecked: true, // 同意隱私協議
       showFixedBtn: false,
 

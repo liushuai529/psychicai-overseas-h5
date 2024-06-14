@@ -2,7 +2,9 @@
   <div>
     <NavigationBar v-if="is_channel_01" />
     <CalculateBar
-      v-if="comboAttachData && is_show_combination && is_show_current_combination"
+      v-if="
+        comboAttachData && is_show_combination && is_show_current_combination
+      "
       :is_home="false"
       :product_key="comboAttachData.product_key"
       :call_back="startCalculateClick"
@@ -173,7 +175,7 @@
         url="emotion_fortune"
         e_id="10006"
       />
-      <NewFooter v-if="showFixedBtn" product_key="h5_emotion2024"/>
+      <NewFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
       <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
       <PopNotice
         v-if="is_show_notice"
@@ -242,11 +244,6 @@ import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.png';
 import combinePayPop from '../../../components/combinePayPop.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
 
-import cn_header from '../../../assets/img/mlxz/svga/emotion24/cn_header.svga';
-import tw_header from '../../../assets/img/mlxz/svga/emotion24/tw_header.svga';
-import cn_qian from '../../../assets/img/mlxz/svga/emotion24/cn_qian.svga';
-import tw_qian from '../../../assets/img/mlxz/svga/emotion24/tw_qian.svga';
-
 import cn_card_1 from '../../../assets/img/emotion/new/2.png';
 import tw_card_1 from '../../../assets/img/emotion/new/tw/2.png';
 import cn_card_2 from '../../../assets/img/emotion/new/3.png';
@@ -310,10 +307,7 @@ export default {
       tw_icon_5,
       cn_history_order,
       tw_history_order,
-      cn_header,
-      tw_header,
-      cn_qian,
-      tw_qian,
+
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,
       sex: '1',
@@ -366,25 +360,39 @@ export default {
   computed: {
     getStyle() {
       //有未使用报告引导框、没有支付提醒tips
-      if (this.comboAttachData && this.comboAttachData.product_key && !this.has_pay) {
-        console.warn('有未使用报告引导框、没有支付提醒tips')
+      if (
+        this.comboAttachData &&
+        this.comboAttachData.product_key &&
+        !this.has_pay
+      ) {
+        console.warn('有未使用报告引导框、没有支付提醒tips');
         return 'top: 0.5rem';
-      } else if (this.comboAttachData && this.comboAttachData.product_key && this.has_pay) {
+      } else if (
+        this.comboAttachData &&
+        this.comboAttachData.product_key &&
+        this.has_pay
+      ) {
         //有未使用报告引导框、有支付提醒tips
-        console.warn('有未使用报告引导框、有支付提醒tips')
+        console.warn('有未使用报告引导框、有支付提醒tips');
         return 'top: 0.7rem';
-      } else if(this.comboAttachData && !this.comboAttachData.product_key && this.has_pay) {
-        console.warn('没有有未使用报告引导框、有支付提醒tips')
+      } else if (
+        this.comboAttachData &&
+        !this.comboAttachData.product_key &&
+        this.has_pay
+      ) {
+        console.warn('没有有未使用报告引导框、有支付提醒tips');
         //没有有未使用报告引导框、有支付提醒tips
         return 'top: 0.5rem';
       }
     },
     //套餐支付显示逻辑
     is_show_combination() {
-      return !["enjoy03", "panda03","enjoy02", "panda02"].includes(utils.getFBChannel());
+      return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(
+        utils.getFBChannel()
+      );
     },
-     //当前报告类型与引导类型不同，则显示
-     is_show_current_combination() {
+    //当前报告类型与引导类型不同，则显示
+    is_show_current_combination() {
       return this.comboAttachData.product_key !== this.product_key;
     },
     productList() {
@@ -1225,7 +1233,7 @@ export default {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: top center;
-  background-color: #EC436B;
+  background-color: #ec436b;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1243,7 +1251,6 @@ export default {
   }
   .cn-info-bg {
     background-image: url('../../../assets/img/emotion_v2/new/cn/info.png');
-
   }
   .tw-info-bg {
     background-image: url('../../../assets/img/emotion_v2/new/tw/info.png');
@@ -1329,23 +1336,23 @@ export default {
             width: 0.12rem;
             height: 0.22rem;
             margin-right: 0.14rem;
-            margin-left: .1rem;
+            margin-left: 0.1rem;
           }
-          .left-tab{
-              margin-left: .24rem;
-            }
+          .left-tab {
+            margin-left: 0.24rem;
+          }
           .sex-tab {
-            width: .58rem;
-            height: .58rem;
+            width: 0.58rem;
+            height: 0.58rem;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 0.3rem;
             color: #909090;
             border-radius: 50%;
-            margin-right: .17rem;
-            background: #FFF2F5;
-            border: 1px solid #FFCFDA;
+            margin-right: 0.17rem;
+            background: #fff2f5;
+            border: 1px solid #ffcfda;
 
             .sex-icon {
               display: block;
@@ -1355,8 +1362,8 @@ export default {
             }
             &.active {
               color: #fff;
-              background-color: #EC436B;
-              border:none
+              background-color: #ec436b;
+              border: none;
             }
           }
         }
@@ -1365,7 +1372,7 @@ export default {
         width: 6.26rem;
         height: 1.34rem;
         margin-top: 0.7rem;
-        object-fit:contain;
+        object-fit: contain;
       }
       .info-bottom {
         display: flex;
@@ -1389,17 +1396,15 @@ export default {
   }
 }
 
-.mt-180{
+.mt-180 {
   margin-top: 2.4rem;
-
 }
-.divider-line{
+.divider-line {
   width: 6.5rem;
-height: 1px;
-background: #000000;
-opacity: 0.13;
-margin-bottom: .2rem;
-
+  height: 1px;
+  background: #000000;
+  opacity: 0.13;
+  margin-bottom: 0.2rem;
 }
 .footer {
   width: 100%;
@@ -1439,13 +1444,12 @@ margin-bottom: .2rem;
 .footer-box {
   width: 7.5rem;
   height: 1.6rem;
-
 }
 
-.ab-footer{
+.ab-footer {
   position: fixed;
   background: #000;
-  opacity: .5;
+  opacity: 0.5;
   width: 100%;
   height: 2.8rem;
   z-index: 1;
@@ -1477,15 +1481,15 @@ margin-bottom: .2rem;
   top: 0.4rem;
 }
 @keyframes emoBtn {
-        0% {
-          transform: scale(0.95);
-        }
+  0% {
+    transform: scale(0.95);
+  }
 
-        100% {
-          transform: scale(1.1);
-        }
-      }
-      .emo-btn {
-        animation: emoBtn 1s infinite ease-in-out alternate;
-      }
+  100% {
+    transform: scale(1.1);
+  }
+}
+.emo-btn {
+  animation: emoBtn 1s infinite ease-in-out alternate;
+}
 </style>
