@@ -63,39 +63,81 @@ var webpackConfig = merge(baseWebpackConfig, {
 
 
     // 从vendor中抽离需要的模块数据
-new webpack.optimize.CommonsChunkPlugin({
-  name: 'echarts',
-  chunks: ['vendor'],
-  minChunks (module) {
-    // any required modules inside node_modules are extracted to vendor
-    return (
-      module.resource &&
-      /echarts|zrender/.test(module.resource)
-    )
-  }
-}),
-new webpack.optimize.CommonsChunkPlugin({
-  name: 'element-ui',
-  chunks: ['vendor'],
-  minChunks (module) {
-    // any required modules inside node_modules are extracted to vendor
-    return (
-      module.resource &&
-      /element-ui/.test(module.resource)
-    )
-  }
-}),
-new webpack.optimize.CommonsChunkPlugin({
-  name: 'vue',
-  chunks: ['vendor'],
-  minChunks (module) {
-    // any required modules inside node_modules are extracted to vendor
-    return (
-      module.resource &&
-      /vue/.test(module.resource)
-    )
-  }
-}),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'echarts',
+      chunks: ['vendor'],
+      minChunks(module) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /echarts|zrender/.test(module.resource)
+        )
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vant',
+      chunks: ['vendor'],
+      minChunks(module) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /vant/.test(module.resource)
+        )
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vue',
+      chunks: ['vendor'],
+      minChunks(module) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /vue/.test(module.resource)
+        )
+      }
+    }),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'swiper',
+      chunks: ['vendor'],
+      minChunks(module) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /swiper/.test(module.resource)
+        )
+      }
+    }),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'mint-ui',
+      chunks: ['vendor'],
+      minChunks(module) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /mint-ui/.test(module.resource)
+        )
+      }
+    }),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'lunar-javascript',
+      chunks: ['vendor'],
+      minChunks(module) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /lunar-javascript/.test(module.resource)
+        )
+      }
+    }),
+
+
+    
+
+
+
 
 
 
