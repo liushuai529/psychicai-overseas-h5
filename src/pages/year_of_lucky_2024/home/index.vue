@@ -232,8 +232,6 @@ import combinePayPop from '../../../components/combinePayPop.vue';
 import cn_new_user_btn from '../../../assets/img/mlxz/year_of_lucky_2024/nianyun_btn_jiexiao.png';
 import tw_new_user_btn from '../../../assets/img/tw_mlxz/year_24/nianyun_btn_jiexiao_fanti.png';
 
-import cn_card_svga from '../../../assets/img/mlxz/svga/year24/cn_card.svga';
-import tw_card_svga from '../../../assets/img/mlxz/svga/year24/tw_card.svga';
 import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/year_order.png';
 import cn_history_order from '../../../assets/img/mlxz/downloadBtn/year.png';
 import PopNotice from '../../../components/PopNotice.vue';
@@ -313,8 +311,10 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/2406d412215566e64563b9f288d8e6ce1781.svga',
       tw_tag_svga:
         'https://psychicai-static.psychicai.pro/imgs/2406f7acfeff41b54aa491aed151218685a9.svga',
-      cn_card_svga,
-      tw_card_svga,
+      cn_card_svga:
+        'https://psychicai-static.psychicai.pro/imgs/24064b0c177e97f34241a4efeb71f3aa3b4f.svga',
+      tw_card_svga:
+        'https://psychicai-static.psychicai.pro/imgs/240658ab9754108a4953abd38fe13c41e3f8.svga',
       // 挽留弹窗
       is_show_notice: false, // 是否展示挽留弹窗
       count_down: 0, // 挽留弹窗倒计时

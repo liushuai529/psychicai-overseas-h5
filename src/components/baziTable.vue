@@ -236,8 +236,6 @@
 
 <script>
 import utils from '../libs/utils';
-import year_ji_svga from '../assets/img/mlxz/svga/year24/detail_ji.svga';
-import career_ji from '../assets/img/mlxz/svga/career24/career_ji.svga';
 import { Downloader, Parser, Player } from 'svga.lite';
 const lang = utils.getLanguage();
 
@@ -388,8 +386,10 @@ export default {
   },
   data() {
     return {
-      year_ji_svga,
-      career_ji,
+      year_ji_svga:
+        'https://psychicai-static.psychicai.pro/imgs/2406b49edbb8fccf436b86052299b7f9f7de.svga',
+      career_ji:
+        'https://psychicai-static.psychicai.pro/imgs/240657a6f19704a34c04ab580f370e148424.svga',
       tips1: tipsArr1[lang],
       tips2: tipsArr2[lang],
       tips3: tipsArr3[lang],
