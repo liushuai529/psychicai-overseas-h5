@@ -479,11 +479,11 @@ export default {
     utils.isProd() &&
       tStatistic &&
       tStatistic.send({
-        event: 'page_view_ovely_main',
+        event: 'page_view_lovely_main',
         md: 10006,
         c_id: -10001,
         args: {
-          args_name: 'page_view_ovely_main',
+          args_name: 'page_view_lovely_main',
           channel: utils.getFBChannel(),
         },
       });
