@@ -62,6 +62,14 @@ export default {
     },
   },
   created() {
+    
+  },
+  computed: {
+    source() {
+      return this.data;
+    },
+  },
+  mounted() {
     let self = this;
     setTimeout(() => {
       self.ele = $('#' + self.id)
@@ -72,13 +80,8 @@ export default {
           display: 'inline',
           lang: 'en',
         });
-      self.ele.mobiscroll('setValue', self.value, true);
-    }, 0);
-  },
-  computed: {
-    source() {
-      return this.data;
-    },
+      self.ele.mobiscroll('setValue', self.value, true); 
+    }, 100);
   },
   // watch : {
   //     source() {
@@ -96,7 +99,7 @@ export default {
   // },
   methods: {
     getValue() {
-      return this.ele.mobiscroll('getValue');
+      return this.ele && this.ele.mobiscroll && this.ele.mobiscroll('getValue');
     },
   },
 };

@@ -350,7 +350,7 @@ export default {
     getValue(type) {
       let col = this.$children;
       for (let i = 0; i < col.length; i++) {
-        if (col[i].name == type) {
+        if (col[i].name == type && col[i].getValue) {
           return col[i].getValue();
         }
       }
