@@ -474,14 +474,14 @@ export default {
       };
       this.picker_date_obj = pick_date;
       if (this.sex !== 'male') {
-        this.$refs.sex_male.click();
+        this.$refs.sex_male && this.$refs.sex_male.click();
         setTimeout(() => {
-          this.$refs.sex_female.click();
+          this.$refs.sex_female && this.$refs.sex_female.click();
         }, 10);
       } else {
-        this.$refs.sex_female.click();
+        this.$refs.sex_female && this.$refs.sex_female.click();
         setTimeout(() => {
-          this.$refs.sex_male.click();
+          this.$refs.sex_male && this.$refs.sex_male.click();
         }, 10);
       }
     }
