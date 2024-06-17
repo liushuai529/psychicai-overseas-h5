@@ -297,10 +297,7 @@
       </div>
     </div>
 
-    <!-- 广告位 -->
-    <div class="ad-list hidden">
-      <img v-for="(ad, k) in ad_list" @click="handleReport(ad, 3)" :key="'ad' + k" class="item" :src="ad.icon" />
-    </div>
+ 
 
     <!-- 选择商品弹窗 -->
     <mt-popup v-model="sale_visible" :closeOnClickModal="false" position="bottom">
@@ -501,8 +498,7 @@ import xiabanner_bazi from '../../assets/img/mlxz/index/xiabanner_bazi_jianti.pn
 import banner_yuantiangang from '../../assets/img/mlxz/index/banner-yuantiangang.png';
 import gif_nianyun from '../../assets/img/mlxz/index/gif/24年运-简体.gif';
 import gif_ganqing from '../../assets/img/mlxz/index/gif/感情运势-简体.gif';
-import gif_guiguzi from '../../assets/img/mlxz/index/gif/鬼谷子-简体.gif';
-import gif_yuantiangang from '../../assets/img/mlxz/index/gif/袁天罡-简体.gif';
+
 
 import tw_bzhh from '../../assets/img/mlxz/index/tw/bzhh.png';
 import tw_wealth24 from '../../assets/img/mlxz/index/tw/wealth24.png';
@@ -1065,42 +1061,7 @@ export default {
         },
       ];
     },
-    // 底部广告
-    ad_list() {
-      return [
-        {
-          id: 80009,
-          icon: gif_nianyun,
-          name: '2024年年运',
-          url: 'year_of_lucky_2024',
-        },
-        {
-          id: 80010,
-          icon: gif_ganqing,
-          name: '24年感情运',
-          url: 'emotion_fortune',
-        },
-        {
-          id: 80002,
-          icon: gif_yuantiangang,
-          name: '袁天罡推背称骨',
-          url: 'weigh_bone',
-        },
-        {
-          id: 80003,
-          icon: gif_guiguzi,
-          name: '鬼谷子',
-          url: 'guiguzi_fortune',
-        },
-        {
-          id: 80005,
-          icon: xiabanner_bazi,
-          name: '八字合婚',
-          url: 'marriage_measure_overseas',
-        },
-        //
-      ];
-    },
+   
 
     // 折扣列表
     zhekouList() {
