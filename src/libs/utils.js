@@ -1194,8 +1194,7 @@ const getExtraParams = (product_key, querystring) => {
       birth_date,
       birth_hour,
       date: moment(
-        `${birth_year}${+birth_month < 10 ? '0' + birth_month : birth_month}${
-          +birth_date < 10 ? '0' + birth_date : birth_date
+        `${birth_year}${+birth_month < 10 ? '0' + birth_month : birth_month}${+birth_date < 10 ? '0' + birth_date : birth_date
         }`
       ).format('YYYYMMDD'),
     };
@@ -1211,7 +1210,7 @@ const isElementInViewport = el => {
     rect.top >= 0 &&
     rect.left >= 0 &&
     rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
+    (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 };
@@ -1508,9 +1507,8 @@ const resetInitFB = () => {
   let noscript = document.createElement('noscript');
   noscript.innerHTML = `
     <img height="1" width="1" style="display:none" 
-         src="https://www.facebook.com/tr?id=${
-           channel_obj[getFBChannel()]
-         }&ev=PageView&noscript=1"/>
+         src="https://www.facebook.com/tr?id=${channel_obj[getFBChannel()]
+    }&ev=PageView&noscript=1"/>
   `;
   document.body.appendChild(noscript);
   checkFB();
@@ -1567,6 +1565,15 @@ const getTitle = val => {
       ? reportName[val].cn
       : reportName[val].tw
     : '';
+};
+
+const getcookieInfo = (key) => {
+  const cookieMap = new Map();
+  document.cookie.split("; ").forEach((cookie) => {
+    const [key, value] = cookie.split("=");
+    cookieMap.set(key, value);
+  })
+  return cookieMap.get(key) === undefined ? '' : cookieMap.get(key)
 };
 
 export default {
@@ -1637,4 +1644,5 @@ export default {
   nongliHourEnum,
   firebaseLogEvent,
   getShortStr,
+  getcookieInfo,
 };

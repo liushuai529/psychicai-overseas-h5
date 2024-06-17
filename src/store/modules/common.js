@@ -48,8 +48,8 @@ export default {
         product_id: product_id,
         extra_ce_suan: utils.getExtraParams(product_key, payload.querystring),
         fb_param: {
-          fbc: localStorage.getItem('_fbc'),
-          fbp: localStorage.getItem('_fbp'),
+          fbc: utils.getcookieInfo('_fbc'),
+          fbp: utils.getcookieInfo('_fbp'),
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
         },
       };
