@@ -232,7 +232,9 @@
           'https://cdn.jsdelivr.net/npm/vconsole@3.3.4/dist/vconsole.min.js'
         );
         setTimeout(() => {
+          if(window.VConsole) {
           var vConsole = new window.VConsole();
+        }
         }, 4000);
       }
     </script>
