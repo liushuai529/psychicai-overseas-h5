@@ -28,7 +28,7 @@
     <script async src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
     <script
       async
-      src="https://static.guance.com/browser-sdk/v3/dataflux-rum.js"
+      async src="https://static.guance.com/browser-sdk/v3/dataflux-rum.js"
       type="text/javascript"
     ></script>
     <script>
@@ -95,7 +95,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js" crossorigin="anonymous"></script>
 
-    <script src="../js/vconsole.min.js" crossorigin="anonymous"></script>
 
     <script>
       //兼容客户端方法
@@ -233,6 +232,25 @@
         w.localStorage.setItem('_fbc', cookieMap.get("_fbc")=== undefined ? '':cookieMap.get("_fbc"))
         w.localStorage.setItem('_fbp', cookieMap.get("_fbp")=== undefined ? '':cookieMap.get("_fbp"))
       })(document, window);
+    </script>
+    <script>
+      function loadJs(url) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = url;
+        head.appendChild(script);
+      }
+  
+      // 测试环境加载vconsole
+      if (window.location.href.indexOf('//test-overseas.psychicai.pro/') > 0) {
+        loadJs(
+          'https://cdn.jsdelivr.net/npm/vconsole@3.3.4/dist/vconsole.min.js'
+        );
+        setTimeout(() => {
+          var vConsole = new window.VConsole();
+        }, 4000);
+      }
     </script>
   </body>
 </html>
