@@ -1,20 +1,47 @@
 <template>
-  <div :class="['container', fix_pop || sale_detail_modal? 'fix-pop' : '', ]" >
-    <img @click="
-      jumpUrl('history_order', '-10010', 'click_main_history', 'dvtjq2')
-      " class="history-order" :src="is_cn ? cn_order_btn : tw_order_btn" alt="" />
+  <div :class="['container', fix_pop || sale_detail_modal ? 'fix-pop' : '']">
+    <img
+      @click="
+        jumpUrl('history_order', '-10010', 'click_main_history', 'dvtjq2')
+      "
+      class="history-order"
+      :src="is_cn ? cn_order_btn : tw_order_btn"
+      alt=""
+    />
     <div class="header-box">
       <mt-swipe :auto="3000" :showIndicators="true" class="swiper-contain">
-        <mt-swipe-item v-for="(item, k) in header_list" :key="'swiper' + k" class="swiper-item">
-          <img @click="handleReport(item, 5)" :src="is_cn ? item.cn_icon : item.tw_icon" alt="" />
+        <mt-swipe-item
+          v-for="(item, k) in header_list"
+          :key="'swiper' + k"
+          class="swiper-item"
+        >
+          <img
+            @click="handleReport(item, 5)"
+            :src="is_cn ? item.cn_icon : item.tw_icon"
+            alt=""
+          />
         </mt-swipe-item>
       </mt-swipe>
       <!-- 用户已购买数据走马灯 -->
       <div @click="jumpPage(mock_report_list[cur_index].id)" class="buy-list">
-        <img class="laba" src="https://psychicai-static.psychicai.pro/imgs/2404148caf3a4f6e4194ba7c5431e81fa82a.png"
-          alt="" />
-        <van-swipe class="swiper-buy" :autoplay="2000" :show-indicators="false" vertical @change="getReportItem">
-          <van-swipe-item ref="swiper" class="swiper-slide" v-for="(it, j) in buy_list" :key="j">
+        <img
+          class="laba"
+          src="https://psychicai-static.psychicai.pro/imgs/2404148caf3a4f6e4194ba7c5431e81fa82a.png"
+          alt=""
+        />
+        <van-swipe
+          class="swiper-buy"
+          :autoplay="2000"
+          :show-indicators="false"
+          vertical
+          @change="getReportItem"
+        >
+          <van-swipe-item
+            ref="swiper"
+            class="swiper-slide"
+            v-for="(it, j) in buy_list"
+            :key="j"
+          >
             <div class="flex-row">
               <span>{{ it }}</span>
               <span class="link-url">{{ mock_report_list[j].name }}</span>
@@ -22,38 +49,68 @@
             </div>
           </van-swipe-item>
         </van-swipe>
-        <img class="arrow" src="https://psychicai-static.psychicai.pro/imgs/2404fe7affcbeb894bd99695760f5bd315d1.png"
-          alt="" />
+        <img
+          class="arrow"
+          src="https://psychicai-static.psychicai.pro/imgs/2404fe7affcbeb894bd99695760f5bd315d1.png"
+          alt=""
+        />
       </div>
     </div>
-    <CalculateBar v-if="comboAttachData && is_show_combination" style="margin-top: 0.1rem" :is_home="true"
-      :product_key="comboAttachData.product_key" :call_back="startCalculateClick" />
+    <CalculateBar
+      v-if="comboAttachData && is_show_combination"
+      style="margin-top: 0.1rem"
+      :is_home="true"
+      :product_key="comboAttachData.product_key"
+      :call_back="startCalculateClick"
+    />
     <!-- 新版多买多折扣 -->
-    <van-swipe v-if="is_show_combine" :loop="false" :show-indicators="false" :stop-propagation="false"
-      class="discount-box" @change="getCombineIndex">
-      <div :style="{
-        height: '100%',
-        width: scrollStyle,
-        transition: 'width 0.3s',
-      }"></div>
-      <van-swipe-item v-if="payed_order_three_list.length" :class="{
-        'sale-item': true,
-        // 'ml-100': combine_index === 0,
-        // 'ml-170': combine_index === 1,
-      }">
+    <van-swipe
+      v-if="is_show_combine"
+      :loop="false"
+      :show-indicators="false"
+      :stop-propagation="false"
+      class="discount-box"
+      @change="getCombineIndex"
+    >
+      <div
+        :style="{
+          height: '100%',
+          width: scrollStyle,
+          transition: 'width 0.3s',
+        }"
+      ></div>
+      <van-swipe-item
+        v-if="payed_order_three_list.length"
+        :class="{
+          'sale-item': true,
+          // 'ml-100': combine_index === 0,
+          // 'ml-170': combine_index === 1,
+        }"
+      >
         <div class="item">
           <div class="order-title">已解锁报告，快来查看！</div>
 
           <!-- 新版 商品选择 -->
-          <div class="three-list" :style="{
-            'margin-top': payed_order_three_list.length
-              ? '0.34rem'
-              : '0.96rem',
-          }">
-            <div v-for="(it, k) in payed_order_three_list.length
-              ? payed_order_three_list
-              : ['', '', '']" :key="'three' + k" :class="['it', it.product_key ? '' : 'no-it', `it${k + 1}`]">
-              <img :src="!is_cn ? it.cn_check_icon : it.tw_check_icon" class="check-icon" alt="" />
+          <div
+            class="three-list"
+            :style="{
+              'margin-top': payed_order_three_list.length
+                ? '0.34rem'
+                : '0.96rem',
+            }"
+          >
+            <div
+              v-for="(it, k) in payed_order_three_list.length
+                ? payed_order_three_list
+                : ['', '', '']"
+              :key="'three' + k"
+              :class="['it', it.product_key ? '' : 'no-it', `it${k + 1}`]"
+            >
+              <img
+                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                class="check-icon"
+                alt=""
+              />
               <div v-if="payed_order_three_list.length" class="tag get-tag">
                 已解锁
               </div>
@@ -77,14 +134,19 @@
         </div>
       </van-swipe-item>
 
-      <van-swipe-item :class="{
-        'sale-item': true,
-        // 'ml-100': !payed_order_three_list.length && combine_index !== 0,
-      }">
+      <van-swipe-item
+        :class="{
+          'sale-item': true,
+          // 'ml-100': !payed_order_three_list.length && combine_index !== 0,
+        }"
+      >
         <div class="item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
-            <div v-if="combine_info.price && is_show_reechoes_3" class="new-price">
+            <div
+              v-if="combine_info.price && is_show_reechoes_3"
+              class="new-price"
+            >
               <span class="one">{{
                 combine_info.unit
                   ? `${combine_info.unit + combine_info.origin_price_str}`
@@ -97,23 +159,43 @@
                   : 'RM-'
               }}</span>
             </div>
-            <img v-else src="../../assets/img/new_combine/home_tag_58_big.png" class="zhekou-icon discount-tag"
-              alt="" />
+            <img
+              v-else
+              src="../../assets/img/new_combine/home_tag_58_big.png"
+              class="zhekou-icon discount-tag"
+              alt=""
+            />
           </div>
 
           <!-- 新版 商品选择 -->
-          <div :style="{
-            'margin-top': !channel03
-              ? '.6rem'
-              : is_show_reechoes_3
+          <div
+            :style="{
+              'margin-top': !channel03
+                ? '.6rem'
+                : is_show_reechoes_3
                 ? '.3rem'
                 : '.6rem',
-          }" class="three-list">
-            <div @click="showModal()" v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
-              :key="'three' + k" :class="['it']">
-              <img v-if="it.product_key" :src="!is_cn ? it.cn_check_icon : it.tw_check_icon" class="check-icon"
-                alt="" />
-              <img v-else src="../../assets/img/new_combine/home_btn_add.png" class="check-icon" alt="" />
+            }"
+            class="three-list"
+          >
+            <div
+              @click="showModal()"
+              v-for="(it, k) in three_list.length ? three_list : ['', '', '']"
+              :key="'three' + k"
+              :class="['it']"
+            >
+              <img
+                v-if="it.product_key"
+                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                class="check-icon"
+                alt=""
+              />
+              <img
+                v-else
+                src="../../assets/img/new_combine/home_btn_add.png"
+                class="check-icon"
+                alt=""
+              />
               <div v-if="three_list.length && !channel03" class="tag">
                 待解锁
               </div>
@@ -130,27 +212,48 @@
           </div>
           <!-- 倒计时 -->
           <div v-if="!channel03 && is_show_reechoes_3" class="empty-card"></div>
-          <TimeDown v-if="is_show_reechoes_3 && channel03" ref="timeDown3" :time_key="3" :count_time="time_3"
-            :list="three_list" />
-          <div @click="changeSale(0)" class="pick-btn"
-            :style="{ 'margin-top': !is_show_reechoes_3 ? '0.8rem' : '0.1rem' }">
+          <TimeDown
+            v-if="is_show_reechoes_3 && channel03"
+            ref="timeDown3"
+            :time_key="3"
+            :count_time="time_3"
+            :list="three_list"
+          />
+          <div
+            @click="changeSale(0)"
+            class="pick-btn"
+            :style="{ 'margin-top': !is_show_reechoes_3 ? '0.8rem' : '0.1rem' }"
+          >
             {{ '领取我的专属优惠' }}
-            <img v-if="is_show_reechoes_3" src="../../assets/img/new_combine/home_tag_58_big.png"
-              class="absolute-zhe discount-tag" alt="" />
+            <img
+              v-if="is_show_reechoes_3"
+              src="../../assets/img/new_combine/home_tag_58_big.png"
+              class="absolute-zhe discount-tag"
+              alt=""
+            />
           </div>
-          <div v-show="is_show_reechoes_3" class="reset-select" @click="restartChoose()">
+          <div
+            v-show="is_show_reechoes_3"
+            class="reset-select"
+            @click="restartChoose()"
+          >
             重新选择
           </div>
         </div>
       </van-swipe-item>
       <!-- 两项选择 -->
-      <van-swipe-item :class="{
-        'sale-item': true,
-      }">
+      <van-swipe-item
+        :class="{
+          'sale-item': true,
+        }"
+      >
         <div class="item" id="card-item">
           <div class="item-price-box">
             <div class="sale-title">多买多折扣</div>
-            <div v-if="combine_info2.price && is_show_reechoes_2" class="new-price">
+            <div
+              v-if="combine_info2.price && is_show_reechoes_2"
+              class="new-price"
+            >
               <span class="one">{{
                 combine_info2.unit
                   ? `${combine_info2.unit + combine_info2.origin_price_str}`
@@ -163,23 +266,43 @@
                   : 'RM-'
               }}</span>
             </div>
-            <img v-else src="../../assets/img/new_combine/home_tag_68_big.png" class="zhekou-icon discount-tag"
-              alt="" />
+            <img
+              v-else
+              src="../../assets/img/new_combine/home_tag_68_big.png"
+              class="zhekou-icon discount-tag"
+              alt=""
+            />
           </div>
 
           <!-- 新版 商品选择 -->
-          <div :style="{
-            'margin-top': !channel03
-              ? '.6rem'
-              : is_show_reechoes_2
+          <div
+            :style="{
+              'margin-top': !channel03
+                ? '.6rem'
+                : is_show_reechoes_2
                 ? '.3rem'
                 : '.6rem',
-          }" class="three-list">
-            <div @click="showModal2()" v-for="(it, k) in two_list.length ? two_list : ['', '']" :key="'three' + k"
-              :class="['it']">
-              <img v-if="it.product_key" :src="!is_cn ? it.cn_check_icon : it.tw_check_icon" class="check-icon"
-                alt="" />
-              <img v-else src="../../assets/img/new_combine/home_btn_add.png" class="check-icon" alt="" />
+            }"
+            class="three-list"
+          >
+            <div
+              @click="showModal2()"
+              v-for="(it, k) in two_list.length ? two_list : ['', '']"
+              :key="'three' + k"
+              :class="['it']"
+            >
+              <img
+                v-if="it.product_key"
+                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                class="check-icon"
+                alt=""
+              />
+              <img
+                v-else
+                src="../../assets/img/new_combine/home_btn_add.png"
+                class="check-icon"
+                alt=""
+              />
               <div v-if="two_list.length && !channel03" class="tag">待解锁</div>
             </div>
             <div class="divider-line-left">
@@ -194,15 +317,31 @@
           </div>
           <div v-if="!channel03 && is_show_reechoes_2" class="empty-card"></div>
 
-          <TimeDown v-if="is_show_reechoes_2 && channel03" ref="timeDown2" :time_key="2" :count_time="time_2"
-            :list="two_list" />
-          <div @click="changeSale(2)" class="pick-btn"
-            :style="{ 'margin-top': is_show_reechoes_2 ? '0.1rem' : '0.8rem' }">
+          <TimeDown
+            v-if="is_show_reechoes_2 && channel03"
+            ref="timeDown2"
+            :time_key="2"
+            :count_time="time_2"
+            :list="two_list"
+          />
+          <div
+            @click="changeSale(2)"
+            class="pick-btn"
+            :style="{ 'margin-top': is_show_reechoes_2 ? '0.1rem' : '0.8rem' }"
+          >
             {{ '领取我的专属优惠' }}
-            <img v-if="is_show_reechoes_2" src="../../assets/img/new_combine/home_tag_68_big.png"
-              class="absolute-zhe discount-tag" alt="" />
+            <img
+              v-if="is_show_reechoes_2"
+              src="../../assets/img/new_combine/home_tag_68_big.png"
+              class="absolute-zhe discount-tag"
+              alt=""
+            />
           </div>
-          <div v-show="is_show_reechoes_2" class="reset-select" @click="restartChoose(2)">
+          <div
+            v-show="is_show_reechoes_2"
+            class="reset-select"
+            @click="restartChoose(2)"
+          >
             重新选择
           </div>
         </div>
@@ -211,16 +350,21 @@
 
     <!-- banner位 -->
     <div class="report-container">
-      <div v-for="(item, index) in banner_list" :key="index" @click="
-        jumpUrl(
-          item.url,
-          item.e_id,
-          item.e_name,
-          item.ad_e,
-          item.report_id,
-          item.product_key
-        )
-        " :class="[item.is_big ? 'big-item' : 'normal-item']">
+      <div
+        v-for="(item, index) in banner_list"
+        :key="index"
+        @click="
+          jumpUrl(
+            item.url,
+            item.e_id,
+            item.e_name,
+            item.ad_e,
+            item.report_id,
+            item.product_key
+          )
+        "
+        :class="[item.is_big ? 'big-item' : 'normal-item']"
+      >
         <!-- // item.is_big
             //   ? is_cn
             //     ? item.icon_item.big.cn
@@ -228,7 +372,11 @@
             //   : is_cn
             //   ? item.icon_item.small.cn
             //   : item.icon_item.small.tw -->
-        <img :src="getBannerIcon(item)" :class="[item.is_big ? 'big-icon' : 'normal-icon']" alt="" />
+        <img
+          :src="getBannerIcon(item)"
+          :class="[item.is_big ? 'big-icon' : 'normal-icon']"
+          alt=""
+        />
         <div v-if="item.is_big" class="big-box">
           <div class="left">
             <div style="-webkit-box-orient: vertical" class="text">
@@ -241,7 +389,11 @@
               </div>
             </div>
           </div>
-          <img class="right-btn" :src="is_cn ? cn_right_pay : tw_right_pay" alt="" />
+          <img
+            class="right-btn"
+            :src="is_cn ? cn_right_pay : tw_right_pay"
+            alt=""
+          />
         </div>
         <div v-else class="normal-box">
           <div style="-webkit-box-orient: vertical" class="text">
@@ -257,100 +409,39 @@
       </div>
     </div>
 
-    <!-- 多买多折扣 -->
-    <div style="display: none" class="sale-box">
-      <div class="title-box">
-        <div class="left">{{ $t('buy-zhekou') }}</div>
-        <div class="right">
-          <div v-if="zhekouList[zhekou].total" class="total">
-            {{ zhekouList[zhekou].total }}RM
-          </div>
-          <div v-if="zhekouList[zhekou].percent" class="percent">
-            {{ zhekouList[zhekou].percent }}
-          </div>
-          <div class="price">{{ zhekouList[zhekou].price }}RM</div>
-        </div>
-      </div>
-      <div class="sale-list">
-        <div @click="showPop()" v-for="(it, k) in checked_list" :key="'sale' + k" class="item">
-          <img v-if="it.check_icon" :src="it.check_icon" class="icon" alt="" />
-          <img v-if="!it.check_icon" src="../../assets/img/mlxz/index/ce_btn_jia.png" class="add-icon" alt="" />
-        </div>
-      </div>
-      <div @click="payModal()" class="lock-btn">
-        {{ $t('order-btn') }}
-        <img v-show="zhekou === 2" class="btn-icon" src="../../assets/img/mlxz/cold_start/cesuan_img_tag2@3x.png"
-          alt="" />
-        <img v-show="zhekou === 1" class="btn-icon" src="../../assets/img/mlxz/cold_start/cesuan_img_tag@3x.png"
-          alt="" />
-      </div>
-      <div @click="showPop()" class="change-btn">
-        {{ $t('change-btn') }}
-      </div>
-    </div>
-    <!-- 爆款推荐 -->
-    <div class="hot-product hidden">
-      <img class="title" src="../../assets/img/mlxz/index/ce_img_bao.png" alt="" />
-      <div class="product-list">
-        <img v-for="(it, k) in recommend_list" :key="'reco' + k" class="item" :src="it.icon"
-          @click="handleReport(it, 2)" alt="" />
-      </div>
-    </div>
-
- 
-
-    <!-- 选择商品弹窗 -->
-    <mt-popup v-model="sale_visible" :closeOnClickModal="false" position="bottom">
-      <div class="pop-box">
-        <div class="pop-header">
-          <div class="left">
-            {{ $t('get-three') }}
-          </div>
-          <img @click="closeSalePop()" src="../../assets/img/mlxz/cesuan_home/icon_close2.png" class="close" alt="" />
-        </div>
-        <div class="pop-content">
-          <div v-for="(it, k) in pop_list" :key="'sale-' + k" @click="chooseSale(it, k)" :class="{
-            item: true,
-            'normal-item': true,
-            'forbidden-item': !can_choose && !it.checked,
-          }">
-            <img v-if="it.checked" class="check-icon" src="../../assets/img/mlxz/index/checked_icon.png" alt="" />
-            <img v-else class="check-icon" src="../../assets/img/mlxz/index/no_check_icon.png" alt="" />
-            <img class="top-icon" :src="it.icon" alt="" />
-
-            <div :id="`text-${k}`" v-if="measureProduct[k]" class="bottom-box">
-              {{ measureProduct[k].tips }}
-            </div>
-          </div>
-        </div>
-        <!-- 确认 -->
-
-        <div :class="{
-          'confirm-box': true,
-          'disabled-confirm': !can_submit ? true : false,
-        }" @click="handleConfirm()">
-          {{ $t('confirm-btn') }}
-        </div>
-      </div>
-    </mt-popup>
     <!-- 调起支付页-->
-    <PayPopup :visible="pay_visible" :is_combine="true" :total_money="zhekouList[zhekou].price"
-      :checked_list="checked_list" :all_list="all_list" :combine_ids="combine_ids"
-      @update-visible="pay_visible = false"></PayPopup>
-    <!-- 支付成功弹窗 -->
-    <PopResult :visible="pay_result_visible" :result_list="result_list" :sub_orders="sub_orders" :pop_list="pop_list"
-      @handleReport="hasPayReport" @update-visible="pay_result_visible = false"></PopResult>
+    <PayPopup
+      :visible="pay_visible"
+      :is_combine="true"
+      :total_money="zhekouList[zhekou].price"
+      :checked_list="checked_list"
+      :all_list="all_list"
+      :combine_ids="combine_ids"
+      @update-visible="pay_visible = false"
+    ></PayPopup>
 
     <!-- 新版选择弹窗 -->
-    <mt-popup v-model="new_sale_modal" :closeOnClickModal="false" position="bottom">
+    <mt-popup
+      v-model="new_sale_modal"
+      :closeOnClickModal="false"
+      position="bottom"
+    >
       <div class="modal-box">
         <div class="title-box">
           <div @click="new_sale_modal = false" class="left">取消</div>
           <div class="center">任选三项享特惠</div>
-          <div v-if="confirm_btn_3" @click="submitPopList()" class="right-common right-check">
+          <div
+            v-if="confirm_btn_3"
+            @click="submitPopList()"
+            class="right-common right-check"
+          >
             <div class="btn">确定</div>
           </div>
-          <div v-else @click="ToastSubmit('三')" class="right-common disable-right">
+          <div
+            v-else
+            @click="ToastSubmit('三')"
+            class="right-common disable-right"
+          >
             <div class="btn">确定</div>
           </div>
         </div>
@@ -367,10 +458,13 @@
               'item-normal': !item.checked,
             }"
           >
-          <div class="show-detail-btn" @click.stop="showDetailModal(3,item, k)">
-            <span class="btn-text">详情</span>
-            <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
-          </div>
+            <div
+              class="show-detail-btn"
+              @click.stop="showDetailModal(3, item, k)"
+            >
+              <span class="btn-text">详情</span>
+              <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
+            </div>
             <img
               :src="item.checked ? checkIcon : noCheckIcon"
               class="check-icon"
@@ -388,15 +482,27 @@
         </div>
       </div>
     </mt-popup>
-    <mt-popup v-model="new_sale_modal2" :closeOnClickModal="false" position="bottom">
+    <mt-popup
+      v-model="new_sale_modal2"
+      :closeOnClickModal="false"
+      position="bottom"
+    >
       <div class="modal-box">
         <div class="title-box">
           <div @click="new_sale_modal2 = false" class="left">取消</div>
           <div class="center">任选两项享特惠</div>
-          <div v-if="confirm_btn_2" @click="submitPopList(2)" class="right-common right-check">
+          <div
+            v-if="confirm_btn_2"
+            @click="submitPopList(2)"
+            class="right-common right-check"
+          >
             <div class="btn">确定</div>
           </div>
-          <div v-else @click="ToastSubmit('两')" class="right-common disable-right">
+          <div
+            v-else
+            @click="ToastSubmit('两')"
+            class="right-common disable-right"
+          >
             <div class="btn">确定</div>
           </div>
         </div>
@@ -413,10 +519,13 @@
               'item-normal': !item.checked,
             }"
           >
-          <div class="show-detail-btn" @click.stop="showDetailModal(2, item, k, 2, 'pick_list2')">
-            <span class="btn-text">详情</span>
-            <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
-          </div>
+            <div
+              class="show-detail-btn"
+              @click.stop="showDetailModal(2, item, k, 2, 'pick_list2')"
+            >
+              <span class="btn-text">详情</span>
+              <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
+            </div>
             <img
               :src="item.checked ? checkIcon : noCheckIcon"
               class="check-icon"
@@ -434,28 +543,58 @@
         </div>
       </div>
     </mt-popup>
-    <PayModal :visible="pay_modal" :combine_info="combine_info" @close="pay_modal = false"
-      @resetInfo="combine_info = {}" @logEvent="logEventForSort" :pay_index="3" key_store="mlxz_web_select_list" />
-    <PayModal :visible="pay_modal2" :combine_info="combine_info2" @close="pay_modal2 = false"
-      @resetInfo="combine_info2 = {}" @logEvent="logEventForSort" :pay_index="2" key_store="mlxz_web_select_list_two" />
+    <PayModal
+      :visible="pay_modal"
+      :combine_info="combine_info"
+      @close="pay_modal = false"
+      @resetInfo="combine_info = {}"
+      @logEvent="logEventForSort"
+      :pay_index="3"
+      key_store="mlxz_web_select_list"
+    />
+    <PayModal
+      :visible="pay_modal2"
+      :combine_info="combine_info2"
+      @close="pay_modal2 = false"
+      @resetInfo="combine_info2 = {}"
+      @logEvent="logEventForSort"
+      :pay_index="2"
+      key_store="mlxz_web_select_list_two"
+    />
 
     <ResultPop v-if="show_result" @close="show_result = false" />
-    <FixedOrder v-if="show_fixed_order" :title="local_title" :new_order_key="new_order_key" name="local" top="4.7rem"
-      :time="local_time" @payOrder="checkOrder" @jumpDetail="jumpOrder" />
-    <FixedOrder v-if="show_api_order" :title="last_title" :last_order="last_order" name="api" top="6.7rem"
-      :time="api_time" @payOrder="checkOrder" @jumpDetail="jumpOrder" />
-    <SaleDetailModal v-model="sale_detail_modal" :callback="sale_detail_callback" :product_key="sale_detail_product_key"
-      :selected_list="new_sale_modal? pick_list: pick_list2"
-      :size="new_sale_modal? 3:2"
-     />
-
+    <FixedOrder
+      v-if="show_fixed_order"
+      :title="local_title"
+      :new_order_key="new_order_key"
+      name="local"
+      top="4.7rem"
+      :time="local_time"
+      @payOrder="checkOrder"
+      @jumpDetail="jumpOrder"
+    />
+    <FixedOrder
+      v-if="show_api_order"
+      :title="last_title"
+      :last_order="last_order"
+      name="api"
+      top="6.7rem"
+      :time="api_time"
+      @payOrder="checkOrder"
+      @jumpDetail="jumpOrder"
+    />
+    <SaleDetailModal
+      v-model="sale_detail_modal"
+      :callback="sale_detail_callback"
+      :product_key="sale_detail_product_key"
+      :selected_list="new_sale_modal ? pick_list : pick_list2"
+      :size="new_sale_modal ? 3 : 2"
+    />
   </div>
 </template>
 
 <script>
 import FixedOrder from '../../components/FixedOrder.vue';
-// @ts-ignore
-import Recommend from './recommend.vue';
 // @ts-ignore
 import utils from '../../libs/utils';
 import PayPopup from '../../components/PayPopup.vue';
@@ -467,7 +606,6 @@ import {
 } from '../../libs/enum';
 import { Toast, Indicator } from 'mint-ui';
 
-import PopResult from './pay_result.vue';
 import { getProductions } from '../../libs/common_api';
 import {
   getProductionsAPI,
@@ -483,9 +621,6 @@ import {
   reportBuryingEventAPI,
 } from '../../api/api';
 
-import longnianImg from '../../assets/img/mlxz/cold_start/banner-2024caiyun@3x.png';
-import career_2024 from '../../assets/img/mlxz/index/banner_shiyeyunshi.png';
-
 import bzhh from '../../assets/img/mlxz/index/bahh.png';
 import nianyun_24 from '../../assets/img/mlxz/index/2024-nianyun.png';
 import ganqqingyun_24 from '../../assets/img/mlxz/index/24-ganqqingyun.png';
@@ -496,15 +631,6 @@ import top_caiyun from '../../assets/img/mlxz/index/top-caiyun.png';
 import top_shiye from '../../assets/img/mlxz/index//top-shiye.png';
 import xiabanner_bazi from '../../assets/img/mlxz/index/xiabanner_bazi_jianti.png';
 import banner_yuantiangang from '../../assets/img/mlxz/index/banner-yuantiangang.png';
-import gif_nianyun from '../../assets/img/mlxz/index/gif/24年运-简体.gif';
-import gif_ganqing from '../../assets/img/mlxz/index/gif/感情运势-简体.gif';
-
-
-import tw_bzhh from '../../assets/img/mlxz/index/tw/bzhh.png';
-import tw_wealth24 from '../../assets/img/mlxz/index/tw/wealth24.png';
-import tw_year24 from '../../assets/img/mlxz/index/tw/year24.png';
-import tw_web from '../../assets/img/mlxz/index/tw/web.png';
-
 import tw_wealth24_banner from '../../assets/img/mlxz/index/tw/wealth24_banner.png';
 import tw_year24_banner from '../../assets/img/mlxz/index/tw/year24_banner.png';
 import tw_bzhh_banner from '../../assets/img/mlxz/index/tw/bzhh_banner.png';
@@ -515,10 +641,6 @@ import tw_weigh from '../../assets/img/mlxz/index/tw/weigh_banner.png';
 
 import tw_order_btn from '../../assets/img/mlxz/index/tw/history_order.png';
 import tw_right_pay from '../../assets/img/mlxz/index/tw/right_pay.png';
-
-import cn_banner_ganqin from '../../assets/img/mlxz/new_banner/h5_img_topbanner_ganqing_jian.png';
-import tw_banner_ganqin from '../../assets/img/mlxz/new_banner/h5_img_topbanner_ganqing_fan.png';
-
 import cn_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_bazihehun.png';
 import cn_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_guiguzi.png';
 import cn_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_yuantiangang.png';
@@ -552,7 +674,7 @@ import tw_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuh
 import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_nianyun.png';
 
 import PayModal from './components/payModal.vue';
-import SaleDetailModal from './components/SaleDetailModal.vue'
+import SaleDetailModal from './components/SaleDetailModal.vue';
 import ResultPop from '../../components/ResultPop.vue';
 import CalculateBar from '../../components/CalculateBar.vue';
 
@@ -567,36 +689,6 @@ const tipsArr5 = {
   'zh-CN': '订单创建中...',
   'zh-TW': '訂單創建中...',
 };
-const hotRecommendProduction = [
-  //  {
-  //   name:'良缘合婚',
-  // content:'',
-  //   url:'',
-  //  },
-  //  {
-  //   name:'姓名风水',
-  // content:'',
-  //   url:'',
-  //  },
-  {
-    id: 1,
-    name: '瞬时卦',
-    url: 'mlxz://time/calculate',
-    content: '这是瞬时卦',
-  },
-  {
-    id: 2,
-    name: '号码测测运',
-    url: 'mlxz://numbermoney/calculate',
-    content: '这是号码测测运',
-  },
-  {
-    id: 3,
-    name: '数字风水',
-    url: 'mlxz://phonenumber/calculate',
-    content: '这是数字风水',
-  },
-];
 
 let index = utils.getQueryString('index') || 0;
 let channel = utils.getQueryString('channel');
@@ -604,24 +696,6 @@ let channel = utils.getQueryString('channel');
 localStorage.setItem('suishen_overseas_channel', channel || '');
 
 const initCheck = [{ value: '' }, { value: '' }, { value: '' }];
-
-const eventProductKey = {
-  h5_wealth2024: '2024_wealty_report',
-  h5_career: 'profession_bazi_report',
-  h5_marriage: 'marriage_contract_report',
-  h5_love: 'emotion_report',
-  h5_fortune2023: '2023_report',
-  h5_wealth2023: '2023_wealty_report',
-};
-
-const eventProductValue = {
-  '2024_wealty_report': '80001',
-  profession_bazi_report: '80004',
-  marriage_contract_report: '80005',
-  emotion_report: '80006',
-  '2023_report': '80007',
-  '2023_wealty_report': '80008',
-};
 
 const user_name_arr = [
   '林**',
@@ -820,14 +894,12 @@ const new_pop_list = [
 export default {
   components: {
     ResultPop,
-    Recommend,
     PayPopup,
-    PopResult,
     PayModal,
     FixedOrder,
     CalculateBar,
     TimeDown,
-    SaleDetailModal
+    SaleDetailModal,
   },
   data() {
     return {
@@ -845,15 +917,12 @@ export default {
       zhekou: 2,
       checked_list: initCheck, //已选择的产品
       mySwiper: null,
-      sale_visible: false,
       can_choose: true, // 选择商品
-      pop_list: [],
       pay_visible: false,
       product_id: 0,
       combine_ids: '',
       pay_result_visible: false, //支付结果弹窗页
       can_submit: true, // 是否可以提交
-      hot_product_list: hotRecommendProduction, // 爆款推荐
       all_list: [],
       result_list: [],
       order_id: utils.getQueryString('order_id') || '',
@@ -881,7 +950,7 @@ export default {
       three_list: [], //三项组合
       new_sale_modal: false,
       sale_detail_modal: false,
-      sale_detail_callback: () => { },
+      sale_detail_callback: () => {},
       sale_detail_product_key: '',
       saleDetailSize: 3,
       new_pop_list,
@@ -925,36 +994,19 @@ export default {
   computed: {
     //套餐支付显示逻辑
     is_show_combination() {
-      return !["enjoy03", "panda03","enjoy02", "panda02"].includes(utils.getFBChannel());
+      return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(
+        utils.getFBChannel()
+      );
     },
     // 顶部广告
     header_list() {
       return [
-        // {
-        //   id: 1,
-        //   cn_icon:
-        //     'https://psychicai-static.psychicai.pro/imgs/2404b88f1b070d4542f391d749cf8d5d6c48.png',
-        //   tw_icon: tw_wealth24,
-        //   name: '2024年财运',
-        //   url: 'lucky_year_report',
-        //   a_id: '60001',
-        //   a_name: '2024_wealty_report',
-        // },
-        // {
-        //   id: 2,
-        //   cn_icon:
-        //     'https://psychicai-static.psychicai.pro/imgs/2404bfd6c3dce6cc479cb50e999f270358ec.png',
-        //   tw_icon: tw_year24,
-        //   name: '24年年运',
-        //   url: 'year_of_lucky_2024',
-        //   a_id: '60009',
-        //   a_name: '2024_report',
-        // },
         {
           id: 3,
           cn_icon:
             'https://psychicai-static.psychicai.pro/imgs/2404c53a0f34e86c4bbf90b5537bbd4c8fb0.png',
-          tw_icon: tw_bzhh,
+          tw_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2406593b28b63ead4314bcc79c2a8f117e59.png',
           name: '八字合婚',
           url: 'marriage_measure_overseas',
           a_id: '60005',
@@ -963,8 +1015,10 @@ export default {
         },
         {
           id: 5,
-          cn_icon: cn_banner_ganqin,
-          tw_icon: tw_banner_ganqin,
+          cn_icon:
+            'https://psychicai-static.psychicai.pro/imgs/240655ba88d3dd824d828ba17b64cc735dad.png',
+          tw_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2406694069772acd41dfb29a5f0b75d5c875.png',
           name: '2024感情运势',
           url: 'emotion_fortune',
           a_id: '60010',
@@ -975,93 +1029,15 @@ export default {
           id: 4,
           cn_icon:
             'https://psychicai-static.psychicai.pro/imgs/2404da455076874c45d689335fbb5fd98c5c.png',
-          tw_icon: tw_web,
+          tw_icon:
+            'https://psychicai-static.psychicai.pro/imgs/2406fadee44ab23b4d4ea1910ecca3af456b.png',
           name: '命理寻真',
           url: 'https://www.psychicai.pro/',
           a_id: '60099',
           a_name: 'download',
         },
-        // {
-        //   id: 80004,
-        //   icon: 'https://psychicai-static.psychicai.pro/imgs/231163a3ceab6ba14d97bbca80544b9c3cfd.png',
-        //   name: '八字事业详批',
-        //   url: 'career_divination_overseas',
-        //   ios_id: '',
-        //   android_id: '22',
-        // },
-        // {
-        //   id: 80005,
-        //   icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/af8b0b8a9c3484c4f4a5428e984c5e8c.png',
-        //   name: '袁天罡',
-        //   url: 'weigh_bone',
-        //   ios_id: '',
-        //   android_id: '23',
-        // },
-        // {
-        //   id: 80005,
-        //   icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/630c7179844d4b3b20f5cf3ff46ff4b6.png',
-        //   name: '鬼谷子',
-        //   url: 'guiguzi_fortune',
-        //   ios_id: '',
-        //   android_id: '24',
-        // },
-
-        // {
-        //   id: 80002,
-        //   icon: 'http://imgcom.static.suishenyun.net/img_head-5e6238.png',
-        //   name: '2024感情运势',
-        //   url: 'emotion_fortune',
-        //   ios_id: '',
-        //   android_id: '',
-        // },
-        // {
-        //   id: 80011,
-        //   icon: career_2024,
-        //   name: '2024事业运',
-        //   url: 'career_fortune_2024',
-        //   ios_id: '',
-        //   android_id: '',
-        // },
-        // {
-        //   id: 80009,
-        //   icon: top_shiye,
-        //   name: '2024年运',
-        //   url: 'year_of_lucky_2024',
-        //   ios_id: '',
-        //   android_id: '',
-        // },
       ];
     },
-    // 推荐
-    recommend_list() {
-      return [
-        {
-          id: 80010,
-          icon: ganqqingyun_24,
-          name: '感情运',
-          url: 'emotion_fortune',
-        },
-        {
-          id: 80005,
-          icon: bzhh,
-          name: '八字合婚',
-          url: 'marriage_measure_overseas',
-        },
-        {
-          id: 80009,
-          icon: nianyun_24,
-          name: '24年年运',
-          url: 'year_of_lucky_2024',
-        },
-        {
-          id: 80001,
-          icon: caiyun_24,
-          name: '24年财运',
-          url: 'lucky_year_report',
-        },
-      ];
-    },
-   
 
     // 折扣列表
     zhekouList() {
@@ -1088,159 +1064,6 @@ export default {
           price: 108,
         },
       ];
-    },
-    // 爆款推荐
-    productionList() {
-      let arr = [];
-      for (let i = 1; i < 11; i++) {
-        arr.push({
-          id: i,
-          checked: false,
-          name: '2024财运',
-          desc: '預知運勢順遂，預測好運危月份，把握流年機遇！預知運勢順遂，預測好運危月份，把握流年機遇！',
-          url: 'www.baidu.com',
-          icon: 'https://psychic-h5.wezhaxi.com/img/prod-combine_5.759e0d4.png',
-        });
-      }
-      return arr;
-    },
-    // 测算产品
-    measureProduct() {
-      return [
-        {
-          id: 21,
-          name: '2024年财运',
-          banner_id: 80001,
-          checked: false,
-          icon: 'https://psychicai-static.psychicai.pro/imgs/23115681e58a5c544fee8ac8c2f259080607.png',
-          url: 'lucky_year_report',
-          product_key: 'h5_wealth2024',
-          tips: '2024全景扫描，预知财运高低浮沉，提前为你揭示财富脉络，帮助你致富之道，拥有财富满盈的2024年！',
-          check_icon:
-            'https://psychicai-static.psychicai.pro/imgs/2311c537595a580c452fb90354ab4244bd78.png',
-        },
-        {
-          id: 22,
-          name: '八字事业详批',
-          banner_id: 80004,
-          checked: false,
-          icon: 'https://psychicai-static.psychicai.pro/imgs/2311f9a18eab2fba41eb87c6b74a69c112f2.png',
-          url: 'career_divination_overseas',
-          product_key: 'h5_career',
-          tips: '预知事业低谷，成功时机，把握你的先天优势，让你的事业一帆风顺！',
-          check_icon:
-            'https://psychicai-static.psychicai.pro/imgs/2311ff0388985646470a8302f1547167ba46.png',
-        },
-        {
-          id: 23,
-          name: '八字合婚',
-          banner_id: 80005,
-          checked: false,
-          icon: 'https://psychicai-static.psychicai.pro/imgs/2311b43a350070e54399beb014774e98dccd.png',
-          url: 'marriage_measure_overseas',
-          product_key: 'h5_marriage',
-          tips: '合八字测试姻缘，专业分析婚配指数，拥有更加幸福美满的婚姻！',
-          check_icon:
-            'https://psychicai-static.psychicai.pro/imgs/2311012132873f174e7ebcd518f2253c909a.png',
-        },
-        {
-          id: 24,
-          name: '姻缘分析',
-          banner_id: 80006,
-          checked: false,
-          icon: 'https://psychicai-static.psychicai.pro/imgs/231106e4f92e19ab4095b50fcaa5075ad621.png',
-          url: 'marriage_divination_overseas',
-          product_key: 'h5_love',
-          tips: '姻缘分析，知己知彼，为你扫除情感障碍，帮你打造天赐良缘！',
-          check_icon:
-            'https://psychicai-static.psychicai.pro/imgs/231184d2494396114e79bdd2f5cdf7ab4f81.png',
-        },
-        {
-          id: 25,
-          name: '2023年兔年运程详批',
-          banner_id: 80007,
-          checked: false,
-          icon: 'https://psychicai-static.psychicai.pro/imgs/23111d65fa2098a5428fb4cdb8e793a1d3de.png',
-          url: 'new_year_luck_overseas',
-          product_key: 'h5_fortune2023',
-          tips: '预知运势顺利，预测好运、危机出现月份，助你把握流年机遇！ ',
-          check_icon:
-            'https://psychicai-static.psychicai.pro/imgs/2311e8b5bdf1352f40ed80ec4239f8246eef.png',
-        },
-        {
-          id: 26,
-          name: '2023兔年一生财运',
-          banner_id: 80008,
-          checked: false,
-          icon: 'https://psychicai-static.psychicai.pro/imgs/2311dab2e4808856460198f9fb5d00335a02.png',
-          url: 'wealth_boutique_overseas',
-          product_key: 'h5_wealth2023',
-          tips: '把握财运先机，揭晓财富运程，助你财运亨通，财源滚滚！',
-          check_icon:
-            'https://psychicai-static.psychicai.pro/imgs/2311451b81975b92422dba50e3ecb43a6c71.png',
-        },
-        {
-          id: 27,
-          name: '袁天罡推背称骨',
-          banner_id: 80002,
-          checked: false,
-          icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/af8b0b8a9c3484c4f4a5428e984c5e8c.png',
-          url: 'weigh_bone',
-          product_key: 'h5_weigh_bone',
-          tips: '通过袁天罡古老占算法，探究身体骨骼，揭示生命密码，为你清晰了解生涯命运走向，让你事业、爱情、健康三线并进，并在生活中找到最佳平衡！',
-          check_icon:
-            'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/af8b0b8a9c3484c4f4a5428e984c5e8c.png',
-        },
-        {
-          id: 28,
-          name: '鬼谷子百卦论命',
-          banner_id: 80003,
-          checked: false,
-          icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/630c7179844d4b3b20f5cf3ff46ff4b6.png',
-          url: 'guiguzi_fortune',
-          product_key: 'h5_bai_gua',
-          tips: '关乎命运的百卦，把握生活中的转机与挑战。通过古老的易经知识演绎生活，精准预判运势，解析个性、爱情、职业、健康等生活重要环节，让你能够明察秋毫，走好人生每一步！',
-          check_icon:
-            'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/630c7179844d4b3b20f5cf3ff46ff4b6.png',
-        },
-        {
-          id: 29,
-          name: '2024年年运',
-          banner_id: 80009,
-          checked: false,
-          icon: 'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/21fdbe04b4913ca464cc71222552327d.png',
-          url: 'year_of_lucky_2024',
-          product_key: 'h5_annual2024',
-          tips: '预知全年吉凶，揭示人生起伏，明晰先机，决策无忧，助力你掌握全年运势，开启更好的2024年！',
-          check_icon:
-            'http://img1000.static.suishenyun.net/2e52e1dc5ac9d868e9983bd3fd8ced1c/21fdbe04b4913ca464cc71222552327d.png',
-        },
-        {
-          id: 30,
-          name: '2024感情运势',
-          banner_id: 12345,
-          checked: false,
-          icon: 'http://imgcom.static.suishenyun.net/img_head-5e6238.png',
-          url: 'emotion_fortune',
-          product_key: 'h5_emotion2024',
-          tips: '2024感情运势，暂无简介',
-          check_icon: 'http://imgcom.static.suishenyun.net/img_head-5e6238.png',
-        },
-        {
-          id: 31,
-          name: '2024事业运',
-          banner_id: 123456,
-          checked: false,
-          icon: career_2024,
-          url: 'career_fortune_2024',
-          product_key: 'h5_career2024',
-          tips: '2024年事业运，暂无简介，2024年事业运，暂无简介',
-          check_icon: career_2024,
-        },
-      ];
-    },
-    longnianBanner() {
-      return longnianImg;
     },
 
     // 改版的报告商品
@@ -1468,18 +1291,6 @@ export default {
     },
   },
   watch: {
-    sale_visible(val) {
-      this.fix_pop = val ? true : false;
-      if (!val) {
-        this.can_choose = true;
-      } else {
-        this.$nextTick(() => {
-          this.pop_list.forEach((it, k) => {
-            this.handleText(k);
-          });
-        });
-      }
-    },
     pay_visible(val) {
       this.fix_pop = val ? true : false;
     },
@@ -1564,8 +1375,9 @@ export default {
     document.title = this.$t('dom-title');
     this.getLastOrder();
 
-    this.is_show_combine =
-      ['enjoy03', 'panda03'].includes(utils.getFBChannel());
+    this.is_show_combine = ['enjoy03', 'panda03'].includes(
+      utils.getFBChannel()
+    );
 
     let url_query = utils.getUrlParams();
     let order_id = url_query.order_id;
@@ -1591,7 +1403,6 @@ export default {
       this.showComboAttach();
       this.getLocalChecked('three_list', 'mlxz_web_select_list');
       this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
-      this.pop_list = this.mergeArray(this.measureProduct, this.all_list);
     });
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
@@ -1656,9 +1467,11 @@ export default {
     getProductions,
     //开始测算
     async startCalculateClick() {
-      location.href = `${path_enums[this.comboAttachData.product_key]
-        }.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id
-        }&product_key=${this.comboAttachData.product_key}`;
+      location.href = `${
+        path_enums[this.comboAttachData.product_key]
+      }.html#/?has_pay=SUCCESS&order_id=${
+        this.comboAttachData.order_id
+      }&product_key=${this.comboAttachData.product_key}`;
     },
     //请求接口，是否展示引导标识
     async showComboAttach() {
@@ -1767,9 +1580,11 @@ export default {
           fbp: localStorage.getItem('_fbp'),
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
         },
-        callback_url: `${location.origin}/${utils.getFBChannel()}/${path_enums[product_key]
-          }.html#/result?path=${path_enums[product_key]
-          }&report_price=${payment}&discount_pay=1`,
+        callback_url: `${location.origin}/${utils.getFBChannel()}/${
+          path_enums[product_key]
+        }.html#/result?path=${
+          path_enums[product_key]
+        }&report_price=${payment}&discount_pay=1`,
       };
       const res = await payOrderAPI(params);
       localStorage.removeItem('mlxz_fixed_api_order_id');
@@ -1795,8 +1610,9 @@ export default {
         let female_str = marry_info.female_str;
         let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
 &pay_modal=1&use_fixed_time=1&discount_pay=1`;
-        location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
-          }.html#/${path}`;
+        location.href = `${location.origin}/${utils.getFBChannel()}/${
+          path_enums[this.new_order_key]
+        }.html#/${path}`;
 
         return;
       }
@@ -1806,8 +1622,9 @@ export default {
         '&pay_modal=1' +
         '&use_fixed_time=1&discount_pay=1';
 
-      location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
-        }.html#/${path}`;
+      location.href = `${location.origin}/${utils.getFBChannel()}/${
+        path_enums[this.new_order_key]
+      }.html#/${path}`;
     },
     /**
      * @description: 校验是否上报埋点
@@ -2081,74 +1898,6 @@ export default {
     },
 
     /**
-     * @description: 开启商品弹窗
-     * @return {*}
-     */
-    showPop() {
-      let arr = localStorage.getItem('mlxz_checked_list');
-      if (arr) {
-        this.checked_list = JSON.parse(arr);
-      }
-      this.pop_list = this.formatProductList(this.pop_list, this.checked_list);
-
-      let id_arr = [];
-      this.checked_list.forEach(it => {
-        if (it.id) {
-          id_arr.push(it.id);
-        }
-      });
-      if (!id_arr.length) {
-        this.sale_visible = true;
-        return;
-      }
-      id_arr.forEach(it => {
-        this.pop_list.forEach(item => {
-          if (item.id === it) {
-            item.checked = true;
-          }
-        });
-      });
-      let has_num = this.formatChecked();
-      this.can_choose = has_num >= 3 ? false : true;
-      this.sale_visible = true;
-    },
-
-    /**
-     * @description: 选择商品
-     * @param {*} it 当前选中
-     * @param {*} k
-     * @return {*}
-     */
-    chooseSale(it, k) {
-      if (!this.can_choose && !it.checked) {
-        return;
-      }
-      this.pop_list[k].checked = !this.pop_list[k].checked;
-
-      let has_num = this.formatChecked();
-      this.can_choose = has_num >= 3 ? false : true;
-    },
-
-    /**
-     * @description: 校验时候选择了3个商品
-     * @return {*}
-     */
-    formatChecked() {
-      let i = 0;
-      this.pop_list.forEach(it => {
-        if (it.checked) {
-          i++;
-        }
-      });
-      return i;
-    },
-
-    closeSalePop() {
-      this.getStoreChecked();
-      this.sale_visible = false;
-    },
-
-    /**
      * @description: 按照ID大小排序
      * @param {*} arr
      * @return {*}
@@ -2157,43 +1906,6 @@ export default {
       return arr.sort((a, b) => {
         return a.id - b.id;
       });
-    },
-
-    /**
-     * @description: 确认选择的产品
-     * @return {*}
-     */
-    handleConfirm() {
-      let i = 0;
-      this.pop_list.forEach(it => {
-        if (it.checked) {
-          i++;
-        }
-      });
-      if (i < 2) {
-        Toast(this.$t('less-get-two-tips'));
-        return false;
-      }
-      this.checked_list = [];
-      this.pop_list.forEach(it => {
-        if (it.checked) {
-          this.checked_list.push(it);
-        }
-      });
-      if (this.checked_list.length < 3) {
-        for (let i = 0; i < 4 - this.checked_list.length; i++) {
-          this.checked_list.push({ value: '' });
-        }
-      }
-      let has_num = this.formatChecked();
-      this.zhekou = has_num > 0 ? has_num - 1 : 2;
-      this.sortData(this.checked_list);
-      localStorage.setItem(
-        'mlxz_checked_list',
-        JSON.stringify(this.checked_list)
-      );
-
-      this.sale_visible = false;
     },
 
     /**
@@ -2729,8 +2441,9 @@ export default {
       let channle = utils.getFBChannel() === 'own' ? '' : utils.getFBChannel();
 
       localStorage.setItem('mlxz_reload_page_home', 1);
-      location.href = `${location.origin}/${channle}/${url}.html#/${status ? 'result' : ''
-        }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
+      location.href = `${location.origin}/${channle}/${url}.html#/${
+        status ? 'result' : ''
+      }?has_pay=SUCCESS&order_id=${order_id}&status=SUCCESS`;
     },
     isShowBannerSort() {
       let channel = utils.getFBChannel();
@@ -2839,135 +2552,217 @@ export default {
       let size = arguments[0] || 3;
       let product_key = arguments[1].product_key;
       this.sale_detail_product_key = product_key;
-      let callbackArg = Array.prototype.slice.call(arguments, 1)
+      let callbackArg = Array.prototype.slice.call(arguments, 1);
       this.sale_detail_callback = () => {
         console.log('sale_detail_callback111');
-        this.chooseNewSale(...callbackArg)
+        this.chooseNewSale(...callbackArg);
         this.sale_detail_modal = false;
-        
       };
       this.sale_detail_modal = true;
       if (size === 2) {
         switch (product_key) {
-          case 'h5_marriage': utils.firebaseLogEvent('10001', '-10036', 'click_reportlist2_marriage_detail', 'click',
-            {
-              args_name: 'click_reportlist2_marriage_detail',
-              channel: utils.getFBChannel(),
-            })
+          case 'h5_marriage':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10036',
+              'click_reportlist2_marriage_detail',
+              'click',
+              {
+                args_name: 'click_reportlist2_marriage_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_emotion2024': utils.firebaseLogEvent('10001', '-10033', 'click_reportlist2_2024lovely_detail', 'click',
-            {
-              args_name: 'click_reportlist2_2024lovely_detail',
-              channel: utils.getFBChannel(),
-            })
+          case 'h5_emotion2024':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10033',
+              'click_reportlist2_2024lovely_detail',
+              'click',
+              {
+                args_name: 'click_reportlist2_2024lovely_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_annual2024': utils.firebaseLogEvent('10001', '-10032', 'click_reportlist2_2024report_detail', 'click',
-            {
-              args_name: 'click_reportlist2_2024report_detail',
-              channel: utils.getFBChannel(),
-            })
+          case 'h5_annual2024':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10032',
+              'click_reportlist2_2024report_detail',
+              'click',
+              {
+                args_name: 'click_reportlist2_2024report_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_wealth2024': utils.firebaseLogEvent('10001', '-10035', 'click_reportlist2_2024wealty_detail', 'click',
-            {
-              args_name: 'click_reportlist2_2024wealty_detail',
-              channel: utils.getFBChannel(),
-            })
+          case 'h5_wealth2024':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10035',
+              'click_reportlist2_2024wealty_detail',
+              'click',
+              {
+                args_name: 'click_reportlist2_2024wealty_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_career2024': utils.firebaseLogEvent('10001', '-10034', 'click_reportlist2_2024career_detail', 'click',
-            {
-              args_name: 'click_reportlist2_2024career_detail',
-              channel: utils.getFBChannel(),
-            })
+          case 'h5_career2024':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10034',
+              'click_reportlist2_2024career_detail',
+              'click',
+              {
+                args_name: 'click_reportlist2_2024career_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10037', 'click_reportlist2_64gua_detail', 'click',
-            {
-              args_name: 'click_reportlist2_64gua_detail',
-              channel: utils.getFBChannel(),
-            })
+          case 'h5_bai_gua':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10037',
+              'click_reportlist2_64gua_detail',
+              'click',
+              {
+                args_name: 'click_reportlist2_64gua_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_weigh_bone': utils.firebaseLogEvent('10001', '-10038', 'click_reportlist2_chenggu_detail', 'click',
-            {
-              args_name: 'click_reportlist2_chenggu_detail',
-              channel: utils.getFBChannel(),
-            })
+          case 'h5_weigh_bone':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10038',
+              'click_reportlist2_chenggu_detail',
+              'click',
+              {
+                args_name: 'click_reportlist2_chenggu_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
-
         }
       } else {
         switch (product_key) {
-          case 'h5_marriage': utils.firebaseLogEvent('10001', '-10043', 'click_reportlist3_marriage_detail', 'click',
-            {
-              args_name: 'click_reportlist3_marriage_detail',
-              channel: utils.getFBChannel(),
-            });
+          case 'h5_marriage':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10043',
+              'click_reportlist3_marriage_detail',
+              'click',
+              {
+                args_name: 'click_reportlist3_marriage_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_emotion2024': utils.firebaseLogEvent('10001', '-10040', 'click_reportlist3_2024lovely_detail', 'click',
-            {
-              args_name: 'click_reportlist3_2024lovely_detail',
-              channel: utils.getFBChannel(),
-            });
+          case 'h5_emotion2024':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10040',
+              'click_reportlist3_2024lovely_detail',
+              'click',
+              {
+                args_name: 'click_reportlist3_2024lovely_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_annual2024': utils.firebaseLogEvent('10001', '-10039', 'click_reportlist3_2024report_detail', 'click',
-            {
-              args_name: 'click_reportlist3_2024report_detail',
-              channel: utils.getFBChannel(),
-            });
+          case 'h5_annual2024':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10039',
+              'click_reportlist3_2024report_detail',
+              'click',
+              {
+                args_name: 'click_reportlist3_2024report_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_wealth2024': utils.firebaseLogEvent('10001', '-10042', 'click_reportlist3_2024wealty_detail', 'click',
-            {
-              args_name: 'click_reportlist3_2024wealty_detail',
-              channel: utils.getFBChannel(),
-            });
+          case 'h5_wealth2024':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10042',
+              'click_reportlist3_2024wealty_detail',
+              'click',
+              {
+                args_name: 'click_reportlist3_2024wealty_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_career2024': utils.firebaseLogEvent('10001', '-10041', 'click_reportlist3_2024career_detail', 'click',
-            {
-              args_name: 'click_reportlist3_2024career_detail',
-              channel: utils.getFBChannel(),
-            });
+          case 'h5_career2024':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10041',
+              'click_reportlist3_2024career_detail',
+              'click',
+              {
+                args_name: 'click_reportlist3_2024career_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_bai_gua': utils.firebaseLogEvent('10001', '-10044', 'click_reportlist3_64gua_detail', 'click',
-            {
-              args_name: 'click_reportlist3_64gua_detail',
-              channel: utils.getFBChannel(),
-            });
+          case 'h5_bai_gua':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10044',
+              'click_reportlist3_64gua_detail',
+              'click',
+              {
+                args_name: 'click_reportlist3_64gua_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
             break;
 
-          case 'h5_weigh_bone': utils.firebaseLogEvent('10001', '-10045', 'click_reportlist3_chenggu_detail', 'click',
-            {
-              args_name: 'click_reportlist3_chenggu_detail',
-              channel: utils.getFBChannel(),
-            });
+          case 'h5_weigh_bone':
+            utils.firebaseLogEvent(
+              '10001',
+              '-10045',
+              'click_reportlist3_chenggu_detail',
+              'click',
+              {
+                args_name: 'click_reportlist3_chenggu_detail',
+                channel: utils.getFBChannel(),
+              }
+            );
 
             break;
         }
       }
     },
     select(key) {
-      if(new_sale_modal) {
+      if (new_sale_modal) {
         //3个
         console.log(this.pick_list);
         console.log(key);
-        return
-        this.chooseNewSale(item, key)
+        return;
+        this.chooseNewSale(item, key);
         this.sale_detail_modal = false;
       } else {
         //2个
-        this.chooseNewSale(item, key, 2, 'pick_list2')
+        this.chooseNewSale(item, key, 2, 'pick_list2');
         this.sale_detail_modal = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -3017,7 +2812,7 @@ export default {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 0.19rem;
 
-  &>.btn-text {
+  & > .btn-text {
     font-family: PingFangSC, PingFang SC;
     font-weight: 600;
     padding-right: 0.04rem;
@@ -3026,7 +2821,7 @@ export default {
     color: #fff;
   }
 
-  &>.btn-img {
+  & > .btn-img {
     width: 0.1rem;
     height: 0.18rem;
   }
@@ -3130,7 +2925,8 @@ export default {
 
 .header-box {
   width: 7.5rem;
-  background: url('https://psychicai-static.psychicai.pro/imgs/24040a66e62f96ec4d54814920ed3dcc4125.png') no-repeat;
+  background: url('https://psychicai-static.psychicai.pro/imgs/24040a66e62f96ec4d54814920ed3dcc4125.png')
+    no-repeat;
   background-size: 7.5rem 4.22rem;
   position: relative;
   padding: 0.2rem 0.2rem 0;
@@ -3138,7 +2934,8 @@ export default {
   .buy-list {
     width: 7.1rem;
     height: 0.72rem;
-    background: url('https://psychicai-static.psychicai.pro/imgs/240498b976e40d914444b775fec84707719e.png') no-repeat;
+    background: url('https://psychicai-static.psychicai.pro/imgs/240498b976e40d914444b775fec84707719e.png')
+      no-repeat;
     background-size: contain;
     margin-top: 0.2rem;
     font-weight: 400;
@@ -3211,7 +3008,8 @@ export default {
     .left {
       width: 2.52rem;
       height: 0.64rem;
-      background: url('../../assets/img/mlxz/index/ce_img_zhekoubg.png') no-repeat;
+      background: url('../../assets/img/mlxz/index/ce_img_zhekoubg.png')
+        no-repeat;
       background-size: contain;
       font-size: 0.32rem;
       font-weight: 600;
@@ -3563,7 +3361,8 @@ export default {
   .normal-item {
     width: 3.46rem;
     height: 4.88rem;
-    background: url('https://psychicai-static.psychicai.pro/imgs/2404a1e37968e812485bbeea12aa4254d485.png') no-repeat;
+    background: url('https://psychicai-static.psychicai.pro/imgs/2404a1e37968e812485bbeea12aa4254d485.png')
+      no-repeat;
     background-size: contain;
     margin: 0 0.09rem;
     .common-item;
@@ -3602,7 +3401,8 @@ export default {
   .big-item {
     width: 7.1rem;
     height: 3.62rem;
-    background: url('https://psychicai-static.psychicai.pro/imgs/24041489a229d8c545d9bc252e1418de9766.png') no-repeat;
+    background: url('https://psychicai-static.psychicai.pro/imgs/24041489a229d8c545d9bc252e1418de9766.png')
+      no-repeat;
     background-size: contain;
     .common-item;
 
@@ -3679,7 +3479,8 @@ export default {
     .item {
       width: 6.54rem !important;
       height: 4.88rem !important;
-      background: url('../../assets/img/new_combine/new_discount_bg.png') no-repeat;
+      background: url('../../assets/img/new_combine/new_discount_bg.png')
+        no-repeat;
       background-size: 100% 100%;
       position: relative;
       overflow-x: hidden;

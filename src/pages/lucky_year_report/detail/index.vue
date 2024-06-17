@@ -1,12 +1,12 @@
 <!--
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-08 20:35:24
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-30 18:45:06
+ * @LastEditors: Tahiti
+ * @LastEditTime: 2024-06-17 17:45:26
  * @Description: 
 -->
 <template>
-  <div :class="['detail', pay_modal? 'fix-pop': '']">
+  <div :class="['detail', pay_modal ? 'fix-pop' : '']">
     <div class="pay-box">
       <img class="title1" :src="is_cn ? cn_txt_title : tw_txt_title" alt="" />
       <img class="title2" :src="is_cn ? cn_img_word3 : tw_img_word3" alt="" />
@@ -81,7 +81,7 @@
       e_click_name="click_2024wealty_pay"
       a_click_token="rckacf"
     />
-    <NewFooter v-if="showFixedBtn" product_key="h5_wealth2024"/>
+    <NewFooter v-if="showFixedBtn" product_key="h5_wealth2024" />
   </div>
 </template>
 
@@ -94,9 +94,6 @@ import BaziTable from '../../../components/baziTable.vue';
 import { getBaziAPI } from '../../../api/api';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import payModal from '../../../components/PayModal.vue';
-import cn_duanyu from '../../../assets/img/mlxz/svga/wealth24/cn_duanyu.svga';
-import tw_duanyu from '../../../assets/img/mlxz/svga/wealth24/tw_duanyu.svga';
-import ji_svga from '../../../assets/img/mlxz/svga/wealth24/caiyun_ji.svga';
 
 import cn_static_duan from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/zhong_1.png';
 import tw_static_duan from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_1.png';
@@ -136,11 +133,14 @@ export default {
       tw_img_word3,
       cn_txt_title,
       tw_txt_title,
-      ji_svga,
+      ji_svga:
+        'https://psychicai-static.psychicai.pro/imgs/2406b773dd3ac3734007bb172f18387d456e.svga',
       cn_static_duan,
       tw_static_duan,
-      cn_duanyu,
-      tw_duanyu,
+      cn_duanyu:
+        'https://psychicai-static.psychicai.pro/imgs/24063f85fe4eef7048d28db51d74b19e54e2.svga',
+      tw_duanyu:
+        'https://psychicai-static.psychicai.pro/imgs/240606203c18b8ab4474a137526332c24b26.svga',
       product_id: 21,
       product_key: 'h5_wealth2024',
       query_user_string: '',
@@ -442,7 +442,6 @@ export default {
   position: fixed !important;
   overflow-y: hidden;
   top: 0;
-
 }
 .btn {
   width: 5.92rem;

@@ -1,8 +1,8 @@
 /*
  * @Author: wujiang@weli.cn
  * @Date: 2024-02-28 16:49:35
- * @LastEditors: wujiang
- * @LastEditTime: 2024-06-05 17:30:01
+ * @LastEditors: Tahiti
+ * @LastEditTime: 2024-06-17 16:37:11
  * @Description: 工具函数
  */
 import moment from 'dayjs';
@@ -29,7 +29,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('panda03') > -1) {
     return 'panda03';
   } else {
-    return 'panda02';
+    return 'panda03';
   }
 };
 /**

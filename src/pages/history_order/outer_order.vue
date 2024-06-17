@@ -1,8 +1,8 @@
 <!--
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-25 14:39:07
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-06-05 18:54:07
+ * @LastEditors: Tahiti
+ * @LastEditTime: 2024-06-17 16:45:56
  * @Description: 历史订单
 -->
 <template>
@@ -331,8 +331,6 @@ import { Indicator, Toast } from 'mint-ui';
 import utils from '@/libs/utils';
 import { path_enums } from '../../libs/enum';
 import { getHistoryOrderAPI, payOrderAPI } from '../../api/api';
-import gif_nianyun from '../../assets/img/mlxz/index/gif/24年运-简体.gif';
-import gif_ganqing from '../../assets/img/mlxz/index/gif/感情运势-简体.gif';
 import { getHistoryOrderImg } from '../../libs/enum';
 import CodePop from '../../components/CodePop.vue';
 import tw_title from '../../assets/img/mlxz/downloadBtn/tw/h5_img_dingdantittle_fan.png';
@@ -343,13 +341,13 @@ const all_status_enums = () => {
 const ad_list = [
   {
     id: 80009,
-    icon: gif_nianyun,
+    icon: 'https://psychicai-static.psychicai.pro/imgs/2406fadee44ab23b4d4ea1910ecca3af456b.png',
     name: '2024年年运',
     url: 'year_of_lucky_2024',
   },
   {
     id: 80010,
-    icon: gif_ganqing,
+    icon: 'https://psychicai-static.psychicai.pro/imgs/240665778c3edc0c4785817b20fe2a812385.gif',
     name: '24年感情运',
     url: 'emotion_fortune',
   },
@@ -648,7 +646,7 @@ export default {
               fbc: localStorage.getItem('_fbc'),
               fbp: localStorage.getItem('_fbp'),
               external_id: localStorage.getItem('mlxz_outer_visitor_id'),
-            }
+            },
           };
           if (product_key === 'h5_combo2_attach') {
             let same_product = this.productList.find(

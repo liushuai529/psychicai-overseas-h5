@@ -2,7 +2,7 @@
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
  * @LastEditors: Tahiti
- * @LastEditTime: 2024-06-15 00:06:37
+ * @LastEditTime: 2024-06-17 14:39:56
  * @Description: 八字合婚
 -->
 <template>
@@ -215,7 +215,6 @@ import utils from './../../../libs/utils.js';
 import topBanner from './top_banner.vue';
 // @ts-ignore
 import info from './info.vue';
-import toOrder from './../../../components/to_order.vue';
 // @ts-ignore
 import DatetimePicker from './datetime_picker.vue';
 import NongliPicker from './nongli_picker.vue';
@@ -280,7 +279,6 @@ export default {
     info,
     DatetimePicker,
     NongliPicker,
-    toOrder,
     PayPopup,
     TopBar,
     HeaderNotice,

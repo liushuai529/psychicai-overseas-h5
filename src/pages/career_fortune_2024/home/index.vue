@@ -207,7 +207,7 @@
         @payOrder="checkOrder"
         @jumpDetail="jumpOrder"
       />
-      <NewFooter v-if="showFixedBtn" product_key="h5_career2024"/>
+      <NewFooter v-if="showFixedBtn" product_key="h5_career2024" />
     </div>
   </div>
 </template>
@@ -250,10 +250,6 @@ import tw_card_1 from '../../../assets/img/tw_mlxz/career_24/card_1.png';
 import tw_card_2 from '../../../assets/img/tw_mlxz/career_24/card_2.png';
 import tw_card_3 from '../../../assets/img/tw_mlxz/career_24/card_3.png';
 
-import cn_header from '../../../assets/img/mlxz/svga/career24/cn_header.svga';
-import tw_header from '../../../assets/img/mlxz/svga/career24/tw_header.svga';
-import cn_zhanwang from '../../../assets/img/mlxz/svga/career24/cn_zhanwang.svga';
-import tw_zhanwang from '../../../assets/img/mlxz/svga/career24/tw_zhanwang.svga';
 import cn_history_order from '../../../assets/img/mlxz/career_2024/bgm_lsdd.png';
 import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/career_order.png';
 import PopNotice from '../../../components/PopNotice.vue';
@@ -281,10 +277,14 @@ export default {
     return {
       cn_history_order,
       tw_history_order,
-      cn_header,
-      tw_header,
-      cn_zhanwang,
-      tw_zhanwang,
+      cn_header:
+        'https://psychicai-static.psychicai.pro/imgs/2406a4943caac44d4bc2b1635a730a09799c.svga',
+      tw_header:
+        'https://psychicai-static.psychicai.pro/imgs/2406f9b4455795fd488a824c6aca40a55758.svga',
+      cn_zhanwang:
+        'https://psychicai-static.psychicai.pro/imgs/2406ed875a48a46c4edd9fa8c9c4b5d031f0.svga',
+      tw_zhanwang:
+        'https://psychicai-static.psychicai.pro/imgs/24060e88e91f926e4903b33b1a625ed28198.svga',
       cn_lock_btn,
       cn_card_1,
       cn_card_2,
@@ -499,8 +499,8 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
-    self.loadBg('#bg-svga', self.is_cn ? cn_header : tw_header);
-    self.loadBg('#zhanwang', self.is_cn ? cn_zhanwang : tw_zhanwang);
+    self.loadBg('#bg-svga', self.is_cn ? this.cn_header : this.tw_header);
+    self.loadBg('#zhanwang', self.is_cn ? this.cn_zhanwang : this.tw_zhanwang);
   },
   methods: {
     /**

@@ -209,7 +209,7 @@
         @payOrder="checkOrder"
         @jumpDetail="jumpOrder"
       />
-      <NewFooter v-if="showFixedBtn" product_key="h5_wealth2024"/>
+      <NewFooter v-if="showFixedBtn" product_key="h5_wealth2024" />
     </div>
   </div>
 </template>
@@ -237,12 +237,6 @@ import {
   maidianEnum,
 } from '../../../libs/enum';
 import combinePayPop from '../../../components/combinePayPop.vue';
-
-import cn_header from '../../../assets/img/mlxz/svga/wealth24/cn_header.svga';
-import tw_header from '../../../assets/img/mlxz/svga/wealth24/tw_header.svga';
-
-import cn_kaiyun from '../../../assets/img/mlxz/svga/wealth24/cn_kaiyun.svga';
-import tw_kaiyun from '../../../assets/img/mlxz/svga/wealth24/tw_kaiyun.svga';
 
 import cn_info_title from '../../../assets/img/mlxz/lucky_year_report/info-title.png';
 import tw_info_title from '../../../assets/img/tw_mlxz/wealth_24/home/txt.png';
@@ -299,11 +293,14 @@ export default {
       tw_btn,
       cn_info_title,
       tw_info_title,
-      cn_header,
-      tw_header,
-      cn_kaiyun,
-      tw_kaiyun,
-      svg: 'https://mixmedia.rili.cn/c89f1fd7-acb1-48b8-9130-774512dfec70.svga',
+      cn_header:
+        'https://psychicai-static.psychicai.pro/imgs/240663fcd4d875384ff5897670e7cc18db55.svga',
+      tw_header:
+        'https://psychicai-static.psychicai.pro/imgs/24063ce892ae985f4b968d765c4b13b3a373.svga',
+      cn_kaiyun:
+        'https://psychicai-static.psychicai.pro/imgs/2406284f276703c84c8dbad3769aa118f8cd.svga',
+      tw_kaiyun:
+        'https://psychicai-static.psychicai.pro/imgs/240681a7e26b69e24dc4963b157ea4acb485.svga',
 
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,

@@ -1,8 +1,8 @@
 <!--
  * @Author: wujiang@weli.cn
  * @Date: 2023-11-09 15:31:53
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-06-05 20:54:07
+ * @LastEditors: Tahiti
+ * @LastEditTime: 2024-06-17 17:37:54
  * @Description: 鬼谷子百卦论命
 -->
 <template>
@@ -199,7 +199,7 @@
         @payOrder="checkOrder"
         @jumpDetail="jumpOrder"
       />
-      <NewFooter v-show="showFixedBtn" product_key="h5_bai_gua"/>
+      <NewFooter v-show="showFixedBtn" product_key="h5_bai_gua" />
     </div>
   </div>
 </template>
@@ -238,11 +238,6 @@ import tw_card_2 from '../../../assets/img/tw_mlxz/guiguzi/home_img_mo2.png';
 
 import combinePayPop from '../../../components/combinePayPop.vue';
 
-import cn_header from '../../../assets/img/mlxz/svga/ggz/cn_header.svga';
-import tw_header from '../../../assets/img/mlxz/svga/ggz/tw_header.svga';
-import cn_tags from '../../../assets/img/mlxz/svga/ggz/cn_tags.svga';
-import tw_tags from '../../../assets/img/mlxz/svga/ggz/tw_tags.svga';
-
 import cn_order from '../../../assets/img/mlxz/guiguzi/bgm_lsdd.png';
 import tw_order from '../../../assets/img/mlxz/downloadBtn/tw/ggz_order.png';
 
@@ -275,10 +270,14 @@ export default {
     return {
       cn_order,
       tw_order,
-      cn_header,
-      tw_header,
-      cn_tags,
-      tw_tags,
+      cn_header:
+        'https://psychicai-static.psychicai.pro/imgs/240606767a30f7354a9c8564667700e0727a.svga',
+      tw_header:
+        'https://psychicai-static.psychicai.pro/imgs/2406912bdf922e39494f8c5c5f40fdfd97f6.svga',
+      cn_tags:
+        'https://psychicai-static.psychicai.pro/imgs/24062e848f4b5a064e418c7bbbc59a365e57.svga',
+      tw_tags:
+        'https://psychicai-static.psychicai.pro/imgs/2406f98d3d74c37d4f19b12db14da018d84b.svga',
       svg: 'https://mixmedia.rili.cn/c89f1fd7-acb1-48b8-9130-774512dfec70.svga',
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,

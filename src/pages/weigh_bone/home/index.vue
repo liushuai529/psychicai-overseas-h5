@@ -1,8 +1,8 @@
 <!--
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-06-05 20:55:06
+ * @LastEditors: Tahiti
+ * @LastEditTime: 2024-06-17 17:40:17
  * @Description: 袁天罡称骨
 -->
 <template>
@@ -188,8 +188,6 @@ import {
   maidianEnum,
 } from '../../../libs/enum';
 import combinePayPop from '../../../components/combinePayPop.vue';
-import cn_header from '../../../assets/img/mlxz/svga/weight_bone/cn_header.svga';
-import tw_header from '../../../assets/img/mlxz/svga/weight_bone/tw_header.svga';
 
 import cn_btn from '../../../assets/img/mlxz/weigh_bone/lock_btn.png';
 import tw_btn from '../../../assets/img/mlxz/weigh_bone/tw/tw_lock_btn.png';
@@ -220,9 +218,10 @@ export default {
     return {
       cn_btn,
       tw_btn,
-      cn_header,
-      tw_header,
-      svg: 'https://mixmedia.rili.cn/422937d4-a997-4686-a8a9-56d33ccb7000.svga',
+      cn_header:
+        'https://psychicai-static.psychicai.pro/imgs/24068e6a988a4f1e4015a2cabb660672a150.svga',
+      tw_header:
+        'https://psychicai-static.psychicai.pro/imgs/2406bd66541900314dbfb26963658c174038.svga',
 
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,
