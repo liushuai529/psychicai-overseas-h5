@@ -643,8 +643,8 @@ export default {
             trade_target_org,
             combine_product_ids: combine_product_ids,
             fb_param: {
-              fbc: localStorage.getItem('_fbc'),
-              fbp: localStorage.getItem('_fbp'),
+              fbc: utils.getcookieInfo('_fbc'),
+              fbp: utils.getcookieInfo('_fbp'),
               external_id: localStorage.getItem('mlxz_outer_visitor_id'),
             },
           };
@@ -729,8 +729,8 @@ export default {
           trade_pay_type,
           trade_target_org,
           fb_param: {
-            fbc: localStorage.getItem('_fbc'),
-            fbp: localStorage.getItem('_fbp'),
+            fbc: utils.getcookieInfo('_fbc'),
+            fbp: utils.getcookieInfo('_fbp'),
             external_id: localStorage.getItem('mlxz_outer_visitor_id'),
           },
         };
