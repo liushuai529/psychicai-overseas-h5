@@ -259,7 +259,7 @@
                   ? `${combine_info2.unit + combine_info2.origin_price_str}`
                   : 'RM-'
               }}</span>
-              <span class="two">-42%</span>
+              <span class="two">-32%</span>
               <span class="large">{{
                 combine_info2.unit
                   ? `${combine_info2.unit + combine_info2.price}`
