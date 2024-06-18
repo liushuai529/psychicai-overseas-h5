@@ -18,7 +18,7 @@
       <div class="info">
         <img
           class="info-bg"
-          src="../../../assets/img/mlxz/lucky_year_report/card.png"
+          src="../../../assets/img/mlxz/lucky_year_report/card.webp"
         />
         <div class="info-content">
           <img
@@ -48,12 +48,12 @@
                 <img
                   v-if="sex === 'male'"
                   class="sex-icon"
-                  src="../../../assets/img/mlxz/lucky_year_report/male-active.png"
+                  src="../../../assets/img/mlxz/lucky_year_report/male-active.webp"
                 />
                 <img
                   v-else
                   class="sex-icon"
-                  src="../../../assets/img/mlxz/lucky_year_report/male.png"
+                  src="../../../assets/img/mlxz/lucky_year_report/male.webp"
                 />
                 <div class="sex-text">男</div>
               </div>
@@ -66,12 +66,12 @@
                 <img
                   v-if="sex === 'female'"
                   class="sex-icon"
-                  src="../../../assets/img/mlxz/lucky_year_report/female-active.png"
+                  src="../../../assets/img/mlxz/lucky_year_report/female-active.webp"
                 />
                 <img
                   v-else
                   class="sex-icon"
-                  src="../../../assets/img/mlxz/lucky_year_report/female.png"
+                  src="../../../assets/img/mlxz/lucky_year_report/female.webp"
                 />
                 <div class="sex-text">女</div>
               </div>
@@ -90,7 +90,7 @@
               <img
                 @click="openPicker"
                 class="info-arrow"
-                src="../../../assets/img/mlxz/lucky_year_report/arrow.png"
+                src="../../../assets/img/mlxz/lucky_year_report/arrow.webp"
               />
             </div>
           </div>
@@ -104,13 +104,13 @@
             <img
               v-if="privacyChecked"
               class="info-check"
-              src="../../../assets/img/mlxz/lucky_year_report/check.png"
+              src="../../../assets/img/mlxz/lucky_year_report/check.webp"
               @click="privacyChecked = !privacyChecked"
             />
             <img
               v-else
               class="info-check"
-              src="../../../assets/img/mlxz/lucky_year_report/uncheck.png"
+              src="../../../assets/img/mlxz/lucky_year_report/uncheck.webp"
               @click="privacyChecked = !privacyChecked"
             />
             查看
@@ -238,25 +238,25 @@ import {
 } from '../../../libs/enum';
 import combinePayPop from '../../../components/combinePayPop.vue';
 
-import cn_info_title from '../../../assets/img/mlxz/lucky_year_report/info-title.png';
+import cn_info_title from '../../../assets/img/mlxz/lucky_year_report/info-title.webp';
 import tw_info_title from '../../../assets/img/tw_mlxz/wealth_24/home/txt.png';
 
 import cn_btn from '../../../assets/img/common/bt.png';
 import tw_btn from '../../../assets/img/common/tw_bt.png';
 
-import cn_card1 from '../../../assets/img/mlxz/lucky_year_report/1.png';
+import cn_card1 from '../../../assets/img/mlxz/lucky_year_report/1.webp';
 import tw_card1 from '../../../assets/img/tw_mlxz/wealth_24/home/1.png';
 
-import cn_card2 from '../../../assets/img/mlxz/lucky_year_report/2.png';
+import cn_card2 from '../../../assets/img/mlxz/lucky_year_report/2.webp';
 import tw_card2 from '../../../assets/img/tw_mlxz/wealth_24/home/2.png';
 
-import cn_card3 from '../../../assets/img/mlxz/lucky_year_report/3.png';
+import cn_card3 from '../../../assets/img/mlxz/lucky_year_report/3.webp';
 import tw_card3 from '../../../assets/img/tw_mlxz/wealth_24/home/3.png';
 
-import cn_card4 from '../../../assets/img/mlxz/lucky_year_report/4.png';
+import cn_card4 from '../../../assets/img/mlxz/lucky_year_report/4.webp';
 import tw_card4 from '../../../assets/img/tw_mlxz/wealth_24/home/4.png';
 
-import cn_order from '../../../assets/img/mlxz/lucky_year_report/order.png';
+import cn_order from '../../../assets/img/mlxz/lucky_year_report/order.webp';
 import tw_order from '../../../assets/img/tw_mlxz/wealth_24/home/order.png';
 import PopNotice from '../../../components/PopNotice.vue';
 import NavigationBar from '../../../components/NavigationBar.vue';
@@ -1011,10 +1011,10 @@ export default {
 }
 
 .cn-bg {
-  background-image: url('../../../assets/img/mlxz/lucky_year_report/2024caiyun_header.png');
+  background-image: url('../../../assets/img/mlxz/lucky_year_report/2024caiyun_header.webp');
 }
 .tw-bg {
-  background-image: url('../../../assets/img/mlxz/lucky_year_report/2024caiyun_header.png');
+  background-image: url('../../../assets/img/mlxz/lucky_year_report/2024caiyun_header.webp');
 }
 .container {
   width: 7.5rem;

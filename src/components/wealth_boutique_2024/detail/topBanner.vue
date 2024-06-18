@@ -10,7 +10,7 @@
   <div class="top-banner">
     <img
       class="first"
-      src="./../../../assets/img/mlxz/lucky_year_report/detail/top_banner.jpg"
+      src="./../../../assets/img/mlxz/lucky_year_report/detail/top_banner.webp"
       alt=""
     />
   </div>

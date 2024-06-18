@@ -101,7 +101,7 @@ export default {
     width: 7.1rem;
     min-height: 5.9rem;
     border-radius: 0.2rem;
-    background-image: url('../../../assets/img/mlxz/weigh_bone/img_mokuai_bg.png');
+    background-image: url('../../../assets/img/mlxz/weigh_bone/img_mokuai_bg.webp');
     background-color: #37438a;
     background-size: contain;
     background-repeat: no-repeat;

@@ -333,7 +333,7 @@ import { path_enums } from '../../libs/enum';
 import { getHistoryOrderAPI, payOrderAPI } from '../../api/api';
 import { getHistoryOrderImg } from '../../libs/enum';
 import CodePop from '../../components/CodePop.vue';
-import tw_title from '../../assets/img/mlxz/downloadBtn/tw/h5_img_dingdantittle_fan.png';
+import tw_title from '../../assets/img/mlxz/downloadBtn/tw/h5_img_dingdantittle_fan.webp';
 const all_status_enums = () => {
   return { 0: '去支付', 1: '查看', 2: '去添加' };
 };
@@ -1045,7 +1045,7 @@ export default {
   .header-box {
     width: 7.5rem;
     height: 1.52rem;
-    background: url('../../assets/img/mlxz/cesuan_home/history_bg.png')
+    background: url('../../assets/img/mlxz/cesuan_home/history_bg.webp')
       no-repeat;
     background-size: contain;
     display: flex;

@@ -38,7 +38,7 @@
               <img
                 @click="openPicker"
                 class="info-arrow"
-                src="../../../assets/img/mlxz/career_2024/icon_you.png"
+                src="../../../assets/img/mlxz/career_2024/icon_you.webp"
               />
             </div>
           </div>
@@ -59,7 +59,7 @@
                 <img
                   v-else
                   class="sex-icon"
-                  src="../../../assets/img/mlxz/career_2024/icon_boy_b.png"
+                  src="../../../assets/img/mlxz/career_2024/icon_boy_b.webp"
                 />
                 <div class="sex-text">男性</div>
               </div>
@@ -77,7 +77,7 @@
                 <img
                   v-else
                   class="sex-icon"
-                  src="../../../assets/img/mlxz/career_2024/icon_girl_b.png"
+                  src="../../../assets/img/mlxz/career_2024/icon_girl_b.webp"
                 />
                 <div class="sex-text">女性</div>
               </div>
@@ -240,18 +240,18 @@ import {
 import combinePayPop from '../../../components/combinePayPop.vue';
 let show_popup = utils.getQueryString('show_popup');
 
-import cn_lock_btn from '../../../assets/img/mlxz/career_2024/home_btn.png';
-import cn_card_1 from '../../../assets/img/mlxz/career_2024/home_img_mokuai2.png';
-import cn_card_2 from '../../../assets/img/mlxz/career_2024/home_img_mokuai3.png';
-import cn_card_3 from '../../../assets/img/mlxz/career_2024/pignjia.png';
+import cn_lock_btn from '../../../assets/img/mlxz/career_2024/home_btn.webp';
+import cn_card_1 from '../../../assets/img/mlxz/career_2024/home_img_mokuai2.webp';
+import cn_card_2 from '../../../assets/img/mlxz/career_2024/home_img_mokuai3.webp';
+import cn_card_3 from '../../../assets/img/mlxz/career_2024/pignjia.webp';
 
-import tw_lock_btn from '../../../assets/img/tw_mlxz/career_24/lock_btn.png';
-import tw_card_1 from '../../../assets/img/tw_mlxz/career_24/card_1.png';
-import tw_card_2 from '../../../assets/img/tw_mlxz/career_24/card_2.png';
-import tw_card_3 from '../../../assets/img/tw_mlxz/career_24/card_3.png';
+import tw_lock_btn from '../../../assets/img/tw_mlxz/career_24/lock_btn.webp';
+import tw_card_1 from '../../../assets/img/tw_mlxz/career_24/card_1.webp';
+import tw_card_2 from '../../../assets/img/tw_mlxz/career_24/card_2.webp';
+import tw_card_3 from '../../../assets/img/tw_mlxz/career_24/card_3.webp';
 
-import cn_history_order from '../../../assets/img/mlxz/career_2024/bgm_lsdd.png';
-import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/career_order.png';
+import cn_history_order from '../../../assets/img/mlxz/career_2024/bgm_lsdd.webp';
+import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/career_order.webp';
 import PopNotice from '../../../components/PopNotice.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
@@ -1112,11 +1112,11 @@ export default {
   position: fixed !important;
 }
 .lang-cn {
-  background-image: url('../../../assets/img/mlxz/career_2024/home_img_head.png');
+  background-image: url('../../../assets/img/mlxz/career_2024/home_img_head.webp');
 }
-.lang-tw {
-  background-image: url('../../../assets/img/tw_mlxz/career_24/bg.png');
-}
+// .lang-tw {
+//   background-image: url('../../../assets/img/tw_mlxz/career_24/bg.png');
+// }
 .container {
   width: 7.5rem;
   display: flex;
@@ -1131,7 +1131,7 @@ export default {
     position: relative;
     margin-bottom: 0.24rem;
     .info-content {
-      background: url('../../../assets/img/mlxz/career_2024/home_card_name.png')
+      background: url('../../../assets/img/mlxz/career_2024/home_card_name.webp')
         no-repeat;
       background-size: contain;
       width: 7.1rem;

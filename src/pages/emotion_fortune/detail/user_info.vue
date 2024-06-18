@@ -72,7 +72,7 @@
 <script>
 import utils from '../../../libs/utils.js';
 import cn_pay_title1 from '../../../assets/img/emotion/pay_title1.png';
-import tw_pay_title1 from '../../../assets/img/tw_mlxz/emotion/result/pay_title1.png';
+import tw_pay_title1 from '../../../assets/img/tw_mlxz/emotion/result/pay_title1.webp';
 export default {
   props: [
     'username',

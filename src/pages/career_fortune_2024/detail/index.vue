@@ -91,17 +91,17 @@ import payModal from '../../../components/PayModal.vue';
 import BaziTable from '../../../components/baziTable.vue';
 // import * as echarts from 'echarts';
 
-import cn_info_title from '../../../assets/img/mlxz/career_2024/detail/yu_img_title.png';
-import cn_hude from '../../../assets/img/mlxz/career_2024/detail/huode.png';
-import cn_home_btn from '../../../assets/img/mlxz/career_2024/home_btn.png';
-import cn_bg from '../../../assets/img/mlxz/career_2024/detail/bg.png';
+import cn_info_title from '../../../assets/img/mlxz/career_2024/detail/yu_img_title.webp';
+import cn_hude from '../../../assets/img/mlxz/career_2024/detail/huode.webp';
+import cn_home_btn from '../../../assets/img/mlxz/career_2024/home_btn.webp';
+import cn_bg from '../../../assets/img/mlxz/career_2024/detail/bg.webp';
 
-import tw_info_title from '../../../assets/img/tw_mlxz/career_24/info_title.png';
-import tw_hude from '../../../assets/img/tw_mlxz/career_24/huode.png';
-import tw_home_btn from '../../../assets/img/tw_mlxz/career_24/home_btn.png';
-import tw_bg from '../../../assets/img/tw_mlxz/career_24/2.png';
-import cn_word3 from '../../../assets/img/mlxz/career_2024/detail/img_word3.png';
-import tw_word3 from '../../../assets/img/tw_mlxz/career_24/tw_word3.png';
+import tw_info_title from '../../../assets/img/tw_mlxz/career_24/info_title.webp';
+import tw_hude from '../../../assets/img/tw_mlxz/career_24/huode.webp';
+import tw_home_btn from '../../../assets/img/tw_mlxz/career_24/home_btn.webp';
+import tw_bg from '../../../assets/img/tw_mlxz/career_24/2.webp';
+import cn_word3 from '../../../assets/img/mlxz/career_2024/detail/img_word3.webp';
+import tw_word3 from '../../../assets/img/tw_mlxz/career_24/tw_word3.webp';
 import { report_id_arr } from '../../../libs/enum';
 import NewFooter from '../../../components/NewFooter.vue';
 const Getmonth = () => {
@@ -491,14 +491,14 @@ export default {
   .top-one {
     width: 100%;
     height: 1.2rem;
-    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_top.png')
+    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_top.webp')
       no-repeat;
     background-size: 100% 100%;
   }
   .center-one {
     width: 100%;
     min-height: 1.2rem;
-    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_mid.png')
+    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_mid.webp')
       no-repeat;
     background-size: 100% 100%;
     margin-top: -0.3rem;
@@ -515,7 +515,7 @@ export default {
   .bottom-one {
     width: 100%;
     height: 1.2rem;
-    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_bot.png')
+    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_bot.webp')
       no-repeat;
     background-size: 100% 100%;
     margin-top: -0.8rem;

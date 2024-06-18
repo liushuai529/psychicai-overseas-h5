@@ -38,7 +38,7 @@
         <img
           @click="closeModal"
           class="close"
-          src="../assets/img/mlxz/index/modal_close.png"
+          src="../assets/img/mlxz/index/modal_close.webp"
           alt=""
         />
       </div>

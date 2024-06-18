@@ -24,14 +24,14 @@
           <img
             v-if="sex === '1'"
             class="sex"
-            src="../../../assets/img/mlxz/weigh_bone/img_boy.png"
+            src="../../../assets/img/mlxz/weigh_bone/img_boy.webp"
             ref="sex_male"
             @click="changeSex(0)"
           />
           <img
             v-else
             class="sex"
-            src="../../../assets/img/mlxz/weigh_bone/img_gril.png"
+            src="../../../assets/img/mlxz/weigh_bone/img_gril.webp"
             ref="sex_female"
             @click="changeSex(1)"
           />
@@ -46,7 +46,7 @@
           </div>
           <img
             class="calendar"
-            src="../../../assets/img/mlxz/weigh_bone/icon_rili.png"
+            src="../../../assets/img/mlxz/weigh_bone/icon_rili.webp"
             @click="openPicker"
           />
         </div>
@@ -80,7 +80,7 @@
         </div>
         <div v-if="!is_channel_01" class="info-history" @click="toOrder">
           <span>{{ $t('history-order') }}</span>
-          <img src="../../../assets/img/mlxz/weigh_bone/img_arrow.png" />
+          <img src="../../../assets/img/mlxz/weigh_bone/img_arrow.webp" />
         </div>
       </div>
       <footerBanner />
@@ -88,7 +88,7 @@
       <!-- <img
       v-show="showFixedBtn"
       class="btn-fixed"
-      src="../../../assets/img/mlxz/career/img_btn.png"
+      src="../../../assets/img/mlxz/career/img_btn.webp"
       @click="check"
     /> -->
 
@@ -189,8 +189,8 @@ import {
 } from '../../../libs/enum';
 import combinePayPop from '../../../components/combinePayPop.vue';
 
-import cn_btn from '../../../assets/img/mlxz/weigh_bone/lock_btn.png';
-import tw_btn from '../../../assets/img/mlxz/weigh_bone/tw/tw_lock_btn.png';
+import cn_btn from '../../../assets/img/mlxz/weigh_bone/lock_btn.webp';
+import tw_btn from '../../../assets/img/mlxz/weigh_bone/tw/tw_lock_btn.webp';
 import PopNotice from '../../../components/PopNotice.vue';
 let show_popup = utils.getQueryString('show_popup');
 
@@ -1055,7 +1055,7 @@ export default {
 .content-1 {
   width: 7.1rem;
   min-height: 3.79rem;
-  background-image: url('../../../assets/img/mlxz/weigh_bone/img_mokuai_bg.png');
+  background-image: url('../../../assets/img/mlxz/weigh_bone/img_mokuai_bg.webp');
   background-repeat: no-repeat;
   background-size: contain;
   background-color: #37438a;

@@ -72,39 +72,39 @@ import { getBaziAPI } from '../../../api/api';
 import utils from '../../../libs/utils';
 import UserInfo from './user_info.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
-import tw_pay_btn from '../../../assets/img/mlxz/year_of_lucky_2024/tw/img_button3.png';
+import tw_pay_btn from '../../../assets/img/mlxz/year_of_lucky_2024/tw/img_button3.webp';
 import analyzeModal from './analyze.vue';
 import payModal from '../../../components/PayModal.vue';
 import { report_id_arr } from '../../../libs/enum';
-import title1 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_1.png';
-import title2 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_2.png';
-import title3 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_3.png';
-import title4 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_nian.png';
-import title5 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_4.png';
-import title6 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_caifu.png';
-import title7 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_5.png';
-import title8 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_6.png';
-import title9 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_7.png';
+import title1 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_1.webp';
+import title2 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_2.webp';
+import title3 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_3.webp';
+import title4 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_nian.webp';
+import title5 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_4.webp';
+import title6 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_caifu.webp';
+import title7 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_5.webp';
+import title8 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_6.webp';
+import title9 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_7.webp';
 
-import cn_card_1 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_1.png';
-import cn_card_2 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_2.png';
-import cn_card_3 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_3.png';
-import cn_card_4 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_4.png';
-import cn_card_5 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_5.png';
-import cn_card_6 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_6.png';
-import cn_card_7 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_7.png';
-import cn_card_8 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_8.png';
-import cn_card_9 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_9.png';
+import cn_card_1 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_1.webp';
+import cn_card_2 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_2.webp';
+import cn_card_3 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_3.webp';
+import cn_card_4 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_4.webp';
+import cn_card_5 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_5.webp';
+import cn_card_6 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_6.webp';
+import cn_card_7 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_7.webp';
+import cn_card_8 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_8.webp';
+import cn_card_9 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_9.webp';
 
-import tw_card_1 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_1.png';
-import tw_card_2 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_2.png';
-import tw_card_3 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_3.png';
-import tw_card_4 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_4.png';
-import tw_card_5 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_5.png';
-import tw_card_6 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_6.png';
-import tw_card_7 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_7.png';
-import tw_card_8 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_8.png';
-import tw_card_9 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_9.png';
+import tw_card_1 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_1.webp';
+import tw_card_2 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_2.webp';
+import tw_card_3 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_3.webp';
+import tw_card_4 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_4.webp';
+import tw_card_5 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_5.webp';
+import tw_card_6 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_6.webp';
+import tw_card_7 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_7.webp';
+import tw_card_8 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_8.webp';
+import tw_card_9 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_9.webp';
 
 import NewFooter from '../../../components/NewFooter.vue';
 const topic1 = [
@@ -388,7 +388,7 @@ export default {
   padding-top: 1.05rem;
   .pay-box {
     margin-bottom: 0.21rem;
-    background: url('../../../assets/img/mlxz/year_of_lucky_2024/pay_img_bg.png')
+    background: url('../../../assets/img/mlxz/year_of_lucky_2024/pay_img_bg.webp')
       no-repeat;
     background-size: 100% 100%;
     width: 7.1rem;

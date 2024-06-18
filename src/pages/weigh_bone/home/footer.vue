@@ -18,16 +18,16 @@
 </template>
 <script>
 import utils from '../../../libs/utils';
-import cn_title from '../../../assets/img/mlxz/weigh_bone/home_img_title1.png';
-import cn_card1 from '../../../assets/img/mlxz/weigh_bone/home_img_card1.png';
-import cn_card2 from '../../../assets/img/mlxz/weigh_bone/home_img_card2.png';
-import cn_card3 from '../../../assets/img/mlxz/weigh_bone/home_img_card3.png';
-import cn_card4 from '../../../assets/img/mlxz/weigh_bone/home_img_card4.png';
-import tw_title from '../../../assets/img/mlxz/weigh_bone/tw/home_img_title1_fanti.png';
-import tw_card1 from '../../../assets/img/mlxz/weigh_bone/tw/home_img_card1_fanti.png';
-import tw_card2 from '../../../assets/img/mlxz/weigh_bone/tw/home_img_card2_fanti.png';
-import tw_card3 from '../../../assets/img/mlxz/weigh_bone/tw/home_img_card3_fanti.png';
-import tw_card4 from '../../../assets/img/mlxz/weigh_bone/tw/home_img_card4_fanti.png';
+import cn_title from '../../../assets/img/mlxz/weigh_bone/home_img_title1.webp';
+import cn_card1 from '../../../assets/img/mlxz/weigh_bone/home_img_card1.webp';
+import cn_card2 from '../../../assets/img/mlxz/weigh_bone/home_img_card2.webp';
+import cn_card3 from '../../../assets/img/mlxz/weigh_bone/home_img_card3.webp';
+import cn_card4 from '../../../assets/img/mlxz/weigh_bone/home_img_card4.webp';
+import tw_title from '../../../assets/img/mlxz/weigh_bone/tw/home_img_title1_fanti.webp';
+import tw_card1 from '../../../assets/img/mlxz/weigh_bone/tw/home_img_card1_fanti.webp';
+import tw_card2 from '../../../assets/img/mlxz/weigh_bone/tw/home_img_card2_fanti.webp';
+import tw_card3 from '../../../assets/img/mlxz/weigh_bone/tw/home_img_card3_fanti.webp';
+import tw_card4 from '../../../assets/img/mlxz/weigh_bone/tw/home_img_card4_fanti.webp';
 export default {
   name: 'footerBanner',
   components: {},
@@ -56,7 +56,7 @@ export default {
 .content-1 {
   width: 7.1rem;
   min-height: 3.79rem;
-  background-image: url('../../../assets/img/mlxz/weigh_bone/img_mokuai_bg.png');
+  background-image: url('../../../assets/img/mlxz/weigh_bone/img_mokuai_bg.webp');
   background-repeat: no-repeat;
   background-size: contain;
   background-color: #37438a;

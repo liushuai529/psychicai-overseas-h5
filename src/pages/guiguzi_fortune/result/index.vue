@@ -53,7 +53,7 @@ import contentDetail from './contentDetail.vue';
 import userInfo from './userInfo.vue';
 import CodePop from '../../../components/CodePop.vue';
 import CopyCode from '../../../components/CopyCode.vue';
-import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/ggz.png';
+import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/ggz.webp';
 export default {
   components: {
     userInfo,
@@ -460,10 +460,10 @@ export default {
 .footer-box {
   // width: 7.1rem;
   // height: 7.11rem;
-  // background: url('../../../assets/img/mlxz/guiguzi/copy_bg.png') no-repeat;
+  // background: url('../../../assets/img/mlxz/guiguzi/copy_bg.webp') no-repeat;
   width: 7.06rem;
   height: 5.41rem;
-  background: url('../../../assets/img/mlxz/downloadBtn/ggz-bg.png') no-repeat;
+  background: url('../../../assets/img/mlxz/downloadBtn/ggz-bg.webp') no-repeat;
   background-size: 100% 100%;
   display: flex;
   flex-direction: column;
@@ -485,7 +485,7 @@ export default {
   .code {
     width: 5.5rem;
     height: 1.04rem;
-    background: url('../../../assets/img/mlxz/guiguzi/img_xiazai_bj.png')
+    background: url('../../../assets/img/mlxz/guiguzi/img_xiazai_bj.webp')
       no-repeat;
     background-size: contain;
     margin-top: 0.4rem;

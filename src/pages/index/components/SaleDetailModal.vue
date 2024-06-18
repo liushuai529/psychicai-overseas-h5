@@ -165,60 +165,60 @@ import tw_icon_4_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganq
 import tw_icon_5_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.png';
 
 // 2024年财运
-import cn_card1_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/1.png';
+import cn_card1_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/1.webp';
 import tw_card1_h5_wealth2024 from '../../../assets/img/tw_mlxz/wealth_24/home/1.png';
 
-import cn_card2_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/2.png';
+import cn_card2_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/2.webp';
 import tw_card2_h5_wealth2024 from '../../../assets/img/tw_mlxz/wealth_24/home/2.png';
 
-import cn_card3_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/3.png';
+import cn_card3_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/3.webp';
 import tw_card3_h5_wealth2024 from '../../../assets/img/tw_mlxz/wealth_24/home/3.png';
 
-import cn_card4_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/4.png';
+import cn_card4_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/4.webp';
 import tw_card4_h5_wealth2024 from '../../../assets/img/tw_mlxz/wealth_24/home/4.png';
  // 2024年事业运势
- import cn_card_1_h5_career2024 from '../../../assets/img/mlxz/career_2024/home_img_mokuai2.png';
-import cn_card_2_h5_career2024 from '../../../assets/img/mlxz/career_2024/home_img_mokuai3.png';
-import cn_card_3_h5_career2024 from '../../../assets/img/mlxz/career_2024/pignjia.png';
+ import cn_card_1_h5_career2024 from '../../../assets/img/mlxz/career_2024/home_img_mokuai2.webp';
+import cn_card_2_h5_career2024 from '../../../assets/img/mlxz/career_2024/home_img_mokuai3.webp';
+import cn_card_3_h5_career2024 from '../../../assets/img/mlxz/career_2024/pignjia.webp';
 
-import tw_card_1_h5_career2024 from '../../../assets/img/tw_mlxz/career_24/card_1.png';
-import tw_card_2_h5_career2024 from '../../../assets/img/tw_mlxz/career_24/card_2.png';
-import tw_card_3_h5_career2024 from '../../../assets/img/tw_mlxz/career_24/card_3.png';
+import tw_card_1_h5_career2024 from '../../../assets/img/tw_mlxz/career_24/card_1.webp';
+import tw_card_2_h5_career2024 from '../../../assets/img/tw_mlxz/career_24/card_2.webp';
+import tw_card_3_h5_career2024 from '../../../assets/img/tw_mlxz/career_24/card_3.webp';
 //八字合婚
-import cn_card1_h5_marriage from './../../../assets/img/mlxz/bzhh/card1.png';
-import cn_card2_h5_marriage from './../../../assets/img/mlxz/bzhh/card2.png';
-import cn_card3_h5_marriage from './../../../assets/img/mlxz/bzhh/card3.png';
-import cn_card4_h5_marriage from './../../../assets/img/mlxz/bzhh/card4.png';
-import cn_card5_h5_marriage from './../../../assets/img/mlxz/bzhh/card5.png';
+import cn_card1_h5_marriage from './../../../assets/img/mlxz/bzhh/card1.webp';
+import cn_card2_h5_marriage from './../../../assets/img/mlxz/bzhh/card2.webp';
+import cn_card3_h5_marriage from './../../../assets/img/mlxz/bzhh/card3.webp';
+import cn_card4_h5_marriage from './../../../assets/img/mlxz/bzhh/card4.webp';
+import cn_card5_h5_marriage from './../../../assets/img/mlxz/bzhh/card5.webp';
 
-import tw_card1_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card1.png';
-import tw_card2_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card2.png';
-import tw_card3_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card3.png';
-import tw_card4_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card4.png';
-import tw_card5_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card5.png';
+import tw_card1_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card1.webp';
+import tw_card2_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card2.webp';
+import tw_card3_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card3.webp';
+import tw_card4_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card4.webp';
+import tw_card5_h5_marriage from './../../../assets/img/tw_mlxz/bazihehun/home/card5.webp';
 // 2024年年运
 
-import cn_card_1_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai1.png';
-import tw_card_1_year_of_lucky_2024 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai1.png';
+import cn_card_1_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai1.webp';
+import tw_card_1_year_of_lucky_2024 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai1.webp';
 
-import cn_card_2_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai2.png';
-import tw_card_2_year_of_lucky_2024 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai2.png';
+import cn_card_2_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai2.webp';
+import tw_card_2_year_of_lucky_2024 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai2.webp';
 
-import cn_card_3_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_cn.png';
-import tw_card_3_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_tw.png';
+import cn_card_3_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_cn.webp';
+import tw_card_3_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_tw.webp';
 
-import cn_card_4_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_cn.png';
-import tw_card_4_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_tw.png';
+import cn_card_4_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_cn.webp';
+import tw_card_4_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_tw.webp';
 
-import cn_card_5_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai5.png';
-import tw_card_5_year_of_lucky_2024 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai5.png';
+import cn_card_5_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai5.webp';
+import tw_card_5_year_of_lucky_2024 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai5.webp';
 //袁天罡秤骨
 import tw_card_1_h5_weigh_bone from '../../../assets/img/weigh_bone/yulan_yuantiangang_top_fan.jpg';
 import cn_card_1_h5_weigh_bone from '../../../assets/img/weigh_bone/yulan_yuantiangang_top_jian.jpg';
 
 //鬼谷子
-import cn_card_2_h5_bai_gua from '../../../assets/img/mlxz/guiguzi/home_img_mo2@2x.png';
-import tw_card_2_h5_bai_gua from '../../../assets/img/tw_mlxz/guiguzi/home_img_mo2.png';
+import cn_card_2_h5_bai_gua from '../../../assets/img/mlxz/guiguzi/home_img_mo2@2x.webp';
+import tw_card_2_h5_bai_gua from '../../../assets/img/tw_mlxz/guiguzi/home_img_mo2.webp';
 import { Toast } from 'mint-ui';
 
 

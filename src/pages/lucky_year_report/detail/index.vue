@@ -31,7 +31,7 @@
       <div class="title3">
         <img
           class="gua"
-          src="../../../assets/img/mlxz/lucky_year_report/detail/new_detail/lock.png"
+          src="../../../assets/img/mlxz/lucky_year_report/detail/new_detail/lock.webp"
           alt=""
         />
         <canvas id="ji"></canvas>
@@ -95,23 +95,23 @@ import { getBaziAPI } from '../../../api/api';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import payModal from '../../../components/PayModal.vue';
 
-import cn_static_duan from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/zhong_1.png';
-import tw_static_duan from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_1.png';
-import cn_txt_title from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/txt-xinxi.png';
-import tw_txt_title from '../../../assets/img/tw_mlxz/wealth_24/detail/txt-xinxi.png';
-import cn_img_word3 from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/img_word3.png';
-import tw_img_word3 from '../../../assets/img/tw_mlxz/wealth_24/detail/img_word3.png';
-import cn_pay_btn from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/bt.png';
-import tw_pay_btn from '../../../assets/img/tw_mlxz/wealth_24/detail/bt.png';
-import cn_zhong_2 from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/zhong_2.png';
-import tw_zhong_2 from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_2.png';
-import cn_zhong_3 from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/zhong_3.png';
-import tw_zhong_3 from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_3.png';
-import cn_zhong_4 from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/zhong_4.png';
-import tw_zhong_4 from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_4.png';
-import cn_zhong_5 from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/zhong_5.png';
-import tw_zhong_5 from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_5.png';
-import tw_modal_bg from '../../../assets/img/tw_mlxz/wealth_24/detail/modal_bg.png';
+import cn_static_duan from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/zhong_1.webp';
+import tw_static_duan from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_1.webp';
+import cn_txt_title from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/txt-xinxi.webp';
+import tw_txt_title from '../../../assets/img/tw_mlxz/wealth_24/detail/txt-xinxi.webp';
+import cn_img_word3 from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/img_word3.webp';
+import tw_img_word3 from '../../../assets/img/tw_mlxz/wealth_24/detail/img_word3.webp';
+import cn_pay_btn from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/bt.webp';
+import tw_pay_btn from '../../../assets/img/tw_mlxz/wealth_24/detail/bt.webp';
+import cn_zhong_2 from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/zhong_2.webp';
+import tw_zhong_2 from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_2.webp';
+import cn_zhong_3 from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/zhong_3.webp';
+import tw_zhong_3 from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_3.webp';
+import cn_zhong_4 from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/zhong_4.webp';
+import tw_zhong_4 from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_4.webp';
+import cn_zhong_5 from '../../../assets/img/mlxz/lucky_year_report/detail/new_detail/zhong_5.webp';
+import tw_zhong_5 from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_5.webp';
+import tw_modal_bg from '../../../assets/img/tw_mlxz/wealth_24/detail/modal_bg.webp';
 import { report_id_arr } from '../../../libs/enum';
 import NewFooter from '../../../components/NewFooter.vue';
 export default {
@@ -377,7 +377,7 @@ export default {
     margin-top: 0.4rem;
     width: 7.42rem;
     height: 14.58rem;
-    background: url('../../../assets/img/mlxz/lucky_year_report/detail/bg.png')
+    background: url('../../../assets/img/mlxz/lucky_year_report/detail/bg.webp')
       no-repeat;
     background-size: contain;
     display: flex;
@@ -428,7 +428,7 @@ export default {
   .footer-box {
     width: 7.5rem;
     height: 2.46rem;
-    // background: url('../../../assets/img/mlxz/lucky_year_report/detail/new_detail/img_btn_bj.png')
+    // background: url('../../../assets/img/mlxz/lucky_year_report/detail/new_detail/img_btn_bj.webp')
     //   no-repeat;
     // background-size: contain;
     display: flex;

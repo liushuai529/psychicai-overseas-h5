@@ -66,8 +66,8 @@ import bg from './../../../assets/img/wealth_boutique_overseas/detail/user_info_
 import Clipboard from 'clipboard';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import { getBaziAPI } from '../../../api/api';
-import cn_word from '../../../assets/img/mlxz/guiguzi/result_img_word.png';
-import tw_word from '../../../assets/img/tw_mlxz/guiguzi/detail/result_img_word.png';
+import cn_word from '../../../assets/img/mlxz/guiguzi/result_img_word.webp';
+import tw_word from '../../../assets/img/tw_mlxz/guiguzi/detail/result_img_word.webp';
 
 export default {
   props: ['orderId', 'extra_ce_suan'],
@@ -200,7 +200,7 @@ export default {
 .user-info .content {
   width: 7.1rem;
   min-height: 4.95rem;
-  background: url('../../../assets/img/mlxz/guiguzi/result_bg.png') no-repeat;
+  background: url('../../../assets/img/mlxz/guiguzi/result_bg.webp') no-repeat;
   background-size: 100% 100%;
   font-size: 0.3rem;
   color: #222222;

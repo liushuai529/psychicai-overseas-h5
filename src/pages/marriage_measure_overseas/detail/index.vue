@@ -10,7 +10,7 @@
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
     <img
       class="top-banner"
-      src="../../../assets/img/mlxz/bzhh/detail/img_head.png"
+      src="../../../assets/img/mlxz/bzhh/detail/img_head.webp"
     />
     
     <div class="pay-box" >
@@ -132,28 +132,28 @@ import year_ganzi from './../../../libs/suishen.wnl.js';
 
 import cn_img_title from '../../../assets/img/bzhh_v2/cn/img_title.png';
 import tw_img_title from '../../../assets/img/bzhh_v2/tw/img_title.png';
-import tw_img_word from '../../../assets/img/tw_mlxz/bazihehun/detail/text.png';
-import cn_img_word from '../../../assets/img/mlxz/bzhh/detail/img_word.png';
+import tw_img_word from '../../../assets/img/tw_mlxz/bazihehun/detail/text.webp';
+import cn_img_word from '../../../assets/img/mlxz/bzhh/detail/img_word.webp';
 
-import cn_mokuai1 from '../../../assets/img/mlxz/bzhh/detail/1.png';
-import cn_mokuai2 from '../../../assets/img/mlxz/bzhh/detail/2.png';
-import cn_mokuai3 from '../../../assets/img/mlxz/bzhh/detail/3.png';
-import cn_mokuai4 from '../../../assets/img/mlxz/bzhh/detail/4.png';
-import cn_mokuai5 from '../../../assets/img/mlxz/bzhh/detail/5.png';
-import cn_mokuai6 from '../../../assets/img/mlxz/bzhh/detail/6.png';
-import cn_mokuai7 from '../../../assets/img/mlxz/bzhh/detail/7.png';
-import cn_mokuai8 from '../../../assets/img/mlxz/bzhh/detail/8.png';
+import cn_mokuai1 from '../../../assets/img/mlxz/bzhh/detail/1.webp';
+import cn_mokuai2 from '../../../assets/img/mlxz/bzhh/detail/2.webp';
+import cn_mokuai3 from '../../../assets/img/mlxz/bzhh/detail/3.webp';
+import cn_mokuai4 from '../../../assets/img/mlxz/bzhh/detail/4.webp';
+import cn_mokuai5 from '../../../assets/img/mlxz/bzhh/detail/5.webp';
+import cn_mokuai6 from '../../../assets/img/mlxz/bzhh/detail/6.webp';
+import cn_mokuai7 from '../../../assets/img/mlxz/bzhh/detail/7.webp';
+import cn_mokuai8 from '../../../assets/img/mlxz/bzhh/detail/8.webp';
 
-import tw_mokuai1 from '../../../assets/img/tw_mlxz/bazihehun/detail/1.png';
-import tw_mokuai2 from '../../../assets/img/tw_mlxz/bazihehun/detail/2.png';
-import tw_mokuai3 from '../../../assets/img/tw_mlxz/bazihehun/detail/3.png';
-import tw_mokuai4 from '../../../assets/img/tw_mlxz/bazihehun/detail/4.png';
-import tw_mokuai5 from '../../../assets/img/tw_mlxz/bazihehun/detail/5.png';
-import tw_mokuai6 from '../../../assets/img/tw_mlxz/bazihehun/detail/6.png';
-import tw_mokuai7 from '../../../assets/img/tw_mlxz/bazihehun/detail/7.png';
-import tw_mokuai8 from '../../../assets/img/tw_mlxz/bazihehun/detail/8.png';
+import tw_mokuai1 from '../../../assets/img/tw_mlxz/bazihehun/detail/1.webp';
+import tw_mokuai2 from '../../../assets/img/tw_mlxz/bazihehun/detail/2.webp';
+import tw_mokuai3 from '../../../assets/img/tw_mlxz/bazihehun/detail/3.webp';
+import tw_mokuai4 from '../../../assets/img/tw_mlxz/bazihehun/detail/4.webp';
+import tw_mokuai5 from '../../../assets/img/tw_mlxz/bazihehun/detail/5.webp';
+import tw_mokuai6 from '../../../assets/img/tw_mlxz/bazihehun/detail/6.webp';
+import tw_mokuai7 from '../../../assets/img/tw_mlxz/bazihehun/detail/7.webp';
+import tw_mokuai8 from '../../../assets/img/tw_mlxz/bazihehun/detail/8.webp';
 
-import tw_modal_bg from '../../../assets/img/tw_mlxz/bazihehun/detail/modal_bg.png';
+import tw_modal_bg from '../../../assets/img/tw_mlxz/bazihehun/detail/modal_bg.webp';
 import payModal from '../../../components/PayModal.vue';
 import shengxiao from './shengxiao.vue';
 import baziInfo from './bazi.vue';

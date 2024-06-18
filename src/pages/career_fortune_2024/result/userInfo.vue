@@ -44,11 +44,11 @@ import bg from './../../../assets/img/wealth_boutique_overseas/detail/user_info_
 import Clipboard from 'clipboard';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import { getBaziAPI } from '../../../api/api';
-import cn_info_title from '../../../assets/img/mlxz/career_2024/detail/yu_img_title.png';
-import tw_info_title from '../../../assets/img/tw_mlxz/career_24/info_title.png';
+import cn_info_title from '../../../assets/img/mlxz/career_2024/detail/yu_img_title.webp';
+import tw_info_title from '../../../assets/img/tw_mlxz/career_24/info_title.webp';
 import BaziTable from '../../../components/baziTable.vue';
-import cn_word3 from '../../../assets/img/mlxz/career_2024/detail/img_word3.png';
-import tw_word3 from '../../../assets/img/tw_mlxz/career_24/tw_word3.png';
+import cn_word3 from '../../../assets/img/mlxz/career_2024/detail/img_word3.webp';
+import tw_word3 from '../../../assets/img/tw_mlxz/career_24/tw_word3.webp';
 export default {
   props: ['orderId', 'extra_ce_suan', 'result'],
   components: {
@@ -239,7 +239,7 @@ export default {
   .top-one {
     width: 100%;
     height: 1.2rem;
-    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_top.png')
+    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_top.webp')
       no-repeat;
     background-size: 100% 100%;
   }
@@ -249,7 +249,7 @@ export default {
     align-items: center;
     width: 100%;
     min-height: 1.2rem;
-    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_mid.png')
+    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_mid.webp')
       no-repeat;
     background-size: 100% 100%;
     margin-top: -0.3rem;
@@ -264,7 +264,7 @@ export default {
   .bottom-one {
     width: 100%;
     height: 1.2rem;
-    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_bot.png')
+    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_bot.webp')
       no-repeat;
     background-size: 100% 100%;
     margin-top: -1rem;

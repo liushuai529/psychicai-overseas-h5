@@ -621,26 +621,26 @@ import {
   reportBuryingEventAPI,
 } from '../../api/api';
 
-import bzhh from '../../assets/img/mlxz/index/bahh.png';
-import nianyun_24 from '../../assets/img/mlxz/index/2024-nianyun.png';
-import ganqqingyun_24 from '../../assets/img/mlxz/index/24-ganqqingyun.png';
-import caiyun_24 from '../../assets/img/mlxz/index/2024-caiyun.png';
-import zongheyunshi from '../../assets/img/mlxz/index/24-zongheyunshi.png';
-import banner_ganqing from '../../assets/img/mlxz/index/banner_ganqing.png';
-import top_caiyun from '../../assets/img/mlxz/index/top-caiyun.png';
-import top_shiye from '../../assets/img/mlxz/index//top-shiye.png';
-import xiabanner_bazi from '../../assets/img/mlxz/index/xiabanner_bazi_jianti.png';
-import banner_yuantiangang from '../../assets/img/mlxz/index/banner-yuantiangang.png';
-import tw_wealth24_banner from '../../assets/img/mlxz/index/tw/wealth24_banner.png';
-import tw_year24_banner from '../../assets/img/mlxz/index/tw/year24_banner.png';
-import tw_bzhh_banner from '../../assets/img/mlxz/index/tw/bzhh_banner.png';
-import tw_emotion from '../../assets/img/mlxz/index/tw/emotion24_banner.png';
-import tw_career from '../../assets/img/mlxz/index/tw/career24_banner.png';
-import tw_ggz from '../../assets/img/mlxz/index/tw/ggz_banner.png';
-import tw_weigh from '../../assets/img/mlxz/index/tw/weigh_banner.png';
+import bzhh from '../../assets/img/mlxz/index/bahh.webp';
+import nianyun_24 from '../../assets/img/mlxz/index/2024-nianyun.webp';
+import ganqqingyun_24 from '../../assets/img/mlxz/index/24-ganqqingyun.webp';
+import caiyun_24 from '../../assets/img/mlxz/index/2024-caiyun.webp';
+import zongheyunshi from '../../assets/img/mlxz/index/24-zongheyunshi.webp';
+import banner_ganqing from '../../assets/img/mlxz/index/banner_ganqing.webp';
+import top_caiyun from '../../assets/img/mlxz/index/top-caiyun.webp';
+import top_shiye from '../../assets/img/mlxz/index//top-shiye.webp';
+import xiabanner_bazi from '../../assets/img/mlxz/index/xiabanner_bazi_jianti.webp';
+import banner_yuantiangang from '../../assets/img/mlxz/index/banner-yuantiangang.webp';
+import tw_wealth24_banner from '../../assets/img/mlxz/index/tw/wealth24_banner.webp';
+import tw_year24_banner from '../../assets/img/mlxz/index/tw/year24_banner.webp';
+import tw_bzhh_banner from '../../assets/img/mlxz/index/tw/bzhh_banner.webp';
+import tw_emotion from '../../assets/img/mlxz/index/tw/emotion24_banner.webp';
+import tw_career from '../../assets/img/mlxz/index/tw/career24_banner.webp';
+import tw_ggz from '../../assets/img/mlxz/index/tw/ggz_banner.webp';
+import tw_weigh from '../../assets/img/mlxz/index/tw/weigh_banner.webp';
 
-import tw_order_btn from '../../assets/img/mlxz/index/tw/history_order.png';
-import tw_right_pay from '../../assets/img/mlxz/index/tw/right_pay.png';
+import tw_order_btn from '../../assets/img/mlxz/index/tw/history_order.webp';
+import tw_right_pay from '../../assets/img/mlxz/index/tw/right_pay.webp';
 import cn_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_bazihehun.png';
 import cn_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_guiguzi.png';
 import cn_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_yuantiangang.png';
@@ -3008,7 +3008,7 @@ export default {
     .left {
       width: 2.52rem;
       height: 0.64rem;
-      background: url('../../assets/img/mlxz/index/ce_img_zhekoubg.png')
+      background: url('../../assets/img/mlxz/index/ce_img_zhekoubg.webp')
         no-repeat;
       background-size: contain;
       font-size: 0.32rem;
@@ -3066,7 +3066,7 @@ export default {
     .item {
       width: 2.02rem;
       height: 1.3rem;
-      background: url('../../assets/img/mlxz/index/check_small.png') no-repeat;
+      background: url('../../assets/img/mlxz/index/check_small.webp') no-repeat;
       background-size: contain;
       margin: 0 0.11rem;
       position: relative;
@@ -3093,7 +3093,7 @@ export default {
     position: relative;
     width: 5.86rem;
     height: 0.96rem;
-    background: url('../../assets/img/mlxz/cesuan_home/mymm_btn.png') no-repeat;
+    background: url('../../assets/img/mlxz/cesuan_home/mymm_btn.webp') no-repeat;
     background-size: contain;
     margin: 0.4rem 0.62rem 0.24rem;
     font-family: PingFangSC-Semibold, PingFang SC;
@@ -3295,12 +3295,12 @@ export default {
     }
 
     .normal-item {
-      background-image: url('../../assets/img/mlxz/cesuan_home/sale_normal_kuang.png');
+      background-image: url('../../assets/img/mlxz/cesuan_home/sale_normal_kuang.webp');
     }
 
     .forbidden-item {
       opacity: 0.6;
-      // background-image: url('../../assets/img/mlxz/cesuan_home/sale_zhezhao_kuang.png');
+      // background-image: url('../../assets/img/mlxz/cesuan_home/sale_zhezhao_kuang.webp');
     }
 
     .check-icon {

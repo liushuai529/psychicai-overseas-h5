@@ -7,7 +7,7 @@
     <img
       v-if="!is_result"
       class="img-line"
-      src="../../../assets/img/mlxz/weigh_bone/img_line.png"
+      src="../../../assets/img/mlxz/weigh_bone/img_line.webp"
       alt=""
     />
     <div class="user">
@@ -87,12 +87,12 @@ import utils from './../../../libs/utils.js';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import { getBaziAPI } from '../../../api/api';
 import payModal from '../../../components/PayModal.vue';
-import cn_btn from '../../../assets/img/mlxz/weigh_bone/lock_btn.png';
-import tw_btn from '../../../assets/img/mlxz/weigh_bone/tw/tw_lock_btn.png';
-import cn_detail_img from '../../../assets/img/mlxz/weigh_bone/img_title2.png';
-import tw_detail_img from '../../../assets/img/mlxz/weigh_bone/tw/img_title2.png';
-import cn_result_title from '../../../assets/img/mlxz/weigh_bone/img_title3.png';
-import tw_result_title from '../../../assets/img/mlxz/weigh_bone/tw/img_title3_fanti.png';
+import cn_btn from '../../../assets/img/mlxz/weigh_bone/lock_btn.webp';
+import tw_btn from '../../../assets/img/mlxz/weigh_bone/tw/tw_lock_btn.webp';
+import cn_detail_img from '../../../assets/img/mlxz/weigh_bone/img_title2.webp';
+import tw_detail_img from '../../../assets/img/mlxz/weigh_bone/tw/img_title2.webp';
+import cn_result_title from '../../../assets/img/mlxz/weigh_bone/img_title3.webp';
+import tw_result_title from '../../../assets/img/mlxz/weigh_bone/tw/img_title3_fanti.webp';
 import { report_id_arr } from '../../../libs/enum';
 export default {
   props: [
@@ -348,7 +348,7 @@ export default {
   width: 7.1rem;
   min-height: 3.57rem;
   border-radius: 0.2rem;
-  background-image: url('../../../assets/img/mlxz/weigh_bone/img_mokuai_bg.png');
+  background-image: url('../../../assets/img/mlxz/weigh_bone/img_mokuai_bg.webp');
   background-color: #37438a;
   background-size: contain;
   background-repeat: no-repeat;

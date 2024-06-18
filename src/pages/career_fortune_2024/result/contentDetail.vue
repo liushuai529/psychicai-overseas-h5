@@ -107,43 +107,43 @@
 </template>
 
 <script>
-import cn_title_1 from '../../../assets/img/mlxz/career_2024/result/title-4.png';
-import cn_title_2 from '../../../assets/img/mlxz/career_2024/result/title-1.png';
-import cn_title_3 from '../../../assets/img/mlxz/career_2024/result/title-2.png';
-import cn_title_4 from '../../../assets/img/mlxz/career_2024/result/title-3.png';
-import title_55 from '../../../assets/img/mlxz/career_2024/result/yu_img_title.png';
+import cn_title_1 from '../../../assets/img/mlxz/career_2024/result/title-4.webp';
+import cn_title_2 from '../../../assets/img/mlxz/career_2024/result/title-1.webp';
+import cn_title_3 from '../../../assets/img/mlxz/career_2024/result/title-2.webp';
+import cn_title_4 from '../../../assets/img/mlxz/career_2024/result/title-3.webp';
+import title_55 from '../../../assets/img/mlxz/career_2024/result/yu_img_title.webp';
 
-import cn_title_5 from '../../../assets/img/mlxz/career_2024/result/title-5.png';
-import cn_title_6 from '../../../assets/img/mlxz/career_2024/result/title-6.png';
-import title_7 from '../../../assets/img/mlxz/career_2024/result/title-7.png';
-import cn_title_8 from '../../../assets/img/mlxz/career_2024/result/title-8.png';
+import cn_title_5 from '../../../assets/img/mlxz/career_2024/result/title-5.webp';
+import cn_title_6 from '../../../assets/img/mlxz/career_2024/result/title-6.webp';
+import title_7 from '../../../assets/img/mlxz/career_2024/result/title-7.webp';
+import cn_title_8 from '../../../assets/img/mlxz/career_2024/result/title-8.webp';
 
-import spring from '../../../assets/img/mlxz/career_2024/result/result_siji_chun.png';
-import summer from '../../../assets/img/mlxz/career_2024/result/result_siji_xia.png';
-import autumn from '../../../assets/img/mlxz/career_2024/result/result_siji_qiu.png';
-import winter from '../../../assets/img/mlxz/career_2024/result/result_siji_dong.png';
+import spring from '../../../assets/img/mlxz/career_2024/result/result_siji_chun.webp';
+import summer from '../../../assets/img/mlxz/career_2024/result/result_siji_xia.webp';
+import autumn from '../../../assets/img/mlxz/career_2024/result/result_siji_qiu.webp';
+import winter from '../../../assets/img/mlxz/career_2024/result/result_siji_dong.webp';
 
-import directionIcon1 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_1@3x.png';
-import directionIcon2 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_2@3x.png';
-import directionIcon3 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_3@3x.png';
-import directionIcon4 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_4@3x.png';
-import directionIcon5 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_5@3x.png';
-import directionIcon6 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_6@3x.png';
-import directionIcon7 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_7@3x.png';
-import directionIcon8 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_8@3x.png';
+import directionIcon1 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_1@3x.webp';
+import directionIcon2 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_2@3x.webp';
+import directionIcon3 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_3@3x.webp';
+import directionIcon4 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_4@3x.webp';
+import directionIcon5 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_5@3x.webp';
+import directionIcon6 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_6@3x.webp';
+import directionIcon7 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_7@3x.webp';
+import directionIcon8 from './../../../assets/img/mlxz/year_of_lucky_2024/yun_location_yell_8@3x.webp';
 import { color_enums, icon_enums, commonBaoshi } from '../../../libs/enum';
 import utils from '../../../libs/utils';
 import CodePop from '../../../components/CodePop.vue';
 import { Toast } from 'vant';
 import CopyCode from '../../../components/CopyCode.vue';
-import tw_title_3 from '../../../assets/img/tw_mlxz/career_24/result/taisui.png';
-import tw_title_4 from '../../../assets/img/tw_mlxz/career_24/result/shiyejiexi.png';
-import tw_title_1 from '../../../assets/img/tw_mlxz/career_24/result/shiyefangwei.png';
-import tw_title_2 from '../../../assets/img/tw_mlxz/career_24/result/kaiyunzhinan.png';
-import tw_title_5 from '../../../assets/img/tw_mlxz/career_24/result/zcgx.png';
-import tw_title_6 from '../../../assets/img/tw_mlxz/career_24/result/jyytz.png';
-import tw_title_8 from '../../../assets/img/tw_mlxz/career_24/result/zcfz.png';
-import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/career24.png';
+import tw_title_3 from '../../../assets/img/tw_mlxz/career_24/result/taisui.webp';
+import tw_title_4 from '../../../assets/img/tw_mlxz/career_24/result/shiyejiexi.webp';
+import tw_title_1 from '../../../assets/img/tw_mlxz/career_24/result/shiyefangwei.webp';
+import tw_title_2 from '../../../assets/img/tw_mlxz/career_24/result/kaiyunzhinan.webp';
+import tw_title_5 from '../../../assets/img/tw_mlxz/career_24/result/zcgx.webp';
+import tw_title_6 from '../../../assets/img/tw_mlxz/career_24/result/jyytz.webp';
+import tw_title_8 from '../../../assets/img/tw_mlxz/career_24/result/zcfz.webp';
+import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/career24.webp';
 
 export default {
   props: ['result', 'title_index'],
@@ -368,7 +368,7 @@ export default {
   .top-one {
     width: 100%;
     height: 1.2rem;
-    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_top.png')
+    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_top.webp')
       no-repeat;
     background-size: 100% 100%;
     margin-bottom: -0.2rem;
@@ -376,7 +376,7 @@ export default {
   .center-one {
     width: 100%;
     min-height: 1.2rem;
-    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_mid.png')
+    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_mid.webp')
       no-repeat;
     background-size: 100% 100%;
     margin-top: -0.02rem;
@@ -387,7 +387,7 @@ export default {
   .bottom-one {
     width: 100%;
     height: 1.2rem;
-    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_bot.png')
+    background: url('../../../assets/img/mlxz/career_2024/detail/img_kuang_bot.webp')
       no-repeat;
     background-size: 100% 100%;
     margin-top: -1rem;
@@ -403,7 +403,7 @@ export default {
   .common-one {
     width: 3rem;
     height: 2.18rem;
-    background: url('../../../assets/img/mlxz/career_2024/result/result_img_kuang.png')
+    background: url('../../../assets/img/mlxz/career_2024/result/result_img_kuang.webp')
       no-repeat;
     background-size: contain;
     display: flex;
@@ -452,7 +452,7 @@ export default {
   .year-title {
     width: 5rem;
     height: 1.4rem;
-    background: url('../../../assets/img/mlxz/career_2024/result/year-kuang.png')
+    background: url('../../../assets/img/mlxz/career_2024/result/year-kuang.webp')
       no-repeat;
     background-size: contain;
     display: flex;
@@ -515,7 +515,7 @@ export default {
   .code {
     width: 5.56rem;
     height: 1.04rem;
-    background: url('../../../assets/img/mlxz/career_2024/result/img_shibiema_card.png')
+    background: url('../../../assets/img/mlxz/career_2024/result/img_shibiema_card.webp')
       no-repeat;
     background-size: contain;
     margin-top: 0.4rem;

@@ -73,7 +73,7 @@ export default {
 .analyze {
   width: 7.1rem;
   min-height: 4.64rem;
-  background: url('../../../assets/img/mlxz/year_of_lucky_2024/result_img_bg.png')
+  background: url('../../../assets/img/mlxz/year_of_lucky_2024/result_img_bg.webp')
     no-repeat;
   background-size: 100% 100%;
   margin: 0 0.2rem 0.2rem;

@@ -53,16 +53,16 @@
 </template>
 
 <script>
-import cn_title1 from '../../../assets/img/mlxz/weigh_bone/img_title4.png';
-import cn_title2 from '../../../assets/img/mlxz/weigh_bone/img_title5.png';
-import cn_title3 from '../../../assets/img/mlxz/weigh_bone/img_title6.png';
-import tw_title1 from '../../../assets/img/mlxz/weigh_bone/tw/img_title4_fanti.png';
-import tw_title2 from '../../../assets/img/mlxz/weigh_bone/tw/img_title5_fanti.png';
-import tw_title3 from '../../../assets/img/mlxz/weigh_bone/tw/img_title6_fanti.png';
+import cn_title1 from '../../../assets/img/mlxz/weigh_bone/img_title4.webp';
+import cn_title2 from '../../../assets/img/mlxz/weigh_bone/img_title5.webp';
+import cn_title3 from '../../../assets/img/mlxz/weigh_bone/img_title6.webp';
+import tw_title1 from '../../../assets/img/mlxz/weigh_bone/tw/img_title4_fanti.webp';
+import tw_title2 from '../../../assets/img/mlxz/weigh_bone/tw/img_title5_fanti.webp';
+import tw_title3 from '../../../assets/img/mlxz/weigh_bone/tw/img_title6_fanti.webp';
 import utils from '../../../libs/utils';
 import CodePop from '../../../components/CodePop.vue';
 import CopyCode from '../../../components/CopyCode.vue';
-import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/weigh_bone.png';
+import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/weigh_bone.webp';
 export default {
   props: ['fortune', 'card_index'],
   data() {
@@ -128,7 +128,7 @@ export default {
   width: 7.1rem;
   min-height: 4.75rem;
   border-radius: 0.2rem;
-  background-image: url('../../../assets/img/mlxz/weigh_bone/img_mokuai_bg.png');
+  background-image: url('../../../assets/img/mlxz/weigh_bone/img_mokuai_bg.webp');
   background-color: #37438a;
   background-size: contain;
   background-repeat: no-repeat;
@@ -151,7 +151,7 @@ export default {
 .card-1 {
   width: 6.02rem;
   height: 3.4rem;
-  background: url('../../../assets/img/mlxz/weigh_bone/img_paper_bg.png')
+  background: url('../../../assets/img/mlxz/weigh_bone/img_paper_bg.webp')
     no-repeat;
   background-size: contain;
   margin-bottom: 0.5rem;
@@ -204,21 +204,21 @@ export default {
   position: relative;
 }
 .level-1 {
-  background-image: url('../../../assets/img/mlxz/weigh_bone/quxian_lv1.png');
+  background-image: url('../../../assets/img/mlxz/weigh_bone/quxian_lv1.webp');
 }
 .level-2 {
-  background-image: url('../../../assets/img/mlxz/weigh_bone/quxian_lv2.png');
+  background-image: url('../../../assets/img/mlxz/weigh_bone/quxian_lv2.webp');
 }
 .level-3 {
-  background-image: url('../../../assets/img/mlxz/weigh_bone/quxian_lv3.png');
+  background-image: url('../../../assets/img/mlxz/weigh_bone/quxian_lv3.webp');
 }
 .level-4 {
-  background-image: url('../../../assets/img/mlxz/weigh_bone/quxian_lv4.png');
+  background-image: url('../../../assets/img/mlxz/weigh_bone/quxian_lv4.webp');
 }
 .qipao {
   width: 0.92rem;
   height: 0.57rem;
-  background: url('../../../assets/img/mlxz/weigh_bone/img_qipao.png') no-repeat;
+  background: url('../../../assets/img/mlxz/weigh_bone/img_qipao.webp') no-repeat;
   background-size: contain;
   display: flex;
   justify-content: center;

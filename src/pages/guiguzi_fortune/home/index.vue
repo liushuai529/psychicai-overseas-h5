@@ -60,7 +60,7 @@
                 <img
                   v-else
                   class="sex-icon"
-                  src="../../../assets/img/mlxz/guiguzi/icon_boy_b.png"
+                  src="../../../assets/img/mlxz/guiguzi/icon_boy_b.webp"
                 />
                 <div class="sex-text">男性</div>
               </div>
@@ -78,7 +78,7 @@
                 <img
                   v-else
                   class="sex-icon"
-                  src="../../../assets/img/mlxz/guiguzi/login_icon_girl.png"
+                  src="../../../assets/img/mlxz/guiguzi/login_icon_girl.webp"
                 />
                 <div class="sex-text">女性</div>
               </div>
@@ -230,16 +230,16 @@ import {
   maidianEnum,
 } from '../../../libs/enum';
 
-import cn_tag from '../../../assets/img/mlxz/guiguzi/img_word4.png';
-import tw_tag from '../../../assets/img/tw_mlxz/guiguzi/img_word4.png';
+import cn_tag from '../../../assets/img/mlxz/guiguzi/img_word4.webp';
+import tw_tag from '../../../assets/img/tw_mlxz/guiguzi/img_word4.webp';
 
-import cn_card_2 from '../../../assets/img/mlxz/guiguzi/home_img_mo2@2x.png';
-import tw_card_2 from '../../../assets/img/tw_mlxz/guiguzi/home_img_mo2.png';
+import cn_card_2 from '../../../assets/img/mlxz/guiguzi/home_img_mo2@2x.webp';
+import tw_card_2 from '../../../assets/img/tw_mlxz/guiguzi/home_img_mo2.webp';
 
 import combinePayPop from '../../../components/combinePayPop.vue';
 
-import cn_order from '../../../assets/img/mlxz/guiguzi/bgm_lsdd.png';
-import tw_order from '../../../assets/img/mlxz/downloadBtn/tw/ggz_order.png';
+import cn_order from '../../../assets/img/mlxz/guiguzi/bgm_lsdd.webp';
+import tw_order from '../../../assets/img/mlxz/downloadBtn/tw/ggz_order.webp';
 
 import PopNotice from '../../../components/PopNotice.vue';
 const tipsArr5 = {
@@ -1002,7 +1002,7 @@ export default {
     z-index: 3;
     margin-bottom: 0.24rem;
     .info-content {
-      background: url('../../../assets/img/mlxz/guiguzi/home_info_bg.png')
+      background: url('../../../assets/img/mlxz/guiguzi/home_info_bg.webp')
         no-repeat;
       background-size: contain;
       width: 7.1rem;

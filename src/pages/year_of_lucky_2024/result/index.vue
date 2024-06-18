@@ -123,7 +123,7 @@ import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import { icon_enums } from '../../../libs/enum';
 import CodePop from '../../../components/CodePop.vue';
 import CopyCode from '../../../components/CopyCode.vue';
-import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/year24.png';
+import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/year24.webp';
 export default {
   components: { contentDetail, UserInfo, CodePop, CopyCode },
   data() {
@@ -649,7 +649,7 @@ export default {
 .download-box {
   min-width: 6.9rem;
   min-height: 4.84rem;
-  background: url('../../../assets/img/mlxz/year_of_lucky_2024/result_img_bg.png')
+  background: url('../../../assets/img/mlxz/year_of_lucky_2024/result_img_bg.webp')
     no-repeat;
   background-size: 100% 100%;
   margin: 0.2rem auto;

@@ -51,10 +51,10 @@
 
 <script>
 import utils from '../../../libs/utils.js';
-import cn_title_1 from '../../../assets/img/mlxz/year_of_lucky_2024/result_img_word.png';
-import tw_title_1 from '../../../assets/img/tw_mlxz/year_24/detail/result_img_word.png';
-import cn_title_2 from '../../../assets/img/mlxz/year_of_lucky_2024/img_word3.png';
-import tw_title_2 from '../../../assets/img/mlxz/year_of_lucky_2024/img_word3.png';
+import cn_title_1 from '../../../assets/img/mlxz/year_of_lucky_2024/result_img_word.webp';
+import tw_title_1 from '../../../assets/img/tw_mlxz/year_24/detail/result_img_word.webp';
+import cn_title_2 from '../../../assets/img/mlxz/year_of_lucky_2024/img_word3.webp';
+import tw_title_2 from '../../../assets/img/mlxz/year_of_lucky_2024/img_word3.webp';
 // import * as echarts from 'echarts';
 
 import BaziTable from '../../../components/baziTable.vue';

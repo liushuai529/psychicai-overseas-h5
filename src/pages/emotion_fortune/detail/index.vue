@@ -120,9 +120,9 @@ import tw_home_xs_btn from '../../../assets/img/emotion_v2/new/tw/pay_xs.png';
 
 import PayCard from '../../../components/PayCard.vue';
 import cn_card_1 from '../../../assets/img/emotion/home_card1.png';
-import tw_card_1 from '../../../assets/img/tw_mlxz/emotion/home_card1.png';
+import tw_card_1 from '../../../assets/img/tw_mlxz/emotion/home_card1.webp';
 import cn_card_2 from '../../../assets/img/emotion/home_card2.png';
-import tw_card_2 from '../../../assets/img/tw_mlxz/emotion/home_card2.png';
+import tw_card_2 from '../../../assets/img/tw_mlxz/emotion/home_card2.webp';
 import payModal from '../../../components/PayModal.vue';
 import BaziTable from '../../../components/baziTable.vue';
 import { Downloader, Parser, Player } from 'svga.lite';

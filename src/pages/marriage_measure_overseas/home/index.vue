@@ -45,26 +45,26 @@
               style="width: 2.16rem; height: 2.16rem"
               v-if="language === 'zh-CN'"
               class="icon-img"
-              src="./../../../assets/img/mlxz/bzhh/left-icon.png"
+              src="./../../../assets/img/mlxz/bzhh/left-icon.webp"
             />
             <img
               v-else
               style="width: 2.16rem; height: 2.16rem"
               class="icon-img"
-              src="./../../../assets/img/tw_mlxz/bazihehun/home/left-icon.png"
+              src="./../../../assets/img/tw_mlxz/bazihehun/home/left-icon.webp"
             />
 
             <img
               style="width: 2.16rem; height: 2.16rem"
               v-if="language === 'zh-CN'"
               class="icon-img"
-              src="./../../../assets/img/mlxz/bzhh/right-icon.png"
+              src="./../../../assets/img/mlxz/bzhh/right-icon.webp"
             />
             <img
               style="width: 2.16rem; height: 2.16rem"
               v-else
               class="icon-img"
-              src="./../../../assets/img/tw_mlxz/bazihehun/home/right-icon.png"
+              src="./../../../assets/img/tw_mlxz/bazihehun/home/right-icon.webp"
             />
           </div>
           <info
@@ -79,12 +79,12 @@
           <div class="privacy">
             <img
               v-if="privacyChecked"
-              src="./../../../assets/img/mlxz/bzhh/check.png"
+              src="./../../../assets/img/mlxz/bzhh/check.webp"
               @click="privacyChecked = !privacyChecked"
             />
             <img
               v-else
-              src="./../../../assets/img/mlxz/bzhh/nocheck.png"
+              src="./../../../assets/img/mlxz/bzhh/nocheck.webp"
               @click="privacyChecked = !privacyChecked"
             />
             <span>{{ $t('check-label') }}</span>
@@ -240,20 +240,20 @@ import {
 import tw_btn from './../../../assets/img//bzhh_v2/tw/img_btn1.png';
 import cn_btn from './../../../assets/img/bzhh_v2/cn/img_btn1.png';
 
-import cn_order from './../../../assets/img/mlxz/bzhh/btn_dingdan.png';
-import tw_order from './../../../assets/img/tw_mlxz/bazihehun/home/order.png';
+import cn_order from './../../../assets/img/mlxz/bzhh/btn_dingdan.webp';
+import tw_order from './../../../assets/img/tw_mlxz/bazihehun/home/order.webp';
 
-import cn_card1 from './../../../assets/img/mlxz/bzhh/card1.png';
-import cn_card2 from './../../../assets/img/mlxz/bzhh/card2.png';
-import cn_card3 from './../../../assets/img/mlxz/bzhh/card3.png';
-import cn_card4 from './../../../assets/img/mlxz/bzhh/card4.png';
-import cn_card5 from './../../../assets/img/mlxz/bzhh/card5.png';
+import cn_card1 from './../../../assets/img/mlxz/bzhh/card1.webp';
+import cn_card2 from './../../../assets/img/mlxz/bzhh/card2.webp';
+import cn_card3 from './../../../assets/img/mlxz/bzhh/card3.webp';
+import cn_card4 from './../../../assets/img/mlxz/bzhh/card4.webp';
+import cn_card5 from './../../../assets/img/mlxz/bzhh/card5.webp';
 
-import tw_card1 from './../../../assets/img/tw_mlxz/bazihehun/home/card1.png';
-import tw_card2 from './../../../assets/img/tw_mlxz/bazihehun/home/card2.png';
-import tw_card3 from './../../../assets/img/tw_mlxz/bazihehun/home/card3.png';
-import tw_card4 from './../../../assets/img/tw_mlxz/bazihehun/home/card4.png';
-import tw_card5 from './../../../assets/img/tw_mlxz/bazihehun/home/card5.png';
+import tw_card1 from './../../../assets/img/tw_mlxz/bazihehun/home/card1.webp';
+import tw_card2 from './../../../assets/img/tw_mlxz/bazihehun/home/card2.webp';
+import tw_card3 from './../../../assets/img/tw_mlxz/bazihehun/home/card3.webp';
+import tw_card4 from './../../../assets/img/tw_mlxz/bazihehun/home/card4.webp';
+import tw_card5 from './../../../assets/img/tw_mlxz/bazihehun/home/card5.webp';
 import combinePayPop from '../../../components/combinePayPop.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
 import PopNotice from '../../../components/PopNotice.vue';
@@ -1212,12 +1212,12 @@ export default {
   position: fixed !important;
 }
 
-/* .cn-bg {
-  background-image: url('../../../assets/img/mlxz/bzhh/bzhh_bg.png');
+ .cn-bg {
+  background-image: url('../../../assets/img/mlxz/bzhh/bzhh_bg.webp');
 }
 .tw-bg {
-  background-image: url('../../../assets/img/tw_mlxz/bazihehun/home/top-banner.png');
-} */
+  background-image: url('../../../assets/img/tw_mlxz/bazihehun/home/top-banner.webp');
+} 
 .home {
   width: 7.5rem;
   background-color: #7f1416;

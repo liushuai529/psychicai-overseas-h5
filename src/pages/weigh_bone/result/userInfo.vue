@@ -83,8 +83,8 @@
 
 <script>
 import utils from './../../../libs/utils.js';
-import title_nan_bg from './../../../assets/img/mlxz/career/result/ziliao.png';
-import title_nv_bg from './../../../assets/img/mlxz/career/result/ziliao.png';
+import title_nan_bg from './../../../assets/img/mlxz/career/result/ziliao.webp';
+import title_nv_bg from './../../../assets/img/mlxz/career/result/ziliao.webp';
 export default {
   props: ['userInfo', 'data'],
   data() {

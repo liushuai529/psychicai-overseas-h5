@@ -10,7 +10,7 @@
     <top-banner />
     <img
       class="person-title"
-      src="./../../../assets/img/mlxz/lucky_year_report/detail/user_info_title.png"
+      src="./../../../assets/img/mlxz/lucky_year_report/detail/user_info_title.webp"
       alt=""
     />
     <div class="info-box">
@@ -42,49 +42,49 @@
       <div class="main">
         <img
           class="main-banner"
-          src="../../../assets/img/mlxz/lucky_year_report/result/img_2024.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/img_2024.webp"
         />
         <!-- 财运断语 -->
         <img
           class="section-title"
-          src="../../../assets/img/mlxz/lucky_year_report/result/content_title_1.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/content_title_1.webp"
           alt=""
         />
         <img
           v-if="fortune.keyword24 === '大吉'"
           class="duanyu"
-          src="../../../assets/img/mlxz/lucky_year_report/result/daji.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/daji.webp"
           alt=""
         />
         <img
           v-if="fortune.keyword24 === '中吉'"
           class="duanyu"
-          src="../../../assets/img/mlxz/lucky_year_report/result/zhongji.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/zhongji.webp"
           alt=""
         />
         <img
           v-if="fortune.keyword24 === '小吉'"
           class="duanyu"
-          src="../../../assets/img/mlxz/lucky_year_report/result/xiaoji.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/xiaoji.webp"
           alt=""
         />
         <img
           v-if="fortune.keyword24 === '平'"
           class="duanyu"
-          src="../../../assets/img/mlxz/lucky_year_report/result/ping.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/ping.webp"
           alt=""
         />
         <img
           v-if="fortune.keyword24 === '凶'"
           class="duanyu"
-          src="../../../assets/img/mlxz/lucky_year_report/result/xiong.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/xiong.webp"
           alt=""
         />
 
         <!-- 财富精批 -->
         <img
           class="section-title"
-          src="../../../assets/img/mlxz/lucky_year_report/result/content_title_2.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/content_title_2.webp"
           alt=""
         />
         <div class="section">
@@ -97,7 +97,7 @@
         <!-- 财运开运指南 -->
         <img
           class="section-title"
-          src="../../../assets/img/mlxz/lucky_year_report/result/content_title_3.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/content_title_3.webp"
           alt=""
         />
         <div class="section" style="text-indent: 1.5em">
@@ -106,12 +106,12 @@
 
         <img
           class="main-banner"
-          src="../../../assets/img/mlxz/lucky_year_report/result/img_life.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/img_life.webp"
         />
         <!-- 关键词 -->
         <img
           class="section-title"
-          src="../../../assets/img/mlxz/lucky_year_report/result/content_title_4.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/content_title_4.webp"
           alt=""
         />
         <div class="keywords">
@@ -123,7 +123,7 @@
         <!-- 财运分析 -->
         <img
           class="section-title"
-          src="../../../assets/img/mlxz/lucky_year_report/result/content_title_5.png"
+          src="../../../assets/img/mlxz/lucky_year_report/result/content_title_5.webp"
           alt=""
         />
         <div class="section">
@@ -167,9 +167,9 @@ import { Toast, Indicator } from 'mint-ui';
 import utils from '@/libs/utils.js';
 import CodePop from '../../../components/CodePop.vue';
 import CopyCode from '../../../components/CopyCode.vue';
-import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/wealth24.png';
-import cn_word3 from '../../../assets/img/mlxz/career_2024/detail/img_word3.png';
-import tw_word3 from '../../../assets/img/tw_mlxz/career_24/tw_word3.png';
+import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/wealth24.webp';
+import cn_word3 from '../../../assets/img/mlxz/career_2024/detail/img_word3.webp';
+import tw_word3 from '../../../assets/img/tw_mlxz/career_24/tw_word3.webp';
 import BaziTable from '../../../components/baziTable.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 
@@ -809,7 +809,7 @@ export default {
     .copy-box {
       width: 5.56rem;
       height: 1.04rem;
-      background: url('../../../assets/img/mlxz/lucky_year_report/detail/new_detail/img_shibiema_card.png')
+      background: url('../../../assets/img/mlxz/lucky_year_report/detail/new_detail/img_shibiema_card.webp')
         no-repeat;
       background-size: contain;
       font-weight: 600;

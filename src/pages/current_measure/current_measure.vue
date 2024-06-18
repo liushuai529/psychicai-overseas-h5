@@ -21,7 +21,7 @@
           <div class="title">
             <!-- <span>{{ item.name }}</span> -->
             <!-- <img
-              src="../../assets/img/mlxz/cesuan_home/back_right.png"
+              src="../../assets/img/mlxz/cesuan_home/back_right.webp"
               alt=""
             /> -->
           </div>
@@ -99,7 +99,7 @@ export default {
   .header-box {
     width: 7.5rem;
     height: 1.52rem;
-    background: url('../../assets/img/mlxz/cesuan_home/history_bg.png')
+    background: url('../../assets/img/mlxz/cesuan_home/history_bg.webp')
       no-repeat;
     background-size: contain;
     display: flex;
@@ -157,22 +157,22 @@ export default {
   }
 }
 .item-1 {
-  background: url('../../assets/img/mlxz/cold_start/问答-瞬时卦@3x.png')
+  background: url('../../assets/img/mlxz/cold_start/问答-瞬时卦@3x.webp')
     no-repeat;
 }
 .item-2 {
-  background: url('../../assets/img/mlxz/cold_start/问答-数字风水@3x.png')
+  background: url('../../assets/img/mlxz/cold_start/问答-数字风水@3x.webp')
     no-repeat;
 }
 .item-3 {
-  background: url('../../assets/img/mlxz/cold_start/问答-号码测孕@3x.png')
+  background: url('../../assets/img/mlxz/cold_start/问答-号码测孕@3x.webp')
     no-repeat;
 }
 .item-4 {
-  background: url('../../assets/img/mlxz/cold_start/问答-缘分深深@3x.png')
+  background: url('../../assets/img/mlxz/cold_start/问答-缘分深深@3x.webp')
     no-repeat;
 }
 .item-5 {
-  background: url('../../assets/img/mlxz/index/img_bg_taluo.png') no-repeat;
+  background: url('../../assets/img/mlxz/index/img_bg_taluo.webp') no-repeat;
 }
 </style>

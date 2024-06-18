@@ -330,7 +330,7 @@ export default {
   //   no-repeat;
   width: 7.06rem;
   height: 5.12rem;
-  background: url('../../../assets/img/mlxz/downloadBtn/emo-bg.png') no-repeat;
+  background: url('../../../assets/img/mlxz/downloadBtn/emo-bg.webp') no-repeat;
   background-size: contain;
   margin-top: 0.2rem;
   display: flex;

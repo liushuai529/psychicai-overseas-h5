@@ -31,26 +31,26 @@
 </template>
 
 <script>
-import cn_title_1 from '../../../assets/img/mlxz/guiguzi/result_img_title1@3x.png';
-import tw_title_1 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_title1.png';
+import cn_title_1 from '../../../assets/img/mlxz/guiguzi/result_img_title1@3x.webp';
+import tw_title_1 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_title1.webp';
 
-import cn_title_2 from '../../../assets/img/mlxz/guiguzi/result_img_title2@3x.png';
-import tw_title_2 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_title2.png';
+import cn_title_2 from '../../../assets/img/mlxz/guiguzi/result_img_title2@3x.webp';
+import tw_title_2 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_title2.webp';
 
-import cn_title_3 from '../../../assets/img/mlxz/guiguzi/result_img_title3@3x.png';
-import tw_title_3 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_title3.png';
+import cn_title_3 from '../../../assets/img/mlxz/guiguzi/result_img_title3@3x.webp';
+import tw_title_3 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_title3.webp';
 
-import cn_title_4 from '../../../assets/img/mlxz/guiguzi/result_img_title4@3x.png';
-import tw_title_4 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_title4.png';
+import cn_title_4 from '../../../assets/img/mlxz/guiguzi/result_img_title4@3x.webp';
+import tw_title_4 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_title4.webp';
 
-import cn_title_5 from '../../../assets/img/mlxz/guiguzi/result_img_title5@3x.png';
-import tw_title_5 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_title5.png';
+import cn_title_5 from '../../../assets/img/mlxz/guiguzi/result_img_title5@3x.webp';
+import tw_title_5 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_title5.webp';
 
-import cn_title_6 from '../../../assets/img/mlxz/guiguzi/result_img_zhongshen.png';
-import tw_title_6 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_zhongshen.png';
+import cn_title_6 from '../../../assets/img/mlxz/guiguzi/result_img_zhongshen.webp';
+import tw_title_6 from '../../../assets/img/tw_mlxz/guiguzi/result/result_img_zhongshen.webp';
 
-import gua_two from '../../../assets/img/mlxz/guiguzi/img_gua2.png';
-import gua_one from '../../../assets/img/mlxz/guiguzi/img_gua1.png';
+import gua_two from '../../../assets/img/mlxz/guiguzi/img_gua2.webp';
+import gua_one from '../../../assets/img/mlxz/guiguzi/img_gua1.webp';
 import utils from '../../../libs/utils';
 export default {
   props: ['result', 'title_index', 'title', 'user', 'gua_code'],
@@ -104,7 +104,7 @@ export default {
 .shadow {
   width: 7.1rem;
   min-height: 5.39rem;
-  background: url('../../../assets/img/mlxz/guiguzi/content_detail_bg.png')
+  background: url('../../../assets/img/mlxz/guiguzi/content_detail_bg.webp')
     no-repeat;
   background-size: 100% 100%;
   padding: 0.54rem 0.5rem 0.4rem;

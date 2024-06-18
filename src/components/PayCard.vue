@@ -135,7 +135,7 @@
         >
         <img
           v-if="['year_of_lucky_2024', 'emotion_fortune'].includes(back_url)"
-          src="../assets/img/mlxz/year_of_lucky_2024/icon_arrow.png"
+          src="../assets/img/mlxz/year_of_lucky_2024/icon_arrow.webp"
           alt=""
         />
         <img v-else src="../assets/img/arrow.png" alt="" />
@@ -196,16 +196,16 @@ import { path_enums } from '../libs/enum';
 import Marquee from './Marquee.vue';
 import { getProductions } from '../libs/common_api';
 import utils from '../libs/utils';
-import BoneCheckImg from '../assets/img/mlxz/weigh_bone/img_choose2.png';
+import BoneCheckImg from '../assets/img/mlxz/weigh_bone/img_choose2.webp';
 import commonCheck from '../assets/img/3.0/checked.png';
 import commonUncheck from '../assets/img/3.0/unchecked.png';
-import yearCheck from '../assets/img/mlxz/year_of_lucky_2024/img_choose2.png';
-import yearUncheck from '../assets/img/mlxz/year_of_lucky_2024/img_choose1.png';
-import cn_pay_type from '../assets/img/mlxz/year_of_lucky_2024/result_img_word2.png';
-import tw_pay_type from '../assets/img/tw_mlxz/year_24/detail/result_img_word2.png';
+import yearCheck from '../assets/img/mlxz/year_of_lucky_2024/img_choose2.webp';
+import yearUncheck from '../assets/img/mlxz/year_of_lucky_2024/img_choose1.webp';
+import cn_pay_type from '../assets/img/mlxz/year_of_lucky_2024/result_img_word2.webp';
+import tw_pay_type from '../assets/img/tw_mlxz/year_24/detail/result_img_word2.webp';
 
-import cn_firstOrderTag from '../assets/img/mlxz/year_of_lucky_2024/youhui_img_tag_big.png';
-import tw_firstOrderTag from '../assets/img/tw_mlxz/year_24/detail/youhui_img_tag_big_fan.png';
+import cn_firstOrderTag from '../assets/img/mlxz/year_of_lucky_2024/youhui_img_tag_big.webp';
+import tw_firstOrderTag from '../assets/img/tw_mlxz/year_24/detail/youhui_img_tag_big_fan.webp';
 
 // 名称映射
 const payMethodsMap = {
@@ -693,13 +693,13 @@ export default {
   margin-top: 0.24rem;
 }
 .cn-guiguzi-btn {
-  background: url('../assets/img/mlxz/guiguzi/bt2.png') no-repeat;
+  background: url('../assets/img/mlxz/guiguzi/bt2.webp') no-repeat;
   background-size: contain;
 }
-.tw-guiguzi-btn {
-  background: url('../assets/img/tw_mlxz/guiguzi/detail/bt2.png') no-repeat;
-  background-size: contain;
-}
+// .tw-guiguzi-btn {
+//   background: url('../assets/img/tw_mlxz/guiguzi/detail/bt2.webp') no-repeat;
+//   background-size: contain;
+// }
 
 .guiguzi-price {
   width: 100%;
@@ -775,7 +775,7 @@ export default {
   position: absolute;
   right: -1.2rem;
   top: 0;
-  background: url('../assets/img/mlxz/year_of_lucky_2024/youhui_img_tag_big.png')
+  background: url('../assets/img/mlxz/year_of_lucky_2024/youhui_img_tag_big.webp')
     no-repeat;
   background-size: contain;
   background-position: center;
@@ -788,7 +788,7 @@ export default {
   position: absolute;
   right: -1.2rem;
   top: 0;
-  background: url('../assets/img/tw_mlxz/year_24/detail/youhui_img_tag_big_fan.png')
+  background: url('../assets/img/tw_mlxz/year_24/detail/youhui_img_tag_big_fan.webp')
     no-repeat;
   background-size: contain;
   background-position: center;
@@ -822,7 +822,7 @@ export default {
 .bone-btn {
   width: 5.12rem;
   height: 1rem;
-  background-image: url('../assets/img/mlxz/weigh_bone/btn_pay.png');
+  background-image: url('../assets/img/mlxz/weigh_bone/btn_pay.webp');
   background-size: contain;
   background-repeat: no-repeat;
   margin-bottom: 0.5rem;
@@ -831,7 +831,7 @@ export default {
 .lucky-2024-btn {
   width: 5.19rem;
   height: 1.03rem;
-  // background-image: url('../assets/img/mlxz/year_of_lucky_2024/img_button3.png');
+  // background-image: url('../assets/img/mlxz/year_of_lucky_2024/img_button3.webp');
   // background-size: contain;
   background-repeat: no-repeat;
   margin-top: 0.24rem;
@@ -839,7 +839,7 @@ export default {
 .career-2024-btn {
   width: 4.98rem;
   height: 1rem;
-  background-image: url('../assets/img/mlxz/career_2024/home_btn.png');
+  background-image: url('../assets/img/mlxz/career_2024/home_btn.webp');
   background-size: contain;
   background-repeat: no-repeat;
   margin-top: 0.24rem;
@@ -848,11 +848,11 @@ export default {
 }
 
 .cn-lucky-2024-btn {
-  background-image: url('../assets/img/mlxz/year_of_lucky_2024/img_button3.png');
+  background-image: url('../assets/img/mlxz/year_of_lucky_2024/img_button3.webp');
   background-size: contain;
 }
 .tw-lucky-2024-btn {
-  background-image: url('../assets/img/mlxz/year_of_lucky_2024/img_button3.png');
+  background-image: url('../assets/img/mlxz/year_of_lucky_2024/img_button3.webp');
   background-size: contain;
 }
 

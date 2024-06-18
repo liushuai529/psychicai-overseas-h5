@@ -203,25 +203,25 @@ import {
 import moment from 'dayjs';
 import HeaderNotice from '../../../components/headerNotice.vue';
 
-import cn_tag from '../../../assets/img/mlxz/year_of_lucky_2024/img_4tag.png';
-import tw_tag from '../../../assets/img/tw_mlxz/year_24/img_4tag.png';
-import cn_order from '../../../assets/img/mlxz/year_of_lucky_2024/btn_ling.png';
-import tw_order from '../../../assets/img/mlxz/year_of_lucky_2024/tw/btn_ling.png';
+import cn_tag from '../../../assets/img/mlxz/year_of_lucky_2024/img_4tag.webp';
+import tw_tag from '../../../assets/img/tw_mlxz/year_24/img_4tag.webp';
+import cn_order from '../../../assets/img/mlxz/year_of_lucky_2024/btn_ling.webp';
+import tw_order from '../../../assets/img/mlxz/year_of_lucky_2024/tw/btn_ling.webp';
 
-import cn_card_1 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai1.png';
-import tw_card_1 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai1.png';
+import cn_card_1 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai1.webp';
+import tw_card_1 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai1.webp';
 
-import cn_card_2 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai2.png';
-import tw_card_2 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai2.png';
+import cn_card_2 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai2.webp';
+import tw_card_2 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai2.webp';
 
-import cn_card_3 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_cn.png';
-import tw_card_3 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_tw.png';
+import cn_card_3 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_cn.webp';
+import tw_card_3 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_tw.webp';
 
-import cn_card_4 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_cn.png';
-import tw_card_4 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_tw.png';
+import cn_card_4 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_cn.webp';
+import tw_card_4 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_tw.webp';
 
-import cn_card_5 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai5.png';
-import tw_card_5 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai5.png';
+import cn_card_5 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai5.webp';
+import tw_card_5 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai5.webp';
 import {
   reportEnum,
   reportName,
@@ -229,11 +229,11 @@ import {
   maidianEnum,
 } from '../../../libs/enum';
 import combinePayPop from '../../../components/combinePayPop.vue';
-import cn_new_user_btn from '../../../assets/img/mlxz/year_of_lucky_2024/nianyun_btn_jiexiao.png';
-import tw_new_user_btn from '../../../assets/img/tw_mlxz/year_24/nianyun_btn_jiexiao_fanti.png';
+import cn_new_user_btn from '../../../assets/img/mlxz/year_of_lucky_2024/nianyun_btn_jiexiao.webp';
+import tw_new_user_btn from '../../../assets/img/tw_mlxz/year_24/nianyun_btn_jiexiao_fanti.webp';
 
-import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/year_order.png';
-import cn_history_order from '../../../assets/img/mlxz/downloadBtn/year.png';
+import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/year_order.webp';
+import cn_history_order from '../../../assets/img/mlxz/downloadBtn/year.webp';
 import PopNotice from '../../../components/PopNotice.vue';
 import NewFooter from '../../../components/NewFooter.vue';
 // 组合测算相关参数
@@ -1070,10 +1070,10 @@ export default {
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }
 .cn-bg {
-  background-image: url('../../../assets/img/mlxz/year_of_lucky_2024/bg.png');
+  background-image: url('../../../assets/img/mlxz/year_of_lucky_2024/bg.webp');
 }
 .tw-bg {
-  background-image: url('../../../assets/img/tw_mlxz/year_24/bg.png');
+  background-image: url('../../../assets/img/tw_mlxz/year_24/bj.webp');
 }
 .container {
   width: 7.5rem;
@@ -1125,7 +1125,7 @@ export default {
     width: 7.1rem;
     height: 4.5rem;
     margin-bottom: 0.3rem;
-    background: url('../../../assets/img/mlxz/year_of_lucky_2024/img_info_bg.png')
+    background: url('../../../assets/img/mlxz/year_of_lucky_2024/img_info_bg.webp')
       no-repeat;
     background-size: contain;
 

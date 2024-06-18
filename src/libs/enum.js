@@ -259,13 +259,13 @@ export const commonBaoshi = {
   9102: 'https://psychicai-static.psychicai.pro/imgs/2311ffec0894244d476799adcc20f0b1987e.png',
 };
 
-import nianyun from '../assets/img/mlxz/history_order/dingdan_img_nianyun.png';
-import yuantiangang from '../assets/img/mlxz/history_order/dingdan_img_yuantiangang.png';
-import guiguzi from '../assets/img/mlxz/history_order/dingdan_img_guiguzi.png';
-import ganqingyun from '../assets/img/mlxz/history_order/dingdan_img_ganqing.png';
-import shiyeyun from '../assets/img/mlxz/history_order/dingdan_img_shiye.png';
-import caiyun from '../assets/img/mlxz/history_order/dingdan_img_caiyun.png';
-import hehun from '../assets/img/mlxz/history_order/dingdan_img_hehun.png';
+import nianyun from '../assets/img/mlxz/history_order/dingdan_img_nianyun.webp';
+import yuantiangang from '../assets/img/mlxz/history_order/dingdan_img_yuantiangang.webp';
+import guiguzi from '../assets/img/mlxz/history_order/dingdan_img_guiguzi.webp';
+import ganqingyun from '../assets/img/mlxz/history_order/dingdan_img_ganqing.webp';
+import shiyeyun from '../assets/img/mlxz/history_order/dingdan_img_shiye.webp';
+import caiyun from '../assets/img/mlxz/history_order/dingdan_img_caiyun.webp';
+import hehun from '../assets/img/mlxz/history_order/dingdan_img_hehun.webp';
 
 import combine2 from '../assets/img/emotion_v2/new/dingdan_img_er.png';
 import combine3 from '../assets/img/emotion_v2/new/dingdan_img_san.png';

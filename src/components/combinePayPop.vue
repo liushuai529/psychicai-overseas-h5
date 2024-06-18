@@ -24,13 +24,13 @@
               <img
                 class="check"
                 v-if="index === i"
-                src="../assets/img/mlxz/cold_start/img_choose2@3x.png"
+                src="../assets/img/mlxz/cold_start/img_choose2@3x.webp"
                 alt
               />
               <img
                 class="check"
                 v-else
-                src="../assets/img/mlxz/cold_start/img_choose1@3x.png"
+                src="../assets/img/mlxz/cold_start/img_choose1@3x.webp"
                 alt
               />
             </div>

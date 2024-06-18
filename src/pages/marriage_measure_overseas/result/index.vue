@@ -160,7 +160,7 @@
       </div>
       <img
         v-if="data_obj.character"
-        src="../../../assets/img/mlxz/bzhh/result/character.jpg"
+        src="../../../assets/img/mlxz/bzhh/result/character.webp"
         alt
         class="info_img"
       />
@@ -243,29 +243,29 @@ import tw_img_title from '../../../assets/img/bzhh_v2/tw/img_title.png';
 import solidStar from './../../../assets/img/marriage_measure_overseas/result/star_light.png';
 import dashedStar from './../../../assets/img/marriage_measure_overseas/result/star_gray.png';
 
-import cn_hemu from '../../../assets/img/mlxz/bzhh/result/hemu_rate.jpg';
-import tw_hemu from '../../../assets/img/tw_mlxz/bazihehun/result/hemu_rate.jpg';
+import cn_hemu from '../../../assets/img/mlxz/bzhh/result/hemu_rate.webp';
+import tw_hemu from '../../../assets/img/tw_mlxz/bazihehun/result/hemu_rate.webp';
 
-import cn_nengliang from '../../../assets/img/mlxz/bzhh/result/energy.jpg';
-import tw_nengliang from '../../../assets/img/tw_mlxz/bazihehun/result/energy.jpg';
+import cn_nengliang from '../../../assets/img/mlxz/bzhh/result/energy.webp';
+import tw_nengliang from '../../../assets/img/tw_mlxz/bazihehun/result/energy.webp';
 
-import cn_career from '../../../assets/img/mlxz/bzhh/result/career.jpg';
-import tw_career from '../../../assets/img/tw_mlxz/bazihehun/result/career.jpg';
+import cn_career from '../../../assets/img/mlxz/bzhh/result/career.webp';
+import tw_career from '../../../assets/img/tw_mlxz/bazihehun/result/career.webp';
 
-import cn_family from '../../../assets/img/mlxz/bzhh/result/family.jpg';
-import tw_family from '../../../assets/img/tw_mlxz/bazihehun/result/family.jpg';
+import cn_family from '../../../assets/img/mlxz/bzhh/result/family.webp';
+import tw_family from '../../../assets/img/tw_mlxz/bazihehun/result/family.webp';
 
-import cn_parents from '../../../assets/img/mlxz/bzhh/result/parents.jpg';
-import tw_parents from '../../../assets/img/tw_mlxz/bazihehun/result/parents.jpg';
+import cn_parents from '../../../assets/img/mlxz/bzhh/result/parents.webp';
+import tw_parents from '../../../assets/img/tw_mlxz/bazihehun/result/parents.webp';
 
-import cn_blossom from '../../../assets/img/mlxz/bzhh/result/blossom.jpg';
-import tw_blossom from '../../../assets/img/tw_mlxz/bazihehun/result/blossom.jpg';
+import cn_blossom from '../../../assets/img/mlxz/bzhh/result/blossom.webp';
+import tw_blossom from '../../../assets/img/tw_mlxz/bazihehun/result/blossom.webp';
 
-import cn_all from '../../../assets/img/mlxz/bzhh/result/all.jpg';
-import tw_all from '../../../assets/img/tw_mlxz/bazihehun/result/all.jpg';
+import cn_all from '../../../assets/img/mlxz/bzhh/result/all.webp';
+import tw_all from '../../../assets/img/tw_mlxz/bazihehun/result/all.webp';
 import CodePop from '../../../components/CodePop.vue';
 import CopyCode from '../../../components/CopyCode.vue';
-import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/bzhh.png';
+import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/bzhh.webp';
 import shengxiao from '../detail/shengxiao.vue';
 import baziInfo from '../detail/bazi.vue';
 import year_ganzi from './../../../libs/suishen.wnl.js';
@@ -870,7 +870,7 @@ export default {
 .download-box {
   width: 7rem;
   min-height: 5.94rem;
-  // background: url('../../../assets/img/mlxz/downloadBtn/bzhh-bg.png') no-repeat;
+  // background: url('../../../assets/img/mlxz/downloadBtn/bzhh-bg.webp') no-repeat;
   border-radius: 0.16rem;
   border: 0.06rem solid #d19a47;
   background-size: contain;

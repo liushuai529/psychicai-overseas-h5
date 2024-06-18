@@ -2,19 +2,19 @@
   <div class="form">
     <!-- <img
       class="title"
-      src="../../../assets/img/mlxz/bzhh/ziliao_word.png"
+      src="../../../assets/img/mlxz/bzhh/ziliao_word.webp"
       alt=""
     /> -->
 
     <img
       v-if="language === 'zh-CN'"
       class="title"
-      src="./../../../assets/img/mlxz/bzhh/user-info-title.png"
+      src="./../../../assets/img/mlxz/bzhh/user-info-title.webp"
     />
     <img
       v-else
       class="title"
-      src="./../../../assets/img/tw_mlxz/bazihehun/home/user-info-title.png"
+      src="./../../../assets/img/tw_mlxz/bazihehun/home/user-info-title.webp"
     />
     <!-- 男方 -->
 

@@ -37,7 +37,7 @@
 <script>
 import { Toast } from 'mint-ui';
 import utils from '../libs/utils';
-import black_logo from '../assets/img/mlxz/career_2024/result/home_img_logo.png';
+import black_logo from '../assets/img/mlxz/career_2024/result/home_img_logo.webp';
 const lang = utils.getLanguage();
 const tips_arr1 = {
   'zh-CN': '神准测算报告，请下载「命理寻真」',
@@ -227,7 +227,7 @@ export default {
   height: 1rem;
 }
 .career-code {
-  background: url('../assets/img/mlxz/moreResult/career_24.png') no-repeat;
+  background: url('../assets/img/mlxz/moreResult/career_24.webp') no-repeat;
   background-size: 100% 100%;
   padding-top: 0.05rem;
 }
@@ -247,14 +247,14 @@ export default {
 }
 
 .guiguzi-code {
-  background: url('../assets/img/mlxz/moreResult/ggz_bg.png') no-repeat;
+  background: url('../assets/img/mlxz/moreResult/ggz_bg.webp') no-repeat;
   background-size: 100% 100%;
 }
 .guiguzi-box {
   width: 7.1rem;
   height: 7.11rem;
   padding-top: 0.53rem;
-  background: url('../assets/img/mlxz/moreResult/ggz_content.png') no-repeat;
+  background: url('../assets/img/mlxz/moreResult/ggz_content.webp') no-repeat;
   background-size: 100% 100%;
 }
 
@@ -266,7 +266,7 @@ export default {
   padding-top: 0.4rem;
 }
 .wealth-code {
-  background: url('../assets/img/mlxz/moreResult/wealth_bg.png') no-repeat;
+  background: url('../assets/img/mlxz/moreResult/wealth_bg.webp') no-repeat;
   background-size: 100% 100%;
 }
 
@@ -278,21 +278,21 @@ export default {
   border: 0.06rem solid #d19a47;
 }
 .marry-code {
-  background: url('../assets/img/mlxz/moreResult/bzhh_bg.png') no-repeat;
+  background: url('../assets/img/mlxz/moreResult/bzhh_bg.webp') no-repeat;
   background-size: 100% 100%;
 }
 
 .weight-box {
   width: 7.1rem;
   min-height: 6.93rem;
-  background-image: url('../assets/img/mlxz/weigh_bone/img_mokuai_bg.png');
+  background-image: url('../assets/img/mlxz/weigh_bone/img_mokuai_bg.webp');
   background-size: contain;
   background-repeat: no-repeat;
   background-color: #37438a;
   border-radius: 0.2rem;
 }
 .weight-code {
-  background: url('../assets/img/mlxz/moreResult/weight_bg.png') no-repeat;
+  background: url('../assets/img/mlxz/moreResult/weight_bg.webp') no-repeat;
   background-size: 100% 100%;
 }
 
@@ -304,7 +304,7 @@ export default {
   background-size: 100% 100%;
 }
 .year-code {
-  background: url('../assets/img/mlxz/moreResult/year_bg.png') no-repeat;
+  background: url('../assets/img/mlxz/moreResult/year_bg.webp') no-repeat;
   background-size: 100% 100%;
   padding-top: 0.05rem;
 }
