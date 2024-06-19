@@ -131,11 +131,11 @@
     </div> -->
       <!-- <img class="card" :src="is_cn ? cn_card_1 : tw_card_1" />
     <img class="card" :src="is_cn ? cn_card_2 : tw_card_2" /> -->
-      <img class="card mt-180" :src="is_cn ? cn_icon_1 : tw_card_1" />
-      <img class="card" :src="is_cn ? cn_icon_2 : tw_card_2" />
-      <img class="card" :src="is_cn ? cn_icon_3 : tw_card_3" />
-      <img class="card" :src="is_cn ? cn_icon_4 : tw_card_4" />
-      <img class="card" :src="is_cn ? cn_icon_5 : tw_card_5" />
+      <img class="card mt-180" :src="is_cn ? cn_icon_1 : tw_icon_1" />
+      <img class="card" :src="is_cn ? cn_icon_2 : tw_icon_2" />
+      <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" />
+      <img class="card" :src="is_cn ? cn_icon_4 : tw_icon_4" />
+      <img class="card" :src="is_cn ? cn_icon_5 : tw_icon_5" />
       <img
         v-if="showFixedBtn"
         class="fix-btn emo-btn"
