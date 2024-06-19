@@ -29,7 +29,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('panda03') > -1) {
     return 'panda03';
   } else {
-    return 'panda03';
+    return 'panda01';
   }
 };
 /**
@@ -1114,7 +1114,7 @@ const getShortStr = (str, len = 4) => {
 
 // 获取语言
 const getLanguage = () => {
-  // return 'zh-TW';
+  return 'zh-TW';
   let now_lang =
     navigator.language.indexOf('zh-') > -1 ? navigator.language : 'zh-CN';
   return getRequestParams('language') || now_lang;

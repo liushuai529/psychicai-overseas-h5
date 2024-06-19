@@ -419,7 +419,7 @@ export const reportName = {
   },
   h5_emotion2024: {
     cn: '2024感情运势',
-    tw: '2024感情运势',
+    tw: '2024感情運勢',
   },
   h5_annual2024: {
     cn: '2024年年运',
