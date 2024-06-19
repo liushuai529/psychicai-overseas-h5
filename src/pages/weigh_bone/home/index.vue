@@ -922,7 +922,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url('../../../assets/img/mlxz/weigh_bone/2404ba89ce61538947eda9a6a240b7f53de0.png');
+  background-image: url('../../../assets/img/mlxz/weigh_bone/2404ba89ce61538947eda9a6a240b7f53de0.webp');
   background-color: #515fad;
   background-size: contain;
   background-repeat: no-repeat;
