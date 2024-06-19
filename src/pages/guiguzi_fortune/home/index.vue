@@ -986,7 +986,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url('https://psychicai-static.psychicai.pro/imgs/24048f0d358d051f4890abe8ad40ec6cbe48.png');
+  background-image: url('../../../assets/img/mlxz/guiguzi/24048f0d358d051f4890abe8ad40ec6cbe48 3.png');
   background-size: contain;
   background-repeat: no-repeat;
   padding-bottom: 2.8rem;

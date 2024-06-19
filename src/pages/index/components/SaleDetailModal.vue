@@ -288,12 +288,10 @@ export default {
         }, // 袁天罡秤骨
         h5_bai_gua: {
           cn:[
-              // 'https://psychicai-static.psychicai.pro/imgs/24048f0d358d051f4890abe8ad40ec6cbe48.png',
               'https://psychicai-static.psychicai.pro/imgs/24044c3c7ad56f9f4e08a25d585164be739f.png',
               cn_card_2_h5_bai_gua
           ],
           tw:[
-              // 'https://psychicai-static.psychicai.pro/imgs/24048f0d358d051f4890abe8ad40ec6cbe48.png',
               'https://psychicai-static.psychicai.pro/imgs/24045923298c6eff48f1ac256edf9ed6d17d.png',
               tw_card_2_h5_bai_gua
           ],
