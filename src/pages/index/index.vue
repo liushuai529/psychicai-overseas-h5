@@ -192,7 +192,7 @@
               />
               <img
                 v-else
-                src="../../assets/img/new_combine/home_btn_add.webp"
+                src="../../assets/img/new_combine/home_btn_add.png"
                 class="check-icon"
                 alt=""
               />
@@ -299,7 +299,7 @@
               />
               <img
                 v-else
-                src="../../assets/img/new_combine/home_btn_add.webp"
+                src="../../assets/img/new_combine/home_btn_add.png"
                 class="check-icon"
                 alt=""
               />
@@ -3594,7 +3594,7 @@ export default {
   }
 
   .no-it {
-    background: url('../../assets/img/new_combine/home_btn_add.webp') no-repeat;
+    background: url('../../assets/img/new_combine/home_btn_add.png') no-repeat;
     background-size: contain;
   }
 }
