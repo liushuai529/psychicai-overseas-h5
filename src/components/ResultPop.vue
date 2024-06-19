@@ -9,7 +9,7 @@
   <div class="result">
     <!-- Your HTML code goes here -->
     <div class="pop-box">
-      <img src="../assets/img/common/pay_success.png" class="pay-logo" alt="" />
+      <img src="../assets/img/common/pay_success.webp" class="pay-logo" alt="" />
       <div class="title">{{ tipsArr1[lang] }}</div>
       <div class="tips">{{ tipsArr2[lang] }}</div>
       <input
@@ -50,7 +50,7 @@
       </div>
       <img
         @click="closePop"
-        src="../assets/img/common/icon_close.png"
+        src="../assets/img/common/icon_close.webp"
         class="close-icon"
         alt=""
       />

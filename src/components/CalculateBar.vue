@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-image:url("../assets/img/home_img_card/home_img_card_tongzhi.png");
+    background-image:url("../assets/img/home_img_card/home_img_card_tongzhi.webp");
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -101,9 +101,9 @@
 
 <script>
 
-import cn_small_bzhh from "../assets/img/common/banner/small/cn/h5_fang_jian_bazihehun.png";
-import tw_small_bzhh from "../assets/img/common/banner/small/tw/h5_fang_fan_bazihhehun.png";
-import new_ganqing_small from "../assets/img/emotion_v2/new/banner_ganqing_fang.png";
+import cn_small_bzhh from "../assets/img/common/banner/small/cn/h5_fang_jian_bazihehun.webp";
+import tw_small_bzhh from "../assets/img/common/banner/small/tw/h5_fang_fan_bazihhehun.webp";
+import new_ganqing_small from "../assets/img/emotion_v2/new/banner_ganqing_fang.webp";
 import utils from '../libs/utils';
 export default {
     props:{

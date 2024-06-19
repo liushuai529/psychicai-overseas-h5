@@ -54,7 +54,7 @@
                 <img
                   v-if="sex == '1'"
                   class="sex-icon"
-                  src="../../../assets/img/wealth_boutique_overseas/home/male-active.png"
+                  src="../../../assets/img/wealth_boutique_overseas/home/male-active.webp"
                 />
                 <img
                   v-else
@@ -72,7 +72,7 @@
                 <img
                   v-if="sex == '0'"
                   class="sex-icon"
-                  src="../../../assets/img/wealth_boutique_overseas/home/female-active.png"
+                  src="../../../assets/img/wealth_boutique_overseas/home/female-active.webp"
                 />
                 <img
                   v-else
@@ -93,13 +93,13 @@
             <img
               v-if="privacyChecked"
               class="info-check"
-              src="../../../assets/img/wealth_boutique_overseas/home/check.png"
+              src="../../../assets/img/wealth_boutique_overseas/home/check.webp"
               @click="privacyChecked = !privacyChecked"
             />
             <img
               v-else
               class="info-check"
-              src="../../../assets/img/wealth_boutique_overseas/home/uncheck.png"
+              src="../../../assets/img/wealth_boutique_overseas/home/uncheck.webp"
               @click="privacyChecked = !privacyChecked"
             />
             查看

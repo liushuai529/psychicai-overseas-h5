@@ -2,7 +2,7 @@
   <div class="user-info" :style="{ backgroundImage: bgc }">
     <img
       class="title"
-      src="./../../../assets/img/wealth_boutique_overseas/detail/user_info_title.png"
+      src="./../../../assets/img/wealth_boutique_overseas/detail/user_info_title.webp"
       alt
     />
     <div class="content">
@@ -34,7 +34,7 @@
 
 <script>
 import utils from './../../../libs/utils.js';
-import bg from './../../../assets/img/wealth_boutique_overseas/detail/user_info_bg.jpg';
+import bg from './../../../assets/img/wealth_boutique_overseas/detail/user_info_bg.webp';
 export default {
   props: ['userInfoStr', 'userInfo'],
   data() {

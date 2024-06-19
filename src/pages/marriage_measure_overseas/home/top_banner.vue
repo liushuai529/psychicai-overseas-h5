@@ -1,7 +1,7 @@
 <template>
   <div class="top-banner">
     <img
-      src="./../../../assets/img/marriage_measure_overseas/detail/top_banner.jpg"
+      src="./../../../assets/img/marriage_measure_overseas/detail/top_banner.webp"
       alt=""
     />
   </div>

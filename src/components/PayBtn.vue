@@ -7,20 +7,20 @@
 <script>
 import utils from '../libs/utils';
 //h5_emotion2024
-// import cn_h5_emotion2024 from '../assets/img/emotion_v2/new/cn/pay.png';
-// import tw_h5_emotion2024 from '../assets/img/emotion_v2/new/tw/pay.png';
-// import cn_h5_emotion2024_xs from '../assets/img/emotion_v2/new/cn/pay_xs.png';
-// import tw_h5_emotion2024_xs from '../assets/img/emotion_v2/new/tw/pay_xs.png';
+// import cn_h5_emotion2024 from '../assets/img/emotion_v2/new/cn/pay.webp';
+// import tw_h5_emotion2024 from '../assets/img/emotion_v2/new/tw/pay.webp';
+// import cn_h5_emotion2024_xs from '../assets/img/emotion_v2/new/cn/pay_xs.webp';
+// import tw_h5_emotion2024_xs from '../assets/img/emotion_v2/new/tw/pay_xs.webp';
 
-import cn_home_btn1 from '../assets/img/emotion_v2/new/cn/btn.png';
-import tw_home_btn1 from '../assets/img/emotion_v2/new/tw/btn.png';
-import cn_home_btn from '../assets/img/emotion_v2/new/cn/pay.png';
-import tw_home_btn from '../assets/img/emotion_v2/new/tw/pay.png';
-import cn_home_xs_btn from '../assets/img/emotion_v2/new/cn/pay_xs.png';
-import tw_home_xs_btn from '../assets/img/emotion_v2/new/tw/pay_xs.png';
+import cn_home_btn1 from '../assets/img/emotion_v2/new/cn/btn.webp';
+import tw_home_btn1 from '../assets/img/emotion_v2/new/tw/btn.webp';
+import cn_home_btn from '../assets/img/emotion_v2/new/cn/pay.webp';
+import tw_home_btn from '../assets/img/emotion_v2/new/tw/pay.webp';
+import cn_home_xs_btn from '../assets/img/emotion_v2/new/cn/pay_xs.webp';
+import tw_home_xs_btn from '../assets/img/emotion_v2/new/tw/pay_xs.webp';
 //h5_marriage
-import tw_h5_marriage from '../assets/img//bzhh_v2/tw/img_btn.png';
-import cn_h5_marriage from '../assets/img/bzhh_v2/cn/img_btn.png';
+import tw_h5_marriage from '../assets/img/bzhh_v2/tw/img_btn.webp';
+import cn_h5_marriage from '../assets/img/bzhh_v2/cn/img_btn.webp';
 export default {
   name: 'PayBtn',
   data() {

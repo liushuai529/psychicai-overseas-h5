@@ -61,8 +61,8 @@
 
 <script>
 import utils from './../../../libs/utils.js';
-import content_bg_1 from './../../../assets/img/wealth_boutique_overseas/detail/content_bg_1.png';
-import bg from './../../../assets/img/wealth_boutique_overseas/detail/user_info_bg.jpg';
+import content_bg_1 from './../../../assets/img/wealth_boutique_overseas/detail/content_bg_1.webp';
+import bg from './../../../assets/img/wealth_boutique_overseas/detail/user_info_bg.webp';
 import Clipboard from 'clipboard';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import { getBaziAPI } from '../../../api/api';

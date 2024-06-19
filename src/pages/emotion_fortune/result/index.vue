@@ -651,18 +651,18 @@ export default {
 <style scoped lang="less">
 .result {
   padding: 0.43rem 0.22rem 0.5rem;
-  background-image: url('../../../assets/img/emotion_v2/new/cn/result/jieguo_ig_bj.png');
+  background-image: url('../../../assets/img/emotion_v2/new/cn/result/jieguo_ig_bj.webp');
   background-repeat: no-repeat;
   background-size: contain;
   background-color: #ec436b;
 }
 
 .cn-bg {
-  background-image: url('../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.png');
+  background-image: url('../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.webp');
 }
 
 .tw-bg {
-  background-image: url('../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.png');
+  background-image: url('../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.webp');
 }
 
 .info-box {

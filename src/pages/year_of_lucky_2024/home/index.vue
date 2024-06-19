@@ -35,14 +35,14 @@
             <img
               v-if="sex == '1'"
               class="sex"
-              src="../../../assets/img/new_year_luck_overseas/home/switch-male.png"
+              src="../../../assets/img/new_year_luck_overseas/home/switch-male.webp"
               ref="sex_male"
               @click="changeSex(0)"
             />
             <img
               v-else
               class="sex"
-              src="../../../assets/img/new_year_luck_overseas/home/switch-female.png"
+              src="../../../assets/img/new_year_luck_overseas/home/switch-female.webp"
               ref="sex_female"
               @click="changeSex(1)"
             />
@@ -60,7 +60,7 @@
             </div>
             <img
               class="calendar"
-              src="../../../assets/img/new_year_luck_overseas/home/calendar.png"
+              src="../../../assets/img/new_year_luck_overseas/home/calendar.webp"
               @click="openPicker"
             />
           </div>
@@ -74,13 +74,13 @@
             <img
               v-if="privacyChecked"
               class="check"
-              src="../../../assets/img/new_year_luck_overseas/home/checked.png"
+              src="../../../assets/img/new_year_luck_overseas/home/checked.webp"
               @click="privacyChecked = !privacyChecked"
             />
             <img
               v-else
               class="check"
-              src="../../../assets/img/new_year_luck_overseas/home/unchecked.png"
+              src="../../../assets/img/new_year_luck_overseas/home/unchecked.webp"
               @click="privacyChecked = !privacyChecked"
             />
             <span>{{ $t('agree-label') }}</span>

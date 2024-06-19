@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import bzhh from '../assets/img/common/bazihehun_img_btnmengban.png';
-import emotion from '../assets/img/common/ganqing_img_btnmengban.png';
-import career from '../assets/img/common/shiye_img_btnmengban.png';
-import wealth from '../assets/img/common/caiyun_img_btnmengban.png';
-import year from '../assets/img/common/nianyun_img_btnmengban.png';
-import ggz from '../assets/img/common/guiguzi_img_btnmengban.png';
+import bzhh from '../assets/img/common/bazihehun_img_btnmengban.webp';
+import emotion from '../assets/img/common/ganqing_img_btnmengban.webp';
+import career from '../assets/img/common/shiye_img_btnmengban.webp';
+import wealth from '../assets/img/common/caiyun_img_btnmengban.webp';
+import year from '../assets/img/common/nianyun_img_btnmengban.webp';
+import ggz from '../assets/img/common/guiguzi_img_btnmengban.webp';
 import utils from '../libs/utils';
 const bg_obj = {
   h5_marriage: bzhh,

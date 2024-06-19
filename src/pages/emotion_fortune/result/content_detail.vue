@@ -109,40 +109,40 @@
   </div>
 </template>
 <script>
-import ji from './../../../assets/img/emotion_v2/new/cn/result/img_qian_jian_ji.png';
-import xiaoji from './../../../assets/img/emotion_v2/new/cn/result/img_qian_jian_xiaoji.png';
-import ping from './../../../assets/img/emotion_v2/new/cn/result/img_qian_jian_ping.png';
-import cn_xiaoxiong from './../../../assets/img/emotion_v2/new/cn/result/img_qian_jian_xiaoxiong.png';
-import tw_xiaoxiong from './../../../assets/img/emotion_v2/new/cn/result/img_qian_jian_xiaoxiong.png';
+import ji from './../../../assets/img/emotion_v2/new/cn/result/img_qian_jian_ji.webp';
+import xiaoji from './../../../assets/img/emotion_v2/new/cn/result/img_qian_jian_xiaoji.webp';
+import ping from './../../../assets/img/emotion_v2/new/cn/result/img_qian_jian_ping.webp';
+import cn_xiaoxiong from './../../../assets/img/emotion_v2/new/cn/result/img_qian_jian_xiaoxiong.webp';
+import tw_xiaoxiong from './../../../assets/img/emotion_v2/new/cn/result/img_qian_jian_xiaoxiong.webp';
 
-import cn_emo_back from './../../../assets/img/emotion_v2/new/cn/result/tittle_1_jian.png';
-import tw_emo_back from './../../../assets/img/emotion_v2/new/tw/result/tittle_1_fan.png';
+import cn_emo_back from './../../../assets/img/emotion_v2/new/cn/result/tittle_1_jian.webp';
+import tw_emo_back from './../../../assets/img/emotion_v2/new/tw/result/tittle_1_fan.webp';
 
-import cn_title1 from './../../../assets/img/emotion_v2/new/cn/result/tittle_1_1_jian.png';
-import tw_title1 from './../../../assets/img/emotion_v2/new/tw/result/tittle_1_1_fan.png';
+import cn_title1 from './../../../assets/img/emotion_v2/new/cn/result/tittle_1_1_jian.webp';
+import tw_title1 from './../../../assets/img/emotion_v2/new/tw/result/tittle_1_1_fan.webp';
 
-import cn_title2 from './../../../assets/img/emotion_v2/new/cn/result/tittle_1_2_jian.png';
-import tw_title2 from './../../../assets/img/emotion_v2/new/tw/result/tittle_1_2_fan.png';
+import cn_title2 from './../../../assets/img/emotion_v2/new/cn/result/tittle_1_2_jian.webp';
+import tw_title2 from './../../../assets/img/emotion_v2/new/tw/result/tittle_1_2_fan.webp';
 
-import cn_title3 from './../../../assets/img/emotion_v2/new/cn/result/tittle_2_1_jian.png';
-import tw_title3 from './../../../assets/img/emotion_v2/new/tw/result/tittle_2_1_fan.png';
+import cn_title3 from './../../../assets/img/emotion_v2/new/cn/result/tittle_2_1_jian.webp';
+import tw_title3 from './../../../assets/img/emotion_v2/new/tw/result/tittle_2_1_fan.webp';
 
-import cn_title4 from './../../../assets/img/emotion_v2/new/cn/result/tittle_2_2_jian.png';
-import tw_title4 from './../../../assets/img/emotion_v2/new/tw/result/tittle_2_2_fan.png';
+import cn_title4 from './../../../assets/img/emotion_v2/new/cn/result/tittle_2_2_jian.webp';
+import tw_title4 from './../../../assets/img/emotion_v2/new/tw/result/tittle_2_2_fan.webp';
 
-import cn_title5 from './../../../assets/img/emotion_v2/new/cn/result/tittle_2_3_jian.png';
-import tw_title5 from './../../../assets/img/emotion_v2/new/tw/result/tittle_2_3_fan.png';
+import cn_title5 from './../../../assets/img/emotion_v2/new/cn/result/tittle_2_3_jian.webp';
+import tw_title5 from './../../../assets/img/emotion_v2/new/tw/result/tittle_2_3_fan.webp';
 
-import cn_title6 from './../../../assets/img/emotion_v2/new/cn/result/tittle_2_4_jian.png';
-import tw_title6 from './../../../assets/img/emotion_v2/new/tw/result/tittle_2_4_fan.png';
+import cn_title6 from './../../../assets/img/emotion_v2/new/cn/result/tittle_2_4_jian.webp';
+import tw_title6 from './../../../assets/img/emotion_v2/new/tw/result/tittle_2_4_fan.webp';
 import utils from '../../../libs/utils';
 
-import cn_ganqingzhanwang from '../../../assets/img/emotion_v2/new/cn/result/tittle_2_jian.png';
-import tw_ganqingzhanwang from '../../../assets/img/emotion_v2/new/tw/result/tittle_2_fan.png';
+import cn_ganqingzhanwang from '../../../assets/img/emotion_v2/new/cn/result/tittle_2_jian.webp';
+import tw_ganqingzhanwang from '../../../assets/img/emotion_v2/new/tw/result/tittle_2_fan.webp';
 import CodePop from '../../../components/CodePop.vue';
 import CopyCode from '../../../components/CopyCode.vue';
-import tw_code_btn from '../../../assets/img/emotion_v2/new/tw/result/img_btn_xiazai_fan.png';
-import cn_code_btn from '../../../assets/img/emotion_v2/new/cn/result/img_btn_xiazai.png';
+import tw_code_btn from '../../../assets/img/emotion_v2/new/tw/result/img_btn_xiazai_fan.webp';
+import cn_code_btn from '../../../assets/img/emotion_v2/new/cn/result/img_btn_xiazai.webp';
 import { Toast } from 'vant';
 export default {
   props: {
@@ -214,11 +214,11 @@ export default {
 </script>
 <style scoped lang="less">
 .zh-CN-item2-bg {
-  background: url('../../../assets/img/emotion_v2/new/cn/result/img_qian_jian.png')
+  background: url('../../../assets/img/emotion_v2/new/cn/result/img_qian_jian.webp')
     no-repeat;
 }
 .zh-TW-item2-bg {
-  background: url('../../../assets/img/emotion_v2/new/tw/result/img_qian_fan.png')
+  background: url('../../../assets/img/emotion_v2/new/tw/result/img_qian_fan.webp')
     no-repeat;
 }
 .item-2 {
@@ -244,14 +244,14 @@ export default {
   .header-box {
     width: 100%;
     height: 2rem;
-    // background: url('../../../assets/img/emotion/result_kuang_bg1.png')
+    // background: url('../../../assets/img/emotion/result_kuang_bg1.webp')
     // no-repeat;
     background-size: contain;
   }
   .content-box {
     width: 100%;
     min-height: 4.26rem;
-    // background: url('../../../assets/img/emotion/result_kuang_bg2.png') repeat-y;
+    // background: url('../../../assets/img/emotion/result_kuang_bg2.webp') repeat-y;
     background-size: 100% auto;
     margin-top: -1rem;
     font-size: 0.28rem;
@@ -267,7 +267,7 @@ export default {
   .footer-box {
     width: 100%;
     height: 2.26rem;
-    // background: url('../../../assets/img/emotion/result_kuang_bg3.png')
+    // background: url('../../../assets/img/emotion/result_kuang_bg3.webp')
     //   no-repeat;
     background-size: contain;
     margin-top: -2.6rem;
@@ -312,7 +312,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('../../../assets/img/emotion_v2/new/cn/result/result_img_ci.png')
+    background: url('../../../assets/img/emotion_v2/new/cn/result/result_img_ci.webp')
       no-repeat;
     background-size: contain;
     font-size: 0.44rem;
@@ -326,7 +326,7 @@ export default {
 .code-box {
   // width: 7.06rem;
   // height: 7.11rem;
-  // background: url('../../../assets/img/emotion/new/result_name_bg.png')
+  // background: url('../../../assets/img/emotion/new/result_name_bg.webp')
   //   no-repeat;
   width: 7.06rem;
   height: 5.12rem;
@@ -352,7 +352,7 @@ export default {
   .code {
     width: 5.56rem;
     height: 1.04rem;
-    background: url('../../../assets/img/emotion/new/img_shibiema_card.png')
+    background: url('../../../assets/img/emotion/new/img_shibiema_card.webp')
       no-repeat;
     background-size: contain;
     margin-top: 0.4rem;

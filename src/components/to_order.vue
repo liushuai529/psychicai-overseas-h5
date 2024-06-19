@@ -8,7 +8,7 @@
 -->
 <template>
     <div class="to-order" @click="toOrder">
-        <img src="../assets/img/to-order.png" alt="">
+        <img src="../assets/img/to-order.webp" alt="">
     </div>
 </template>
  

@@ -138,7 +138,7 @@
           src="../assets/img/mlxz/year_of_lucky_2024/icon_arrow.webp"
           alt=""
         />
-        <img v-else src="../assets/img/arrow.png" alt="" />
+        <img v-else src="../assets/img/arrow.webp" alt="" />
       </div>
     </div>
     <div
@@ -197,8 +197,8 @@ import Marquee from './Marquee.vue';
 import { getProductions } from '../libs/common_api';
 import utils from '../libs/utils';
 import BoneCheckImg from '../assets/img/mlxz/weigh_bone/img_choose2.webp';
-import commonCheck from '../assets/img/3.0/checked.png';
-import commonUncheck from '../assets/img/3.0/unchecked.png';
+import commonCheck from '../assets/img/3.0/checked.webp';
+import commonUncheck from '../assets/img/3.0/unchecked.webp';
 import yearCheck from '../assets/img/mlxz/year_of_lucky_2024/img_choose2.webp';
 import yearUncheck from '../assets/img/mlxz/year_of_lucky_2024/img_choose1.webp';
 import cn_pay_type from '../assets/img/mlxz/year_of_lucky_2024/result_img_word2.webp';

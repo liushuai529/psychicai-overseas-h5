@@ -9,7 +9,7 @@
   <div class="timer-box">
     <div class="left">
       <img
-        src="../../../assets/img/new_combine/home_icon_daojishi.png"
+        src="../../../assets/img/new_combine/home_icon_daojishi.webp"
         class="clock"
         alt=""
       />

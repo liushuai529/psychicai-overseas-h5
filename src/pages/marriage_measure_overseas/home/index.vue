@@ -237,8 +237,8 @@ import {
   maidianEnum,
 } from '../../../libs/enum';
 
-import tw_btn from './../../../assets/img//bzhh_v2/tw/img_btn1.png';
-import cn_btn from './../../../assets/img/bzhh_v2/cn/img_btn1.png';
+import tw_btn from './../../../assets/img//bzhh_v2/tw/img_btn1.webp';
+import cn_btn from './../../../assets/img/bzhh_v2/cn/img_btn1.webp';
 
 import cn_order from './../../../assets/img/mlxz/bzhh/btn_dingdan.webp';
 import tw_order from './../../../assets/img/tw_mlxz/bazihehun/home/order.webp';

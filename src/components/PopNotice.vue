@@ -33,7 +33,7 @@
                   {{ male_info.birth }}
                 </span>
                 <img
-                  src="../assets/img/pop/cn/h5_icon_man.png"
+                  src="../assets/img/pop/cn/h5_icon_man.webp"
                   class="sex"
                   alt=""
                 />
@@ -46,7 +46,7 @@
                   {{ female_info.birth }}
                 </span>
                 <img
-                  src="../assets/img/pop/cn/h5_icon_girl.png"
+                  src="../assets/img/pop/cn/h5_icon_girl.webp"
                   class="sex"
                   alt=""
                 />
@@ -61,13 +61,13 @@
               </span>
               <img
                 v-if="user_info.sex"
-                src="../assets/img/pop/cn/h5_icon_man.png"
+                src="../assets/img/pop/cn/h5_icon_man.webp"
                 class="sex"
                 alt=""
               />
               <img
                 v-else
-                src="../assets/img/pop/cn/h5_icon_girl.png"
+                src="../assets/img/pop/cn/h5_icon_girl.webp"
                 class="sex"
                 alt=""
               />
@@ -129,7 +129,7 @@
         </div>
         <img
           @click="closeModal"
-          src="../assets/img/pop/icon_close.png"
+          src="../assets/img/pop/icon_close.webp"
           class="close"
           alt=""
         />
@@ -614,20 +614,20 @@ export default {
   height: 8.87rem;
 }
 .cn-bg {
-  background: url('../assets/img/pop/cn/youhui.png') no-repeat;
+  background: url('../assets/img/pop/cn/youhui.webp') no-repeat;
   background-size: contain;
 }
 .tw-bg {
-  background: url('../assets/img/pop/cn/youhui.png') no-repeat;
+  background: url('../assets/img/pop/cn/youhui.webp') no-repeat;
   background-size: contain;
 }
 
 .cn-big-bg {
-  background: url('../assets/img/pop/cn/big_bg.png') no-repeat;
+  background: url('../assets/img/pop/cn/big_bg.webp') no-repeat;
   background-size: contain;
 }
 .tw-big-bg {
-  background: url('../assets/img/pop/cn/big_bg.png') no-repeat;
+  background: url('../assets/img/pop/cn/big_bg.webp') no-repeat;
   background-size: contain;
 }
 

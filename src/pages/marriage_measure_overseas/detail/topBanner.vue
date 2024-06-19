@@ -2,7 +2,7 @@
   <div class="top-banner">
     <img
       class="first"
-      src="./../../../assets/img/marriage_measure_overseas/detail/detail_header.jpg"
+      src="./../../../assets/img/marriage_measure_overseas/detail/detail_header.webp"
       alt=""
     />
   </div>

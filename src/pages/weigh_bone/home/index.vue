@@ -60,13 +60,13 @@
           <img
             v-if="privacyChecked"
             class="check"
-            src="../../../assets/img/career_divination_overseas/home/checked.png"
+            src="../../../assets/img/career_divination_overseas/home/checked.webp"
             @click="privacyChecked = !privacyChecked"
           />
           <img
             v-else
             class="check"
-            src="../../../assets/img/career_divination_overseas/home/unchecked.png"
+            src="../../../assets/img/career_divination_overseas/home/unchecked.webp"
             @click="privacyChecked = !privacyChecked"
           />
           <span>查看</span>

@@ -109,41 +109,41 @@ import utils from '../../../libs/utils';
 // @ts-ignore
 import UserInfo from './user_info.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
-import cn_pay_btn from '../../../assets/img/emotion/home_btn.png';
+import cn_pay_btn from '../../../assets/img/emotion/home_btn.webp';
 
-import cn_home_btn1 from '../../../assets/img/emotion_v2/new/cn/btn.png';
-import tw_home_btn1 from '../../../assets/img/emotion_v2/new/tw/btn.png';
-import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/pay.png';
-import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/pay.png';
-import cn_home_xs_btn from '../../../assets/img/emotion_v2/new/cn/pay_xs.png';
-import tw_home_xs_btn from '../../../assets/img/emotion_v2/new/tw/pay_xs.png';
+import cn_home_btn1 from '../../../assets/img/emotion_v2/new/cn/btn.webp';
+import tw_home_btn1 from '../../../assets/img/emotion_v2/new/tw/btn.webp';
+import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/pay.webp';
+import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/pay.webp';
+import cn_home_xs_btn from '../../../assets/img/emotion_v2/new/cn/pay_xs.webp';
+import tw_home_xs_btn from '../../../assets/img/emotion_v2/new/tw/pay_xs.webp';
 
 import PayCard from '../../../components/PayCard.vue';
-import cn_card_1 from '../../../assets/img/emotion/home_card1.png';
+import cn_card_1 from '../../../assets/img/emotion/home_card1.webp';
 import tw_card_1 from '../../../assets/img/tw_mlxz/emotion/home_card1.webp';
-import cn_card_2 from '../../../assets/img/emotion/home_card2.png';
+import cn_card_2 from '../../../assets/img/emotion/home_card2.webp';
 import tw_card_2 from '../../../assets/img/tw_mlxz/emotion/home_card2.webp';
 import payModal from '../../../components/PayModal.vue';
 import BaziTable from '../../../components/baziTable.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
-import cn_info_title from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_toutu.png';
-import tw_info_title from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_toutu.png';
-import cn_zhong3 from '../../../assets/img/emotion/new/zhong_3.png';
-import tw_zhong3 from '../../../assets/img/emotion/new/tw/zhong_3.png';
-import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.png';
-import tw_zhong4 from '../../../assets/img/emotion/new/tw/zhong_4.png';
+import cn_info_title from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_toutu.webp';
+import tw_info_title from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_toutu.webp';
+import cn_zhong3 from '../../../assets/img/emotion/new/zhong_3.webp';
+import tw_zhong3 from '../../../assets/img/emotion/new/tw/zhong_3.webp';
+import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
+import tw_zhong4 from '../../../assets/img/emotion/new/tw/zhong_4.webp';
 import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import PayDetail from '../../../components/PayDetail.vue';
 
-import cn_bg_1 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_1.png';
-import cn_bg_2 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_2.png';
-import cn_bg_3 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_3.png';
-import tw_bg_1 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_1_fanti.png';
-import tw_bg_2 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_2_fanti.png';
-import tw_bg_3 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_3_fanti.png';
-import img_zhifu_jian from '../../../assets/img/emotion_v2/new/cn/detail/img_zhifu_jian.png';
-import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_fan.png';
+import cn_bg_1 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_1.webp';
+import cn_bg_2 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_2.webp';
+import cn_bg_3 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_3.webp';
+import tw_bg_1 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_1_fanti.webp';
+import tw_bg_2 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_2_fanti.webp';
+import tw_bg_3 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_3_fanti.webp';
+import img_zhifu_jian from '../../../assets/img/emotion_v2/new/cn/detail/img_zhifu_jian.webp';
+import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_jian.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
 export default {
@@ -503,13 +503,13 @@ export default {
   }
 
   .cn-bg {
-    background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.png)
+    background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.webp)
       no-repeat;
     background-size: 100% 100%;
   }
 
   .tw-bg {
-    background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.png)
+    background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.webp)
       no-repeat;
     background-size: 100% 100%;
   }
@@ -559,7 +559,7 @@ export default {
 .card-box {
   width: 7.06rem;
   height: 4.68rem;
-  background: url('../../../assets/img/emotion/new/result_card2.png') no-repeat;
+  background: url('../../../assets/img/emotion/new/result_card2.webp') no-repeat;
   background-size: contain;
   margin-bottom: 0.2rem;
 

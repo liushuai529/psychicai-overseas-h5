@@ -26,7 +26,7 @@
         </div>
         <img
           class="heart"
-          src="../../../assets/img/marriage_measure_overseas/detail/heart.png"
+          src="../../../assets/img/marriage_measure_overseas/detail/heart.webp"
         />
         <div class="female-info">
           <div class="info-name">{{ fname | nameFilter }}</div>
@@ -58,7 +58,7 @@
     <img
       id="title-pay"
       class="title-pay"
-      src="../../../assets/img/bzhh_v2/img_title.png"
+      src="../../../assets/img/bzhh_v2/img_title.webp"
       alt=""
     />
     <PayDetail
@@ -130,8 +130,8 @@ import utils from './../../../libs/utils.js';
 import hour_ganzi from './../../../libs/suishen.huangli.js';
 import year_ganzi from './../../../libs/suishen.wnl.js';
 
-import cn_img_title from '../../../assets/img/bzhh_v2/cn/img_title.png';
-import tw_img_title from '../../../assets/img/bzhh_v2/tw/img_title.png';
+import cn_img_title from '../../../assets/img/bzhh_v2/cn/img_title.webp';
+import tw_img_title from '../../../assets/img/bzhh_v2/tw/img_title.webp';
 import tw_img_word from '../../../assets/img/tw_mlxz/bazihehun/detail/text.webp';
 import cn_img_word from '../../../assets/img/mlxz/bzhh/detail/img_word.webp';
 
@@ -157,8 +157,8 @@ import tw_modal_bg from '../../../assets/img/tw_mlxz/bazihehun/detail/modal_bg.w
 import payModal from '../../../components/PayModal.vue';
 import shengxiao from './shengxiao.vue';
 import baziInfo from './bazi.vue';
-import tw_btn from './../../../assets/img//bzhh_v2/tw/img_btn.png';
-import cn_btn from './../../../assets/img/bzhh_v2/cn/img_btn.png';
+import tw_btn from './../../../assets/img//bzhh_v2/tw/img_btn.webp';
+import cn_btn from './../../../assets/img/bzhh_v2/cn/img_btn.webp';
 import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import PayDetail from '../../../components/PayDetail.vue';
@@ -570,7 +570,7 @@ export default {
 .footer-box {
   width: 7.5rem;
   height: 3rem;
-  // background: url('../../../assets/img/bzhh_v2/bazihehun_img_btnmengban.png')
+  // background: url('../../../assets/img/bzhh_v2/bazihehun_img_btnmengban.webp')
   //   no-repeat;
   // background-size: contain;
   // position: fixed;

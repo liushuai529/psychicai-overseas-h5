@@ -5,7 +5,7 @@
         selectIndex ? 'left-product' : 'left-product-select',
         'both-product-container',
       ]" :style="getLeftBg()" @click="changeComboHandle(0)">
-        <img v-if="selectIndex === 0" src="../assets/img/img_buy_choose.png" class="check_icon" />
+        <img v-if="selectIndex === 0" src="../assets/img/img_buy_choose.webp" class="check_icon" />
         <div :class="['title', this.selectIndex ? 'title-unselect' : null]">
           单项购买
         </div>
@@ -27,7 +27,7 @@
         selectIndex ? 'right-product-select' : 'right-product',
         'both-product-container',
       ]" :style="getRightBg()" @click="changeComboHandle(1)">
-        <img v-if="selectIndex === 1" src="../assets/img/img_buy_choose.png" class="check_icon" />
+        <img v-if="selectIndex === 1" src="../assets/img/img_buy_choose.webp" class="check_icon" />
         <div :class="['title', this.selectIndex ? null : 'title-unselect']">
           超值套餐
         </div>
@@ -45,7 +45,7 @@
             </div>
           </div>
 
-          <img class="icon-plus" src="../assets/img/img_buy_add_seleted.png" />
+          <img class="icon-plus" src="../assets/img/img_buy_add_seleted.webp" />
 
           <div class="image-item-contaier">
             <img class="icon" :src="product_key === 'h5_marriage'
@@ -68,7 +68,7 @@
     </div>
     <div class="time-container">
       <div class="left-container">
-        <img src="../assets/img/buy_icon_daojishi.png" />
+        <img src="../assets/img/buy_icon_daojishi.webp" />
         <div class="desc">限时优惠倒计时</div>
       </div>
       <div class="right-container">
@@ -103,10 +103,10 @@
 import { CountDown } from "vant";
 import { banner_enums } from "../libs/enum";
 import utils from "../libs/utils";
-import buy_choose from "../assets/img/img_buy_choose.png";
-import cn_small_bzhh from "../assets/img/common/banner/small/cn/h5_fang_jian_bazihehun.png";
-import tw_small_bzhh from "../assets/img/common/banner/small/tw/h5_fang_fan_bazihhehun.png";
-import new_ganqing_small from "../assets/img/emotion_v2/new/banner_ganqing_fang.png";
+import buy_choose from "../assets/img/img_buy_choose.webp";
+import cn_small_bzhh from "../assets/img/common/banner/small/cn/h5_fang_jian_bazihehun.webp";
+import tw_small_bzhh from "../assets/img/common/banner/small/tw/h5_fang_fan_bazihhehun.webp";
+import new_ganqing_small from "../assets/img/emotion_v2/new/banner_ganqing_fang.webp";
 
 export default {
   props: {

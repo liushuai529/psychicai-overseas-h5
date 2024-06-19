@@ -241,8 +241,8 @@ import combinePayPop from '../../../components/combinePayPop.vue';
 import cn_info_title from '../../../assets/img/mlxz/lucky_year_report/info-title.webp';
 import tw_info_title from '../../../assets/img/tw_mlxz/wealth_24/home/txt.png';
 
-import cn_btn from '../../../assets/img/common/bt.png';
-import tw_btn from '../../../assets/img/common/tw_bt.png';
+import cn_btn from '../../../assets/img/common/bt.webp';
+import tw_btn from '../../../assets/img/common/tw_bt.webp';
 
 import cn_card1 from '../../../assets/img/mlxz/lucky_year_report/1.webp';
 import tw_card1 from '../../../assets/img/tw_mlxz/wealth_24/home/1.png';

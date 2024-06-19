@@ -11,7 +11,7 @@
       <div class="title">选择支付方式</div>
       <img
         @click="pop_modal = false"
-        src="../../../assets/img/new_combine/icon_close2.png"
+        src="../../../assets/img/new_combine/icon_close2.webp"
         class="close"
         alt=""
       />
@@ -53,8 +53,8 @@
 
 <script>
 import { getPayMethodsAPI, payOrderAPI } from '../../../api/api';
-import checked from '../../../assets/img/new_combine/img_choose2.png';
-import noChecked from '../../../assets/img/new_combine/img_choose1.png';
+import checked from '../../../assets/img/new_combine/img_choose2.webp';
+import noChecked from '../../../assets/img/new_combine/img_choose1.webp';
 import { Indicator } from 'mint-ui';
 import utils from '../../../libs/utils';
 export default {

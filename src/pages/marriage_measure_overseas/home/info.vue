@@ -23,7 +23,7 @@
         <img
           class="left"
           style="width: 1.22rem; height: 1.22rem; margin-right: 0.2rem"
-          src="./../../../assets/img/bzhh_v2/man-icon.png"
+          src="./../../../assets/img/bzhh_v2/man-icon.webp"
         />
       </div>
       <div class="right">
@@ -56,7 +56,7 @@
         <img
           class="left"
           style="width: 1.22rem; height: 1.22rem; margin-right: 0.2rem"
-          src="./../../../assets/img/bzhh_v2/fman-icon.png"
+          src="./../../../assets/img/bzhh_v2/fman-icon.webp"
         />
       </div>
       <div class="right">

@@ -13,12 +13,12 @@
 
 <script>
 
-import h5_emotion2024 from '../assets/img/bottom_bg/emotion.png';
-import h5_marriage from '../assets/img/bottom_bg/h5_marriage.png';
-import h5_wealth2024 from '../assets/img/bottom_bg/h5_wealth2024.png';
-import h5_career2024 from '../assets/img/bottom_bg/h5_career2024.png';
-import h5_bai_gua from '../assets/img/bottom_bg/h5_bai_gua.png';
-import h5_annual2024 from '../assets/img/bottom_bg/h5_annual2024.png';
+import h5_emotion2024 from '../assets/img/bottom_bg/emotion.webp';
+import h5_marriage from '../assets/img/bottom_bg/h5_marriage.webp';
+import h5_wealth2024 from '../assets/img/bottom_bg/h5_wealth2024.webp';
+import h5_career2024 from '../assets/img/bottom_bg/h5_career2024.webp';
+import h5_bai_gua from '../assets/img/bottom_bg/h5_bai_gua.webp';
+import h5_annual2024 from '../assets/img/bottom_bg/h5_annual2024.webp';
 
 export default {
   name: "NewFooter",

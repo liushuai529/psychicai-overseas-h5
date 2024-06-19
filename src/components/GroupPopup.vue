@@ -11,7 +11,7 @@
             请选择商品组合<span>需选择{{ maxNum }}个商品</span>
           </div>
           <div class="group-close" @click="close">
-            <img src="../assets/img/index2/pay-close.png" />
+            <img src="../assets/img/index2/pay-close.webp" />
           </div>
         </div>
         <div class="group-wrapper">
@@ -166,7 +166,7 @@ export default {
       width: 6.9rem;
       height: 1.6rem;
       margin-bottom: 0.24rem;
-      background-image: url('../assets/img/3.0/select-border.png');
+      background-image: url('../assets/img/3.0/select-border.webp');
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
@@ -191,7 +191,7 @@ export default {
         line-height: 0.36rem;
       }
       &.active {
-        background-image: url('../assets/img/3.0/select-border_active.png');
+        background-image: url('../assets/img/3.0/select-border_active.webp');
         .desc {
           color: #314a46;
         }
@@ -220,19 +220,19 @@ export default {
   }
 }
 .prod_1 {
-  background-image: url('../assets/img/3.0/prod-combine_1.png');
+  background-image: url('../assets/img/3.0/prod-combine_1.webp');
 }
 .prod_2 {
-  background-image: url('../assets/img/3.0/prod-combine_2.png');
+  background-image: url('../assets/img/3.0/prod-combine_2.webp');
 }
 .prod_3 {
-  background-image: url('../assets/img/3.0/prod-combine_3.png');
+  background-image: url('../assets/img/3.0/prod-combine_3.webp');
 }
 .prod_4 {
-  background-image: url('../assets/img/3.0/prod-combine_4.png');
+  background-image: url('../assets/img/3.0/prod-combine_4.webp');
 }
 .prod_5 {
-  background-image: url('../assets/img/3.0/prod-combine_5.png');
+  background-image: url('../assets/img/3.0/prod-combine_5.webp');
 }
 </style>
 <style lang="less">

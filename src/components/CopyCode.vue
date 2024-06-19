@@ -236,12 +236,12 @@ export default {
   width: 7.11rem;
   height: 6.94rem;
   padding-top: 1.53rem;
-  background: url('../assets/img/emotion_v2/new/cn/result/img_xiazai_jian.png')
+  background: url('../assets/img/emotion_v2/new/cn/result/img_xiazai_jian.webp')
     no-repeat;
   background-size: 100% 100%;
 }
 .emotion-code {
-  background: url('../assets/img/emotion_v2/new/cn/result/img_shibiema_card.png')
+  background: url('../assets/img/emotion_v2/new/cn/result/img_shibiema_card.webp')
     no-repeat;
   background-size: 100% 100%;
 }

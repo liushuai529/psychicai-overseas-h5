@@ -16,7 +16,7 @@
             </div>
             <div class="good-name">“{{ name }}”測算服務費用</div>
             <div class="checkstand">
-                <img src="../../assets/img/checkstand/bg-top.png" alt />
+                <img src="../../assets/img/checkstand/bg-top.webp" alt />
                 <div class="wrapper">
                     <div class="title">請選擇支付方式</div>
                     <div class="item" v-for="(item, i) in list" @click="index = i">
@@ -25,11 +25,11 @@
                             <div class="name">{{ item.name }}</div>
                             <div class="refund">{{ canRefund(item.payment_name) }}</div>
                         </div>
-                        <img class="check" v-if="index === i" src="../../assets/img/checkstand/checked.png" alt />
-                        <img class="check" v-else src="../../assets/img/checkstand/unchecked.png" alt />
+                        <img class="check" v-if="index === i" src="../../assets/img/checkstand/checked.webp" alt />
+                        <img class="check" v-else src="../../assets/img/checkstand/unchecked.webp" alt />
                     </div>
                 </div>
-                <img style="margin-top: -1px" src="../../assets/img/checkstand/bg-bottom.png" alt />
+                <img style="margin-top: -1px" src="../../assets/img/checkstand/bg-bottom.webp" alt />
             </div>
             <div class="btn" @click="pay">去支付</div>
         </template>
@@ -261,7 +261,7 @@ export default {
             margin-top: -1px;
             box-sizing: border-box;
             padding: 0 0.7rem;
-            background-image: url("../../assets/img/checkstand/bg-line.png");
+            background-image: url("../../assets/img/checkstand/bg-line.webp");
             background-repeat: repeat;
             background-position: center;
             background-size: contain;

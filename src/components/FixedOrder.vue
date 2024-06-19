@@ -205,7 +205,7 @@ export default {
 .fixed-order {
   width: 2.56rem;
   height: 1.9rem;
-  background: url('../assets/img/pop/fix-pop.png') no-repeat;
+  background: url('../assets/img/pop/fix-pop.webp') no-repeat;
   background-size: contain;
   position: fixed;
   right: 0;

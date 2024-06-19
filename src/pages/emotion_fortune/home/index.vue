@@ -25,7 +25,7 @@
         :style="getStyle"
       >
         <img
-          src="../../../assets/img/common/baogao_icon_home.png"
+          src="../../../assets/img/common/baogao_icon_home.webp"
           class="left"
           alt=""
         />
@@ -70,7 +70,7 @@
               <img
                 @click="openPicker"
                 class="info-arrow"
-                src="../../../assets/img/emotion_v2/new/icon_you.png"
+                src="../../../assets/img/emotion_v2/new/icon_you.webp"
               />
             </div>
           </div>
@@ -107,13 +107,13 @@
             <img
               v-if="privacyChecked"
               class="info-check"
-              src="../../../assets/img/emotion/xieyi-checked.png"
+              src="../../../assets/img/emotion/xieyi-checked.webp"
               @click="privacyChecked = !privacyChecked"
             />
             <img
               v-else
               class="info-check"
-              src="../../../assets/img/emotion/xieyi-no-check.png"
+              src="../../../assets/img/emotion/xieyi-no-check.webp"
               @click="privacyChecked = !privacyChecked"
             />
             {{ $t('check-label') }}
@@ -238,33 +238,33 @@ import {
   maidianEnum,
 } from '../../../libs/enum';
 
-import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.png';
-import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.png';
+import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.webp';
+import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.webp';
 
 import combinePayPop from '../../../components/combinePayPop.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
 
-import cn_card_1 from '../../../assets/img/emotion/new/2.png';
-import tw_card_1 from '../../../assets/img/emotion/new/tw/2.png';
-import cn_card_2 from '../../../assets/img/emotion/new/3.png';
-import tw_card_2 from '../../../assets/img/emotion/new/tw/3.png';
-import cn_history_order from '../../../assets/img/emotion_v2/new/bgm_lsdd.png';
-import tw_history_order from '../../../assets/img/emotion_v2/new/bgm_lsdd_fan.png';
+import cn_card_1 from '../../../assets/img/emotion/new/2.webp';
+import tw_card_1 from '../../../assets/img/emotion/new/tw/2.webp';
+import cn_card_2 from '../../../assets/img/emotion/new/3.webp';
+import tw_card_2 from '../../../assets/img/emotion/new/tw/3.webp';
+import cn_history_order from '../../../assets/img/emotion_v2/new/bgm_lsdd.webp';
+import tw_history_order from '../../../assets/img/emotion_v2/new/bgm_lsdd_fan.webp';
 
 import HotProduct from '../../../components/hotProduct.vue';
 import PopNotice from '../../../components/PopNotice.vue';
 
-import cn_icon_1 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home1.png';
-import cn_icon_2 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home2.png';
-import cn_icon_3 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home3.png';
-import cn_icon_4 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home4.png';
-import cn_icon_5 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home5.png';
+import cn_icon_1 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home1.webp';
+import cn_icon_2 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home2.webp';
+import cn_icon_3 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home3.webp';
+import cn_icon_4 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home4.webp';
+import cn_icon_5 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home5.webp';
 
-import tw_icon_1 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home1_fanti.png';
-import tw_icon_2 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home2_fanti.png';
-import tw_icon_3 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_fanti.png';
-import tw_icon_4 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.png';
-import tw_icon_5 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.png';
+import tw_icon_1 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home1_fanti.webp';
+import tw_icon_2 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home2_fanti.webp';
+import tw_icon_3 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_fanti.webp';
+import tw_icon_4 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.webp';
+import tw_icon_5 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 
 import tStatistic from 'tstatistic';
@@ -1215,10 +1215,10 @@ export default {
   }
 }
 .cn-bg {
-  background-image: url('../../../assets/img/emotion_v2/new/cn/bg.png');
+  background-image: url('../../../assets/img/emotion_v2/new/cn/bg.webp');
 }
 .tw-bg {
-  background-image: url('../../../assets/img/emotion_v2/new/cn/bg.png');
+  background-image: url('../../../assets/img/emotion_v2/new/cn/bg.webp');
 }
 #bg-svga {
   position: absolute;
@@ -1250,10 +1250,10 @@ export default {
     }
   }
   .cn-info-bg {
-    background-image: url('../../../assets/img/emotion_v2/new/cn/info.png');
+    background-image: url('../../../assets/img/emotion_v2/new/cn/info.webp');
   }
   .tw-info-bg {
-    background-image: url('../../../assets/img/emotion_v2/new/tw/info.png');
+    background-image: url('../../../assets/img/emotion_v2/new/tw/info.webp');
   }
   .info {
     justify-content: center;
@@ -1264,7 +1264,7 @@ export default {
     height: 4.47rem;
     margin-bottom: 0.2rem;
     background-repeat: no-repeat;
-    // background: url('../../../assets/img/emotion/img_name_bg.png') no-repeat;
+    // background: url('../../../assets/img/emotion/img_name_bg.webp') no-repeat;
     background-size: contain;
     margin-top: 8.83rem;
     .info-bg {
@@ -1433,7 +1433,7 @@ export default {
 .card-box {
   width: 7.06rem;
   height: 4.68rem;
-  background: url('../../../assets/img/emotion/new/result_card2.png') no-repeat;
+  background: url('../../../assets/img/emotion/new/result_card2.webp') no-repeat;
   background-size: contain;
   margin-bottom: 0.2rem;
   #qian {
@@ -1462,7 +1462,7 @@ export default {
   left: 0.2rem;
   width: 1.32rem;
   height: 0.6rem;
-  background: url('../../../assets/img/common/baogao_img_btnbj.png') no-repeat;
+  background: url('../../../assets/img/common/baogao_img_btnbj.webp') no-repeat;
   background-size: contain;
   display: flex;
   align-items: center;

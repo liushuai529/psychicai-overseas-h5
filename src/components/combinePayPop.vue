@@ -5,7 +5,7 @@
         <div class="pay-header">
           <div class="pay-title">{{ tips_1[language] }}</div>
           <div class="pay-close" @click="close">
-            <img src="../assets/img/index2/pay-close.png" />
+            <img src="../assets/img/index2/pay-close.webp" />
           </div>
         </div>
         <div class="pay-wrapper">
@@ -41,7 +41,7 @@
             @click="expand = true"
           >
             {{ tips_2[language] }}
-            <img src="../assets/img/arrow.png" alt="" />
+            <img src="../assets/img/arrow.webp" alt="" />
           </div>
         </div>
         <div class="pay-btn" @click="pay">{{ tips_3[language] }}</div>

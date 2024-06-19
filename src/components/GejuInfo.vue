@@ -100,11 +100,11 @@
 <template>
     <div :id="product_key !== 'h5_emotion2024' ? 'mode_middle' : ''" class="main">
         <div class="header_img" v-if="product_key === 'h5_emotion2024'">
-            <img  src="../assets/img/geju/tittle_img_gejujiedu_jian.png" alt="">   
+            <img  src="../assets/img/geju/tittle_img_gejujiedu_jian.webp" alt="">   
         </div>
 
         <div class="header_img-bzhh" v-else>
-            <img src='../assets/img/geju/img_title_jian.png' alt="">
+            <img src='../assets/img/geju/img_title_jian.webp' alt="">
         </div>
 
 
@@ -119,28 +119,28 @@
             </div>
             <div class="nav_item">
                 <div class="nav_header" v-if="product_key === 'h5_emotion2024'">
-                    <img src="../assets/img/geju/left_heart.png" alt="">
+                    <img src="../assets/img/geju/left_heart.webp" alt="">
                     <span>感情方面</span>
-                    <img src="../assets/img/geju/right_heart.png" alt="">
+                    <img src="../assets/img/geju/right_heart.webp" alt="">
                 </div>
                 <div class="nav_header" v-else>
-                    <img src="../assets/img/geju/left_bird.png" alt="">
+                    <img src="../assets/img/geju/left_bird.webp" alt="">
                     <span>感情方面</span>
-                    <img src="../assets/img/geju/right_bird.png" alt="">
+                    <img src="../assets/img/geju/right_bird.webp" alt="">
                 </div>
                 <div class="nav_desc" v-html="item.love">
                 </div>
             </div>
             <div class="nav_item">
                 <div class="nav_header" v-if="product_key === 'h5_emotion2024'">
-                    <img src="../assets/img/geju/left_heart.png" alt="">
+                    <img src="../assets/img/geju/left_heart.webp" alt="">
                     <span>{{ is_cn ? "事业方面 " : "事業方面" }}</span>
-                    <img src="../assets/img/geju/right_heart.png" alt="">
+                    <img src="../assets/img/geju/right_heart.webp" alt="">
                 </div>
                 <div class="nav_header" v-else>
-                    <img src="../assets/img/geju/left_bird.png" alt="">
+                    <img src="../assets/img/geju/left_bird.webp" alt="">
                     <span>{{ is_cn ? "事业方面 " : "事業方面" }}</span>
-                    <img src="../assets/img/geju/right_bird.png" alt="">
+                    <img src="../assets/img/geju/right_bird.webp" alt="">
                 </div>
                 <div class="nav_desc" v-html="item.cause">
 

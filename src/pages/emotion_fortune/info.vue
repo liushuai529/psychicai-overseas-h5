@@ -71,8 +71,8 @@
 </template>
 
 <script>
-import arrowImg from './../../assets/img/index/down_arrow.png';
-import main_title_bg from './../../assets/img/bjmy0@2x.png';
+import arrowImg from './../../assets/img/index/down_arrow.webp';
+import main_title_bg from './../../assets/img/bjmy0@2x.webp';
 
 export default {
   props: ['name', 'sex', 'date', 'hour'],

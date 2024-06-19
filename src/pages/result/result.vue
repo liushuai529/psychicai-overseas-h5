@@ -11,8 +11,8 @@
     <!-- <div v-if="!loading && hasData" @click="toPage">成功</div>
         <div v-else-if="!loading" @click="back">返回</div>-->
     <div class="content" v-if="!loading">
-      <img v-if="hasData" src="../../assets/img/result/success.png" alt />
-      <img v-else src="../../assets/img/result/fail.png" alt />
+      <img v-if="hasData" src="../../assets/img/result/success.webp" alt />
+      <img v-else src="../../assets/img/result/fail.webp" alt />
       <div class="text">{{ hasData ? '訂單支付成功' : '訂單支付失败' }}</div>
       <div class="btn" @click="toPage">
         {{ hasData ? '點擊查看' : '點擊返回' }}

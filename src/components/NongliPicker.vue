@@ -6,7 +6,7 @@
         <img
           @click="cancel()"
           class="close"
-          src="../assets/img/common/liu_icon_dialog_no.png"
+          src="../assets/img/common/liu_icon_dialog_no.webp"
           alt=""
         />
         <div class="check-box">
@@ -16,7 +16,7 @@
           <div class="common-tab active-tab">{{ $t('nongli-label') }}</div>
         </div>
         <img
-          src="../assets/img/common/liu_icon_dialog_yes.png"
+          src="../assets/img/common/liu_icon_dialog_yes.webp"
           class="right"
           @click="submit()"
         />

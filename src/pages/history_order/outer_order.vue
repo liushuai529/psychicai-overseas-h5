@@ -17,7 +17,7 @@
       <div class="new-tab">
         <img
           @click="backPage"
-          src="../../assets/img/common/dingdan_icon_back.png"
+          src="../../assets/img/common/dingdan_icon_back.webp"
           class="back"
           alt=""
         />
@@ -1287,7 +1287,7 @@ export default {
 .write-bg {
   width: 7.1rem;
   height: 1.92rem !important;
-  background: url('../../assets/img/common/home_img_card_dingdan.png') no-repeat;
+  background: url('../../assets/img/common/home_img_card_dingdan.webp') no-repeat;
   background-size: contain !important;
 }
 
@@ -1413,20 +1413,20 @@ export default {
 .bg-2-nopay {
   width: 7.1rem;
   height: 2.44rem;
-  background: url('../../assets/img/pop/status-bg-2.png') no-repeat;
+  background: url('../../assets/img/pop/status-bg-2.webp') no-repeat;
   background-size: contain;
   position: relative;
 }
 .bg-4-nopay {
   width: 7.1rem;
   height: 2.44rem;
-  background: url('../../assets/img/pop/status-bg-2.png') no-repeat;
+  background: url('../../assets/img/pop/status-bg-2.webp') no-repeat;
   background-size: contain;
   position: relative;
 }
 .bg-1-nopay {
   height: 1.92rem;
-  background: url('../../assets/img/pop/status-bg-1.png') no-repeat;
+  background: url('../../assets/img/pop/status-bg-1.webp') no-repeat;
   background-size: contain;
   position: relative;
 }
@@ -1504,7 +1504,7 @@ export default {
 }
 .bg-3-nopay {
   height: 2.96rem;
-  background: url('../../assets/img/emotion_v2/new/home_img_card_dingdan.png')
+  background: url('../../assets/img/emotion_v2/new/home_img_card_dingdan.webp')
     no-repeat;
   background-size: contain;
   position: relative;

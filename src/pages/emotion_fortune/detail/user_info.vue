@@ -71,7 +71,7 @@
 
 <script>
 import utils from '../../../libs/utils.js';
-import cn_pay_title1 from '../../../assets/img/emotion/pay_title1.png';
+import cn_pay_title1 from '../../../assets/img/emotion/pay_title1.webp';
 import tw_pay_title1 from '../../../assets/img/tw_mlxz/emotion/result/pay_title1.webp';
 export default {
   props: [
@@ -231,10 +231,10 @@ export default {
   margin-top: 0 !important;
 }
 .cn-info {
-  background-image: url('../../../assets/img/emotion/result_name_bg.png');
+  background-image: url('../../../assets/img/emotion/result_name_bg.webp');
 }
 .tw-info {
-  background-image: url('../../../assets/img/emotion/new/tw/result_info.png');
+  background-image: url('../../../assets/img/emotion/new/tw/result_info.webp');
 }
 .result-box {
   padding-left: 0.95rem !important;

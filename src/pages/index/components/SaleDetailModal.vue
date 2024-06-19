@@ -152,17 +152,17 @@
 
 <script>
 //  2024年爱情运势
-import cn_icon_1_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home1.png';
-import cn_icon_2_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home2.png';
-import cn_icon_3_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home3.png';
-import cn_icon_4_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home4.png';
-import cn_icon_5_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home5.png';
+import cn_icon_1_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home1.webp';
+import cn_icon_2_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home2.webp';
+import cn_icon_3_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home3.webp';
+import cn_icon_4_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home4.webp';
+import cn_icon_5_h5_emotion2024 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home5.webp';
 
-import tw_icon_1_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home1_fanti.png';
-import tw_icon_2_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home2_fanti.png';
-import tw_icon_3_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_fanti.png';
-import tw_icon_4_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.png';
-import tw_icon_5_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.png';
+import tw_icon_1_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home1_fanti.webp';
+import tw_icon_2_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home2_fanti.webp';
+import tw_icon_3_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_fanti.webp';
+import tw_icon_4_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.webp';
+import tw_icon_5_h5_emotion2024 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.webp';
 
 // 2024年财运
 import cn_card1_h5_wealth2024 from '../../../assets/img/mlxz/lucky_year_report/1.webp';
@@ -213,8 +213,8 @@ import tw_card_4_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky
 import cn_card_5_year_of_lucky_2024 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai5.webp';
 import tw_card_5_year_of_lucky_2024 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai5.webp';
 //袁天罡秤骨
-import tw_card_1_h5_weigh_bone from '../../../assets/img/weigh_bone/yulan_yuantiangang_top_fan.jpg';
-import cn_card_1_h5_weigh_bone from '../../../assets/img/weigh_bone/yulan_yuantiangang_top_jian.jpg';
+import tw_card_1_h5_weigh_bone from '../../../assets/img/weigh_bone/yulan_yuantiangang_top_fan.webp';
+import cn_card_1_h5_weigh_bone from '../../../assets/img/weigh_bone/yulan_yuantiangang_top_jian.webp';
 
 //鬼谷子
 import cn_card_2_h5_bai_gua from '../../../assets/img/mlxz/guiguzi/home_img_mo2@2x.webp';

@@ -23,14 +23,14 @@
     <div class="marquee-wrapper">
       <div class="marquee-box" :class="{ scrollmarquee: scrollMarquee }">
         <div class="marquee-text item">
-          <img src="../assets/img/bzhh_v2/icon_laba.png" class="laba" alt="" />
+          <img src="../assets/img/bzhh_v2/icon_laba.webp" class="laba" alt="" />
           <span>{{ cur_marry_obj.desc1 }}</span>
           <span>{{ cur_marry_obj.desc2 }}</span>
           <span @click="jumpHome" class="light-red">八字合婚</span>
           <span>{{ cur_marry_obj.desc3 }}</span>
         </div>
         <div class="marquee-text next item">
-          <img src="../assets/img/bzhh_v2/icon_laba.png" class="laba" alt="" />
+          <img src="../assets/img/bzhh_v2/icon_laba.webp" class="laba" alt="" />
           <span>{{ next_marry_obj.desc1 }}</span>
           <span>{{ next_marry_obj.desc2 }}</span>
           <span @click="jumpHome" class="light-red">八字合婚</span>
@@ -151,7 +151,7 @@ export default {
         .marquee-icon {
           width: 0.28rem;
           height: 0.24rem;
-          background-image: url('../assets/img/3.0/horn.png');
+          background-image: url('../assets/img/3.0/horn.webp');
           background-position: top;
           background-repeat: no-repeat;
           background-size: contain;

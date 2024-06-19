@@ -96,7 +96,7 @@
         style="vertical-align: middle"
       >
         <img
-          src="../../src/assets/img/navtation_bar_icon/h5_icon_home.png"
+          src="../../src/assets/img/navtation_bar_icon/h5_icon_home.webp"
           alt=""
         />
         <span style="display: block" class="bold-text">{{ tips1 }}</span>
@@ -118,14 +118,14 @@
         @click="goRoute('/history_order', 'h5_order')"
       >
         <img
-          src="../../src/assets/img/navtation_bar_icon/h5_icon_dingdan.png"
+          src="../../src/assets/img/navtation_bar_icon/h5_icon_dingdan.webp"
           alt=""
         />
         <span class="bold-text">{{ tips3 }}</span>
       </div>
     </div>
     <img
-      src="../assets/img/navtation_bar_icon/daohang_img_jianbian.png"
+      src="../assets/img/navtation_bar_icon/daohang_img_jianbian.webp"
       class="divider-line"
       alt=""
     />

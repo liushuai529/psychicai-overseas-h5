@@ -5,7 +5,7 @@
         <div class="pay-header">
           <div class="pay-title">选择支付方式</div>
           <div class="pay-close" @click="close">
-            <img src="../assets/img/index2/pay-close.png" />
+            <img src="../assets/img/index2/pay-close.webp" />
           </div>
         </div>
         <div class="pay-wrapper">
@@ -35,7 +35,7 @@
           </template>
           <div v-if="!expand" class="expand" @click="expand = true">
             展开更多
-            <img src="../assets/img/arrow.png" alt="" />
+            <img src="../assets/img/arrow.webp" alt="" />
           </div>
         </div>
         <div class="pay-btn" @click="pay">立即支付</div>

@@ -33,24 +33,24 @@
 </template>
 
 <script>
-import cn_bzhh from '../assets/img/common/small/h5_fang_jian_bazihehun.png';
-import cn_emotion from '../assets/img/common/small/h5_fang_jian_ganqing.png';
-import cn_career from '../assets/img/common/small/h5_fang_jian_shiye.png';
-import cn_wealth from '../assets/img/common/small/h5_fang_jian_caiyun.png';
-import cn_year from '../assets/img/common/small/h5_fang_jian_nianyun.png';
-import cn_weight from '../assets/img/common/small/h5_fang_jian_yuantiangang.png';
-import cn_ggz from '../assets/img/common/small/h5_fang_jian_guiguzi.png';
+import cn_bzhh from '../assets/img/common/small/h5_fang_jian_bazihehun.webp';
+import cn_emotion from '../assets/img/common/small/h5_fang_jian_ganqing.webp';
+import cn_career from '../assets/img/common/small/h5_fang_jian_shiye.webp';
+import cn_wealth from '../assets/img/common/small/h5_fang_jian_caiyun.webp';
+import cn_year from '../assets/img/common/small/h5_fang_jian_nianyun.webp';
+import cn_weight from '../assets/img/common/small/h5_fang_jian_yuantiangang.webp';
+import cn_ggz from '../assets/img/common/small/h5_fang_jian_guiguzi.webp';
 
-import tw_bzhh from '../assets/img/common/small/h5_fang_fan_bazihhehun.png';
-import tw_emotion from '../assets/img/common/small/h5_fang_fan_ganqing.png';
-import tw_career from '../assets/img/common/small/h5_fang_fan_shiye.png';
-import tw_wealth from '../assets/img/common/small/h5_fang_fan_caiyun.png';
-import tw_year from '../assets/img/common/small/h5_fang_fan_nianyun.png';
-import tw_weight from '../assets/img/common/small/h5_fang_fan_yuantiangang.png';
-import tw_ggz from '../assets/img/common/small/h5_fang_fan_guiguzi.png';
+import tw_bzhh from '../assets/img/common/small/h5_fang_fan_bazihhehun.webp';
+import tw_emotion from '../assets/img/common/small/h5_fang_fan_ganqing.webp';
+import tw_career from '../assets/img/common/small/h5_fang_fan_shiye.webp';
+import tw_wealth from '../assets/img/common/small/h5_fang_fan_caiyun.webp';
+import tw_year from '../assets/img/common/small/h5_fang_fan_nianyun.webp';
+import tw_weight from '../assets/img/common/small/h5_fang_fan_yuantiangang.webp';
+import tw_ggz from '../assets/img/common/small/h5_fang_fan_guiguzi.webp';
 
-import cn_title from '../assets/img/common/ganqing_tittle_baokuan_jian.png';
-import tw_title from '../assets/img/common/ganqing_tittle_baokuan_fan.png';
+import cn_title from '../assets/img/common/ganqing_tittle_baokuan_jian.webp';
+import tw_title from '../assets/img/common/ganqing_tittle_baokuan_fan.webp';
 import utils from '../libs/utils';
 
 const all_list = [

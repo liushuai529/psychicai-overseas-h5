@@ -1,18 +1,18 @@
 .AXIATABOOST {
-  background-image: url('../assets/img/checkstand/payType/pay_icon_boost.png');
+  background-image: url('../assets/img/checkstand/payType/pay_icon_boost.webp');
 }
 .MAYBANK {
-  background-image: url('../assets/img/checkstand/payType/pay_icon_maybank.png');
+  background-image: url('../assets/img/checkstand/payType/pay_icon_maybank.webp');
 }
 .TNG {
-  background-image: url('../assets/img/checkstand/payType/pay_icon_touchgo.png');
+  background-image: url('../assets/img/checkstand/payType/pay_icon_touchgo.webp');
 }
 .GRABPAY {
-  background-image: url('../assets/img/checkstand/payType/pay_icon_grabpay.png');
+  background-image: url('../assets/img/checkstand/payType/pay_icon_grabpay.webp');
 }
 .NET_BANKING {
-  background-image: url('../assets/img/checkstand/payType/pay_icon_touchgo@3x.png');
+  background-image: url('../assets/img/checkstand/payType/pay_icon_touchgo@3x.webp');
 }
 .GOOGLEPAY {
-  background-image: url('../assets/img/checkstand/payType/pay_icon_goolglepay.png');
+  background-image: url('../assets/img/checkstand/payType/pay_icon_goolglepay.webp');
 }

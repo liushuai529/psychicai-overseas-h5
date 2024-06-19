@@ -16,7 +16,7 @@
         </div>
         <img
           class="heart"
-          src="../../../assets/img/marriage_measure_overseas/detail/heart.png"
+          src="../../../assets/img/marriage_measure_overseas/detail/heart.webp"
         />
         <div class="female-info">
           <div class="info-name">{{ user_ext.female_name | nameFilter }}</div>
@@ -238,10 +238,10 @@ import {
 import { Toast, Indicator } from 'mint-ui';
 import utils from './../../../libs/utils.js';
 import topBanner from './../detail/topBanner.vue';
-import cn_img_title from '../../../assets/img/bzhh_v2/cn/img_title.png';
-import tw_img_title from '../../../assets/img/bzhh_v2/tw/img_title.png';
-import solidStar from './../../../assets/img/marriage_measure_overseas/result/star_light.png';
-import dashedStar from './../../../assets/img/marriage_measure_overseas/result/star_gray.png';
+import cn_img_title from '../../../assets/img/bzhh_v2/cn/img_title.webp';
+import tw_img_title from '../../../assets/img/bzhh_v2/tw/img_title.webp';
+import solidStar from './../../../assets/img/marriage_measure_overseas/result/star_light.webp';
+import dashedStar from './../../../assets/img/marriage_measure_overseas/result/star_gray.webp';
 
 import cn_hemu from '../../../assets/img/mlxz/bzhh/result/hemu_rate.webp';
 import tw_hemu from '../../../assets/img/tw_mlxz/bazihehun/result/hemu_rate.webp';

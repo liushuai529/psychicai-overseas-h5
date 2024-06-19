@@ -31,7 +31,7 @@
   </div>
 </template>
 <script>
-import wechat_bg from '../assets/img/wechat@3x.png';
+import wechat_bg from '../assets/img/wechat@3x.webp';
 import Clipboard from 'clipboard'; //引入复制插件
 export default {
   props: {

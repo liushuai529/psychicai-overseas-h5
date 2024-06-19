@@ -267,9 +267,9 @@ import shiyeyun from '../assets/img/mlxz/history_order/dingdan_img_shiye.webp';
 import caiyun from '../assets/img/mlxz/history_order/dingdan_img_caiyun.webp';
 import hehun from '../assets/img/mlxz/history_order/dingdan_img_hehun.webp';
 
-import combine2 from '../assets/img/emotion_v2/new/dingdan_img_er.png';
-import combine3 from '../assets/img/emotion_v2/new/dingdan_img_san.png';
-import combo2_attach from '../assets/img/new_order/dingdan_img_er.png';
+import combine2 from '../assets/img/emotion_v2/new/dingdan_img_er.webp';
+import combine3 from '../assets/img/emotion_v2/new/dingdan_img_san.webp';
+import combo2_attach from '../assets/img/new_order/dingdan_img_er.webp';
 export const getHistoryOrderImg = {
   h5_weigh_bone: yuantiangang,
   h5_bai_gua: guiguzi,
@@ -293,43 +293,43 @@ export const report_id_arr = {
   h5_career2024: '60011',
 };
 
-import cn_small_bzhh from '../assets/img/common/banner/small/cn/h5_fang_jian_bazihehun.png';
-import cn_small_wealth from '../assets/img/common/banner/small/cn/h5_fang_jian_caiyun.png';
-import cn_small_career from '../assets/img/common/banner/small/cn/h5_fang_jian_shiye.png';
-import cn_small_love from '../assets/img/common/banner/small/cn/h5_fang_jian_ganqing.png';
-import cn_small_year from '../assets/img/common/banner/small/cn/h5_fang_jian_nianyun.png';
-import cn_small_gggz from '../assets/img/common/banner/small/cn/h5_fang_jian_guiguzi.png';
-import cn_small_weighbone from '../assets/img/common/banner/small/cn/h5_fang_jian_yuantiangang.png';
+import cn_small_bzhh from '../assets/img/common/banner/small/cn/h5_fang_jian_bazihehun.webp';
+import cn_small_wealth from '../assets/img/common/banner/small/cn/h5_fang_jian_caiyun.webp';
+import cn_small_career from '../assets/img/common/banner/small/cn/h5_fang_jian_shiye.webp';
+import cn_small_love from '../assets/img/common/banner/small/cn/h5_fang_jian_ganqing.webp';
+import cn_small_year from '../assets/img/common/banner/small/cn/h5_fang_jian_nianyun.webp';
+import cn_small_gggz from '../assets/img/common/banner/small/cn/h5_fang_jian_guiguzi.webp';
+import cn_small_weighbone from '../assets/img/common/banner/small/cn/h5_fang_jian_yuantiangang.webp';
 
-import tw_small_bzhh from '../assets/img/common/banner/small/tw/h5_fang_fan_bazihhehun.png';
-import tw_small_wealth from '../assets/img/common/banner/small/tw/h5_fang_fan_caiyun.png';
-import tw_small_career from '../assets/img/common/banner/small/tw/h5_fang_fan_shiye.png';
-import tw_small_love from '../assets/img/common/banner/small/tw/h5_fang_fan_ganqing.png';
-import tw_small_year from '../assets/img/common/banner/small/tw/h5_fang_fan_nianyun.png';
-import tw_small_gggz from '../assets/img/common/banner/small/tw/h5_fang_fan_guiguzi.png';
-import tw_small_weighbone from '../assets/img/common/banner/small/tw/h5_fang_fan_yuantiangang.png';
+import tw_small_bzhh from '../assets/img/common/banner/small/tw/h5_fang_fan_bazihhehun.webp';
+import tw_small_wealth from '../assets/img/common/banner/small/tw/h5_fang_fan_caiyun.webp';
+import tw_small_career from '../assets/img/common/banner/small/tw/h5_fang_fan_shiye.webp';
+import tw_small_love from '../assets/img/common/banner/small/tw/h5_fang_fan_ganqing.webp';
+import tw_small_year from '../assets/img/common/banner/small/tw/h5_fang_fan_nianyun.webp';
+import tw_small_gggz from '../assets/img/common/banner/small/tw/h5_fang_fan_guiguzi.webp';
+import tw_small_weighbone from '../assets/img/common/banner/small/tw/h5_fang_fan_yuantiangang.webp';
 
-import cn_big_bzhh from '../assets/img/common/banner/big/cn/h5_chang_jian_bazihehun.png';
-import cn_big_wealth from '../assets/img/common/banner/big/cn/h5_chang_jian_caiyun.png';
-import cn_big_career from '../assets/img/common/banner/big/cn/h5_chang_jian_shiye.png';
-import cn_big_love from '../assets/img/common/banner/big/cn/h5_chang_jian_ganqing.png';
-import cn_big_year from '../assets/img/common/banner/big/cn/h5_chang_jian_nianyun.png';
-import cn_big_gggz from '../assets/img/common/banner/big/cn/h5_chang_jian_guiguzi.png';
-import cn_big_weighbone from '../assets/img/common/banner/big/cn/h5_chang_jian_yuantiangang.png';
+import cn_big_bzhh from '../assets/img/common/banner/big/cn/h5_chang_jian_bazihehun.webp';
+import cn_big_wealth from '../assets/img/common/banner/big/cn/h5_chang_jian_caiyun.webp';
+import cn_big_career from '../assets/img/common/banner/big/cn/h5_chang_jian_shiye.webp';
+import cn_big_love from '../assets/img/common/banner/big/cn/h5_chang_jian_ganqing.webp';
+import cn_big_year from '../assets/img/common/banner/big/cn/h5_chang_jian_nianyun.webp';
+import cn_big_gggz from '../assets/img/common/banner/big/cn/h5_chang_jian_guiguzi.webp';
+import cn_big_weighbone from '../assets/img/common/banner/big/cn/h5_chang_jian_yuantiangang.webp';
 
-import tw_big_bzhh from '../assets/img/common/banner/big/tw/h5_chang_fan_bazihehun.png';
-import tw_big_wealth from '../assets/img/common/banner/big/tw/h5_chang_fan_caiyun.png';
-import tw_big_career from '../assets/img/common/banner/big/tw/h5_chang_fan_shiye.png';
-import tw_big_love from '../assets/img/common/banner/big/tw/h5_chang_fan_ganqing.png';
-import tw_big_year from '../assets/img/common/banner/big/tw/h5_chang_fan_nianyun.png';
-import tw_big_gggz from '../assets/img/common/banner/big/tw/h5_chang_fan_guiguzi.png';
-import tw_big_weighbone from '../assets/img/common/banner/big/tw/h5_chang_fan_yuantiangang.png';
+import tw_big_bzhh from '../assets/img/common/banner/big/tw/h5_chang_fan_bazihehun.webp';
+import tw_big_wealth from '../assets/img/common/banner/big/tw/h5_chang_fan_caiyun.webp';
+import tw_big_career from '../assets/img/common/banner/big/tw/h5_chang_fan_shiye.webp';
+import tw_big_love from '../assets/img/common/banner/big/tw/h5_chang_fan_ganqing.webp';
+import tw_big_year from '../assets/img/common/banner/big/tw/h5_chang_fan_nianyun.webp';
+import tw_big_gggz from '../assets/img/common/banner/big/tw/h5_chang_fan_guiguzi.webp';
+import tw_big_weighbone from '../assets/img/common/banner/big/tw/h5_chang_fan_yuantiangang.webp';
 
-import new_ganqing_small from '../assets/img/emotion_v2/new/banner_ganqing_fang.png';
-import new_ganqing_big from '../assets/img/emotion_v2/new/banner_ganqing_chang.png';
+import new_ganqing_small from '../assets/img/emotion_v2/new/banner_ganqing_fang.webp';
+import new_ganqing_big from '../assets/img/emotion_v2/new/banner_ganqing_chang.webp';
 
-import new_ganqing_small_xinren from '../assets/img/emotion_v2/new/banner_ganqing_fang_tag.png';
-import new_ganqing_big_xinren from '../assets/img/emotion_v2/new/banner_ganqing_chang_tag.png';
+import new_ganqing_small_xinren from '../assets/img/emotion_v2/new/banner_ganqing_fang_tag.webp';
+import new_ganqing_big_xinren from '../assets/img/emotion_v2/new/banner_ganqing_chang_tag.webp';
 
 export const banner_enums = {
   h5_marriage: {

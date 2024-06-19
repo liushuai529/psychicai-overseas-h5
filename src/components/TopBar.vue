@@ -84,7 +84,7 @@ export default {
         color: #314a46;
         &.active {
             color: #fff;
-            background-image: url("../assets/img/3.0/topbar-tab.png");
+            background-image: url("../assets/img/3.0/topbar-tab.webp");
         }
     }
 }

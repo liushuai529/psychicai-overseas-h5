@@ -161,7 +161,7 @@
             </div>
             <img
               v-else
-              src="../../assets/img/new_combine/home_tag_58_big.png"
+              src="../../assets/img/new_combine/home_tag_58_big.webp"
               class="zhekou-icon discount-tag"
               alt=""
             />
@@ -192,7 +192,7 @@
               />
               <img
                 v-else
-                src="../../assets/img/new_combine/home_btn_add.png"
+                src="../../assets/img/new_combine/home_btn_add.webp"
                 class="check-icon"
                 alt=""
               />
@@ -227,7 +227,7 @@
             {{ '领取我的专属优惠' }}
             <img
               v-if="is_show_reechoes_3"
-              src="../../assets/img/new_combine/home_tag_58_big.png"
+              src="../../assets/img/new_combine/home_tag_58_big.webp"
               class="absolute-zhe discount-tag"
               alt=""
             />
@@ -268,7 +268,7 @@
             </div>
             <img
               v-else
-              src="../../assets/img/new_combine/home_tag_68_big.png"
+              src="../../assets/img/new_combine/home_tag_68_big.webp"
               class="zhekou-icon discount-tag"
               alt=""
             />
@@ -299,7 +299,7 @@
               />
               <img
                 v-else
-                src="../../assets/img/new_combine/home_btn_add.png"
+                src="../../assets/img/new_combine/home_btn_add.webp"
                 class="check-icon"
                 alt=""
               />
@@ -332,7 +332,7 @@
             {{ '领取我的专属优惠' }}
             <img
               v-if="is_show_reechoes_2"
-              src="../../assets/img/new_combine/home_tag_68_big.png"
+              src="../../assets/img/new_combine/home_tag_68_big.webp"
               class="absolute-zhe discount-tag"
               alt=""
             />
@@ -463,7 +463,7 @@
               @click.stop="showDetailModal(3, item, k)"
             >
               <span class="btn-text">详情</span>
-              <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
+              <img src="../../assets/img/icon_yulan_more.webp" class="btn-img" />
             </div>
             <img
               :src="item.checked ? checkIcon : noCheckIcon"
@@ -524,7 +524,7 @@
               @click.stop="showDetailModal(2, item, k, 2, 'pick_list2')"
             >
               <span class="btn-text">详情</span>
-              <img src="../../assets/img/icon_yulan_more.png" class="btn-img" />
+              <img src="../../assets/img/icon_yulan_more.webp" class="btn-img" />
             </div>
             <img
               :src="item.checked ? checkIcon : noCheckIcon"
@@ -641,37 +641,37 @@ import tw_weigh from '../../assets/img/mlxz/index/tw/weigh_banner.webp';
 
 import tw_order_btn from '../../assets/img/mlxz/index/tw/history_order.webp';
 import tw_right_pay from '../../assets/img/mlxz/index/tw/right_pay.webp';
-import cn_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_bazihehun.png';
-import cn_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_guiguzi.png';
-import cn_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_yuantiangang.png';
-import cn_modal_emotion from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_ganqing.png';
-import cn_modal_career from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_shiye.png';
-import cn_modal_wealth from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_caiyun.png';
-import cn_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_nianyun.png';
-import tw_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_bazihehun.png';
-import tw_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_guiguzi.png';
-import tw_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_yuantiangang.png';
-import tw_modal_emotion from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_ganqing.png';
-import tw_modal_career from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_shiye.png';
-import tw_modal_wealth from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_caiyun.png';
-import tw_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_nianyun.png';
-import checkIcon from '../../assets/img/new_combine/zuhe_btn_choose_selected.png';
-import noCheckIcon from '../../assets/img/new_combine/zuhe_btn_choose_normal.png';
+import cn_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_bazihehun.webp';
+import cn_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_guiguzi.webp';
+import cn_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_yuantiangang.webp';
+import cn_modal_emotion from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_ganqing.webp';
+import cn_modal_career from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_shiye.webp';
+import cn_modal_wealth from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_caiyun.webp';
+import cn_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_jian_nianyun.webp';
+import tw_modal_bzhh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_bazihehun.webp';
+import tw_modal_ggz from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_guiguzi.webp';
+import tw_modal_weigh from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_yuantiangang.webp';
+import tw_modal_emotion from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_ganqing.webp';
+import tw_modal_career from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_shiye.webp';
+import tw_modal_wealth from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_caiyun.webp';
+import tw_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan_nianyun.webp';
+import checkIcon from '../../assets/img/new_combine/zuhe_btn_choose_selected.webp';
+import noCheckIcon from '../../assets/img/new_combine/zuhe_btn_choose_normal.webp';
 
-import cn_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_bazihehun.png';
-import cn_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_guiguzi.png';
-import cn_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_yuantiangang.png';
-import cn_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_ganqing.png';
-import cn_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_shiye.png';
-import cn_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_caiyun.png';
-import cn_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_nianyun.png';
-import tw_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_bazihehun.png';
-import tw_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_guiguzi.png';
-import tw_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_yuantiangang.png';
-import tw_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_ganqing.png';
-import tw_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_shiye.png';
-import tw_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_caiyun.png';
-import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_nianyun.png';
+import cn_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_bazihehun.webp';
+import cn_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_guiguzi.webp';
+import cn_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_yuantiangang.webp';
+import cn_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_ganqing.webp';
+import cn_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_shiye.webp';
+import cn_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_caiyun.webp';
+import cn_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_nianyun.webp';
+import tw_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_bazihehun.webp';
+import tw_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_guiguzi.webp';
+import tw_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_yuantiangang.webp';
+import tw_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_ganqing.webp';
+import tw_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_shiye.webp';
+import tw_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_caiyun.webp';
+import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_nianyun.webp';
 
 import PayModal from './components/payModal.vue';
 import SaleDetailModal from './components/SaleDetailModal.vue';
@@ -2879,7 +2879,7 @@ export default {
       width: 4.16rem;
       height: 0.8rem;
       margin: 0.3rem auto;
-      background-image: url('../../assets/img/3.0/slide.png');
+      background-image: url('../../assets/img/3.0/slide.webp');
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
@@ -3479,7 +3479,7 @@ export default {
     .item {
       width: 6.54rem !important;
       height: 4.88rem !important;
-      background: url('../../assets/img/new_combine/new_discount_bg.png')
+      background: url('../../assets/img/new_combine/new_discount_bg.webp')
         no-repeat;
       background-size: 100% 100%;
       position: relative;
@@ -3594,7 +3594,7 @@ export default {
   }
 
   .no-it {
-    background: url('../../assets/img/new_combine/home_btn_add.png') no-repeat;
+    background: url('../../assets/img/new_combine/home_btn_add.webp') no-repeat;
     background-size: contain;
   }
 }
@@ -3602,7 +3602,7 @@ export default {
 .pick-btn {
   width: 5.86rem;
   height: 0.96rem;
-  background: url('../../assets/img/new_combine/button_big.png') no-repeat;
+  background: url('../../assets/img/new_combine/button_big.webp') no-repeat;
   background-size: contain;
   font-weight: 600;
   font-size: 0.32rem;
@@ -3807,12 +3807,12 @@ export default {
     }
 
     .item-normal {
-      background: url('../../assets/img/new_combine/sale_normal.png') no-repeat;
+      background: url('../../assets/img/new_combine/sale_normal.webp') no-repeat;
       background-size: contain;
     }
 
     .item-checked {
-      background: url('../../assets/img/new_combine/sale_checked.png') no-repeat;
+      background: url('../../assets/img/new_combine/sale_checked.webp') no-repeat;
       background-size: contain;
     }
 
