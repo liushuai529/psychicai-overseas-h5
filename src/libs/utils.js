@@ -29,7 +29,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('panda03') > -1) {
     return 'panda03';
   } else {
-    return 'panda01';
+    return 'panda03';
   }
 };
 /**

@@ -107,7 +107,7 @@
               :class="['it', it.product_key ? '' : 'no-it', `it${k + 1}`]"
             >
               <img
-                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                :src="checkIconDic[it.product_key][utils.getLanguage()]"
                 class="check-icon"
                 alt=""
               />
@@ -186,7 +186,7 @@
             >
               <img
                 v-if="it.product_key"
-                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                :src="checkIconDic[it.product_key][utils.getLanguage()]"
                 class="check-icon"
                 alt=""
               />
@@ -293,7 +293,7 @@
             >
               <img
                 v-if="it.product_key"
-                :src="!is_cn ? it.cn_check_icon : it.tw_check_icon"
+                :src="checkIconDic[it.product_key][utils.getLanguage()]"
                 class="check-icon"
                 alt=""
               />
@@ -658,20 +658,20 @@ import tw_modal_year from '../../assets/img/new_combine/sale_big/h5_zuhe_big_fan
 import checkIcon from '../../assets/img/new_combine/zuhe_btn_choose_selected.webp';
 import noCheckIcon from '../../assets/img/new_combine/zuhe_btn_choose_normal.webp';
 
-import cn_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_bazihehun.webp';
-import cn_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_guiguzi.webp';
-import cn_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_yuantiangang.webp';
-import cn_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_ganqing.webp';
-import cn_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_shiye.webp';
-import cn_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_caiyun.webp';
-import cn_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_nianyun.webp';
-import tw_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_bazihehun.webp';
-import tw_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_guiguzi.webp';
-import tw_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_yuantiangang.webp';
-import tw_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_ganqing.webp';
-import tw_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_shiye.webp';
-import tw_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_caiyun.webp';
-import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_nianyun.webp';
+import tw_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_bazihehun.webp';
+import tw_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_guiguzi.webp';
+import tw_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_yuantiangang.webp';
+import tw_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_ganqing.webp';
+import tw_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_shiye.webp';
+import tw_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_caiyun.webp';
+import tw_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_fan_nianyun.webp';
+import cn_check_icon_bzhh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_bazihehun.webp';
+import cn_check_icon_ggz from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_guiguzi.webp';
+import cn_check_icon_weigh from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_yuantiangang.webp';
+import cn_check_icon_emotion from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_ganqing.webp';
+import cn_check_icon_career from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_shiye.webp';
+import cn_check_icon_wealth from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_caiyun.webp';
+import cn_check_icon_year from '../../assets/img/new_combine/sale_small/h5_zuhe_small_jian_nianyun.webp';
 
 import PayModal from './components/payModal.vue';
 import SaleDetailModal from './components/SaleDetailModal.vue';
@@ -689,6 +689,36 @@ const tipsArr5 = {
   'zh-CN': '订单创建中...',
   'zh-TW': '訂單創建中...',
 };
+const checkIconDic = {
+  'h5_bai_gua': {
+    'zh-CN': cn_check_icon_ggz, 
+    'zh-TW': tw_check_icon_ggz,
+  },
+  'h5_weigh_bone': {
+    'zh-CN': cn_check_icon_weigh,
+    'zh-TW': tw_check_icon_weigh,
+  },
+  'h5_marriage': {
+    'zh-CN': cn_check_icon_bzhh, 
+    'zh-TW': tw_check_icon_bzhh
+  },
+  'h5_emotion2024': {
+    'zh-CN': cn_check_icon_emotion, 
+    'zh-TW': tw_check_icon_emotion
+  },
+  'h5_annual2024': {
+    'zh-CN': cn_check_icon_year, 
+    'zh-TW': tw_check_icon_year
+  },
+  'h5_wealth2024': {
+    'zh-CN': cn_check_icon_wealth, 
+    'zh-TW': tw_check_icon_wealth
+  },
+  'h5_career2024': {
+    'zh-CN': cn_check_icon_career, 
+    'zh-TW': tw_check_icon_career
+  },
+}
 
 let index = utils.getQueryString('index') || 0;
 let channel = utils.getQueryString('channel');
@@ -989,6 +1019,8 @@ export default {
       time_start_2: false,
       time_3: 0,
       time_2: 0,
+      checkIconDic,
+      utils,
     };
   },
   computed: {
@@ -2192,6 +2224,7 @@ export default {
         }
 
         this.two_list = JSON.parse(JSON.stringify(this.pick_list2));
+        console.log('this.two_list', this.two_list)
         this.getSelectTagList(val);
         localStorage.setItem(
           'mlxz_web_select_list_two',
