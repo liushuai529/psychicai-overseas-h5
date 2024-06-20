@@ -1423,6 +1423,7 @@ export default {
     this.getProductSort();
     getProductionsAPI('ceh5').then(res => {
       this.all_list = res.data;
+      this.showComboAttach();
       if (!this.is_show_combine) return;
       if (order_id && pay_status === 'SUCCESS' && remove_flag === 2) {
         localStorage.removeItem(
@@ -1432,7 +1433,6 @@ export default {
       }
       this.getSelectTagList();
       this.getPayedOrderList();
-      this.showComboAttach();
       this.getLocalChecked('three_list', 'mlxz_web_select_list');
       this.getLocalChecked('two_list', 'mlxz_web_select_list_two');
     });
