@@ -260,7 +260,7 @@ export default {
           this.new_time
         );
         this.$emit('close');
-        this.$router.push({ path });
+        // this.$router.push({ path });
         return;
       }
       let path =
