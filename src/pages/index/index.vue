@@ -1438,6 +1438,7 @@ export default {
     });
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
+        console.log('page_back','返回到报告集合页面')
         utils.gcyLog(`page_back`, {
           mlxz_action_desc: '返回到报告集合页面',
         });

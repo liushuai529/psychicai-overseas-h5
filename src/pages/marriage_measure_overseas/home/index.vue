@@ -367,6 +367,10 @@ export default {
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
         this.showComboAttach();
+        console.log('page_back','返回到八字合婚首页')
+        utils.gcyLog(`page_back`, {
+          mlxz_action_desc: '返回到八字合婚首页',
+        });
       }
     });
     utils.isProd() &&
