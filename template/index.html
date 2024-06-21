@@ -128,9 +128,9 @@
         'DATAFLUX_RUM'
       )
       
-      DATAFLUX_RUM.onReady(function () {
+      DATAFLUX_RUM && DATAFLUX_RUM.onReady(function () {
         const is_prod = !/(localhost|192\.168|test-|console)/.test(location.href);
-        is_prod && DATAFLUX_RUM.init({
+        is_prod && DATAFLUX_RUM && DATAFLUX_RUM.init({
           applicationId: 'psychicai_h5',
           datakitOrigin: 'https://future-datakit.wekoi.ai', // 协议（包括：//），域名（或IP地址）[和端口号],
           env: /(localhost|192\.168|test|console)/.test(location.href)
