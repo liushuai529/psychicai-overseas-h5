@@ -13,7 +13,7 @@ import result from '../pages/marriage_measure_overseas/result/index.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -35,4 +35,19 @@ export default new Router({
       redirect: '/',
     },
   ],
+  
 });
+
+//全局前置路由守卫————初始化的时候被调用、每次路由切换之前被调用
+router.beforeEach((to,from,next)=>{
+	console.log('前置路由守卫',to,from)
+	next()
+})
+
+//全局后置路由守卫————初始化的时候被调用、每次路由切换之后被调用
+// router.afterEach((to,from)=>{
+// 	console.log('后置路由守卫',to,from)
+// 	document.title = to.meta.title || '硅谷系统'//修改网页标题
+// })
+
+export default router
