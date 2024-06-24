@@ -1,5 +1,6 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
+    <AnimationPage product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
     <img
       class="header-title"
       :src="is_cn ? cn_info_title : tw_info_title"
@@ -146,6 +147,7 @@ import img_zhifu_jian from '../../../assets/img/emotion_v2/new/cn/detail/img_zhi
 import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_jian.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
+import AnimationPage from '../../../components/AnimationPage.vue';
 export default {
   components: {
     UserInfo,
@@ -156,6 +158,7 @@ export default {
     PayDetail,
     NewFooter,
     GejuInfo,
+    AnimationPage,
   },
   data() {
     return {
@@ -221,6 +224,7 @@ export default {
       showFixedBtn: false,
       is_show_btn: true,
       gejujiedu: [], //格局信息
+      showAnimation: true,//过渡动画标识
     };
   },
   computed: {
@@ -382,7 +386,6 @@ export default {
       this.zhi = data.zhi;
       this.nayin = data.nayin;
       this.gejujiedu = data.gejujiedu;
-      console.warn('this.gejujiedu', this.gejujiedu);
     },
 
     /**
@@ -418,7 +421,6 @@ export default {
         : `${Lunar.fromYmd(+this.year, +this.month, +this.date)
             .getSolar()
             .toString()} ${this.picker_hour}`;
-      console.warn('this.gongli_nongli ', this.gongli_nongli);
 
       let nongli_desc = +this.gongli_nongli
         ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} `

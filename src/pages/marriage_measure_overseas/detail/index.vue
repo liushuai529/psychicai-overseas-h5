@@ -8,6 +8,7 @@
 
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
+    <AnimationPage product_key="h5_marriage" :visible="showAnimation"  @update-visible="showAnimation = false"/>
     <img
       class="top-banner"
       src="../../../assets/img/mlxz/bzhh/detail/img_head.webp"
@@ -164,6 +165,7 @@ import HomeFooter from '../../../components/HomeFooter.vue';
 import PayDetail from '../../../components/PayDetail.vue';
 import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
+import AnimationPage from '../../../components/AnimationPage.vue';
 
 
 const mockTipsArr = {
@@ -189,6 +191,7 @@ export default {
     PayDetail,
     NewFooter,
     GejuInfo,
+    AnimationPage,
   },
   data() {
     return {
@@ -222,6 +225,7 @@ export default {
       tw_mokuai5,
       tw_mokuai6,
       tw_mokuai7,
+      showAnimation: true,//过渡动画标识
       showFixedBtn: false,
       // baziInfo
       male_user_string: this.$route.query.male_str,
