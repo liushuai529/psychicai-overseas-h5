@@ -225,7 +225,7 @@ export default {
       tw_mokuai5,
       tw_mokuai6,
       tw_mokuai7,
-      showAnimation: true,//过渡动画标识
+      showAnimation: false,//过渡动画标识
       showFixedBtn: false,
       // baziInfo
       male_user_string: this.$route.query.male_str,
@@ -244,6 +244,10 @@ export default {
     nameFilter(val) {
       return utils.getShortStr(val, 4);
     },
+  },
+
+  beforeCreate() {
+    this.showAnimation = true;
   },
 
   created() {
