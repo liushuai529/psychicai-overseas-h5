@@ -162,6 +162,7 @@ export default {
   },
   data() {
     return {
+      localStorage: window.localStorage,
       cn_bg_1,
       cn_bg_2,
       cn_bg_3,
