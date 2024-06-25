@@ -152,6 +152,7 @@ export default {
         setTimeout(() => {
           this.show_modal = false;
           this.$emit('update-visible', false);
+          localStorage.removeItem('onceAnimation');
         }, 2000);
         
       }

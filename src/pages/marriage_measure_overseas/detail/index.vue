@@ -8,7 +8,7 @@
 
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal ||showAnimation }">
-    <AnimationPage product_key="h5_marriage" :visible="showAnimation"  @update-visible="showAnimation = false"/>
+    <AnimationPage product_key="h5_marriage" :visible="showAnimation && onceAnimation"  @update-visible="showAnimation = false"/>
     <img
       class="top-banner"
       src="../../../assets/img/mlxz/bzhh/detail/img_head.webp"
@@ -225,7 +225,7 @@ export default {
       tw_mokuai5,
       tw_mokuai6,
       tw_mokuai7,
-      showAnimation: false,//过渡动画标识
+      showAnimation: true,//过渡动画标识
       showFixedBtn: false,
       // baziInfo
       male_user_string: this.$route.query.male_str,
@@ -246,10 +246,6 @@ export default {
     },
   },
 
-  beforeCreate() {
-    this.showAnimation = true;
-  },
-
   created() {
     utils.firebaseLogEvent(
       '10007',
@@ -266,6 +262,9 @@ export default {
     this.parseUserString();
   },
   computed: {
+    onceAnimation() {
+      return localStorage.getItem('mlxz_outer_animation');
+    },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -296,17 +295,6 @@ export default {
   },
   mounted() {
     window.scrollTo(0, 0);
-    setTimeout(() => {
-      this.$nextTick(() => {
-      //排除渠道3
-        if(!this.is_show_combinationSpecial02) return
-        // 滚动到指定元素
-        const element = document.getElementById('title-pay');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    }, 6000);
     let btn = document.getElementById('info-btn');
     let self = this;
 

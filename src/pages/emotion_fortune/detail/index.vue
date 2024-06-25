@@ -1,6 +1,6 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal || showAnimation}">
-    <AnimationPage product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
+    <AnimationPage product_key="h5_emotion2024" :visible="showAnimation && onceAnimation"  @update-visible="showAnimation = false"/>
     <img
       class="header-title"
       :src="is_cn ? cn_info_title : tw_info_title"
@@ -224,7 +224,7 @@ export default {
       showFixedBtn: false,
       is_show_btn: true,
       gejujiedu: [], //格局信息
-      showAnimation: false,//过渡动画标识
+      showAnimation: true,//过渡动画标识
     };
   },
   watch: {
@@ -246,6 +246,9 @@ export default {
   },
 
   computed: {
+    onceAnimation() {
+      return localStorage.getItem('mlxz_outer_animation');
+    },
     //套餐支付显示逻辑
     is_show_combination() {
       return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(
@@ -320,17 +323,6 @@ export default {
 
   mounted() {
     window.scrollTo(0, 0);
-    setTimeout(() => {
-      this.$nextTick(() => {
-        //排除渠道3
-        if (!this.is_show_combinationSpecial02) return;
-        // 滚动到指定元素
-        const element = document.getElementById('method-title-img');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    }, 6000);
     let self = this;
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器

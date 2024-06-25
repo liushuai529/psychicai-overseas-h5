@@ -603,6 +603,9 @@ export default {
     // self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
   },
   methods: {
+    setAnimation() {
+      localStorage.setItem('mlxz_outer_animation', '1');
+    },
     async preloadSVGA() {
       var svgaUrl = 'https://psychicai-static.psychicai.pro/imgs/2406c6f666683c824312b07e66feb0c73ad2.svga'; // 替换为你的SVGA文件路径
       var image = new Image();
@@ -854,6 +857,8 @@ export default {
         return;
       }
 
+      
+
       let querystring = '';
       querystring += username;
       querystring += '|';
@@ -868,7 +873,8 @@ export default {
       querystring += time_obj.date;
       querystring += '|';
       querystring += time_obj.birth_hour || '-1';
-
+      //设置过渡动画标识
+      this.setAnimation();
       window.localStorage.setItem('_emotion_fortune_info', querystring);
 
       let path = 'detail?querystring=' + querystring;

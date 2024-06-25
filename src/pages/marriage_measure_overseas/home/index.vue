@@ -579,6 +579,9 @@ export default {
     },
   },
   methods: {
+    setAnimation() {
+      localStorage.setItem('mlxz_outer_animation', '1');
+    },
     //顶部引导横幅，开始测算
     async startCalculateClick() {
       //顶部套餐报告与当前报告不同
@@ -824,6 +827,7 @@ export default {
       if (isNaN(parseInt(this.female.picker_hour))) {
         this.female.picker_hour = -1;
       }
+      this.setAnimation()
 
       let maleusername = this.male.username;
       let femaleusername = this.female.username;
