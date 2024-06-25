@@ -320,6 +320,17 @@ export default {
 
   mounted() {
     window.scrollTo(0, 0);
+    setTimeout(() => {
+      this.$nextTick(() => {
+        //排除渠道3
+        if (!this.is_show_combinationSpecial02) return;
+        // 滚动到指定元素
+        const element = document.getElementById('method-title-img');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }, 6000);
     let self = this;
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
