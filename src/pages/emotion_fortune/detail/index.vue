@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ detail: true, 'hidden-scroll': pay_modal || showAnimation}">
+  <div :class="{ detail: true, 'hidden-scroll': pay_modal || !!onceAnimation }">
     <AnimationPage v-if='!!onceAnimation' product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
     <img
       class="header-title"
