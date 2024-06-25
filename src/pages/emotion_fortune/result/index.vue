@@ -6,7 +6,8 @@
  * @Description: 
 -->
 <template>
-  <div class="result">
+  <div class="result" @click="bottom_pop_modal = false">
+    <ResultPopup :visible="bottom_pop_modal" product_key="h5_emotion2024" @update-visible="bottom_pop_modal = false"/>
     <div :class="['info-box', lang ? 'cn-bg' : 'tw-bg']">
       <BaziTable
         :sex="sex"
@@ -61,8 +62,9 @@ import {
   sendEventApi,
 } from '../../../api/api';
 import BaziTable from '../../../components/baziTable.vue';
+import ResultPopup from '../../../components/ResultPopup.vue';
 export default {
-  components: { contentDetail, UserInfo, BaziTable },
+  components: { contentDetail, UserInfo, BaziTable, ResultPopup },
   data() {
     return {
       loading: false,
@@ -119,15 +121,18 @@ export default {
       wuxingqiang: '',
       tao_hua_num: 0,
       fuqigong: '',
+      bottom_pop_modal: false,//底部弹窗
     };
   },
   created() {
+   
     // localStorage.removeItem('mlxz_fixed_order_info');
     // localStorage.removeItem('mlxz_fixed_order_key');
     // localStorage.removeItem('mlxz_fixed_local_order_time');
     // localStorage.removeItem('mlxz_fixed_api_order_time');
   },
   async mounted() {
+    this.bottom_pop_modal = true
     this.order_id = this.$route.query.id || this.$route.query.order_id;
 
     window.scrollTo(0, 0);
