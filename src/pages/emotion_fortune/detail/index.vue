@@ -224,7 +224,7 @@ export default {
       showFixedBtn: false,
       is_show_btn: true,
       gejujiedu: [], //格局信息
-      showAnimation: true,//过渡动画标识
+      showAnimation: false,//过渡动画标识
     };
   },
   watch: {
@@ -297,6 +297,9 @@ export default {
         }
       }
     },
+  },
+  beforeCreate() {
+    this.showAnimation = true;
   },
   async created() {
     utils.firebaseLogEvent(
