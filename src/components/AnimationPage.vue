@@ -149,8 +149,11 @@ export default {
       if (this.content >= this.max_time) {
         // 当时间大于5秒，停止计时器
         clearInterval(this.timer); // 清除计时器
-        this.show_modal = false;
-        this.$emit('update-visible', false);
+        setTimeout(() => {
+          this.show_modal = false;
+          this.$emit('update-visible', false);
+        }, 2000);
+        
       }
       if (this.content > 1 && this.content <= 3) {
         this.current_time = 1
@@ -212,6 +215,7 @@ export default {
       border-radius: 0.08rem;
 
       .progress-check {
+        transition: width 0.5s ease-in-out; /* 过渡效果应用于宽度变化 */
         position: absolute;
         top: 0;
         left: 0;
