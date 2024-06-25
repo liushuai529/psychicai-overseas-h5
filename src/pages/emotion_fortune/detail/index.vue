@@ -1,6 +1,6 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') }">
-    <AnimationPage  product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
+    <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
     <img
       class="header-title"
       :src="is_cn ? cn_info_title : tw_info_title"
