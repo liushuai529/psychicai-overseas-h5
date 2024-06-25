@@ -8,7 +8,7 @@
 
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal ||showAnimation }">
-    <AnimationPage v-if='onceAnimation' product_key="h5_marriage" :visible="showAnimation"  @update-visible="showAnimation = false"/>
+    <AnimationPage v-if='!!onceAnimation' product_key="h5_marriage" :visible="showAnimation"  @update-visible="showAnimation = false"/>
     <img
       class="top-banner"
       src="../../../assets/img/mlxz/bzhh/detail/img_head.webp"
@@ -263,6 +263,7 @@ export default {
   },
   computed: {
     onceAnimation() {
+      console.log('mlxz_outer_animation', localStorage.getItem('mlxz_outer_animation'))
       return localStorage.getItem('mlxz_outer_animation');
     },
     is_cn() {
