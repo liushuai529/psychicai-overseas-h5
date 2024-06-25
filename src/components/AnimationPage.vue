@@ -103,19 +103,19 @@ export default {
     getTipText() {
       if (this.product_key === 'h5_emotion2024') {
         if (this.current_time === 1) {
-          return utils.getLanguage() === 'zh-CN' ? '1.正在录入你的信息...' : '1.正在录入你的信息...'
+          return utils.getLanguage() === 'zh-CN' ? '1.正在录入你的信息...' : '1.正在錄入你的信息...'
         } else if (this.current_time === 2) {
-          return utils.getLanguage() === 'zh-CN' ? '2.正在计算你的八字...' : '2.正在计算你的八字...'
+          return utils.getLanguage() === 'zh-CN' ? '2.正在计算你的八字...' : '2.正在計算你的八字...'
         } else if (this.current_time === 3) {
-          return utils.getLanguage() === 'zh-CN' ? '3.正在分析你的运势...' : '3.正在分析你的运势...'
+          return utils.getLanguage() === 'zh-CN' ? '3.正在分析你的运势...' : '3.正在分析你的運勢...'
         }
       } else {
         if (this.current_time === 1) {
-          return utils.getLanguage() === 'zh-CN' ? '1.正在录入你的信息...' : '1.正在录入你的信息...'
+          return utils.getLanguage() === 'zh-CN' ? '1.正在录入你的信息...' : '1.正在錄入你的信息...'
         } else if (this.current_time === 2) {
-          return utils.getLanguage() === 'zh-CN' ? '2.正在计算你的八字...' : '2.正在计算你的八字...'
+          return utils.getLanguage() === 'zh-CN' ? '2.正在计算你的八字...' : '2.正在計算你的八字...'
         } else if (this.current_time === 3) {
-          return utils.getLanguage() === 'zh-CN' ? '3.正在分析你的运势...' : '3.正在分析你的运势...'
+          return utils.getLanguage() === 'zh-CN' ? '3.正在分析你的运势...' : '3.正在分析你的運勢...'
         }
       }
     },

@@ -521,6 +521,15 @@ export default {
     }
   },
   mounted() {
+    // var svgaUrl = 'https://psychicai-static.psychicai.pro/imgs/2406c6f666683c824312b07e66feb0c73ad2.svga'; // 替换为你的SVGA文件路径
+    //         var image = new Image();
+    //         image.src = svgaUrl;
+    //         image.onload = function() {
+    //             console.log('SVGA preloaded successfully');
+    //         };
+    //         image.onerror = function() {
+    //             console.error('Failed to preload SVGA');
+    //         };
     if (utils.isProd()) {
       try {
         fbq('trackCustom', 'CustomChannel', {
@@ -601,6 +610,17 @@ export default {
     // self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
   },
   methods: {
+    async preloadSVGA() {
+      var svgaUrl = 'https://psychicai-static.psychicai.pro/imgs/2406c6f666683c824312b07e66feb0c73ad2.svga'; // 替换为你的SVGA文件路径
+      var image = new Image();
+      image.src = svgaUrl;
+      image.onload = function() {
+          console.log('SVGA preloaded successfully');
+      };
+      image.onerror = function() {
+          console.error('Failed to preload SVGA');
+      };
+    },
     //顶部引导横幅，开始测算
     async startCalculateClick() {
       //顶部套餐报告与当前报告不同
