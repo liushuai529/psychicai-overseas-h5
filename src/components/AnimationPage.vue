@@ -33,7 +33,7 @@ export default {
       show_modal: true,
       timer: null,
       content: 0,
-      max_time: 100,//最大时长5秒，500毫秒执行一次。
+      max_time: 10,//最大时长5秒，500毫秒执行一次。
       current_time: 1,//当前阶段
       bzhh_svga:
         'https://psychicai-static.psychicai.pro/imgs/24069960be53a74c43b38ef1d79903e63d13.svga',
@@ -152,7 +152,7 @@ export default {
         setTimeout(() => {
           this.show_modal = false;
           this.$emit('update-visible', false);
-          localStorage.removeItem('onceAnimation');
+          localStorage.removeItem('mlxz_outer_animation');
         }, 2000);
         
       }
