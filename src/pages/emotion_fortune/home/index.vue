@@ -474,6 +474,10 @@ export default {
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
         this.showComboAttach();
+        console.log('page_back','返回到感情运首页')
+        utils.gcyLog(`page_back`, {
+          mlxz_action_desc: '返回到感情运首页',
+        });
       }
     });
     utils.isProd() &&
@@ -517,6 +521,8 @@ export default {
     }
   },
   mounted() {
+    //svga动画预加载
+    this.preloadSVGA()
     if (utils.isProd()) {
       try {
         fbq('trackCustom', 'CustomChannel', {
@@ -597,6 +603,20 @@ export default {
     // self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
   },
   methods: {
+    setAnimation() {
+      localStorage.setItem('mlxz_outer_animation', '1');
+    },
+    async preloadSVGA() {
+      var svgaUrl = 'https://psychicai-static.psychicai.pro/imgs/2406c6f666683c824312b07e66feb0c73ad2.svga'; // 替换为你的SVGA文件路径
+      var image = new Image();
+      image.src = svgaUrl;
+      image.onload = function() {
+          console.log('SVGA preloaded successfully');
+      };
+      image.onerror = function() {
+          console.error('Failed to preload SVGA');
+      };
+    },
     //顶部引导横幅，开始测算
     async startCalculateClick() {
       //顶部套餐报告与当前报告不同
@@ -837,6 +857,8 @@ export default {
         return;
       }
 
+      
+
       let querystring = '';
       querystring += username;
       querystring += '|';
@@ -851,7 +873,8 @@ export default {
       querystring += time_obj.date;
       querystring += '|';
       querystring += time_obj.birth_hour || '-1';
-
+      //设置过渡动画标识
+      this.setAnimation();
       window.localStorage.setItem('_emotion_fortune_info', querystring);
 
       let path = 'detail?querystring=' + querystring;

@@ -18,7 +18,7 @@
       <canvas
         v-show="!is_result && show_daji"
         id="canvasji"
-        :class="['daji', is_career ? 'career-ji' : 'year-ji']"
+        :class="['daji', is_career ? 'career-ji' : 'year-ji']" 
       >
       </canvas>
 

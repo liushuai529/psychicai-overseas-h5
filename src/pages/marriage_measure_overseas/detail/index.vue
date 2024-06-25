@@ -7,7 +7,8 @@
 -->
 
 <template>
-  <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
+  <div :class="{ detail: true, 'hidden-scroll': pay_modal ||showAnimation }">
+    <AnimationPage v-if='!!onceAnimation' product_key="h5_marriage" :visible="showAnimation"  @update-visible="showAnimation = false"/>
     <img
       class="top-banner"
       src="../../../assets/img/mlxz/bzhh/detail/img_head.webp"
@@ -164,6 +165,7 @@ import HomeFooter from '../../../components/HomeFooter.vue';
 import PayDetail from '../../../components/PayDetail.vue';
 import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
+import AnimationPage from '../../../components/AnimationPage.vue';
 
 
 const mockTipsArr = {
@@ -189,6 +191,7 @@ export default {
     PayDetail,
     NewFooter,
     GejuInfo,
+    AnimationPage,
   },
   data() {
     return {
@@ -222,6 +225,7 @@ export default {
       tw_mokuai5,
       tw_mokuai6,
       tw_mokuai7,
+      showAnimation: true,//过渡动画标识
       showFixedBtn: false,
       // baziInfo
       male_user_string: this.$route.query.male_str,
@@ -258,6 +262,10 @@ export default {
     this.parseUserString();
   },
   computed: {
+    onceAnimation() {
+      console.log('mlxz_outer_animation', localStorage.getItem('mlxz_outer_animation'))
+      return localStorage.getItem('mlxz_outer_animation');
+    },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -269,20 +277,25 @@ export default {
       return !["enjoy03", "panda03"].includes(utils.getFBChannel());
     },
   },
+  watch: {
+    showAnimation(val) {
+      if(!val) {
+        setTimeout(() => {
+          this.$nextTick(() => {
+          //排除渠道3
+            if(!this.is_show_combinationSpecial02) return
+            // 滚动到指定元素
+            const element = document.getElementById('title-pay');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
+        }, 0);
+      }
+    }
+  },
   mounted() {
     window.scrollTo(0, 0);
-    setTimeout(() => {
-      this.$nextTick(() => {
-      //排除渠道3
-        if(!this.is_show_combinationSpecial02) return
-        // 滚动到指定元素
-        const element = document.getElementById('title-pay');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    }, 500);
-
     let btn = document.getElementById('info-btn');
     let self = this;
 

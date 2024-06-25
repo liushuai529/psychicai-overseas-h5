@@ -1556,7 +1556,7 @@ const gcyLog = (title, args) => {
   args_.mlxz_outer_visitor_id =
     localStorage.getItem('mlxz_outer_visitor_id') || '';
   args_.mlxz_outer_open_uid = localStorage.getItem('mlxz_outer_open_uid') || '';
-  window.DATAFLUX_RUM && window.DATAFLUX_RUM.addAction(title, args_);
+  window.DATAFLUX_RUM && window.DATAFLUX_RUM.addAction && window.DATAFLUX_RUM.addAction(title, args_);
 };
 import { reportName } from '../libs/enum';
 const getTitle = val => {
