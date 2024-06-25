@@ -296,6 +296,17 @@ export default {
   },
   mounted() {
     window.scrollTo(0, 0);
+    setTimeout(() => {
+      this.$nextTick(() => {
+      //排除渠道3
+        if(!this.is_show_combinationSpecial02) return
+        // 滚动到指定元素
+        const element = document.getElementById('title-pay');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }, 500);
     let btn = document.getElementById('info-btn');
     let self = this;
 
