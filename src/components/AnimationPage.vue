@@ -228,11 +228,13 @@ export default {
 
 .bzhh-bg {
   background: url('../assets/img/components/animation_page/img_bj_hehun.png') no-repeat;
+  background-color: rgba(127, 20, 22, 1);
   background-size: cover
 }
 
 .emotion-bg {
   background: url('../assets/img/components/animation_page/img_bj_ganqing.png') no-repeat;
+  background-color: rgba(236, 69, 106, 1);
   background-size: cover
 }
 

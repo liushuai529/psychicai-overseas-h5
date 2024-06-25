@@ -521,15 +521,8 @@ export default {
     }
   },
   mounted() {
-    // var svgaUrl = 'https://psychicai-static.psychicai.pro/imgs/2406c6f666683c824312b07e66feb0c73ad2.svga'; // 替换为你的SVGA文件路径
-    //         var image = new Image();
-    //         image.src = svgaUrl;
-    //         image.onload = function() {
-    //             console.log('SVGA preloaded successfully');
-    //         };
-    //         image.onerror = function() {
-    //             console.error('Failed to preload SVGA');
-    //         };
+    //svga动画预加载
+    this.preloadSVGA()
     if (utils.isProd()) {
       try {
         fbq('trackCustom', 'CustomChannel', {

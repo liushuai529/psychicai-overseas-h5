@@ -227,6 +227,24 @@ export default {
       showAnimation: true,//过渡动画标识
     };
   },
+  watch: {
+    showAnimation(val) {
+      if(!val) {
+        setTimeout(() => {
+          this.$nextTick(() => {
+            //排除渠道3
+            if (!this.is_show_combinationSpecial02) return;
+            // 滚动到指定元素
+            const element = document.getElementById('method-title-img');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
+        }, 0);
+      }
+    },
+  },
+
   computed: {
     //套餐支付显示逻辑
     is_show_combination() {
@@ -299,17 +317,6 @@ export default {
 
   mounted() {
     window.scrollTo(0, 0);
-    setTimeout(() => {
-      this.$nextTick(() => {
-        //排除渠道3
-        if (!this.is_show_combinationSpecial02) return;
-        // 滚动到指定元素
-        const element = document.getElementById('method-title-img');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    }, 500);
     let self = this;
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
