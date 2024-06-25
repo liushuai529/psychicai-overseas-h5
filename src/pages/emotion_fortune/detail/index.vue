@@ -1,6 +1,6 @@
 <template>
-  <div :class="{ detail: true, 'hidden-scroll': pay_modal || !!onceAnimation }">
-    <AnimationPage v-if='!!onceAnimation' product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
+  <div :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') }">
+    <AnimationPage  product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
     <img
       class="header-title"
       :src="is_cn ? cn_info_title : tw_info_title"
@@ -246,9 +246,6 @@ export default {
   },
 
   computed: {
-    onceAnimation() {
-      return localStorage.getItem('mlxz_outer_animation');
-    },
     //套餐支付显示逻辑
     is_show_combination() {
       return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(
