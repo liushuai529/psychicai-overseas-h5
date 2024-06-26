@@ -2,20 +2,20 @@
   <div class="result-popup" :style="{'background': getbgStyle}" v-show="show_modal">
     <div class="result-container">
       <div class="head">
-        <div class="title">尊敬的用户您好：</div>
-        <div>您的【报告名称】已生成，为了保障您的隐私，
-          全部报告请在【命理寻真】App中查看。</div>
+        <div class="title">{{ tips_arr1[lang] }}</div>
+        <!-- <div>您的【】 {{ tips_arr2[lang] }}</div> -->
+        <div>{{ `【${tips_arr9[product_key][lang]}】${tips_arr2[lang]}` }}</div>
       </div>
       <div class="copy-container">
-        <div class="left">识别码：{{ transfer_code }}</div>
-        <div class="right" @click="handleCopyCode" v-if="transfer_code">复制</div>
+        <div class="left">{{tips_arr6[lang]}}：{{ transfer_code }}</div>
+        <div class="right" @click="handleCopyCode" v-if="transfer_code">{{ tips_arr3[lang] }}</div>
       </div>
       <div class="tip">
-        <div>复制识别码，打开命理寻真App即可查看；</div>
-        <div>识别码可在我的——我的报告中查看。</div>
+        <div>{{ tips_arr5[lang] }}</div>
+        <div>{{ tips_arr7[lang] }}</div>
       </div>
       <img class="logo" :src="is_cn? cn_img_popovers_logo: tw_img_popovers_logo"/>
-      <div class="btn" @click="downClick">立即下载</div>
+      <div class="btn" @click="downClick">{{ tips_arr8[lang] }}</div>
     </div>
   </div>
 </template>
@@ -28,12 +28,12 @@ import tw_img_popovers_logo from '../assets/img/components/result_popup/tw/img_p
 import { Toast } from 'mint-ui';
 const lang = utils.getLanguage();
 const tips_arr1 = {
-  'zh-CN': '神准测算报告，请下载「命理寻真」',
-  'zh-TW': '神準測算報告，請下載「命理尋真」',
+  'zh-CN': '尊敬的用户您好：',
+  'zh-TW': '尊敬的用戶您好：',
 };
 const tips_arr2 = {
-  'zh-CN': '识别码',
-  'zh-TW': '識別碼',
+  'zh-CN': '已生成，为了保障您的隐私，全部报告请在【命理寻真】App中查看。',
+  'zh-TW': '已生成，為了保障您的隱私，全部報告請在【命理尋真】App中查看。',
 };
 const tips_arr3 = {
   'zh-CN': '复制',
@@ -44,9 +44,79 @@ const tips_arr4 = {
   'zh-TW': '複製成功',
 };
 const tips_arr5 = {
-  'zh-CN': '复制识别码，打开命理寻真，可重复查看您购买的报告',
-  'zh-TW': '復製識別碼，打開命理尋真，可重復查看您購買的報告',
+  'zh-CN': '复制识别码，打开命理寻真App即可查看；',
+  'zh-TW': '復製識別碼，打開命理尋真App即可查看；',
 };
+const tips_arr6 = {
+  'zh-CN': '识别码',
+  'zh-TW': '識別碼',
+};
+const tips_arr7 = {
+  'zh-CN': '识别码可在我的——我的报告中查看。',
+  'zh-TW': '識別碼可在我的——我的報告中查看。',
+};
+const tips_arr8 = {
+  'zh-CN': '立即下载',
+  'zh-TW': '立即下載',
+};
+const tips_arr9 = {
+  h5_wealth2024: {
+    'zh-CN': '2024年财运',
+    'zh-TW': '2024年財運', 
+  },
+  h5_annual2024: {
+    'zh-CN': '2024年年运',
+    'zh-TW': '2024年年運', 
+  }, // 2024年年运
+  h5_weigh_bone: {
+    'zh-CN': '袁天罡秤骨',
+    'zh-TW': '袁天罡秤骨', 
+  }, // 袁天罡秤骨
+  h5_bai_gua: {
+    'zh-CN': '鬼谷子',
+    'zh-TW': '鬼谷子', 
+  }, // 鬼谷子
+  h5_emotion2024: {
+    'zh-CN': '2024年爱情运势',
+    'zh-TW': '2024年愛情運勢', 
+  }, // 2024年爱情运势
+  h5_marriage: {
+    'zh-CN': '八字合婚',
+    'zh-TW': '八字合婚', 
+  },
+  h5_career2024: {
+    'zh-CN': '2024年事业运势',
+    'zh-TW': '2024年事業運勢', 
+  }, // 2024年事业运势
+};
+
+const show_info = {
+  h5_wealth2024: {module: 10005, 'content_id': -10019, 'event_name': 'view_2024wealty_download', type: 'view'}, // 2024年财运
+  h5_annual2024: {module: 10003, 'content_id': -10019, 'event_name': 'view_2024report_download', type: 'view'}, // 2024年年运
+  h5_weigh_bone: {module: 10009, 'content_id': -10019, 'event_name': 'view_chenggu_download', type: 'view'}, // 袁天罡秤骨
+  h5_bai_gua: {module: 10008, 'content_id': -10019, 'event_name': 'view_64gua_download', type: 'view'}, // 鬼谷子
+  h5_emotion2024: {module: 10006, 'content_id': -10026, 'event_name': 'view_2024lovely_download', type: 'view'}, // 2024年爱情运势
+  h5_marriage: {module: 10007, 'content_id': -10028, 'event_name': 'view_marriage_download', type: 'view'}, //合婚
+  h5_career2024: {module: 10004, 'content_id': -10019, 'event_name': 'view_2024career_download', type: 'view'}, // 2024年事业运势 
+}
+const copy_info = {
+  h5_wealth2024: {module: 10005, 'content_id': -10020, 'event_name': 'click_2024wealty_copy', type: 'click'}, // 2024年财运
+  h5_annual2024: {module: 10003, 'content_id': -10020, 'event_name': 'click_2024report_copy', type: 'click'}, // 2024年年运
+  h5_weigh_bone: {module: 10009, 'content_id': -10020, 'event_name': 'click_chenggu_copy', type: 'click'}, // 袁天罡秤骨
+  h5_bai_gua: {module: 10008, 'content_id': -10020, 'event_name': 'click_64gua_copy', type: 'click'}, // 鬼谷子
+  h5_emotion2024: {module: 10006, 'content_id': -10027, 'event_name': 'click_2024lovely_copy', type: 'click'}, // 2024年爱情运势
+  h5_marriage: {module: 10007, 'content_id': -10029, 'event_name': 'click_marriage_copy', type: 'click'}, //合婚
+  h5_career2024: {module: 10004, 'content_id': -10020, 'event_name': 'click_2024career_copy', type: 'click'}, // 2024年事业运势 
+}
+const down_info = {
+  h5_wealth2024: {module: 10005, 'content_id': -10021, 'event_name': 'click_2024wealty_download', type: 'click'}, // 2024年财运
+  h5_annual2024: {module: 10003, 'content_id': -10021, 'event_name': 'click_2024report_download', type: 'click'}, // 2024年年运
+  h5_weigh_bone: {module: 10009, 'content_id': -10021, 'event_name': 'click_chenggu_download', type: 'click'}, // 袁天罡秤骨
+  h5_bai_gua: {module: 10008, 'content_id': -10021, 'event_name': 'click_64gua_download', type: 'click'}, // 鬼谷子
+  h5_emotion2024: {module: 10006, 'content_id': -10028, 'event_name': 'click_2024lovely_download', type: 'click'}, // 2024年爱情运势
+  h5_marriage: {module: 10007, 'content_id': -10030, 'event_name': 'click_marriage_download', type: 'click'}, //合婚
+  h5_career2024: {module: 10004, 'content_id': -10021, 'event_name': 'click_2024career_download', type: 'click'}, // 2024年事业运势 
+}
 
 //h5_marriage
 
@@ -68,7 +138,6 @@ export default {
   },
   data() {
     return {
-      show_modal: false,
       cn_img_popovers_logo,
       tw_img_popovers_logo,
       bg_style: {
@@ -79,17 +148,38 @@ export default {
         h5_emotion2024: 'linear-gradient( 180deg, rgba(236,67,107,0) 0%, #EC436B 100%)', // 2024年爱情运势
         h5_marriage: 'linear-gradient( 180deg, rgba(127,20,22,0) 0%, #7F1416 100%)',
         h5_career2024: 'linear-gradient( 180deg, rgba(222,36,46,0) 0%, #DE242E 100%)', // 2024年事业运势
-      }
+      },
+      lang,
+      tips_arr1,
+      tips_arr2,
+      tips_arr3,
+      tips_arr4,
+      tips_arr5,
+      tips_arr6,
+      tips_arr7,
+      tips_arr8,
+      tips_arr9, 
+
     }
   },
  
   watch: {
-   
-    visible(val) {
-      this.show_modal = val;
-    },
+    
+  },
+  mounted() {
+    if(this.show_modal) {
+      this.$emit('change_pop_modal', true)
+      // utils.firebaseLogEvent(show_info[this.product_key]['module'], show_info[this.product_key]['content_id'], show_info[this.product_key]['event_name'], show_info[this.product_key]['type'], {
+      //   args_name: show_info[this.product_key]['event_name'],
+      //   channel: utils.getFBChannel(),
+      // });
+    }
   },
   computed: {
+    show_modal() {
+      return ["enjoy02", "panda02","enjoy03", "panda03"].includes(utils.getFBChannel()) && utils.isAndroid();
+    },
+
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -101,8 +191,16 @@ export default {
     async handleCopyCode(val) {
       utils.copyText('mlxz-' + this.transfer_code);
       Toast(tips_arr4[lang]);
+      // utils.firebaseLogEvent(copy_info[this.product_key]['module'], copy_info[this.product_key]['content_id'], copy_info[this.product_key]['event_name'], copy_info[this.product_key]['type'], {
+      //   args_name: copy_info[this.product_key]['event_name'],
+      //   channel: utils.getFBChannel(),
+      // });
     },
     downClick() {
+      // utils.firebaseLogEvent(down_info[this.product_key]['module'], down_info[this.product_key]['content_id'], down_info[this.product_key]['event_name'], down_info[this.product_key]['type'], {
+      //   args_name: down_info[this.product_key]['event_name'],
+      //   channel: utils.getFBChannel(),
+      // });
       utils.openApp();
     }
    }

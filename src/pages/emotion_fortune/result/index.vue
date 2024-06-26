@@ -6,8 +6,8 @@
  * @Description: 
 -->
 <template>
-  <div class="result">
-    <ResultPopup :visible="bottom_pop_modal" product_key="h5_emotion2024" :transfer_code="fortune.transfer_code|| ''" @update-visible="bottom_pop_modal = false"/>
+  <div class="result" :class="['result', show_pop_modal? 'hidden-scroll': '']">
+    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />
     <div :class="['info-box', lang ? 'cn-bg' : 'tw-bg']">
       <BaziTable
         :sex="sex"
@@ -121,7 +121,7 @@ export default {
       wuxingqiang: '',
       tao_hua_num: 0,
       fuqigong: '',
-      bottom_pop_modal: false,//底部弹窗
+      show_pop_modal: false,//底部引导用户下载遮罩
     };
   },
   created() {
@@ -132,7 +132,6 @@ export default {
     // localStorage.removeItem('mlxz_fixed_api_order_time');
   },
   async mounted() {
-    this.bottom_pop_modal = true
     this.order_id = this.$route.query.id || this.$route.query.order_id;
 
     window.scrollTo(0, 0);
@@ -182,6 +181,12 @@ export default {
   },
   watch: {},
   methods: {
+    /**
+     * 显示底部引导用户下载app遮罩
+     */
+    change_pop_modal() {
+      this.show_pop_modal = true;
+    },
     /**
      * @description: 校验是否上报埋点
      * @return {*}
