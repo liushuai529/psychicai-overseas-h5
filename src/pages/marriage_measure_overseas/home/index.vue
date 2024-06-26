@@ -132,8 +132,8 @@
       <!-- 時間選擇控件 -->
       <DatetimePicker
         :male="sex"
-        start="1959"
-        end="2008"
+        start="1900"
+        end="2020"
         :year="year"
         :month="month"
         :date="date"
@@ -142,8 +142,8 @@
       />
       <NongliPicker
         :male="sex"
-        start="1959"
-        end="2008"
+        start="1900"
+        end="2020"
         :year="year"
         :month="month"
         :date="date"

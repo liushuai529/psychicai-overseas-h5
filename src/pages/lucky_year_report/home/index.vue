@@ -150,24 +150,24 @@
       />
 
       <!-- 时间选择控件 -->
-      <datetime-picker
-        start="1960"
-        end="2000"
+      <DatetimePicker
+        start="1900"
+        end="2020"
         :year="year"
         :month="month"
         :date="date"
         :birth_hour="birth_hour"
         v-show="choose_time && !show_nongli"
-      ></datetime-picker>
-      <nongli-picker
-        start="1960"
-        end="2000"
+      ></DatetimePicker>
+      <NongliPicker
+        start="1900"
+        end="2020"
         :year="year"
         :month="month"
         :date="date"
         :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"
-      ></nongli-picker>
+      ></NongliPicker>
       <!-- <combinePayPop
       :visible="pay_modal"
       :all_list="productList"
@@ -316,7 +316,7 @@ export default {
       picker_date_obj: null,
       picker_hour: '',
       gongli_nongli: '公历',
-
+ 
       choose_time: false,
       show_nongli: false,
       channel: channel === '' ? null : channel,
