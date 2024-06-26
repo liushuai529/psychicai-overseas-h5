@@ -7,8 +7,8 @@
           全部报告请在【命理寻真】App中查看。</div>
       </div>
       <div class="copy-container">
-        <div class="left">识别码：HJGE7HJ64JLSUF6S</div>
-        <div class="right">复制</div>
+        <div class="left">识别码：{{ transfer_code }}</div>
+        <div class="right" @click="handleCopyCode" v-if="transfer_code">复制</div>
       </div>
       <div class="tip">
         <div>复制识别码，打开命理寻真App即可查看；</div>
@@ -25,6 +25,28 @@ import utils from '../libs/utils';
 
 import cn_img_popovers_logo from '../assets/img/components/result_popup/cn/img_popovers_logo.webp';
 import tw_img_popovers_logo from '../assets/img/components/result_popup/tw/img_popovers_logo_tw.webp';
+import { Toast } from 'mint-ui';
+const lang = utils.getLanguage();
+const tips_arr1 = {
+  'zh-CN': '神准测算报告，请下载「命理寻真」',
+  'zh-TW': '神準測算報告，請下載「命理尋真」',
+};
+const tips_arr2 = {
+  'zh-CN': '识别码',
+  'zh-TW': '識別碼',
+};
+const tips_arr3 = {
+  'zh-CN': '复制',
+  'zh-TW': '複製',
+};
+const tips_arr4 = {
+  'zh-CN': '复制成功',
+  'zh-TW': '複製成功',
+};
+const tips_arr5 = {
+  'zh-CN': '复制识别码，打开命理寻真，可重复查看您购买的报告',
+  'zh-TW': '復製識別碼，打開命理尋真，可重復查看您購買的報告',
+};
 
 //h5_marriage
 
@@ -38,6 +60,10 @@ export default {
     visible: {
       type: Boolean,
       default: true,
+    },
+    transfer_code: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -72,8 +98,12 @@ export default {
     },
    },
    methods: {
+    async handleCopyCode(val) {
+      utils.copyText('mlxz-' + this.transfer_code);
+      Toast(tips_arr4[lang]);
+    },
     downClick() {
-      this.$emit('update-visible', false);
+      utils.openApp();
     }
    }
 }

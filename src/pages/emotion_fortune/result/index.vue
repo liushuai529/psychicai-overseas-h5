@@ -6,8 +6,8 @@
  * @Description: 
 -->
 <template>
-  <div class="result" @click="bottom_pop_modal = false">
-    <ResultPopup :visible="bottom_pop_modal" product_key="h5_emotion2024" @update-visible="bottom_pop_modal = false"/>
+  <div class="result">
+    <ResultPopup :visible="bottom_pop_modal" product_key="h5_emotion2024" :transfer_code="fortune.transfer_code|| ''" @update-visible="bottom_pop_modal = false"/>
     <div :class="['info-box', lang ? 'cn-bg' : 'tw-bg']">
       <BaziTable
         :sex="sex"
