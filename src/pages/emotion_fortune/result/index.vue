@@ -6,7 +6,8 @@
  * @Description: 
 -->
 <template>
-  <div class="result">
+  <div class="result" :class="['result', show_pop_modal? 'hidden-scroll': '']">
+    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />
     <div :class="['info-box', lang ? 'cn-bg' : 'tw-bg']">
       <BaziTable
         :sex="sex"
@@ -61,8 +62,9 @@ import {
   sendEventApi,
 } from '../../../api/api';
 import BaziTable from '../../../components/baziTable.vue';
+import ResultPopup from '../../../components/ResultPopup.vue';
 export default {
-  components: { contentDetail, UserInfo, BaziTable },
+  components: { contentDetail, UserInfo, BaziTable, ResultPopup },
   data() {
     return {
       loading: false,
@@ -119,9 +121,11 @@ export default {
       wuxingqiang: '',
       tao_hua_num: 0,
       fuqigong: '',
+      show_pop_modal: false,//底部引导用户下载遮罩
     };
   },
   created() {
+   
     // localStorage.removeItem('mlxz_fixed_order_info');
     // localStorage.removeItem('mlxz_fixed_order_key');
     // localStorage.removeItem('mlxz_fixed_local_order_time');
@@ -177,6 +181,12 @@ export default {
   },
   watch: {},
   methods: {
+    /**
+     * 显示底部引导用户下载app遮罩
+     */
+    change_pop_modal() {
+      this.show_pop_modal = true;
+    },
     /**
      * @description: 校验是否上报埋点
      * @return {*}
