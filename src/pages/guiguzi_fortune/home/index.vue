@@ -131,7 +131,7 @@
 
       <!-- 時间选择控件 -->
       <DatetimePicker
-        start="1900"
+        start="1901"
         end="2020"
         :year="year"
         :month="month"
@@ -140,7 +140,7 @@
         v-show="choose_time && !show_nongli"
       ></DatetimePicker>
       <NongliPicker
-        start="1900"
+        start="1901"
         end="2020"
         :year="year"
         :month="month"
