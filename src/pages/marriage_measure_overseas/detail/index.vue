@@ -1,20 +1,31 @@
 <!--
  * @Author: wujiang@weli.cn
  * @Date: 2023-10-18 11:45:29
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-30 18:47:46
+ * @LastEditors: Tahiti
+ * @LastEditTime: 2024-06-27 11:14:50
  * @Description: 八字合婚
 -->
 
 <template>
-  <div :class="{ detail: true, 'hidden-scroll': pay_modal ||!!localStorage.getItem('mlxz_outer_animation') }">
-    <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_marriage" :visible="showAnimation"  @update-visible="showAnimation = false"/>
+  <div
+    :class="{
+      detail: true,
+      'hidden-scroll':
+        pay_modal || !!localStorage.getItem('mlxz_outer_animation'),
+    }"
+  >
+    <AnimationPage
+      v-if="!!localStorage.getItem('mlxz_outer_animation')"
+      product_key="h5_marriage"
+      :visible="showAnimation"
+      @update-visible="showAnimation = false"
+    />
     <img
       class="top-banner"
       src="../../../assets/img/mlxz/bzhh/detail/img_head.webp"
     />
-    
-    <div class="pay-box" >
+
+    <div class="pay-box">
       <img
         class="banner"
         :src="language === 'zh-CN' ? cn_img_title : tw_img_title"
@@ -23,7 +34,11 @@
         <div class="male-info">
           <div class="info-name">{{ mname | nameFilter }}</div>
           <div class="info-birth">{{ mbirth }}</div>
-          <baziInfo :key="0" :user_info="male_user_string" @get_user_info="getUserInfo"/>
+          <baziInfo
+            :sex_index="0"
+            :user_info="male_user_string"
+            @get_user_info="getUserInfo"
+          />
         </div>
         <img
           class="heart"
@@ -32,10 +47,14 @@
         <div class="female-info">
           <div class="info-name">{{ fname | nameFilter }}</div>
           <div class="info-birth">{{ fbirth }}</div>
-          <baziInfo :key="1" :user_info="female_user_string" @get_user_info="getUserInfo"/>
+          <baziInfo
+            :sex_index="1"
+            :user_info="female_user_string"
+            @get_user_info="getUserInfo"
+          />
         </div>
       </div>
-   
+
       <div class="bazi-box">
         <!-- <PayCard
           ref="paycard"
@@ -81,7 +100,13 @@
       class="user"
     />
 
-    <GejuInfo v-if="is_show_combinationSpecial02"  style="margin-bottom: 0.22rem;" :product_key="product_key" :user_desc="mingge_desc" :dataList="[mingge_minfo, mingge_finfo]"/>
+    <GejuInfo
+      v-if="is_show_combinationSpecial02"
+      style="margin-bottom: 0.22rem"
+      :product_key="product_key"
+      :user_desc="mingge_desc"
+      :dataList="[mingge_minfo, mingge_finfo]"
+    />
 
     <img class="text" :src="language === 'zh-CN' ? cn_img_word : tw_img_word" />
     <img class="module" :src="language === 'zh-CN' ? cn_mokuai1 : tw_mokuai1" />
@@ -119,7 +144,7 @@
       class="btn-fixed"
       :src="language === 'zh-CN' ? cn_btn : tw_btn"
     />
-    <NewFooter product_key="h5_marriage"/>
+    <NewFooter product_key="h5_marriage" />
     <!-- <div class="footer-box"></div> -->
   </div>
 </template>
@@ -166,7 +191,6 @@ import PayDetail from '../../../components/PayDetail.vue';
 import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
 import AnimationPage from '../../../components/AnimationPage.vue';
-
 
 const mockTipsArr = {
   'zh-CN': '成功解锁了八字合婚的详细解析',
@@ -226,7 +250,7 @@ export default {
       tw_mokuai5,
       tw_mokuai6,
       tw_mokuai7,
-      showAnimation: true,//过渡动画标识
+      showAnimation: true, //过渡动画标识
       showFixedBtn: false,
       // baziInfo
       male_user_string: this.$route.query.male_str,
@@ -236,9 +260,9 @@ export default {
       tw_modal_bg,
       cn_modal_bg:
         'https://psychicai-static.psychicai.pro/imgs/240439e6ef4d89894c5d88378c3cbd7790fb.png',
-      mingge_desc:[],//命格生日信息展示  
-      mingge_minfo:[],//命格男性信息
-      mingge_finfo:[],//命格女性信息
+      mingge_desc: [], //命格生日信息展示
+      mingge_minfo: [], //命格男性信息
+      mingge_finfo: [], //命格女性信息
     };
   },
   filters: {
@@ -264,7 +288,10 @@ export default {
   },
   computed: {
     onceAnimation() {
-      console.log('localStorage.getItem()', localStorage.getItem('mlxz_outer_animation'))
+      console.log(
+        'localStorage.getItem()',
+        localStorage.getItem('mlxz_outer_animation')
+      );
       return localStorage.getItem('mlxz_outer_animation');
     },
     is_cn() {
@@ -272,19 +299,21 @@ export default {
     },
     //套餐支付显示逻辑
     is_show_combination() {
-      return !["enjoy03", "panda03","enjoy02", "panda02"].includes(utils.getFBChannel());
+      return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(
+        utils.getFBChannel()
+      );
     },
     is_show_combinationSpecial02() {
-      return !["enjoy03", "panda03"].includes(utils.getFBChannel());
+      return !['enjoy03', 'panda03'].includes(utils.getFBChannel());
     },
   },
   watch: {
     showAnimation(val) {
-      if(!val) {
+      if (!val) {
         setTimeout(() => {
           this.$nextTick(() => {
-          //排除渠道3
-            if(!this.is_show_combinationSpecial02) return
+            //排除渠道3
+            if (!this.is_show_combinationSpecial02) return;
             // 滚动到指定元素
             const element = document.getElementById('title-pay');
             if (element) {
@@ -293,14 +322,14 @@ export default {
           });
         }, 0);
       }
-    }
+    },
   },
   mounted() {
     window.scrollTo(0, 0);
     setTimeout(() => {
       this.$nextTick(() => {
-      //排除渠道3
-        if(!this.is_show_combinationSpecial02) return
+        //排除渠道3
+        if (!this.is_show_combinationSpecial02) return;
         // 滚动到指定元素
         const element = document.getElementById('title-pay');
         if (element) {
@@ -334,14 +363,12 @@ export default {
     });
   },
   methods: {
-   
     getUserInfo(sex, info) {
-      if(sex === 0) {
+      if (sex === 0) {
         this.mingge_finfo = info;
       } else {
         this.mingge_minfo = info;
       }
-      
     },
 
     /**
@@ -383,12 +410,21 @@ export default {
         this.mbirth = `${this.$t('nongli-label')} ${myear}年${mday.nmonthstr}${
           mday.ndatestr
         }`;
-        this.mingge_desc.push(`${utils.getShortStr(this.mname, 4)}，男，${myear}年${mday.nmonthstr}${mday.ndatestr}生人，`)
+        this.mingge_desc.push(
+          `${utils.getShortStr(this.mname, 4)}，男，${myear}年${
+            mday.nmonthstr
+          }${mday.ndatestr}生人，`
+        );
       } else {
         this.mbirth = `${this.$t(
           'gongli-label'
         )} ${myear}年${mmonth}月${mdate}日`;
-        this.mingge_desc.push(`${utils.getShortStr(this.mname, 4)}，男，${myear}年${mmonth}月${mdate}日生人，`)
+        this.mingge_desc.push(
+          `${utils.getShortStr(
+            this.mname,
+            4
+          )}，男，${myear}年${mmonth}月${mdate}日生人，`
+        );
       }
       // 女性生日農曆
       if (query_user_string_array[11] === '0') {
@@ -396,12 +432,21 @@ export default {
         this.fbirth = `${this.$t('nongli-label')} ${fyear}年${fday.nmonthstr}${
           fday.ndatestr
         }`;
-        this.mingge_desc.push(`${utils.getShortStr(this.fname, 4)}，女，${fyear}年${fday.nmonthstr}${fday.ndatestr}生人`)
+        this.mingge_desc.push(
+          `${utils.getShortStr(this.fname, 4)}，女，${fyear}年${
+            fday.nmonthstr
+          }${fday.ndatestr}生人`
+        );
       } else {
         this.fbirth = `${this.$t(
           'gongli-label'
         )} ${fyear}年${fmonth}月${fdate}日`;
-        this.mingge_desc.push(`${utils.getShortStr(this.fname, 4)}，女，${fyear}年${fmonth}月${fdate}日生人`)
+        this.mingge_desc.push(
+          `${utils.getShortStr(
+            this.fname,
+            4
+          )}，女，${fyear}年${fmonth}月${fdate}日生人`
+        );
       }
     },
 
@@ -460,7 +505,7 @@ export default {
 <style scoped lang="less">
 .detail {
   overflow-x: hidden;
-  background-color: #7F1416;
+  background-color: #7f1416;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -469,7 +514,7 @@ export default {
     width: 100%;
     margin-bottom: 0.24rem;
   }
-  
+
   .pay-box {
     position: relative;
     margin-top: -1.6rem;
@@ -479,15 +524,14 @@ export default {
     // background-color: #fbf8ed;
     width: 7.3rem;
     height: 4.2rem;
-    background: #FFEDD8;
+    background: #ffedd8;
     border-radius: 0.2rem;
-    border: 0.09rem solid #B70E08;
+    border: 0.09rem solid #b70e08;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    
     .banner {
       position: absolute;
       top: -0.45rem;
@@ -503,7 +547,7 @@ export default {
       // justify-content: center;
       // margin: 0.68rem 0 0.49rem;
       // padding: 0 0.28rem;
-          /* width: 100%; */
+      /* width: 100%; */
       margin-top: 1rem;
       height: 2.76rem;
       width: 6.7rem;
@@ -511,8 +555,8 @@ export default {
       align-items: center;
       justify-content: center;
       padding: 0 0.28rem;
-      border: 0.03rem solid #B87F40;
-      background: #FFEDD8;
+      border: 0.03rem solid #b87f40;
+      background: #ffedd8;
       .heart {
         width: 1.4rem;
         flex: none;
@@ -608,10 +652,10 @@ export default {
   min-height: 6rem;
   font-family: system-ui, sans-serif;
   border-radius: 0.16rem;
-  border: 0.09rem solid #B70E08;
+  border: 0.09rem solid #b70e08;
   padding: 0.4rem 0.16rem 0;
   margin-top: -0.45rem;
-  background: #FFEDD8;
+  background: #ffedd8;
 }
 .title-pay {
   width: 7.5rem;
@@ -629,7 +673,7 @@ export default {
   margin: 0.28rem auto 0.44rem;
   font-weight: 400;
   font-size: 0.24rem;
-  color: #F2CFCF;
+  color: #f2cfcf;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -647,7 +691,7 @@ export default {
     margin-right: 0.08rem;
   }
   .light-red {
-    color: #FFDA27;
+    color: #ffda27;
   }
 }
 </style>
