@@ -4,7 +4,7 @@
       <div class="head">
         <div class="title">{{ tips_arr1[lang] }}</div>
         <!-- <div>您的【】 {{ tips_arr2[lang] }}</div> -->
-        <div>{{ `【${tips_arr9[product_key][lang]}】${tips_arr2[lang]}` }}</div>
+        <div>{{ `您的【${tips_arr9[product_key][lang]}】${tips_arr2[lang]}` }}</div>
       </div>
       <div class="copy-container">
         <div class="left">{{tips_arr6[lang]}}：{{ transfer_code }}</div>
@@ -212,7 +212,7 @@ export default {
 <style scoped lang="less">
 .result-popup {
   position: fixed;
-  z-index: 1;
+  z-index: 99999;
   bottom: 0;
   left: 0;
   width: 7.5rem;

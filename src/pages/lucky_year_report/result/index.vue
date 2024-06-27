@@ -7,7 +7,7 @@
 -->
 <template>
   <div :class="['detail', 'result-detail', show_pop_modal? 'hidden-scroll': '']">    
-    <ResultPopup product_key="h5_wealth2024" @change_pop_modal="change_pop_modal" :transfer_code="transfer_code|| ''" />
+    <ResultPopup product_key="h5_wealth2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />
     <top-banner />
     <img
       class="person-title"
