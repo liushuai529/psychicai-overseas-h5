@@ -141,13 +141,13 @@ export default {
       cn_img_popovers_logo,
       tw_img_popovers_logo,
       bg_style: {
-        h5_wealth2024: 'linear-gradient( 180deg, rgba(208,61,61,0) 0%, #D03D3D 100%)', // 2024年财运
-        h5_annual2024: 'linear-gradient( 180deg, rgba(255,170,65,0) 0%, #FFAA41 100%)', // 2024年年运
-        h5_weigh_bone: 'linear-gradient( 180deg, rgba(81,95,173,0) 0%, #515FAD 100%)', // 袁天罡秤骨
-        h5_bai_gua: 'linear-gradient( 180deg, rgba(164,51,30,0) 0%, #A4331E 100%)', // 鬼谷子
-        h5_emotion2024: 'linear-gradient( 180deg, rgba(236,67,107,0) 0%, #EC436B 100%)', // 2024年爱情运势
-        h5_marriage: 'linear-gradient( 180deg, rgba(127,20,22,0) 0%, #7F1416 100%)',
-        h5_career2024: 'linear-gradient( 180deg, rgba(222,36,46,0) 0%, #DE242E 100%)', // 2024年事业运势
+        h5_wealth2024: 'linear-gradient( 180deg, rgba(208,61,61,0) 0%, #D03D3D 32%, #D03D3D 100%)', // 2024年财运
+        h5_annual2024: 'linear-gradient( 180deg, rgba(255,170,65,0) 0%, #FFAA41 32%, #FFAA41 100%)', // 2024年年运
+        h5_weigh_bone: 'linear-gradient( 180deg, rgba(81,95,173,0) 0%, #515FAD 32%, #515FAD 100%)', // 袁天罡秤骨
+        h5_bai_gua: 'linear-gradient( 180deg, rgba(164,51,30,0) 0%, #A4331E 32%, #A4331E 100%)', // 鬼谷子
+        h5_emotion2024: 'linear-gradient( 180deg, rgba(236,67,107,0) 0%, #EC436B 32%, #EC436B 100%)', // 2024年爱情运势
+        h5_marriage: 'linear-gradient( 180deg, rgba(127,20,22,0) 0%, #7F1416 32%, #7F1416 100%)',
+        h5_career2024: 'linear-gradient( 180deg, rgba(222,36,46,0) 0%, #DE242E 32%, #DE242E 100%)', // 2024年事业运势
       },
       lang,
       tips_arr1,
@@ -221,7 +221,7 @@ export default {
   justify-content: center;
   .result-container {
     width: 7.1rem;
-    background: linear-gradient(180deg, #D3F2E5 0%, #FFFFFF 100%);
+    background: linear-gradient( 180deg, #D3F2E5 0%, #FFFFFF 38%, #FFFFFF 100%);
     border-radius: 0.4rem;
     margin-top: 2rem;
     margin-bottom: 0.2rem;
