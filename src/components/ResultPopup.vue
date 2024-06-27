@@ -232,7 +232,7 @@ export default {
     .head {
       width: 100%;
       // min-height: 1.88rem;
-      height: 1.88rem;
+      // height: 1.88rem;
       background-image: url(../assets/img/components/result_popup/img_popovers_topbj.webp);
       background-size: auto 100%;
       background-repeat: no-repeat;
@@ -242,7 +242,7 @@ export default {
       color: #314A46;
       text-align: left;
       font-style: normal;
-      overflow-y: hidden;
+      // overflow-y: hidden;
       .title {
         font-weight: bold;
         font-size: 0.36rem;

@@ -437,4 +437,7 @@ export default {
   display: block;
   width: 100%;
 }
+.hidden-scroll {
+  overflow-y: hidden;
+}
 </style>
