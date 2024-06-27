@@ -33,6 +33,21 @@ const getFBChannel = () => {
   }
 };
 /**
+ * @description: 获取FB初始化ID
+ * @return {*}
+ */
+const getFbId = () => {
+  return {
+    'enjoy01': '1122026312239443',
+    'panda01': '798187135579003',
+    'nova01': '718889796870693',
+    'enjoy02': '1505987713629330',
+    'panda02': '824193972893573',
+    'enjoy03': '2368489400014794',
+    'panda03': '7693892440702728',
+  }
+}
+/**
  * @description: 是否是生产环境
  * @return {*}
  */
@@ -1585,6 +1600,7 @@ export default {
   checkFB,
   fbEvent,
   getFBChannel,
+  getFbId,
   resetResultUrl,
   openAdjustApp,
   buildURL,

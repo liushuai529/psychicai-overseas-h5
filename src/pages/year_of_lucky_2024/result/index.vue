@@ -348,6 +348,7 @@ export default {
           mlxz_action_desc: '完成firebase埋点上报',
           mlxz_order_status: report_status,
         });
+        console.log('Purchase事件上报', this.order_id)
         if (utils.isProd()) {
           await utils.checkFB();
           try {
@@ -360,7 +361,7 @@ export default {
             fbq('track', 'Purchase', {
               value: report_price.toFixed(2),
               currency: 'MYR',
-            });
+            },{eventID: this.order_id});
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '完成FB埋点上报，Purchase',
               mlxz_value: report_price.toFixed(2),

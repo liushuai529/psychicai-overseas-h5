@@ -78,7 +78,12 @@
         'script',
         'https://connect.facebook.net/en_US/fbevents.js'
       );
-      fbq('init', '824193972893573');
+      // fbq('init', '824193972893573');
+      if(localStorage.getItem('mlxz_outer_visitor_id')) {
+        fbq('init', '824193972893573',  {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
+      } else {
+        fbq('init', '824193972893573');
+      }
       fbq('track', 'PageView');
     </script>
     <noscript>
