@@ -1,5 +1,6 @@
 <template>
-  <div class="detail result-detail">
+  <div :class="['detail', 'result-detail', show_pop_modal? 'hidden-scroll': '']">  
+    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="transfer_code|| ''" />  
     <top-banner />
 
     <!-- 新版信息start -->
@@ -269,6 +270,7 @@ import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/bzhh.webp';
 import shengxiao from '../detail/shengxiao.vue';
 import baziInfo from '../detail/bazi.vue';
 import year_ganzi from './../../../libs/suishen.wnl.js';
+import ResultPopup from '../../../components/ResultPopup.vue'
 
 export default {
   components: {
@@ -277,6 +279,7 @@ export default {
     CopyCode,
     shengxiao,
     baziInfo,
+    ResultPopup,
   },
   data() {
     return {
@@ -343,6 +346,7 @@ export default {
       mbirth: '',
       fbirth: '',
       show_bazi: false,
+      show_pop_modal: false,//底部引导用户下载遮罩
     };
   },
   filters: {
@@ -407,6 +411,12 @@ export default {
   },
   watch: {},
   methods: {
+    /**
+     * 显示底部引导用户下载app遮罩
+     */
+     change_pop_modal() {
+      this.show_pop_modal = true;
+    },
     /**
      * @description: 校验是否上报埋点
      * @return {*}

@@ -6,7 +6,8 @@
  * @Description: 
 -->
 <template>
-  <div :class="['result']">
+  <div :class="['result', show_pop_modal? 'hidden-scroll': '']">   
+    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />  
     <!-- <UserInfo
       :username="username"
       :sex="sex"
@@ -124,8 +125,9 @@ import { icon_enums } from '../../../libs/enum';
 import CodePop from '../../../components/CodePop.vue';
 import CopyCode from '../../../components/CopyCode.vue';
 import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/year24.webp';
+import ResultPopup from '../../../components/ResultPopup.vue'
 export default {
-  components: { contentDetail, UserInfo, CodePop, CopyCode },
+  components: { contentDetail, UserInfo, CodePop, CopyCode, ResultPopup },
   data() {
     return {
       loading: false,
@@ -176,6 +178,7 @@ export default {
       cn_code_btn:
         'https://psychicai-static.psychicai.pro/imgs/2404068a187ac69c42f1af1e1d0384bde2e6.png',
       tw_code_btn,
+      show_pop_modal: false,//底部引导用户下载遮罩
     };
   },
   computed: {
@@ -235,6 +238,12 @@ export default {
   },
   watch: {},
   methods: {
+    /**
+     * 显示底部引导用户下载app遮罩
+     */
+     change_pop_modal() {
+      this.show_pop_modal = true;
+    },
     /**
      * @description: 校验是否上报埋点
      * @return {*}

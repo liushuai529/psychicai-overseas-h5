@@ -1,5 +1,6 @@
 <template>
-  <div class="main">
+  <div :class="['main', show_pop_modal? 'hidden-scroll': '']">    
+    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" /> 
     <userInfo v-if="user_info" :is_result="true" :user_detail="user_info" />
     <content-detail v-if="fortune.weight" :fortune="fortune" :card_index="1" />
     <content-detail
@@ -29,11 +30,13 @@ import utils from './../../../libs/utils.js';
 // @ts-ignore
 import contentDetail from './contentDetail.vue';
 import userInfo from '../detail/userInfo.vue';
+import ResultPopup from '../../../components/ResultPopup.vue'
 
 export default {
   components: {
     contentDetail,
     userInfo,
+    ResultPopup,
   },
   data() {
     return {
@@ -57,6 +60,7 @@ export default {
       order_id: 0,
       count: 0, // 轮训次数
       status: '',
+      show_pop_modal: false,//底部引导用户下载遮罩
     };
   },
   computed: {},
@@ -111,6 +115,12 @@ export default {
   },
   watch: {},
   methods: {
+    /**
+     * 显示底部引导用户下载app遮罩
+     */
+     change_pop_modal() {
+      this.show_pop_modal = true;
+    },
     /**
      * @description: 校验是否上报埋点
      * @return {*}

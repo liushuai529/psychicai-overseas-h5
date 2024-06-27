@@ -1,5 +1,6 @@
 <template>
-  <div class="detail result-detail">
+  <div :class="['detail', 'result-detail', show_pop_modal? 'hidden-scroll': '']">  
+    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="transfer_code|| ''" />
     <user-info v-if="extra_ce_suan.name" :extra_ce_suan="extra_ce_suan" />
     <div class="main-outer">
       <div class="main">
@@ -49,6 +50,7 @@ import {
 } from '../../../api/api';
 import utils from './../../../libs/utils.js';
 import contentDetail from './contentDetail.vue';
+import ResultPopup from '../../../components/ResultPopup.vue'
 // @ts-ignore
 import userInfo from './userInfo.vue';
 import CodePop from '../../../components/CodePop.vue';
@@ -60,6 +62,7 @@ export default {
     contentDetail,
     CodePop,
     CopyCode,
+    ResultPopup,
   },
 
   data() {
@@ -82,6 +85,7 @@ export default {
       cn_code_btn:
         'https://psychicai-static.psychicai.pro/imgs/2404f9772bf5b3954cf9836e192486b7ae8d.png',
       tw_code_btn,
+      show_pop_modal: false,//底部引导用户下载遮罩
     };
   },
   created() {
@@ -139,6 +143,12 @@ export default {
   },
   watch: {},
   methods: {
+    /**
+     * 显示底部引导用户下载app遮罩
+     */
+     change_pop_modal() {
+      this.show_pop_modal = true;
+    },
     /**
      * @description: 校验是否上报埋点
      * @return {*}

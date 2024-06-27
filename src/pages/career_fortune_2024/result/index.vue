@@ -1,5 +1,6 @@
 <template>
-  <div class="detail result-detail">
+  <div :class="['detail', 'result-detail', show_pop_modal? 'hidden-scroll': '']">
+    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="result.transfer_code|| ''" />
     <user-info
       v-if="extra_ce_suan.name"
       :extra_ce_suan="extra_ce_suan"
@@ -25,11 +26,13 @@ import utils from './../../../libs/utils.js';
 import contentDetail from './contentDetail.vue';
 // @ts-ignore
 import userInfo from './userInfo.vue';
+import ResultPopup from '../../../components/ResultPopup.vue'
 import { maidianEnum } from '../../../libs/enum';
 export default {
   components: {
     userInfo,
     contentDetail,
+    ResultPopup,
   },
 
   data() {
@@ -52,6 +55,7 @@ export default {
       jiexi: {},
       fangweiObj: {},
       result: {},
+      show_pop_modal: false,//底部引导用户下载遮罩
     };
   },
   async created() {
@@ -105,6 +109,12 @@ export default {
   computed: {},
 
   methods: {
+    /**
+     * 显示底部引导用户下载app遮罩
+     */
+     change_pop_modal() {
+      this.show_pop_modal = true;
+    },
     /**
      * @description: 校验是否上报埋点
      * @return {*}
