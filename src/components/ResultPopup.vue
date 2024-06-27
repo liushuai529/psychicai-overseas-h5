@@ -4,7 +4,7 @@
       <div class="head">
         <div class="title">{{ tips_arr1[lang] }}</div>
         <!-- <div>您的【】 {{ tips_arr2[lang] }}</div> -->
-        <div>{{ `您的【${tips_arr9[product_key][lang]}】${tips_arr2[lang]}` }}</div>
+        <div style="margin-top: 0.2rem;">{{ `您的【${tips_arr9[product_key][lang]}】${tips_arr2[lang]}` }}</div>
       </div>
       <div class="copy-container">
         <div class="left">{{tips_arr6[lang]}}：{{ transfer_code }}</div>
@@ -223,7 +223,7 @@ export default {
     width: 7.1rem;
     background: linear-gradient(180deg, #D3F2E5 0%, #FFFFFF 100%);
     border-radius: 0.4rem;
-    margin-top: 2.4rem;
+    margin-top: 2rem;
     margin-bottom: 0.2rem;
     display: flex;
     flex-direction: column;
@@ -231,7 +231,8 @@ export default {
     padding: 0.4rem;
     .head {
       width: 100%;
-      min-height: 1.88rem;
+      // min-height: 1.88rem;
+      height: 1.88rem;
       background-image: url(../assets/img/components/result_popup/img_popovers_topbj.webp);
       background-size: auto 100%;
       background-repeat: no-repeat;
@@ -243,7 +244,7 @@ export default {
       font-style: normal;
       overflow-y: hidden;
       .title {
-        font-weight: 500;
+        font-weight: bold;
         font-size: 0.36rem;
         color: #314A46;
       }
@@ -277,7 +278,6 @@ export default {
         font-weight: 600;
         font-size: 0.24rem;
         color: #314A46;
-        text-align: left;
         font-style: normal;
         display: flex;
         justify-content: center;
@@ -291,6 +291,7 @@ export default {
       color: #314A46;
       font-style: normal;
       margin-top: 0.3rem;
+      opacity: 0.5;
     }
     .logo {
       margin-top: 0.4rem;
