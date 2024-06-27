@@ -220,15 +220,28 @@ export default {
   display: flex;
   justify-content: center;
   .result-container {
+    // width: 7.1rem;
+    // background: linear-gradient( 180deg, #D3F2E5 0%, #FFFFFF 38%, #FFFFFF 100%);
+    // border-radius: 0.4rem;
+    // // margin-top: 2rem;
+    // margin-bottom: 0.2rem;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // padding: 0.4rem;
     width: 7.1rem;
-    background: linear-gradient( 180deg, #D3F2E5 0%, #FFFFFF 38%, #FFFFFF 100%);
+    background: linear-gradient(180deg, #D3F2E5 0%, #FFFFFF 38%, #FFFFFF 100%);
     border-radius: 0.4rem;
-    margin-top: 2rem;
+    /* margin-top: 1.8rem; */
     margin-bottom: 0.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0.4rem;
+    padding-bottom: 0.4rem;
+    position: absolute;
+    left: 0.2rem;
+    bottom: 0.2rem;
     .head {
       width: 100%;
       // min-height: 1.88rem;
@@ -253,6 +266,7 @@ export default {
     .copy-container {
       width: 6.3rem;
       height: 0.84rem;
+      min-height: 0.84rem;
       background: #EAF0EE;
       border-radius: 0.16rem;
       margin-top: 0.08rem;
@@ -301,6 +315,7 @@ export default {
     .btn {
       width: 6.3rem;
       height: 0.9rem;
+      min-height: 0.9rem;
       background: linear-gradient( 180deg, #F47553 0%, #E92424 99%);
       border-radius: 0.16rem;
       border: 0.02rem solid #FFD192;
