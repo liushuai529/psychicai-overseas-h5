@@ -91,31 +91,31 @@ const tips_arr9 = {
 };
 
 const show_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10019, 'event_name': 'view_2024wealty_download', type: 'view'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10019, 'event_name': 'view_2024report_download', type: 'view'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10019, 'event_name': 'view_chenggu_download', type: 'view'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10019, 'event_name': 'view_64gua_download', type: 'view'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10026, 'event_name': 'view_2024lovely_download', type: 'view'}, // 2024年爱情运势
+  h5_wealth2024: {module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view'}, // 2024年财运
+  h5_annual2024: {module: 10003, 'content_id': -10020, 'event_name': 'view_2024report_download', type: 'view'}, // 2024年年运
+  h5_weigh_bone: {module: 10009, 'content_id': -10020, 'event_name': 'view_chenggu_download', type: 'view'}, // 袁天罡秤骨
+  h5_bai_gua: {module: 10008, 'content_id': -10020, 'event_name': 'view_64gua_download', type: 'view'}, // 鬼谷子
+  h5_emotion2024: {module: 10006, 'content_id': -10029, 'event_name': 'view_2024lovely_download', type: 'view'}, // 2024年爱情运势
   h5_marriage: {module: 10007, 'content_id': -10031, 'event_name': 'view_marriage_download', type: 'view'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10019, 'event_name': 'view_2024career_download', type: 'view'}, // 2024年事业运势 
+  h5_career2024: {module: 10004, 'content_id': -10020, 'event_name': 'view_2024career_download', type: 'view'}, // 2024年事业运势 
 }
 const copy_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10020, 'event_name': 'click_2024wealty_copy', type: 'click'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10020, 'event_name': 'click_2024report_copy', type: 'click'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10020, 'event_name': 'click_chenggu_copy', type: 'click'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10020, 'event_name': 'click_64gua_copy', type: 'click'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10027, 'event_name': 'click_2024lovely_copy', type: 'click'}, // 2024年爱情运势
+  h5_wealth2024: {module: 10005, 'content_id': -10021, 'event_name': 'click_2024wealty_copy', type: 'click'}, // 2024年财运
+  h5_annual2024: {module: 10003, 'content_id': -10021, 'event_name': 'click_2024report_copy', type: 'click'}, // 2024年年运
+  h5_weigh_bone: {module: 10009, 'content_id': -10021, 'event_name': 'click_chenggu_copy', type: 'click'}, // 袁天罡秤骨
+  h5_bai_gua: {module: 10008, 'content_id': -10021, 'event_name': 'click_64gua_copy', type: 'click'}, // 鬼谷子
+  h5_emotion2024: {module: 10006, 'content_id': -10030, 'event_name': 'click_2024lovely_copy', type: 'click'}, // 2024年爱情运势
   h5_marriage: {module: 10007, 'content_id': -10032, 'event_name': 'click_marriage_copy', type: 'click'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10020, 'event_name': 'click_2024career_copy', type: 'click'}, // 2024年事业运势 
+  h5_career2024: {module: 10004, 'content_id': -10021, 'event_name': 'click_2024career_copy', type: 'click'}, // 2024年事业运势 
 }
 const down_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10021, 'event_name': 'click_2024wealty_download', type: 'click'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10021, 'event_name': 'click_2024report_download', type: 'click'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10021, 'event_name': 'click_chenggu_download', type: 'click'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10021, 'event_name': 'click_64gua_download', type: 'click'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10028, 'event_name': 'click_2024lovely_download', type: 'click'}, // 2024年爱情运势
+  h5_wealth2024: {module: 10005, 'content_id': -10022, 'event_name': 'click_2024wealty_download', type: 'click'}, // 2024年财运
+  h5_annual2024: {module: 10003, 'content_id': -10022, 'event_name': 'click_2024report_download', type: 'click'}, // 2024年年运
+  h5_weigh_bone: {module: 10009, 'content_id': -10022, 'event_name': 'click_chenggu_download', type: 'click'}, // 袁天罡秤骨
+  h5_bai_gua: {module: 10008, 'content_id': -10022, 'event_name': 'click_64gua_download', type: 'click'}, // 鬼谷子
+  h5_emotion2024: {module: 10006, 'content_id': -10031, 'event_name': 'click_2024lovely_download', type: 'click'}, // 2024年爱情运势
   h5_marriage: {module: 10007, 'content_id': -10033, 'event_name': 'click_marriage_download', type: 'click'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10021, 'event_name': 'click_2024career_download', type: 'click'}, // 2024年事业运势 
+  h5_career2024: {module: 10004, 'content_id': -10022, 'event_name': 'click_2024career_download', type: 'click'}, // 2024年事业运势 
 }
 
 //h5_marriage
