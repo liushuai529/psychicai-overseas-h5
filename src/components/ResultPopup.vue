@@ -237,7 +237,7 @@ export default {
     padding: 0.4rem;
     .head {
       width: 100%;
-      height: 1.88rem;
+      min-height: 1.88rem;
       background-image: url(../assets/img/components/result_popup/img_popovers_topbj.webp);
       background-size: auto 100%;
       background-repeat: no-repeat;

@@ -1,6 +1,6 @@
 <template>
   <div class="bazi">
-    {{ getInfoStr }}
+    <!-- {{ getInfoStr }} -->
     <div class="name c-zhu">
       <div>年</div>
       <div>月</div>
