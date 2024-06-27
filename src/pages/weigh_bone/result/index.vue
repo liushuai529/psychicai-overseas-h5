@@ -1,6 +1,6 @@
 <template>
   <div :class="['main', show_pop_modal? 'hidden-scroll': '']">    
-    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" /> 
+    <ResultPopup product_key="h5_weigh_bone" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" /> 
     <userInfo v-if="user_info" :is_result="true" :user_detail="user_info" />
     <content-detail v-if="fortune.weight" :fortune="fortune" :card_index="1" />
     <content-detail

@@ -132,7 +132,7 @@
       <!-- 時間選擇控件 -->
       <DatetimePicker
         :male="sex"
-        start="1900"
+        start="1901"
         end="2020"
         :year="year"
         :month="month"
@@ -142,7 +142,7 @@
       />
       <NongliPicker
         :male="sex"
-        start="1900"
+        start="1901"
         end="2020"
         :year="year"
         :month="month"

@@ -7,7 +7,7 @@
 -->
 <template>
   <div :class="['result', show_pop_modal? 'hidden-scroll': '']">   
-    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />  
+    <ResultPopup product_key="h5_annual2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />  
     <!-- <UserInfo
       :username="username"
       :sex="sex"

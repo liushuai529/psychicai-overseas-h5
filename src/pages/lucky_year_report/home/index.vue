@@ -622,21 +622,21 @@ export default {
         Toast(this.$t('tips-3'));
         return;
       }
-      if (time_obj.year > 2000 || time_obj.year < 1960) {
-        utils.firebaseLogEvent(
-          '10005',
-          '-10002',
-          'click_2024wealty_main',
-          'click',
-          {
-            args_name: 'click_2024wealty_main',
-            channel: utils.getFBChannel(),
-            click_type: 'error',
-          }
-        );
-        Toast(this.$t('tips-5'));
-        return;
-      }
+      // if (time_obj.year > 2000 || time_obj.year < 1960) {
+      //   utils.firebaseLogEvent(
+      //     '10005',
+      //     '-10002',
+      //     'click_2024wealty_main',
+      //     'click',
+      //     {
+      //       args_name: 'click_2024wealty_main',
+      //       channel: utils.getFBChannel(),
+      //       click_type: 'error',
+      //     }
+      //   );
+      //   Toast(this.$t('tips-5'));
+      //   return;
+      // }
       if (!this.privacyChecked) {
         utils.firebaseLogEvent(
           '10005',

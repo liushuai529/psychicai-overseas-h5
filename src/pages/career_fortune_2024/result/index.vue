@@ -1,6 +1,6 @@
 <template>
   <div :class="['detail', 'result-detail', show_pop_modal? 'hidden-scroll': '']">
-    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="result.transfer_code|| ''" />
+    <ResultPopup product_key="h5_career2024" @change_pop_modal="change_pop_modal" :transfer_code="result.transfer_code|| ''" />
     <user-info
       v-if="extra_ce_suan.name"
       :extra_ce_suan="extra_ce_suan"
