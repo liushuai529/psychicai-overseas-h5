@@ -321,7 +321,10 @@ export default {
   }
 
 }
+
+</style>
+<style lang="less">
 .mint-toast.is-placemiddle {
-  z-index: 100000000 ;
+  z-index: 100000000 !important;
 }
 </style>
