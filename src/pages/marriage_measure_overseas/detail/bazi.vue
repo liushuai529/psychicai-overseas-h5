@@ -1,5 +1,6 @@
 <template>
   <div class="bazi">
+    {{ getInfoStr }}
     <div class="name c-zhu">
       <div>年</div>
       <div>月</div>
@@ -30,6 +31,10 @@ export default {
       type: String,
       default: '',
     },
+    sex_index: {
+      type: Number,
+      default: 0, // 0: 男 1: 女
+    },
   },
   data() {
     return {
@@ -46,6 +51,11 @@ export default {
       gan: ['？', '？', '？', '？'],
       zhi: ['？', '？', '？', '？'],
     };
+  },
+  computed: {
+    getInfoStr() {
+      return this.$store.state.male_str;
+    },
   },
 
   async created() {},
@@ -96,6 +106,13 @@ export default {
         : `${Lunar.fromYmd(+this.year, +this.month, +this.date)
             .getSolar()
             .toString()} ${this.picker_hour}`;
+
+      this.$store.commit('setUserDate', {
+        key: this.sex_index ? 'famale_str' : 'male_str',
+        date: +this.gongli_nongli
+          ? this.picker_date_yangli
+          : this.picker_date_nongli,
+      });
     },
     /**
      * @description: 获取用户八字
@@ -123,7 +140,7 @@ export default {
       };
       const { status, data } = await getBaziAPI(data_);
       if (status !== 1000) return;
-      this.$emit('get_user_info', this.sex, data.gejujiedu)
+      this.$emit('get_user_info', this.sex, data.gejujiedu);
       this.gan = data.gan;
       this.zhi = data.zhi;
     },

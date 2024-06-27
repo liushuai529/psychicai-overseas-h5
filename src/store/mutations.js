@@ -1,3 +1,11 @@
+/*
+ * @Author: Tahiti
+ * @Date: 2024-05-07 21:03:37
+ * @LastEditors: Tahiti
+ * @LastEditTime: 2024-06-27 11:07:27
+ * @Description:
+ * @FilePath: /psychicai-overseas-h5/src/store/mutations.js
+ */
 export default {
   setCurrentInfo(state, info) {
     if (!info.year || !info.month || !info.date) {
@@ -37,5 +45,8 @@ export default {
   },
   setProductions(state, productions) {
     state.productions = productions;
+  },
+  setUserDate(state, payload) {
+    state[payload.key] = payload.date;
   },
 };
