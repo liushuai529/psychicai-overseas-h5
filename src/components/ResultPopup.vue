@@ -269,7 +269,7 @@ export default {
       min-height: 0.84rem;
       background: #EAF0EE;
       border-radius: 0.16rem;
-      margin-top: 0.08rem;
+      margin-top: 0.3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
