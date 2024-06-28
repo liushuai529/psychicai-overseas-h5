@@ -127,9 +127,10 @@ export default {
      * @description: 折线图配置及初始化
      * @return {*}
      */
-    getEcharts() {
+    async getEcharts() {
       let self = this;
-      let myChart = echarts.init(document.getElementById('echarts'));
+      await utils.asleep(1000)
+      let myChart = echarts.init(document.getElementById('echarts')); 
 
       // 指定图表的配置项和数据
       let option = {

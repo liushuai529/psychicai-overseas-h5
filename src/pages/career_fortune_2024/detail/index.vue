@@ -350,7 +350,8 @@ export default {
      * @description: 折线图配置及初始化
      * @return {*}
      */
-    getEcharts() {
+    async getEcharts() {
+      await utils.asleep(1000)
       let self = this;
       let myChart = echarts.init(document.getElementById('echarts'));
 

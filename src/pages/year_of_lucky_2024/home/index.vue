@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavigationBar v-if="is_channel_01" />
+    <header-notice v-if="has_pay"></header-notice>
     <FbShareNotice v-if="is_show_fb_notice"/>
     <div
       :class="{
@@ -10,7 +11,7 @@
         'tw-bg': !is_cn,
       }"
     >
-      <header-notice v-if="has_pay"></header-notice>
+      
       <img
         v-if="!is_channel_01"
         class="order-icon"
