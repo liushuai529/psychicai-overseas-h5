@@ -2,6 +2,8 @@
   <div :class="['detail', 'result-detail', show_pop_modal? 'hidden-scroll': '']">  
     <ResultPopup product_key="h5_marriage" @change_pop_modal="change_pop_modal" :transfer_code="transfer_code|| ''" />  
     <top-banner />
+    <FbShareNotice v-if="is_show_fb_notice"/>
+    
 
     <!-- 新版信息start -->
     <div v-if="!loading && hasData" class="pay-box">
@@ -271,6 +273,8 @@ import shengxiao from '../detail/shengxiao.vue';
 import baziInfo from '../detail/bazi.vue';
 import year_ganzi from './../../../libs/suishen.wnl.js';
 import ResultPopup from '../../../components/ResultPopup.vue'
+import FbShareNotice from '../../../components/FbShareNotice.vue'
+
 
 export default {
   components: {
@@ -280,6 +284,7 @@ export default {
     shengxiao,
     baziInfo,
     ResultPopup,
+    FbShareNotice,
   },
   data() {
     return {
@@ -405,6 +410,9 @@ export default {
     this.query();
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
