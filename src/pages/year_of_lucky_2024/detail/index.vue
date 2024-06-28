@@ -1,6 +1,6 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
-    <FbShareNotice v-if="is_show_fb_notice"/>
+    <FbShareNotice v-if="is_show_fb_notice" />
     <div class="pay-box">
       <UserInfo
         :username="username"
@@ -392,7 +392,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 1.05rem;
   .pay-box {
     margin-bottom: 0.21rem;
     background: url('../../../assets/img/mlxz/year_of_lucky_2024/pay_img_bg.webp')
@@ -400,6 +399,7 @@ export default {
     background-size: 100% 100%;
     width: 7.1rem;
     min-height: 12.72rem;
+    margin-top: 1.05rem;
   }
 
   .text {
