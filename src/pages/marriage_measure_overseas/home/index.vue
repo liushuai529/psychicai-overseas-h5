@@ -23,8 +23,8 @@
       }"
       id="home"
     >
-      <header-notice v-if="has_pay"></header-notice>
-      <FbShareNotice v-if="is_show_fb_notice"/>
+      <header-notice v-if="!has_pay"></header-notice>
+      <FbShareNotice v-if="!is_show_fb_notice"/>
 
       <div class="top-banner">
         <!-- <canvas id="canvas"></canvas> -->
