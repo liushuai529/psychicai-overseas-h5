@@ -118,11 +118,7 @@ import NewFooter from '../../../components/NewFooter.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
 export default {
   components: { PayCard, BaziTable, payModal, NewFooter,FbShareNotice  },
-  computed: {
-    is_show_fb_notice() {
-      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
-    },
-  },
+  
   data() {
     return {
       cn_zhong_2,
@@ -173,6 +169,9 @@ export default {
     };
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     username_title() {
       return `${utils.getShortStr(this.username)}的2024年${this.$t(
         'report-name'
