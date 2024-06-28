@@ -8,8 +8,10 @@
 <template>
   <div>
     <NavigationBar v-if="is_channel_01" />
+    <header-notice v-if="has_pay"></header-notice>
+    <FbShareNotice v-if="is_show_fb_notice"/>
     <div :class="{ container: true, 'fix-box': choose_time ? true : false }">
-      <header-notice v-if="has_pay"></header-notice>
+      
       <canvas class="canvas" id="canvas"></canvas>
       <div class="info">
         <div class="info-name">
@@ -166,6 +168,8 @@
 <script>
 import FixedOrder from '../../../components/FixedOrder.vue';
 import NavigationBar from '../../../components/NavigationBar.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
+
 import { Toast, Indicator } from 'mint-ui';
 import { Downloader, Parser, Player } from 'svga.lite';
 import DatetimePicker from '../../../components/DatetimePicker';
@@ -213,6 +217,7 @@ export default {
     PopNotice,
     FixedOrder,
     NavigationBar,
+    FbShareNotice,
   },
   data() {
     return {
@@ -265,6 +270,9 @@ export default {
     };
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     local_title() {
       return utils.getTitle(this.new_order_key);
     },

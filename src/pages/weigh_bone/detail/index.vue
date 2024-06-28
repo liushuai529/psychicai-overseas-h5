@@ -7,6 +7,7 @@
 -->
 <template>
   <div class="detail">
+    <FbShareNotice v-if="is_show_fb_notice"/>
     <userInfo
       :user_detail="query_user_string"
       :product_key="product_key"
@@ -34,12 +35,15 @@ import PayCard from '../../../components/PayCard.vue';
 import utils from '../../../libs/utils';
 import footerBanner from '../home/footer';
 import userInfo from './userInfo.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
+
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 export default {
   components: {
     PayCard,
     footerBanner,
     userInfo,
+    FbShareNotice,
   },
   data() {
     return {
@@ -49,7 +53,12 @@ export default {
       showBottomBtn: false,
     };
   },
-  computed: {},
+  computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
+  },
+  
   mounted() {
     window.scrollTo(0, 0);
     let screenH = window.screen.height;

@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavigationBar v-if="is_channel_01" />
+    <FbShareNotice v-if="is_show_fb_notice"/>
     <div
       :class="{
         container: true,
@@ -186,6 +187,8 @@
 </template>
 <script>
 import NavigationBar from '../../../components/NavigationBar.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
+
 import FixedOrder from '../../../components/FixedOrder.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
@@ -255,6 +258,7 @@ export default {
     FixedOrder,
     NewFooter,
     NavigationBar,
+    FbShareNotice,
   },
   data() {
     return {
@@ -331,6 +335,9 @@ export default {
     };
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     local_title() {
       return utils.getTitle(this.new_order_key);
     },

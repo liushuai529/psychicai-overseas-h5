@@ -1,5 +1,6 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
+    <FbShareNotice v-if="is_show_fb_notice"/>
     <div class="pay-box">
       <UserInfo
         :username="username"
@@ -107,6 +108,8 @@ import tw_card_8 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_8.
 import tw_card_9 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_9.webp';
 
 import NewFooter from '../../../components/NewFooter.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
+
 const topic1 = [
   '23年事业是否变动？',
   '财运是否受到影响？',
@@ -153,6 +156,7 @@ export default {
     analyzeModal,
     payModal,
     NewFooter,
+    FbShareNotice,
   },
   data() {
     return {
@@ -221,6 +225,9 @@ export default {
     };
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     username_title() {
       return `${utils.getShortStr(this.username)}的${this.$t('dom-title')}`;
     },

@@ -25,9 +25,6 @@ export default {
   },
   data() {
     return {
-      cn_img_popovers_logo,
-      tw_img_popovers_logo,
-    
       lang,
     }
   },
