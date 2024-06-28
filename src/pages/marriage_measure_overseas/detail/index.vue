@@ -20,6 +20,7 @@
       :visible="showAnimation"
       @update-visible="showAnimation = false"
     />
+    <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')"/>
     <img
       class="top-banner"
       src="../../../assets/img/mlxz/bzhh/detail/img_head.webp"
@@ -191,6 +192,8 @@ import PayDetail from '../../../components/PayDetail.vue';
 import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
 import AnimationPage from '../../../components/AnimationPage.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
+
 
 const mockTipsArr = {
   'zh-CN': '成功解锁了八字合婚的详细解析',
@@ -216,6 +219,7 @@ export default {
     NewFooter,
     GejuInfo,
     AnimationPage,
+    FbShareNotice,
   },
   data() {
     return {
@@ -287,6 +291,9 @@ export default {
     this.parseUserString();
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     onceAnimation() {
       console.log(
         'localStorage.getItem()',

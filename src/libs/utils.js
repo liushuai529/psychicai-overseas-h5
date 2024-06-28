@@ -779,7 +779,7 @@ const getDataArrayFromUserAgent = () => {
  */
 const isFBContainer = () => {
   let ua = user_agent().toLowerCase();
-  return /fb_iab/i.test(ua);
+  return /fb_iab/i.test(ua) || /fbios/i.test(ua);
 };
 
 /**

@@ -9,6 +9,7 @@
       :product_key="comboAttachData.product_key"
       :call_back="startCalculateClick"
     />
+    
     <div
       :class="{
         container: true,
@@ -18,6 +19,7 @@
       }"
     >
       <header-notice v-if="has_pay"></header-notice>
+      <FbShareNotice v-if="is_show_fb_notice"/>
       <div
         v-if="!is_channel_01"
         @click="backHome()"
@@ -214,6 +216,7 @@
 <script>
 import NavigationBar from '../../../components/NavigationBar.vue';
 import CalculateBar from '../../../components/CalculateBar.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
 import FixedOrder from '../../../components/FixedOrder.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
@@ -292,6 +295,7 @@ export default {
     NewFooter,
     NavigationBar,
     CalculateBar,
+    FbShareNotice,
   },
   data() {
     return {
@@ -358,6 +362,9 @@ export default {
     };
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     getStyle() {
       //有未使用报告引导框、没有支付提醒tips
       if (

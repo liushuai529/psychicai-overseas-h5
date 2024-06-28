@@ -7,6 +7,7 @@
       alt=""
     />
 
+    <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')"/>
     <div :class="{ 'pay-box': true, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
       <BaziTable
         :sex="sex"
@@ -148,6 +149,8 @@ import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhif
 import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
 import AnimationPage from '../../../components/AnimationPage.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
+
 export default {
   components: {
     UserInfo,
@@ -159,6 +162,7 @@ export default {
     NewFooter,
     GejuInfo,
     AnimationPage,
+    FbShareNotice,
   },
   data() {
     return {
@@ -247,6 +251,9 @@ export default {
   },
 
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     //套餐支付显示逻辑
     is_show_combination() {
       return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(

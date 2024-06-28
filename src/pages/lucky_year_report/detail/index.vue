@@ -7,6 +7,7 @@
 -->
 <template>
   <div :class="['detail', pay_modal ? 'fix-pop' : '']">
+    <FbShareNotice v-if="is_show_fb_notice"/>
     <div class="pay-box">
       <img class="title1" :src="is_cn ? cn_txt_title : tw_txt_title" alt="" />
       <img class="title2" :src="is_cn ? cn_img_word3 : tw_img_word3" alt="" />
@@ -114,9 +115,14 @@ import tw_zhong_5 from '../../../assets/img/tw_mlxz/wealth_24/detail/zhong_5.web
 import tw_modal_bg from '../../../assets/img/tw_mlxz/wealth_24/detail/modal_bg.webp';
 import { report_id_arr } from '../../../libs/enum';
 import NewFooter from '../../../components/NewFooter.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
 export default {
-  components: { PayCard, BaziTable, payModal, NewFooter },
-  computed: {},
+  components: { PayCard, BaziTable, payModal, NewFooter,FbShareNotice  },
+  computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
+  },
   data() {
     return {
       cn_zhong_2,

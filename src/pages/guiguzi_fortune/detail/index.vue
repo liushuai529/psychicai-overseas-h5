@@ -1,5 +1,6 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
+    <FbShareNotice v-if="is_show_fb_notice"/>
     <img
       class="top-banner"
       :src="language === 'zh-CN' ? cn_header : tw_header"
@@ -129,12 +130,15 @@ import tw_model_bg from '../../../assets/img/mlxz/guiguzi/guiguzi_tw.webp';
 import payModal from '../../../components/PayModal.vue';
 import { report_id_arr } from '../../../libs/enum';
 import NewFooter from '../../../components/NewFooter.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
+
 export default {
   components: {
     PayCard,
     Marquee,
     payModal,
     NewFooter,
+    FbShareNotice,
   },
   data() {
     return {
@@ -183,7 +187,12 @@ export default {
       return utils.getShortStr(val, 4);
     },
   },
-  computed: {},
+  computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
+  },
+
   async created() {
     utils.firebaseLogEvent(
       '10008',

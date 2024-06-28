@@ -1,6 +1,8 @@
 <template>
   <div>
     <NavigationBar v-if="is_channel_01" />
+    <header-notice v-if="has_pay"></header-notice>
+    <FbShareNotice v-if="is_show_fb_notice"/>
     <div
       :class="{
         container: true,
@@ -9,7 +11,7 @@
         'lang-tw': language === 'zh-TW',
       }"
     >
-      <header-notice v-if="has_pay"></header-notice>
+      
       <canvas id="bg-svga"></canvas>
       <div class="info">
         <div class="info-content">
@@ -214,7 +216,7 @@
 
 <script>
 import NavigationBar from '../../../components/NavigationBar.vue';
-
+import FbShareNotice from '../../../components/FbShareNotice.vue';
 import FixedOrder from '../../../components/FixedOrder.vue';
 import NewFooter from '../../../components/NewFooter.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
@@ -272,6 +274,7 @@ export default {
     FixedOrder,
     NewFooter,
     NavigationBar,
+    FbShareNotice,
   },
   data() {
     return {
@@ -339,6 +342,9 @@ export default {
     };
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     productList() {
       return this.$store.state.common.productList;
     },

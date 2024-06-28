@@ -1,5 +1,6 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
+    <FbShareNotice v-if="is_show_fb_notice"/>
     <div class="new-pay-box">
       <div class="title-box">
         <img :src="is_cn ? cn_info_title : tw_info_title" />
@@ -104,6 +105,8 @@ import cn_word3 from '../../../assets/img/mlxz/career_2024/detail/img_word3.webp
 import tw_word3 from '../../../assets/img/tw_mlxz/career_24/tw_word3.webp';
 import { report_id_arr } from '../../../libs/enum';
 import NewFooter from '../../../components/NewFooter.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
+
 const Getmonth = () => {
   let arr = [];
   for (let i = 0; i < 12; i++) {
@@ -118,6 +121,7 @@ export default {
     payModal,
     BaziTable,
     NewFooter,
+    FbShareNotice,
   },
   data() {
     return {
@@ -177,6 +181,9 @@ export default {
     },
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     username_title() {
       return `${utils.getShortStr(this.username)}的${this.$t('pop-title')}`;
     },

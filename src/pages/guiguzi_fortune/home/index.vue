@@ -8,8 +8,9 @@
 <template>
   <div>
     <NavigationBar v-if="is_channel_01" />
+    <header-notice v-if="has_pay"></header-notice>
+    <FbShareNotice v-if="is_show_fb_notice"/>
     <div :class="{ container: true, 'fix-box': choose_time ? true : false }">
-      <header-notice v-if="has_pay"></header-notice>
       <canvas id="canvasbg"></canvas>
       <canvas id="canvastag"></canvas>
       <div class="info">
@@ -242,6 +243,8 @@ import cn_order from '../../../assets/img/mlxz/guiguzi/bgm_lsdd.webp';
 import tw_order from '../../../assets/img/mlxz/downloadBtn/tw/ggz_order.webp';
 
 import PopNotice from '../../../components/PopNotice.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
+
 const tipsArr5 = {
   'zh-CN': '订单创建中...',
   'zh-TW': '訂單創建中...',
@@ -265,6 +268,7 @@ export default {
     FixedOrder,
     NewFooter,
     NavigationBar,
+    FbShareNotice,
   },
   data() {
     return {
@@ -331,6 +335,9 @@ export default {
     };
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     productList() {
       return this.$store.state.common.productList;
     },

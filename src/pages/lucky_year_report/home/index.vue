@@ -1,6 +1,8 @@
 <template>
   <div>
     <NavigationBar v-if="is_channel_01" />
+    <header-notice v-if="has_pay"></header-notice>
+    <FbShareNotice v-if="is_show_fb_notice"/>
     <div
       :class="{
         container: true,
@@ -12,7 +14,7 @@
         'padding-bottom': '2.8rem',
       }"
     >
-      <header-notice v-if="has_pay"></header-notice>
+      
       <canvas class="canvas1" id="canvas1"></canvas>
 
       <div class="info">
@@ -260,6 +262,8 @@ import cn_order from '../../../assets/img/mlxz/lucky_year_report/order.webp';
 import tw_order from '../../../assets/img/tw_mlxz/wealth_24/home/order.png';
 import PopNotice from '../../../components/PopNotice.vue';
 import NavigationBar from '../../../components/NavigationBar.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
+
 let channel = utils.getQueryStr('channel');
 const tipsArr5 = {
   'zh-CN': '订单创建中...',
@@ -276,6 +280,7 @@ export default {
     FixedOrder,
     NewFooter,
     NavigationBar,
+    FbShareNotice,
   },
   data() {
     return {
@@ -342,6 +347,9 @@ export default {
     };
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     productList() {
       return this.$store.state.common.productList;
     },
