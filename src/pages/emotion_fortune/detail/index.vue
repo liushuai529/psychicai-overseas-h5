@@ -1,5 +1,6 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') }">
+    <FbShareNotice v-if="!is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')"/>
     <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
     <img
       class="header-title"
@@ -7,7 +8,7 @@
       alt=""
     />
 
-    <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')"/>
+    
     <div :class="{ 'pay-box': true, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
       <BaziTable
         :sex="sex"
