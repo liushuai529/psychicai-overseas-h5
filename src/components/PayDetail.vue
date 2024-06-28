@@ -573,8 +573,8 @@ export default {
           localStorage.removeItem('mlxz_fixed_api_order_time');
         }
         await utils.asleep(1000);
-        // location.href = res.data.pay_url;
-        window.open(res.data.pay_url, '_blank');
+        location.href = res.data.pay_url;
+        // window.open(res.data.pay_url, '_blank');
       }
     },
   },
