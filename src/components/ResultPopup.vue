@@ -243,7 +243,11 @@ export default {
     left: 0.2rem;
     bottom: 0.2rem;
     .head {
-      width: 100%;
+      // width: 100%;
+      //头部背景图宽度充满
+      margin-left: 0.8rem;
+      padding-right: 0.8rem;
+      width: calc(100% + 0.8rem);
       // min-height: 1.88rem;
       // height: 1.88rem;
       background-image: url(../assets/img/components/result_popup/img_popovers_topbj.webp);
