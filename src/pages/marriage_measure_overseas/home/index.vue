@@ -26,6 +26,8 @@
       id="home"
     >
       <header-notice v-if="has_pay"></header-notice>
+      <FbShareNotice v-if="is_show_fb_notice"/>
+
       <div class="top-banner">
         <!-- <canvas id="canvas"></canvas> -->
 
@@ -210,6 +212,7 @@
 import FixedOrder from '../../../components/FixedOrder.vue';
 import NavigationBar from '../../../components/NavigationBar.vue';
 import CalculateBar from '../../../components/CalculateBar.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import utils from './../../../libs/utils.js';
 import topBanner from './top_banner.vue';
@@ -289,6 +292,7 @@ export default {
     NewFooter,
     NavigationBar,
     CalculateBar,
+    FbShareNotice,
   },
   data() {
     return {
@@ -509,6 +513,9 @@ export default {
     // self.loadBg('#canvas', self.is_cn ? self.cn_header : self.tw_header);
   },
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer();
+    },
     //套餐支付显示逻辑
     is_show_combination() {
       return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(

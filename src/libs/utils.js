@@ -777,6 +777,15 @@ const getDataArrayFromUserAgent = () => {
  * @description: 是否安卓系统
  * @return {*}
  */
+const isFBContainer = () => {
+  let ua = user_agent().toLowerCase();
+  return /fb_iab/i.test(ua);
+};
+
+/**
+ * @description: 是否安卓系统
+ * @return {*}
+ */
 const isAndroid = () => {
   let ua = user_agent().toLowerCase();
   return /android/i.test(ua);
@@ -1655,6 +1664,7 @@ export default {
   getUp,
   getRequestParams,
   isAndroid,
+  isFBContainer,
   nongliMonthEnum,
   nongliDayEnum,
   nongliHourEnum,
