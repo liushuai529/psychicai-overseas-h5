@@ -187,11 +187,6 @@ export default {
       return utils.getShortStr(val, 4);
     },
   },
-  computed: {
-    is_show_fb_notice() {
-      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
-    },
-  },
 
   async created() {
     utils.firebaseLogEvent(
@@ -214,6 +209,9 @@ export default {
   },
 
   computed: {
+    is_show_fb_notice() {
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+    },
     username_title() {
       return `${utils.getShortStr(this.username)}的${this.$t('dom-title')}`;
     },
