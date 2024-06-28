@@ -9,6 +9,8 @@
       :product_key="comboAttachData.product_key"
       :call_back="startCalculateClick"
     />
+    <header-notice v-if="has_pay"></header-notice>
+    <FbShareNotice v-if="is_show_fb_notice"/>
     
     <div
       :class="{
@@ -18,8 +20,7 @@
         'tw-bg': language === 'zh-TW',
       }"
     >
-      <header-notice v-if="has_pay"></header-notice>
-      <FbShareNotice v-if="is_show_fb_notice"/>
+     
       <div
         v-if="!is_channel_01"
         @click="backHome()"
@@ -366,6 +367,7 @@ export default {
       return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
     },
     getStyle() {
+      return
       //有未使用报告引导框、没有支付提醒tips
       if (
         this.comboAttachData &&
@@ -383,14 +385,24 @@ export default {
         console.warn('有未使用报告引导框、有支付提醒tips');
         return 'top: 0.7rem';
       } else if (
-        this.comboAttachData &&
-        !this.comboAttachData.product_key &&
-        this.has_pay
+        !this.comboAttachData && this.has_pay && this.is_show_fb_notice
+      ) {
+        console.warn('没有有未使用报告引导框、有支付提醒tip、有FB引导');
+        //没有有未使用报告引导框、有支付提醒tips
+        return 'top: 1.2rem';
+      } else if (
+        !this.comboAttachData && this.has_pay
       ) {
         console.warn('没有有未使用报告引导框、有支付提醒tips');
         //没有有未使用报告引导框、有支付提醒tips
-        return 'top: 0.5rem';
-      }
+        return 'top: 0.7rem';
+      } else if (
+        !this.comboAttachData && this.is_show_fb_notice
+      ) {
+        console.warn('没有有未使用报告引导框、有FB引导');
+        //没有有未使用报告引导框、有FB引导
+        return 'top: 0.7rem';
+      } 
     },
     //套餐支付显示逻辑
     is_show_combination() {
