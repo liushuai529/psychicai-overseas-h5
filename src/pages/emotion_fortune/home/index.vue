@@ -1083,7 +1083,7 @@ export default {
       if (!check_event && utils.isProd()) {
         location.href = 'index.html';
       } else {
-        window.open('index.html', '_blank');
+        // window.open('index.html', '_blank');
       }
     },
     // 展示挽留弹窗  通过定时器
