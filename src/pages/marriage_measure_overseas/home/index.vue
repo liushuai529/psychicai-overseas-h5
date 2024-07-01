@@ -738,7 +738,7 @@ export default {
     },
     async check() {
       console.log('wingow', window)
-      window.open('www.baidu.com', '_blank');
+      // window.open('www.baidu.com', '_blank');
       let gongli_nongli = this.gongli_nongli;
       if (this.male.username == '') {
         utils.firebaseLogEvent(
