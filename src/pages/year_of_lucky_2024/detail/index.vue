@@ -1,6 +1,7 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
     <FbShareNotice v-if="is_show_fb_notice" />
+    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <div class="pay-box">
       <UserInfo
         :username="username"
@@ -29,6 +30,7 @@
         <img class="huxi-btn" :src="is_cn ? cn_pay_btn : tw_pay_btn" alt="" />
       </div>
     </div>
+    <PayItem product_key="h5_annual2024" @show_modal="showModal"/>
     <img :src="is_cn ? cn_card_1 : tw_card_1" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_2 : tw_card_2" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_3 : tw_card_3" class="card-bg" alt="" />
@@ -109,6 +111,8 @@ import tw_card_9 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_9.
 
 import NewFooter from '../../../components/NewFooter.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
+import PayItem from '../../../components/PayItem.vue';
+import PayGuideModal from '../../../components/PayGuideModal.vue';
 
 const topic1 = [
   '23年事业是否变动？',
@@ -157,6 +161,8 @@ export default {
     payModal,
     NewFooter,
     FbShareNotice,
+    PayItem,
+    PayGuideModal,
   },
   data() {
     return {
@@ -222,6 +228,7 @@ export default {
       pay_modal: false, //支付弹窗
       modal_bg:
         'https://psychicai-static.psychicai.pro/imgs/240444508285d55242dbac9b5ab02272d80a.png',
+      showPayGuideModal: false,//待支付蒙版    
     };
   },
   computed: {
@@ -299,6 +306,9 @@ export default {
     });
   },
   methods: {
+    showModal() {
+      this.showPayGuideModal = !this.showPayGuideModal;
+    },
     /**
      * @description: 获取用户八字
      * @return {*}

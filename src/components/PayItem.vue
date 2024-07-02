@@ -1,5 +1,5 @@
 <template>
-  <div class="pay-item">
+  <div class="pay-item" v-if="show">
     <div class="pay-contaienr">
       <div class="left">
         <div class="title">您有待支付订单</div>
@@ -25,46 +25,6 @@ import { getLastOrderGetAPI } from '../api/api';
 import { path_enums } from '../libs/enum';
 import { payOrderAPI } from '../api/api';
 
-const lang = utils.getLanguage();
-const show_info = {
-  h5_wealth2024: { module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view' }, // 2024年财运
-  h5_annual2024: { module: 10003, 'content_id': -10020, 'event_name': 'view_2024report_download', type: 'view' }, // 2024年年运
-  h5_weigh_bone: { module: 10009, 'content_id': -10020, 'event_name': 'view_chenggu_download', type: 'view' }, // 袁天罡秤骨
-  h5_bai_gua: { module: 10008, 'content_id': -10020, 'event_name': 'view_64gua_download', type: 'view' }, // 鬼谷子
-  h5_emotion2024: { module: 10006, 'content_id': -10029, 'event_name': 'view_2024lovely_download', type: 'view' }, // 2024年爱情运势
-  h5_marriage: { module: 10007, 'content_id': -10031, 'event_name': 'view_marriage_download', type: 'view' }, //合婚
-  h5_career2024: { module: 10004, 'content_id': -10020, 'event_name': 'view_2024career_download', type: 'view' }, // 2024年事业运势 
-}
-const event_enums = {
-  h5_wealth2024: {
-    c_id: '-10005',
-    c_name: 'click_history_2024wealty_repay',
-  },
-  h5_career2024: {
-    c_id: '-10006',
-    c_name: 'click_history_2024career_repay',
-  },
-  h5_marriage: {
-    c_id: '-10007',
-    c_name: 'click_histroy_marriage_repay',
-  },
-  h5_weigh_bone: {
-    c_id: '-10009',
-    c_name: 'click_history_chenggu_repay',
-  },
-  h5_bai_gua: {
-    c_id: '-10008',
-    c_name: 'click_history_64gua_repay',
-  },
-  h5_annual2024: {
-    c_id: '-10003',
-    c_name: 'click_history_2024report_repay',
-  },
-  h5_emotion2024: {
-    c_id: '-10004',
-    c_name: 'click_history_2024lovely_repay',
-  },
-};
 import { CountDown } from 'vant';
 export default {
   components: {
@@ -88,20 +48,41 @@ export default {
     const res = await getLastOrderGetAPI();
     if (res.status !== 1000) return;
     this.last_order = res.data;
+    if(this.last_order) {
+      //自动下单
+      this.autoPay()
+    }
   },
 
   computed: {
+    show() {
+      return utils.getFBChannel().indexOf('02')>-1
+    },
     productList() {
       return this.$store.state.common.productList;
     },
+    canAutoPay() {
+      return localStorage.getItem(`auto_pay`) && !utils.isFBContainer() && localStorage.getItem(`mlxz_outer_visitor_id`) 
+    }
   },
   methods: {
+    autoPay() {
+      if(this.canAutoPay) {
+        this.pay();
+      }
+    },
     getTime(val) {
       const { minutes, seconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000;
       localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, time_);
     },
     async pay() {
+      if (utils.isFBContainer()) {
+        this.$emit('show_modal', true)
+        if (!utils.getQueryStr('mlxz_outer_visitor_id')) {
+          location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&_fbc=${localStorage.getItem('_fbc')}&_fbq=${localStorage.getItem('_fbq')}&auto_pay=1`
+        }
+      }
       Indicator.open('订单创建中');
       const {
         status,
@@ -115,7 +96,7 @@ export default {
         combine_product_ids,
       } = this.last_order;
       let url = path_enums[product_key];
-      
+
       if (combine_product_ids && combine_product_ids.length) {
         let length_ = combine_product_ids.length;
         let params = {
@@ -204,34 +185,32 @@ export default {
       //       channel: utils.getFBChannel(),
       //     }
       //   );
-        let params = {
-          pay_method,
-          product_key,
-          product_id,
-          platform: 'WEB',
-          extra_ce_suan: ext,
-          trade_pay_type,
-          trade_target_org,
-          fb_param: {
-            fbc: utils.getcookieInfo('_fbc'),
-            fbp: utils.getcookieInfo('_fbp'),
-            external_id: localStorage.getItem('mlxz_outer_visitor_id'),
-          },
-        };
+      let params = {
+        pay_method,
+        product_key,
+        product_id,
+        platform: 'WEB',
+        extra_ce_suan: ext,
+        trade_pay_type,
+        trade_target_org,
+        fb_param: {
+          fbc: utils.getcookieInfo('_fbc'),
+          fbp: utils.getcookieInfo('_fbp'),
+          external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+        },
+      };
 
-        params.callback_url = `${
-          location.origin
-        }/${utils.getFBChannel()}/${url}.html#/result?path=${
-          path_enums[product_key]
+      params.callback_url = `${location.origin
+        }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
         }&report_price=${payment}&repay=1`;
-        const res = await payOrderAPI(params);
+      const res = await payOrderAPI(params);
 
-        Indicator.close();
+      Indicator.close();
 
-        if (res.status !== 1000) return;
+      if (res.status !== 1000) return;
 
 
-        location.href = res.data.pay_url;
+      location.href = res.data.pay_url;
     }
   }
 }

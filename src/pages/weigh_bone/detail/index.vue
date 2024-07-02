@@ -8,12 +8,14 @@
 <template>
   <div class="detail">
     <FbShareNotice v-if="is_show_fb_notice"/>
+    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <userInfo
       :user_detail="query_user_string"
       :product_key="product_key"
       :query_user_string="query_user_string"
       @logEvent="logEventFun"
     />
+    <PayItem product_key="h5_weigh_bone" @show_modal="showModal"/>
     <!-- <div class="pay-box">
       <div style="padding: 0 0.2rem">
         <PayCard
@@ -36,6 +38,8 @@ import utils from '../../../libs/utils';
 import footerBanner from '../home/footer';
 import userInfo from './userInfo.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
+import PayItem from '../../../components/PayItem.vue';
+import PayGuideModal from '../../../components/PayGuideModal.vue';
 
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 export default {
@@ -44,6 +48,8 @@ export default {
     footerBanner,
     userInfo,
     FbShareNotice,
+    PayItem,
+    PayGuideModal,
   },
   data() {
     return {
@@ -51,6 +57,7 @@ export default {
       product_key: 'h5_weigh_bone',
       query_user_string: '',
       showBottomBtn: false,
+      showPayGuideModal: false,//待支付蒙版  
     };
   },
   computed: {
@@ -87,6 +94,9 @@ export default {
     this.query_user_string = this.$route.query.querystring;
   },
   methods: {
+    showModal() {
+      this.showPayGuideModal = !this.showPayGuideModal;
+    },
     /**
      * @description: 埋点上报
      * @return {*}

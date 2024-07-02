@@ -1,6 +1,7 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
     <FbShareNotice v-if="is_show_fb_notice"/>
+    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <img
       class="top-banner"
       :src="language === 'zh-CN' ? cn_header : tw_header"
@@ -82,6 +83,7 @@
         <div class="price">吉时价 RM68</div>
       </PayCard> -->
     </div>
+    <PayItem product_key="h5_bai_gua" @show_modal="showModal"/>
     <img class="card" :src="language === 'zh-CN' ? cn_card_1 : tw_card_1" />
     <img class="card" :src="language === 'zh-CN' ? cn_card_2 : tw_card_2" />
     <div class="footer-box"></div>
@@ -131,6 +133,8 @@ import payModal from '../../../components/PayModal.vue';
 import { report_id_arr } from '../../../libs/enum';
 import NewFooter from '../../../components/NewFooter.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
+import PayItem from '../../../components/PayItem.vue';
+import PayGuideModal from '../../../components/PayGuideModal.vue';
 
 export default {
   components: {
@@ -139,6 +143,8 @@ export default {
     payModal,
     NewFooter,
     FbShareNotice,
+    PayItem,
+    PayGuideModal,
   },
   data() {
     return {
@@ -180,6 +186,7 @@ export default {
       tw_modal_bg: tw_model_bg,
       showFixedBtn: false,
       is_show_btn: true,
+      showPayGuideModal: false,//待支付蒙版  
     };
   },
   filters: {
@@ -253,6 +260,9 @@ export default {
     });
   },
   methods: {
+    showModal() {
+      this.showPayGuideModal = !this.showPayGuideModal;
+    },
     /**
      * @description: 获取八字
      * @return {*}

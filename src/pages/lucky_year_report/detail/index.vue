@@ -8,6 +8,7 @@
 <template>
   <div :class="['detail', pay_modal ? 'fix-pop' : '']">
     <FbShareNotice v-if="is_show_fb_notice"/>
+    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <div class="pay-box">
       <img class="title1" :src="is_cn ? cn_txt_title : tw_txt_title" alt="" />
       <img class="title2" :src="is_cn ? cn_img_word3 : tw_img_word3" alt="" />
@@ -116,8 +117,10 @@ import tw_modal_bg from '../../../assets/img/tw_mlxz/wealth_24/detail/modal_bg.w
 import { report_id_arr } from '../../../libs/enum';
 import NewFooter from '../../../components/NewFooter.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
+import PayItem from '../../../components/PayItem.vue';
+import PayGuideModal from '../../../components/PayGuideModal.vue';
 export default {
-  components: { PayCard, BaziTable, payModal, NewFooter,FbShareNotice  },
+  components: { PayCard, BaziTable, payModal, NewFooter,FbShareNotice,PayItem, PayGuideModal  },
   
   data() {
     return {
@@ -166,6 +169,7 @@ export default {
       tw_modal_bg,
       is_show_btn: true,
       showFixedBtn: false,
+      showPayGuideModal: false,//待支付蒙版  
     };
   },
   computed: {
@@ -252,6 +256,9 @@ export default {
     self.loadBg('#ji', self.ji_svga);
   },
   methods: {
+    showModal() {
+      this.showPayGuideModal = !this.showPayGuideModal;
+    },
     // 端内加载背景SVGA动画
     loadBg(dom, url, is_loop = true) {
       const downloader = new Downloader();

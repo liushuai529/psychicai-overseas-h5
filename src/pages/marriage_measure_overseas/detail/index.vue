@@ -21,6 +21,7 @@
       @update-visible="showAnimation = false"
     />
     <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')"/>
+    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <img
       class="top-banner"
       src="../../../assets/img/mlxz/bzhh/detail/img_head.webp"
@@ -76,6 +77,7 @@
         </div> -->
       </div>
     </div>
+    <PayItem product_key="h5_marriage" @show_modal="showModal"/>
     <img
       id="title-pay"
       class="title-pay"
@@ -193,6 +195,8 @@ import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
 import AnimationPage from '../../../components/AnimationPage.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
+import PayItem from '../../../components/PayItem.vue';
+import PayGuideModal from '../../../components/PayGuideModal.vue';
 
 
 const mockTipsArr = {
@@ -220,6 +224,8 @@ export default {
     GejuInfo,
     AnimationPage,
     FbShareNotice,
+    PayItem,
+    PayGuideModal,
   },
   data() {
     return {
@@ -267,6 +273,7 @@ export default {
       mingge_desc: [], //命格生日信息展示
       mingge_minfo: [], //命格男性信息
       mingge_finfo: [], //命格女性信息
+      showPayGuideModal: false,//待支付蒙版  
     };
   },
   filters: {
@@ -343,7 +350,7 @@ export default {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       });
-    }, 500);
+    }, 2000);
     let btn = document.getElementById('info-btn');
     let self = this;
 
@@ -370,6 +377,9 @@ export default {
     });
   },
   methods: {
+    showModal() {
+      this.showPayGuideModal = !this.showPayGuideModal;
+    },
     getUserInfo(sex, info) {
       if (sex === 0) {
         this.mingge_finfo = info;
