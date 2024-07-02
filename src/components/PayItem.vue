@@ -84,6 +84,7 @@ export default {
         if (!utils.getQueryStr('mlxz_outer_visitor_id')) {
           location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&_fbc=${localStorage.getItem('_fbc')}&_fbq=${localStorage.getItem('_fbq')}&auto_pay=1`
         }
+        return
       }
       Indicator.open('订单创建中');
       const {
