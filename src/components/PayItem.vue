@@ -47,7 +47,9 @@ export default {
     this.$store.dispatch('common/getProduction');
     const res = await getLastOrderGetAPI();
     if (res.status !== 1000) return;
-    this.last_order = res.data;
+    if(res.data && res.data.product_key === this.product_key) {
+      this.last_order = res.data;
+    }
     if(this.last_order) {
       //自动下单
       this.autoPay()
@@ -56,7 +58,7 @@ export default {
 
   computed: {
     show() {
-      return utils.getFBChannel().indexOf('02')>-1
+      return utils.getFBChannel().indexOf('02')>-1 && this.last_order
     },
     productList() {
       return this.$store.state.common.productList;
