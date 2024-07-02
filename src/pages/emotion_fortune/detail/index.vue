@@ -7,7 +7,7 @@
       :src="is_cn ? cn_info_title : tw_info_title"
       alt=""
     />
-
+    
     
     <div :class="{ 'pay-box': true, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
       <BaziTable
@@ -41,6 +41,7 @@
       >
       </BaziTable>
     </div>
+    <!-- <PayItem product_key="h5_emotion2024"/> -->
     <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
       <img
         id="method-title-img"
@@ -151,6 +152,7 @@ import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
 import AnimationPage from '../../../components/AnimationPage.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
+import PayItem from '../../../components/PayItem.vue';
 
 export default {
   components: {
@@ -164,6 +166,7 @@ export default {
     GejuInfo,
     AnimationPage,
     FbShareNotice,
+    PayItem,
   },
   data() {
     return {
@@ -482,6 +485,7 @@ export default {
       this.pay_modal = true;
     },
     payOrder() {
+  
       this.$refs.payDetail.payMoney();
     },
   },
@@ -524,7 +528,7 @@ export default {
   background: #ec436b;
 
   .pay-box {
-    margin-bottom: 0.49rem;
+    margin-bottom: 0.3rem;
     width: 7.1rem;
     height: 7.09rem;
     padding-top: 1.1rem;
