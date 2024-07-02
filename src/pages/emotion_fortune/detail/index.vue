@@ -41,7 +41,7 @@
       >
       </BaziTable>
     </div>
-    <!-- <PayItem product_key="h5_emotion2024"/> -->
+    <PayItem product_key="h5_emotion2024"/>
     <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
       <img
         id="method-title-img"
