@@ -9,7 +9,7 @@
     </div>
     <div class="time">
       <div>{{ is_cn? '请在' : '請在' }}</div>
-      <count-down :time="time" @change="getTime" />
+      <count-down :time="time" @change="getTime" style="margin-left: 5px; margin-right: 5px;"/>
       <div>{{ is_cn? '内完成支付': '內完成支付' }}</div>
     </div>
 
@@ -264,7 +264,7 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .pay-item {
   width: 7.1rem;
   height: 2.04rem;
@@ -343,6 +343,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center
+  }
+  .van-count-down {
+    font-weight: 600;
+    font-size: 0.26rem;
+    color: #E24C2E;
+    line-height: 0.26rem; 
   }
 }
 </style>
