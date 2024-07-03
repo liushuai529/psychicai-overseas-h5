@@ -32,8 +32,8 @@ const pay_info = {
   h5_annual2024: {module: 10003, 'content_id': -10023, 'event_name': 'click_paycardyear_pay', type: 'click'}, // 2024年年运
   h5_weigh_bone: {module: 10009, 'content_id': -10023, 'event_name': 'click_paycardchenggu_pay', type: 'click'}, // 袁天罡秤骨
   h5_bai_gua: {module: 10008, 'content_id': -10023, 'event_name': 'click_paycard64gua_pay', type: 'click'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10023, 'event_name': 'click_paycardlove_pay', type: 'click'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10023, 'event_name': 'click_paycardmarriage_pay', type: 'click'}, //合婚
+  h5_emotion2024: {module: 10006, 'content_id': -10032, 'event_name': 'click_paycardlove_pay', type: 'click'}, // 2024年爱情运势
+  h5_marriage: {module: 10007, 'content_id': -10034, 'event_name': 'click_paycardmarriage_pay', type: 'click'}, //合婚
   h5_career2024: {module: 10004, 'content_id': -10023, 'event_name': 'click_paycardcareer_pay', type: 'click'}, // 2024年事业运势 
 }
 const modal_info = {
@@ -41,8 +41,8 @@ const modal_info = {
   h5_annual2024: {module: 10003, 'content_id': -10024, 'event_name': 'page_view_iosyear_guidance', type: 'page_view'}, // 2024年年运
   h5_weigh_bone: {module: 10009, 'content_id': -10024, 'event_name': 'page_view_ioschenggu_guidance', type: 'page_view'}, // 袁天罡秤骨
   h5_bai_gua: {module: 10008, 'content_id': -10024, 'event_name': 'page_view_ios64gua_guidance', type: 'page_view'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10024, 'event_name': 'page_view_ioslove_guidance', type: 'page_view'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10024, 'event_name': 'page_view_iosmarriage_guidance', type: 'page_view'}, //合婚
+  h5_emotion2024: {module: 10006, 'content_id': -10033, 'event_name': 'page_view_ioslove_guidance', type: 'page_view'}, // 2024年爱情运势
+  h5_marriage: {module: 10007, 'content_id': -10035, 'event_name': 'page_view_iosmarriage_guidance', type: 'page_view'}, //合婚
   h5_career2024: {module: 10004, 'content_id': -10024, 'event_name': 'page_view_ioscareer_guidance', type: 'page_view'}, // 2024年事业运势 
 }
 export default {
