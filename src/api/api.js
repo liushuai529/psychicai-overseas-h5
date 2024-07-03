@@ -192,5 +192,5 @@ export const getLastOrderAPI = async data => {
 //查询最近一笔订单get请求
 export const getLastOrderGetAPI = async data => {
   await visitorLoginAPI();
-  return request(`/web/auth/trade/orders/ce_suan/recent`, 'GET', data);
+  return request(`/web/auth/trade/orders/ce_suan/recent/${data}`, 'GET', data);
 };

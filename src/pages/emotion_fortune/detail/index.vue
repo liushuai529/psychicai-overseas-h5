@@ -492,7 +492,7 @@ export default {
       this.pay_modal = true;
     },
     payOrder() {
-  
+      localStorage.removeItem('mlxz_count_pay_item_h5_emotion2024');
       this.$refs.payDetail.payMoney();
     },
   },

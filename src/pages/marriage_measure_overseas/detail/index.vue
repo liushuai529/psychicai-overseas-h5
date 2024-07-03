@@ -505,6 +505,7 @@ export default {
      */
     showPayModal() {
       this.$refs.payDetail.payMoney();
+      localStorage.removeItem('mlxz_count_pay_item_h5_marriage');
       return;
       utils.firebaseLogEvent('10007', '-10004', 'click_marriage_mid', 'click', {
         args_name: 'click_marriage_mid',

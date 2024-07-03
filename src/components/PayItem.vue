@@ -42,14 +42,14 @@ export default {
       default: 'h5_emotion2024'
     },
   },
+  
 
   async created() {
+    this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`):  30 * 60 * 1000
     this.$store.dispatch('common/getProduction');
-    const res = await getLastOrderGetAPI();
+    const res = await getLastOrderGetAPI(this.product_key);
     if (res.status !== 1000) return;
-    if(res.data && res.data.product_key === this.product_key) {
-      this.last_order = res.data;
-    }
+    this.last_order = res.data;
     if(this.last_order) {
       //自动下单
       this.autoPay()
@@ -80,7 +80,7 @@ export default {
     getTime(val) {
       const { minutes, seconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000;
-      localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, time_);
+      // localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, time_);
     },
     async pay() {
       if (utils.isFBContainer()) {

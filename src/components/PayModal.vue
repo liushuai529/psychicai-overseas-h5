@@ -499,6 +499,7 @@ export default {
         return false;
       }
       this.payCanClick = true;
+      localStorage.removeItem(`mlxz_count_pay_item_${this.product_key}`);
       clearTimeout(this.pay_lock_time);
       this.pay_lock_time = setTimeout(() => {
         this.payCanClick = false;
@@ -517,6 +518,7 @@ export default {
         e_name: 'pay_click',
         product_id: this.product.product_id,
       });
+     
       utils.firebaseLogEvent(
         this.e_view_id,
         this.c_click_id,
