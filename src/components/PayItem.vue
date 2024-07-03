@@ -2,15 +2,15 @@
   <div class="pay-item" v-if="show">
     <div class="pay-contaienr">
       <div class="left">
-        <div class="title">您有待支付订单</div>
-        <div class="desc">已根据您的八字信息成功生成「报告」</div>
+        <div class="title">{{is_cn? '您有待支付订单': '您有待支付訂單'}}</div>
+        <div class="desc">{{ is_cn? '已根据您的八字信息成功生成「报告」': '已根據您的八字信息成功生成「報告」' }}</div>
       </div>
       <div class="right" @click="pay">立即支付</div>
     </div>
     <div class="time">
-      <div>请在</div>
+      <div>{{ is_cn? '请在' : '請在' }}</div>
       <count-down :time="time" @change="getTime" />
-      <div>内完成支付</div>
+      <div>{{ is_cn? '内完成支付': '內完成支付' }}</div>
     </div>
 
   </div>
@@ -52,11 +52,14 @@ export default {
     }
     if(this.last_order) {
       //自动下单
-      // this.autoPay()
+      this.autoPay()
     }
   },
 
   computed: {
+    is_cn() {
+      return utils.getLanguage() === 'zh-CN';
+    },
     show() {
       return utils.getFBChannel().indexOf('02')>-1 && this.last_order
     },
@@ -64,12 +67,13 @@ export default {
       return this.$store.state.common.productList;
     },
     canAutoPay() {
-      return !utils.isFBContainer() && localStorage.getItem(`mlxz_outer_visitor_id`) 
+      return !utils.isFBContainer() && localStorage.getItem(`mlxz_outer_visitor_id`) && utils.getQueryStr('timestamp') && !localStorage.getItem(`auto_pay_${utils.getQueryStr('timestamp')}`)
     }
   },
   methods: {
     autoPay() {
       if(this.canAutoPay) {
+        localStorage.setItem(`auto_pay_${utils.getQueryStr('timestamp')}`, 1)
         this.pay();
       }
     },
@@ -82,7 +86,7 @@ export default {
       if (utils.isFBContainer()) {
         this.$emit('show_modal', true)
         if (!utils.getQueryStr('mlxz_outer_visitor_id')) {
-          location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&_fbc=${localStorage.getItem('_fbc')}&_fbq=${localStorage.getItem('_fbq')}`
+          location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&_fbc=${localStorage.getItem('_fbc')}&_fbq=${localStorage.getItem('_fbq')}&timestamp=${new Date().getTime()}`
         }
         return
       }
