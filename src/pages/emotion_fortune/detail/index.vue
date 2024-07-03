@@ -2,12 +2,13 @@
   <div :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') }">
     <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')"/>
     <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
+    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <img
       class="header-title"
       :src="is_cn ? cn_info_title : tw_info_title"
       alt=""
     />
-
+    
     
     <div :class="{ 'pay-box': true, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
       <BaziTable
@@ -41,6 +42,7 @@
       >
       </BaziTable>
     </div>
+    <PayItem product_key="h5_emotion2024" @show_modal="showModal"/>
     <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
       <img
         id="method-title-img"
@@ -151,6 +153,8 @@ import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
 import AnimationPage from '../../../components/AnimationPage.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
+import PayItem from '../../../components/PayItem.vue';
+import PayGuideModal from '../../../components/PayGuideModal.vue';
 
 export default {
   components: {
@@ -164,6 +168,8 @@ export default {
     GejuInfo,
     AnimationPage,
     FbShareNotice,
+    PayItem,
+    PayGuideModal,
   },
   data() {
     return {
@@ -231,6 +237,7 @@ export default {
       is_show_btn: true,
       gejujiedu: [], //格局信息
       showAnimation: true,//过渡动画标识
+      showPayGuideModal: false,//待支付蒙版
     };
   },
   watch: {
@@ -339,7 +346,7 @@ export default {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       });
-    }, 500);
+    }, 2000);
     let self = this;
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
@@ -365,6 +372,9 @@ export default {
     });
   },
   methods: {
+    showModal() {
+      this.showPayGuideModal = !this.showPayGuideModal;
+    },
     // 端内加载背景SVGA动画
     loadBg(dom, url, is_loop = true) {
       const downloader = new Downloader();
@@ -482,6 +492,7 @@ export default {
       this.pay_modal = true;
     },
     payOrder() {
+      localStorage.removeItem('mlxz_count_pay_item_h5_emotion2024');
       this.$refs.payDetail.payMoney();
     },
   },
@@ -524,7 +535,7 @@ export default {
   background: #ec436b;
 
   .pay-box {
-    margin-bottom: 0.49rem;
+    margin-bottom: 0.3rem;
     width: 7.1rem;
     height: 7.09rem;
     padding-top: 1.1rem;

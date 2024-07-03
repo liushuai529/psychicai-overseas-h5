@@ -74,6 +74,44 @@
 
     <script async src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
 
+    <script>
+      
+      function getQueryStr(key) {
+        if (typeof window !== 'undefined') {
+          let url = location.hash;
+          let theRequest = new Object();
+          if (url.indexOf('?') != -1) {
+            let str = url.substr(1).split('?')[1];
+            let strs = str.split('&');
+            for (let i = 0; i < strs.length; i++) {
+              theRequest[strs[i].split('=')[0]] = decodeURI(strs[i].split('=')[1]);
+            }
+          }
+          return theRequest[key] == null ? '' : theRequest[key];
+        }
+      }
+      function setCookie(name, value, days, path) {
+        var expires = "";
+        if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=" + (path || "/");
+      }
+      if(getQueryStr('_fbc')&&getQueryStr('_fbp')) {
+        setCookie("_fbc", getQueryStr('_fbc'), 7, "/");
+        setCookie("_fbq", getQueryStr('_fbp'), 7, "/");
+      }
+
+      if(getQueryStr('mlxz_outer_open_uid')|| getQueryStr('mlxz_outer_access_token') ||getQueryStr('mlxz_outer_visitor_id')) {
+        localStorage.setItem('mlxz_outer_open_uid', getQueryStr('mlxz_outer_open_uid'));
+        localStorage.setItem('mlxz_outer_access_token', getQueryStr('mlxz_outer_access_token'));
+        localStorage.setItem('mlxz_outer_visitor_id', getQueryStr('mlxz_outer_visitor_id'));
+      }
+      
+    </script>
+
     <!-- <script>
       //兼容客户端方法
       window.callbackEtouchUserInfo = function () {
@@ -249,8 +287,10 @@
     <script async src="../js/swiper-3.3.1.jquery.min.js"></script>
     <!--content-->
     <div id="app" data-own="1"></div>
+
     <script>
       !(function (d, w) {
+
         const cookieMap = new Map();
 
         document.cookie.split("; ").forEach((cookie) => {

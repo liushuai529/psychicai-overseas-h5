@@ -1,6 +1,7 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
     <FbShareNotice v-if="is_show_fb_notice"/>
+    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <div class="new-pay-box">
       <div class="title-box">
         <img :src="is_cn ? cn_info_title : tw_info_title" />
@@ -52,6 +53,7 @@
       </div>
       <div class="bottom-one"></div>
     </div>
+    <PayItem product_key="h5_career2024" @show_modal="showModal"/>
 
     <img class="card" :src="is_cn ? cn_bg : tw_bg" />
     <img
@@ -106,6 +108,8 @@ import tw_word3 from '../../../assets/img/tw_mlxz/career_24/tw_word3.webp';
 import { report_id_arr } from '../../../libs/enum';
 import NewFooter from '../../../components/NewFooter.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
+import PayItem from '../../../components/PayItem.vue';
+import PayGuideModal from '../../../components/PayGuideModal.vue';
 
 const Getmonth = () => {
   let arr = [];
@@ -122,6 +126,8 @@ export default {
     BaziTable,
     NewFooter,
     FbShareNotice,
+    PayItem,
+    PayGuideModal,
   },
   data() {
     return {
@@ -173,6 +179,7 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/2404decca054fa0640bf94f151ddf77e8e5d.png',
       cn_modal_bg:
         'https://psychicai-static.psychicai.pro/imgs/24044f85a11130fe41fbad46e43aec4ed6fb.png',
+      showPayGuideModal: false,//待支付蒙版  
     };
   },
   filters: {
@@ -269,6 +276,9 @@ export default {
   },
 
   methods: {
+    showModal() {
+      this.showPayGuideModal = !this.showPayGuideModal;
+    },
     /**
      * @description: 获取八字
      * @return {*}

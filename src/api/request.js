@@ -18,7 +18,7 @@ let originUrl = window.location.href;
 const projectEnv = env => {
   return originUrl.indexOf(env) > -1 ? true : false;
 };
-if (projectEnv('192.168') || projectEnv('localhost')) {
+if (projectEnv('192.168') || projectEnv('172.19') || projectEnv('localhost')) {
   baseURL = devBaseUrl;
 } else if (projectEnv('test')) {
   baseURL = testBaseURL;
