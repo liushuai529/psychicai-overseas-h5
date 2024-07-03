@@ -52,7 +52,9 @@ export default {
     this.$store.dispatch('common/getProduction');
     const res = await getLastOrderGetAPI(this.product_key);
     if (res.status !== 1000) return;
-    this.last_order = res.data;
+    if(res.data.status !== 'PAYED') {
+      this.last_order = res.data;
+    }
     if(this.last_order) {
       //自动下单
       this.autoPay()
