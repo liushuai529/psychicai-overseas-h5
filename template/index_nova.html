@@ -108,7 +108,7 @@
         }
         document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=" + (path || "/");
       }
-      if(getQueryStr('_fbc')||getQueryStr('_fbq')) {
+      if(getQueryStr('_fbc')&&getQueryStr('_fbq')) {
         setCookie("_fbc", getQueryStr('_fbc'), 7, "/");
         setCookie("_fbq", getQueryStr('_fbq'), 7, "/");
       }
