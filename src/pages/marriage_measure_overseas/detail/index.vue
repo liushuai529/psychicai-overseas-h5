@@ -549,6 +549,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 0.3rem;
 
     .banner {
       position: absolute;
@@ -678,7 +679,7 @@ export default {
 .title-pay {
   width: 7.5rem;
   height: 1.32rem;
-  margin: 0.29rem auto 0;
+  // margin: 0.29rem auto 0;
   position: relative;
   z-index: 2;
 }
