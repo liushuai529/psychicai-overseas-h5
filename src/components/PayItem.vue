@@ -1,5 +1,5 @@
 <template>
-  <div class="pay-item" v-show="show">
+  <div class="pay-item" v-show="show" :style="{marginBottom:product_key==='h5_emotion2024'? '0.37rem': '0.24rem'}">
     <div class="pay-contaienr">
       <div class="left">
         <div class="title">{{is_cn? '您有待支付订单': '您有待支付訂單'}}</div>
