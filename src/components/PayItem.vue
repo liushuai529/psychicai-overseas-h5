@@ -26,6 +26,25 @@ import { path_enums } from '../libs/enum';
 import { payOrderAPI } from '../api/api';
 
 import { CountDown } from 'vant';
+
+const pay_info = {
+  h5_wealth2024: {module: 10005, 'content_id': -10023, 'event_name': 'click_paycardwealty_pay', type: 'click'}, // 2024年财运
+  h5_annual2024: {module: 10003, 'content_id': -10023, 'event_name': 'click_paycardyear_pay', type: 'click'}, // 2024年年运
+  h5_weigh_bone: {module: 10009, 'content_id': -10023, 'event_name': 'click_paycardchenggu_pay', type: 'click'}, // 袁天罡秤骨
+  h5_bai_gua: {module: 10008, 'content_id': -10023, 'event_name': 'click_paycard64gua_pay', type: 'click'}, // 鬼谷子
+  h5_emotion2024: {module: 10006, 'content_id': -10023, 'event_name': 'view_2024lovely_download', type: 'click'}, // 2024年爱情运势
+  h5_marriage: {module: 10007, 'content_id': -10023, 'event_name': 'view_marriage_download', type: 'click'}, //合婚
+  h5_career2024: {module: 10004, 'content_id': -10023, 'event_name': 'view_2024career_download', type: 'click'}, // 2024年事业运势 
+}
+const modal_info = {
+  h5_wealth2024: {module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view'}, // 2024年财运
+  h5_annual2024: {module: 10003, 'content_id': -10024, 'event_name': 'page_view_iosyear_guidance', type: 'page_view'}, // 2024年年运
+  h5_weigh_bone: {module: 10009, 'content_id': -10024, 'event_name': 'page_view_ioschenggu_guidance', type: 'page_view'}, // 袁天罡秤骨
+  h5_bai_gua: {module: 10008, 'content_id': -10024, 'event_name': 'click_64gua_copy', type: 'page_view'}, // 鬼谷子
+  h5_emotion2024: {module: 10006, 'content_id': -10024, 'event_name': 'click_2024lovely_copy', type: 'page_view'}, // 2024年爱情运势
+  h5_marriage: {module: 10007, 'content_id': -10024, 'event_name': 'click_marriage_copy', type: 'page_view'}, //合婚
+  h5_career2024: {module: 10004, 'content_id': -10024, 'event_name': 'click_2024career_copy', type: 'page_view'}, // 2024年事业运势 
+}
 export default {
   components: {
     CountDown,
@@ -99,6 +118,10 @@ export default {
         if (!utils.getQueryStr('mlxz_outer_visitor_id')) {
           location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&_fbc=${localStorage.getItem('_fbc')}&_fbq=${localStorage.getItem('_fbq')}&timestamp=${new Date().getTime()}`
         }
+        utils.firebaseLogEvent(modal_info[this.product_key]['module'], modal_info[this.product_key]['content_id'], modal_info[this.product_key]['event_name'], modal_info[this.product_key]['type'], {
+          args_name: modal_info[this.product_key]['event_name'],
+          channel: utils.getFBChannel(),
+        });
         return
       }
       Indicator.open('订单创建中');
@@ -192,6 +215,10 @@ export default {
         // 组合下单结束
         return;
       }
+      utils.firebaseLogEvent(pay_info[this.product_key]['module'], pay_info[this.product_key]['content_id'], pay_info[this.product_key]['event_name'], pay_info[this.product_key]['type'], {
+        args_name: pay_info[this.product_key]['event_name'],
+        channel: utils.getFBChannel(),
+      });
 
       // utils.firebaseLogEvent(
       //     '10002',
