@@ -113,6 +113,10 @@ export default {
       
     },
     async pay() {
+      utils.firebaseLogEvent(pay_info[this.product_key]['module'], pay_info[this.product_key]['content_id'], pay_info[this.product_key]['event_name'], pay_info[this.product_key]['type'], {
+        args_name: pay_info[this.product_key]['event_name'],
+        channel: utils.getFBChannel(),
+      });
       if (utils.isFBContainer()) {
         this.$emit('show_modal', true)
         if (!utils.getQueryStr('mlxz_outer_visitor_id')) {
@@ -216,10 +220,7 @@ export default {
         // 组合下单结束
         return;
       }
-      utils.firebaseLogEvent(pay_info[this.product_key]['module'], pay_info[this.product_key]['content_id'], pay_info[this.product_key]['event_name'], pay_info[this.product_key]['type'], {
-        args_name: pay_info[this.product_key]['event_name'],
-        channel: utils.getFBChannel(),
-      });
+      
 
       // utils.firebaseLogEvent(
       //     '10002',
