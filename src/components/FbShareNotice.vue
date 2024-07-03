@@ -1,7 +1,7 @@
 <template>
   <div class="fb-share-notice">
    <div></div>
-   <div>{{ is_cn? '点击右上角浏览器打开体验更流畅': '點擊右上角瀏覽器打開體驗更流暢' }}</div>
+   <div>{{ is_cn? '支付遇到问题请使用浏览器访问': '支付遇到問題請使用瀏覽器訪問' }}</div>
    <img class="logo" src="../assets/img/components/fb_share_notice/arrow_more_yindao.webp"/>
     
   </div>

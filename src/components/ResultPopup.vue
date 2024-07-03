@@ -56,8 +56,8 @@ const tips_arr7 = {
   'zh-TW': '識別碼可在我的——我的報告中查看。',
 };
 const tips_arr8 = {
-  'zh-CN': '立即下载',
-  'zh-TW': '立即下載',
+  'zh-CN': '复制识别码并立即下载查看',
+  'zh-TW': '復製識別碼並立即下載查看',
 };
 const tips_arr9 = {
   h5_wealth2024: {
