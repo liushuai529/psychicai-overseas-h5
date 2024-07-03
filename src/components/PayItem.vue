@@ -116,6 +116,7 @@ export default {
       utils.firebaseLogEvent(pay_info[this.product_key]['module'], pay_info[this.product_key]['content_id'], pay_info[this.product_key]['event_name'], pay_info[this.product_key]['type'], {
         args_name: pay_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
+        container: utils.isFBContainer()? 'fb': 'web'
       });
       if (utils.isFBContainer()) {
         this.$emit('show_modal', true)
