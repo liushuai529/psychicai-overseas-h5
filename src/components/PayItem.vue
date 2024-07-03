@@ -1,5 +1,5 @@
 <template>
-  <div class="pay-item" v-if="show">
+  <div class="pay-item" v-show="show">
     <div class="pay-contaienr">
       <div class="left">
         <div class="title">{{is_cn? '您有待支付订单': '您有待支付訂單'}}</div>
@@ -45,7 +45,10 @@ export default {
   
 
   async created() {
-    this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`):  30 * 60 * 1000
+    if(!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
+      localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, 30 * 60 * 1000);
+    } 
+    // this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`):  30 * 60 * 1000
     this.$store.dispatch('common/getProduction');
     const res = await getLastOrderGetAPI(this.product_key);
     if (res.status !== 1000) return;
@@ -80,7 +83,13 @@ export default {
     getTime(val) {
       const { minutes, seconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000;
-      // localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, time_);
+      if(localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
+        localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, time_);
+      } else {
+        this.time = 30 * 60 * 1000
+      }
+      
+      
     },
     async pay() {
       if (utils.isFBContainer()) {
