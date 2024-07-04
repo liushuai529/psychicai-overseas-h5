@@ -22,7 +22,7 @@
     >
      
       <div
-        v-if="!is_channel_01"
+        v-if="!is_channel_01 && !is_channel_05"
         @click="backHome()"
         :class="['back-box']"
         :style="getStyle"
@@ -453,6 +453,9 @@ export default {
     },
     is_channel_01() {
       return utils.getFBChannel().indexOf('01') > -1;
+    },
+    is_channel_05() {
+      return utils.getFBChannel().indexOf('05') > -1;
     },
   },
   watch: {
