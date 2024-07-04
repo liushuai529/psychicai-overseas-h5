@@ -62,9 +62,10 @@ export default {
         if (this.channel1) {
           return cn_home_btn;
         } 
-        // else if (this.channel2) {
-        //   return cn_home_xs_btn;
-        // } 
+        else if (this.channel2) {
+          // return cn_home_xs_btn;
+          return cn_home_btn1; 
+        } 
         else if (this.channel3) {
           return cn_home_btn1;
         }
@@ -72,9 +73,10 @@ export default {
         if (this.channel1) {
           return tw_home_btn;
         } 
-        // else if (this.channel2) {
-        //   return tw_home_xs_btn;
-        // } 
+        else if (this.channel2) {
+          // return tw_home_xs_btn;
+          return tw_home_btn1;
+        } 
         else if (this.channel3) {
           return tw_home_btn1;
         }
