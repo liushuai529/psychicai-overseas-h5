@@ -303,7 +303,7 @@ export default {
           // return cn_home_xs_btn;
           return cn_home_btn1;
         } 
-        else if (this.channel3) {
+        else {
           return cn_home_btn1;
         }
       } else {
@@ -314,7 +314,7 @@ export default {
           // return tw_home_xs_btn;
           return tw_home_btn1;
         } 
-        else if (this.channel3) {
+        else {
           return tw_home_btn1;
         }
       }
