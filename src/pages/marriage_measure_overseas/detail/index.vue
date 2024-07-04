@@ -77,7 +77,7 @@
         </div> -->
       </div>
     </div>
-    <PayItem product_key="h5_marriage" @show_modal="showModal"/>
+    <PayItem product_key="h5_marriage" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
     <img
       id="title-pay"
       class="title-pay"
