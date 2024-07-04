@@ -83,7 +83,7 @@
         <div class="price">吉时价 RM68</div>
       </PayCard> -->
     </div>
-    <PayItem product_key="h5_bai_gua" @show_modal="showModal"/>
+    <PayItem product_key="h5_bai_gua" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
     <img class="card" :src="language === 'zh-CN' ? cn_card_1 : tw_card_1" />
     <img class="card" :src="language === 'zh-CN' ? cn_card_2 : tw_card_2" />
     <div class="footer-box"></div>

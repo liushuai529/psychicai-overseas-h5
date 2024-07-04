@@ -30,7 +30,7 @@
         <img class="huxi-btn" :src="is_cn ? cn_pay_btn : tw_pay_btn" alt="" />
       </div>
     </div>
-    <PayItem product_key="h5_annual2024" @show_modal="showModal"/>
+    <PayItem product_key="h5_annual2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
     <img :src="is_cn ? cn_card_1 : tw_card_1" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_2 : tw_card_2" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_3 : tw_card_3" class="card-bg" alt="" />

@@ -53,7 +53,7 @@
       </div>
       <div class="bottom-one"></div>
     </div>
-    <PayItem product_key="h5_career2024" @show_modal="showModal"/>
+    <PayItem product_key="h5_career2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
 
     <img class="card" :src="is_cn ? cn_bg : tw_bg" />
     <img

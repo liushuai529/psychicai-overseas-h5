@@ -5,7 +5,7 @@
         <div class="title">{{is_cn? '您有待支付订单': '您有待支付訂單'}}</div>
         <div class="desc">{{ is_cn? '已根据您的八字信息成功生成「报告」': '已根據您的八字信息成功生成「報告」' }}</div>
       </div>
-      <div class="right" @click="pay">立即支付</div>
+      <div class="right">立即支付</div>
     </div>
     <div class="time">
       <div>{{ is_cn? '请在' : '請在' }}</div>
