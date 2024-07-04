@@ -174,6 +174,7 @@
       @getOrderId="getOrderId"
     ></combinePayPop> -->
       <HotProduct
+        v-if="!is_channel_05"
         product_key="h5_emotion2024"
         url="emotion_fortune"
         e_id="10006"
