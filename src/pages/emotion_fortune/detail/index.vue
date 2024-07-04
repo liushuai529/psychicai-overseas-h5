@@ -42,7 +42,7 @@
       >
       </BaziTable>
     </div>
-    <PayItem product_key="h5_emotion2024" @show_modal="showModal"/>
+    <PayItem product_key="h5_emotion2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
     <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
       <img
         id="method-title-img"
