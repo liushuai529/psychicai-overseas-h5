@@ -279,7 +279,7 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
     is_show_combination() {
-      return !["enjoy03", "panda03", "enjoy02", "panda02"].includes(utils.getFBChannel());
+      return ["enjoy01", "panda01"].includes(utils.getFBChannel());
     }
   },
   filters: {

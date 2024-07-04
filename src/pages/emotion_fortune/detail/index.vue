@@ -264,12 +264,12 @@ export default {
     },
     //套餐支付显示逻辑
     is_show_combination() {
-      return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(
+      return ['enjoy01', 'panda01'].includes(
         utils.getFBChannel()
       );
     },
     is_show_combinationSpecial02() {
-      return !['enjoy03', 'panda03'].includes(utils.getFBChannel());
+      return !['enjoy03', 'panda03', 'enjoy05'].includes(utils.getFBChannel());
     },
 
     //限时特惠
@@ -289,7 +289,7 @@ export default {
       return ['enjoy02', 'panda02'].includes(utils.getFBChannel());
     },
     channel3() {
-      return ['enjoy03', 'panda03'].includes(utils.getFBChannel());
+      return ['enjoy03', 'panda03', 'enjoy05'].includes(utils.getFBChannel());
     },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
