@@ -1,11 +1,11 @@
 <template>
-  <div class="pay-item" v-show="show" :style="{marginBottom:product_key==='h5_emotion2024'? '0.37rem': '0.24rem'}">
+  <div class="pay-item" v-show="show" :style="{marginBottom:product_key==='h5_emotion2024'? '0.37rem': '0.24rem'}" @click="pay">
     <div class="pay-contaienr">
       <div class="left">
         <div class="title">{{is_cn? '您有待支付订单': '您有待支付訂單'}}</div>
         <div class="desc">{{ is_cn? '已根据您的八字信息成功生成「报告」': '已根據您的八字信息成功生成「報告」' }}</div>
       </div>
-      <div class="right" @click="pay">立即支付</div>
+      <div class="right">立即支付</div>
     </div>
     <div class="time">
       <div>{{ is_cn? '请在' : '請在' }}</div>
@@ -60,6 +60,10 @@ export default {
       type: String,
       default: 'h5_emotion2024'
     },
+    show_pay_guide_modal: {
+      type: Boolean,
+      default: false
+    },
   },
   
 
@@ -77,6 +81,20 @@ export default {
     if(this.last_order) {
       //自动下单
       this.autoPay()
+    }
+  },
+  watch: {
+    async show_pay_guide_modal(newVal) {
+     if(!newVal) {
+      console.log('刷新卡片')
+      const res = await getLastOrderGetAPI(this.product_key);
+      if (res.status !== 1000) return;
+      if(res.data.status !== 'PAYED') {
+        this.last_order = res.data;
+      } else {
+        this.last_order = null; 
+      }
+     } 
     }
   },
 

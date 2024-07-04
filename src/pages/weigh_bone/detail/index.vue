@@ -15,7 +15,7 @@
       :query_user_string="query_user_string"
       @logEvent="logEventFun"
     />
-    <PayItem product_key="h5_weigh_bone" @show_modal="showModal"/>
+    <PayItem product_key="h5_weigh_bone" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
     <!-- <div class="pay-box">
       <div style="padding: 0 0.2rem">
         <PayCard

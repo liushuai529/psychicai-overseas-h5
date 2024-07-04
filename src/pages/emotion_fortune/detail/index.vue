@@ -42,7 +42,7 @@
       >
       </BaziTable>
     </div>
-    <PayItem product_key="h5_emotion2024" @show_modal="showModal"/>
+    <PayItem product_key="h5_emotion2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
     <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
       <img
         id="method-title-img"
@@ -298,17 +298,23 @@ export default {
       if (this.language === 'zh-CN') {
         if (this.channel1) {
           return cn_home_btn;
-        } else if (this.channel2) {
-          return cn_home_xs_btn;
-        } else if (this.channel3) {
+        } 
+        else if (this.channel2) {
+          // return cn_home_xs_btn;
+          return cn_home_btn1;
+        } 
+        else if (this.channel3) {
           return cn_home_btn1;
         }
       } else {
         if (this.channel1) {
           return tw_home_btn;
-        } else if (this.channel2) {
-          return tw_home_xs_btn;
-        } else if (this.channel3) {
+        } 
+        else if (this.channel2) {
+          // return tw_home_xs_btn;
+          return tw_home_btn1;
+        } 
+        else if (this.channel3) {
           return tw_home_btn1;
         }
       }

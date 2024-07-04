@@ -47,7 +47,7 @@
         alt=""
       />
     </div>
-    <PayItem product_key="h5_wealth2024" @show_modal="showModal"/>
+    <PayItem product_key="h5_wealth2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
     <div
       :style="`background-image:url(${
         is_cn ? cn_static_duan : tw_static_duan
