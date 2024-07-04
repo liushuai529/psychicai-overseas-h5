@@ -44,11 +44,13 @@ export default {
   position: fixed;
   z-index: 100000;
   background: #333435;
+ 
   display: flex;
   justify-content: center;
   .pay-img {
     width: 6rem;
-    height: 5.7rem
+    height: 8rem
+    
   }
 }
 </style>

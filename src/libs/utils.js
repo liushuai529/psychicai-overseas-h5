@@ -791,6 +791,12 @@ const isAndroid = () => {
   return /android/i.test(ua);
 };
 
+const getExtendUrl = () => {
+  return `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&_fbc=${localStorage.getItem('_fbc')}&_fbp=${localStorage.getItem('_fbp')}&timestamp=${new Date().getTime()}`;
+};
+
+
+
 /**
  * @description: 获取请求参数
  * @param {*} key 参数key
@@ -1671,4 +1677,5 @@ export default {
   firebaseLogEvent,
   getShortStr,
   getcookieInfo,
+  getExtendUrl,
 };
