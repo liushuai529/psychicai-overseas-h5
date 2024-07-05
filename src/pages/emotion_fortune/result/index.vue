@@ -311,7 +311,7 @@ export default {
           mlxz_order_status: report_status,
         });
         console.log('Purchase事件上报', this.order_id)
-        if (utils.isProd() || utils.getFBChannel()==='enjoy05') {
+        if (utils.isProd()) {
           await utils.checkFB();
           try {
             utils.gcyLog(`order_id:${this.order_id}`, {
