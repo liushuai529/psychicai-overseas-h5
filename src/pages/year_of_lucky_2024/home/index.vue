@@ -729,7 +729,8 @@ export default {
       querystring += time_obj.birth_hour || '-1';
 
       window.localStorage.setItem('year_of_lucky_info', querystring);
-      let path = 'detail?querystring=' + querystring;
+      // let path = 'detail?querystring=' + querystring;
+      let path = 'detail?querystring=' + querystring + utils.getExtendUrl();
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
         '10003',
