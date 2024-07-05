@@ -900,7 +900,7 @@ export default {
       this.setAnimation();
       window.localStorage.setItem('_emotion_fortune_info', querystring);
 
-      let path = 'detail?querystring=' + querystring;
+      let path = 'detail?querystring=' + querystring + utils.getExtendUrl();
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
         '10006',
