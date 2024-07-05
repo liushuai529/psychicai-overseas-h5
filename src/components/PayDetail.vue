@@ -517,7 +517,7 @@ export default {
         });
         pay_max_params.callback_url = `${location.origin}${location.pathname
           }#/result?path=${path_enums[this.product_key]}&report_price=${this.product.price
-          }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}`;
+          }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR' }`;
         const res = await payOrderAPI(pay_max_params);
         localStorage.removeItem('mlxz_set_event_times');
         Indicator.close();

@@ -570,7 +570,7 @@ export default {
         location.pathname
       }#/result?path=${path_enums[this.product_key]}&report_price=${
         this.product.price
-      }&discount_pay=${discount_pay}`;
+      }&discount_pay=${discount_pay}&currency_type=${this.product.currency_type || 'MYR' }`;
       const res = await payOrderAPI(pay_max_params);
       Indicator.close();
       localStorage.removeItem('mlxz_set_event_times');

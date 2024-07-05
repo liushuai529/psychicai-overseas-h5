@@ -173,6 +173,7 @@ export default {
       let report_price = +utils.getQueryStr('report_price');
       let report_status = utils.getQueryStr('status');
       let discount_pay = +utils.getQueryStr('discount_pay');
+      let currency_type = utils.getQueryStr('currency_type');
       let repay = +utils.getQueryStr('repay');
 
       utils.gcyLog(`order_id:${this.order_id}`, {
@@ -233,17 +234,17 @@ export default {
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '开始上报FB埋点，Purchase',
               mlxz_value: report_price.toFixed(2),
-              mlxz_currency: 'MYR',
+              mlxz_currency: currency_type,
               mlxz_order_status: report_status,
             });
             fbq('track', 'Purchase', {
               value: report_price.toFixed(2),
-              currency: 'MYR',
+              currency: currency_type,
             },{eventID: this.order_id});
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '完成FB埋点上报，Purchase',
               mlxz_value: report_price.toFixed(2),
-              mlxz_currency: 'MYR',
+              mlxz_currency: currency_type,
               mlxz_order_status: report_status,
             });
           } catch (err) {
