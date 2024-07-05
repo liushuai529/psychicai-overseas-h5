@@ -177,7 +177,7 @@ export default {
   },
   computed: {
     show_modal() {
-      return ["enjoy02", "panda02","enjoy03", "panda03"].includes(utils.getFBChannel()) && utils.isAndroid();
+      return !["enjoy01", "panda01"].includes(utils.getFBChannel()) && utils.isAndroid();
     },
 
     is_cn() {

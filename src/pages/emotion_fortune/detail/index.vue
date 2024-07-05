@@ -264,12 +264,12 @@ export default {
     },
     //套餐支付显示逻辑
     is_show_combination() {
-      return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(
+      return ['enjoy01', 'panda01'].includes(
         utils.getFBChannel()
       );
     },
     is_show_combinationSpecial02() {
-      return !['enjoy03', 'panda03'].includes(utils.getFBChannel());
+      return !['enjoy03', 'panda03', 'enjoy05'].includes(utils.getFBChannel());
     },
 
     //限时特惠
@@ -289,7 +289,7 @@ export default {
       return ['enjoy02', 'panda02'].includes(utils.getFBChannel());
     },
     channel3() {
-      return ['enjoy03', 'panda03'].includes(utils.getFBChannel());
+      return ['enjoy03', 'panda03', 'enjoy05'].includes(utils.getFBChannel());
     },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
@@ -303,7 +303,7 @@ export default {
           // return cn_home_xs_btn;
           return cn_home_btn1;
         } 
-        else if (this.channel3) {
+        else {
           return cn_home_btn1;
         }
       } else {
@@ -314,7 +314,7 @@ export default {
           // return tw_home_xs_btn;
           return tw_home_btn1;
         } 
-        else if (this.channel3) {
+        else {
           return tw_home_btn1;
         }
       }

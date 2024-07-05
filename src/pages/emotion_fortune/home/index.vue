@@ -22,7 +22,7 @@
     >
      
       <div
-        v-if="!is_channel_01"
+        v-if="!is_channel_01 && !is_channel_05"
         @click="backHome()"
         :class="['back-box']"
         :style="getStyle"
@@ -174,6 +174,7 @@
       @getOrderId="getOrderId"
     ></combinePayPop> -->
       <HotProduct
+        v-if="!is_channel_05"
         product_key="h5_emotion2024"
         url="emotion_fortune"
         e_id="10006"
@@ -406,7 +407,7 @@ export default {
     },
     //套餐支付显示逻辑
     is_show_combination() {
-      return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(
+      return ['enjoy01', 'panda02'].includes(
         utils.getFBChannel()
       );
     },
@@ -453,6 +454,9 @@ export default {
     },
     is_channel_01() {
       return utils.getFBChannel().indexOf('01') > -1;
+    },
+    is_channel_05() {
+      return utils.getFBChannel().indexOf('05') > -1;
     },
   },
   watch: {
@@ -895,7 +899,6 @@ export default {
       //设置过渡动画标识
       this.setAnimation();
       window.localStorage.setItem('_emotion_fortune_info', querystring);
-
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(

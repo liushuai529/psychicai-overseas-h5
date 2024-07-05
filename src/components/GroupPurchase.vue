@@ -191,9 +191,6 @@ export default {
     is_cn() {
       return utils.getLanguage() === "zh-CN";
     },
-    is_show_combination() {
-      return !["enjoy03", "panda03","enjoy02", "panda02"].includes(utils.getFBChannel());
-    },
     getH5MarriageIcon() {
       if (this.is_cn) {
         return cn_small_bzhh;
