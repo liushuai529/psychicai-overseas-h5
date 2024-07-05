@@ -676,8 +676,7 @@ export default {
       querystring += '|';
       querystring += time_obj.birth_hour || '-1';
       window.localStorage.setItem('mlxz_career_2024_info', querystring);
-      // let path = 'detail?querystring=' + querystring;
-      let path = 'detail?querystring=' + querystring + utils.getExtendUrl();
+      let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
         '10004',

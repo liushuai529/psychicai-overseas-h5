@@ -884,7 +884,7 @@ export default {
         '&male_str=' +
         male_str +
         '&female_str=' +
-        female_str + utils.getExtendUrl();
+        female_str;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
         '10007',

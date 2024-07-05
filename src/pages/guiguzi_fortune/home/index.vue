@@ -639,8 +639,7 @@ export default {
       querystring += '|';
       querystring += time_obj.birth_hour || '-1';
       window.localStorage.setItem('_guiguzi_overseas_info', querystring);
-      // let path = 'detail?querystring=' + querystring;
-      let path = 'detail?querystring=' + querystring + utils.getExtendUrl();
+      let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent('10008', '-10002', 'click_64gua_main', 'click', {
         args_name: 'click_64gua_main',

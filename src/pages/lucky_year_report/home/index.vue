@@ -677,8 +677,7 @@ export default {
       querystring += '|';
       querystring += time_obj.birth_hour || '-1';
       window.localStorage.setItem('etouch_luck_userinfo_new', querystring);
-      // let path = 'detail?querystring=' + querystring;
-      let path = 'detail?querystring=' + querystring + utils.getExtendUrl();
+      let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
 
       utils.firebaseLogEvent(

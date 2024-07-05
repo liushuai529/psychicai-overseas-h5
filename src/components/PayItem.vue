@@ -71,7 +71,7 @@ export default {
     if(!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
       localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, 30 * 60 * 1000);
     } 
-    // this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`):  30 * 60 * 1000
+    this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`):  30 * 60 * 1000
     this.$store.dispatch('common/getProduction');
     const res = await getLastOrderGetAPI(this.product_key);
     if (res.status !== 1000) return;

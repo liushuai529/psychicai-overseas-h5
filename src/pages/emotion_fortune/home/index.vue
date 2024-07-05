@@ -899,8 +899,7 @@ export default {
       //设置过渡动画标识
       this.setAnimation();
       window.localStorage.setItem('_emotion_fortune_info', querystring);
-
-      let path = 'detail?querystring=' + querystring + utils.getExtendUrl();
+      let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
         '10006',
