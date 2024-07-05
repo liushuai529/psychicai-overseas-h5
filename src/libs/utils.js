@@ -28,8 +28,10 @@ const getFBChannel = () => {
     return 'enjoy03';
   } else if (url.indexOf('panda03') > -1) {
     return 'panda03';
+  } else if (url.indexOf('enjoy05') > -1) {
+    return 'enjoy05';
   } else {
-    return 'panda02';
+    return 'panda05';
   }
 };
 /**
@@ -45,6 +47,7 @@ const getFbId = () => {
     'panda02': '824193972893573',
     'enjoy03': '2368489400014794',
     'panda03': '7693892440702728',
+    'enjoy05': '1904115380074482',
   }
 }
 /**

@@ -55,7 +55,7 @@ export default {
       return ["enjoy02", "panda02"].includes(utils.getFBChannel());
     },
     channel3() {
-      return ["enjoy03", "panda03"].includes(utils.getFBChannel());
+      return ["enjoy03", "panda03", "enjoy05"].includes(utils.getFBChannel());
     },
     btn_url() {
       if (utils.getLanguage() === 'zh-CN') {
@@ -66,7 +66,7 @@ export default {
           // return cn_home_xs_btn;
           return cn_home_btn1; 
         } 
-        else if (this.channel3) {
+        else {
           return cn_home_btn1;
         }
       } else {
@@ -77,7 +77,7 @@ export default {
           // return tw_home_xs_btn;
           return tw_home_btn1;
         } 
-        else if (this.channel3) {
+        else {
           return tw_home_btn1;
         }
       }

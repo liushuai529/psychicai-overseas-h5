@@ -1026,7 +1026,7 @@ export default {
   computed: {
     //套餐支付显示逻辑
     is_show_combination() {
-      return !['enjoy03', 'panda03', 'enjoy02', 'panda02'].includes(
+      return ['enjoy01', 'panda01'].includes(
         utils.getFBChannel()
       );
     },
@@ -1407,7 +1407,7 @@ export default {
     document.title = this.$t('dom-title');
     this.getLastOrder();
 
-    this.is_show_combine = ['enjoy03', 'panda03'].includes(
+    this.is_show_combine = ['enjoy03', 'panda03', 'enjoy05'].includes(
       utils.getFBChannel()
     );
 
@@ -2453,7 +2453,7 @@ export default {
     },
     logPageView(val) {
       let channel = utils.getFBChannel();
-      if (!['enjoy03', 'panda03'].includes(channel)) {
+      if (!['enjoy03', 'panda03', 'enjoy05'].includes(channel)) {
         return;
       }
       if (val === 0) {
