@@ -1,15 +1,12 @@
 <template>
   <div :class="['animation-page', getBgImg]" v-if="show_modal">
-    <canvas
-        id="canvas_mp"
-        :class="['daji']"
-      >
-      </canvas>
+    <canvas id="canvas_mp" :class="['daji']">
+    </canvas>
     <img class="mp" :src="getMpImg" />
     <div :class="['progress-container', getBgTip]">
       <div>{{ getTipText }}</div>
       <div class="progress-uncheck">
-        <div class="progress-check" :style="{width: getWidth}"></div>
+        <div class="progress-check" :style="{ width: getWidth }"></div>
       </div>
     </div>
   </div>
@@ -24,6 +21,11 @@ import cn_bzhh_mp from '../assets/img/components/animation_page/bzhh_mp.png';
 import cn_emotion_mp from '../assets/img/components/animation_page/emotion_mp.png';
 import tw_bzhh_mp from '../assets/img/components/animation_page/bzhh_mp.png';
 import tw_emotion_mp from '../assets/img/components/animation_page/emotion_mp.png';
+
+const log_info = {
+  h5_emotion2024: { module: 10006, 'content_id': -10034, 'event_name': 'page_view_giflove', type: 'page_view' }, // 2024年爱情运势
+  h5_marriage: { module: 10007, 'content_id': -10036, 'event_name': 'page_view_gifmarriage', type: 'page_view' }, //合婚
+}
 
 
 export default {
@@ -64,6 +66,10 @@ export default {
   },
   created() {
     this.timer = setInterval(this.updateTime, 500);
+    utils.firebaseLogEvent(log_info[this.product_key]['module'], log_info[this.product_key]['content_id'], log_info[this.product_key]['event_name'], log_info[this.product_key]['type'], {
+      args_name: log_info[this.product_key]['event_name'],
+      channel: utils.getFBChannel(),
+    });
   },
   mounted() {
     this.loadBg(
@@ -73,8 +79,8 @@ export default {
   },
   computed: {
     getWidth() {
- 
-      return `${6.3* (this.content/10)}rem`
+
+      return `${6.3 * (this.content / 10)}rem`
     },
     getBgImg() {
       if (this.product_key === 'h5_emotion2024') {
@@ -128,7 +134,7 @@ export default {
      * @param {*} is_loop 是否循环
      * @return {*}
      */
-     loadBg(dom, url, is_loop = true) {
+    loadBg(dom, url, is_loop = true) {
       const downloader = new Downloader();
       // 默认调用 WebWorker 线程解析
       // 可配置 new Parser({ disableWorker: true }) 禁止
@@ -145,7 +151,7 @@ export default {
       })();
     },
     updateTime() {
-      this.content = this.content +1; // 
+      this.content = this.content + 1; // 
       if (this.content >= this.max_time) {
         // 当时间大于5秒，停止计时器
         clearInterval(this.timer); // 清除计时器
@@ -154,7 +160,7 @@ export default {
           this.$emit('update-visible', false);
           localStorage.removeItem('mlxz_outer_animation');
         }, 2000);
-        
+
       }
       if (this.content > 1 && this.content <= 3) {
         this.current_time = 1
@@ -179,6 +185,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .daji {
     position: absolute;
     left: 0.68rem;
@@ -216,7 +223,8 @@ export default {
       border-radius: 0.08rem;
 
       .progress-check {
-        transition: width 0.5s ease-in-out; /* 过渡效果应用于宽度变化 */
+        transition: width 0.5s ease-in-out;
+        /* 过渡效果应用于宽度变化 */
         position: absolute;
         top: 0;
         left: 0;
