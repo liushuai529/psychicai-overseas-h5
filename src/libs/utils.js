@@ -990,7 +990,7 @@ const encodeUnicode = str => {
  */
 const isIos = () => {
   let lower = user_agent().toLowerCase();
-  return /iphone/i.test(lower) || /ipad/i.test(lower) || /ios/i.test(lower) || /safari/i.test(lower);
+  return /iphone/i.test(lower) || /ipad/i.test(lower) || /ios/i.test(lower);
 };
 
 /**
