@@ -596,8 +596,7 @@ export default {
       this.month = arr[4];
       this.date = arr[5];
       this.birth_hour = arr[6];
-      this.email = arr[7];
-
+      this.email = arr[7]||'';
       this.username = arr[0];
       this.sex = arr[1] + '';
       this.gongli_nongli = arr[2];
