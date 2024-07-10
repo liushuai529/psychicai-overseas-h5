@@ -43,10 +43,10 @@
         alt=""
       />
       <div
-        :class="['info', language === 'zh-CN' ? 'cn-info-bg' : 'tw-info-bg']"
+        :class="['info']"
       >
         <div class="info-content">
-          <!-- <div>333</div> -->
+          <img class="info-img":src="language === 'zh-CN'? cn_info: tw_info"/>
           <div class="info-item">
             <div class="info-label">{{ $t('name-label') }}:</div>
             <div class="info-input">
@@ -281,11 +281,14 @@ import cn_icon_3 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home3.w
 import cn_icon_4 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home4.webp';
 import cn_icon_5 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home5.webp';
 
+
 import tw_icon_1 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home1_fanti.webp';
 import tw_icon_2 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home2_fanti.webp';
 import tw_icon_3 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_fanti.webp';
 import tw_icon_4 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.webp';
 import tw_icon_5 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.webp';
+import cn_info from '../../../assets/img/emotion_v2/new/cn/info.webp';
+import tw_info from '../../../assets/img/emotion_v2/new/cn/info.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 
 import tStatistic from 'tstatistic';
@@ -329,6 +332,8 @@ export default {
       tw_icon_5,
       cn_history_order,
       tw_history_order,
+      cn_info,
+      tw_info,
 
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,
@@ -1343,12 +1348,7 @@ export default {
       width: 2.8rem;
     }
   }
-  .cn-info-bg {
-    // background-image: url('../../../assets/img/emotion_v2/new/cn/info.webp');
-  }
-  .tw-info-bg {
-    // background-image: url('../../../assets/img/emotion_v2/new/tw/info.webp');
-  }
+
   .info {
     justify-content: center;
     position: relative;
@@ -1357,11 +1357,7 @@ export default {
     width: 7.1rem;
     min-height: 5.45rem;
     border-radius: 0.16rem;
-    // margin-bottom: 0.2rem;
-    // background-repeat: no-repeat;
     background: rgba(255, 250, 250, 1);
-    // background: url('../../../assets/img/emotion/img_name_bg.webp') no-repeat;
-    // background-size: contain;
     margin-top: 8.83rem;
     .info-bg {
       display: block;
@@ -1375,6 +1371,11 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      .info-img {
+        width: 6.68rem;
+        height: 0.9rem;
+        margin-top: -1.1rem;
+      }
 
       .info-item {
         // margin-bottom: 0.2rem;
