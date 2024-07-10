@@ -28,6 +28,7 @@
     <script async src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
     <script>
       
+      console.log('setting')
       function getQueryStr(key) {
         if (typeof window !== 'undefined') {
           let url = location.hash;
@@ -55,7 +56,7 @@
         setCookie("_fbc", getQueryStr('_fbc'), 7, "/");
         setCookie("_fbp", getQueryStr('_fbp'), 7, "/");
       }
-
+      console.log('mlxz_outer_open_uid', getQueryStr('mlxz_outer_open_uid'), getQueryStr('mlxz_outer_access_token'), getQueryStr('mlxz_outer_visitor_id'))
       if(getQueryStr('mlxz_outer_open_uid')|| getQueryStr('mlxz_outer_access_token') ||getQueryStr('mlxz_outer_visitor_id')) {
         localStorage.setItem('mlxz_outer_open_uid', getQueryStr('mlxz_outer_open_uid'));
         localStorage.setItem('mlxz_outer_access_token', getQueryStr('mlxz_outer_access_token'));
