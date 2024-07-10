@@ -1618,6 +1618,10 @@ const checkEmail = (email) => {
   return emailRegex.test(email);
 };
 
+const showEmail = () => {
+  return getFBChannel().indexOf('02')> -1 && isIos()
+};
+
 export default {
   getTitle,
   gcyLog,
@@ -1691,4 +1695,5 @@ export default {
   getcookieInfo,
   getExtendUrl,
   checkEmail,
+  showEmail,
 };

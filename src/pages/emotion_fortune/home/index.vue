@@ -43,7 +43,7 @@
         alt=""
       />
       <div
-        :class="['info']"
+        :class="['info', utils.showEmail() ? 'info-height' : '']"
       >
         <div class="info-content">
           <img class="info-img":src="language === 'zh-CN'? cn_info: tw_info"/>
@@ -102,9 +102,9 @@
             </div>
             
           </div>
-          <div class="divider-line"></div>
+          <div v-if="utils.showEmail()" class="divider-line"></div>
 
-          <div class="info-item">
+          <div v-if="utils.showEmail()" class="info-item">
             <div class="info-label">{{ $t('email-label') }}:</div>
             <div class="info-input">
               <input
@@ -334,6 +334,7 @@ export default {
       tw_history_order,
       cn_info,
       tw_info,
+      utils,
 
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,
@@ -914,13 +915,13 @@ export default {
         return;
       }
 
-      if (email == '') {
+      if (email == '' && utils.showEmail()) {
         Toast(this.$t('email-tips'));
         let dom = document.getElementById('email');
         dom.focus();
         return;
       }
-      if(!utils.checkEmail(email)) {
+      if(!utils.checkEmail(email) && utils.showEmail()) {
         Toast(this.$t('email-tips-1'));
         let dom = document.getElementById('email');
         dom.focus();
@@ -1349,13 +1350,14 @@ export default {
     }
   }
 
+  
   .info {
     justify-content: center;
     position: relative;
     display: flex;
     justify-content: center;
     width: 7.1rem;
-    min-height: 5.45rem;
+    height: 4.47rem;
     border-radius: 0.16rem;
     background: rgba(255, 250, 250, 1);
     margin-top: 8.83rem;
@@ -1486,6 +1488,9 @@ export default {
         }
       }
     }
+  }
+  .info-height {
+    height: 5.4rem;
   }
   .card {
     width: 7.06rem;
