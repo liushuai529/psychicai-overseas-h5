@@ -916,12 +916,34 @@ export default {
       }
 
       if (email == '' && utils.showEmail()) {
+        utils.firebaseLogEvent(
+          '10006',
+          '-10002',
+          'click_2024lovely_main',
+          'click',
+          {
+            args_name: 'click_2024lovely_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('email-tips'));
         let dom = document.getElementById('email');
         dom.focus();
         return;
       }
       if(!utils.checkEmail(email) && utils.showEmail()) {
+        utils.firebaseLogEvent(
+          '10006',
+          '-10002',
+          'click_2024lovely_main',
+          'click',
+          {
+            args_name: 'click_2024lovely_main',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
         Toast(this.$t('email-tips-1'));
         let dom = document.getElementById('email');
         dom.focus();
@@ -1400,7 +1422,7 @@ export default {
           padding: 0.06rem;
           align-items: center;
           input {
-            width: 3rem;
+            width: 100%;
             font-size: 0.3rem;
             line-height: 0.42rem;
             outline: none;
