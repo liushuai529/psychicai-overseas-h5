@@ -288,7 +288,7 @@ import tw_icon_3 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_f
 import tw_icon_4 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.webp';
 import tw_icon_5 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.webp';
 import cn_info from '../../../assets/img/emotion_v2/new/cn/info.webp';
-import tw_info from '../../../assets/img/emotion_v2/new/cn/info.webp';
+import tw_info from '../../../assets/img/emotion_v2/new/tw/info.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 
 import tStatistic from 'tstatistic';
