@@ -995,8 +995,8 @@ export default {
       }
       let { has_pay, order_id, product_key } = this.$route.query;
 
-      if (!has_pay) {
-        if (has_pay !== 'SUCCESS') {
+      if (has_pay) {
+        if (has_pay === 'SUCCESS') {
           getPayOrderInfoAPI(
             order_id,
             this.getExtra(product_key, querystring)
