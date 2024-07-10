@@ -801,7 +801,7 @@ export default {
         birth_month,
         birth_date,
         birth_hour,
-        email: email === undefined ? '': email,
+        email: email === undefined || !utils.showEmail()? '': email,
         date: moment(
           `${birth_year}${+birth_month < 10 ? '0' + birth_month : birth_month}${
             +birth_date < 10 ? '0' + birth_date : birth_date

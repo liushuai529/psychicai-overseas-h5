@@ -1205,7 +1205,7 @@ const getExtraParams = (product_key, querystring) => {
       male_is_gongli,
       female_is_gongli,
       sex,
-      email: email === undefined ? '': email,
+      email: email === undefined || !showEmail()? '': email,
     };
   }
   // 其他 单人信息
@@ -1229,7 +1229,7 @@ const getExtraParams = (product_key, querystring) => {
       birth_month,
       birth_date,
       birth_hour,
-      email: email === undefined ? '': email,
+      email: email === undefined || !showEmail()? '': email,
       date: moment(
         `${birth_year}${+birth_month < 10 ? '0' + birth_month : birth_month}${+birth_date < 10 ? '0' + birth_date : birth_date
         }`
