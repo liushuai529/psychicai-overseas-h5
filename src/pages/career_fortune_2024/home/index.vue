@@ -790,6 +790,7 @@ export default {
         birth_month,
         birth_date,
         birth_hour,
+        email,
       ] = query_user_string_array;
 
       params = {
@@ -800,6 +801,7 @@ export default {
         birth_month,
         birth_date,
         birth_hour,
+        email,
         date: moment(
           `${birth_year}${+birth_month < 10 ? '0' + birth_month : birth_month}${
             +birth_date < 10 ? '0' + birth_date : birth_date

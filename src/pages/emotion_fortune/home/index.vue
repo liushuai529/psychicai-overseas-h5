@@ -46,6 +46,7 @@
         :class="['info', language === 'zh-CN' ? 'cn-info-bg' : 'tw-info-bg']"
       >
         <div class="info-content">
+          <!-- <div>333</div> -->
           <div class="info-item">
             <div class="info-label">{{ $t('name-label') }}:</div>
             <div class="info-input">
@@ -99,7 +100,22 @@
                 <div class="sex-text">女</div>
               </div>
             </div>
+            
           </div>
+          <div class="divider-line"></div>
+
+          <div class="info-item">
+            <div class="info-label">{{ $t('email-label') }}:</div>
+            <div class="info-input">
+              <input
+                type="text"
+                id="email"
+                v-model="email"
+                :placeholder="$t('email-placeholder')"
+              />
+            </div>
+          </div>
+
           <img
             id="info-btn"
             class="info-btn emo-btn"
@@ -322,6 +338,7 @@ export default {
       date: '',
       birth_hour: '-1',
       username: '',
+      email: '',
       picker_date: '',
       picker_date_obj: null,
       picker_hour: '',
@@ -573,6 +590,7 @@ export default {
       this.month = arr[4];
       this.date = arr[5];
       this.birth_hour = arr[6];
+      this.email = arr[7];
 
       this.username = arr[0];
       this.sex = arr[1] + '';
@@ -682,6 +700,7 @@ export default {
       let username = this.username;
       let sex = this.sex;
       let gongli_nongli = this.gongli_nongli;
+      let email = this.email;
       let time_obj = this.picker_date_obj;
       if (username == '') {
         location.href = url;
@@ -692,6 +711,10 @@ export default {
         return;
       }
       if (time_obj == null) {
+        location.href = url;
+        return;
+      }
+      if (email == '') {
         location.href = url;
         return;
       }
@@ -710,6 +733,8 @@ export default {
       querystring += time_obj.date;
       querystring += '|';
       querystring += time_obj.birth_hour || '-1';
+      querystring += '|';
+      querystring += email;
       window.localStorage.setItem('_emotion_fortune_info', querystring);
       location.href = url;
     },
@@ -784,6 +809,7 @@ export default {
      */
     storeUserInfo(url) {
       let username = this.username;
+      let email = this.email;
       let sex = this.sex;
       let gongli_nongli = this.gongli_nongli;
       let time_obj = this.picker_date_obj;
@@ -813,6 +839,8 @@ export default {
       querystring += time_obj.date;
       querystring += '|';
       querystring += time_obj.birth_hour || '-1';
+      querystring += '|';
+      querystring += email;
 
       window.localStorage.setItem('_emotion_fortune_info', querystring);
       location.href = url;
@@ -824,6 +852,7 @@ export default {
      */
     async check() {
       let username = this.username;
+      let email = this.email;
       let sex = this.sex;
       let gongli_nongli = this.gongli_nongli;
       let time_obj = this.picker_date_obj;
@@ -880,6 +909,20 @@ export default {
         return;
       }
 
+      if (email == '') {
+        Toast(this.$t('email-tips'));
+        let dom = document.getElementById('email');
+        dom.focus();
+        return;
+      }
+      if(!utils.checkEmail(email)) {
+        Toast(this.$t('email-tips-1'));
+        let dom = document.getElementById('email');
+        dom.focus();
+        return;
+      }
+      
+
       
 
       let querystring = '';
@@ -896,6 +939,8 @@ export default {
       querystring += time_obj.date;
       querystring += '|';
       querystring += time_obj.birth_hour || '-1';
+      querystring += '|';
+      querystring += email;
       //设置过渡动画标识
       this.setAnimation();
       window.localStorage.setItem('_emotion_fortune_info', querystring);
@@ -1021,6 +1066,7 @@ export default {
           male_is_gongli,
           female_is_gongli,
           sex,
+          email,
         ] = query_user_string_array;
 
         params = {
@@ -1037,6 +1083,7 @@ export default {
           male_is_gongli,
           female_is_gongli,
           sex,
+          email,
         };
       }
       // 其他 单人信息
@@ -1049,6 +1096,7 @@ export default {
           birth_month,
           birth_date,
           birth_hour,
+          email,
         ] = query_user_string_array;
 
         params = {
@@ -1059,6 +1107,7 @@ export default {
           birth_month,
           birth_date,
           birth_hour,
+          email,
           date: moment(
             `${birth_year}${
               +birth_month < 10 ? '0' + birth_month : birth_month
@@ -1295,10 +1344,10 @@ export default {
     }
   }
   .cn-info-bg {
-    background-image: url('../../../assets/img/emotion_v2/new/cn/info.webp');
+    // background-image: url('../../../assets/img/emotion_v2/new/cn/info.webp');
   }
   .tw-info-bg {
-    background-image: url('../../../assets/img/emotion_v2/new/tw/info.webp');
+    // background-image: url('../../../assets/img/emotion_v2/new/tw/info.webp');
   }
   .info {
     justify-content: center;
@@ -1306,11 +1355,13 @@ export default {
     display: flex;
     justify-content: center;
     width: 7.1rem;
-    height: 4.47rem;
-    margin-bottom: 0.2rem;
-    background-repeat: no-repeat;
+    min-height: 5.45rem;
+    border-radius: 0.16rem;
+    // margin-bottom: 0.2rem;
+    // background-repeat: no-repeat;
+    background: rgba(255, 250, 250, 1);
     // background: url('../../../assets/img/emotion/img_name_bg.webp') no-repeat;
-    background-size: contain;
+    // background-size: contain;
     margin-top: 8.83rem;
     .info-bg {
       display: block;

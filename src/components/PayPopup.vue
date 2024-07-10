@@ -222,6 +222,7 @@ export default {
           male_is_gongli,
           female_is_gongli,
           sex,
+          email,
         ] = query_user_string_array;
 
         params = {
@@ -238,6 +239,7 @@ export default {
           male_is_gongli,
           female_is_gongli,
           sex,
+          email,
         };
       }
       // 其他 单人信息
@@ -250,6 +252,7 @@ export default {
           birth_month,
           birth_date,
           birth_hour,
+          email,
         ] = query_user_string_array;
 
         params = {
@@ -260,6 +263,7 @@ export default {
           birth_month,
           birth_date,
           birth_hour,
+          email,
           date: moment(`${birth_year}/${birth_month}/${birth_date}`).format(
             'YYYYMMDD'
           ),

@@ -31,7 +31,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('enjoy05') > -1) {
     return 'enjoy05';
   } else {
-    return 'enjoy05';
+    return 'enjoy02';
   }
 };
 /**
@@ -1188,6 +1188,7 @@ const getExtraParams = (product_key, querystring) => {
       male_is_gongli,
       female_is_gongli,
       sex,
+      email,
     ] = query_user_string_array;
 
     params = {
@@ -1204,6 +1205,7 @@ const getExtraParams = (product_key, querystring) => {
       male_is_gongli,
       female_is_gongli,
       sex,
+      email,
     };
   }
   // 其他 单人信息
@@ -1216,6 +1218,7 @@ const getExtraParams = (product_key, querystring) => {
       birth_month,
       birth_date,
       birth_hour,
+      email,
     ] = query_user_string_array;
 
     params = {
@@ -1226,6 +1229,7 @@ const getExtraParams = (product_key, querystring) => {
       birth_month,
       birth_date,
       birth_hour,
+      email,
       date: moment(
         `${birth_year}${+birth_month < 10 ? '0' + birth_month : birth_month}${+birth_date < 10 ? '0' + birth_date : birth_date
         }`
@@ -1609,6 +1613,11 @@ const getcookieInfo = (key) => {
   return cookieMap.get(key) === undefined ? '' : cookieMap.get(key)
 };
 
+const checkEmail = (email) => {
+  var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  return emailRegex.test(email);
+};
+
 export default {
   getTitle,
   gcyLog,
@@ -1681,4 +1690,5 @@ export default {
   getShortStr,
   getcookieInfo,
   getExtendUrl,
+  checkEmail,
 };

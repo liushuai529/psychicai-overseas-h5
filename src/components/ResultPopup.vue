@@ -177,7 +177,7 @@ export default {
   },
   computed: {
     show_modal() {
-      return !["enjoy01", "panda01"].includes(utils.getFBChannel()) && utils.isAndroid();
+      return !["enjoy01", "panda01"].includes(utils.getFBChannel()) && utils.isAndroid() && !utils.getQueryStr('hidden_modal');
     },
 
     is_cn() {
