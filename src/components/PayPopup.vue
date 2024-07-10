@@ -239,7 +239,7 @@ export default {
           male_is_gongli,
           female_is_gongli,
           sex,
-          email,
+          email: email === undefined ? '': email,
         };
       }
       // 其他 单人信息
@@ -263,7 +263,7 @@ export default {
           birth_month,
           birth_date,
           birth_hour,
-          email,
+          email: email === undefined ? '': email,
           date: moment(`${birth_year}/${birth_month}/${birth_date}`).format(
             'YYYYMMDD'
           ),

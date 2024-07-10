@@ -995,8 +995,8 @@ export default {
       }
       let { has_pay, order_id, product_key } = this.$route.query;
 
-      if (has_pay) {
-        if (has_pay === 'SUCCESS') {
+      if (!has_pay) {
+        if (has_pay !== 'SUCCESS') {
           getPayOrderInfoAPI(
             order_id,
             this.getExtra(product_key, querystring)
@@ -1111,7 +1111,7 @@ export default {
           male_is_gongli,
           female_is_gongli,
           sex,
-          email,
+          email: email === undefined ? '': email,
         };
       }
       // 其他 单人信息
@@ -1126,7 +1126,6 @@ export default {
           birth_hour,
           email,
         ] = query_user_string_array;
-
         params = {
           name,
           sex,
@@ -1135,7 +1134,7 @@ export default {
           birth_month,
           birth_date,
           birth_hour,
-          email,
+          email: email === undefined ? '': email,
           date: moment(
             `${birth_year}${
               +birth_month < 10 ? '0' + birth_month : birth_month
