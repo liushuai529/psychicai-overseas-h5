@@ -990,7 +990,7 @@ const encodeUnicode = str => {
  */
 const isIos = () => {
   let lower = user_agent().toLowerCase();
-  return /iphone/i.test(lower) || /ipad/i.test(lower) || /ios/i.test(lower);
+  return /iphone/i.test(lower) || /ipad/i.test(lower) || /ios/i.test(lower) || /safari/i.test(lower);
 };
 
 /**
@@ -1619,7 +1619,7 @@ const checkEmail = (email) => {
 };
 
 const showEmail = () => {
-  return getFBChannel().indexOf('02')> -1 && !isAndroid()
+  return getFBChannel().indexOf('02')> -1 && isIos()
 };
 
 export default {
