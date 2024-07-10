@@ -932,23 +932,23 @@ export default {
         dom.focus();
         return;
       }
-      if(!utils.checkEmail(email) && utils.showEmail()) {
-        utils.firebaseLogEvent(
-          '10006',
-          '-10002',
-          'click_2024lovely_main',
-          'click',
-          {
-            args_name: 'click_2024lovely_main',
-            channel: utils.getFBChannel(),
-            click_type: 'error',
-          }
-        );
-        Toast(this.$t('email-tips-1'));
-        let dom = document.getElementById('email');
-        dom.focus();
-        return;
-      }
+      // if(!utils.checkEmail(email) && utils.showEmail()) {
+      //   utils.firebaseLogEvent(
+      //     '10006',
+      //     '-10002',
+      //     'click_2024lovely_main',
+      //     'click',
+      //     {
+      //       args_name: 'click_2024lovely_main',
+      //       channel: utils.getFBChannel(),
+      //       click_type: 'error',
+      //     }
+      //   );
+      //   Toast(this.$t('email-tips-1'));
+      //   let dom = document.getElementById('email');
+      //   dom.focus();
+      //   return;
+      // }
       
 
       

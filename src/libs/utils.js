@@ -1619,7 +1619,7 @@ const checkEmail = (email) => {
 };
 
 const showEmail = () => {
-  return getFBChannel().indexOf('02')> -1 && isIos()
+  return getFBChannel().indexOf('02')> -1 && !isAndroid()
 };
 
 export default {
