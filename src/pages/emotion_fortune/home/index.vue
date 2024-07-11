@@ -597,7 +597,6 @@ export default {
       this.date = arr[5];
       this.birth_hour = arr[6];
       this.email = (arr[7] == ''|| arr[7] == 'undefined')? '': arr[7];
-      console.log('this.email', typeof this.email)
       this.username = arr[0];
       this.sex = arr[1] + '';
       this.gongli_nongli = arr[2];
