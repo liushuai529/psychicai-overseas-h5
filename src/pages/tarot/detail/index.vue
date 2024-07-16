@@ -1,7 +1,30 @@
-
 <template>
   <div :class="['tarot-detail']">
-    <CardList/>
+    <FbShareNotice v-if="is_show_fb_notice"/>
+    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
+    <CardList  style="margin-top: 0.5rem;"/>
+    <div class="question-container">
+      <div class="title-container">
+        <div class="q-container">
+          <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />
+          <div class="q-title">你的问题</div>
+        </div>
+        <div class="a-container">212423</div>
+      </div>
+    </div>
+    <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
+    <TarotPayItem product_key="h5_emotion2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
+    <TarotPayDetail
+      ref="payDetail"
+      product_key="h5_emotion2024"
+      e_view_id="10006"
+      c_view_id="-10005"
+      e_view_name="view_2024lovely_pay"
+      a_view_token="184kba"
+      c_click_id="-10006"
+      e_click_name="click_2024lovely_pay"
+      a_click_token="2rov44"
+    />
   </div>
 </template>
 
@@ -9,7 +32,13 @@
 import { Indicator, Toast } from 'mint-ui';
 import { Downloader, Parser, Player } from 'svga.lite';
 import utils from '../../../libs/utils';
-import CardList from '../components/cardList.vue';
+import CardList from '../components/CardList.vue';
+import TarotPayDetail from '../../../components/TarotPayDetail.vue';
+import TarotPayItem from '../../../components/TarotPayItem.vue';
+import FbShareNotice from '../../../components/FbShareNotice.vue';
+import PayGuideModal from '../../../components/PayGuideModal.vue';
+import cn_taluo_img_jieda from '../../../assets/img/tarot/cn/taluo_img_jieda.webp';
+import tw_taluo_img_jieda from '../../../assets/img/tarot/tw/taluo_img_jieda.webp';
 import BaziTable from '../../../components/baziTable.vue';
 import { getBaziAPI } from '../../../api/api';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
@@ -20,63 +49,98 @@ import { report_id_arr } from '../../../libs/enum';
 
 
 export default {
-  components: { CardList  },
-  
+  components: { CardList, TarotPayDetail, TarotPayItem, FbShareNotice, PayGuideModal },
+
   data() {
     return {
-      product_id: 21,
-      product_key: 'h5_wealth2024',
-      query_user_string: '',
-      year: '',
-      month: '',
-      date: '',
-      birth_hour: '',
-      username: '',
-      sex: '',
-      gongli_nongli: '',
-      picker_hour: '',
-      picker_date_yangli: '',
-      picker_date_nongli: '',
-      gan: ['甲', '丙', '壬', '丙'],
-      zhi: ['戌', '子', '辰', '午'],
-      nayin: ['？', '？', '？', '？'],
-      is_result: false,
-      pay_modal: false, //支付弹窗
-      cn_modal_bg:
-        'https://psychicai-static.psychicai.pro/imgs/24046cb4eb8a55fe42b98cbf02a04c94f0d8.png',
-      tw_modal_bg,
-      is_show_btn: true,
-      showFixedBtn: false,
+      cn_taluo_img_jieda,
+      tw_taluo_img_jieda,
       showPayGuideModal: false,//待支付蒙版  
     };
   },
   computed: {
-   
+    is_cn() {
+      return utils.getLanguage() === 'zh-CN';
+    },
+    is_show_fb_notice() {
+      return utils.isFBContainer();
+    },
   },
   watch: {
-  
+
   },
   async created() {
-    
+
   },
-  
+
   mounted() {
-   
+
   },
   methods: {
-    
+    showModal() {
+      this.showPayGuideModal = !this.showPayGuideModal;
+    },
+
   },
 };
 </script>
 
 <style scoped lang="less">
 .tarot-detail {
-  background: #0F031A;
+  // background: #0F031A;
+  background: rgba(30, 10, 45, 1);
   width: 7.5rem;
   display: flex;
-  height: 100vh;
   flex-direction: column;
   align-items: center;
-}
+  .question-container {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
+    .title-container {
+      display: flex;
+      // align-items: center;
+      flex-direction: column;
+      padding-left: 0.24rem;
+      .q-container {
+        display: flex;
+        align-items: center;
+        q-img {
+          width: 0.48rem;
+          height: 0.5rem;
+        }
+
+        .q-title {
+          font-weight: 600;
+          font-size: 0.36rem;
+          color: #FFFFFF;
+          line-height: 0.54rem;
+        }
+      }
+
+      .a-container {
+        width: 7.02rem;
+        height: 1.2rem;
+        background: #201A2F;
+        border-radius: 0.16rem;
+        display: flex;
+        font-weight: 400;
+        font-size: 0.3rem;
+        color: #FFFFFF;
+        line-height: 0.3rem;
+        align-items: center;
+        padding: 0.24rem;
+      }
+
+    }
+  }
+  .img-desc {
+    width: 7.02rem;
+    height: 0.68rem;
+    object-fit: contain;
+    margin-top: 0.3rem;
+  }
+}
 </style>

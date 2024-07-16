@@ -1,17 +1,28 @@
-
 <template>
   <div class="card-list">
-    <div class="item" >
-      <img class="card-img" src="../../../assets/img/tarot/paimian.webp"/>
-      
+    <div class="item">
+      <img class="card-img" src="../../../assets/img/tarot/paimian.webp" />
+      <div class="card-tag">
+        <img class="icon-img" src="../../../assets/img/tarot/right-icon.webp" />
+        <div class="img-bg">战车 正</div>
+        <img class="icon-img" src="../../../assets/img/tarot/left-icon.webp" />
+      </div>
     </div>
-    <div class="item" >
-      <img class="card-img" src="../../../assets/img/tarot/paimian.webp"/>
-     
+    <div class="item">
+      <img class="card-img" src="../../../assets/img/tarot/paimian.webp" />
+      <div class="card-tag">
+        <img class="icon-img" src="../../../assets/img/tarot/right-icon.webp" />
+        <div class="img-bg">战车 正</div>
+        <img class="icon-img" src="../../../assets/img/tarot/left-icon.webp" />
+      </div>
     </div>
-    <div class="item" >
-      <img class="card-img" src="../../../assets/img/tarot/paimian.webp"/>
-     
+    <div class="item">
+      <img class="card-img" src="../../../assets/img/tarot/paimian.webp" />
+      <div class="card-tag">
+        <img class="icon-img" src="../../../assets/img/tarot/right-icon.webp" />
+        <div class="img-bg">战车 正</div>
+        <img class="icon-img" src="../../../assets/img/tarot/left-icon.webp" />
+      </div>
     </div>
   </div>
 </template>
@@ -19,72 +30,83 @@
 <script>
 import utils from '../../../libs/utils';
 
-const tipsArr1 = {
-  'zh-CN': '优惠倒计时',
-  'zh-TW': '優惠倒計時',
-};
+
 export default {
+  components: {},
   name: 'CardList',
   props: {
-   
+
     list: {
       type: Array,
-      default: () => [1,2,3],
+      default: () => [1, 2, 3],
     },
 
-    
+
   },
   components: {
   },
-  filters: {
-    filter_name(val) {
-      return utils.getShortStr(val, 4);
-    },
-    filterTime(val_) {
-      let val = val_.toString();
-      if (val.length === 1) {
-        return '0' + val;
-      } else if (val.length === 2) {
-        return val;
-      } else {
-        return (val / 10).toFixed(0);
-      }
-    },
-  },
+
   data() {
     return {
-      
+
     };
   },
   computed: {
-    
+
   },
   watch: {},
-  mounted() {},
+  mounted() { },
   methods: {
-    
+
   },
 };
 </script>
 
 <style scoped lang="less">
 .card-list {
-  width: 7.5rem;
+  // width: 7.5rem;
+  width: 100%;
   height: 3.1rem;
   display: flex;
   justify-content: space-between;
-  padding-left: 0.86rem;
-  padding-right: 0.86rem;
+  padding-left: 0.62rem;
+  padding-right: 0.62rem;
+
   .item {
     display: flex;
     flex-direction: column;
     height: 100%;
-   
+
     .card-img {
       width: 1.44rem;
       height: 2.46rem;
     }
-    
+
+    .card-tag {
+      height: 0.36rem;
+      display: flex;
+      margin-top: 0.3rem;
+
+      .icon-img {
+        width: 0.24rem;
+        height: 0.36rem;
+      }
+
+      .img-bg {
+        background-image: url('../../../assets/img/tarot/tag-bg.webp');
+        font-weight: 600;
+        font-size: 0.24rem;
+        color: #FFFFFF;
+        line-height: 0.24rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 0.06rem;
+        padding-bottom: 0.06rem;
+      }
+
+    }
+
   }
 }
 </style>

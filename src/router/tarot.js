@@ -12,6 +12,7 @@ import index from '../pages/tarot/home/index.vue';
 import read from '../pages/tarot/read/index.vue';
 import detail from '../pages/tarot/detail/index.vue';
 import result from '../pages/tarot/result/index.vue';
+import order from '../pages/tarot/order/index.vue';
 
 Vue.use(Router);
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/result',
       name: 'result',
       component: result,
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: order,
     },
     {
       path: '*',
