@@ -75,7 +75,7 @@ export default {
     this.$store.dispatch('common/getProduction');
     const res = await getLastOrderGetAPI(this.product_key);
     if (res.status !== 1000) return;
-    if(res.data.status !== 'PAYED') {
+    if(res.data&&res.data.status !== 'PAYED') {
       this.last_order = res.data;
     }
     if(this.last_order) {

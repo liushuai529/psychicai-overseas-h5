@@ -4,15 +4,18 @@
     'cn-bg': is_cn,
     'tw-bg': !is_cn,
   }">
-    <FbShareNotice :text="is_cn? '点击右上角…使用浏览器打开体验更流畅': '點擊右上角…使用瀏覽器打開體驗更流暢'"/>
-    <img class="order-icon" :src="is_cn? cn_home_img_dingdan: tw_home_img_dingdan"/>
-    <img class="desc-icon" :src="is_cn? cn_home_img_text: tw_home_img_text"/>
-    <img class="btn-icon" :src="is_cn? cn_home_btn_kaishi: tw_home_btn_kaishi"/>
+    <FbShareNotice :text="is_cn ? '点击右上角…使用浏览器打开体验更流畅' : '點擊右上角…使用瀏覽器打開體驗更流暢'" />
+    <img class="order-icon" @click="goToOrder" :src="is_cn ? cn_home_img_dingdan : tw_home_img_dingdan" />
+    <img class="desc-icon" :src="is_cn ? cn_home_img_text : tw_home_img_text" />
+    <img class="btn-icon" @click="goToRead" :src="is_cn ? cn_home_btn_kaishi : tw_home_btn_kaishi" />
   </div>
 </template>
 
 <script>
 import utils from '../../../libs/utils.js';
+import {
+  getGalleryAPI,
+} from '../../../api/api';
 import FbShareNotice from '../components/FbShareNotice.vue'
 import cn_home_img_dingdan from '../../../assets/img/tarot/cn/home_img_dingdan.png'
 import tw_home_img_dingdan from '../../../assets/img/tarot/tw/home_img_dingdan_fan.png'
@@ -46,7 +49,7 @@ export default {
 
   },
   created() {
-
+    this.getGalleryData();
   },
   beforeDestroy() {
 
@@ -55,7 +58,22 @@ export default {
 
   },
   methods: {
-
+    async getGalleryData() {
+      let res = await getGalleryAPI();
+      if (res.status === 1000) {
+        localStorage.setItem('gallery_data', JSON.stringify(res.data));
+      }
+    },
+    goToRead() {
+      this.$router.push({
+        path: 'read',
+      });
+    },
+    goToOrder() {
+      this.$router.push({
+        path: 'order',
+      });
+    }
   },
 };
 </script>
@@ -80,6 +98,7 @@ export default {
   // padding-top: 7.4rem;
   position: relative;
   background-color: #0E0512;
+
   .order-icon {
     width: 0.5rem;
     height: 1.52rem;
@@ -87,11 +106,13 @@ export default {
     align-self: flex-end;
     margin-top: 4.19rem;
   }
+
   .desc-icon {
     width: 5.62rem;
     height: 0.64rem;
     margin-top: 4.4rem;
   }
+
   .btn-icon {
     width: 5.72rem;
     height: 0.94rem;

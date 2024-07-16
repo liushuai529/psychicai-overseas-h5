@@ -1,35 +1,22 @@
 <template>
-  <div :class="{
-    'tarot-read': true,
-  
-  }">
-    <!-- <div class="pai-container">
-      <img class="img1" src="../../../assets/img/tarot/paimian.webp"/>
-      <img class="img2" src="../../../assets/img/tarot/paimian.webp"/>
-      <img class="img3" src="../../../assets/img/tarot/paimian.webp"/>
-      <img class="img4" src="../../../assets/img/tarot/paimian.webp"/>
-      <img class="img5" src="../../../assets/img/tarot/paimian.webp"/>
-      <img class="img6" src="../../../assets/img/tarot/paimian.webp"/>
-      <img class="img7" src="../../../assets/img/tarot/paimian.webp"/>
-      <img class="img8" src="../../../assets/img/tarot/paimian.webp"/>
-      <img class="img9" src="../../../assets/img/tarot/paimian.webp"/>
-      <img class="img10" src="../../../assets/img/tarot/paimian.webp"/>
-    </div> -->
-
-    <div class="box">
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
-        <img  src="../../../assets/img/tarot/paimian.webp" alt=""/>
+  <div class="tarot-read-container">
+    <!-- <FbShareNotice /> -->
+    <DealCards ref="dealDards" v-if="!rise_move_end"/>
+    <div class="question-container">
+      <div class="input-question-container">
+        <div class="title">
+          <img src="../../../assets/img/tarot/taluo_img_xing.webp" />
+          <div>{{ is_cn ? '你的问题' : '你的問題' }}</div>
+        </div>
+        <div class="input-container">
+          <textarea cols="5" v-model="question" placeholder="请详细描述你现在的状态及信众的疑问，真人塔
+罗占卜师实时为您解答问题。" maxlength="50"></textarea>
+        </div>
+      </div>
+      <div class="btn-container">
+        <img class="btn" :src="btn_url" @click="adviceClick"/>
+      </div>
+      <QuestionList style="margin-left: 0.24rem; margin-top: 0.5rem" @get_question="getQuestion" />
     </div>
 
   </div>
@@ -37,23 +24,68 @@
 
 <script>
 import utils from '../../../libs/utils.js';
+import FbShareNotice from '../components/FbShareNotice.vue'
+import QuestionList from '../components/QuestionList.vue'
+import DealCards from '../components/DealCards.vue'
+import cn_taluo_btn_zixun_normal from '../../../assets/img/tarot/cn/taluo_btn_zixun_normal.webp';
+import cn_taluo_btn_zixun_disable from '../../../assets/img/tarot/cn/taluo_btn_zixun_disable.webp';
+import tw_taluo_btn_zixun_normal from '../../../assets/img/tarot/tw/taluo_btn_zixun_normal_fan.webp';
+import tw_taluo_btn_zixun_disable from '../../../assets/img/tarot/tw/taluo_btn_zixun_disable_fan.webp';
+
 let channel = utils.getQueryStr('channel');
 
 export default {
   components: {
-
+    FbShareNotice,
+    QuestionList,
+    DealCards,
   },
   data() {
     return {
-
+      dealDards: null,
+      btn_statu: false,
+      question: '',
+      rise_move_end: false,//上移动画结束
+      cn_taluo_btn_zixun_normal,
+      cn_taluo_btn_zixun_disable,
+      tw_taluo_btn_zixun_normal,
+      tw_taluo_btn_zixun_disable,
     };
   },
   computed: {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
+    btn_url() {
+      if (this.is_cn) {
+        if (this.btn_statu) {
+          return cn_taluo_btn_zixun_normal
+        } else {
+          return cn_taluo_btn_zixun_disable;
+        }
+      } else {
+        if (this.btn_statu) {
+          return tw_taluo_btn_zixun_normal;
+        } else {
+          return tw_taluo_btn_zixun_disable;
+        }
+      }
+    }
   },
   watch: {
+    question(val) {
+      if (val) {
+          this.btn_statu = true;
+        } else {
+          this.btn_statu = false;
+        }
+    },
+    //上移动画结束
+    "dealDards.rise_move_end"(val) {
+      if(val) {
+        this.rise_move_end = true
+      }
+    }
 
   },
   created() {
@@ -63,269 +95,128 @@ export default {
 
   },
   mounted() {
-
+    this.dealDards = this.$refs.dealDards
+    setTimeout(() => {
+      console.log('dealDards', this.$refs.dealDards)
+    }, 2000);
   },
   methods: {
-
+    getQuestion(item) {
+      console.log('获取问题', item)
+      this.question = item;
+    },
+    adviceClick() {
+      if(!this.btn_statu) return;
+      localStorage.setItem('question', this.question)
+      this.$router.push({
+        path: 'detail',
+      });
+    }
   },
 };
 </script>
 
 <style scoped lang="less">
-// .cn-bg {
-//   background-image: url('../../../assets/img/tarot/cn/bg.webp');
-// }
-
-// .tw-bg {
-//   background-image: url('../../../assets/img/tarot/tw/bg.webp');
-// }
-body{
-            overflow: hidden;
-        }
-        .box{
-            width: 310px;
-            height: 441px;
-
-            margin:100px auto;
-            position: relative;
-            
-        }
-
-    .box img{
-        position: absolute;
-        left:0;
-        top:0;
-        transition:all 1s;
-
-        /* 设置变换中心*/
-        transform-origin: center bottom;
-        box-shadow: 2px 2px 3px 0px #333;
-
-    }
-
-        .box:hover img:nth-child(6){
-            transform:rotate(-10deg);
-        }
-
-        .box:hover img:nth-child(5){
-            transform:rotate(-20deg);
-        }
-
-        .box:hover img:nth-child(4){
-            transform:rotate(-30deg);
-        }
-        .box:hover img:nth-child(3){
-            transform:rotate(-40deg);
-        }
-        .box:hover img:nth-child(2){
-            transform:rotate(-50deg);
-        }
-        .box:hover img:nth-child(1){
-            transform:rotate(-60deg);
-        }
-
-        .box:hover img:nth-child(8){
-            transform:rotate(10deg);
-        }
-
-        .box:hover img:nth-child(9){
-            transform:rotate(20deg);
-        }
-
-        .box:hover img:nth-child(10){
-            transform:rotate(30deg);
-        }
-        .box:hover img:nth-child(11){
-            transform:rotate(40deg);
-        }
-        .box:hover img:nth-child(12){
-            transform:rotate(50deg);
-        }
-        .box:hover img:nth-child(13){
-            transform:rotate(60deg);
-        }
-
-
-.tarot-read { 
+.tarot-read-container {
   width: 7.5rem;
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  background-size: 7.5rem 15.36rem;
-  background-repeat: no-repeat;
-  // padding-top: 7.4rem;
-  position: relative;
+  height: 100%;
   background: #0F031A;
-  .pai-container {
-    margin-top: 2rem;
-    width: 100%;
-    height: 5rem;
-    border: 1px solid red;
-    position: relative;
-    .img1 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 0rem;
-      transform: rotate(-52.5deg); animation-delay: 0.65s;
-      transform-origin: 50% 100%;
-    }
-    .img2 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 0.3rem;
-      transform: rotate(-47.5deg);animation-delay: 0.7s;
-      transform-origin: 50% 100%;
-    }
-    .img3 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 0.6rem;
-      transform: rotate(-42.5deg); animation-delay: 0.75s;
-      transform-origin: 50% 100%;
-    }
-    .img4 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 0.9rem;
-      transform: rotate(-37.5deg); animation-delay: 0.85s;
-      transform-origin: 50% 100%;
 
-    }
-    .img5 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.2rem;
-      transform: rotate(-32.5deg); animation-delay: 0.9s;
-      transform-origin: 50% 100%;
-    }
+  .question-container {
+    margin-top: 3.87rem;
 
-    .img6 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.5rem;
-      transform: rotate(-27.5deg); animation-delay: 0.95s;
-      transform-origin: 50% 100%;
-    }
-    .img7 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.8rem;
-      transform: rotate(-22.5deg); animation-delay: 1s;
-      transform-origin: 50% 100%;
-    }
-    .img8 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 2.1rem;
-      transform: rotate(-17.5deg); animation-delay: 1.1s;
-      transform-origin: 50% 100%;
-    }
-    .img9 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 2.4rem;
-      transform: rotate(-12.5deg); animation-delay: 1.2s;
-      transform-origin: 50% 100%;
-    }
-    .img10 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 2.7rem;
-      transform: rotate(-7.5deg); animation-delay: 1.3s;
-      transform-origin: 50% 100%;
-    }
-    .img11 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1rem;
-    }
-    .img12 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.1rem;
-    }
-    .img13 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.2rem;
-    }
-    .img14{
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.3rem;
-    }
-    .img15 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.4rem;
-    }
-    .img16 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.5rem;
-    }
-    .img17 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.6rem;
-    }
-    .img18{
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.7rem;
-    }
-    .img19 {
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.8rem;
-    }
-    .img20{
-      width: 1.44rem;
-      height: 2.46rem;
-      position: absolute;
-      top: 0rem;
-      right: 1.9rem;
+    .input-question-container {
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 0.36rem;
+        color: #FFFFFF;
+        line-height: 0.54rem;
+
+        img {
+          width: 0.48rem;
+          height: 0.5rem;
+        }
+      }
+
+      .input-container {
+        width: 7.02rem;
+        height: 2.26rem;
+        margin-left: 0.24rem;
+        border-radius: 0.16rem;
+        display: flex;
+        box-sizing: border-box;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+
+
+        textarea {
+          width: 100%;
+          height: 2.26rem;
+          font-size: 0.3rem;
+          line-height: 0.42rem;
+          outline: none;
+          border: none;
+          background-color: transparent;
+          padding: 0;
+          // margin: 0 0.3rem;
+          color: #FFFFFF;
+          white-space: pre-wrap;
+          padding: 0.3rem 0.3rem;
+          border-radius: 0.16rem;
+
+          &::input-placeholder {
+            color: #FFFFFF;
+            opacity: 0.3;
+          }
+
+          &::-webkit-input-placeholder {
+            color: #FFFFFF;
+            opacity: 0.3;
+          }
+
+          &::-moz-placeholder {
+            color: #FFFFFF;
+            opacity: 0.3;
+          }
+
+          &::-moz-placeholder {
+            color: #FFFFFF;
+            opacity: 0.3;
+          }
+
+          &::-ms-input-placeholder {
+            color: #FFFFFF;
+            opacity: 0.3;
+          }
+        }
+
+        textarea:focus {
+          border: 0.01rem solid #A464FF;
+          outline: none;
+          /* 移除默认的蓝色轮廓线 */
+        }
+      }
     }
 
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 7.5rem;
+      margin-top: 0.3rem;
+
+      .btn {
+        width: 5.72rem;
+        height: 0.94rem;
+        display: flex;
+
+      }
+    }
   }
 }
 </style>

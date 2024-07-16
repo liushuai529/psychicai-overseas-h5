@@ -179,7 +179,6 @@ export default {
       pay_lock_time: 0,
       combine_product_ids: [],//组合下单ID集合，由前端拼接
 
-      all_product: [],//所有测算报告、组合优惠
     };
   },
   props: {
@@ -275,18 +274,16 @@ export default {
   },
   created() {
     // 首次挽留的弹窗计时
-    let use_fixed_time = this.$route.query.use_fixed_time;
-    if (use_fixed_time) {
-      this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
-      localStorage.removeItem('mlxz_fixed_local_order_time');
-    } else {
-      this.time = 15 * 60 * 1000;
-      // localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
-    }
+    // let use_fixed_time = this.$route.query.use_fixed_time;
+    // if (use_fixed_time) {
+    //   this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
+    //   localStorage.removeItem('mlxz_fixed_local_order_time');
+    // } else {
+    //   this.time = 15 * 60 * 1000;
+    // }
 
 
     this.getProductionList();
-
     this.getPayMethod();
 
     utils.firebaseLogEvent(
@@ -328,18 +325,19 @@ export default {
       }
     },
 
-
     /**
      * @description: 获取当前商品信息
      * @return {*}
      */
-    async getProductionList() {
+     async getProductionList() {
       this.product = null;
-      const { status, data } = await getProductionsAPI('ceh5');
+      const { status, data } = await getProductionsAPI('master');
       if (status === 1000) {
         this.product = data.find(item => item.product_key === this.product_key);
         //获取所有报告以及套餐
         this.all_product = data;
+        //组合两项优惠
+        this.h5_combo2_attach = data.find(item => item.product_key === 'h5_combo2_attach');
 
         this.is_new_user = this.product
           ? this.product.tags
@@ -348,6 +346,9 @@ export default {
           : false;
       }
     },
+
+
+   
     /**
      * @description: 获取支付方式列表
      * @return {*}
@@ -370,25 +371,12 @@ export default {
       let channel = utils.getFBChannel();
       return ['enjoy02', 'panda02'].includes(channel) ? false : true;
     },
-    // 事件排序
-    async logEventForSort(it) {
-      if (!this.isShowBannerSort()) return;
-      try {
-        const res = await reportEventAPI({
-          event_name: it.e_name,
-          product_id: it.product_id,
-        });
-        if (res.status !== 1000) return;
-      } catch (e) {
-        console.error(e);
-      }
-    },
+ 
     /**
      * @description: 创建订单 支付
      * @return {*}
      */
     async payMoney() {
-      if (this.all_product.length === 0) return
       //防抖
       if (this.payCanClick) {
         return false
@@ -410,25 +398,9 @@ export default {
         }
       }
 
-      this.logEventForSort({
-        e_name: 'pay_click',
-        product_id: this.product.product_id,
-      });
-      //组合套餐购买埋点上报
-      if (this.combine_product_ids.length) {
-        utils.firebaseLogEvent(
-          this.product_key === 'h5_emotion2024' ? 10006 : 10007,
-          this.product_key === 'h5_emotion2024' ? -10028 : -10030,
-          this.product_key === 'h5_emotion2024' ? 'click_2024lovelymarriage_pay' : 'click_marriage2024lovely_pay',
-          'click',
-          {
-            args_name: this.product_key === 'h5_emotion2024' ? 'click_2024lovelymarriage_pay' : 'click_marriage2024lovely_pay',
-            pay_type: this.pay_methods[this.check_index].title,
-            channel: utils.getFBChannel(),
-          }
-        );
-      } else {
-        utils.firebaseLogEvent(
+    
+      //购买埋点上报
+      utils.firebaseLogEvent(
           this.e_view_id,
           this.c_click_id,
           this.e_click_name,
@@ -439,7 +411,6 @@ export default {
             channel: utils.getFBChannel(),
           }
         );
-      }
       let pick_method = this.pay_methods[this.check_index];
       const { pay_method, trade_pay_type, trade_target_org, fake } = pick_method;
       //假支付
@@ -447,17 +418,16 @@ export default {
         Toast(this.is_cn ? '请选择其他支付方式' : '請選擇其他支付方式')
         return
       }
-      localStorage.setItem('report_price', this.product.price);
+      // localStorage.setItem('report_price', this.product.price);
       Indicator.open(tipsArr5[utils.getLanguage()]);
       let params = {
         pay_method: pay_method,
         product_key: this.product_key,
         product_id: this.product.product_id,
         combine_product_ids: this.combine_product_ids,
+        question: localStorage.getItem('question'),
+        question_tarot: JSON.parse(localStorage.getItem('question_tarot')|| '{}'),
         platform: 'WEB',
-        extra_ce_suan: utils.getExtraParams(
-          this.product_key,
-        ),
         fb_param: {
           fbc: utils.getcookieInfo('_fbc'),
           fbp: utils.getcookieInfo('_fbp'),
@@ -468,28 +438,13 @@ export default {
 
       let discount_pay = this.$route.query.discount_pay || 0;
       let user_time = true;
-      if (pay_method === 'google_pay') {
-        const res = await payOrderAPI(params);
-        localStorage.removeItem('mlxz_set_event_times');
-
-        Indicator.close();
-        if (res.status !== 1000) return;
-        if (user_time) {
-          localStorage.removeItem('mlxz_fixed_order_info');
-          localStorage.removeItem('mlxz_fixed_order_key');
-          localStorage.removeItem('mlxz_fixed_local_order_time');
-          localStorage.removeItem('mlxz_fixed_api_order_time');
-        }
-
-        localStorage.setItem('report_order_id', res.data.id);
-      } else {
-        let pay_max_params = Object.assign({}, params, {
+      let pay_max_params = Object.assign({}, params, {
           trade_pay_type,
           trade_target_org,
         });
         pay_max_params.callback_url = `${location.origin}${location.pathname
-          }#/result?path=${path_enums[this.product_key]}&report_price=${this.product.price
-          }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}`;
+          }#/result?path=${path_enums[this.product_key]}&report_price=${this.product&&this.product.price?this.product.price: '19.9'
+          }&currency_type=${this.product.currency_type || 'MYR'}`;
         const res = await payOrderAPI(pay_max_params);
         localStorage.removeItem('mlxz_set_event_times');
         Indicator.close();
@@ -502,7 +457,6 @@ export default {
         }
         await utils.asleep(1000);
         location.href = res.data.pay_url;
-      }
     },
   },
 };

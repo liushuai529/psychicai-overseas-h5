@@ -67,7 +67,7 @@
 import { Indicator, Toast } from 'mint-ui';
 import utils from '@/libs/utils';
 import { path_enums } from '../../../libs/enum';
-import { getHistoryOrderAPI, payOrderAPI } from '../../../api/api';
+import { getTarotHistoryOrderAPI, payOrderAPI } from '../../../api/api';
 import { getHistoryOrderImg } from '../../../libs/enum';
 import CodePop from '../../../components/CodePop.vue';
 import tw_title from '../../../assets/img/mlxz/downloadBtn/tw/h5_img_dingdantittle_fan.webp';
@@ -137,9 +137,11 @@ export default {
       active_tab: 1, // 当前tab
       has_next: false,
       query: {
-        status: '',
-        page: 1,
-        page_size: 50,
+        // status: '',
+        // page: 1,
+        // page_size: 50,
+        offset: 0,
+        limit: 20,
       },
       list: [], // 列表数据
       status_enum: all_status_enums(),
@@ -178,7 +180,7 @@ export default {
     setInterval(() => {
       let is_reload = localStorage.getItem('mlxz_reload_page_history');
       if (is_reload) {
-        this.query.page = 1;
+        this.query.offset = 0;
         this.list = [];
         this.getData();
       }
@@ -202,7 +204,7 @@ export default {
   },
   watch: {
     active_tab(val) {
-      this.query.page = 1;
+      this.query.offset = 0;
       this.list = [];
       this.getData();
     },
@@ -216,14 +218,14 @@ export default {
     async getData() {
       Indicator.open('加载中...');
       this.show_kf = false;
-      this.query.status = query_enums[this.active_tab] || '';
-      const { status, data } = await getHistoryOrderAPI(this.query);
+      // this.query.status = query_enums[this.active_tab] || '';
+      const { status, data } = await getTarotHistoryOrderAPI(this.query);
       localStorage.removeItem('mlxz_reload_page_history');
 
       Indicator.close();
       if (status !== 1000) return;
       this.list =
-        this.query.page === 1
+        this.query.offset === 0
           ? data.data_list
           : [...this.list, ...data.data_list];
       this.has_next = data.page_no >= data.total_page ? false : true;
@@ -247,7 +249,7 @@ export default {
      */
     loadMore() {
       if (this.has_next) {
-        this.query.page++;
+        this.query.offset+=this.query.limit;
         this.getData();
       }
     },

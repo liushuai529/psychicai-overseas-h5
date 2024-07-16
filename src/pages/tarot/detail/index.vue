@@ -9,14 +9,14 @@
           <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />
           <div class="q-title">你的问题</div>
         </div>
-        <div class="a-container">212423</div>
+        <div class="a-container">{{ question }}</div>
       </div>
     </div>
     <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
-    <TarotPayItem product_key="h5_emotion2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
+    <TarotPayItem product_key="master_tarot" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
     <TarotPayDetail
       ref="payDetail"
-      product_key="h5_emotion2024"
+      product_key="master_tarot"
       e_view_id="10006"
       c_view_id="-10005"
       e_view_name="view_2024lovely_pay"
@@ -56,6 +56,7 @@ export default {
       cn_taluo_img_jieda,
       tw_taluo_img_jieda,
       showPayGuideModal: false,//待支付蒙版  
+      question:'',
     };
   },
   computed: {
@@ -70,7 +71,7 @@ export default {
 
   },
   async created() {
-
+    this.question = localStorage.getItem('question')|| ''
   },
 
   mounted() {
@@ -90,6 +91,7 @@ export default {
   // background: #0F031A;
   background: rgba(30, 10, 45, 1);
   width: 7.5rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

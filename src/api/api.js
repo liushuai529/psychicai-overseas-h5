@@ -71,10 +71,22 @@ export const getHistoryOrderAPI = async data => {
   return request(`/web/auth/trade/orders/ce_suan`, 'GET', data);
 };
 
+// 查询塔罗订单
+export const getTarotHistoryOrderAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/master/questions/paging`, 'GET', data);
+};
+
 // 下单
 export const payOrderAPI = async data => {
   await visitorLoginAPI();
   return request(`/web/auth/trade/orders/ce_suan`, 'POST', data);
+};
+
+// 塔罗下单
+export const payTarotOrderAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/trade/orders/master/tarot`, 'POST', data);
 };
 
 // 查询已支付订单填充信息
@@ -194,3 +206,23 @@ export const getLastOrderGetAPI = async data => {
   await visitorLoginAPI();
   return request(`/web/auth/trade/orders/ce_suan/recent/${data}`, 'GET', data);
 };
+
+//查询塔罗牌问题列表
+export const getQuestionAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/tarot/question`, 'GET', data);
+};
+
+//查询塔罗牌全部牌面数据查询
+export const getGalleryAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/tarot/gallery`, 'GET', data);
+};
+
+//塔罗牌洗牌操作
+export const tarotShuffleAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/tarot/shuffle`, 'POST', data);
+};
+
+
