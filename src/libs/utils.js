@@ -1622,6 +1622,7 @@ const showEmail = () => {
   return getFBChannel().indexOf('02')> -1 && isIos()
 };
 
+
 export default {
   getTitle,
   gcyLog,

@@ -46,7 +46,11 @@
         </div>
       </div>
     </div>
-    <div :class="['effect_area',{'rise_fadeout':rise_transparent}]" ref="effect_area">
+    <!-- <div :class="['effect_area',{'rise_fadeout':rise_transparent}]" ref="effect_area">
+      <img class="effect_card" :src="paimian_img" 
+        />
+    </div> -->
+    <div :class="['effect_area']" ref="effect_area">
       <img class="effect_card" :src="paimian_img" 
         />
     </div>
@@ -310,6 +314,7 @@ export default {
      */
     selection_complete_handel(){
       if(this.selected_card_num === 3){
+        localStorage.setItem('selected_card_list', JSON.stringify(this.selected_card_list.map(item=>item.card)))
         this.isFlipped = true;
         setTimeout(()=>{
           this.flip_show = true;

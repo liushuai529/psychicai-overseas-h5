@@ -1,8 +1,11 @@
 <template>
   <div class="tarot-read-container">
-    <!-- <FbShareNotice /> -->
+    <!-- <FbShareNotice style="position: absolute; top: 0; left:0; z-index: 5;"  /> -->
+    
     <DealCards ref="dealDards" v-if="!rise_move_end"/>
-    <div class="question-container">
+    <CardList style="margin-left: 0.24rem;"/>
+    <div class="question-container" >
+      
       <div class="input-question-container">
         <div class="title">
           <img src="../../../assets/img/tarot/taluo_img_xing.webp" />
@@ -25,6 +28,7 @@
 <script>
 import utils from '../../../libs/utils.js';
 import FbShareNotice from '../components/FbShareNotice.vue'
+import CardList from '../components/CardList.vue'
 import QuestionList from '../components/QuestionList.vue'
 import DealCards from '../components/DealCards.vue'
 import cn_taluo_btn_zixun_normal from '../../../assets/img/tarot/cn/taluo_btn_zixun_normal.webp';
@@ -39,6 +43,7 @@ export default {
     FbShareNotice,
     QuestionList,
     DealCards,
+    CardList,
   },
   data() {
     return {
@@ -46,6 +51,7 @@ export default {
       btn_statu: false,
       question: '',
       rise_move_end: false,//上移动画结束
+      select_card_list: [],
       cn_taluo_btn_zixun_normal,
       cn_taluo_btn_zixun_disable,
       tw_taluo_btn_zixun_normal,
@@ -86,6 +92,7 @@ export default {
         this.rise_move_end = true
       }
     }
+    
 
   },
   created() {
@@ -123,8 +130,7 @@ export default {
   background: #0F031A;
 
   .question-container {
-    margin-top: 3.87rem;
-
+    margin-top: 0.6rem;
     .input-question-container {
       display: flex;
       flex-direction: column;

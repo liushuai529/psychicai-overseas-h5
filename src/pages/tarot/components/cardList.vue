@@ -1,26 +1,10 @@
 <template>
   <div class="card-list">
-    <div class="item">
-      <img class="card-img" src="../../../assets/img/tarot/paimian.webp" />
+    <div class="item" v-for="item in list">
+      <img class="card-img" :src="item.card.image_url" />
       <div class="card-tag">
         <img class="icon-img" src="../../../assets/img/tarot/right-icon.webp" />
-        <div class="img-bg">战车 正</div>
-        <img class="icon-img" src="../../../assets/img/tarot/left-icon.webp" />
-      </div>
-    </div>
-    <div class="item">
-      <img class="card-img" src="../../../assets/img/tarot/paimian.webp" />
-      <div class="card-tag">
-        <img class="icon-img" src="../../../assets/img/tarot/right-icon.webp" />
-        <div class="img-bg">战车 正</div>
-        <img class="icon-img" src="../../../assets/img/tarot/left-icon.webp" />
-      </div>
-    </div>
-    <div class="item">
-      <img class="card-img" src="../../../assets/img/tarot/paimian.webp" />
-      <div class="card-tag">
-        <img class="icon-img" src="../../../assets/img/tarot/right-icon.webp" />
-        <div class="img-bg">战车 正</div>
+        <div class="img-bg">{{ `${item.card.name_cn} ${item.upright? '正': '逆'}` }}</div>
         <img class="icon-img" src="../../../assets/img/tarot/left-icon.webp" />
       </div>
     </div>
@@ -34,43 +18,55 @@ import utils from '../../../libs/utils';
 export default {
   components: {},
   name: 'CardList',
-  props: {
 
-    list: {
-      type: Array,
-      default: () => [1, 2, 3],
-    },
-
-
-  },
   components: {
   },
 
   data() {
     return {
-
+      list: []
     };
   },
   computed: {
 
   },
-  watch: {},
-  mounted() { },
   methods: {
-
+    //监听localStorage数据变化
+    startWatching(key) {
+      setInterval(() => {
+        const currentStorage = JSON.parse(localStorage.getItem(key)) || {};
+        if (JSON.stringify(this.storage) !== JSON.stringify(currentStorage)) {
+          this.storage = currentStorage;
+          this.localStorageChanged();
+        }
+      }, 1000);
+    },
+    localStorageChanged() {
+      if(localStorage.getItem('selected_card_list')) {
+        this.list = JSON.parse(localStorage.getItem('selected_card_list'))
+        console.log('aaa', this.list)
+      }
+    }
   },
+  watch: {},
+
+  mounted() {
+    this.startWatching('selected_card_list');
+  },
+
 };
 </script>
 
 <style scoped lang="less">
 .card-list {
-  // width: 7.5rem;
-  width: 100%;
-  height: 3.1rem;
+  width: 7.02rem;
+  // width: 100%;
+  // height: 3.1rem;
   display: flex;
   justify-content: space-between;
   padding-left: 0.62rem;
   padding-right: 0.62rem;
+  padding-top: 0.3rem;
 
   .item {
     display: flex;
@@ -104,9 +100,7 @@ export default {
         padding-top: 0.06rem;
         padding-bottom: 0.06rem;
       }
-
     }
-
   }
 }
 </style>
