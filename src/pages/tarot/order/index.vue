@@ -41,11 +41,9 @@
 
 
             <div :class="['info']">
-              <div class="left">
-                我看不懂呢，想找个老师我看看，解
-                读一下是什么意思，帮我看看运势意思，帮我看看运势
-
-              </div>
+              <div class="left" style="-webkit-box-orient: vertical;">
+                我看不懂呢，想找个老师我看看，解读一下是什么意思，帮我看看运势意思，帮我看看运势
+                        </div>
               <div class="right">
                 <div class="pay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>
                 <div class="search" v-if="item.order_status === 'PAYED'" @click="handleJump(item)">查看</div>
@@ -579,6 +577,8 @@ export default {
             overflow: hidden;
             text-overflow: ellipsis;
             background: rgba(32, 26, 47, 1);
+            // word-wrap: break-word;
+
 
 
           }
