@@ -28,7 +28,7 @@
 <script>
 import utils from '../../../libs/utils.js';
 import FbShareNotice from '../components/FbShareNotice.vue'
-import CardList from '../components/CardList.vue'
+import CardList from '../components/CardList1.vue'
 import QuestionList from '../components/QuestionList.vue'
 import DealCards from '../components/DealCards.vue'
 import cn_taluo_btn_zixun_normal from '../../../assets/img/tarot/cn/taluo_btn_zixun_normal.webp';
