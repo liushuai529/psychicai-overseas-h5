@@ -87,7 +87,7 @@ import { Indicator } from 'mint-ui';
 import {
   getPayMethodsAPI,
   getProductionsAPI,
-  payOrderAPI,
+  payTarotOrderAPI,
   reportEventAPI,
 } from '../api/api';
 import utils from '../libs/utils';
@@ -336,9 +336,6 @@ export default {
         this.product = data.find(item => item.product_key === this.product_key);
         //获取所有报告以及套餐
         this.all_product = data;
-        //组合两项优惠
-        this.h5_combo2_attach = data.find(item => item.product_key === 'h5_combo2_attach');
-
         this.is_new_user = this.product
           ? this.product.tags
             ? this.product.tags.includes('newcomer_discount')
@@ -420,13 +417,21 @@ export default {
       }
       // localStorage.setItem('report_price', this.product.price);
       Indicator.open(tipsArr5[utils.getLanguage()]);
+      let selected_card_list = JSON.parse(localStorage.getItem('selected_card_list'));
+      selected_card_list = selected_card_list.map((item)=>{return {
+        card_key: item.card.card_key, upright:item.upright
+      }})
       let params = {
         pay_method: pay_method,
         product_key: this.product_key,
         product_id: this.product.product_id,
         combine_product_ids: this.combine_product_ids,
         question: localStorage.getItem('question'),
-        question_tarot: JSON.parse(localStorage.getItem('question_tarot')|| '{}'),
+        question_tarot: {
+          array_type:'timeline',
+          ask_type: 'array',
+          items: selected_card_list
+        },
         platform: 'WEB',
         fb_param: {
           fbc: utils.getcookieInfo('_fbc'),
@@ -445,7 +450,7 @@ export default {
         pay_max_params.callback_url = `${location.origin}${location.pathname
           }#/result?path=${path_enums[this.product_key]}&report_price=${this.product&&this.product.price?this.product.price: '19.9'
           }&currency_type=${this.product.currency_type || 'MYR'}`;
-        const res = await payOrderAPI(pay_max_params);
+        const res = await payTarotOrderAPI(pay_max_params);
         localStorage.removeItem('mlxz_set_event_times');
         Indicator.close();
         if (res.status !== 1000) return;
@@ -505,6 +510,7 @@ export default {
   width: 100%;
   display: flex;
   align-items: center;
+  
   justify-content: space-between;
   padding: 0 0.14rem;
   margin-top: 0.14rem;

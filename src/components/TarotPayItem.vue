@@ -20,30 +20,20 @@
 <script>
 import utils from '../libs/utils';
 import { Indicator, Toast } from 'mint-ui';
-import { getLastOrderGetAPI } from '../api/api';
+import { getTarotLastOrderGetAPI } from '../api/api';
 
 import { path_enums } from '../libs/enum';
-import { payOrderAPI } from '../api/api';
+import { payTarotOrderAPI } from '../api/api';
 
 import { CountDown } from 'vant';
 
 const pay_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10023, 'event_name': 'click_paycardwealty_pay', type: 'click'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10023, 'event_name': 'click_paycardyear_pay', type: 'click'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10023, 'event_name': 'click_paycardchenggu_pay', type: 'click'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10023, 'event_name': 'click_paycard64gua_pay', type: 'click'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10032, 'event_name': 'click_paycardlove_pay', type: 'click'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10034, 'event_name': 'click_paycardmarriage_pay', type: 'click'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10023, 'event_name': 'click_paycardcareer_pay', type: 'click'}, // 2024年事业运势 
+  master_tarot: {module: 10005, 'content_id': -10023, 'event_name': 'click_paycardwealty_pay', type: 'click'}, // 2024年财运
+
 }
 const modal_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10024, 'event_name': 'page_view_iosyear_guidance', type: 'page_view'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10024, 'event_name': 'page_view_ioschenggu_guidance', type: 'page_view'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10024, 'event_name': 'page_view_ios64gua_guidance', type: 'page_view'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10033, 'event_name': 'page_view_ioslove_guidance', type: 'page_view'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10035, 'event_name': 'page_view_iosmarriage_guidance', type: 'page_view'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10024, 'event_name': 'page_view_ioscareer_guidance', type: 'page_view'}, // 2024年事业运势 
+  master_tarot: {module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view'}, // 2024年财运
+  
 }
 export default {
   components: {
@@ -58,7 +48,7 @@ export default {
   props: {
     product_key: {
       type: String,
-      default: 'h5_emotion2024'
+      default: 'master_tarot'
     },
     show_pay_guide_modal: {
       type: Boolean,
@@ -72,10 +62,11 @@ export default {
       localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, 30 * 60 * 1000);
     } 
     this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`):  30 * 60 * 1000
-    this.$store.dispatch('common/getProduction');
-    const res = await getLastOrderGetAPI(this.product_key);
+    this.$store.dispatch('common/getTarotProduction');
+    const res = await getTarotLastOrderGetAPI(this.product_key);
     if (res.status !== 1000) return;
-    if(res.data&&res.data.status !== 'PAYED') {
+    console.log('res.data', res.data)
+    if(res.data&&res.data.order_status !== 'PAYED') {
       this.last_order = res.data;
     }
     if(this.last_order) {
@@ -87,9 +78,9 @@ export default {
     async show_pay_guide_modal(newVal) {
      if(!newVal) {
       console.log('刷新卡片')
-      const res = await getLastOrderGetAPI(this.product_key);
+      const res = await getTarotLastOrderGetAPI(this.product_key);
       if (res.status !== 1000) return;
-      if(res.data.status !== 'PAYED') {
+      if(res.data.order_status !== 'PAYED') {
         this.last_order = res.data;
       } else {
         this.last_order = null; 
@@ -103,7 +94,7 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
     show() {
-      return utils.getFBChannel().indexOf('02')>-1 && this.last_order
+      return this.last_order
     },
     productList() {
       return this.$store.state.common.productList;
@@ -150,7 +141,7 @@ export default {
       }
       Indicator.open('订单创建中');
       const {
-        status,
+        order_status,
         payment,
         pay_method,
         product_key,
@@ -167,7 +158,6 @@ export default {
         product_key,
         product_id,
         platform: 'WEB',
-        extra_ce_suan: ext,
         trade_pay_type,
         trade_target_org,
         fb_param: {
@@ -180,7 +170,7 @@ export default {
       params.callback_url = `${location.origin
         }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
         }&report_price=${payment}&repay=1`;
-      const res = await payOrderAPI(params);
+      const res = await payTarotOrderAPI(params);
 
       Indicator.close();
 

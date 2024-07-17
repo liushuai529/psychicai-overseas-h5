@@ -30,25 +30,25 @@
           }" v-for="(item, k) in list" :key="'order' + k">
             <div class="title-box">
               <div class="left">
-                <img :src="icon_arr[item.product_key]" alt="" />
+                <img :src="icon_arr[item.product_key || 'master_tarot']" alt="" />
                 <div class="title">
                   {{ is_cn ? '真人塔罗答疑解惑' : '真人塔羅答疑解惑' }}
 
                 </div>
               </div>
-              <div class="right">{{ is_cn ? '订单编号：' : '訂單編號：' }}{{ item.id }}</div>
+              <div class="right">{{ is_cn ? '订单编号：' : '訂單編號：' }}{{ item.order_id }}</div>
             </div>
 
 
             <div :class="['info']">
               <div class="left">
                 我看不懂呢，想找个老师我看看，解
-              读一下是什么意思，帮我看看运势意思，帮我看看运势
+                读一下是什么意思，帮我看看运势意思，帮我看看运势
 
               </div>
               <div class="right">
-                <!-- <div class="pay">支付</div> -->
-                <div class="search">查看</div>
+                <div class="pay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>
+                <div class="search" v-if="item.order_status === 'PAYED'" @click="handleJump(item)">查看</div>
               </div>
 
 
@@ -67,7 +67,7 @@
 import { Indicator, Toast } from 'mint-ui';
 import utils from '@/libs/utils';
 import { path_enums } from '../../../libs/enum';
-import { getTarotHistoryOrderAPI, payOrderAPI } from '../../../api/api';
+import { getTarotHistoryOrderAPI, payTarotOrderAPI } from '../../../api/api';
 import { getHistoryOrderImg } from '../../../libs/enum';
 import CodePop from '../../../components/CodePop.vue';
 import tw_title from '../../../assets/img/mlxz/downloadBtn/tw/h5_img_dingdantittle_fan.webp';
@@ -84,34 +84,11 @@ const query_enums = {
 
 
 const event_enums = {
-  h5_wealth2024: {
-    c_id: '-10005',
-    c_name: 'click_history_2024wealty_repay',
+  master_tarot: {
+    c_id: '-10010',
+    c_name: 'click_history_mastertarot_repay',
   },
-  h5_career2024: {
-    c_id: '-10006',
-    c_name: 'click_history_2024career_repay',
-  },
-  h5_marriage: {
-    c_id: '-10007',
-    c_name: 'click_histroy_marriage_repay',
-  },
-  h5_weigh_bone: {
-    c_id: '-10009',
-    c_name: 'click_history_chenggu_repay',
-  },
-  h5_bai_gua: {
-    c_id: '-10008',
-    c_name: 'click_history_64gua_repay',
-  },
-  h5_annual2024: {
-    c_id: '-10003',
-    c_name: 'click_history_2024report_repay',
-  },
-  h5_emotion2024: {
-    c_id: '-10004',
-    c_name: 'click_history_2024lovely_repay',
-  },
+
 };
 
 export default {
@@ -175,7 +152,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('common/getProduction');
+    this.$store.dispatch('common/getTarotProduction');
 
     setInterval(() => {
       let is_reload = localStorage.getItem('mlxz_reload_page_history');
@@ -226,20 +203,12 @@ export default {
       if (status !== 1000) return;
       this.list =
         this.query.offset === 0
-          ? data.data_list
-          : [...this.list, ...data.data_list];
-      this.has_next = data.page_no >= data.total_page ? false : true;
-
-      this.list.forEach(it => {
-        if (it.product_key === 'h5_marriage') {
-          it.can_write = !it.ext.male_name ? true : false;
-        } else {
-          it.can_write = !it.ext.name ? true : false;
-        }
-      });
+          ? data.list
+          : [...this.list, ...data.list];
+      this.has_next = data.has_more ? true : false;
+      console.log('this.list', this.list)
       this.is_empty = !this.list.length ? true : false;
       this.show_kf = true;
-
       Indicator.close();
     },
 
@@ -249,7 +218,7 @@ export default {
      */
     loadMore() {
       if (this.has_next) {
-        this.query.offset+=this.query.limit;
+        this.query.offset += this.query.limit;
         this.getData();
       }
     },
@@ -316,22 +285,20 @@ export default {
       // if (!can_continue) {
       //   return;
       // }
-      let url = path_enums[item.product_key];
-      if (item.status === 'PAYED') {
-        if (item.ext.name || item.ext.male_name) {
-          // 跳转详情页
-          location.href = `${url}.html#/result?order_id=${item.id}&status=${item.status}`;
-        } else {
-          localStorage.setItem('mlxz_reload_page_history', 1);
-          localStorage.setItem('mlxz_reload_page_home', 1);
-          // 跳转添加信息页
-          location.href = `${url}.html#/?has_pay=SUCCESS&order_id=${item.id}&product_key=${item.product_key}`;
-        }
+      let url = path_enums[item.product_key || 'master_tarot'];
+      if (item.order_status === 'PAYED') {
+        localStorage.setItem('mlxz_reload_page_history', 1);
+        localStorage.setItem('mlxz_reload_page_home', 1);
+        // 跳转添加信息页
+        this.$router.push({
+          path: 'result',
+          query: { order_id: item.order_id, status: 'SUCCESS', has_pay: 'SUCCESS',product_key: item.product_key|| 'master_tarot'},
+        });
       } else {
         Indicator.open(this.$t('tips-17'));
 
         const {
-          status,
+          order_status,
           payment,
           pay_method,
           product_key,
@@ -341,90 +308,13 @@ export default {
           trade_target_org,
           combine_product_ids,
         } = item;
-        if (combine_product_ids && combine_product_ids.length) {
-          let length_ = combine_product_ids.length;
-          let params = {
-            pay_method,
-            product_key,
-            product_id,
-            platform: 'WEB',
-            extra_ce_suan: {},
-            trade_pay_type,
-            trade_target_org,
-            combine_product_ids: combine_product_ids,
-            fb_param: {
-              fbc: utils.getcookieInfo('_fbc'),
-              fbp: utils.getcookieInfo('_fbp'),
-              external_id: localStorage.getItem('mlxz_outer_visitor_id'),
-            },
-          };
-          if (product_key === 'h5_combo2_attach') {
-            let same_product = this.productList.find(
-              item => item.product_id === combine_product_ids[0]
-            );
-            const back_url = path_enums[same_product.product_key];
-            params.extra_ce_suan = ext;
-            params.callback_url = `${location.origin
-              }/${utils.getFBChannel()}/${back_url}.html#/result?path=${path_enums[same_product.product_key]
-              }&report_price=${payment}&repay=3`;
-
-            let e_name =
-              same_product.product_key === 'h5_emotion2024'
-                ? 'click_history_2024lovelymarriage_repay'
-                : 'click_history_marriage2024lovely_repay';
-            let e_id =
-              same_product.product_key === 'h5_emotion2024'
-                ? '-10030'
-                : '-10031';
-            utils.firebaseLogEvent('10002', e_id, e_name, 'click', {
-              args_name: e_name,
-              channel: utils.getFBChannel(),
-            });
-          } else {
-            utils.firebaseLogEvent(
-              '10002',
-              length_ === 2 ? '-10010' : '-10011',
-              length_ === 2
-                ? 'click_history_report2_repay'
-                : 'click_history_report3_repay',
-              'click',
-              {
-                args_name:
-                  length_ === 2
-                    ? 'click_history_report2_repay'
-                    : 'click_history_report3_repay',
-                channel: utils.getFBChannel(),
-              }
-            );
-            params.callback_url =
-              location.origin +
-              `/${utils.getFBChannel()}/` +
-              'index.html' +
-              '?pay_index=' +
-              length_ +
-              '&report_price=' +
-              payment +
-              '&repay=1';
-          }
-
-          const res = await payOrderAPI(params);
-
-          Indicator.close();
-
-          if (res.status !== 1000) return;
-          localStorage.setItem('mlxz_reload_page_history', 1);
-
-          location.href = res.data.pay_url;
-          // 组合下单结束
-          return;
-        }
         utils.firebaseLogEvent(
           '10002',
-          event_enums[product_key].c_id,
-          event_enums[product_key].c_name,
+          event_enums[product_key || 'master_tarot'].c_id,
+          event_enums[product_key || 'master_tarot'].c_name,
           'click',
           {
-            args_name: event_enums[product_key].c_name,
+            args_name: event_enums[product_key || 'master_tarot'].c_name,
             channel: utils.getFBChannel(),
           }
         );
@@ -444,9 +334,9 @@ export default {
         };
 
         params.callback_url = `${location.origin
-          }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
+          }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key || 'master_tarot']
           }&report_price=${payment}&repay=1`;
-        const res = await payOrderAPI(params);
+        const res = await payTarotOrderAPI(params);
 
         Indicator.close();
 
@@ -459,18 +349,7 @@ export default {
       }
     },
 
-    /**
-     * @description: 状态展示
-     * @param {*} it
-     * @return {*}
-     */
-    statusShow(it) {
-      if (it.status === 'PAYED') {
-        return it.ext.name || it.ext.male_name ? '查看' : this.$t('tips-14');
-      } else {
-        return this.$t('tips-16');
-      }
-    },
+
 
 
 
@@ -491,29 +370,8 @@ export default {
 
 
 
-    getStatusStyle(item) {
-      const { status, ext } = item;
-      if (status === 'PAYED') {
-        if (ext && (ext.name || ext.male_name)) {
-          return 'status-PAYED';
-        }
-      } else {
-        return 'status-other';
-      }
-    },
-    getAbsoluteStyle(item) {
-      const { status, ext, product_key } = item;
-      if (status !== 'PAYED') {
-        if (
-          product_key !== 'h5_marriage' &&
-          product_key !== 'h5_combo2_attach'
-        ) {
-          return 'no-pay-btn1';
-        } else {
-          return 'no-pay-btn2';
-        }
-      }
-    },
+
+
 
 
   },
@@ -705,7 +563,7 @@ export default {
           padding: 0 0.24rem;
           width: 100%;
           height: 1.04rem;
-          
+
 
           .left {
             display: flex;
@@ -722,7 +580,7 @@ export default {
             text-overflow: ellipsis;
             background: rgba(32, 26, 47, 1);
 
-     
+
           }
 
           .right {
@@ -732,6 +590,7 @@ export default {
             font-size: 0.28rem;
             color: #FFFFFF;
             line-height: 0.28rem;
+
             .pay {
               width: 100%;
               height: 100%;
@@ -742,6 +601,7 @@ export default {
               justify-content: center;
               align-items: center;
             }
+
             .search {
               width: 100%;
               height: 100%;
@@ -750,7 +610,7 @@ export default {
               display: flex;
               justify-content: center;
               align-items: center;
-        
+
               color: #B65AFF;
             }
           }

@@ -10,21 +10,21 @@
          v-show="cardList[idx].show"
          @click="card_clicked(idx,$event)"
         />        
-        <!-- <img class="card card_v" :src="paimian_img" 
+        <img class="card card_v" :src="paimian_img" 
          ref="card_v"
          v-if="currentImageIndex < customData.card_num"
-        /> -->
+        />
       </div>
-      <!-- <div class = 'arm_area'>
+      <div class = 'arm_area'>
         <img class="arm_v" 
           :src="arm_img"
           ref="arm_v"
         />
-      </div> -->
+      </div>
     </div>
-    <!-- <div :class="['hands_area',{'rise_fadeout':rise_transparent}]" >
+    <div :class="['hands_area',{'rise_fadeout':rise_transparent}]" >
       <img :class="['hands',{'hands_show':hands_show}]" :src="hands_img" />
-    </div> -->
+    </div>
     <div :class="['text_area',{'rise_fadeout':rise_transparent}]" >
       <img :src="shouzhi_img" :class='["shouzhi_img","pointer_animation",{"transparent":card_animation}]' ref="shouzhi_img"/>
       <img class="text_img"
@@ -195,8 +195,8 @@ export default {
     card_v_animation(){
       let time = setTimeout(()=>{
         clearTimeout(time);
-        // this.$refs.card_v.style.transform = `rotate(${this.rotate_deg(this.customData.card_num)}deg)`;
-        // this.$refs.arm_v.classList.add('arm_animation');
+        this.$refs.card_v.style.transform = `rotate(${this.rotate_deg(this.customData.card_num)}deg)`;
+        this.$refs.arm_v.classList.add('arm_animation');
         let hands_show_time = setTimeout(()=>{
           clearTimeout(hands_show_time);
           this.hands_show = true;
@@ -248,32 +248,31 @@ export default {
      * @param callback 
      */
     card_selection_animation(eventCardRect,targetCardWrapperRect,isLeft,callback){
-      // // 展示选中的牌
-      // this.card_selection_show(eventCardRect,isLeft)
-      // // 动画
-      // this.$nextTick(()=>{
-      //   const effect_area = this.$refs.effect_area;
-      //   let showCardRect = effect_area.getBoundingClientRect()
-      //   // 计算距离
-      //   let {left,top} = this.distanceCardXY(showCardRect,targetCardWrapperRect)
-      //   setTimeout(() => {
-      //     effect_area.style.transition = `transform 1s linear`;
-      //   }, 0);
-      //   let time = setTimeout(() => {
-      //     clearTimeout(time);
-      //     effect_area.style.transform = `translate(${left}px,${top}px)`;
-      //     let timeCallBack =  setTimeout(() => {
-      //       clearTimeout(timeCallBack);
-      //       callback && callback();
-      //       setTimeout(() => {
-      //         effect_area.style.transition = 'none';
-      //       }, 0);
-      //       effect_area.style.transform = '';
-      //       effect_area.style.opacity = 0;
-      //     }, 1000);
-      //   }, 500);
-      // })
-       callback && callback();
+      // 展示选中的牌
+      this.card_selection_show(eventCardRect,isLeft)
+      // 动画
+      this.$nextTick(()=>{
+        const effect_area = this.$refs.effect_area;
+        let showCardRect = effect_area.getBoundingClientRect()
+        // 计算距离
+        let {left,top} = this.distanceCardXY(showCardRect,targetCardWrapperRect)
+        setTimeout(() => {
+          effect_area.style.transition = `transform 1s linear`;
+        }, 0);
+        let time = setTimeout(() => {
+          clearTimeout(time);
+          effect_area.style.transform = `translate(${left}px,${top}px)`;
+          let timeCallBack =  setTimeout(() => {
+            clearTimeout(timeCallBack);
+            callback && callback();
+            setTimeout(() => {
+              effect_area.style.transition = 'none';
+            }, 0);
+            effect_area.style.transform = '';
+            effect_area.style.opacity = 0;
+          }, 1000);
+        }, 500);
+      })
     },
     /**
      * @description 展示选中的牌

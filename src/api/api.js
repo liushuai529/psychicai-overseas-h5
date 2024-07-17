@@ -207,6 +207,14 @@ export const getLastOrderGetAPI = async data => {
   return request(`/web/auth/trade/orders/ce_suan/recent/${data}`, 'GET', data);
 };
 
+//查询最近一笔订单get请求
+export const getTarotLastOrderGetAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/master/recent/${data}`, 'GET', data);
+};
+
+
+
 //查询塔罗牌问题列表
 export const getQuestionAPI = async data => {
   await visitorLoginAPI();
@@ -224,5 +232,12 @@ export const tarotShuffleAPI = async data => {
   await visitorLoginAPI();
   return request(`/web/auth/tarot/shuffle`, 'POST', data);
 };
+
+//大师答疑订单详情查询
+export const tarotQuestionsDetailAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/master/questions/detail`, 'GET', data);
+};
+
 
 

@@ -11,21 +11,21 @@
       <!-- <div class="title-container">
        
       </div> -->
-      <CardList />
-      <div class="question-text">我看不懂呢，想找个老师帮我看一看，解读一下是什
-        么意思，帮我看看运势如何，最多50字~</div>
+      <CardList :card_list="card_list" :is_async="1"/>
+      <div class="question-text">{{ result_data &&result_data.question }}</div>
     </div>
 
     <div class="q-container">
       <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />
       <div class="q-title">{{ is_cn ? '真人塔罗师回复' : '真人塔羅師回復' }}</div>
     </div>
-    <div class="a-loading-container" v-if="is_loading">
+    
+    <div v-if="result_data&& result_data.answer_list[0].answer_status">
+      <ResultCard :result="result_data.answer_list[0]"/>
+    </div>
+    <div class="a-loading-container" v-else>
       <img class="wait-img" src="../../../assets/img/tarot/dayi_img_wait.webp"/>
       <span>{{is_cn?'真人塔罗占卜师正在思考您的问题': '真人塔羅占蔔師正在思考您的問題' }}</span>
-    </div>
-    <div v-else>
-      <ResultCard/>
     </div>
 
     <FixDowonLoad/>
@@ -58,7 +58,7 @@ import PayGuideModal from '../../../components/PayGuideModal.vue';
 import cn_taluo_img_jieda from '../../../assets/img/tarot/cn/taluo_img_jieda.webp';
 import tw_taluo_img_jieda from '../../../assets/img/tarot/tw/taluo_img_jieda.webp';
 import BaziTable from '../../../components/baziTable.vue';
-import { getBaziAPI } from '../../../api/api';
+import { tarotQuestionsDetailAPI } from '../../../api/api';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import payModal from '../../../components/PayModal.vue';
 
@@ -68,6 +68,7 @@ import { report_id_arr } from '../../../libs/enum';
 
 export default {
   components: { CardList, TarotPayDetail, TarotPayItem, TarotNotice, PayGuideModal, FixDowonLoad, Overlay, EmailInfoCard, ResultCard },
+  
 
   data() {
     return {
@@ -75,6 +76,9 @@ export default {
       tw_taluo_img_jieda,
       is_loading: false,
       showPayGuideModal: false,//待支付蒙版  
+      order_id: '',
+      card_list: [],
+      result_data: null,//答疑订单返回数据
     };
   },
   computed: {
@@ -90,8 +94,11 @@ export default {
 
   },
   async created() {
-
+    this.order_id = this.$route.query.order_id;
+    this.getData()
   },
+
+  
 
   mounted() {
 
@@ -100,6 +107,15 @@ export default {
     showModal() {
       this.showPayGuideModal = !this.showPayGuideModal;
     },
+    async getData() {
+      let res = await tarotQuestionsDetailAPI({order_id: this.order_id})
+      if(res.status === 1000) {
+        this.card_list = res.data.tarot.items;
+        console.log('this.card_list', this.card_list)
+        this.result_data = res.data;
+      }
+      console.log('res', res)
+    }
 
   },
 };

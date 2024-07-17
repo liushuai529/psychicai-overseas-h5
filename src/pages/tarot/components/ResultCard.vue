@@ -3,14 +3,13 @@
     <div class="head">
       <img />
       <div class="name-container">
-        <div class="name">仰轮丽</div>
+        <div class="name">{{ result.counselor_nickname }}</div>
         <div class="num">好评率：99%</div>
       </div>
     </div>
     <div class="line"></div>
     <div class="content">
-      之前面临了挑战和选择，你似乎被一些看似美好的事物所诱惑，诱惑总是伴随着虚假和危险，但是最终会迎来美好的结果。
-      以上是我根据您的情况对您所抽取的牌阵进行的解读，我的回复解决了您的困扰吗？还有什么想不清楚的可以与我继续交流。
+      {{ result.answer }}
     </div>
   </div>
 </template>
@@ -25,9 +24,9 @@ export default {
   name: 'ResultCard',
   props: {
 
-    list: {
-      type: Array,
-      default: () => [1, 2, 3],
+    result: {
+      type: Object,
+      default: () => {},
     },
 
 

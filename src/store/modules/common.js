@@ -15,6 +15,7 @@ export default {
   state: {
     curLang: 'zh-CN',
     productList: [],
+    tarotProductList: [],
     order_id: '',
   },
   mutations: {
@@ -34,6 +35,15 @@ export default {
       if (res.status === 1000) {
         commit('setData', {
           key: 'productList',
+          value: res.data,
+        });
+      }
+    },
+    getTarotProduction: async function ({ commit }, payload) {
+      const res = await getProductionsAPI('master');
+      if (res.status === 1000) {
+        commit('setData', {
+          key: 'tarotProductList',
           value: res.data,
         });
       }

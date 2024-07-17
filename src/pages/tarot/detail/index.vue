@@ -40,7 +40,6 @@ import PayGuideModal from '../../../components/PayGuideModal.vue';
 import cn_taluo_img_jieda from '../../../assets/img/tarot/cn/taluo_img_jieda.webp';
 import tw_taluo_img_jieda from '../../../assets/img/tarot/tw/taluo_img_jieda.webp';
 import BaziTable from '../../../components/baziTable.vue';
-import { getBaziAPI } from '../../../api/api';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import payModal from '../../../components/PayModal.vue';
 

@@ -1,10 +1,10 @@
 <template>
   <div class="card-list">
-    <div class="item" v-for="item in list">
-      <img class="card-img" :src="item.card.image_url" />
+    <div class="item" v-for="item in is_async? card_list: list">
+      <img class="card-img" :src="is_async?item.image_url: item.card.image_url" />
       <div class="card-tag">
         <img class="icon-img" src="../../../assets/img/tarot/right-icon.webp" />
-        <div class="img-bg">{{ `${item.card.name_cn} ${item.upright? '正': '逆'}` }}</div>
+        <div class="img-bg">{{ `${is_async?item.card_name: item.card.name_cn} ${item.upright? '正': '逆'}` }}</div>
         <img class="icon-img" src="../../../assets/img/tarot/left-icon.webp" />
       </div>
     </div>
@@ -20,6 +20,16 @@ export default {
   name: 'CardList',
 
   components: {
+  },
+
+  props: {
+    is_async: {
+      default: '',
+    },
+    card_list: {
+      type: Array,
+      default: () => [],
+    }
   },
 
   data() {
@@ -44,14 +54,19 @@ export default {
     localStorageChanged() {
       if(localStorage.getItem('selected_card_list')) {
         this.list = JSON.parse(localStorage.getItem('selected_card_list'))
-        console.log('aaa', this.list)
       }
     }
   },
   watch: {},
 
   mounted() {
-    this.startWatching('selected_card_list');
+    console.log('is_async', this.is_async)
+    if(this.is_async) {
+     
+    } else {
+      this.startWatching('selected_card_list');
+    }
+    
   },
 
 };
