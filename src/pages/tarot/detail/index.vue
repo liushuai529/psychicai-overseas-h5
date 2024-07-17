@@ -30,7 +30,7 @@
 
 <script>
 import { Indicator, Toast } from 'mint-ui';
-import { Downloader, Parser, Player } from 'svga.lite';
+import { Downloader, Parser, Player } from 'svga.lite'; 
 import utils from '../../../libs/utils';
 import CardList from '../components/CardList.vue';
 import TarotPayDetail from '../../../components/TarotPayDetail.vue';
