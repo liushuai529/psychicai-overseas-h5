@@ -568,7 +568,7 @@ export default {
   },
   mounted() {
     //svga动画预加载
-    this.preloadSVGA()
+    // this.preloadSVGA()
     if (utils.isProd()) {
       try {
         fbq('trackCustom', 'CustomChannel', {
