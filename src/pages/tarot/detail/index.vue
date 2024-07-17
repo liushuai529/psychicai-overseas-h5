@@ -32,7 +32,7 @@
 import { Indicator, Toast } from 'mint-ui';
 import { Downloader, Parser, Player } from 'svga.lite'; 
 import utils from '../../../libs/utils';
-import CardList from '../components/CardList1.vue';
+import CardList from '../components/CardList.vue';
 import TarotPayDetail from '../../../components/TarotPayDetail.vue';
 import TarotPayItem from '../../../components/TarotPayItem.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
