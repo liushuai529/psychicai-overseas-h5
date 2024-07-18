@@ -32,6 +32,8 @@ export default {
   },
   data() {
     return {
+      timer: null,//定时器
+      num: 0,//时间变量，5秒自动触发页面跳转
       cn_home_img_dingdan,
       tw_home_img_dingdan,
       cn_home_img_text,
@@ -52,10 +54,17 @@ export default {
     this.getGalleryData();
   },
   beforeDestroy() {
-
+    this.timer && clearInterval(this.timer);
   },
   mounted() {
-
+    this.timer = setInterval(() => {
+      this.num+=1;
+      if(this.num === 5) {
+        clearInterval(this.timer);
+        this.num = 0;
+        this.goToRead();
+      } 
+    }, 1000);
   },
   methods: {
     async getGalleryData() {

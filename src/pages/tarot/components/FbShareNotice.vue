@@ -1,7 +1,7 @@
 <template>
   <div class="fb-share-notice" v-if="is_show_fb_notice">
    <div></div>
-   <div>{{ text }}</div>
+   <div>{{ text?text: show_text }}</div>
    <img class="logo" src="../../../assets/img/components/fb_share_notice/arrow_more_yindao.webp"/>
     
   </div>
@@ -15,11 +15,12 @@ export default {
   props: {
     text: {
       type: String,
-      default: '点击右上角…使用浏览器打开体验更流畅'
+      default: ''
     }
   },
   data() {
     return {
+
     }
   },
  
@@ -31,9 +32,12 @@ export default {
   },
   computed: {
     is_show_fb_notice() {
-      return true
+      // return true
       return utils.isFBContainer();
     },
+    show_text() {
+      return utils.getLanguage() === 'zh-CN'? '点击右上角…使用浏览器打开体验更流畅': '點擊右上角…使用瀏覽器打開體驗更流暢';
+    }
     
    },
    methods: {

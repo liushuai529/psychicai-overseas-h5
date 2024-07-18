@@ -1,6 +1,9 @@
 <template>
   <div class="tarot-read-container">
-    <!-- <FbShareNotice style="position: absolute; top: 0; left:0; z-index: 5;"  /> -->
+    
+    <FbShareNotice v-if="!rise_move_end" style="position: absolute; top: 0; left:0; z-index: 5;"  />
+    <FbShareNotice v-else />
+   
     
     <DealCards ref="dealDards" v-if="!rise_move_end"/>
     <CardList style="margin-left: 0.24rem;"/>
@@ -28,6 +31,7 @@
 <script>
 import utils from '../../../libs/utils.js';
 import FbShareNotice from '../components/FbShareNotice.vue'
+import TarotNotice from '../../../components/TarotNotice.vue'
 import CardList from '../components/CardList.vue'
 import QuestionList from '../components/QuestionList.vue'
 import DealCards from '../components/DealCards.vue'
@@ -41,6 +45,7 @@ let channel = utils.getQueryStr('channel');
 export default {
   components: {
     FbShareNotice,
+    TarotNotice,
     QuestionList,
     DealCards,
     CardList,

@@ -28,7 +28,7 @@
     <div :class="['text_area',{'rise_fadeout':rise_transparent}]" >
       <img :src="shouzhi_img" :class='["shouzhi_img","pointer_animation",{"transparent":card_animation}]' ref="shouzhi_img"/>
       <img class="text_img"
-      :src="is_cn?xipai_text_cn_img:xipai_text_cn_img"
+      :src="is_cn?cn_xipai_text_img:tw_xipai_text_img"
       ref="text_img"
       />
     </div>
@@ -62,8 +62,10 @@ import utils from '../../../libs/utils.js';
 import paimian_img from '../../../assets/img/tarot/paimian.webp';
 import arm_img from '../../../assets/img/tarot/arm.webp';
 import hands_img from '../../../assets/img/tarot/hands.webp';
-import xipai_text_cn_img from '../../../assets/img/tarot/cn/xipai_text_cn.webp';
-import choupai_text_img from '../../../assets/img/tarot/choupai_text.webp';
+import cn_xipai_text_img from '../../../assets/img/tarot/cn/xipai_text_cn.webp';
+import tw_xipai_text_img from '../../../assets/img/tarot/tw/taluo_img_xipai_text_fan.webp';
+import cn_choupai_text_img from '../../../assets/img/tarot/cn/choupai_text.webp';
+import tw_choupai_text_img from '../../../assets/img/tarot/tw/taluo_img_choupai_text_fan.webp';
 import shouzhi_img from '../../../assets/img/tarot/shouzhi.webp';
 import card_desc_left from '../../../assets/img/tarot/left-icon.webp';
 import card_desc_right from '../../../assets/img/tarot/right-icon.webp';
@@ -88,8 +90,10 @@ export default {
       paimian_img,
       arm_img,
       hands_img,
-      xipai_text_cn_img,
-      choupai_text_img,
+      cn_xipai_text_img,
+      tw_xipai_text_img,
+      cn_choupai_text_img,
+      tw_choupai_text_img,
       shouzhi_img,
       tag_bg,
       card_desc_right,
@@ -306,7 +310,7 @@ export default {
      hands_show_handel(){
       this.$refs.text_img.style.opacity = 0;
       setTimeout(() => {
-        this.$refs.text_img.src = this.choupai_text_img;
+        this.$refs.text_img.src = this.is_cn? this.cn_choupai_text_img: this.tw_choupai_text_img;
         this.$refs.text_img.style.opacity = 1;
       }, 200);
     },
