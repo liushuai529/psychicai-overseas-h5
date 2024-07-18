@@ -1,16 +1,16 @@
 <template>
-  <div class="pay-item" v-show="show"  @click="pay">
+  <div class="pay-item" v-show="show" @click="pay">
     <div class="pay-contaienr">
       <div class="left">
-        <div class="title">{{is_cn? '您有待支付订单': '您有待支付訂單'}}</div>
-        <div class="desc">{{ is_cn? '真人塔罗咨询师在线为您答疑': '真人塔羅咨詢師在線為您答疑' }}</div>
+        <div class="title">{{ is_cn ? '您有待支付订单' : '您有待支付訂單' }}</div>
+        <div class="desc">{{ is_cn ? '真人塔罗咨询师在线为您答疑' : '真人塔羅咨詢師在線為您答疑' }}</div>
       </div>
       <div class="right">立即支付</div>
     </div>
     <div class="time">
-      <div>{{ is_cn? '请在' : '請在' }}</div>
-      <count-down :time="time" @change="getTime" style="margin-left: 5px; margin-right: 5px;"/>
-      <div>{{ is_cn? '内完成支付': '內完成支付' }}</div>
+      <div>{{ is_cn ? '请在' : '請在' }}</div>
+      <count-down :time="time" @change="getTime" style="margin-left: 5px; margin-right: 5px;" />
+      <div>{{ is_cn ? '内完成支付' : '內完成支付' }}</div>
     </div>
 
   </div>
@@ -28,12 +28,12 @@ import { payTarotOrderAPI } from '../api/api';
 import { CountDown } from 'vant';
 
 const pay_info = {
-  master_tarot: {module: 10005, 'content_id': -10023, 'event_name': 'click_paycardwealty_pay', type: 'click'}, // 2024年财运
+  master_tarot: { module: 10005, 'content_id': -10023, 'event_name': 'click_paycardwealty_pay', type: 'click' }, // 2024年财运
 
 }
 const modal_info = {
-  master_tarot: {module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view'}, // 2024年财运
-  
+  master_tarot: { module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view' }, // 2024年财运
+
 }
 export default {
   components: {
@@ -55,37 +55,37 @@ export default {
       default: false
     },
   },
-  
+
 
   async created() {
-    if(!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
+    if (!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
       localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, 30 * 60 * 1000);
-    } 
-    this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`):  30 * 60 * 1000
+    }
+    this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) : 30 * 60 * 1000
     this.$store.dispatch('common/getTarotProduction');
     const res = await getTarotLastOrderGetAPI(this.product_key);
     if (res.status !== 1000) return;
     console.log('res.data', res.data)
-    if(res.data&&res.data.order_status !== 'PAYED') {
+    if (res.data && res.data.order_status !== 'PAYED') {
       this.last_order = res.data;
     }
-    if(this.last_order) {
+    if (this.last_order) {
       //自动下单
       this.autoPay()
     }
   },
   watch: {
     async show_pay_guide_modal(newVal) {
-     if(!newVal) {
-      console.log('刷新卡片')
-      const res = await getTarotLastOrderGetAPI(this.product_key);
-      if (res.status !== 1000) return;
-      if(res.data.order_status !== 'PAYED') {
-        this.last_order = res.data;
-      } else {
-        this.last_order = null; 
+      if (!newVal) {
+        console.log('刷新卡片')
+        const res = await getTarotLastOrderGetAPI(this.product_key);
+        if (res.status !== 1000) return;
+        if (res.data.order_status !== 'PAYED') {
+          this.last_order = res.data;
+        } else {
+          this.last_order = null;
+        }
       }
-     } 
     }
   },
 
@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     autoPay() {
-      if(this.canAutoPay) {
+      if (this.canAutoPay) {
         localStorage.setItem(`auto_pay_${utils.getQueryStr('timestamp')}`, 1)
         this.pay();
       }
@@ -113,29 +113,30 @@ export default {
     getTime(val) {
       const { minutes, seconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000;
-      if(localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
+      if (localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
         localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, time_);
       } else {
         this.time = 30 * 60 * 1000
       }
-      
-      
+
+
     },
     async pay() {
       utils.firebaseLogEvent(pay_info[this.product_key]['module'], pay_info[this.product_key]['content_id'], pay_info[this.product_key]['event_name'], pay_info[this.product_key]['type'], {
         args_name: pay_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
-        container: utils.isFBContainer()? 'fb': 'web'
+        container: utils.isFBContainer() ? 'fb' : 'web'
       });
+      
       if (utils.isFBContainer()) {
         this.$emit('show_modal', true)
         if (!utils.getQueryStr('mlxz_outer_visitor_id')) {
-          location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&_fbc=${localStorage.getItem('_fbc')}&_fbp=${localStorage.getItem('_fbp')}&timestamp=${new Date().getTime()}`
+          location.href += `?mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&question=${encodeURIComponent(localStorage.getItem('question'))}&selected_card_list=${encodeURIComponent(localStorage.getItem('selected_card_list'))} &_fbc=${localStorage.getItem('_fbc')}&_fbp=${localStorage.getItem('_fbp')}&timestamp=${new Date().getTime()}` 
         }
         utils.firebaseLogEvent(modal_info[this.product_key]['module'], modal_info[this.product_key]['content_id'], modal_info[this.product_key]['event_name'], modal_info[this.product_key]['type'], {
           args_name: modal_info[this.product_key]['event_name'],
           channel: utils.getFBChannel(),
-          os: utils.isAndroid()? 'android': 'ios'
+          os: utils.isAndroid() ? 'android' : 'ios'
         });
         return
       }
@@ -152,7 +153,12 @@ export default {
         combine_product_ids,
       } = this.last_order;
       let url = path_enums[product_key];
-     
+      let selected_card_list = JSON.parse(localStorage.getItem('selected_card_list'));
+      selected_card_list = selected_card_list.map((item) => {
+        return {
+          card_key: item.card.card_key, upright: item.upright
+        }
+      })
       let params = {
         pay_method,
         product_key,
@@ -160,6 +166,12 @@ export default {
         platform: 'WEB',
         trade_pay_type,
         trade_target_org,
+        question: localStorage.getItem('question'),
+        question_tarot: {
+          array_type: 'timeline',
+          ask_type: 'array',
+          items: selected_card_list
+        },
         fb_param: {
           fbc: utils.getcookieInfo('_fbc'),
           fbp: utils.getcookieInfo('_fbp'),
@@ -187,7 +199,7 @@ export default {
 .pay-item {
   width: 7.1rem;
   height: 2.04rem;
-  background: linear-gradient( 180deg, #F7ECFD 0%, #EED0FF 100%);
+  background: linear-gradient(180deg, #F7ECFD 0%, #EED0FF 100%);
   border-radius: 0.2rem;
   display: flex;
   flex-direction: column;
@@ -232,7 +244,7 @@ export default {
     .right {
       width: 1.68rem;
       height: 0.74rem;
-      background: linear-gradient( 180deg, #A136DE 0%, #5C15AC 100%);
+      background: linear-gradient(180deg, #A136DE 0%, #5C15AC 100%);
       border-radius: 0.2rem;
       border: 0.02rem solid #E585FF;
       font-weight: 600;
@@ -264,11 +276,12 @@ export default {
     justify-content: center;
     align-items: center
   }
+
   .van-count-down {
     font-weight: 600;
     font-size: 0.26rem;
     color: #E24C2E;
-    line-height: 0.26rem; 
+    line-height: 0.26rem;
   }
 }
 </style>

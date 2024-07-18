@@ -20,7 +20,7 @@
         </div>
         <div v-if="!list.length && is_empty" class="empty-list">
           <img src="../../../assets/img/mlxz/quesheng_no_nothinh.png" class="nothing-icon" alt="" />
-          <div class="tips">{{ $t('tips-3') }}</div>
+          <!-- <div class="tips">{{ $t('tips-3') }}</div> -->
 
         </div>
         <div v-else class="order-list">

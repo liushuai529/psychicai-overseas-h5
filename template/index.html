@@ -108,6 +108,11 @@
         localStorage.setItem('mlxz_outer_access_token', getQueryStr('mlxz_outer_access_token'));
         localStorage.setItem('mlxz_outer_visitor_id', getQueryStr('mlxz_outer_visitor_id'));
       }
+
+      if(getQueryStr('selected_card_list')|| getQueryStr('question')) {
+        localStorage.setItem('selected_card_list', decodeURIComponent(getQueryStr('selected_card_list')));
+        localStorage.setItem('question', decodeURIComponent(getQueryStr('question')));
+      }
       
     </script>
 

@@ -73,7 +73,6 @@ export const getHistoryOrderAPI = async data => {
 
 // 查询塔罗订单
 export const getTarotHistoryOrderAPI = async data => {
-  await visitorLoginAPI();
   return request(`/web/auth/master/questions/paging`, 'GET', data);
 };
 
@@ -85,7 +84,6 @@ export const payOrderAPI = async data => {
 
 // 塔罗下单
 export const payTarotOrderAPI = async data => {
-  await visitorLoginAPI();
   return request(`/web/auth/trade/orders/master/tarot`, 'POST', data);
 };
 
@@ -209,7 +207,6 @@ export const getLastOrderGetAPI = async data => {
 
 //查询最近一笔订单get请求
 export const getTarotLastOrderGetAPI = async data => {
-  await visitorLoginAPI();
   return request(`/web/auth/master/recent/${data}`, 'GET', data);
 };
 
@@ -217,25 +214,21 @@ export const getTarotLastOrderGetAPI = async data => {
 
 //查询塔罗牌问题列表
 export const getQuestionAPI = async data => {
-  await visitorLoginAPI();
   return request(`/web/auth/tarot/question`, 'GET', data);
 };
 
 //查询塔罗牌全部牌面数据查询
 export const getGalleryAPI = async data => {
-  await visitorLoginAPI();
   return request(`/web/auth/tarot/gallery`, 'GET', data);
 };
 
 //塔罗牌洗牌操作
 export const tarotShuffleAPI = async data => {
-  await visitorLoginAPI();
   return request(`/web/auth/tarot/shuffle`, 'POST', data);
 };
 
 //大师答疑订单详情查询
 export const tarotQuestionsDetailAPI = async data => {
-  await visitorLoginAPI();
   return request(`/web/auth/master/questions/detail`, 'GET', data);
 };
 
