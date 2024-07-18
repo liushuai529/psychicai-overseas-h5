@@ -29,15 +29,8 @@
     </div>
 
     <FixDowonLoad/>
-
-    <!-- <Overlay show="true" />
-    <EmailInfoCard/> -->
-    
-    
-
-
-
-
+    <Overlay :show="show_email" />
+    <EmailInfoCard v-if="show_email" @hidden_modal="hidden_modal"/>
 
   </div>
 </template>
@@ -58,7 +51,7 @@ import PayGuideModal from '../../../components/PayGuideModal.vue';
 import cn_taluo_img_jieda from '../../../assets/img/tarot/cn/taluo_img_jieda.webp';
 import tw_taluo_img_jieda from '../../../assets/img/tarot/tw/taluo_img_jieda.webp';
 import BaziTable from '../../../components/baziTable.vue';
-import { tarotQuestionsDetailAPI } from '../../../api/api';
+import { tarotQuestionsDetailAPI, tarotVisitorAPI } from '../../../api/api';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import payModal from '../../../components/PayModal.vue';
 
@@ -79,6 +72,7 @@ export default {
       order_id: '',
       card_list: [],
       result_data: null,//答疑订单返回数据
+      show_email: false,
     };
   },
   computed: {
@@ -96,6 +90,7 @@ export default {
   async created() {
     this.order_id = this.$route.query.order_id;
     this.getData()
+    this.getEmailInfo();
   },
 
   
@@ -104,6 +99,18 @@ export default {
 
   },
   methods: {
+    hidden_modal() {
+      this.show_email = false
+    },
+    async getEmailInfo() {
+      let res = await tarotVisitorAPI();
+      if(res.status === 1000) {
+        if(!res.data.email) {
+          this.show_email = true
+        }
+      }
+      console.log('res', res)
+    },
     showModal() {
       this.showPayGuideModal = !this.showPayGuideModal;
     },

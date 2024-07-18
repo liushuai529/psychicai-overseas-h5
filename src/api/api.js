@@ -232,5 +232,23 @@ export const tarotQuestionsDetailAPI = async data => {
   return request(`/web/auth/master/questions/detail`, 'GET', data);
 };
 
+//塔罗用户信息（是否绑定过邮箱）
+export const tarotVisitorAPI = async data => {
+  return request(`/web/auth/visitor/info`, 'GET', data);
+};
+
+//塔罗用户信息（是否绑定过邮箱）
+export const bindTarotEmailAPI = async data => {
+  return request(`/web/auth/visitor/email`, 'POST', data);
+};
+
+//塔罗获取邮箱验证码
+export const getTarotEmailCodeAPI = async data => {
+  return request(`/web/email/code`, 'POST', data);
+};
+
+
+
+
 
 

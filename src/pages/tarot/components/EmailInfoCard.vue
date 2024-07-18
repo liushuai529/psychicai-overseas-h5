@@ -3,21 +3,24 @@
     <div class="title">{{ is_cn ? '咨询师正在回复' : '咨詢師正在回復' }}</div>
     <div class="desc">{{ is_cn ? '真人塔罗占卜师回复后第一时间通知您' : '真人塔羅占蔔師回復後第一時間通知您' }}</div>
     <div class="info-input" style="margin-top: 0.5rem;">
-      <input type="text" id="username" v-model="username" placeholder="aa" />
+      <input type="text" id="email" v-model="email" placeholder="aa" />
     </div>
     <div class="info-input" style="margin-top: 0.2rem;">
-      <input type="number" id="username" v-model="pwd" placeholder="aa" maxlength="6">
-      <div class="send-text" :class="{ active: code_statu }">重新发送</div>
+      <input id="email" v-model="email_code" placeholder="aa" maxlength="6">
+      <div class="send-text" :class="{ active: code_statu && !code_loading }" @click="getCodeClick">{{ code_btn_text }}
+      </div>
     </div>
 
-    <div class="btn" :class="{ active: btn_statu }">
-      <span :class="{ active: btn_statu }">确认绑定</span>
+    <div class="btn" :class="{ active: btn_statu }" @click="bindHandle">
+      <span :class="{ active: btn_statu }">{{ is_cn ? '确认绑定' : '確認綁定' }}</span>
     </div>
   </div>
 </template>
 
 <script>
 import utils from '../../../libs/utils';
+import { Indicator, Toast } from 'mint-ui';
+import { bindTarotEmailAPI, getTarotEmailCodeAPI } from '../../../api/api';
 
 export default {
   components: {},
@@ -30,21 +33,70 @@ export default {
 
   data() {
     return {
-      username: '',
-      pwd: '',
-      btn_statu: false,
-      code_statu: false,
+      email: '',
+      email_code: '',
+      is_send_code: false,//是否发送过验证码
+      number: 0,
+      timer: null,
+      code_loading: false,
     };
   },
   computed: {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
+    btn_statu() {
+      return this.email.trim().length && this.email_code.length === 6;
+    },
+    code_statu() {
+      return this.email.trim().length>6 && this.number === 0;
+    },
+    code_btn_text() {
+      if (this.number) {
+        return this.number + 's';
+      } else {
+        if (!this.is_send_code) {
+          return this.is_cn ? '获取验证码' : '獲取驗證碼';
+        } else {
+          return this.is_cn ? '重新发送' : '重新發送';
+        }
+      }
+    }
   },
   watch: {},
   mounted() { },
   methods: {
-
+    async bindHandle() {
+      let res = await bindTarotEmailAPI({
+        email: this.email,
+        email_code: this.email_code
+      });
+      if (res.status === 1000) {
+        Toast(this.is_cn ? '绑定成功' : '綁定成功');
+        this.$emit('hidden_modal')
+      }
+    },
+    async getCodeClick() {
+      if (!this.code_statu) return;
+      this.code_loading = true;
+      getTarotEmailCodeAPI({ email: this.email }).then((res) => {
+        this.code_loading = false;
+        if (res.status === 1000) {
+          Toast(this.is_cn ? '验证码已发送至您的邮箱' : '驗證碼已發送至您的郵箱');
+          this.number = 59;
+          this.timer = setInterval(() => {
+            if (this.number >= 1) {
+              this.number -= 1;
+            }
+            if (this.number === 0) {
+              clearInterval(this.timer)
+            }
+          }, 1000);
+        }
+      }).catch(err => {
+        this.code_loading = false;
+      })
+    }
   },
 };
 </script>
@@ -108,10 +160,11 @@ export default {
       text-align: right;
       margin-right: 0.2rem;
       opacity: 0.3;
+
       &.active {
         color: #FFD136;
         opacity: 1;
-      } 
+      }
     }
 
     input {
