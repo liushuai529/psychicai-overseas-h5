@@ -45,5 +45,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  bottom: 0.5rem;
+  z-index: 5;
 }
 </style>

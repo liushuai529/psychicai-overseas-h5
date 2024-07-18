@@ -7,8 +7,8 @@
     
     <DealCards ref="dealDards" v-if="!rise_move_end"/>
     <CardList style="margin-left: 0.24rem;"/>
-    <div class="question-container" >
-      
+    <!-- <div class="question-container" v-if="rise_move_end"> -->
+    <div class="question-container">      
       <div class="input-question-container">
         <div class="title">
           <img src="../../../assets/img/tarot/taluo_img_xing.webp" />
@@ -17,12 +17,14 @@
         <div class="input-container">
           <textarea cols="5" v-model="question" placeholder="请详细描述你现在的状态及信众的疑问，真人塔
 罗占卜师实时为您解答问题。" maxlength="50"></textarea>
+          <div class="num-container">{{ `${question.length}/50` }}</div>
         </div>
       </div>
       <div class="btn-container">
         <img class="btn" :src="btn_url" @click="adviceClick"/>
       </div>
       <QuestionList style="margin-left: 0.24rem; margin-top: 0.5rem" @get_question="getQuestion" />
+      <FixDowonLoad/>
     </div>
 
   </div>
@@ -34,6 +36,8 @@ import FbShareNotice from '../components/FbShareNotice.vue'
 import TarotNotice from '../../../components/TarotNotice.vue'
 import CardList from '../components/CardList.vue'
 import QuestionList from '../components/QuestionList.vue'
+import FixDowonLoad from '../components/FixDowonLoad.vue'
+
 import DealCards from '../components/DealCards.vue'
 import cn_taluo_btn_zixun_normal from '../../../assets/img/tarot/cn/taluo_btn_zixun_normal.webp';
 import cn_taluo_btn_zixun_disable from '../../../assets/img/tarot/cn/taluo_btn_zixun_disable.webp';
@@ -49,6 +53,7 @@ export default {
     QuestionList,
     DealCards,
     CardList,
+    FixDowonLoad,
   },
   data() {
     return {
@@ -163,6 +168,17 @@ export default {
         box-sizing: border-box;
         align-items: center;
         background: rgba(255, 255, 255, 0.1);
+        position: relative;
+        .num-container {
+          position: absolute;
+          right: 0.24rem;
+          bottom: 0.24rem;
+          opacity: 0.3;
+          font-weight: 400;
+          font-size: 0.24rem;
+          color: #FFFFFF;
+          line-height: 0.24rem;
+        }
 
 
         textarea {

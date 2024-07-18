@@ -76,7 +76,7 @@
       </div>
     </div>
     <!--此处引用按钮组件-->
-    <div style="display: flex;justify-content: center;">
+    <div style="display: flex;justify-content: center; margin-bottom: 1.5rem;">
       <TarotPayBtn :callback="payMoney" />
     </div>
   </div>
@@ -236,6 +236,7 @@ export default {
         h5_annual2024: '193',
         h5_bai_gua: '146',
         h5_weigh_bone: '138',
+        master_tarot: '3854',
       };
       return buyList[this.product_key];
     },

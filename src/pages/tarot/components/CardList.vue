@@ -86,7 +86,9 @@ export default {
   .item {
     display: flex;
     flex-direction: column;
+    // width: 100%; //固定卡片的宽度，tag字数过多UI会异常
     height: 100%;
+    align-items: center;
 
     .card-img {
       width: 1.44rem;
@@ -114,6 +116,7 @@ export default {
         align-items: center;
         padding-top: 0.06rem;
         padding-bottom: 0.06rem;
+        width: 100%;
       }
     }
   }

@@ -12,7 +12,12 @@
         <div class="a-container">{{ question }}</div>
       </div>
     </div>
+    <!-- <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
     <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
+    <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
+    <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
+    <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
+    <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/> -->
     <TarotPayItem product_key="master_tarot" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
     <TarotPayDetail
       ref="payDetail"
@@ -90,7 +95,7 @@ export default {
   // background: #0F031A;
   background: rgba(30, 10, 45, 1);
   width: 7.5rem;
-  height: 100%;
+  // height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
