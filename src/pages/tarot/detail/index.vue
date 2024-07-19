@@ -1,8 +1,8 @@
 <template>
   <div :class="['tarot-detail']">
-    <FbShareNotice v-if="is_show_fb_notice"/>
-    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
-    <CardList  style="margin-top: 0.5rem;"/>
+    <FbShareNotice v-if="is_show_fb_notice" />
+    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
+    <CardList style="margin-top: 0.5rem;" />
     <div class="question-container">
       <div class="title-container">
         <div class="q-container">
@@ -18,24 +18,16 @@
     <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
     <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
     <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/> -->
-    <TarotPayItem product_key="master_tarot" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
-    <TarotPayDetail
-      ref="payDetail"
-      product_key="master_tarot"
-      e_view_id="10006"
-      c_view_id="-10005"
-      e_view_name="view_2024lovely_pay"
-      a_view_token="184kba"
-      c_click_id="-10006"
-      e_click_name="click_2024lovely_pay"
-      a_click_token="2rov44"
-    />
+    <TarotPayItem product_key="master_tarot" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
+    <TarotPayDetail ref="payDetail" product_key="master_tarot" e_view_id="10006" c_view_id="-10005"
+      e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006" e_click_name="click_2024lovely_pay"
+      a_click_token="2rov44" />
   </div>
 </template>
 
 <script>
 import { Indicator, Toast } from 'mint-ui';
-import { Downloader, Parser, Player } from 'svga.lite'; 
+import { Downloader, Parser, Player } from 'svga.lite';
 import utils from '../../../libs/utils';
 import CardList from '../components/CardList.vue';
 import TarotPayDetail from '../../../components/TarotPayDetail.vue';
@@ -60,7 +52,7 @@ export default {
       cn_taluo_img_jieda,
       tw_taluo_img_jieda,
       showPayGuideModal: false,//待支付蒙版  
-      question:'',
+      question: '',
     };
   },
   computed: {
@@ -75,7 +67,17 @@ export default {
 
   },
   async created() {
-    this.question = localStorage.getItem('question')|| ''
+    this.question = localStorage.getItem('question') || ''
+    utils.firebaseLogEvent(
+      '10010',
+      '-10011',
+      'page_view_tarotpay',
+      'page_view',
+      {
+        args_name: 'page_view_tarotpay',
+        channel: utils.getFBChannel(),
+      }
+    );
   },
 
   mounted() {
@@ -99,6 +101,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .question-container {
     margin-top: 0.5rem;
     display: flex;
@@ -110,9 +113,11 @@ export default {
       // align-items: center;
       flex-direction: column;
       padding-left: 0.24rem;
+
       .q-container {
         display: flex;
         align-items: center;
+
         q-img {
           width: 0.48rem;
           height: 0.5rem;
@@ -142,6 +147,7 @@ export default {
 
     }
   }
+
   .img-desc {
     width: 7.02rem;
     height: 0.68rem;

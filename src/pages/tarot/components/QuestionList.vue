@@ -55,6 +55,17 @@ export default {
    },
   methods: {
     questionClick(item) {
+      utils.firebaseLogEvent(
+        '10010',
+        '-10009',
+        'click_question_choise',
+        'click',
+        {
+          args_name: 'click_question_choise',
+          channel: utils.getFBChannel(),
+          // question_id: item
+        }
+      );
       this.$emit('get_question', item)
     },
     changeQuestion() {
@@ -67,6 +78,17 @@ export default {
       //   this.getQuestionData()
       // }
       this.getQuestionData()
+      utils.firebaseLogEvent(
+        '10010',
+        '-10010',
+        'click_question_change',
+        'click',
+        {
+          args_name: 'click_question_change',
+          channel: utils.getFBChannel(),
+          // question_id: item
+        }
+      );
     },
     async getQuestionData() {
       const res = await getQuestionAPI();

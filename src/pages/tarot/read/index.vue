@@ -1,14 +1,14 @@
 <template>
   <div class="tarot-read-container">
-    
-    <FbShareNotice v-if="!rise_move_end" style="position: absolute; top: 0; left:0; z-index: 5;"  />
+
+    <FbShareNotice v-if="!rise_move_end" style="position: absolute; top: 0; left:0; z-index: 5;" />
     <FbShareNotice v-else />
-   
-    
-    <DealCards ref="dealDards" v-if="!rise_move_end"/>
-    <CardList style="margin-left: 0.24rem;"/>
+
+
+    <DealCards ref="dealDards" v-if="!rise_move_end" />
+    <CardList style="margin-left: 0.24rem;" />
     <!-- <div class="question-container" v-if="rise_move_end"> -->
-    <div class="question-container">      
+    <div class="question-container">
       <div class="input-question-container">
         <div class="title">
           <img src="../../../assets/img/tarot/taluo_img_xing.webp" />
@@ -21,10 +21,10 @@
         </div>
       </div>
       <div class="btn-container">
-        <img class="btn" :src="btn_url" @click="adviceClick"/>
+        <img class="btn" :src="btn_url" @click="adviceClick" />
       </div>
       <QuestionList style="margin-left: 0.24rem; margin-top: 0.5rem" @get_question="getQuestion" />
-      <FixDowonLoad/>
+      <FixDowonLoad />
     </div>
 
   </div>
@@ -92,18 +92,29 @@ export default {
   watch: {
     question(val) {
       if (val) {
-          this.btn_statu = true;
-        } else {
-          this.btn_statu = false;
-        }
+        this.btn_statu = true;
+      } else {
+        this.btn_statu = false;
+      }
     },
     //上移动画结束
     "dealDards.rise_move_end"(val) {
-      if(val) {
+      if (val) {
         this.rise_move_end = true
+        //问题输入页面出现埋点
+        utils.firebaseLogEvent(
+          '10010',
+          '-10007',
+          'page_view_question',
+          'page_view',
+          {
+            args_name: 'page_view_question',
+            channel: utils.getFBChannel(),
+          }
+        );
       }
     }
-    
+
 
   },
   created() {
@@ -117,6 +128,16 @@ export default {
     setTimeout(() => {
       console.log('dealDards', this.$refs.dealDards)
     }, 2000);
+    utils.firebaseLogEvent(
+      '10010',
+      '-10003',
+      'page_view_pullcards',
+      'page_view',
+      {
+        args_name: 'page_view_pullcards',
+        channel: utils.getFBChannel(),
+      }
+    );
   },
   methods: {
     getQuestion(item) {
@@ -124,11 +145,35 @@ export default {
       this.question = item;
     },
     adviceClick() {
-      if(!this.btn_statu) return;
+      if (!this.btn_statu) {
+        utils.firebaseLogEvent(
+          '10010',
+          '-10008',
+          'click_question_check',
+          'click',
+          {
+            args_name: 'click_question_check',
+            channel: utils.getFBChannel(),
+            click_type: 'error'
+          }
+        );
+        return
+      };
       localStorage.setItem('question', this.question)
+      utils.firebaseLogEvent(
+        '10010',
+        '-10008',
+        'click_question_check',
+        'click',
+        {
+          args_name: 'click_question_check',
+          channel: utils.getFBChannel(),
+          click_type: 'screen_tracking'
+        }
+      );
       this.$router.push({
         path: 'detail',
-        query: { product_key: this.product_key}, 
+        query: { product_key: this.product_key },
       });
     }
   },
@@ -143,6 +188,7 @@ export default {
 
   .question-container {
     margin-top: 0.6rem;
+
     .input-question-container {
       display: flex;
       flex-direction: column;
@@ -171,6 +217,7 @@ export default {
         align-items: center;
         background: rgba(255, 255, 255, 0.1);
         position: relative;
+
         .num-container {
           position: absolute;
           right: 0.24rem;

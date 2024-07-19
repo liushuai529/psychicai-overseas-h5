@@ -52,18 +52,28 @@ export default {
   },
   created() {
     this.getGalleryData();
+    utils.firebaseLogEvent(
+      '10010',
+      '-10001',
+      'page_view_tarotmain',
+      'view',
+      {
+        args_name: 'page_view_tarotmain',
+        channel: utils.getFBChannel(),
+      }
+    );
   },
   beforeDestroy() {
     this.timer && clearInterval(this.timer);
   },
   mounted() {
     this.timer = setInterval(() => {
-      this.num+=1;
-      if(this.num === 5) {
+      this.num += 1;
+      if (this.num === 5) {
         clearInterval(this.timer);
         this.num = 0;
         this.goToRead();
-      } 
+      }
     }, 1000);
   },
   methods: {
@@ -74,6 +84,16 @@ export default {
       }
     },
     goToRead() {
+      utils.firebaseLogEvent(
+        '10010',
+        '-10002',
+        'click_tarotmain_check',
+        'click',
+        {
+          args_name: 'click_tarotmain_check',
+          channel: utils.getFBChannel(),
+        }
+      );
       this.$router.push({
         path: 'read',
       });
