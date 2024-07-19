@@ -20,7 +20,7 @@ export default {
     },
     btn_text: {
       type: String,
-      default: 'h5_emotion2024'
+      default: ''
     }
   },
   computed: {
