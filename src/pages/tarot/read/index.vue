@@ -61,6 +61,7 @@ export default {
       btn_statu: false,
       question: '',
       rise_move_end: false,//上移动画结束
+      product_key: 'master_tarot',
       select_card_list: [],
       cn_taluo_btn_zixun_normal,
       cn_taluo_btn_zixun_disable,
@@ -127,6 +128,7 @@ export default {
       localStorage.setItem('question', this.question)
       this.$router.push({
         path: 'detail',
+        query: { product_key: this.product_key}, 
       });
     }
   },

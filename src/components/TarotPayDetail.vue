@@ -77,7 +77,7 @@
     </div>
     <!--此处引用按钮组件-->
     <div style="display: flex;justify-content: center; margin-bottom: 1.5rem;">
-      <TarotPayBtn :callback="payMoney" />
+      <TarotPayBtn :callback="payMoney" :btn_text="btn_text"/>
     </div>
   </div>
 </template>
@@ -227,6 +227,13 @@ export default {
   },
 
   computed: {
+    btn_text() {
+      if(this.is_cn) {
+        return `${this.product.currency_type}${this.product.price_str} 真人咨询师解答`
+      } else {
+        return `${this.product.currency_type}${this.product.price_str} 真人咨詢師解答`
+      }
+    },
     buy_people() {
       const buyList = {
         h5_marriage: '87',

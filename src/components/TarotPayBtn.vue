@@ -1,7 +1,7 @@
 <template>
 
   <div class="tarot-pay-btn" @click="callback()">
-    RM19.99 真人咨询师解答
+    {{ btn_text }}
   </div>
 </template>
 <script>
@@ -18,7 +18,7 @@ export default {
       type: Function,
       default: function () { }
     },
-    product_key: {
+    btn_text: {
       type: String,
       default: 'h5_emotion2024'
     }
@@ -27,6 +27,9 @@ export default {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
+  },
+  mounted() {
+
   }
 }
 </script>
