@@ -20,7 +20,7 @@
       <div class="q-title">{{ is_cn ? '真人塔罗师回复' : '真人塔羅師回復' }}</div>
     </div>
 
-    <div v-if="result_data && result_data.answer_list[0].answer_status">
+    <div v-if="result_data && result_data.answer_list[0] && result_data.answer_list[0].answer_status">
       <ResultCard :result="result_data.answer_list[0]" />
     </div>
     <div class="a-loading-container" v-else>
@@ -51,7 +51,7 @@ import PayGuideModal from '../../../components/PayGuideModal.vue';
 import cn_taluo_img_jieda from '../../../assets/img/tarot/cn/taluo_img_jieda.webp';
 import tw_taluo_img_jieda from '../../../assets/img/tarot/tw/taluo_img_jieda.webp';
 import BaziTable from '../../../components/baziTable.vue';
-import { tarotQuestionsDetailAPI, tarotVisitorAPI, checkSendEventApi } from '../../../api/api';
+import { tarotQuestionsDetailAPI, tarotVisitorAPI, checkSendEventApi, resultTarotCheckAPI } from '../../../api/api';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import payModal from '../../../components/PayModal.vue';
 
@@ -89,8 +89,8 @@ export default {
   },
   async created() {
     this.order_id = this.$route.query.order_id;
-    this.getData()
-    this.getEmailInfo();
+    // this.getData()
+
   },
 
 
@@ -108,7 +108,7 @@ export default {
         channel: utils.getFBChannel(),
       }
     );
-
+    Indicator.open(this.$t('result-check'));
     // 上报支付结果埋点  start
     let check_result = await this.checkWithTimeout();
     if (check_result !== null) {
@@ -130,8 +130,41 @@ export default {
     });
     await this.checkResult();
     this.query();
+    this.getEmailInfo();
   },
   methods: {
+
+    /**
+     * @description: 查询结果数据
+     * @return {*}
+     */
+    query() {
+      // Indicator.open(this.$t('result-check'));
+      // let res = await tarotQuestionsDetailAPI({ order_id: this.order_id })
+      tarotQuestionsDetailAPI({ order_id: this.$route.query.order_id }).then(res => {
+        if (res.status === 1000) {
+          this.card_list = res.data.tarot.items;
+          console.log('this.card_list', this.card_list)
+          this.result_data = res.data;
+          Indicator.close();
+        }
+      });
+    },
+
+    /**
+     * @description: 校验支付结果
+     * @return {*}
+     */
+    async checkResult() {
+      let data = {
+        order_id: this.$route.query.order_id,
+        pkg: "''",
+        receipt: '',
+        transaction_id: '',
+        version_name: '',
+      };
+      await resultTarotCheckAPI(data);
+    },
 
     /**
      * @description: 完成上报埋点
@@ -272,7 +305,7 @@ export default {
       if (res.status === 1000) {
         if (!res.data.email) {
           if (report_status) {
-            if (report_status['PAYED', 'SUCCESS'].includes(report_status)) {
+            if (['PAYED', 'SUCCESS'].includes(report_status)) {
               this.show_email = true
             }
           } else {

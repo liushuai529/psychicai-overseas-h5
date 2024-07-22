@@ -247,6 +247,11 @@ export const getTarotEmailCodeAPI = async data => {
   return request(`/web/email/code`, 'POST', data);
 };
 
+// 塔罗订单结果校验
+export const resultTarotCheckAPI = async data => {
+  return request(`/web/auth/trade/orders/verify`, 'POST', data);
+};
+
 
 
 
