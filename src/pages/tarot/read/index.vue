@@ -184,7 +184,7 @@ export default {
 <style scoped lang="less">
 .tarot-read-container {
   width: 7.5rem;
-  height: 100%;
+  min-height: 100%;
   background: #0F031A;
 
   .question-container {

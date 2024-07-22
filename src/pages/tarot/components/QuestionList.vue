@@ -13,7 +13,7 @@
     <div class="question-container">
       <div class="item">
         <div style="margin-top: 0.2rem;" v-for="item in list">
-          <div class="content-container" @click="questionClick(item)">
+          <div class="content-container" @click="questionClick(item)" style="margin-bottom: 2rem;">
             <div class="text">{{ item.content }}</div>
             <img src="../../../assets/img/tarot/dingdan_icon_back.webp" />
           </div>
@@ -113,7 +113,7 @@ export default {
 
 <style scoped lang="less">
 .question-list {
-  width: 7.02rem;
+  width: 7.5rem;
   display: flex;
   flex-direction: column;
 
