@@ -6,7 +6,7 @@
 
 
     <DealCards ref="dealDards" v-if="!rise_move_end" />
-    <CardList style="margin-left: 0.24rem;" v-if="rise_move_end"/>
+    <CardList style="margin-left: 0.24rem;" v-show="rise_move_end"/>
     <!-- <div class="question-container" v-if="rise_move_end"> -->
     <div class="question-container" v-if="rise_move_end">
       <div class="input-question-container">

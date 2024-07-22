@@ -1,5 +1,6 @@
 <template>
   <div :class="['main', { 'rise_move': rise_move }]">
+    <div class="bg-img"></div>
     <div :class="['dealing-area', { 'dealing-area_sink': hands_show }, { 'rise_fadeout': rise_transparent }]">
       <div class="card_area">
         <img class="card" :src="paimian_img" v-for="num, idx in customData.card_num" :key="num"
@@ -361,6 +362,16 @@ export default {
   color: #FFFFFF;
   line-height: 0.24rem;
   text-align: center;
+}
+.bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7.5rem;
+  height: 2.4rem;
+  background-image: url('../../../assets/img/tarot/taluo_img_zhuozi.webp');
+  background-size: 7.5rem 2.4rem;
+  background-repeat: no-repeat;
 }
 
 .dealing-area {
