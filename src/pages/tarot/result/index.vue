@@ -11,26 +11,26 @@
       <!-- <div class="title-container">
        
       </div> -->
-      <CardList :card_list="card_list" :is_async="1"/>
-      <div class="question-text">{{ result_data &&result_data.question }}</div>
+      <CardList :card_list="card_list" :is_async="1" />
+      <div class="question-text">{{ result_data && result_data.question }}</div>
     </div>
 
     <div class="q-container">
       <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />
       <div class="q-title">{{ is_cn ? '真人塔罗师回复' : '真人塔羅師回復' }}</div>
     </div>
-    
-    <div v-if="result_data&& result_data.answer_list[0].answer_status">
-      <ResultCard :result="result_data.answer_list[0]"/>
+
+    <div v-if="result_data && result_data.answer_list[0].answer_status">
+      <ResultCard :result="result_data.answer_list[0]" />
     </div>
     <div class="a-loading-container" v-else>
-      <img class="wait-img" src="../../../assets/img/tarot/dayi_img_wait.webp"/>
-      <span>{{is_cn?'真人塔罗占卜师正在思考您的问题': '真人塔羅占蔔師正在思考您的問題' }}</span>
+      <img class="wait-img" src="../../../assets/img/tarot/dayi_img_wait.webp" />
+      <span>{{ is_cn ? '真人塔罗占卜师正在思考您的问题' : '真人塔羅占蔔師正在思考您的問題' }}</span>
     </div>
 
-    <FixDowonLoad/>
+    <FixDowonLoad />
     <Overlay :show="show_email" />
-    <EmailInfoCard v-if="show_email" @hidden_modal="hidden_modal"/>
+    <EmailInfoCard v-if="show_email" @hidden_modal="hidden_modal" />
 
   </div>
 </template>
@@ -61,7 +61,7 @@ import { report_id_arr } from '../../../libs/enum';
 
 export default {
   components: { CardList, TarotPayDetail, TarotPayItem, TarotNotice, PayGuideModal, FixDowonLoad, Overlay, EmailInfoCard, ResultCard },
-  
+
 
   data() {
     return {
@@ -93,7 +93,7 @@ export default {
     this.getEmailInfo();
   },
 
-  
+
 
   mounted() {
 
@@ -103,10 +103,17 @@ export default {
       this.show_email = false
     },
     async getEmailInfo() {
+      let report_status = utils.getQueryStr('status');
       let res = await tarotVisitorAPI();
-      if(res.status === 1000) {
-        if(!res.data.email) {
-          this.show_email = true
+      if (res.status === 1000) {
+        if (!res.data.email) {
+          if (report_status) {
+            if (report_status['PAYED', 'SUCCESS'].includes(report_status)) {
+              this.show_email = true
+            }
+          } else {
+            this.show_email = true
+          }
         }
       }
       console.log('res', res)
@@ -115,8 +122,8 @@ export default {
       this.showPayGuideModal = !this.showPayGuideModal;
     },
     async getData() {
-      let res = await tarotQuestionsDetailAPI({order_id: this.order_id})
-      if(res.status === 1000) {
+      let res = await tarotQuestionsDetailAPI({ order_id: this.order_id })
+      if (res.status === 1000) {
         this.card_list = res.data.tarot.items;
         console.log('this.card_list', this.card_list)
         this.result_data = res.data;
@@ -132,6 +139,7 @@ export default {
 .van-overlay {
   z-index: 2;
 }
+
 .tarot-detail {
   background: #0F031A;
   width: 7.5rem;
@@ -179,6 +187,7 @@ export default {
       margin-top: 0.24rem;
     }
   }
+
   .a-loading-container {
     width: 7.02rem;
     height: 4.12rem;
@@ -192,6 +201,7 @@ export default {
     font-size: 0.28rem;
     color: #FFFFFF;
     line-height: 0.42rem;
+
     img {
       width: 2.6rem;
       height: 2.6rem;
@@ -199,6 +209,6 @@ export default {
     }
   }
 
-  
+
 }
 </style>

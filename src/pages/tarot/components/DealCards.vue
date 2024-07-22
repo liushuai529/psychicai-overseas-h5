@@ -33,13 +33,13 @@
         </div>
       </div>
     </div>
-    <div :class="['effect_area', { 'rise_fadeout': rise_transparent }]" ref="effect_area">
+    <!-- <div :class="['effect_area', { 'rise_fadeout': rise_transparent }]" ref="effect_area">
       <img class="effect_card" :src="paimian_img" />
-    </div>
-    <!-- <div :class="['effect_area']" ref="effect_area">
+    </div> -->
+    <div :class="['effect_area']" ref="effect_area">
       <img class="effect_card" :src="paimian_img" 
         />
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
@@ -259,32 +259,32 @@ export default {
      * @param callback 
      */
     card_selection_animation(eventCardRect, targetCardWrapperRect, isLeft, callback) {
-      // // 展示选中的牌
-      // this.card_selection_show(eventCardRect,isLeft)
-      // // 动画
-      // this.$nextTick(()=>{
-      //   const effect_area = this.$refs.effect_area;
-      //   let showCardRect = effect_area.getBoundingClientRect()
-      //   // 计算距离
-      //   let {left,top} = this.distanceCardXY(showCardRect,targetCardWrapperRect)
-      //   setTimeout(() => {
-      //     effect_area.style.transition = `transform 1s linear`;
-      //   }, 0);
-      //   let time = setTimeout(() => {
-      //     clearTimeout(time);
-      //     effect_area.style.transform = `translate(${left}px,${top}px)`;
-      //     let timeCallBack =  setTimeout(() => {
-      //       clearTimeout(timeCallBack);
-      //       callback && callback();
-      //       setTimeout(() => {
-      //         effect_area.style.transition = 'none';
-      //       }, 0);
-      //       effect_area.style.transform = '';
-      //       effect_area.style.opacity = 0;
-      //     }, 1000);
-      //   }, 500);
-      // })
-      callback && callback();
+      // 展示选中的牌
+      this.card_selection_show(eventCardRect,isLeft)
+      // 动画
+      this.$nextTick(()=>{
+        const effect_area = this.$refs.effect_area;
+        let showCardRect = effect_area.getBoundingClientRect()
+        // 计算距离
+        let {left,top} = this.distanceCardXY(showCardRect,targetCardWrapperRect)
+        setTimeout(() => {
+          effect_area.style.transition = `transform 1s linear`;
+        }, 0);
+        let time = setTimeout(() => {
+          clearTimeout(time);
+          effect_area.style.transform = `translate(${left}px,${top}px)`;
+          let timeCallBack =  setTimeout(() => {
+            clearTimeout(timeCallBack);
+            callback && callback();
+            setTimeout(() => {
+              effect_area.style.transition = 'none';
+            }, 0);
+            effect_area.style.transform = '';
+            effect_area.style.opacity = 0;
+          }, 1000);
+        }, 500);
+      })
+      // callback && callback();
     },
     /**
      * @description 展示选中的牌
