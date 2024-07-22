@@ -350,8 +350,9 @@ export default {
 </script>
 <style scoped lang="less">
 .main {
-  // width: 100%;
-  width: 7.5rem;
+  width: 100%;
+  // width: 7.5rem;
+  overflow-x: hidden;
   display: flex;
   height: 100%;
   flex-direction: column;

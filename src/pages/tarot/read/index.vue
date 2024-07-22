@@ -25,9 +25,9 @@
       </div>
       <QuestionList style="margin-left: 0.24rem; margin-top: 0.5rem;" @get_question="getQuestion" />
       <div style="height: 1.2rem; width: 100%; background: #0F031A;"></div>
-      <FixDowonLoad />
+      <!-- <FixDowonLoad /> -->
     </div>
-
+    <FixDowonLoad />
   </div>
 </template>
 
@@ -184,6 +184,7 @@ export default {
 <style scoped lang="less">
 .tarot-read-container {
   width: 7.5rem;
+  overflow-x: hidden;
   min-height: 100%;
   background: #0F031A;
 
