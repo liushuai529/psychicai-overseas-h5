@@ -42,7 +42,7 @@
 
             <div :class="['info']">
               <div class="left" style="-webkit-box-orient: vertical;">
-                我看不懂呢，想找个老师我看看，解读一下是什么意思，帮我看看运势意思，帮我看看运势
+                {{ item.question }}
                         </div>
               <div class="right">
                 <div class="pay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>

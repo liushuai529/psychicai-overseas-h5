@@ -93,7 +93,11 @@ export default {
   watch: {
     question(val) {
       if (val) {
-        this.btn_statu = true;
+        if(val.length>4) {
+          this.btn_statu = true;
+        } else {
+          this.btn_statu = false; 
+        }
       } else {
         this.btn_statu = false;
       }

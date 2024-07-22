@@ -1,5 +1,5 @@
 <template>
-  <div class="fix-dowon-load">
+  <div class="fix-dowon-load" v-show="show">
     <div class="left">
       <img src="../../../assets/img/tarot/taluo_img_mingli.webp" />
       <div class="content-container" @click="downApp">
@@ -38,6 +38,9 @@ export default {
     };
   },
   computed: {
+    show() {
+      return utils.isAndroid();
+    },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
