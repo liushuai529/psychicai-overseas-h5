@@ -229,9 +229,9 @@ export default {
   computed: {
     btn_text() {
       if(this.is_cn) {
-        return `${this.product.currency_type}${this.product.price_str} 真人咨询师解答`
+        return `${this.product && this.product.currency_type || ''}${this.product && this.product.price_str || ''} 真人咨询师解答`
       } else {
-        return `${this.product.currency_type}${this.product.price_str} 真人咨詢師解答`
+        return `${this.product && this.product.currency_type || ''}${this.product && this.product.price_str|| ''} 真人咨詢師解答`
       }
     },
     buy_people() {
