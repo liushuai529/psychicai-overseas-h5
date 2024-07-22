@@ -49,7 +49,7 @@ export default {
       return this.email.trim().length && this.email_code.length === 6;
     },
     code_statu() {
-      return this.email.trim().length>6 && this.number === 0;
+      return this.email.trim().length > 6 && this.number === 0;
     },
     code_btn_text() {
       if (this.number) {
@@ -64,16 +64,50 @@ export default {
     }
   },
   watch: {},
-  mounted() { },
+  mounted() {
+    utils.firebaseLogEvent(
+      '10010',
+      '-10016',
+      'view_tarot_result_email',
+      'page_view',
+      {
+        args_name: 'view_tarot_result_email',
+        channel: utils.getFBChannel(),
+      }
+    );
+  },
   methods: {
     async bindHandle() {
       let res = await bindTarotEmailAPI({
         email: this.email,
         email_code: this.email_code
       });
-      if (res.status === 1000) {
+      if (res && res.status === 1000) {
         Toast(this.is_cn ? '绑定成功' : '綁定成功');
         this.$emit('hidden_modal')
+        utils.firebaseLogEvent(
+          '10010',
+          '-10017',
+          'click_tarotresult_mail_check',
+          'page_view',
+          {
+            args_name: 'click_tarotresult_mail_check',
+            channel: utils.getFBChannel(),
+            click_type: 'confirm',
+          }
+        );
+      } else {
+        utils.firebaseLogEvent(
+          '10010',
+          '-10017',
+          'click_tarotresult_mail_check',
+          'page_view',
+          {
+            args_name: 'click_tarotresult_mail_check',
+            channel: utils.getFBChannel(),
+            click_type: 'error',
+          }
+        );
       }
     },
     async getCodeClick() {

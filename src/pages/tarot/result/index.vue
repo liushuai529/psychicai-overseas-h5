@@ -51,7 +51,7 @@ import PayGuideModal from '../../../components/PayGuideModal.vue';
 import cn_taluo_img_jieda from '../../../assets/img/tarot/cn/taluo_img_jieda.webp';
 import tw_taluo_img_jieda from '../../../assets/img/tarot/tw/taluo_img_jieda.webp';
 import BaziTable from '../../../components/baziTable.vue';
-import { tarotQuestionsDetailAPI, tarotVisitorAPI } from '../../../api/api';
+import { tarotQuestionsDetailAPI, tarotVisitorAPI, checkSendEventApi } from '../../../api/api';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import payModal from '../../../components/PayModal.vue';
 
@@ -95,10 +95,174 @@ export default {
 
 
 
-  mounted() {
+  async mounted() {
+    this.order_id = this.$route.query.order_id;
+    window.scrollTo(0, 0);
+    utils.firebaseLogEvent(
+      '10010',
+      '-10015',
+      'page_view_tarot_result',
+      'page_view',
+      {
+        args_name: 'page_view_tarot_result',
+        channel: utils.getFBChannel(),
+      }
+    );
 
+    // 上报支付结果埋点  start
+    let check_result = await this.checkWithTimeout();
+    if (check_result !== null) {
+      utils.gcyLog(`order_id:${this.order_id}`, {
+        mlxz_action_desc: '已经获取了是否上报埋点的状态',
+        mlxz_attribution_status: check_result.data.status,
+      });
+      if (check_result.data && check_result.data.status) {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '准备执行上报埋点',
+          mlxz_check_status: check_result.data.status,
+        });
+        this.handleSendEvent();
+      }
+    }
+    // end
+    utils.gcyLog(`order_id:${this.order_id}`, {
+      mlxz_action_desc: '开始验单',
+    });
+    await this.checkResult();
+    this.query();
   },
   methods: {
+
+    /**
+     * @description: 完成上报埋点
+     * @return {*}
+     */
+    async handleSendEvent() {
+      let report_price = +utils.getQueryStr('report_price');
+      let report_status = utils.getQueryStr('status');
+      let currency_type = utils.getQueryStr('currency_type');
+      // let repay = +utils.getQueryStr('repay');
+
+      utils.gcyLog(`order_id:${this.order_id}`, {
+        mlxz_action_desc: '准备上报埋点，获取订单状态',
+        mlxz_order_status: report_status,
+      });
+      if (report_status === 'SUCCESS' || report_status === 'PAYED') {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '开始上报firebase埋点',
+          mlxz_order_status: report_status,
+        });
+
+        utils.firebaseLogEvent(
+          '10010',
+          '-10013',
+          'event_status_tarotpay_success',
+          'event_status',
+          {
+            args_name: 'event_status_tarotpay_success',
+            channel: utils.getFBChannel(),
+          }
+        );
+
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '完成firebase埋点上报',
+          mlxz_order_status: report_status,
+        });
+        console.log('Purchase事件上报', this.order_id)
+        if (utils.isProd()) {
+          await utils.checkFB();
+          try {
+            utils.gcyLog(`order_id:${this.order_id}`, {
+              mlxz_action_desc: '开始上报FB埋点，Purchase',
+              mlxz_value: report_price.toFixed(2),
+              mlxz_currency: currency_type,
+              mlxz_order_status: report_status,
+            });
+            fbq('track', 'Purchase', {
+              value: report_price.toFixed(2),
+              currency: currency_type,
+            }, { eventID: this.order_id });
+            utils.gcyLog(`order_id:${this.order_id}`, {
+              mlxz_action_desc: '完成FB埋点上报，Purchase',
+              mlxz_value: report_price.toFixed(2),
+              mlxz_currency: currency_type,
+              mlxz_order_status: report_status,
+            });
+          } catch (err) {
+            console.error('error message:', err);
+          }
+        }
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '完成埋点上报，开始与接口通信，通知完成上报',
+        });
+        this.sendEvent();
+      } else {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '开始上报埋点',
+          mlxz_order_status: report_status,
+        });
+
+
+        utils.firebaseLogEvent(
+          '10010',
+          '-10014',
+          'event_status_tarotpay_fail',
+          'event_status',
+          {
+            args_name: 'event_status_tarotpay_fail',
+            channel: utils.getFBChannel(),
+          }
+        );
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '完成上报埋点',
+          mlxz_order_status: report_status,
+        });
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '完成埋点上报，开始与接口通信，通知完成上报',
+        });
+        this.sendEvent();
+      }
+    },
+    /**
+    * @description: 校验是否上报埋点
+    * @return {*}
+    */
+    async checkWithTimeout() {
+      try {
+        const result = await Promise.race([
+          checkSendEventApi({ order_id: this.order_id }),
+          new Promise((resolve, reject) => {
+            setTimeout(() => resolve(null), 6000);
+          }),
+        ]);
+
+        if (result !== null) {
+          // 如果有返回数据，则直接返回
+          utils.gcyLog(`order_id:${this.order_id}`, {
+            mlxz_action_desc: '已校验是否上报埋点',
+            mlxz_check_result_status: result.data.status,
+          });
+          return result;
+        } else {
+          utils.gcyLog(`order_id:${this.order_id}`, {
+            mlxz_action_desc: '接口超时，重新调用校验上报埋点接口',
+          });
+          // 等待 6 秒后再次调用 checkSendEventApi
+          const retryResult = await checkSendEventApi({
+            order_id: this.order_id,
+          });
+          utils.gcyLog(`order_id:${this.order_id}`, {
+            mlxz_action_desc: '接口超时，完成重试调用上报埋点接口',
+          });
+          return retryResult;
+        }
+      } catch (error) {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '接口报错，停止校验',
+        });
+        throw error;
+      }
+    },
     hidden_modal() {
       this.show_email = false
     },
