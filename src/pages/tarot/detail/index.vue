@@ -87,7 +87,7 @@ export default {
   // background: #0F031A;
   background: rgba(30, 10, 45, 1);
   width: 7.5rem;
-  // height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

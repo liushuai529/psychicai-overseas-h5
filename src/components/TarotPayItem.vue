@@ -118,8 +118,6 @@ export default {
       } else {
         this.time = 30 * 60 * 1000
       }
-
-
     },
     async pay() {
       utils.firebaseLogEvent(pay_info[this.product_key]['module'], pay_info[this.product_key]['content_id'], pay_info[this.product_key]['event_name'], pay_info[this.product_key]['type'], {
