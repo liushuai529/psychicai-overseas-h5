@@ -1,13 +1,19 @@
 <template>
-  <div :class="{
-    'tarot-index': true,
-    'cn-bg': is_cn,
-    'tw-bg': !is_cn,
-  }">
-    <FbShareNotice :text="is_cn ? '点击右上角…使用浏览器打开体验更流畅' : '點擊右上角…使用瀏覽器打開體驗更流暢'" />
-    <img class="order-icon" @click="goToOrder" :src="is_cn ? cn_home_img_dingdan : tw_home_img_dingdan" />
-    <img class="desc-icon" :src="is_cn ? cn_home_img_text : tw_home_img_text" />
-    <img class="btn-icon" @click="goToRead" :src="is_cn ? cn_home_btn_kaishi : tw_home_btn_kaishi" />
+  <div style="background-color: #0E0512;">
+    <div :class="{
+      'tarot-index': true,
+      'cn-bg': is_cn,
+      'tw-bg': !is_cn,
+      'rise_move': rise_move
+    }">
+
+      <div :class="['animation']">
+        <FbShareNotice :text="is_cn ? '点击右上角…使用浏览器打开体验更流畅' : '點擊右上角…使用瀏覽器打開體驗更流暢'" />
+        <img class="order-icon" @click="goToOrder" :src="is_cn ? cn_home_img_dingdan : tw_home_img_dingdan" />
+        <img class="desc-icon" :src="is_cn ? cn_home_img_text : tw_home_img_text" />
+        <img class="btn-icon" @click="goToRead" :src="is_cn ? cn_home_btn_kaishi : tw_home_btn_kaishi" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -32,6 +38,7 @@ export default {
   },
   data() {
     return {
+      rise_move: false,//上移开始
       timer: null,//定时器
       num: 0,//时间变量，5秒自动触发页面跳转
       cn_home_img_dingdan,
@@ -84,19 +91,23 @@ export default {
       }
     },
     goToRead() {
-      utils.firebaseLogEvent(
-        '10010',
-        '-10002',
-        'click_tarotmain_check',
-        'click',
-        {
-          args_name: 'click_tarotmain_check',
-          channel: utils.getFBChannel(),
-        }
-      );
-      this.$router.push({
-        path: 'read',
-      });
+      this.rise_move = true;
+      setTimeout(() => {
+        utils.firebaseLogEvent(
+          '10010',
+          '-10002',
+          'click_tarotmain_check',
+          'click',
+          {
+            args_name: 'click_tarotmain_check',
+            channel: utils.getFBChannel(),
+          }
+        );
+        this.$router.push({
+          path: 'read',
+        });
+      }, 2000);
+
     },
     goToOrder() {
       this.$router.push({
@@ -108,12 +119,29 @@ export default {
 </script>
 
 <style scoped lang="less">
+@keyframes rise {
+  0% {
+    transform: translateY(0);
+  }
+
+
+  100% {
+    // transform: translateY(-100vh);
+    transform: translateY(-15rem);
+  }
+}
+
 .cn-bg {
   background-image: url('../../../assets/img/tarot/cn/bg.webp');
 }
 
 .tw-bg {
   background-image: url('../../../assets/img/tarot/tw/bg.webp');
+}
+
+.rise_move {
+  // animation: rise 2s ease-in-out forwards;
+  animation: rise 2s linear forwards;
 }
 
 .tarot-index {
@@ -128,24 +156,44 @@ export default {
   position: relative;
   background-color: #0E0512;
 
-  .order-icon {
-    width: 0.5rem;
-    height: 1.52rem;
+  .bg {
+    position: absolute;
+    z-index: -1;
+    background: #0E0512;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .animation {
     display: flex;
-    align-self: flex-end;
-    margin-top: 4.19rem;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 7.5rem;
+
+    .order-icon {
+      width: 0.5rem;
+      height: 1.52rem;
+      display: flex;
+      align-self: flex-end;
+      margin-top: 4.19rem;
+    }
+
+    .desc-icon {
+      width: 5.62rem;
+      height: 0.64rem;
+      margin-top: 4.4rem;
+    }
+
+    .btn-icon {
+      width: 5.72rem;
+      height: 0.94rem;
+      margin-top: 0.5rem;
+    }
   }
 
-  .desc-icon {
-    width: 5.62rem;
-    height: 0.64rem;
-    margin-top: 4.4rem;
-  }
 
-  .btn-icon {
-    width: 5.72rem;
-    height: 0.94rem;
-    margin-top: 0.5rem;
-  }
 }
 </style>

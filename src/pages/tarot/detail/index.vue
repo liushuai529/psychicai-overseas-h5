@@ -19,8 +19,8 @@
     <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
     <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/> -->
     <TarotPayItem product_key="master_tarot" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
-    <TarotPayDetail ref="payDetail" product_key="master_tarot" e_view_id="10006" c_view_id="-10005"
-      e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006" e_click_name="click_2024lovely_pay"
+    <TarotPayDetail ref="payDetail" product_key="master_tarot" e_view_id="10010" c_view_id="-10011"
+      e_view_name="page_view_tarotpay" a_view_token="184kba" c_click_id="-10012" e_click_name="click_tarotpay_pay"
       a_click_token="2rov44" />
   </div>
 </template>
@@ -68,16 +68,6 @@ export default {
   },
   async created() {
     this.question = localStorage.getItem('question') || ''
-    utils.firebaseLogEvent(
-      '10010',
-      '-10011',
-      'page_view_tarotpay',
-      'page_view',
-      {
-        args_name: 'page_view_tarotpay',
-        channel: utils.getFBChannel(),
-      }
-    );
   },
 
   mounted() {

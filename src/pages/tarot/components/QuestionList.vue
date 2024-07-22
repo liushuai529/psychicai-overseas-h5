@@ -14,7 +14,7 @@
       <div class="item">
         <div style="margin-top: 0.2rem;" v-for="item in list">
           <div class="content-container" @click="questionClick(item)">
-            <div class="text">{{ item }}</div>
+            <div class="text">{{ item.content }}</div>
             <img src="../../../assets/img/tarot/dingdan_icon_back.webp" />
           </div>
           <div class="line"></div>
@@ -63,7 +63,7 @@ export default {
         {
           args_name: 'click_question_choise',
           channel: utils.getFBChannel(),
-          // question_id: item
+          question_id: item.id
         }
       );
       this.$emit('get_question', item)
@@ -86,7 +86,7 @@ export default {
         {
           args_name: 'click_question_change',
           channel: utils.getFBChannel(),
-          // question_id: item
+          question_id: item.id
         }
       );
     },

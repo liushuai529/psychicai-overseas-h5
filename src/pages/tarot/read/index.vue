@@ -6,9 +6,9 @@
 
 
     <DealCards ref="dealDards" v-if="!rise_move_end" />
-    <CardList style="margin-left: 0.24rem;" />
+    <CardList style="margin-left: 0.24rem;" v-if="rise_move_end"/>
     <!-- <div class="question-container" v-if="rise_move_end"> -->
-    <div class="question-container">
+    <div class="question-container" v-if="rise_move_end">
       <div class="input-question-container">
         <div class="title">
           <img src="../../../assets/img/tarot/taluo_img_xing.webp" />
@@ -23,7 +23,8 @@
       <div class="btn-container">
         <img class="btn" :src="btn_url" @click="adviceClick" />
       </div>
-      <QuestionList style="margin-left: 0.24rem; margin-top: 0.5rem" @get_question="getQuestion" />
+      <QuestionList style="margin-left: 0.24rem; margin-top: 0.5rem;" @get_question="getQuestion" />
+      <div style="height: 1.2rem; width: 100%; background: #0F031A;"></div>
       <FixDowonLoad />
     </div>
 
@@ -142,7 +143,7 @@ export default {
   methods: {
     getQuestion(item) {
       console.log('获取问题', item)
-      this.question = item;
+      this.question = item.content;
     },
     adviceClick() {
       if (!this.btn_statu) {

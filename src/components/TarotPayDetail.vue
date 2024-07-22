@@ -382,6 +382,7 @@ export default {
      * @return {*}
      */
     async payMoney() {
+      
       //防抖
       if (this.payCanClick) {
         return false
