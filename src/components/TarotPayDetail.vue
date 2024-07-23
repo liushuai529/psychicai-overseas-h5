@@ -167,7 +167,7 @@ export default {
       //   'https://psychicai-static.psychicai.pro/imgs/24049b44461fceb64a04b15edd6b2a8bb79e.png',
       new_user_icon:
         'https://psychicai-static.psychicai.pro/imgs/24040fcec5baef7f4fcea5a1eed3552d734e.png',
-      time: 0,
+      time: 15 * 60 * 1000,
       // time: 5 * 1000,
       time_str_1: '',
       time_str_2: '',
@@ -295,7 +295,7 @@ export default {
     },
   },
   created() {
-    this.time = +localStorage.getItem(`mlxz_count_down_${this.product_key}`);
+    // this.time = +localStorage.getItem(`mlxz_count_down_${this.product_key}`);
 
     this.getProductionList();
     this.getPayMethod();
@@ -341,11 +341,11 @@ export default {
       
       const { minutes, seconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000;
-      if (this.time) {
-        localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_ ,);
-      } else {
-        this.time = 30 * 60 * 1000
-      }
+      // if (this.time) {
+      //   localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_ ,);
+      // } else {
+      //   this.time = 15 * 60 * 1000
+      // }
       this.is_show_shandong = time_ < 60 * 1000;
       this.is_show_daoqi = time_ < 31 * 1000;
     },

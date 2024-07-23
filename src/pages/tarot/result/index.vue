@@ -20,7 +20,7 @@
       <div class="q-title">{{ is_cn ? '真人塔罗师回复' : '真人塔羅師回復' }}</div>
     </div>
 
-    <div v-if="result_data && result_data.answer_list[0] && result_data.answer_list[0].answer_status">
+    <div  v-if="result_data && result_data.answer_list[0] && result_data.answer_list[0].answer_status">
       <ResultCard :result="result_data.answer_list[0]" />
     </div>
     <div class="a-loading-container" v-else>
@@ -349,6 +349,8 @@ export default {
   width: 7.5rem;
   display: flex;
   height: 100%;
+  overflow-y: scroll;
+  // min-height: 100%;
   flex-direction: column;
   align-items: center;
 
