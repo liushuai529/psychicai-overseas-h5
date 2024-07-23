@@ -2,7 +2,7 @@
   <div :class="['tarot-detail']">
     <TarotNotice v-if="is_show_tarot_notice" :show_btn="true" />
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
-    <div class="q-container">
+    <div class="q-container" style="margin-top: 0.2rem;">
       <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />
       <div class="q-title">{{ is_cn ? '我的提问' : '我的提問' }}</div>
     </div>
@@ -124,7 +124,8 @@ export default {
     });
     await this.checkResult();
     this.goToPayPage();
-    if (report_status === 'SUCCESS' || report_status === 'PAYED') {
+    if (!report_status || report_status === 'SUCCESS' || report_status === 'PAYED') {
+    
       this.query();
       this.getEmailInfo();
     }
@@ -135,13 +136,15 @@ export default {
     goToPayPage() {
       Indicator.close();
       let report_status = utils.getQueryStr('status');
-      if (report_status !== 'SUCCESS' && report_status !== 'PAYED') {
+      console.log('report_status', report_status)
+   
+      if ((report_status !== 'SUCCESS' && report_status !== 'PAYED'  )) {
+        if(!report_status) return
         this.$router.push({
           path: 'detail',
           query: { product_key: 'master_tarot' },
         });
       }
-      return
     },
     async sendEvent() {
      

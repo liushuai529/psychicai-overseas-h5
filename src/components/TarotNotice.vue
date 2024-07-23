@@ -60,6 +60,7 @@ export default {
 .fb-share-notice {
   width: 7.5rem;
   height: 0.88rem;
+  min-width: 0.88rem;
   background: #1E0A2D;
   // opacity: 0.6;
   display: flex;
@@ -75,7 +76,7 @@ export default {
   .btn-container {
     position: absolute;
     left: 0.3rem;
-    top: 0.22rem;
+    // top: 0.22rem;
     height: 0.44rem;
     width: 1.1rem;
     display: flex;
