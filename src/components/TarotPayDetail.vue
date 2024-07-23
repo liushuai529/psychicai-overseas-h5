@@ -85,7 +85,7 @@
 <script>
 import { Indicator } from 'mint-ui';
 import {
-  getPayMethodsAPI,
+  getTarotPayMethodsAPI,
   getProductionsAPI,
   payTarotOrderAPI,
   reportEventAPI,
@@ -356,7 +356,7 @@ export default {
      */
     async getProductionList() {
       this.product = null;
-      const { status, data } = await getProductionsAPI('master');
+      const { status, data } = await getProductionsAPI('master', true);
       if (status === 1000) {
         this.product = data.find(item => item.product_key === this.product_key);
         //获取所有报告以及套餐
@@ -378,7 +378,7 @@ export default {
     async getPayMethod() {
       this.loading = true;
       try {
-        const res = await getPayMethodsAPI();
+        const res = await getTarotPayMethodsAPI();
         this.loading = false;
         if (res.status === 1000) {
           this.start_down = true;

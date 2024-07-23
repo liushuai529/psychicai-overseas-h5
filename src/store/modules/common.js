@@ -40,7 +40,7 @@ export default {
       }
     },
     getTarotProduction: async function ({ commit }, payload) {
-      const res = await getProductionsAPI('master');
+      const res = await getProductionsAPI('master', true);
       if (res.status === 1000) {
         commit('setData', {
           key: 'tarotProductList',

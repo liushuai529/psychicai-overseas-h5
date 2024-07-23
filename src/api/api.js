@@ -60,10 +60,13 @@ export const getResultAPI = async data => {
 };
 
 // 商品查询
-export const getProductionsAPI = async productGroup => {
-  await visitorLoginAPI();
+export const getProductionsAPI = async (productGroup, isTarot) => {
+  if(!isTarot) {
+    await visitorLoginAPI();
+  }
   return request(`/web/auth/trade/products/${productGroup}`, 'GET');
 };
+
 
 // 查询历史订单
 export const getHistoryOrderAPI = async data => {
@@ -255,6 +258,11 @@ export const resultTarotCheckAPI = async data => {
 // 上报埋点
 export const sendTarotEventApi = async data => {
   return request(`/web/attribution/report/${data.order_id}`, 'POST', data);
+};
+
+// 查询塔罗支付方式
+export const getTarotPayMethodsAPI = async data => {
+  return request(`/web/auth/trade/pay_methods`, 'GET', data);
 };
 
 
