@@ -146,8 +146,10 @@ export default {
   },
   methods: {
     getQuestion(item) {
-      console.log('获取问题', item)
       this.question = item.content;
+      setTimeout(() => {
+        this.adviceClick();
+      }, 0);
     },
     adviceClick() {
       if (!this.btn_statu) {
