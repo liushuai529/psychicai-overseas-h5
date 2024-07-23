@@ -20,7 +20,7 @@
         </div>
         <div v-if="!list.length && is_empty" class="empty-list">
           <img src="../../../assets/img/tarot/dayi_img_wait.webp" class="nothing-icon" alt="" />
-          <div class="tips">{{ is_cn? '暂无数据': '暫無數據' }}</div>
+          <div class="tips">{{ is_cn ? '暂无数据' : '暫無數據' }}</div>
 
         </div>
         <div v-else class="order-list">
@@ -43,7 +43,7 @@
             <div :class="['info']">
               <div class="left" style="-webkit-box-orient: vertical;">
                 {{ item.question }}
-                        </div>
+              </div>
               <div class="right">
                 <div class="pay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>
                 <div class="search" v-if="item.order_status === 'PAYED'" @click="handleJump(item)">查看</div>
@@ -141,8 +141,9 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
     productList() {
-      return this.$store.state.common.productList;
+      return this.$store.state.common.tarotProductList;
     },
+
   },
   filters: {
     filterName(val) {
@@ -221,34 +222,9 @@ export default {
       }
     },
 
-    /**
-     * @description: 格式化时间
-     * @param {*} val
-     * @return {*}
-     */
-    formateTime(is_gongli, year, month, date, hour) {
-      if (is_gongli == '1') {
-        return `${year}年${month}月${date}日${hour === '-1'
-          ? `未知${this.$t('tips-11')}辰`
-          : hour + this.$t('tips-11')
-          }`;
-      } else {
-        return `${year}年${utils.nongliMonthEnum()[+month - 1]}${utils.nongliDayEnum()[+date - 1]
-          }${hour === '-1'
-            ? `未知${this.$t('tips-11')}辰`
-            : utils.nongliHourEnum()[+hour / 2]
-          }`;
-      }
-    },
 
-    /**
-     * @description: 跳转即时测算
-     * @param {*} url
-     * @return {*}
-     */
-    jumpUrl(url) {
-      location.href = `${url}.html`;
-    },
+
+
 
     async openApp() {
       utils.firebaseLogEvent(
@@ -290,21 +266,22 @@ export default {
         // 跳转添加信息页
         this.$router.push({
           path: 'result',
-          query: { order_id: item.order_id, status: 'SUCCESS', has_pay: 'SUCCESS',product_key: item.product_key|| 'master_tarot'},
+          query: { order_id: item.order_id, status: 'SUCCESS', product_key: item.product_key || 'master_tarot' },
         });
       } else {
+        let same_product = this.productList.find(
+          i => i.product_id === item.product_id
+        );
+        if(!same_product) return
         Indicator.open(this.$t('tips-17'));
 
         const {
           order_status,
-          payment,
           pay_method,
           product_key,
           product_id,
-          ext,
           trade_pay_type,
           trade_target_org,
-          combine_product_ids,
         } = item;
         utils.firebaseLogEvent(
           '10002',
@@ -321,7 +298,6 @@ export default {
           product_key,
           product_id,
           platform: 'WEB',
-          extra_ce_suan: ext,
           trade_pay_type,
           trade_target_org,
           fb_param: {
@@ -329,11 +305,17 @@ export default {
             fbp: utils.getcookieInfo('_fbp'),
             external_id: localStorage.getItem('mlxz_outer_visitor_id'),
           },
+          question: item.question,
+          question_tarot: {
+            array_type: 'timeline',
+            ask_type: 'array',
+            items: item.tarot.items
+          },
         };
 
         params.callback_url = `${location.origin
           }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key || 'master_tarot']
-          }&report_price=${payment}&repay=1`;
+          }&report_price=${same_product.price}&repay=1`;
         const res = await payTarotOrderAPI(params);
 
         Indicator.close();
