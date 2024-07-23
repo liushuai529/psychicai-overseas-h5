@@ -1,7 +1,7 @@
 <template>
   <div class="email-info-card">
     <div class="title">{{ is_cn ? '咨询师正在回复' : '咨詢師正在回復' }}</div>
-    <div class="desc">{{ is_cn ? '真人塔罗占卜师回复后第一时间通知您' : '真人塔羅占蔔師回復後第一時間通知您' }}</div>
+    <div class="desc">{{ is_cn ? '真人塔罗占卜师回复后第一时间通知您' : '真人塔羅占卜師回復後第一時間通知您' }}</div>
     <div class="info-input" style="margin-top: 0.5rem;">
       <input type="text" id="email" v-model="email" placeholder="aa" />
     </div>

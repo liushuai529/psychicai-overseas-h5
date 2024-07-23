@@ -1,8 +1,8 @@
 <template>
-  <div class="fix-dowon-load" v-show="show">
+  <div class="fix-dowon-load" v-show="show" @click="downApp">
     <div class="left">
       <img src="../../../assets/img/tarot/taluo_img_mingli.webp" />
-      <div class="content-container" @click="downApp">
+      <div class="content-container">
         <div class="title">{{ is_cn ? '下载命理寻真' : '下載命理尋真' }}</div>
         <div class="desc">{{ is_cn ? '获取更多塔罗真人咨询师解答' : '獲取更多塔羅真人咨詢師解答' }}</div>
       </div>

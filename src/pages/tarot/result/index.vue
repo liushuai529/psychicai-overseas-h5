@@ -25,7 +25,7 @@
     </div>
     <div class="a-loading-container" v-else>
       <img class="wait-img" src="../../../assets/img/tarot/dayi_img_wait.webp" />
-      <span>{{ is_cn ? '真人塔罗占卜师正在思考您的问题' : '真人塔羅占蔔師正在思考您的問題' }}</span>
+      <span>{{ is_cn ? '真人塔罗占卜师正在思考您的问题' : '真人塔羅占卜師正在思考您的問題' }}</span>
     </div>
 
     <FixDowonLoad />

@@ -16,7 +16,7 @@
         </div>
         <div class="input-container">
           <textarea cols="5" v-model="question"
-            :placeholder="is_cn ? '请详细描述你现在的状态及信众的疑问，真人塔罗占卜师实时为您解答问题。' : '請詳細描述你現在的狀態及信眾的疑問，真人塔羅占蔔師實時為您解答問題。'"
+            :placeholder="is_cn ? '请详细描述你现在的状态及信众的疑问，真人塔罗占卜师实时为您解答问题。' : '請詳細描述你現在的狀態及信眾的疑問，真人塔羅占卜師實時為您解答問題。'"
             maxlength="50"></textarea>
           <div class="num-container">{{ `${question.length}/50` }}</div>
         </div>

@@ -122,7 +122,7 @@ const newTipsArr1 = {
 };
 const tipsArr2 = {
   'zh-CN': '人购买塔罗占卜咨询',
-  'zh-TW': '人購買塔羅占蔔咨詢',
+  'zh-TW': '人購買塔羅占卜咨詢',
 };
 
 const tipsArr3 = {

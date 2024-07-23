@@ -4,10 +4,10 @@
       infinite-scroll-distance="10" :class="['container']">
       <div class="new-tab">
         <img @click="backPage" src="../../../assets/img/tarot/dingdan_icon_back-left.webp" class="back" alt="" />
-        我的提问
+        {{ is_cn? '我的提问': '我的提問' }}
       </div>
       <div class="top-box">
-        {{ is_cn ? '咨询过程中遇到问题请联系：plum7server@wekoi.cn' : '咨詢過程中遇到問題請聯系：plum7se' }}
+        {{ is_cn ? '咨询过程中遇到问题请联系：plum7server@wekoi.cn' : '咨詢過程中遇到問題請聯系：plum7server@wekoi.cn' }}
       </div>
       <div class="content">
         <div class="tab-list hidden">
@@ -57,6 +57,7 @@
       </div>
     </div>
 
+    <FixDowonLoad/>
     <CodePop m_id="20004" v-if="code_modal" @close="code_modal = false" />
   </div>
 </template>
@@ -68,6 +69,7 @@ import { path_enums } from '../../../libs/enum';
 import { getTarotHistoryOrderAPI, payTarotOrderAPI } from '../../../api/api';
 import { getHistoryOrderImg } from '../../../libs/enum';
 import CodePop from '../../../components/CodePop.vue';
+import FixDowonLoad from '../components/FixDowonLoad.vue';
 import tw_title from '../../../assets/img/mlxz/downloadBtn/tw/h5_img_dingdantittle_fan.webp';
 const all_status_enums = () => {
   return { 0: '去支付', 1: '查看', 2: '去添加' };
@@ -135,6 +137,7 @@ export default {
   },
   components: {
     CodePop,
+    FixDowonLoad,
   },
   computed: {
     is_cn() {
@@ -424,6 +427,7 @@ export default {
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
+  
 
 
   .hidden {
@@ -484,6 +488,7 @@ export default {
 
     .order-list {
       margin: 0 0.2rem;
+      margin-bottom: 2rem;
 
       .item {
         width: 7.1rem;
