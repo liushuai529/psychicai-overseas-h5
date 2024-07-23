@@ -282,6 +282,7 @@ export default {
             }, 0);
             effect_area.style.transform = '';
             effect_area.style.opacity = 0;
+            effect_area.style.display = 'none';
           }, 1000);
         }, 500);
       })
@@ -297,6 +298,7 @@ export default {
       const right = cardRect.left
       const centerY = cardRect.top + (cardRect.height / 8);
       const effect_area = this.$refs.effect_area
+      effect_area.style.display = 'block';
       effect_area.style.top = centerY + 'px';
       isLeft ? effect_area.style.left = left + 'px' : effect_area.style.left = right + 'px';
       effect_area.style.opacity = 1;
