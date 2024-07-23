@@ -15,8 +15,7 @@
           <div>{{ is_cn ? '你的问题' : '你的問題' }}</div>
         </div>
         <div class="input-container">
-          <textarea cols="5" v-model="question" placeholder="请详细描述你现在的状态及信众的疑问，真人塔
-罗占卜师实时为您解答问题。" maxlength="50"></textarea>
+          <textarea cols="5" v-model="question" :placeholder="is_cn? '请详细描述你现在的状态及信众的疑问，真人塔罗占卜师实时为您解答问题。': '請詳細描述你現在的狀態及信眾的疑問，真人塔羅占蔔師實時為您解答問題。'" maxlength="50"></textarea>
           <div class="num-container">{{ `${question.length}/50` }}</div>
         </div>
       </div>
@@ -262,26 +261,31 @@ export default {
           &::input-placeholder {
             color: #FFFFFF;
             opacity: 0.3;
+            word-break: break-all;  
           }
 
           &::-webkit-input-placeholder {
             color: #FFFFFF;
             opacity: 0.3;
+            word-break: break-all;  
           }
 
           &::-moz-placeholder {
             color: #FFFFFF;
             opacity: 0.3;
+            word-break: break-all;  
           }
 
           &::-moz-placeholder {
             color: #FFFFFF;
             opacity: 0.3;
+            word-break: break-all;  
           }
 
           &::-ms-input-placeholder {
             color: #FFFFFF;
             opacity: 0.3;
+            word-break: break-all;  
           }
         }
 
