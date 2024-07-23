@@ -7,17 +7,13 @@
       <div class="title-container">
         <div class="q-container">
           <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />
-          <div class="q-title">你的问题</div>
+          <div class="q-title">{{ is_cn? '你的问题': '你的問題' }}</div>
         </div>
         <div class="a-container">{{ question }}</div>
       </div>
     </div>
-    <!-- <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
     <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
-    <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
-    <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
-    <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
-    <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/> -->
+   
     <TarotPayItem product_key="master_tarot" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
     <TarotPayDetail ref="payDetail" product_key="master_tarot" e_view_id="10010" c_view_id="-10011"
       e_view_name="page_view_tarotpay" a_view_token="184kba" c_click_id="-10012" e_click_name="click_tarotpay_pay"
@@ -84,8 +80,7 @@ export default {
 
 <style scoped lang="less">
 .tarot-detail {
-  // background: #0F031A;
-  background: rgba(30, 10, 45, 1);
+  background: #0F031A;
   width: 7.5rem;
   min-height: 100%;
   display: flex;
@@ -108,7 +103,7 @@ export default {
         display: flex;
         align-items: center;
 
-        q-img {
+        .q-img {
           width: 0.48rem;
           height: 0.5rem;
         }

@@ -106,7 +106,7 @@ export default {
         this.$router.push({
           path: 'read',
         });
-      }, 2000);
+      }, 1500);
 
     },
     goToOrder() {
@@ -141,7 +141,7 @@ export default {
 
 .rise_move {
   // animation: rise 2s ease-in-out forwards;
-  animation: rise 2s linear forwards;
+  animation: rise 1.5s linear forwards;
 }
 
 .tarot-index {

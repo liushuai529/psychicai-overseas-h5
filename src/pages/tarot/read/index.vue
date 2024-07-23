@@ -206,7 +206,8 @@ export default {
         font-size: 0.36rem;
         color: #FFFFFF;
         line-height: 0.54rem;
-
+        margin-bottom: 0.15rem;
+        margin-left: 0.18rem;
         img {
           width: 0.48rem;
           height: 0.5rem;
@@ -242,7 +243,7 @@ export default {
           font-size: 0.3rem;
           line-height: 0.42rem;
           outline: none;
-          border: none;
+          // border: none;
           background-color: transparent;
           padding: 0;
           // margin: 0 0.3rem;
@@ -250,6 +251,8 @@ export default {
           white-space: pre-wrap;
           padding: 0.3rem 0.3rem;
           border-radius: 0.16rem;
+          border: 0.01rem solid rgba(76, 47, 116, 1);
+          outline: none;
 
           &::input-placeholder {
             color: #FFFFFF;

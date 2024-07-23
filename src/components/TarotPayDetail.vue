@@ -47,7 +47,7 @@
         </div>
       </div>
 
-    
+
 
       <div class="pay-type">支付方式</div>
 
@@ -77,7 +77,7 @@
     </div>
     <!--此处引用按钮组件-->
     <div style="display: flex;justify-content: center; margin-bottom: 1.5rem;">
-      <TarotPayBtn :callback="payMoney" :btn_text="btn_text"/>
+      <TarotPayBtn :callback="payMoney" :btn_text="btn_text" />
     </div>
   </div>
 </template>
@@ -96,6 +96,10 @@ import { CountDown, Toast } from 'vant';
 import 'vant/lib/index.css';
 import TarotPayBtn from './TarotPayBtn.vue';
 import checked_icon from '../assets/img/tarot/checked_icon.webp';
+import no_check_icon from '../assets/img/tarot/img_choose1.webp';
+
+import cn_xsyh_icon from '../assets/img/tarot/cn/img_xianshi_cn.webp'; 
+import tw_xsyh_icon from '../assets/img/tarot/tw/ceh5_img_youhui_fan.webp';
 
 const e_id_arr = {
   h5_wealth2024: '60001',
@@ -157,8 +161,10 @@ export default {
       new_tips1: newTipsArr1[utils.getLanguage()],
       pay_methods: [],
       loading: false,
-      xsyh_icon:
-        'https://psychicai-static.psychicai.pro/imgs/24049b44461fceb64a04b15edd6b2a8bb79e.png',
+      cn_xsyh_icon,
+      tw_xsyh_icon,
+      // xsyh_icon:
+      //   'https://psychicai-static.psychicai.pro/imgs/24049b44461fceb64a04b15edd6b2a8bb79e.png',
       new_user_icon:
         'https://psychicai-static.psychicai.pro/imgs/24040fcec5baef7f4fcea5a1eed3552d734e.png',
       time: 0,
@@ -170,8 +176,9 @@ export default {
       is_new_user: false, // 是否是新用户
       check_index: 0, //选中支付方式
       checked_icon,
-      no_check_icon:
-        'https://psychicai-static.psychicai.pro/imgs/2404f091a163349f45d3909f82e4660cc3c6.png',
+      no_check_icon,
+      // no_check_icon:
+      //   'https://psychicai-static.psychicai.pro/imgs/2404f091a163349f45d3909f82e4660cc3c6.png',
       start_down: false,
       is_show_shandong: false,
       is_show_daoqi: false,
@@ -227,11 +234,18 @@ export default {
   },
 
   computed: {
-    btn_text() {
-      if(this.is_cn) {
-        return `${this.product && this.product.currency_type || ''}${this.product && this.product.price_str || ''} 真人咨询师解答`
+    xsyh_icon() {
+      if (this.is_cn) {
+        return cn_xsyh_icon;
       } else {
-        return `${this.product && this.product.currency_type || ''}${this.product && this.product.price_str|| ''} 真人咨詢師解答`
+        return tw_xsyh_icon;
+      }
+    },
+    btn_text() {
+      if (this.is_cn) {
+        return `${this.product && this.product.unit || ''}${this.product && this.product.price_str || ''} 真人咨询师解答`
+      } else {
+        return `${this.product && this.product.unit || ''}${this.product && this.product.price_str || ''} 真人咨詢師解答`
       }
     },
     buy_people() {
@@ -281,15 +295,7 @@ export default {
     },
   },
   created() {
-    // 首次挽留的弹窗计时
-    // let use_fixed_time = this.$route.query.use_fixed_time;
-    // if (use_fixed_time) {
-    //   this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
-    //   localStorage.removeItem('mlxz_fixed_local_order_time');
-    // } else {
-    //   this.time = 15 * 60 * 1000;
-    // }
-
+    this.time = +localStorage.getItem(`mlxz_count_down_${this.product_key}`);
 
     this.getProductionList();
     this.getPayMethod();
@@ -309,35 +315,46 @@ export default {
 
   methods: {
     getTime(val) {
-      const { minutes, seconds, milliseconds } = val;
-      let time_ = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
-      // 是否展示首次挽留弹窗 0 1展示 2不展示  并缓存当前时间用于弹窗倒计时
-      let notice_num = localStorage.getItem(
-        `mlxz_show_notice_${this.product_key}`
-      );
-      if (notice_num) {
-        if (+notice_num === 1) {
-          localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
-        }
-      } else {
-        localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
-      }
-      localStorage.setItem(`mlxz_fixed_local_order_time`, time_);
+      // const { minutes, seconds, milliseconds } = val;
+      // let time_ = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
+      // // 是否展示首次挽留弹窗 0 1展示 2不展示  并缓存当前时间用于弹窗倒计时
+      // let notice_num = localStorage.getItem(
+      //   `mlxz_show_notice_${this.product_key}`
+      // );
+      // console.log('time_', time_)
+      // if (notice_num) {
+      //   if (+notice_num === 1) {
+      //     localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
+      //   }
+      // } else {
+      //   localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
+      // }
+      // localStorage.setItem(`mlxz_fixed_local_order_time`, time_);
 
+      // this.is_show_shandong = time_ < 60 * 1000;
+      // this.is_show_daoqi = time_ < 31 * 1000;
+      // if (!minutes && !seconds && milliseconds < 10) {
+      //   this.time = 0;
+      //   this.$refs.countDown.pause();
+      //   this.$refs.countDown.reset();
+      // }
+      
+      const { minutes, seconds } = val;
+      let time_ = minutes * 60 * 1000 + seconds * 1000;
+      if (this.time) {
+        localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_ ,);
+      } else {
+        this.time = 30 * 60 * 1000
+      }
       this.is_show_shandong = time_ < 60 * 1000;
       this.is_show_daoqi = time_ < 31 * 1000;
-      if (!minutes && !seconds && milliseconds < 10) {
-        this.time = 0;
-        this.$refs.countDown.pause();
-        this.$refs.countDown.reset();
-      }
     },
 
     /**
      * @description: 获取当前商品信息
      * @return {*}
      */
-     async getProductionList() {
+    async getProductionList() {
       this.product = null;
       const { status, data } = await getProductionsAPI('master');
       if (status === 1000) {
@@ -353,7 +370,7 @@ export default {
     },
 
 
-   
+
     /**
      * @description: 获取支付方式列表
      * @return {*}
@@ -376,13 +393,13 @@ export default {
       let channel = utils.getFBChannel();
       return ['enjoy02', 'panda02'].includes(channel) ? false : true;
     },
- 
+
     /**
      * @description: 创建订单 支付
      * @return {*}
      */
     async payMoney() {
-      
+
       //防抖
       if (this.payCanClick) {
         return false
@@ -404,19 +421,19 @@ export default {
         }
       }
 
-    
+
       //购买埋点上报
       utils.firebaseLogEvent(
-          this.e_view_id,
-          this.c_click_id,
-          this.e_click_name,
-          'click',
-          {
-            args_name: this.e_click_name,
-            pay_type: this.pay_methods[this.check_index].title,
-            channel: utils.getFBChannel(),
-          }
-        );
+        this.e_view_id,
+        this.c_click_id,
+        this.e_click_name,
+        'click',
+        {
+          args_name: this.e_click_name,
+          pay_type: this.pay_methods[this.check_index].title,
+          channel: utils.getFBChannel(),
+        }
+      );
       let pick_method = this.pay_methods[this.check_index];
       const { pay_method, trade_pay_type, trade_target_org, fake } = pick_method;
       //假支付
@@ -427,9 +444,11 @@ export default {
       // localStorage.setItem('report_price', this.product.price);
       Indicator.open(tipsArr5[utils.getLanguage()]);
       let selected_card_list = JSON.parse(localStorage.getItem('selected_card_list'));
-      selected_card_list = selected_card_list.map((item)=>{return {
-        card_key: item.card.card_key, upright:item.upright
-      }})
+      selected_card_list = selected_card_list.map((item) => {
+        return {
+          card_key: item.card.card_key, upright: item.upright
+        }
+      })
       let params = {
         pay_method: pay_method,
         product_key: this.product_key,
@@ -437,7 +456,7 @@ export default {
         combine_product_ids: this.combine_product_ids,
         question: localStorage.getItem('question'),
         question_tarot: {
-          array_type:'timeline',
+          array_type: 'timeline',
           ask_type: 'array',
           items: selected_card_list
         },
@@ -453,24 +472,24 @@ export default {
       let discount_pay = this.$route.query.discount_pay || 0;
       let user_time = true;
       let pay_max_params = Object.assign({}, params, {
-          trade_pay_type,
-          trade_target_org,
-        });
-        pay_max_params.callback_url = `${location.origin}${location.pathname
-          }#/result?path=${path_enums[this.product_key]}&report_price=${this.product&&this.product.price?this.product.price: '19.9'
-          }&currency_type=${this.product.currency_type || 'MYR'}`;
-        const res = await payTarotOrderAPI(pay_max_params);
-        localStorage.removeItem('mlxz_set_event_times');
-        Indicator.close();
-        if (res.status !== 1000) return;
-        if (user_time) {
-          localStorage.removeItem('mlxz_fixed_order_info');
-          localStorage.removeItem('mlxz_fixed_order_key');
-          localStorage.removeItem('mlxz_fixed_local_order_time');
-          localStorage.removeItem('mlxz_fixed_api_order_time');
-        }
-        await utils.asleep(1000);
-        location.href = res.data.pay_url;
+        trade_pay_type,
+        trade_target_org,
+      });
+      pay_max_params.callback_url = `${location.origin}${location.pathname
+        }#/result?path=${path_enums[this.product_key]}&report_price=${this.product && this.product.price ? this.product.price : '19.9'
+        }&currency_type=${this.product.currency_type || 'MYR'}`;
+      const res = await payTarotOrderAPI(pay_max_params);
+      localStorage.removeItem('mlxz_set_event_times');
+      Indicator.close();
+      if (res.status !== 1000) return;
+      if (user_time) {
+        localStorage.removeItem('mlxz_fixed_order_info');
+        localStorage.removeItem('mlxz_fixed_order_key');
+        localStorage.removeItem('mlxz_fixed_local_order_time');
+        localStorage.removeItem('mlxz_fixed_api_order_time');
+      }
+      await utils.asleep(1000);
+      location.href = res.data.pay_url;
     },
   },
 };
@@ -519,7 +538,7 @@ export default {
   width: 100%;
   display: flex;
   align-items: center;
-  
+
   justify-content: space-between;
   padding: 0 0.14rem;
   margin-top: 0.14rem;
@@ -544,7 +563,7 @@ export default {
       .now-price {
         height: 0.4rem;
         font-size: 0.4rem;
-        color: #e24c2e;
+        color: #FF2937;
         line-height: 0.4rem;
         margin-bottom: 0.1rem;
       }
@@ -567,15 +586,10 @@ export default {
     font-weight: 600;
     font-size: 0.24rem;
 
-    // color: #e24c2e;
-    // div {
-    //   height: 0.24rem;
-    //   line-height: 0.24rem;
-    // }
     .title {
       height: 0.24rem;
       line-height: 0.24rem;
-      color: #e24c2e;
+      color: #FF2937;
     }
   }
 
@@ -607,7 +621,7 @@ export default {
     line-height: 0.26rem;
 
     span {
-      color: #e24c2e;
+      color: #FF2937;
     }
   }
 }
@@ -777,16 +791,18 @@ export default {
   width: 100%;
   height: 0.3rem;
   font-weight: 600;
-  font-size: 0.22rem;
+  font-size: 0.24rem;
   color: #9E99AA;
-  line-height: 0.22rem;
+  line-height: 0.24rem;
   text-align: center;
   margin-top: 0.4rem;
   margin-bottom: 0.32rem;
 
   display: flex;
 }
-.pay-type::before, .pay-type::after {
+
+.pay-type::before,
+.pay-type::after {
   content: "";
   width: 0.5rem;
   flex: 1;

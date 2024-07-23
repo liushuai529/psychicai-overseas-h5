@@ -3,11 +3,11 @@
     <div class="title-container">
       <div class="left">
         <img src="../../../assets/img/tarot/taluo_img_xing.webp" />
-        <span>猜你想问</span>
+        <span> {{ is_cn? '猜你想问': '猜你想問' }}</span>
       </div>
       <div class="right" @click="changeQuestion">
         <img src="../../../assets/img/tarot/taluo_img_huan.webp" />
-        <span>换一换</span>
+        <span>{{ is_cn? '换一换': '換一換' }}</span>
       </div>
     </div>
     <div class="question-container">
@@ -47,7 +47,9 @@ export default {
     };
   },
   computed: {
-
+    is_cn() {
+      return utils.getLanguage() === 'zh-CN';
+    }
   },
   watch: {},
   mounted() {
@@ -142,7 +144,7 @@ export default {
     .right {
       display: flex;
       align-items: center;
-
+      opacity: 0.8;
       img {
         width: 0.36rem;
         height: 0.36rem;
@@ -166,7 +168,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 0 0.24rem;
-    margin-top: 0.29rem;
+    margin-top: 0.15rem;
 
     .item {
       display: flex;
