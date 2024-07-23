@@ -23,7 +23,7 @@
         ref="shouzhi_img" />
       <img class="text_img" :src="is_cn ? cn_xipai_text_img : tw_xipai_text_img" ref="text_img" />
     </div>
-    <div class="card_selection_area" ref="card_selection_area" style="opacity: 1;">
+    <div  :class="['card_selection_area', { 'show_fadein': hands_show }]" ref="card_selection_area" style="opacity: 0;">
       <div v-for="item, idx in selected_card_list" :key="idx" class="card_wrapper">
         <img :src="item.img_url" :class="['card_img', { flipped: isFlipped }]" v-show="item.show" />
         <img :class="['flip_card', { flip_card_show: flip_show }]" :src="item.flip_img_url" />
@@ -586,6 +586,16 @@ export default {
   }
 }
 
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes pointer-pulse {
   0% {
     transform: scale(1);
@@ -614,6 +624,11 @@ export default {
 .rise_fadeout {
   animation: fadeout 1s ease-in-out forwards;
 }
+
+.show_fadein {
+  animation: fadein 1s ease-in-out forwards;
+}
+
 
 .rise_move {
   animation: rise 2s ease-in-out forwards;
