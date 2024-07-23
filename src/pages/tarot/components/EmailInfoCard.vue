@@ -3,10 +3,10 @@
     <div class="title">{{ is_cn ? '咨询师正在回复' : '咨詢師正在回復' }}</div>
     <div class="desc">{{ is_cn ? '真人塔罗占卜师回复后第一时间通知您' : '真人塔羅占卜師回復後第一時間通知您' }}</div>
     <div class="info-input" style="margin-top: 0.5rem;">
-      <input type="text" id="email" v-model="email" placeholder="aa" />
+      <input type="text" id="email" v-model="email" :placeholder="is_cn? '请输入您的邮箱号码': '請輸入您的郵箱號碼'" />
     </div>
     <div class="info-input" style="margin-top: 0.2rem;">
-      <input id="email" v-model="email_code" placeholder="aa" maxlength="6">
+      <input id="email_code" v-model="email_code" :placeholder="is_cn? '请输入验证码': '請輸入驗證碼'" maxlength="6">
       <div class="send-text" :class="{ active: code_statu && !code_loading }" @click="getCodeClick">{{ code_btn_text }}
       </div>
     </div>
@@ -213,23 +213,28 @@ export default {
       margin: 0 0.3rem;
 
       &::input-placeholder {
-        color: rgba(51, 51, 51, 0.5);
+        color: rgba(255,255,255,0.3);
+        font-size: 0.3rem;
       }
 
       &::-webkit-input-placeholder {
-        color: rgba(51, 51, 51, 0.5);
+        color: rgba(255,255,255,0.3);
+        font-size: 0.3rem;
       }
 
       &::-moz-placeholder {
-        color: rgba(51, 51, 51, 0.5);
+        color: rgba(255,255,255,0.3);
+        font-size: 0.3rem;
       }
 
       &::-moz-placeholder {
-        color: rgba(51, 51, 51, 0.5);
+        color: rgba(255,255,255,0.3);
+        font-size: 0.3rem;
       }
 
       &::-ms-input-placeholder {
-        color: rgba(51, 51, 51, 0.5);
+        color: rgba(255,255,255,0.3);
+        font-size: 0.3rem;
       }
     }
 
