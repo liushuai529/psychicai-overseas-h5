@@ -3,7 +3,7 @@
     <div v-infinite-scroll="() => loadMore()" :infinite-scroll-immediate-check="true" infinite-scroll-disabled="loading"
       infinite-scroll-distance="10" :class="['container']">
       <div class="new-tab">
-        <img @click="backPage" src="../../../assets/img/common/dingdan_icon_back.webp" class="back" alt="" />
+        <img @click="backPage" src="../../../assets/img/tarot/dingdan_icon_back-left.webp" class="back" alt="" />
         我的提问
       </div>
       <div class="top-box">
@@ -19,8 +19,8 @@
           </div>
         </div>
         <div v-if="!list.length && is_empty" class="empty-list">
-          <img src="../../../assets/img/mlxz/quesheng_no_nothinh.png" class="nothing-icon" alt="" />
-          <!-- <div class="tips">{{ $t('tips-3') }}</div> -->
+          <img src="../../../assets/img/tarot/dayi_img_wait.webp" class="nothing-icon" alt="" />
+          <div class="tips">{{ is_cn? '暂无数据': '暫無數據' }}</div>
 
         </div>
         <div v-else class="order-list">
@@ -386,8 +386,8 @@ export default {
   flex-direction: column;
 
   .nothing-icon {
-    width: 1.84rem;
-    height: 1.84rem;
+    width: 2.6rem;
+    height: 2.6rem;
   }
 
   .tips {
@@ -432,6 +432,7 @@ export default {
   line-height: 0.39rem;
   margin-top: 0.24rem;
   margin-bottom: 0.24rem;
+  opacity: 0.5;
 }
 
 .container {

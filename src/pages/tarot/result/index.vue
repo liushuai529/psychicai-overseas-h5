@@ -15,7 +15,7 @@
       <div class="question-text">{{ result_data && result_data.question }}</div>
     </div>
 
-    <div class="q-container">
+    <div class="q-container" style="margin-top: 0.4rem;">
       <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />
       <div class="q-title">{{ is_cn ? '真人塔罗师回复' : '真人塔羅師回復' }}</div>
     </div>
@@ -350,8 +350,9 @@ export default {
     color: #FFFFFF;
     align-items: center;
     width: 100%;
+    margin-bottom: 0.15rem;
 
-    q-img {
+    .q-img {
       width: 0.48rem;
       height: 0.5rem;
     }
@@ -373,7 +374,7 @@ export default {
     border-radius: 0.16rem;
     display: flex;
     flex-direction: column;
-    padding: 0.24rem;
+    // padding: 0.24rem;
     // width: 100%;
 
     .question-text {

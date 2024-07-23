@@ -1,7 +1,7 @@
 <template>
   <div class="reslut-card">
     <div class="head">
-      <img />
+      <img :src="result.counselor_avatar"/>
       <div class="name-container">
         <div class="name">{{ result.counselor_nickname }}</div>
         <div class="num">好评率：99%</div>
@@ -81,7 +81,6 @@ export default {
       width: 1rem;
       height: 1rem;
       border-radius: 1rem;
-      border: 1px solid red;
     }
 
     .name-container {
