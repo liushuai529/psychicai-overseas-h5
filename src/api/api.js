@@ -252,6 +252,11 @@ export const resultTarotCheckAPI = async data => {
   return request(`/web/auth/trade/orders/verify`, 'POST', data);
 };
 
+// 上报埋点
+export const sendTarotEventApi = async data => {
+  return request(`/web/attribution/report/${data.order_id}`, 'POST', data);
+};
+
 
 
 

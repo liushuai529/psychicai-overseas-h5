@@ -1,6 +1,6 @@
 <template>
   <div :class="['tarot-detail']">
-    <TarotNotice v-if="is_show_tarot_notice" />
+    <TarotNotice v-if="is_show_tarot_notice" :show_btn="true"/>
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <div class="q-container">
       <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />
@@ -38,7 +38,6 @@
 <script>
 import { Indicator, Toast } from 'mint-ui';
 import { Overlay } from 'vant';
-import { Downloader, Parser, Player } from 'svga.lite';
 import utils from '../../../libs/utils';
 import CardList from '../components/CardList.vue';
 import FixDowonLoad from '../components/FixDowonLoad.vue';
@@ -50,13 +49,7 @@ import TarotNotice from '../../../components/TarotNotice.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
 import cn_taluo_img_jieda from '../../../assets/img/tarot/cn/taluo_img_jieda.webp';
 import tw_taluo_img_jieda from '../../../assets/img/tarot/tw/taluo_img_jieda.webp';
-import BaziTable from '../../../components/baziTable.vue';
-import { tarotQuestionsDetailAPI, tarotVisitorAPI, checkSendEventApi, resultTarotCheckAPI } from '../../../api/api';
-import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
-import payModal from '../../../components/PayModal.vue';
-
-
-import { report_id_arr } from '../../../libs/enum';
+import { tarotQuestionsDetailAPI, tarotVisitorAPI, checkSendEventApi, resultTarotCheckAPI, sendTarotEventApi } from '../../../api/api';
 
 
 export default {
@@ -133,6 +126,20 @@ export default {
     this.getEmailInfo();
   },
   methods: {
+
+    async sendEvent() {
+      utils.gcyLog(`order_id:${this.order_id}`, {
+        mlxz_action_desc: '开始调用接口，通知已上报',
+      });
+      const res = await sendTarotEventApi({ order_id: this.order_id });
+      if (res.status === 1000) {
+        utils.gcyLog(`order_id:${this.order_id}`, {
+          mlxz_action_desc: '已通知已上报',
+          mlxz_attribution_status: res.status,
+          mlxz_attribution_desc: res.desc,
+        });
+      }
+    },
 
     /**
      * @description: 查询结果数据
