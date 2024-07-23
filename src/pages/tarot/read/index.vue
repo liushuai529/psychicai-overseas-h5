@@ -192,7 +192,10 @@ export default {
   width: 7.5rem;
   overflow-x: hidden;
   min-height: 100%;
-  background: #0F031A;
+  // background: #0F031A;
+  background-image: url('../../../assets/img/tarot/taluo_img_bj.webp');
+  // background-size: 7.5rem 15.36rem;
+  background-repeat: no-repeat;
 
   .question-container {
     margin-top: 0.6rem;
