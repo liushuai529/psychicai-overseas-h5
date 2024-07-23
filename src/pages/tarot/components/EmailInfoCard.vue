@@ -126,6 +126,7 @@ export default {
               clearInterval(this.timer)
             }
           }, 1000);
+          this.is_send_code = true;
         }
       }).catch(err => {
         this.code_loading = false;
