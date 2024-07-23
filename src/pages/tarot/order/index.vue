@@ -543,6 +543,7 @@ export default {
             font-size: 0.24rem;
             font-weight: 400;
             color: #FFFFFF;
+            opacity: 0.4;
           }
         }
 
@@ -577,7 +578,9 @@ export default {
             -webkit-line-clamp: 2;
             overflow: hidden;
             text-overflow: ellipsis;
-            background: rgba(32, 26, 47, 1);
+            // background: rgba(32, 26, 47, 1);
+            border-radius: 0.12rem;
+            background: #2C263B;
             // word-wrap: break-word;
 
 
