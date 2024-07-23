@@ -1,6 +1,6 @@
 <template>
   <div :class="['tarot-detail']">
-    <TarotNotice v-if="is_show_tarot_notice" :show_btn="true"/>
+    <TarotNotice v-if="is_show_tarot_notice" :show_btn="true" />
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <div class="q-container">
       <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />
@@ -20,7 +20,7 @@
       <div class="q-title">{{ is_cn ? '真人塔罗师回复' : '真人塔羅師回復' }}</div>
     </div>
 
-    <div  v-if="result_data && result_data.answer_list[0] && result_data.answer_list[0].answer_status">
+    <div v-if="result_data && result_data.answer_list[0] && result_data.answer_list[0].answer_status">
       <ResultCard :result="result_data.answer_list[0]" />
     </div>
     <div class="a-loading-container" v-else>
@@ -82,13 +82,13 @@ export default {
   },
   async created() {
     this.order_id = this.$route.query.order_id;
-    // this.getData()
 
   },
 
 
 
   async mounted() {
+    let report_status = utils.getQueryStr('status');
     this.order_id = this.$route.query.order_id;
     window.scrollTo(0, 0);
     utils.firebaseLogEvent(
@@ -115,6 +115,7 @@ export default {
           mlxz_check_status: check_result.data.status,
         });
         this.handleSendEvent();
+        
       }
     }
     // end
@@ -122,17 +123,34 @@ export default {
       mlxz_action_desc: '开始验单',
     });
     await this.checkResult();
-    this.query();
-    this.getEmailInfo();
+    this.goToPayPage();
+    if (report_status === 'SUCCESS' || report_status === 'PAYED') {
+      this.query();
+      this.getEmailInfo();
+    }
+    
   },
   methods: {
 
+    goToPayPage() {
+      Indicator.close();
+      let report_status = utils.getQueryStr('status');
+      if (report_status !== 'SUCCESS' && report_status !== 'PAYED') {
+        this.$router.push({
+          path: 'detail',
+          query: { product_key: 'master_tarot' },
+        });
+      }
+      return
+    },
     async sendEvent() {
+     
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '开始调用接口，通知已上报',
       });
       const res = await sendTarotEventApi({ order_id: this.order_id });
       if (res.status === 1000) {
+        
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '已通知已上报',
           mlxz_attribution_status: res.status,
@@ -146,8 +164,7 @@ export default {
      * @return {*}
      */
     query() {
-      // Indicator.open(this.$t('result-check'));
-      // let res = await tarotQuestionsDetailAPI({ order_id: this.order_id })
+    
       tarotQuestionsDetailAPI({ order_id: this.$route.query.order_id }).then(res => {
         if (res.status === 1000) {
           this.card_list = res.data.tarot.items;

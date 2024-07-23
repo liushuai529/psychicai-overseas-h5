@@ -6,7 +6,7 @@
 
 
     <DealCards ref="dealDards" v-if="!rise_move_end" />
-    <CardList style="margin-left: 0.24rem;" v-show="rise_move_end"/>
+    <CardList style="margin-left: 0.24rem;" v-show="rise_move_end" />
     <!-- <div class="question-container" v-if="rise_move_end"> -->
     <div class="question-container" v-if="rise_move_end">
       <div class="input-question-container">
@@ -15,7 +15,9 @@
           <div>{{ is_cn ? '你的问题' : '你的問題' }}</div>
         </div>
         <div class="input-container">
-          <textarea cols="5" v-model="question" :placeholder="is_cn? '请详细描述你现在的状态及信众的疑问，真人塔罗占卜师实时为您解答问题。': '請詳細描述你現在的狀態及信眾的疑問，真人塔羅占蔔師實時為您解答問題。'" maxlength="50"></textarea>
+          <textarea cols="5" v-model="question"
+            :placeholder="is_cn ? '请详细描述你现在的状态及信众的疑问，真人塔罗占卜师实时为您解答问题。' : '請詳細描述你現在的狀態及信眾的疑問，真人塔羅占蔔師實時為您解答問題。'"
+            maxlength="50"></textarea>
           <div class="num-container">{{ `${question.length}/50` }}</div>
         </div>
       </div>
@@ -92,10 +94,10 @@ export default {
   watch: {
     question(val) {
       if (val) {
-        if(val.length>4) {
+        if (val.length > 4) {
           this.btn_statu = true;
         } else {
-          this.btn_statu = false; 
+          this.btn_statu = false;
         }
       } else {
         this.btn_statu = false;
@@ -177,9 +179,11 @@ export default {
           click_type: 'screen_tracking'
         }
       );
+      console.log('localStorage.getIt', localStorage.getItem('selected_card_list'))
       this.$router.push({
         path: 'detail',
-        query: { product_key: this.product_key },
+        query: { product_key: this.product_key, question: encodeURIComponent(localStorage.getItem('question')), selected_card_list: encodeURIComponent(localStorage.getItem('selected_card_list')) },
+
       });
     }
   },
@@ -212,6 +216,7 @@ export default {
         line-height: 0.54rem;
         margin-bottom: 0.15rem;
         margin-left: 0.18rem;
+
         img {
           width: 0.48rem;
           height: 0.5rem;
@@ -261,31 +266,31 @@ export default {
           &::input-placeholder {
             color: #FFFFFF;
             opacity: 0.3;
-            word-break: break-all;  
+            word-break: break-all;
           }
 
           &::-webkit-input-placeholder {
             color: #FFFFFF;
             opacity: 0.3;
-            word-break: break-all;  
+            word-break: break-all;
           }
 
           &::-moz-placeholder {
             color: #FFFFFF;
             opacity: 0.3;
-            word-break: break-all;  
+            word-break: break-all;
           }
 
           &::-moz-placeholder {
             color: #FFFFFF;
             opacity: 0.3;
-            word-break: break-all;  
+            word-break: break-all;
           }
 
           &::-ms-input-placeholder {
             color: #FFFFFF;
             opacity: 0.3;
-            word-break: break-all;  
+            word-break: break-all;
           }
         }
 

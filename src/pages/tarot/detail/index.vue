@@ -63,7 +63,7 @@ export default {
 
   },
   async created() {
-    this.question = localStorage.getItem('question') || ''
+    this.question = decodeURIComponent(utils.getQueryStr('question'))|| localStorage.getItem('question') ||  ''
   },
 
   mounted() {

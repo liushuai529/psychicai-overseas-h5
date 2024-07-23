@@ -64,6 +64,9 @@ export default {
     if(this.is_async) {
      
     } else {
+      if(utils.getQueryStr('selected_card_list')) {
+        this.list = JSON.parse(decodeURIComponent(utils.getQueryStr('selected_card_list')))
+      }
       this.startWatching('selected_card_list');
     }
     
