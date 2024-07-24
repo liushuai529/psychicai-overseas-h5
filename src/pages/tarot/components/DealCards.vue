@@ -365,9 +365,7 @@ export default {
   color: #FFFFFF;
   line-height: 0.24rem;
   text-align: center;
-  // background-image: url('../../../assets/img/tarot/taluo_img_bj.webp');
-  // background-size: 7.5rem 15.36rem;
-  // background-repeat: no-repeat;
+ 
 }
 .bg-img {
   position: absolute;

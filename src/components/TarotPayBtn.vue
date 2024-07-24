@@ -43,7 +43,7 @@ export default {
   justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: 0.5rem;
+  bottom: 0rem;
   z-index: 5;
   background: #1E0A2D;
 

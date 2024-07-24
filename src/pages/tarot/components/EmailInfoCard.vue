@@ -173,6 +173,8 @@ export default {
     font-size: 0.28rem;
     color: #FFFFFF;
     line-height: 0.42rem;
+    opacity: 0.5;
+    margin-top: 0.08rem;
   }
 
   .info-input {

@@ -380,6 +380,7 @@ export default {
     align-items: center;
     width: 100%;
     margin-bottom: 0.15rem;
+    padding-left: 0.08rem;
 
     .q-img {
       width: 0.48rem;

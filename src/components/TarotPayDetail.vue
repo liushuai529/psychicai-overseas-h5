@@ -76,7 +76,7 @@
       </div>
     </div>
     <!--此处引用按钮组件-->
-    <div style="display: flex;justify-content: center; margin-bottom: 1.5rem;">
+    <div style="display: flex;justify-content: center;">
       <TarotPayBtn :callback="payMoney" :btn_text="btn_text" />
     </div>
   </div>
@@ -712,7 +712,7 @@ export default {
   align-items: center;
   justify-content: center;
   color: #fff;
-  background-color: #e24c2e;
+  background-color: #FF2937;
   /* 初始背景色 */
 }
 

@@ -16,7 +16,7 @@
         </div>
         <div class="input-container">
           <textarea cols="5" v-model="question"
-            :placeholder="is_cn ? '请详细描述你现在的状态及信众的疑问，真人塔罗占卜师实时为您解答问题。' : '請詳細描述你現在的狀態及信眾的疑問，真人塔羅占卜師實時為您解答問題。'"
+            :placeholder="is_cn ? '请详细描述你现在的状态及心中的疑问，真人塔罗占卜师实时为您解答问题。' : '請詳細描述你現在的狀態及心中的疑問，真人塔羅占卜師實時為您解答問題。'"
             maxlength="50"></textarea>
           <div class="num-container">{{ `${question.length}/50` }}</div>
         </div>
@@ -199,6 +199,7 @@ export default {
   background-image: url('../../../assets/img/tarot/taluo_img_bj.webp');
   // background-size: 7.5rem 15.36rem;
   background-repeat: no-repeat;
+  background-size: cover;
 
   .question-container {
     margin-top: 0.6rem;
@@ -258,7 +259,7 @@ export default {
           // margin: 0 0.3rem;
           color: #FFFFFF;
           white-space: pre-wrap;
-          padding: 0.3rem 0.3rem;
+          padding: 0.24rem 0.24rem;
           border-radius: 0.16rem;
           border: 0.01rem solid rgba(76, 47, 116, 1);
           outline: none;
