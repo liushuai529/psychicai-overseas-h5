@@ -1,6 +1,6 @@
 <template>
   <div :class="['tarot-detail']">
-    <TarotNotice v-if="is_show_tarot_notice" :show_btn="true" />
+    <div v-if="is_show_tarot_notice"><TarotNotice :show_btn="true" /></div>
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <div class="q-container" style="margin-top: 0.2rem;">
       <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />

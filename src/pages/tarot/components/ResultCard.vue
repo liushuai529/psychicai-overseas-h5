@@ -4,12 +4,12 @@
       <img :src="result.counselor_avatar"/>
       <div class="name-container">
         <div class="name">{{ result.counselor_nickname }}</div>
-        <div class="num">好评率：99%</div>
+        <div class="num">{{ is_cn? '好评率：99%': '好評率：99%' }}</div>
       </div>
     </div>
     <div class="line"></div>
     <div class="content">
-      {{ result.answer }}
+      {{ result.answer}}
     </div>
   </div>
 </template>
@@ -81,6 +81,7 @@ export default {
       width: 1rem;
       height: 1rem;
       border-radius: 1rem;
+      margin-left: 0.24rem;
     }
 
     .name-container {
