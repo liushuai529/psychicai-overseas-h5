@@ -69,7 +69,7 @@ export default {
       '10010',
       '-10016',
       'view_tarot_result_email',
-      'page_view',
+      'view',
       {
         args_name: 'view_tarot_result_email',
         channel: utils.getFBChannel(),
@@ -89,7 +89,7 @@ export default {
           '10010',
           '-10017',
           'click_tarotresult_mail_check',
-          'page_view',
+          'click',
           {
             args_name: 'click_tarotresult_mail_check',
             channel: utils.getFBChannel(),
@@ -101,7 +101,7 @@ export default {
           '10010',
           '-10017',
           'click_tarotresult_mail_check',
-          'page_view',
+          'click',
           {
             args_name: 'click_tarotresult_mail_check',
             channel: utils.getFBChannel(),

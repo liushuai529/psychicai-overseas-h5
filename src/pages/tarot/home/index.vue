@@ -11,7 +11,7 @@
         <FbShareNotice :text="is_cn ? '点击右上角…使用浏览器打开体验更流畅' : '點擊右上角…使用瀏覽器打開體驗更流暢'" />
         <img class="order-icon" @click="goToOrder" :src="is_cn ? cn_home_img_dingdan : tw_home_img_dingdan" />
         <img class="desc-icon" :src="is_cn ? cn_home_img_text : tw_home_img_text" />
-        <img class="btn-icon" @click="goToRead" :src="is_cn ? cn_home_btn_kaishi : tw_home_btn_kaishi" />
+        <img class="btn-icon" @click="goToRead(1)" :src="is_cn ? cn_home_btn_kaishi : tw_home_btn_kaishi" />
       </div>
     </div>
   </div>
@@ -90,10 +90,10 @@ export default {
         localStorage.setItem('gallery_data', JSON.stringify(res.data));
       }
     },
-    goToRead() {
+    goToRead(type) {
       this.rise_move = true;
       setTimeout(() => {
-        utils.firebaseLogEvent(
+        type && utils.firebaseLogEvent(
           '10010',
           '-10002',
           'click_tarotmain_check',
