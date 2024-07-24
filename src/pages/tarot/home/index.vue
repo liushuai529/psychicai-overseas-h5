@@ -79,7 +79,9 @@ export default {
       if (this.num === 5) {
         clearInterval(this.timer);
         this.num = 0;
-        this.goToRead();
+        if(utils.isIos()) {
+          this.goToRead();
+        }
       }
     }, 1000);
   },
