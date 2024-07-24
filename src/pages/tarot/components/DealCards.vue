@@ -135,7 +135,8 @@ export default {
   created() {
     this.initCardList();
   },
-  mounted() {
+  async mounted() {
+    await utils.asleep(1500)
     //发牌
     this.showNextImage()
     //虚拟牌动画，视觉流畅度
