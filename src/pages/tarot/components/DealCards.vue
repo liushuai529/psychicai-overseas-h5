@@ -236,9 +236,9 @@ export default {
           card_info_array[this.selected_card_num]['m_id'],
           card_info_array[this.selected_card_num]['c_id'],
           card_info_array[this.selected_card_num]['e_name'],
-          card_info_array[this.selected_card_num]['m_id'],
+          card_info_array[this.selected_card_num]['type'],
           {
-            args_name: card_info_array[this.selected_card_num]['type'],
+            args_name: card_info_array[this.selected_card_num]['e_name'],
             channel: utils.getFBChannel(),
           }
         );
