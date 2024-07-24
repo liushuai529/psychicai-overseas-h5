@@ -19,7 +19,7 @@
       <img :class="['hands', { 'hands_show': hands_show }]" :src="hands_img" />
     </div>
     <div :class="['text_area', { 'rise_fadeout': rise_transparent }]">
-      <img :src="shouzhi_img" style="opacity: 0;"
+      <img :src="shouzhi_img" 
         :class='["shouzhi_img", "pointer_animation", { "transparent": card_animation }]' ref="shouzhi_img" />
       <img class="text_img" :src="is_cn ? cn_xipai_text_img : tw_xipai_text_img" ref="text_img" />
     </div>
@@ -457,7 +457,7 @@ export default {
   .shouzhi_img {
     margin-top: 0.1rem;
     width: 1.1rem;
-    // opacity: 1;
+    opacity: 1;
     transition: opacity 0.5s ease;
   }
 }
