@@ -72,7 +72,7 @@
         已有<span>{{ buy_people }}</span>{{ tips2 }}
       </div>
       <div class="buy-people">
-        {{ tips3 }}<span>{{ buy_people }}</span>
+        {{ tips3 }}<span>3815</span>
       </div>
     </div>
     <!--此处引用按钮组件-->

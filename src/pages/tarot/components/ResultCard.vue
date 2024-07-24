@@ -120,6 +120,7 @@ export default {
     color: #FFFFFF;
     line-height: 0.42rem;
     margin-top: 0.2rem;
+    margin-bottom: 1.5rem;
   }
 }
 </style>

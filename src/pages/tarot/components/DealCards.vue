@@ -19,11 +19,11 @@
       <img :class="['hands', { 'hands_show': hands_show }]" :src="hands_img" />
     </div>
     <div :class="['text_area', { 'rise_fadeout': rise_transparent }]">
-      <img :src="shouzhi_img" :class='["shouzhi_img", "pointer_animation", { "transparent": card_animation }]'
-        ref="shouzhi_img" />
+      <img :src="shouzhi_img" style="opacity: 0;"
+        :class='["shouzhi_img", "pointer_animation", { "transparent": card_animation }]' ref="shouzhi_img" />
       <img class="text_img" :src="is_cn ? cn_xipai_text_img : tw_xipai_text_img" ref="text_img" />
     </div>
-    <div  :class="['card_selection_area', { 'show_fadein': hands_show }]" ref="card_selection_area" style="opacity: 0;">
+    <div :class="['card_selection_area', { 'show_fadein': hands_show }]" ref="card_selection_area" style="opacity: 0;">
       <div v-for="item, idx in selected_card_list" :key="idx" class="card_wrapper">
         <img :src="item.img_url" :class="['card_img', { flipped: isFlipped }]" v-show="item.show" />
         <img :class="['flip_card', { flip_card_show: flip_show }]" :src="item.flip_img_url" />
@@ -38,8 +38,7 @@
       <img class="effect_card" :src="paimian_img" />
     </div> -->
     <div :class="['effect_area']" ref="effect_area">
-      <img class="effect_card" :src="paimian_img" 
-        />
+      <img class="effect_card" :src="paimian_img" />
     </div>
   </div>
 </template>
@@ -136,7 +135,7 @@ export default {
     this.initCardList();
   },
   async mounted() {
-    await utils.asleep(1500)
+    await utils.asleep(1000)
     //发牌
     this.showNextImage()
     //虚拟牌动画，视觉流畅度
@@ -232,7 +231,7 @@ export default {
         currCard.show = true;
         currCard.card = card;
         currCard.desc = `${card.card.name_cn || ''} ${card.upright ? '正' : '逆'}`;
-        
+
         utils.firebaseLogEvent(
           card_info_array[this.selected_card_num]['m_id'],
           card_info_array[this.selected_card_num]['c_id'],
@@ -263,20 +262,20 @@ export default {
      */
     card_selection_animation(eventCardRect, targetCardWrapperRect, isLeft, callback) {
       // 展示选中的牌
-      this.card_selection_show(eventCardRect,isLeft)
+      this.card_selection_show(eventCardRect, isLeft)
       // 动画
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         const effect_area = this.$refs.effect_area;
         let showCardRect = effect_area.getBoundingClientRect()
         // 计算距离
-        let {left,top} = this.distanceCardXY(showCardRect,targetCardWrapperRect)
+        let { left, top } = this.distanceCardXY(showCardRect, targetCardWrapperRect)
         setTimeout(() => {
-          effect_area.style.transition = `transform 1s linear`;
+          effect_area.style.transition = `transform 0.7s linear`;
         }, 0);
         let time = setTimeout(() => {
           clearTimeout(time);
           effect_area.style.transform = `translate(${left}px,${top}px)`;
-          let timeCallBack =  setTimeout(() => {
+          let timeCallBack = setTimeout(() => {
             clearTimeout(timeCallBack);
             callback && callback();
             setTimeout(() => {
@@ -285,7 +284,7 @@ export default {
             effect_area.style.transform = '';
             effect_area.style.opacity = 0;
             effect_area.style.display = 'none';
-          }, 1000);
+          }, 700);
         }, 500);
       })
       // callback && callback();
@@ -344,7 +343,7 @@ export default {
             this.rise_transparent = true
             setTimeout(() => {
               this.rise_move_end = true
-            }, 2000)
+            }, 1500)
           }, 600)
         }, 300)
       }
@@ -367,8 +366,9 @@ export default {
   color: #FFFFFF;
   line-height: 0.24rem;
   text-align: center;
- 
+
 }
+
 .bg-img {
   position: absolute;
   top: 0;
@@ -633,7 +633,7 @@ export default {
 
 
 .rise_move {
-  animation: rise 2s ease-in-out forwards;
+  animation: rise 1.5s ease-in-out forwards;
 }
 
 .flipped {
