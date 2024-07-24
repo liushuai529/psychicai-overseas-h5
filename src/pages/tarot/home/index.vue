@@ -63,7 +63,7 @@ export default {
       '10010',
       '-10001',
       'page_view_tarotmain',
-      'view',
+      'page_view',
       {
         args_name: 'page_view_tarotmain',
         channel: utils.getFBChannel(),
