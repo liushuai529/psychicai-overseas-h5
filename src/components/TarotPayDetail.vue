@@ -514,6 +514,7 @@ export default {
 <style scoped lang="less">
 .pay-method {
   width: 7.02rem;
+  margin-bottom: 2rem;
 }
 
 .no-empty {
