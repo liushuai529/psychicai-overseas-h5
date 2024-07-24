@@ -145,10 +145,10 @@ export default {
         pay_method,
         product_key,
         product_id,
-        ext,
         trade_pay_type,
         trade_target_org,
-        combine_product_ids,
+        question,
+        tarot,
       } = this.last_order;
       let url = path_enums[product_key];
       let selected_card_list = JSON.parse(localStorage.getItem('selected_card_list'));
@@ -164,11 +164,11 @@ export default {
         platform: 'WEB',
         trade_pay_type,
         trade_target_org,
-        question: localStorage.getItem('question'),
+        question: question,
         question_tarot: {
           array_type: 'timeline',
           ask_type: 'array',
-          items: selected_card_list
+          items: tarot.items
         },
         fb_param: {
           fbc: utils.getcookieInfo('_fbc'),
@@ -176,7 +176,6 @@ export default {
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
         },
       };
-
       params.callback_url = `${location.origin
         }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
         }&report_price=${payment}&repay=1`;
