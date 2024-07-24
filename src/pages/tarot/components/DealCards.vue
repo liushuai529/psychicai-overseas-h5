@@ -12,7 +12,7 @@
         /> -->
       </div>
       <div class='arm_area'>
-        <img class="arm_v" :src="arm_img" ref="arm_v" />
+        <img class="arm_v transparent" :src="arm_img" ref="arm_v" />
       </div>
     </div>
     <div :class="['hands_area', { 'rise_fadeout': rise_transparent }]">
@@ -196,6 +196,7 @@ export default {
         clearTimeout(time);
         //创建一张旋转牌优化帧动画卡顿问题
         // this.$refs.card_v.style.transform = `rotate(${this.rotate_deg(this.customData.card_num)}deg)`;
+        this.$refs.arm_v.classList.remove('transparent');
         this.$refs.arm_v.classList.add('arm_animation');
         let hands_show_time = setTimeout(() => {
           clearTimeout(hands_show_time);
