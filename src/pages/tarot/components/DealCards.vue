@@ -19,8 +19,8 @@
       <img :class="['hands', { 'hands_show': hands_show }]" :src="hands_img" />
     </div>
     <div :class="['text_area', { 'rise_fadeout': rise_transparent }]">
-      <img :src="shouzhi_img" 
-        :class='["shouzhi_img", "pointer_animation", { "transparent": card_animation }]' ref="shouzhi_img" />
+      <img :src="shouzhi_img" style="opacity: 0;"
+        :class='["shouzhi_img",  { "pointer_animation": !card_animation }]' ref="shouzhi_img" />
       <img class="text_img" :src="is_cn ? cn_xipai_text_img : tw_xipai_text_img" ref="text_img" />
     </div>
     <div :class="['card_selection_area', { 'show_fadein': hands_show }]" ref="card_selection_area" style="opacity: 0;">
