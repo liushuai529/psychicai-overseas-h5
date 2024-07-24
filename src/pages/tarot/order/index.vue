@@ -167,16 +167,16 @@ export default {
   },
 
   mounted() {
-    utils.firebaseLogEvent(
-      '10002',
-      '-10001',
-      'page_view_history',
-      'page_view',
-      {
-        args_name: 'page_view_history',
-        channel: utils.getFBChannel(),
-      }
-    );
+    // utils.firebaseLogEvent(
+    //   '10002',
+    //   '-10001',
+    //   'page_view_history',
+    //   'page_view',
+    //   {
+    //     args_name: 'page_view_history',
+    //     channel: utils.getFBChannel(),
+    //   }
+    // );
 
     this.is_android = utils.isAndroid();
     this.getData();
