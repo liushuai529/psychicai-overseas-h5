@@ -1,6 +1,8 @@
 <template>
   <div :class="['tarot-detail']">
-    <div v-if="is_show_tarot_notice"><TarotNotice :show_btn="true" /></div>
+    <div v-if="is_show_tarot_notice">
+      <TarotNotice :show_btn="true" />
+    </div>
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <div class="q-container" style="margin-top: 0.2rem;">
       <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />
@@ -115,7 +117,7 @@ export default {
           mlxz_check_status: check_result.data.status,
         });
         this.handleSendEvent();
-        
+
       }
     }
     // end
@@ -125,11 +127,11 @@ export default {
     await this.checkResult();
     this.goToPayPage();
     if (!report_status || report_status === 'SUCCESS' || report_status === 'PAYED') {
-    
+
       this.query();
       this.getEmailInfo();
     }
-    
+
   },
   methods: {
 
@@ -137,9 +139,9 @@ export default {
       Indicator.close();
       let report_status = utils.getQueryStr('status');
       console.log('report_status', report_status)
-   
-      if ((report_status !== 'SUCCESS' && report_status !== 'PAYED'  )) {
-        if(!report_status) return
+
+      if ((report_status !== 'SUCCESS' && report_status !== 'PAYED')) {
+        if (!report_status) return
         this.$router.push({
           path: 'detail',
           query: { product_key: 'master_tarot' },
@@ -147,13 +149,13 @@ export default {
       }
     },
     async sendEvent() {
-     
+
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '开始调用接口，通知已上报',
       });
       const res = await sendTarotEventApi({ order_id: this.order_id });
       if (res.status === 1000) {
-        
+
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '已通知已上报',
           mlxz_attribution_status: res.status,
@@ -167,7 +169,7 @@ export default {
      * @return {*}
      */
     query() {
-    
+
       tarotQuestionsDetailAPI({ order_id: this.$route.query.order_id }).then(res => {
         if (res.status === 1000) {
           this.card_list = res.data.tarot.items;
@@ -201,7 +203,7 @@ export default {
       let report_price = +utils.getQueryStr('report_price');
       let report_status = utils.getQueryStr('status');
       let currency_type = utils.getQueryStr('currency_type');
-      // let repay = +utils.getQueryStr('repay');
+      let repay = +utils.getQueryStr('repay');
 
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
@@ -213,16 +215,31 @@ export default {
           mlxz_order_status: report_status,
         });
 
-        utils.firebaseLogEvent(
-          '10010',
-          '-10013',
-          'event_status_tarotpay_success',
-          'event_status',
-          {
-            args_name: 'event_status_tarotpay_success',
-            channel: utils.getFBChannel(),
-          }
-        );
+        if (repay) {
+          utils.firebaseLogEvent(
+            '10010',
+            '-10021',
+            'event_status_tarothistory_pay_success',
+            'event_status',
+            {
+              args_name: 'event_status_tarothistory_pay_success',
+              channel: utils.getFBChannel(),
+            }
+          );
+        } else {
+          utils.firebaseLogEvent(
+            '10010',
+            '-10013',
+            'event_status_tarotpay_success',
+            'event_status',
+            {
+              args_name: 'event_status_tarotpay_success',
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+
+
 
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成firebase埋点上报',

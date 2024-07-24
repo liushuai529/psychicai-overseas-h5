@@ -85,8 +85,8 @@ const query_enums = {
 
 const event_enums = {
   master_tarot: {
-    c_id: '-10010',
-    c_name: 'click_history_mastertarot_repay',
+    c_id: '-10020',
+    c_name: 'click_history_tarot_repay',
   },
 
 };
@@ -287,13 +287,14 @@ export default {
           trade_target_org,
         } = item;
         utils.firebaseLogEvent(
-          '10002',
+          '10010',
           event_enums[product_key || 'master_tarot'].c_id,
           event_enums[product_key || 'master_tarot'].c_name,
           'click',
           {
             args_name: event_enums[product_key || 'master_tarot'].c_name,
             channel: utils.getFBChannel(),
+            pay_type:pay_method 
           }
         );
         let params = {

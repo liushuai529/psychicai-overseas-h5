@@ -28,8 +28,7 @@ import { payTarotOrderAPI } from '../api/api';
 import { CountDown } from 'vant';
 
 const pay_info = {
-  master_tarot: { module: 10005, 'content_id': -10023, 'event_name': 'click_paycardwealty_pay', type: 'click' }, // 2024年财运
-
+  master_tarot: { module: 10010, 'content_id': -10019, 'event_name': 'click_paycardtarot_pay', type: 'click' }, // 塔罗
 }
 const modal_info = {
   master_tarot: { module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view' }, // 2024年财运
