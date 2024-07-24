@@ -430,7 +430,8 @@ export default {
         'click',
         {
           args_name: this.e_click_name,
-          pay_type: this.pay_methods[this.check_index].title,
+          // pay_type: this.pay_methods[this.check_index].title,
+          pay_type: this.pay_methods[this.check_index].trade_pay_type,
           channel: utils.getFBChannel(),
         }
       );
