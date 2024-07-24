@@ -457,7 +457,7 @@ export default {
   .shouzhi_img {
     margin-top: 0.1rem;
     width: 1.1rem;
-    opacity: 1;
+    // opacity: 1;
     transition: opacity 0.5s ease;
   }
 }
