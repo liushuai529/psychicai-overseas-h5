@@ -177,7 +177,7 @@ export default {
       };
       params.callback_url = `${location.origin
         }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
-        }&report_price=${payment}&repay=1`;
+        }&report_price=${payment}`;
       const res = await payTarotOrderAPI(params);
 
       Indicator.close();

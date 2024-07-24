@@ -294,7 +294,7 @@ export default {
           {
             args_name: event_enums[product_key || 'master_tarot'].c_name,
             channel: utils.getFBChannel(),
-            pay_type:trade_pay_type 
+            // pay_type:trade_pay_type 
           }
         );
         let params = {

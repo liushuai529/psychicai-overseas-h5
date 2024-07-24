@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="btn-container">
-        <img class="btn" :src="btn_url" @click="adviceClick" />
+        <img class="btn" :src="btn_url" @click="adviceClick(1)" />
       </div>
       <QuestionList style="margin-left: 0.24rem; margin-top: 0.5rem;" @get_question="getQuestion" />
       <div style="height: 1.2rem; width: 100%; background: #0F031A;"></div>
@@ -152,8 +152,8 @@ export default {
         this.adviceClick();
       }, 0);
     },
-    async adviceClick() {
-      if (!this.btn_statu) {
+    async adviceClick(type) {
+      if (!this.btn_statu && type) {
         utils.firebaseLogEvent(
           '10010',
           '-10008',
@@ -168,7 +168,7 @@ export default {
         return
       };
       localStorage.setItem('question', this.question)
-      utils.firebaseLogEvent(
+      type && utils.firebaseLogEvent(
         '10010',
         '-10008',
         'click_question_check',
