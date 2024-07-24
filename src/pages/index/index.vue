@@ -1447,6 +1447,9 @@ export default {
     });
   },
   async mounted() {
+    setTimeout(() => {
+      console.log('userAgent', navigator.userAgent)
+    }, 10000);
     if (utils.isProd()) {
       try {
         fbq('trackCustom', 'CustomChannel', {

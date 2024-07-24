@@ -60,10 +60,13 @@ export const getResultAPI = async data => {
 };
 
 // 商品查询
-export const getProductionsAPI = async productGroup => {
-  await visitorLoginAPI();
+export const getProductionsAPI = async (productGroup, isTarot) => {
+  if(!isTarot) {
+    await visitorLoginAPI();
+  }
   return request(`/web/auth/trade/products/${productGroup}`, 'GET');
 };
+
 
 // 查询历史订单
 export const getHistoryOrderAPI = async data => {
@@ -71,10 +74,20 @@ export const getHistoryOrderAPI = async data => {
   return request(`/web/auth/trade/orders/ce_suan`, 'GET', data);
 };
 
+// 查询塔罗订单
+export const getTarotHistoryOrderAPI = async data => {
+  return request(`/web/auth/master/questions/paging`, 'GET', data);
+};
+
 // 下单
 export const payOrderAPI = async data => {
   await visitorLoginAPI();
   return request(`/web/auth/trade/orders/ce_suan`, 'POST', data);
+};
+
+// 塔罗下单
+export const payTarotOrderAPI = async data => {
+  return request(`/web/auth/trade/orders/master/tarot`, 'POST', data);
 };
 
 // 查询已支付订单填充信息
@@ -194,3 +207,66 @@ export const getLastOrderGetAPI = async data => {
   await visitorLoginAPI();
   return request(`/web/auth/trade/orders/ce_suan/recent/${data}`, 'GET', data);
 };
+
+//查询最近一笔订单get请求
+export const getTarotLastOrderGetAPI = async data => {
+  return request(`/web/auth/master/recent/${data}`, 'GET', data);
+};
+
+
+
+//查询塔罗牌问题列表
+export const getQuestionAPI = async data => {
+  return request(`/web/auth/tarot/question`, 'GET', data);
+};
+
+//查询塔罗牌全部牌面数据查询
+export const getGalleryAPI = async data => {
+  return request(`/web/auth/tarot/gallery`, 'GET', data);
+};
+
+//塔罗牌洗牌操作
+export const tarotShuffleAPI = async data => {
+  return request(`/web/auth/tarot/shuffle`, 'POST', data);
+};
+
+//大师答疑订单详情查询
+export const tarotQuestionsDetailAPI = async data => {
+  return request(`/web/auth/master/questions/detail`, 'GET', data);
+};
+
+//塔罗用户信息（是否绑定过邮箱）
+export const tarotVisitorAPI = async data => {
+  return request(`/web/auth/visitor/info`, 'GET', data);
+};
+
+//塔罗用户信息（是否绑定过邮箱）
+export const bindTarotEmailAPI = async data => {
+  return request(`/web/auth/visitor/email`, 'POST', data);
+};
+
+//塔罗获取邮箱验证码
+export const getTarotEmailCodeAPI = async data => {
+  return request(`/web/email/code`, 'POST', data);
+};
+
+// 塔罗订单结果校验
+export const resultTarotCheckAPI = async data => {
+  return request(`/web/auth/trade/orders/verify`, 'POST', data);
+};
+
+// 上报埋点
+export const sendTarotEventApi = async data => {
+  return request(`/web/attribution/report/${data.order_id}`, 'POST', data);
+};
+
+// 查询塔罗支付方式
+export const getTarotPayMethodsAPI = async data => {
+  return request(`/web/auth/trade/pay_methods`, 'GET', data);
+};
+
+
+
+
+
+
