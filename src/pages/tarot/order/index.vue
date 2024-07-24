@@ -569,6 +569,7 @@ export default {
             border-radius: 0.12rem;
             background: #2C263B;
             // word-wrap: break-word;
+            padding: 0.1rem 0.08rem;
 
 
 
@@ -788,7 +789,7 @@ export default {
     height: 0.44rem;
     position: absolute;
     z-index: 2;
-    left: 0.2rem;
+    left: 0.25rem;
     top: 0.22rem;
   }
 }

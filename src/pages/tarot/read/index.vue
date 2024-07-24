@@ -152,7 +152,7 @@ export default {
         this.adviceClick();
       }, 0);
     },
-    adviceClick() {
+    async adviceClick() {
       if (!this.btn_statu) {
         utils.firebaseLogEvent(
           '10010',
@@ -180,6 +180,14 @@ export default {
         }
       );
       console.log('localStorage.getIt', localStorage.getItem('selected_card_list'))
+      if (utils.isProd()) {
+        await utils.checkFB();
+        try {
+          fbq('track', 'Lead');
+        } catch (err) {
+          console.error('Lead  error message:', err);
+        }
+      }
       this.$router.push({
         path: 'detail',
         query: { product_key: this.product_key, question: encodeURIComponent(localStorage.getItem('question')), selected_card_list: encodeURIComponent(localStorage.getItem('selected_card_list')) },

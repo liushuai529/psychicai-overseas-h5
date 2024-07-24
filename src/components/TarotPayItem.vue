@@ -266,7 +266,7 @@ export default {
     margin-top: 0.18rem;
     font-weight: 600;
     font-size: 0.26rem;
-    color: #E24C2E;
+    color: #FF2937;
     line-height: 0.26rem;
     text-align: right;
     font-style: normal;
