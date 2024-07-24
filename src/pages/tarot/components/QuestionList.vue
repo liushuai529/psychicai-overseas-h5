@@ -88,7 +88,6 @@ export default {
         {
           args_name: 'click_question_change',
           channel: utils.getFBChannel(),
-          question_id: item.id
         }
       );
     },

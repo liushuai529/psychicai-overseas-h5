@@ -304,7 +304,7 @@ export default {
       this.e_view_id,
       this.c_view_id,
       this.e_view_name,
-      'view',
+      'page_view',
       {
         args_name: this.e_view_name,
         channel: utils.getFBChannel(),
