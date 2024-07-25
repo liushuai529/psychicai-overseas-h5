@@ -186,7 +186,7 @@ export default {
     .desc-icon {
       width: 5.62rem;
       height: 0.64rem;
-      margin-top: 3.5rem;
+      margin-top: 3.2rem;
     }
 
     .btn-icon {
