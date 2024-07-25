@@ -70,8 +70,8 @@ export default {
   width: 7.5rem;
   height: 1.08rem;
   display: flex;
-  position: fixed;
-  z-index: 1;
+  position: absolute;
+  z-index: 10;
   left: 0rem;
   bottom: 0rem;
   justify-content: space-between;
