@@ -35,6 +35,7 @@ export default {
     return {
       cn_taluo_img_xiazai,
       tw_taluo_img_xiazai,
+      windowHeight: document.body.clientHeight,
     };
   },
   computed: {
@@ -45,8 +46,16 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
   },
-  watch: {},
-  mounted() { },
+  watch: {
+    windowHeight(val, old) {
+      console.log('时时高度', val, old)
+    }
+  },
+  mounted() { 
+    window.onresize = () => {
+      this.windowHeight = document.documentElement.clientHeight;
+    }
+  },
   methods: {
     downApp() {
       utils.openApp();
@@ -70,7 +79,7 @@ export default {
   width: 7.5rem;
   height: 1.08rem;
   display: flex;
-  position: absolute;
+  position: fixed;
   z-index: 10;
   left: 0rem;
   bottom: 0rem;
