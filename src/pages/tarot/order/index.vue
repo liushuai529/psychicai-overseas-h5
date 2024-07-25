@@ -42,7 +42,7 @@
 
             <div :class="['info']">
               <div class="left" style="-webkit-box-orient: vertical;">
-                {{ item.question }}
+                <span class="text">{{ item.question }}</span>
               </div>
               <div class="right">
                 <div class="pay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>
@@ -556,24 +556,22 @@ export default {
           .left {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             width: 4.9rem;
-            font-weight: 400;
-            font-size: 0.28rem;
-            color: #FFFFFF;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            // background: rgba(32, 26, 47, 1);
+            max-height: 100%;
             border-radius: 0.12rem;
             background: #2C263B;
-            // word-wrap: break-word;
             padding: 0.1rem 0.08rem;
 
-
-
+            .text{
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2; // 限制为两行
+              font-size: 0.28rem;
+              font-weight: 400;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: #FFFFFF;
+            }
           }
 
           .right {
