@@ -31,7 +31,7 @@ const pay_info = {
   master_tarot: { module: 10010, 'content_id': -10019, 'event_name': 'click_paycardtarot_pay', type: 'click' }, // 塔罗
 }
 const modal_info = {
-  master_tarot: { module: 100010, 'content_id': -10022, 'event_name': 'page_view_tarot_guidance', type: 'page_view' }, // 引导用户打开浏览器
+  master_tarot: { module: 10010, 'content_id': -10022, 'event_name': 'page_view_tarot_guidance', type: 'page_view' }, // 引导用户打开浏览器
 
 }
 export default {
