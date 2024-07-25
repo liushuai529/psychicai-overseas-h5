@@ -1,5 +1,5 @@
 <template>
-  <div class="fix-dowon-load" v-show="show" @click="downApp">
+  <div class="fix-dowon-load"  id="fix-dowon-load" @click="downApp" :style="{top: `${windowHeight - divHeight}px`}">
     <div class="left">
       <img src="../../../assets/img/tarot/taluo_img_mingli.webp" />
       <div class="content-container">
@@ -36,6 +36,7 @@ export default {
       cn_taluo_img_xiazai,
       tw_taluo_img_xiazai,
       windowHeight: document.body.clientHeight,
+      divHeight: 0,
     };
   },
   computed: {
@@ -55,6 +56,7 @@ export default {
     window.onresize = () => {
       this.windowHeight = document.documentElement.clientHeight;
     }
+    this.divHeight = document.getElementById('fix-dowon-load').offsetHeight;
   },
   methods: {
     downApp() {
@@ -82,7 +84,7 @@ export default {
   position: fixed;
   z-index: 10;
   left: 0rem;
-  bottom: 0rem;
+  // bottom: 0rem;
   justify-content: space-between;
   align-items: center;
   padding-left: 0.24rem;
