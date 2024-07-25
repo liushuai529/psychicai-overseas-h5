@@ -31,7 +31,7 @@ const pay_info = {
   master_tarot: { module: 10010, 'content_id': -10019, 'event_name': 'click_paycardtarot_pay', type: 'click' }, // 塔罗
 }
 const modal_info = {
-  master_tarot: { module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view' }, // 2024年财运
+  master_tarot: { module: 100010, 'content_id': -10022, 'event_name': 'page_view_tarot_guidance', type: 'page_view' }, // 引导用户打开浏览器
 
 }
 export default {
@@ -130,11 +130,11 @@ export default {
         if (!utils.getQueryStr('mlxz_outer_visitor_id')) {
           location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&question=${encodeURIComponent(localStorage.getItem('question'))}&selected_card_list=${encodeURIComponent(localStorage.getItem('selected_card_list'))} &_fbc=${localStorage.getItem('_fbc')}&_fbp=${localStorage.getItem('_fbp')}&timestamp=${new Date().getTime()}` 
         }
-        // utils.firebaseLogEvent(modal_info[this.product_key]['module'], modal_info[this.product_key]['content_id'], modal_info[this.product_key]['event_name'], modal_info[this.product_key]['type'], {
-        //   args_name: modal_info[this.product_key]['event_name'],
-        //   channel: utils.getFBChannel(),
-        //   os: utils.isAndroid() ? 'android' : 'ios'
-        // });
+        utils.firebaseLogEvent(modal_info[this.product_key]['module'], modal_info[this.product_key]['content_id'], modal_info[this.product_key]['event_name'], modal_info[this.product_key]['type'], {
+          args_name: modal_info[this.product_key]['event_name'],
+          channel: utils.getFBChannel(),
+          type: utils.isAndroid() ? 'android' : 'iOS'
+        });
         return
       }
       Indicator.open('订单创建中');
