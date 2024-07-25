@@ -276,7 +276,7 @@ export default {
   .van-count-down {
     font-weight: 600;
     font-size: 0.26rem;
-    color: #E24C2E;
+    color: #FF2937;
     line-height: 0.26rem;
   }
 }

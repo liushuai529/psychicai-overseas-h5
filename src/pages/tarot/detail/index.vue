@@ -118,7 +118,7 @@ export default {
 
       .a-container {
         width: 7.02rem;
-        height: 1.2rem;
+        // height: 1.2rem;
         background: #201A2F;
         border-radius: 0.16rem;
         display: flex;
@@ -128,6 +128,7 @@ export default {
         line-height: 0.3rem;
         align-items: center;
         padding: 0.24rem;
+        margin-top: 0.15rem;
       }
 
     }
