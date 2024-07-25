@@ -276,7 +276,7 @@ export default {
           i => i.product_id === item.product_id
         );
         if(!same_product) return
-        Indicator.open(this.$t('tips-17'));
+        Indicator.open('支付中...');
 
         const {
           order_status,
