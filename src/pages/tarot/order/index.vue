@@ -496,7 +496,7 @@ export default {
         background-size: 100% 100%;
         margin-bottom: 0.24rem;
         overflow-x: hidden;
-
+        height: 100%;
         .title-box {
           display: flex;
           align-items: center;
@@ -550,7 +550,9 @@ export default {
           border-radius: 0.12rem;
           padding: 0 0.24rem;
           width: 100%;
-          height: 1.04rem;
+          // height: 1.04rem;
+          height: 100%;
+          padding-bottom: 0.24rem;
 
 
           .left {
