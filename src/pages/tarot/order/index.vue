@@ -42,7 +42,7 @@
 
             <div :class="['info']">
               <div class="left" style="-webkit-box-orient: vertical;">
-                <div class="text">{{ item.question }}的撒地方撒方式水电费水电费水电费水电费水电费撒的发生的</div>
+                <div class="text">{{ item.question }}</div>
               </div>
               <div class="right">
                 <div class="pay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>
