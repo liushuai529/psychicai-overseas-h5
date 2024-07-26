@@ -429,7 +429,7 @@ export default {
       font-size: 0.28rem;
       color: #FFFFFF;
       line-height: 0.42rem;
-      margin-top: 0.24rem;
+      margin: 0.24rem;
     }
   }
 
