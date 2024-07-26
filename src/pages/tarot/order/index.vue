@@ -41,7 +41,14 @@
 
 
             <div :class="['info']">
-              <div class="left" style="-webkit-box-orient: vertical;">
+              <div class="left" style="-webkit-box-orient: vertical;display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2; 
+              font-size: 0.28rem;
+              font-weight: 400;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: #FFFFFF;">
                 <div class="text">{{ item.question }}</div>
               </div>
               <div class="right">
