@@ -4,7 +4,7 @@
       infinite-scroll-distance="10" :class="['container']">
       <div class="new-tab">
         <img @click="backPage" src="../../../assets/img/tarot/dingdan_icon_back-left.webp" class="back" alt="" />
-        {{ is_cn? '我的提问': '我的提問' }}
+        {{ is_cn ? '我的提问' : '我的提問' }}
       </div>
       <div class="top-box">
         {{ is_cn ? '咨询过程中遇到问题请联系：plum7server@wekoi.cn' : '咨詢過程中遇到問題請聯系：plum7server@wekoi.cn' }}
@@ -71,7 +71,7 @@
       </div>
     </div>
 
-    <FixDowonLoad/>
+    <FixDowonLoad />
     <CodePop m_id="20004" v-if="code_modal" @close="code_modal = false" />
   </div>
 </template>
@@ -289,7 +289,7 @@ export default {
         let same_product = this.productList.find(
           i => i.product_id === item.product_id
         );
-        if(!same_product) return
+        if (!same_product) return
         Indicator.open('支付中...');
 
         const {
@@ -442,7 +442,7 @@ export default {
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
-  
+
 
 
   .hidden {
@@ -512,6 +512,7 @@ export default {
         // overflow-x: hidden;
         overflow: hidden;
         height: 100%;
+
         .title-box {
           display: flex;
           align-items: center;
@@ -580,7 +581,7 @@ export default {
             background: #2C263B;
             padding: 0.1rem 0.24rem;
 
-            .text{
+            .text {
               display: -webkit-box;
               -webkit-box-orient: vertical;
               -webkit-line-clamp: 2; // 限制为两行
