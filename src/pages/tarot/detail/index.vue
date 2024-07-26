@@ -125,7 +125,7 @@ export default {
         font-weight: 400;
         font-size: 0.3rem;
         color: #FFFFFF;
-        line-height: 0.3rem;
+        line-height: 0.42rem;
         align-items: center;
         padding: 0.24rem;
         margin-top: 0.15rem;
