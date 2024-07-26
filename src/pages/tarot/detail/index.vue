@@ -129,6 +129,7 @@ export default {
         align-items: center;
         padding: 0.24rem;
         margin-top: 0.15rem;
+        word-break: break-all;
       }
 
     }
