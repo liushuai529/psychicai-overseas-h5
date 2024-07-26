@@ -41,15 +41,22 @@
 
 
             <div :class="['info']">
-              <div class="left" style="-webkit-box-orient: vertical;display: -webkit-box;
+              <div class="left" style="display: flex;
+            flex-direction: column;
+            width: 4.9rem;
+            height: 100%;
+            max-height: 1rem;
+            border-radius: 0.12rem;
+            background: #2C263B;
+            padding: 0.1rem 0.24rem;">
+                <div class="text" style="display: -webkit-box;
               -webkit-box-orient: vertical;
               -webkit-line-clamp: 2; 
               font-size: 0.28rem;
               font-weight: 400;
               overflow: hidden;
               text-overflow: ellipsis;
-              color: #FFFFFF;">
-                <div class="text">{{ item.question }}</div>
+              color: #FFFFFF;">{{ item.question }}</div>
               </div>
               <div class="right">
                 <div class="pay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>
@@ -562,9 +569,6 @@ export default {
           max-height: 1.28rem;
           height: 100%;
           padding-bottom: 0.24rem;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2; // 限制为两行
-          text-overflow: ellipsis;
 
           .left {
             display: flex;
@@ -575,9 +579,6 @@ export default {
             border-radius: 0.12rem;
             background: #2C263B;
             padding: 0.1rem 0.24rem;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2; // 限制为两行
-            text-overflow: ellipsis;
 
             .text{
               display: -webkit-box;
