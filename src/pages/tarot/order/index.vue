@@ -564,7 +564,7 @@ export default {
             flex-direction: column;
             width: 4.9rem;
             height: 100%;
-            max-height: 0.8rem;
+            max-height: 1rem;
             border-radius: 0.12rem;
             background: #2C263B;
             padding: 0.1rem 0.24rem;
