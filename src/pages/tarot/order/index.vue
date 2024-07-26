@@ -4,7 +4,7 @@
       infinite-scroll-distance="10" :class="['container']">
       <div class="new-tab">
         <img @click="backPage" src="../../../assets/img/tarot/dingdan_icon_back-left.webp" class="back" alt="" />
-        {{ is_cn? '我的提问': '我的提問' }}
+        {{ is_cn ? '我的提问' : '我的提問' }}
       </div>
       <div class="top-box">
         {{ is_cn ? '咨询过程中遇到问题请联系：plum7server@wekoi.cn' : '咨詢過程中遇到問題請聯系：plum7server@wekoi.cn' }}
@@ -41,8 +41,22 @@
 
 
             <div :class="['info']">
-              <div class="left" style="-webkit-box-orient: vertical;">
-                <div class="text">{{ item.question }}</div>
+              <div class="left" style="display: flex;
+            flex-direction: column;
+            width: 4.9rem;
+            height: 100%;
+            max-height: 1rem;
+            border-radius: 0.12rem;
+            background: #2C263B;
+            padding: 0.1rem 0.24rem;">
+                <div class="text" style="display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2; 
+              font-size: 0.28rem;
+              font-weight: 400;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: #FFFFFF;">{{ item.question }}</div>
               </div>
               <div class="right">
                 <div class="pay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>
@@ -57,7 +71,7 @@
       </div>
     </div>
 
-    <FixDowonLoad/>
+    <FixDowonLoad />
     <CodePop m_id="20004" v-if="code_modal" @close="code_modal = false" />
   </div>
 </template>
@@ -275,7 +289,7 @@ export default {
         let same_product = this.productList.find(
           i => i.product_id === item.product_id
         );
-        if(!same_product) return
+        if (!same_product) return
         Indicator.open('支付中...');
 
         const {
@@ -428,7 +442,7 @@ export default {
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
-  
+
 
 
   .hidden {
@@ -495,8 +509,10 @@ export default {
         width: 7.1rem;
         background-size: 100% 100%;
         margin-bottom: 0.24rem;
-        overflow-x: hidden;
+        // overflow-x: hidden;
+        overflow: hidden;
         height: 100%;
+
         .title-box {
           display: flex;
           align-items: center;
@@ -551,26 +567,21 @@ export default {
           padding: 0 0.24rem;
           width: 100%;
           // height: 1.04rem;
-          max-height: 1.04rem;
+          max-height: 1.28rem;
           height: 100%;
           padding-bottom: 0.24rem;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2; // 限制为两行
-          text-overflow: ellipsis;
 
           .left {
             display: flex;
             flex-direction: column;
             width: 4.9rem;
-            max-height: 100%;
+            height: 100%;
+            max-height: 1rem;
             border-radius: 0.12rem;
             background: #2C263B;
             padding: 0.1rem 0.24rem;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2; // 限制为两行
-            text-overflow: ellipsis;
 
-            .text{
+            .text {
               display: -webkit-box;
               -webkit-box-orient: vertical;
               -webkit-line-clamp: 2; // 限制为两行
