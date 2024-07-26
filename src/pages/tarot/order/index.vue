@@ -42,7 +42,7 @@
 
             <div :class="['info']">
               <div class="left" style="-webkit-box-orient: vertical;">
-                <span class="text">{{ item.question }}</span>
+                <div class="text">{{ item.question }}的撒地方撒方式水电费水电费水电费水电费水电费撒的发生的</div>
               </div>
               <div class="right">
                 <div class="pay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>
@@ -551,9 +551,12 @@ export default {
           padding: 0 0.24rem;
           width: 100%;
           // height: 1.04rem;
+          max-height: 1.04rem;
           height: 100%;
           padding-bottom: 0.24rem;
-
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2; // 限制为两行
+          text-overflow: ellipsis;
 
           .left {
             display: flex;
@@ -563,6 +566,9 @@ export default {
             border-radius: 0.12rem;
             background: #2C263B;
             padding: 0.1rem 0.24rem;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2; // 限制为两行
+            text-overflow: ellipsis;
 
             .text{
               display: -webkit-box;
