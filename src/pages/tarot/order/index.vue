@@ -495,7 +495,8 @@ export default {
         width: 7.1rem;
         background-size: 100% 100%;
         margin-bottom: 0.24rem;
-        overflow-x: hidden;
+        // overflow-x: hidden;
+        overflow: hidden;
         height: 100%;
         .title-box {
           display: flex;
@@ -562,7 +563,8 @@ export default {
             display: flex;
             flex-direction: column;
             width: 4.9rem;
-            max-height: 100%;
+            height: 100%;
+            max-height: 0.8rem;
             border-radius: 0.12rem;
             background: #2C263B;
             padding: 0.1rem 0.24rem;
