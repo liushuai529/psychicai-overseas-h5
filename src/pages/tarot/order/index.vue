@@ -560,7 +560,7 @@ export default {
             max-height: 100%;
             border-radius: 0.12rem;
             background: #2C263B;
-            padding: 0.1rem 0.2rem;
+            padding: 0.1rem 0.24rem;
 
             .text{
               display: -webkit-box;

@@ -542,8 +542,8 @@ export default {
   align-items: center;
 
   justify-content: space-between;
-  padding: 0 0.14rem;
-  margin-top: 0.14rem;
+  padding: 0 0.24rem;
+  margin-top: 0.24rem;
 
   .left {
     display: flex;
@@ -632,14 +632,14 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 0.14rem;
+  padding: 0 0.24rem;
   width: 100%;
 
   .item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.24rem;
 
     .left {
       display: flex;

@@ -64,8 +64,9 @@ export default {
   align-items: center;
   padding-left: 0.24rem;
   padding-right: 0.24rem;
-  background: #1E0A2D;
+  background: #201A2F;
   border-radius: 0.16rem;
+  margin-bottom: 1.5rem;
 
   .head {
     height: 1.48rem;
@@ -120,7 +121,7 @@ export default {
     color: #FFFFFF;
     line-height: 0.42rem;
     margin-top: 0.2rem;
-    margin-bottom: 1.5rem;
+    // margin-bottom: 1.5rem;
   }
 }
 </style>
