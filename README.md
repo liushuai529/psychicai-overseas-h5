@@ -38,3 +38,14 @@
 
 - github 地址：https://github.com/adjust/web_sdk/blob/master/docs/chinese/README.md#installation
 - SDK 地址：https://help.adjust.com/zh/article/set-log-level-web-sdk
+
+## 投放链接
+03、05渠道为感情运。05渠道仅为感情运（页面没有首页按钮）
+测试
+https://test-overseas.psychicai.pro/ocean03/emotion_fortune.html
+https://test-overseas.psychicai.pro/ocean05/emotion_fortune.html
+https://test-overseas.psychicai.pro/ocean06/tarot.html
+正式
+https://overseas.psychicai.pro/ocean03/emotion_fortune.html
+https://overseas.psychicai.pro/ocean05/emotion_fortune.html
+https://overseas.psychicai.pro/ocean06/tarot.html
