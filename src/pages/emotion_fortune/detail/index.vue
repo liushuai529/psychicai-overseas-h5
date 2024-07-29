@@ -269,7 +269,7 @@ export default {
       );
     },
     is_show_combinationSpecial02() {
-      return !['enjoy03', 'panda03', 'enjoy05'].includes(utils.getFBChannel());
+      return !["enjoy03", "panda03", "ocean03", "enjoy05", "ocean05"].includes(utils.getFBChannel());
     },
 
     //限时特惠
@@ -289,7 +289,7 @@ export default {
       return ['enjoy02', 'panda02'].includes(utils.getFBChannel());
     },
     channel3() {
-      return ['enjoy03', 'panda03', 'enjoy05'].includes(utils.getFBChannel());
+      return ["enjoy03", "panda03", "ocean03", "enjoy05", "ocean05"].includes(utils.getFBChannel());
     },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
