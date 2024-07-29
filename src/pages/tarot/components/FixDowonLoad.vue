@@ -1,5 +1,5 @@
 <template>
-  <div class="fix-dowon-load"  id="fix-dowon-load" @click="downApp" :style="{top: `${windowHeight - divHeight}px`}">
+  <div class="fix-dowon-load" v-show="show"  id="fix-dowon-load" @click="downApp" :style="{top: `${windowHeight - divHeight}px`}">
     <div class="left">
       <img src="../../../assets/img/tarot/taluo_img_mingli.webp" />
       <div class="content-container">
