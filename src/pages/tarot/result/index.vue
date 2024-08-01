@@ -246,7 +246,8 @@ export default {
           mlxz_order_status: report_status,
         });
         console.log('Purchase事件上报', this.order_id)
-        if (utils.isProd()) {
+        // if (utils.isProd()) {
+          if (1===1) {
           await utils.checkFB();
           try {
             utils.gcyLog(`order_id:${this.order_id}`, {
