@@ -33,6 +33,8 @@
     <FixDowonLoad />
     <Overlay :show="show_email" />
     <EmailInfoCard v-if="show_email" @hidden_modal="hidden_modal" />
+    <ResultPopup/>
+
 
   </div>
 </template>
@@ -49,13 +51,14 @@ import TarotPayDetail from '../../../components/TarotPayDetail.vue';
 import TarotPayItem from '../../../components/TarotPayItem.vue';
 import TarotNotice from '../../../components/TarotNotice.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
+import ResultPopup from '../components/ResultPopup.vue'
 import cn_taluo_img_jieda from '../../../assets/img/tarot/cn/taluo_img_jieda.webp';
 import tw_taluo_img_jieda from '../../../assets/img/tarot/tw/taluo_img_jieda.webp';
 import { tarotQuestionsDetailAPI, tarotVisitorAPI, checkSendEventApi, resultTarotCheckAPI, sendTarotEventApi } from '../../../api/api';
 
 
 export default {
-  components: { CardList, TarotPayDetail, TarotPayItem, TarotNotice, PayGuideModal, FixDowonLoad, Overlay, EmailInfoCard, ResultCard },
+  components: { CardList, TarotPayDetail, TarotPayItem, TarotNotice, PayGuideModal, FixDowonLoad, Overlay, EmailInfoCard, ResultCard, ResultPopup },
 
 
   data() {
