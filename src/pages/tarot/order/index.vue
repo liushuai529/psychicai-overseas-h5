@@ -7,7 +7,7 @@
         {{ is_cn ? '我的提问' : '我的提問' }}
       </div>
       <div class="top-box">
-        {{ is_cn ? '咨询过程中遇到问题请联系：plum7server@wekoi.cn' : '咨詢過程中遇到問題請聯系：plum7server@wekoi.cn' }}
+        {{ is_cn ? '复制订单邀请码，打开命理寻真，你可以在命理寻真中查看你的提问' : '复制订单邀请码，打开命理寻真，你可以在命理寻真中查看你的提问' }}
       </div>
       <div class="content">
         <div class="tab-list hidden">
@@ -40,7 +40,44 @@
             </div>
 
 
-            <div :class="['info']">
+            <div :class="['info']" v-if="is_android">
+              <div class="left" style="display: flex;
+            flex-direction: column;
+            width: 7.2rem;
+            height: 100%;
+            max-height: 1rem;
+            border-radius: 0.12rem;
+            background: #2C263B;
+            padding: 0.1rem 0.24rem;">
+                <div class="text" style="display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2; 
+              font-size: 0.28rem;
+              font-weight: 400;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: #FFFFFF;">{{ item.question }}</div>
+              </div>
+
+            </div>
+
+            <div class="code-container" v-if="is_android">
+              <div class="left">
+                <div class="text">
+                  <span>{{ is_cn? '订单识别码：': '訂單識別碼：' }}</span>
+                  <span>{{ item.transfer_code }}</span>
+                  <span class="copy" @click="copyCode(item.transfer_code)">{{ is_cn? '复制': '復製' }}</span>
+                </div>
+              </div>
+              <div class="right">
+                <div class="pay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>
+                <div class="search" v-if="item.order_status === 'PAYED'" @click="handleJump(item)">查看</div>
+              </div>
+            </div>
+
+
+
+            <div :class="['info']" v-if="is_ios">
               <div class="left" style="display: flex;
             flex-direction: column;
             width: 4.9rem;
@@ -62,9 +99,9 @@
                 <div class="pay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>
                 <div class="search" v-if="item.order_status === 'PAYED'" @click="handleJump(item)">查看</div>
               </div>
-
-
             </div>
+
+
 
           </div>
         </div>
@@ -72,7 +109,9 @@
     </div>
 
     <FixDowonLoad />
-    <CodePop m_id="20004" v-if="code_modal" @close="code_modal = false" />
+    <CodePop v-if="code_modal" @close="code_modal = false" />
+    <div class="tip">{{ is_cn? '咨询过程中遇到问题请下载命理寻真App，联系人工客服。': '咨詢過程中遇到問題請下載命理尋真App，聯系人工客服。' }}</div>
+
   </div>
 </template>
 
@@ -82,8 +121,9 @@ import utils from '@/libs/utils';
 import { path_enums } from '../../../libs/enum';
 import { getTarotHistoryOrderAPI, payTarotOrderAPI } from '../../../api/api';
 import { getHistoryOrderImg } from '../../../libs/enum';
-import CodePop from '../../../components/CodePop.vue';
+import CodePop from '../components/CodePop.vue';
 import FixDowonLoad from '../components/FixDowonLoad.vue';
+
 import tw_title from '../../../assets/img/mlxz/downloadBtn/tw/h5_img_dingdantittle_fan.webp';
 const all_status_enums = () => {
   return { 0: '去支付', 1: '查看', 2: '去添加' };
@@ -139,7 +179,6 @@ export default {
       is_empty: false,
       show_kf: true,
       jump_loading: false,
-      is_android: false,
       male_icon:
         'https://psychicai-static.psychicai.pro/imgs/24042cba8d2e03aa4538802aa57b2de12259.png',
       female_icon:
@@ -159,6 +198,12 @@ export default {
     },
     productList() {
       return this.$store.state.common.tarotProductList;
+    },
+    is_android() {
+      return utils.isAndroid();
+    },
+    is_ios() {
+      return utils.isIos();
     },
 
   },
@@ -192,7 +237,6 @@ export default {
     //   }
     // );
 
-    this.is_android = utils.isAndroid();
     this.getData();
   },
   watch: {
@@ -419,10 +463,22 @@ export default {
   width: 7.5rem;
   height: 100vh;
   font-family: system-ui;
+  .tip {
+    position: fixed;
+    left: 0.39rem;
+    bottom: 1.28rem;
+    width: 6.8rem;
+    font-size: 0.26rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 0.39rem;
+  }
 }
 
 .top-box {
   width: 100%;
+  width: 7.1rem;
+  padding-left: 0.24rem;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -590,6 +646,75 @@ export default {
               overflow: hidden;
               text-overflow: ellipsis;
               color: #FFFFFF;
+            }
+          }
+
+          .right {
+            width: 1.44rem;
+            height: 0.68rem;
+            font-weight: 600;
+            font-size: 0.28rem;
+            color: #FFFFFF;
+            line-height: 0.28rem;
+
+            .pay {
+              width: 100%;
+              height: 100%;
+              background: linear-gradient(180deg, #A136DE 0%, #5C15AC 100%);
+              border-radius: 0.16rem;
+              border: 0.02rem solid #E585FF;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .search {
+              width: 100%;
+              height: 100%;
+              border-radius: 0.16rem;
+              border: 0.02rem solid #4C256B;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              color: #B65AFF;
+            }
+          }
+        }
+
+        .code-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-radius: 0.12rem;
+          padding: 0 0.24rem;
+          width: 100%;
+          // height: 1.04rem;
+          max-height: 1.28rem;
+          height: 100%;
+          padding-bottom: 0.24rem;
+
+          .left {
+            display: flex;
+            width: 4.9rem;
+            height: 100%;
+            // max-height: 1rem;
+            padding: 0.1rem 0rem;
+
+            .text {
+              font-size: 0.26rem;
+              font-weight: 400;
+              color: #FFFFFF;
+
+              .copy {
+                font-weight: 400;
+                font-size: 0.26rem;
+                color: rgba(255, 255, 255, 0.4);
+                line-height: 0.38rem;
+                text-align: left;
+                font-style: normal;
+                text-decoration-line: underline;
+              }
             }
           }
 

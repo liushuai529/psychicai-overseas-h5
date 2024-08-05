@@ -21,8 +21,8 @@
 <script>
 import utils from '../../../libs/utils';
 
-import cn_img_popovers_logo from '../../../assets/img/components/result_popup/cn/img_popovers_logo.webp';
-import tw_img_popovers_logo from '../../../assets/img/components/result_popup/tw/img_popovers_logo_tw.webp';
+import cn_img_popovers_logo from '../../../assets/img/components/result_popup/cn/img_popovers_logo1.webp';
+import tw_img_popovers_logo from '../../../assets/img/components/result_popup/tw/img_popovers_logo_tw1.webp';
 import { Toast } from 'mint-ui';
 const lang = utils.getLanguage();
 const tips_arr1 = {
@@ -60,31 +60,13 @@ const tips_arr8 = {
 
 
 const show_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10020, 'event_name': 'view_2024report_download', type: 'view'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10020, 'event_name': 'view_chenggu_download', type: 'view'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10020, 'event_name': 'view_64gua_download', type: 'view'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10029, 'event_name': 'view_2024lovely_download', type: 'view'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10031, 'event_name': 'view_marriage_download', type: 'view'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10020, 'event_name': 'view_2024career_download', type: 'view'}, // 2024年事业运势 
+  master_tarot: {module: 10010, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view'}, 
 }
 const copy_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10021, 'event_name': 'click_2024wealty_copy', type: 'click'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10021, 'event_name': 'click_2024report_copy', type: 'click'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10021, 'event_name': 'click_chenggu_copy', type: 'click'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10021, 'event_name': 'click_64gua_copy', type: 'click'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10030, 'event_name': 'click_2024lovely_copy', type: 'click'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10032, 'event_name': 'click_marriage_copy', type: 'click'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10021, 'event_name': 'click_2024career_copy', type: 'click'}, // 2024年事业运势 
+  master_tarot: {module: 10010, 'content_id': -10021, 'event_name': 'click_2024wealty_copy', type: 'click'}, 
 }
 const down_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10022, 'event_name': 'click_2024wealty_download', type: 'click'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10022, 'event_name': 'click_2024report_download', type: 'click'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10022, 'event_name': 'click_chenggu_download', type: 'click'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10022, 'event_name': 'click_64gua_download', type: 'click'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10031, 'event_name': 'click_2024lovely_download', type: 'click'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10033, 'event_name': 'click_marriage_download', type: 'click'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10022, 'event_name': 'click_2024career_download', type: 'click'}, // 2024年事业运势 
+  master_tarot: {module: 10010, 'content_id': -10022, 'event_name': 'click_2024wealty_download', type: 'click'}, 
 }
 
 //h5_marriage
@@ -94,7 +76,7 @@ export default {
   props: {
     product_key: {
       type: String,
-      default: 'h5_emotion2024'
+      default: 'master_tarot'
     },
     visible: {
       type: Boolean,
@@ -109,15 +91,6 @@ export default {
     return {
       cn_img_popovers_logo,
       tw_img_popovers_logo,
-      bg_style: {
-        h5_wealth2024: 'linear-gradient( 180deg, rgba(208,61,61,0) 0%, #D03D3D 32%, #D03D3D 100%)', // 2024年财运
-        h5_annual2024: 'linear-gradient( 180deg, rgba(255,170,65,0) 0%, #FFAA41 32%, #FFAA41 100%)', // 2024年年运
-        h5_weigh_bone: 'linear-gradient( 180deg, rgba(81,95,173,0) 0%, #515FAD 32%, #515FAD 100%)', // 袁天罡秤骨
-        h5_bai_gua: 'linear-gradient( 180deg, rgba(164,51,30,0) 0%, #A4331E 32%, #A4331E 100%)', // 鬼谷子
-        h5_emotion2024: 'linear-gradient( 180deg, rgba(236,67,107,0) 0%, #EC436B 32%, #EC436B 100%)', // 2024年爱情运势
-        h5_marriage: 'linear-gradient( 180deg, rgba(127,20,22,0) 0%, #7F1416 32%, #7F1416 100%)',
-        h5_career2024: 'linear-gradient( 180deg, rgba(222,36,46,0) 0%, #DE242E 32%, #DE242E 100%)', // 2024年事业运势
-      },
       lang,
       tips_arr1,
       tips_arr2,
@@ -127,7 +100,6 @@ export default {
       tips_arr6,
       tips_arr7,
       tips_arr8,
-
     }
   },
  
@@ -178,7 +150,7 @@ export default {
 <style scoped lang="less">
 .result-popup {
   position: fixed;
-  z-index: 99999;
+  z-index: 10;
   bottom: 0;
   left: 0;
   width: 7.5rem;

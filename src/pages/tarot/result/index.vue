@@ -33,7 +33,7 @@
     <FixDowonLoad />
     <Overlay :show="show_email" />
     <EmailInfoCard v-if="show_email" @hidden_modal="hidden_modal" />
-    <ResultPopup/>
+    <ResultPopup product_key="master_tarot" :transfer_code="result_data && result_data.transfer_code"/>
 
 
   </div>
@@ -80,6 +80,9 @@ export default {
     is_show_tarot_notice() {
       return true;
       return utils.isFBContainer();
+    },
+    is_ios() {
+      return utils.isIos();
     },
   },
   watch: {
@@ -350,7 +353,7 @@ export default {
       let report_status = utils.getQueryStr('status');
       let res = await tarotVisitorAPI();
       if (res.status === 1000) {
-        if (!res.data.email) {
+        if (!res.data.email && is_ios) {
           if (report_status) {
             if (['PAYED', 'SUCCESS'].includes(report_status)) {
               this.show_email = true
@@ -378,11 +381,17 @@ export default {
   },
 };
 </script>
+<style>
+/* .mint-indicator-wrapper {
+  z-index: 99999 !important;
+} */
+</style>
 
 <style scoped lang="less">
 .van-overlay {
-  z-index: 2;
+  z-index: 20;
 }
+
 
 .tarot-detail {
   background: #0F031A;
