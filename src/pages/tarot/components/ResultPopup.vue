@@ -63,10 +63,10 @@ const show_info = {
   master_tarot: {module: 10010, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view'}, 
 }
 const copy_info = {
-  master_tarot: {module: 10010, 'content_id': -10021, 'event_name': 'click_2024wealty_copy', type: 'click'}, 
+  master_tarot: {module: 10010, 'content_id': -10026, 'event_name': 'click_tarotcopy_result', type: 'click'}, 
 }
 const down_info = {
-  master_tarot: {module: 10010, 'content_id': -10022, 'event_name': 'click_2024wealty_download', type: 'click'}, 
+  master_tarot: {module: 10010, 'content_id': -10023, 'event_name': 'click_tarot_result', type: 'click'}, 
 }
 
 //h5_marriage
@@ -109,15 +109,15 @@ export default {
   mounted() {
     if(this.show_modal) {
       this.$emit('change_pop_modal', true)
-      utils.firebaseLogEvent(show_info[this.product_key]['module'], show_info[this.product_key]['content_id'], show_info[this.product_key]['event_name'], show_info[this.product_key]['type'], {
-        args_name: show_info[this.product_key]['event_name'],
-        channel: utils.getFBChannel(),
-      });
+      // utils.firebaseLogEvent(show_info[this.product_key]['module'], show_info[this.product_key]['content_id'], show_info[this.product_key]['event_name'], show_info[this.product_key]['type'], {
+      //   args_name: show_info[this.product_key]['event_name'],
+      //   channel: utils.getFBChannel(),
+      // });
     }
   },
   computed: {
     show_modal() {
-      return !["enjoy01", "panda01"].includes(utils.getFBChannel()) && utils.isAndroid() && !utils.getQueryStr('hidden_modal');
+      return utils.isAndroid() && utils.getQueryStr('status') !== 'FAILED';
     },
 
     is_cn() {

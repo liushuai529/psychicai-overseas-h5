@@ -404,6 +404,16 @@ export default {
       utils.copyText('mlxz-' + code);
       Toast('复制成功');
       this.code_modal = true;
+      utils.firebaseLogEvent(
+        '10010',
+        '-10025',
+        'click_tarothistory_copy',
+        'click',
+        {
+          args_name: 'click_tarothistory_copy',
+          channel: utils.getFBChannel(),
+        }
+      ); 
     },
 
     backPage() {

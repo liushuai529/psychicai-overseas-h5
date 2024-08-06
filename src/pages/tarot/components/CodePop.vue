@@ -108,19 +108,15 @@ export default {
      */
     async downloadApp() {
       utils.firebaseLogEvent(
-        this.m_id,
-        this.m_id === '20004' ? '-10003' : '-10004',
-        this.m_id === '20004'
-          ? 'click_history_download'
-          : 'click_interpretation_download',
+        '10010',
+        '-10024',
+        'click_tarothistory_download',
         'click',
         {
-          args_name:
-            this.m_id === '20004'
-              ? 'click_history_download'
-              : 'click_interpretation_download',
+          args_name: 'click_tarothistory_download',
+          channel: utils.getFBChannel(),
         }
-      );
+      ); 
       await utils.asleep(200);
       utils.openApp();
     },
