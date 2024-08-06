@@ -38,12 +38,10 @@
               </div>
               <div class="right">{{ is_cn ? '订单编号：' : '訂單編號：' }}{{ item.order_id }}</div>
             </div>
-
-
             <div :class="['info']" v-if="is_android">
-              <div class="left" style="display: flex;
+              <div :class="['left', item.order_status === 'PAYED' ? 'payed' : 'pay']" style="display: flex;
             flex-direction: column;
-            width: 7.2rem;
+            /* width: 7.2rem; */
             height: 100%;
             max-height: 1rem;
             border-radius: 0.12rem;
@@ -58,15 +56,18 @@
               text-overflow: ellipsis;
               color: #FFFFFF;">{{ item.question }}</div>
               </div>
+              <div class="right" v-if="item.order_status !== 'PAYED'">
+                <div class="pay" @click="handleJump(item)">支付</div>
+              </div>
 
             </div>
 
-            <div class="code-container" v-if="is_android">
+            <div class="code-container" v-if="is_android && item.order_status === 'PAYED'">
               <div class="left">
                 <div class="text">
-                  <span>{{ is_cn? '订单识别码：': '訂單識別碼：' }}</span>
+                  <span>{{ is_cn ? '订单识别码：' : '訂單識別碼：' }}</span>
                   <span>{{ item.transfer_code }}</span>
-                  <span class="copy" @click="copyCode(item.transfer_code)">{{ is_cn? '复制': '復製' }}</span>
+                  <span class="copy" @click="copyCode(item.transfer_code)">{{ is_cn ? '复制' : '復製' }}</span>
                 </div>
               </div>
               <div class="right">
@@ -110,7 +111,7 @@
 
     <FixDowonLoad />
     <CodePop v-if="code_modal" @close="code_modal = false" />
-    <div class="tip">{{ is_cn? '咨询过程中遇到问题请下载命理寻真App，联系人工客服。': '咨詢過程中遇到問題請下載命理尋真App，聯系人工客服。' }}</div>
+    <div class="tip">{{ is_cn ? '咨询过程中遇到问题请下载命理寻真App，联系人工客服。' : '咨詢過程中遇到問題請下載命理尋真App，聯系人工客服。' }}</div>
 
   </div>
 </template>
@@ -413,7 +414,7 @@ export default {
           args_name: 'click_tarothistory_copy',
           channel: utils.getFBChannel(),
         }
-      ); 
+      );
     },
 
     backPage() {
@@ -473,13 +474,14 @@ export default {
   width: 7.5rem;
   height: 100vh;
   font-family: system-ui;
+
   .tip {
     position: fixed;
     left: 0.39rem;
     bottom: 1.28rem;
     width: 6.8rem;
     font-size: 0.26rem;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
     line-height: 0.39rem;
   }
 }
@@ -657,6 +659,14 @@ export default {
               text-overflow: ellipsis;
               color: #FFFFFF;
             }
+          }
+
+          .payed {
+            width: 7.2rem;
+          }
+
+          .pay {
+            width: 4.9rem;
           }
 
           .right {
