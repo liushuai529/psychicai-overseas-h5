@@ -1276,13 +1276,11 @@ const openApp = () => {
   if(isAndroid()) {
     openAdjustApp();
   } else if (isIos()) {
-    location.href = 'https://apps.apple.com/sg/app/%E5%AF%BB%E7%9C%9F-%E5%92%A8%E8%AF%A2/id6479632593?l=zh-Hans-CN';
+    window.open(
+      'https://apps.apple.com/sg/app/%E5%AF%BB%E7%9C%9F-%E5%92%A8%E8%AF%A2/id6479632593?l=zh-Hans-CN',
+      '_blank'
+    );
   }
-  
-  return;
-  location.href =
-    // 'https://play.google.com/store/apps/details?id=com.psychicai.fortune';
-    'https://www.psychicai.pro/';
 };
 
 /**
