@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     show() {
-      return utils.isAndroid();
+      return true;
     },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
@@ -82,7 +82,7 @@ export default {
   height: 1.08rem;
   display: flex;
   position: fixed;
-  z-index: 10;
+  z-index: 5;
   left: 0rem;
   // bottom: 0rem;
   justify-content: space-between;

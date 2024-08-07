@@ -1,5 +1,5 @@
 <template>
-  <div :class="['tarot-detail']">
+  <div :class="['tarot-detail', show_pop_modal? 'hidden-scroll': '']">
     <div v-if="is_show_tarot_notice">
       <TarotNotice :show_btn="true" />
     </div>
@@ -33,6 +33,8 @@
     <FixDowonLoad />
     <Overlay :show="show_email" />
     <EmailInfoCard v-if="show_email" @hidden_modal="hidden_modal" />
+    <ResultPopup @change_pop_modal="change_pop_modal" product_key="master_tarot" :transfer_code="result_data && result_data.transfer_code" change_pop_modal/>
+
 
   </div>
 </template>
@@ -49,13 +51,14 @@ import TarotPayDetail from '../../../components/TarotPayDetail.vue';
 import TarotPayItem from '../../../components/TarotPayItem.vue';
 import TarotNotice from '../../../components/TarotNotice.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
+import ResultPopup from '../components/ResultPopup.vue'
 import cn_taluo_img_jieda from '../../../assets/img/tarot/cn/taluo_img_jieda.webp';
 import tw_taluo_img_jieda from '../../../assets/img/tarot/tw/taluo_img_jieda.webp';
 import { tarotQuestionsDetailAPI, tarotVisitorAPI, checkSendEventApi, resultTarotCheckAPI, sendTarotEventApi } from '../../../api/api';
 
 
 export default {
-  components: { CardList, TarotPayDetail, TarotPayItem, TarotNotice, PayGuideModal, FixDowonLoad, Overlay, EmailInfoCard, ResultCard },
+  components: { CardList, TarotPayDetail, TarotPayItem, TarotNotice, PayGuideModal, FixDowonLoad, Overlay, EmailInfoCard, ResultCard, ResultPopup },
 
 
   data() {
@@ -68,6 +71,7 @@ export default {
       card_list: [],
       result_data: null,//答疑订单返回数据
       show_email: false,
+      show_pop_modal: false,//底部引导用户下载遮罩
     };
   },
   computed: {
@@ -77,6 +81,9 @@ export default {
     is_show_tarot_notice() {
       return true;
       return utils.isFBContainer();
+    },
+    is_ios() {
+      return utils.isIos();
     },
   },
   watch: {
@@ -134,6 +141,12 @@ export default {
 
   },
   methods: {
+     /**
+     * 显示底部引导用户下载app遮罩
+     */
+     change_pop_modal() {
+      this.show_pop_modal = true;
+    },
 
     goToPayPage() {
       Indicator.close();
@@ -347,7 +360,7 @@ export default {
       let report_status = utils.getQueryStr('status');
       let res = await tarotVisitorAPI();
       if (res.status === 1000) {
-        if (!res.data.email) {
+        if (!res.data.email && this.is_ios) {
           if (report_status) {
             if (['PAYED', 'SUCCESS'].includes(report_status)) {
               this.show_email = true
@@ -375,11 +388,17 @@ export default {
   },
 };
 </script>
+<style>
+/* .mint-indicator-wrapper {
+  z-index: 99999 !important;
+} */
+</style>
 
 <style scoped lang="less">
 .van-overlay {
-  z-index: 2;
+  z-index: 9;
 }
+
 
 .tarot-detail {
   background: #0F031A;
