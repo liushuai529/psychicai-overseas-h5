@@ -111,7 +111,7 @@
 
     <FixDowonLoad />
     <CodePop v-if="code_modal" @close="code_modal = false" />
-    <div class="tip">{{ is_cn ? '咨询过程中遇到问题请下载命理寻真App，联系人工客服。' : '咨詢過程中遇到問題請下載命理尋真App，聯系人工客服。' }}</div>
+    <div class="tip" v-if="is_android">{{ is_cn ? '咨询过程中遇到问题请下载命理寻真App，联系人工客服。' : '咨詢過程中遇到問題請下載命理尋真App，聯系人工客服。' }}</div>
 
   </div>
 </template>
