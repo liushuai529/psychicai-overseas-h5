@@ -499,7 +499,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 1.28rem;
+    bottom: 1.08rem;
     width: 7.5rem;
     font-size: 0.26rem;
     color: rgba(255, 255, 255, 0.5);
