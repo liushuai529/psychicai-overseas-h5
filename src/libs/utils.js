@@ -1277,7 +1277,7 @@ const openApp = () => {
     openAdjustApp();
   } else if (isIos()) {
     window.open(
-      'https://apps.apple.com/sg/app/%E5%AF%BB%E7%9C%9F-%E5%92%A8%E8%AF%A2/id6479632593?l=zh-Hans-CN',
+      'https://apps.apple.com/sg/app/id6479632593',
       '_blank'
     );
   }
