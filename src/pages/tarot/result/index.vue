@@ -1,5 +1,5 @@
 <template>
-  <div :class="['tarot-detail']">
+  <div :class="['tarot-detail', show_pop_modal? 'hidden-scroll': '']">
     <div v-if="is_show_tarot_notice">
       <TarotNotice :show_btn="true" />
     </div>
@@ -33,7 +33,7 @@
     <FixDowonLoad />
     <Overlay :show="show_email" />
     <EmailInfoCard v-if="show_email" @hidden_modal="hidden_modal" />
-    <ResultPopup product_key="master_tarot" :transfer_code="result_data && result_data.transfer_code"/>
+    <ResultPopup @change_pop_modal="change_pop_modal" product_key="master_tarot" :transfer_code="result_data && result_data.transfer_code" change_pop_modal/>
 
 
   </div>
@@ -71,6 +71,7 @@ export default {
       card_list: [],
       result_data: null,//答疑订单返回数据
       show_email: false,
+      show_pop_modal: false,//底部引导用户下载遮罩
     };
   },
   computed: {
@@ -140,6 +141,12 @@ export default {
 
   },
   methods: {
+     /**
+     * 显示底部引导用户下载app遮罩
+     */
+     change_pop_modal() {
+      this.show_pop_modal = true;
+    },
 
     goToPayPage() {
       Indicator.close();

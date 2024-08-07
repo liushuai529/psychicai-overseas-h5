@@ -7,7 +7,7 @@
         {{ is_cn ? '我的提问' : '我的提問' }}
       </div>
       <div class="top-box">
-        {{ is_cn ? '复制订单邀请码，打开命理寻真，你可以在命理寻真中查看你的提问' : '复制订单邀请码，打开命理寻真，你可以在命理寻真中查看你的提问' }}
+        {{ is_cn ? '复制订单识别码，打开命理寻真，你可以在命理寻真中查看你的提问' : '复制订单識別碼，打开命理寻真，你可以在命理寻真中查看你的提问' }}
       </div>
       <div class="content">
         <div class="tab-list hidden">
@@ -477,9 +477,15 @@ export default {
 
   .tip {
     position: fixed;
-    left: 0.39rem;
+    height: 0.59rem;
+    background: #0F031A;
+    display: block;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     bottom: 1.28rem;
-    width: 6.8rem;
+    width: 7.5rem;
     font-size: 0.26rem;
     color: rgba(255, 255, 255, 0.5);
     line-height: 0.39rem;
