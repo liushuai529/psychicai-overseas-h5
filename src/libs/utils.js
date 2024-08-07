@@ -1273,7 +1273,12 @@ const isElementInViewport = el => {
  * @return {*}
  */
 const openApp = () => {
-  openAdjustApp();
+  if(isAndroid()) {
+    openAdjustApp();
+  } else if (isIos()) {
+    // location.href = 'https://www.psychicai.pro/';
+  }
+  
   return;
   location.href =
     // 'https://play.google.com/store/apps/details?id=com.psychicai.fortune';

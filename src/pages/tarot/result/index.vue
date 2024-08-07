@@ -353,7 +353,7 @@ export default {
       let report_status = utils.getQueryStr('status');
       let res = await tarotVisitorAPI();
       if (res.status === 1000) {
-        if (!res.data.email && is_ios) {
+        if (!res.data.email && this.is_ios) {
           if (report_status) {
             if (['PAYED', 'SUCCESS'].includes(report_status)) {
               this.show_email = true
@@ -389,7 +389,7 @@ export default {
 
 <style scoped lang="less">
 .van-overlay {
-  z-index: 20;
+  z-index: 9;
 }
 
 

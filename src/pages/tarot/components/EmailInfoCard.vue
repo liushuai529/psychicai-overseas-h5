@@ -196,7 +196,7 @@ export default {
   /* 内容的宽度 */
   background: linear-gradient(180deg, #421A88 0%, #2D135A 40%, #2D135A 100%);
   border-radius: 0.4rem;
-  z-index: 3;
+  z-index: 10;
   color: white;
   display: flex;
   flex-direction: column;
