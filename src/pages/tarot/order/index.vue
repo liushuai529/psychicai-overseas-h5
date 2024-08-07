@@ -7,7 +7,7 @@
         {{ is_cn ? '我的提问' : '我的提問' }}
       </div>
       <div class="top-box">
-        {{ is_cn ? '复制订单识别码，打开命理寻真，你可以在命理寻真中查看你的提问' : '复制订单識別碼，打开命理寻真，你可以在命理寻真中查看你的提问' }}
+        {{ top_tip }}
       </div>
       <div class="content">
         <div class="tab-list hidden">
@@ -206,6 +206,21 @@ export default {
     is_ios() {
       return utils.isIos();
     },
+    top_tip() {
+      if (utils.isIos()) {
+        if (utils.getLanguage() === 'zh-CN') {
+          return '咨询过程中遇到问题请联系：plum7server@wekoi.cn'
+        } else {
+          return '咨詢過程中遇到問題請聯系：plum7server@wekoi.cn'
+        }
+      } else {
+        if (utils.getLanguage() === 'zh-CN') {
+          return '复制订单识别码，打开命理寻真，你可以在命理寻真中查看你的提问';
+        } else {
+          return '復製訂單識別碼，打開命理尋真，你可以在命理尋真中查看你的提問';
+        }
+      }
+    }
 
   },
   filters: {
