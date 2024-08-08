@@ -92,7 +92,7 @@ export default {
       utils.openApp();
     },
     async getData() {
-      if (utils.isAndroid() && this.product_key === 'h5_emotion2024') {
+      if (utils.isAndroid()) {
         if (this.product_key && this.product_key === 'master_tarot') {
           let res = await getTarotDiscountGetAPI(this.product_key);
           if (res && res.status === 1000) {
