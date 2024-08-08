@@ -74,8 +74,7 @@
               'write-bg': item.can_write && item.status == 'PAYED',
               'one-bg':
                 item.product_key !== 'h5_marriage' &&
-                !item.can_write &&
-                item.status == 'PAYED',
+                !item.can_write,
               'bg-2-nopay':
                 item.status !== 'PAYED' &&
                 item.product_key === 'h5_marriage' &&
@@ -90,12 +89,12 @@
                 item.status !== 'PAYED' &&
                 item.product_key !== 'h5_marriage' &&
                 ['h5_combo2', 'h5_combo2_attach'].includes(item.product_key),
-              'bg-1-nopay':
-                item.status !== 'PAYED' &&
-                item.product_key !== 'h5_marriage' &&
-                !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
-                  item.product_key
-                ),
+              // 'bg-1-nopay':
+              //   item.status !== 'PAYED' &&
+              //   item.product_key !== 'h5_marriage' &&
+              //   !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+              //     item.product_key
+              //   ),
             }"
             v-for="(item, k) in list"
             :key="'order' + k"
@@ -124,13 +123,13 @@
                   !item.can_write &&
                   item.status === 'PAYED',
                 'one-info':
-                  item.product_key !== 'h5_marriage' && item.status === 'PAYED',
-                'no-pay-1':
-                  item.status !== 'PAYED' &&
-                  item.product_key !== 'h5_marriage' &&
-                  !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
-                    item.product_key
-                  ),
+                  item.product_key !== 'h5_marriage',
+                // 'no-pay-1':
+                //   item.status !== 'PAYED' &&
+                //   item.product_key !== 'h5_marriage' &&
+                //   !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                //     item.product_key
+                //   ),
                 'no-pay-2':
                   item.status !== 'PAYED' &&
                   (item.product_key === 'h5_marriage' ||
@@ -291,11 +290,11 @@
               <div
                 :class="[
                   'left',
-                  item.status !== 'PAYED'
-                    ? 'hidden-btn'
-                    : item.transfer_code
-                    ? ''
-                    : ' visible-hidden',
+                  // item.status !== 'PAYED'
+                  //   ? 'hidden-btn'
+                  //   : item.transfer_code
+                  //   ? ''
+                  //   : ' visible-hidden',
                 ]"
               >
                 <span>{{ $t('tips-7') }}{{ item.transfer_code || '-' }}</span>
@@ -309,7 +308,6 @@
                 :class="[
                   'right-btn',
                   `${getStatusStyle(item)}`,
-                  getAbsoluteStyle(item),
                 ]"
               >
                 <div class="status-text status-btn">
