@@ -42,7 +42,7 @@ const getFBChannel = () => {
   }else if (url.indexOf('ocean06') > -1) {
     return 'ocean06';
   }else {
-    return 'own';
+    return '';
   }
 };
 /**

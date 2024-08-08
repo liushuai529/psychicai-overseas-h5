@@ -157,7 +157,7 @@
                     <span
                       :class="{
                         birth: true,
-                        'hidden-one': item.status !== 'PAYED',
+                        // 'hidden-one': item.status !== 'PAYED',
                       }"
                       >{{
                         formateTime(
@@ -187,7 +187,7 @@
                     <span
                       :class="{
                         birth: true,
-                        'hidden-one': item.status !== 'PAYED',
+                        // 'hidden-one': item.status !== 'PAYED',
                       }"
                       >{{
                         formateTime(
@@ -207,7 +207,7 @@
                     <span
                       :class="{
                         birth: true,
-                        'hidden-one': item.status !== 'PAYED',
+                        // 'hidden-one': item.status !== 'PAYED',
                       }"
                       >{{
                         formateTime(

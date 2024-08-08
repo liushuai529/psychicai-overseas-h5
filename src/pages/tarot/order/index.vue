@@ -39,7 +39,7 @@
               <div class="right">{{ is_cn ? '订单编号：' : '訂單編號：' }}{{ item.order_id }}</div>
             </div>
             <div :class="['info']" v-if="is_android">
-              <div :class="['left', item.order_status === 'PAYED' ? 'payed' : 'pay']" style="display: flex;
+              <div :class="['left',]" style="display: flex;
             flex-direction: column;
             /* width: 7.2rem; */
             height: 100%;
@@ -56,13 +56,13 @@
               text-overflow: ellipsis;
               color: #FFFFFF;">{{ item.question }}</div>
               </div>
-              <div class="right" v-if="item.order_status !== 'PAYED'">
+              <!-- <div class="right" v-if="item.order_status !== 'PAYED'">
                 <div class="pay" @click="handleJump(item)">支付</div>
-              </div>
+              </div> -->
 
             </div>
 
-            <div class="code-container" v-if="is_android && item.order_status === 'PAYED'">
+            <div class="code-container" v-if="is_android ">
               <div class="left">
                 <div class="text">
                   <span>{{ is_cn ? '订单邀请码：' : '訂單邀請碼：' }}</span>
@@ -663,7 +663,7 @@ export default {
           .left {
             display: flex;
             flex-direction: column;
-            width: 4.9rem;
+            width: 7.2rem;
             height: 100%;
             max-height: 1rem;
             border-radius: 0.12rem;
