@@ -42,20 +42,20 @@ const tips_arr4 = {
   'zh-TW': '複製成功',
 };
 const tips_arr5 = {
-  'zh-CN': '复制识别码，打开命理寻真App',
-  'zh-TW': '復製識別碼，打開命理尋真App',
+  'zh-CN': '复制邀请码，打开命理寻真App',
+  'zh-TW': '復製邀請碼，打開命理尋真App',
 };
 const tips_arr6 = {
-  'zh-CN': '识别码',
-  'zh-TW': '識別碼',
+  'zh-CN': '邀请码',
+  'zh-TW': '邀請碼',
 };
 const tips_arr7 = {
   'zh-CN': '请在我的——我的提问中查看。',
   'zh-TW': '請在我的——我的提問中查看。',
 };
 const tips_arr8 = {
-  'zh-CN': '复制识别码并立即下载查看',
-  'zh-TW': '復製識別碼並立即下載查看',
+  'zh-CN': '复制邀请码并立即下载查看',
+  'zh-TW': '復製邀請碼並立即下載查看',
 };
 
 

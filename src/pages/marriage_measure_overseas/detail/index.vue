@@ -11,7 +11,7 @@
     :class="{
       detail: true,
       'hidden-scroll':
-        pay_modal || !!localStorage.getItem('mlxz_outer_animation'),
+        pay_modal || !!localStorage.getItem('mlxz_outer_animation') || show_discount_modal,
     }"
   >
     <AnimationPage
@@ -149,6 +149,7 @@
     />
     <NewFooter product_key="h5_marriage" />
     <!-- <div class="footer-box"></div> -->
+    <FixedDiscountModal product_key="h5_marriage" @change_discount_modal="change_discount_modal"/>
   </div>
 </template>
 
@@ -197,6 +198,7 @@ import AnimationPage from '../../../components/AnimationPage.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
 import PayItem from '../../../components/PayItem.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
+import FixedDiscountModal from '../../../components/FixedDiscountModal.vue';
 
 
 const mockTipsArr = {
@@ -226,6 +228,7 @@ export default {
     FbShareNotice,
     PayItem,
     PayGuideModal,
+    FixedDiscountModal,
   },
   data() {
     return {
@@ -274,6 +277,7 @@ export default {
       mingge_minfo: [], //命格男性信息
       mingge_finfo: [], //命格女性信息
       showPayGuideModal: false,//待支付蒙版  
+      show_discount_modal: false,//低价折扣弹窗
     };
   },
   filters: {
@@ -372,6 +376,12 @@ export default {
     });
   },
   methods: {
+     /**
+     * 显示低价折扣遮罩
+     */
+     change_discount_modal(val) {
+      this.show_discount_modal = val;
+    },
     showModal() {
       this.showPayGuideModal = !this.showPayGuideModal;
     },

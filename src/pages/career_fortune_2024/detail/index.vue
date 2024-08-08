@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
+  <div :class="{ detail: true, 'hidden-scroll': pay_modal || show_discount_modal}">
     <FbShareNotice v-if="is_show_fb_notice"/>
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <div class="new-pay-box">
@@ -81,6 +81,7 @@
       a_click_token="889e3j"
     />
     <NewFooter v-if="showFixedBtn" product_key="h5_career2024" />
+    <FixedDiscountModal product_key="h5_career2024" @change_discount_modal="change_discount_modal"/>
   </div>
 </template>
 
@@ -110,6 +111,7 @@ import NewFooter from '../../../components/NewFooter.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
 import PayItem from '../../../components/PayItem.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
+import FixedDiscountModal from '../../../components/FixedDiscountModal.vue';
 
 const Getmonth = () => {
   let arr = [];
@@ -128,6 +130,7 @@ export default {
     FbShareNotice,
     PayItem,
     PayGuideModal,
+    FixedDiscountModal,
   },
   data() {
     return {
@@ -170,6 +173,7 @@ export default {
       score: [10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100],
       showFixedBtn: false,
       is_show_btn: true,
+      show_discount_modal: false,//低价折扣弹窗
       cn_pay_btn:
         'https://psychicai-static.psychicai.pro/imgs/2404ef4eba890d5b4678b27ef01bc42bcd45.png',
       tw_pay_btn:
@@ -276,6 +280,12 @@ export default {
   },
 
   methods: {
+     /**
+     * 显示低价折扣遮罩
+     */
+     change_discount_modal(val) {
+      this.show_discount_modal = val;
+    },
     showModal() {
       this.showPayGuideModal = !this.showPayGuideModal;
     },

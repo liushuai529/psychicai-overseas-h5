@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ detail: true, 'hidden-scroll': pay_modal }">
+  <div :class="{ detail: true, 'hidden-scroll': pay_modal || show_discount_modal }">
     <FbShareNotice v-if="is_show_fb_notice" />
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <div class="pay-box">
@@ -66,6 +66,7 @@
       @close="pay_modal = false"
     />
     <NewFooter v-if="showFixedBtn" product_key="h5_annual2024"/>
+    <FixedDiscountModal product_key="h5_annual2024" @change_discount_modal="change_discount_modal"/>
   </div>
 </template>
 
@@ -113,6 +114,7 @@ import NewFooter from '../../../components/NewFooter.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
 import PayItem from '../../../components/PayItem.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
+import FixedDiscountModal from '../../../components/FixedDiscountModal.vue';
 
 const topic1 = [
   '23年事业是否变动？',
@@ -163,6 +165,7 @@ export default {
     FbShareNotice,
     PayItem,
     PayGuideModal,
+    FixedDiscountModal,
   },
   data() {
     return {
@@ -229,6 +232,7 @@ export default {
       modal_bg:
         'https://psychicai-static.psychicai.pro/imgs/240444508285d55242dbac9b5ab02272d80a.png',
       showPayGuideModal: false,//待支付蒙版    
+      show_discount_modal: false,//低价折扣弹窗
     };
   },
   computed: {
@@ -306,6 +310,12 @@ export default {
     });
   },
   methods: {
+     /**
+     * 显示低价折扣遮罩
+     */
+     change_discount_modal(val) {
+      this.show_discount_modal = val;
+    },
     showModal() {
       this.showPayGuideModal = !this.showPayGuideModal;
     },

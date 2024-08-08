@@ -50,8 +50,8 @@
 import utils from '../libs/utils';
 
 const tipsArr1 = {
-  'zh-CN': '识别码已复制',
-  'zh-TW': '識別碼已復製',
+  'zh-CN': '邀请码已复制',
+  'zh-TW': '邀請碼已復製',
 };
 const tipsArr2 = {
   'zh-CN': '1.打开命理寻真',

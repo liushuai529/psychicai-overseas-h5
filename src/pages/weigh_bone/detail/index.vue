@@ -6,7 +6,7 @@
  * @Description: 袁天罡称骨 支付页
 -->
 <template>
-  <div class="detail">
+  <div :class="{ detail: true, 'hidden-scroll': show_discount_modal}">
     <FbShareNotice v-if="is_show_fb_notice"/>
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <userInfo
@@ -29,6 +29,7 @@
       </div>
     </div> -->
     <footerBanner />
+    <FixedDiscountModal product_key="h5_weigh_bone" @change_discount_modal="change_discount_modal"/>
   </div>
 </template>
 
@@ -40,6 +41,7 @@ import userInfo from './userInfo.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
 import PayItem from '../../../components/PayItem.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
+import FixedDiscountModal from '../../../components/FixedDiscountModal.vue';
 
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 export default {
@@ -50,6 +52,7 @@ export default {
     FbShareNotice,
     PayItem,
     PayGuideModal,
+    FixedDiscountModal,
   },
   data() {
     return {
@@ -58,6 +61,7 @@ export default {
       query_user_string: '',
       showBottomBtn: false,
       showPayGuideModal: false,//待支付蒙版  
+      show_discount_modal: false,//低价折扣弹窗
     };
   },
   computed: {
@@ -94,6 +98,12 @@ export default {
     this.query_user_string = this.$route.query.querystring;
   },
   methods: {
+    /**
+     * 显示低价折扣遮罩
+     */
+     change_discount_modal(val) {
+      this.show_discount_modal = val;
+    },
     showModal() {
       this.showPayGuideModal = !this.showPayGuideModal;
     },

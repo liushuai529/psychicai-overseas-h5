@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') }">
+  <div :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') || show_discount_modal}">
     <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')"/>
     <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
@@ -105,6 +105,7 @@
     /> -->
     <img @click="payOrder" class="fix-btn emo-btn" :src="btn_url" />
     <HomeFooter product_key="h5_emotion2024" />
+    <FixedDiscountModal product_key="h5_emotion2024" @change_discount_modal="change_discount_modal"/>
   </div>
 </template>
 
@@ -155,6 +156,7 @@ import AnimationPage from '../../../components/AnimationPage.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
 import PayItem from '../../../components/PayItem.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
+import FixedDiscountModal from '../../../components/FixedDiscountModal.vue';
 
 export default {
   components: {
@@ -170,6 +172,7 @@ export default {
     FbShareNotice,
     PayItem,
     PayGuideModal,
+    FixedDiscountModal,
   },
   data() {
     return {
@@ -238,6 +241,7 @@ export default {
       gejujiedu: [], //格局信息
       showAnimation: true,//过渡动画标识
       showPayGuideModal: false,//待支付蒙版
+      show_discount_modal: false,//低价折扣弹窗
     };
   },
   watch: {
@@ -378,6 +382,12 @@ export default {
     });
   },
   methods: {
+     /**
+     * 显示低价折扣遮罩
+     */
+     change_discount_modal(val) {
+      this.show_discount_modal = val;
+    },
     showModal() {
       this.showPayGuideModal = !this.showPayGuideModal;
     },

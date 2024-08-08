@@ -1,5 +1,5 @@
 <template>
-  <div :class="['tarot-detail']">
+  <div :class="['tarot-detail', show_discount_modal? 'hidden-scroll': '' ]">
     <FbShareNotice v-if="is_show_fb_notice" />
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <CardList style="margin-top: 0.5rem;" />
@@ -7,18 +7,20 @@
       <div class="title-container">
         <div class="q-container">
           <img class="q-img" src="../../../assets/img/tarot/taluo_img_xing.webp" />
-          <div class="q-title">{{ is_cn? '你的问题': '你的問題' }}</div>
+          <div class="q-title">{{ is_cn ? '你的问题' : '你的問題' }}</div>
         </div>
         <div class="a-container">{{ question }}</div>
       </div>
     </div>
-    <img class="img-desc" :src="is_cn? cn_taluo_img_jieda: tw_taluo_img_jieda"/>
-   
+    <img class="img-desc" :src="is_cn ? cn_taluo_img_jieda : tw_taluo_img_jieda" />
+
     <TarotPayItem product_key="master_tarot" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
     <TarotPayDetail ref="payDetail" product_key="master_tarot" e_view_id="10010" c_view_id="-10011"
       e_view_name="page_view_tarotpay" a_view_token="184kba" c_click_id="-10012" e_click_name="click_tarotpay_pay"
       a_click_token="2rov44" />
+    <FixedDiscountModal product_key="master_tarot" @change_discount_modal="change_discount_modal" />
   </div>
+
 </template>
 
 <script>
@@ -30,6 +32,7 @@ import TarotPayDetail from '../../../components/TarotPayDetail.vue';
 import TarotPayItem from '../../../components/TarotPayItem.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
+import FixedDiscountModal from '../../../components/FixedDiscountModal.vue';
 import cn_taluo_img_jieda from '../../../assets/img/tarot/cn/taluo_img_jieda.webp';
 import tw_taluo_img_jieda from '../../../assets/img/tarot/tw/taluo_img_jieda.webp';
 import BaziTable from '../../../components/baziTable.vue';
@@ -41,7 +44,7 @@ import { report_id_arr } from '../../../libs/enum';
 
 
 export default {
-  components: { CardList, TarotPayDetail, TarotPayItem, FbShareNotice, PayGuideModal },
+  components: { CardList, TarotPayDetail, TarotPayItem, FbShareNotice, PayGuideModal, FixedDiscountModal },
 
   data() {
     return {
@@ -49,6 +52,7 @@ export default {
       tw_taluo_img_jieda,
       showPayGuideModal: false,//待支付蒙版  
       question: '',
+      show_discount_modal: false,//低价折扣弹窗
     };
   },
   computed: {
@@ -63,13 +67,19 @@ export default {
 
   },
   async created() {
-    this.question = decodeURIComponent(utils.getQueryStr('question'))|| localStorage.getItem('question') ||  ''
+    this.question = decodeURIComponent(utils.getQueryStr('question')) || localStorage.getItem('question') || ''
   },
 
   mounted() {
 
   },
   methods: {
+    /**
+   * 显示低价折扣遮罩
+   */
+    change_discount_modal(val) {
+      this.show_discount_modal = val;
+    },
     showModal() {
       this.showPayGuideModal = !this.showPayGuideModal;
     },

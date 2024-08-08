@@ -6,7 +6,7 @@
  * @Description: 
 -->
 <template>
-  <div :class="['detail', pay_modal ? 'fix-pop' : '']">
+  <div :class="['detail', pay_modal ? 'fix-pop' : '', show_discount_modal? 'hidden-scroll': '']">
     <FbShareNotice v-if="is_show_fb_notice"/>
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <div class="pay-box">
@@ -85,6 +85,7 @@
       a_click_token="rckacf"
     />
     <NewFooter v-if="showFixedBtn" product_key="h5_wealth2024" />
+    <FixedDiscountModal product_key="h5_wealth2024" @change_discount_modal="change_discount_modal"/>
   </div>
 </template>
 
@@ -120,8 +121,9 @@ import NewFooter from '../../../components/NewFooter.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
 import PayItem from '../../../components/PayItem.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
+import FixedDiscountModal from '../../../components/FixedDiscountModal.vue';
 export default {
-  components: { PayCard, BaziTable, payModal, NewFooter,FbShareNotice,PayItem, PayGuideModal  },
+  components: { PayCard, BaziTable, payModal, NewFooter,FbShareNotice,PayItem, PayGuideModal, FixedDiscountModal  },
   
   data() {
     return {
@@ -171,6 +173,7 @@ export default {
       is_show_btn: true,
       showFixedBtn: false,
       showPayGuideModal: false,//待支付蒙版  
+      show_discount_modal: false,//低价折扣弹窗
     };
   },
   computed: {
@@ -257,6 +260,12 @@ export default {
     self.loadBg('#ji', self.ji_svga);
   },
   methods: {
+     /**
+     * 显示低价折扣遮罩
+     */
+     change_discount_modal(val) {
+      this.show_discount_modal = val;
+    },
     showModal() {
       this.showPayGuideModal = !this.showPayGuideModal;
     },

@@ -879,7 +879,7 @@ export default {
     },
 
     /**
-     * @description: 复制订单识别码
+     * @description: 复制订单邀请码
      * @param {*} code
      * @return {*}
      */

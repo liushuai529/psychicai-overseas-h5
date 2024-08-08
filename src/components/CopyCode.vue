@@ -44,8 +44,8 @@ const tips_arr1 = {
   'zh-TW': '神準測算報告，請下載「命理尋真」',
 };
 const tips_arr2 = {
-  'zh-CN': '识别码',
-  'zh-TW': '識別碼',
+  'zh-CN': '邀请码',
+  'zh-TW': '邀請碼',
 };
 const tips_arr3 = {
   'zh-CN': '复制',
@@ -56,8 +56,8 @@ const tips_arr4 = {
   'zh-TW': '複製成功',
 };
 const tips_arr5 = {
-  'zh-CN': '复制识别码，打开命理寻真，可重复查看您购买的报告',
-  'zh-TW': '復製識別碼，打開命理尋真，可重復查看您購買的報告',
+  'zh-CN': '复制邀请码，打开命理寻真，可重复查看您购买的报告',
+  'zh-TW': '復製邀請碼，打開命理尋真，可重復查看您購買的報告',
 };
 export default {
   name: 'CopyCode',
@@ -153,7 +153,7 @@ export default {
   },
   methods: {
     /**
-     * @description: 复制识别码
+     * @description: 复制邀请码
      * @param {*} val
      * @return {*}
      */

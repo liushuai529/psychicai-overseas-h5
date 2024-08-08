@@ -65,7 +65,7 @@
             <div class="code-container" v-if="is_android && item.order_status === 'PAYED'">
               <div class="left">
                 <div class="text">
-                  <span>{{ is_cn ? '订单识别码：' : '訂單識別碼：' }}</span>
+                  <span>{{ is_cn ? '订单邀请码：' : '訂單邀請碼：' }}</span>
                   <span>{{ item.transfer_code }}</span>
                   <span class="copy" @click="copyCode(item.transfer_code)">{{ is_cn ? '复制' : '復製' }}</span>
                 </div>
@@ -215,9 +215,9 @@ export default {
         }
       } else {
         if (utils.getLanguage() === 'zh-CN') {
-          return '复制订单识别码，打开命理寻真，你可以在命理寻真中查看你的提问';
+          return '复制订单邀请码，打开命理寻真，你可以在命理寻真中查看你的提问';
         } else {
-          return '復製訂單識別碼，打開命理尋真，你可以在命理尋真中查看你的提問';
+          return '復製訂單邀請碼，打開命理尋真，你可以在命理尋真中查看你的提問';
         }
       }
     }
@@ -412,7 +412,7 @@ export default {
 
 
     /**
-     * @description: 复制订单识别码
+     * @description: 复制订单邀请码
      * @param {*} code
      * @return {*}
      */
