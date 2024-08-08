@@ -268,12 +268,12 @@ export const getTarotPayMethodsAPI = async data => {
 //查询折扣信息
 export const getDiscountGetAPI = async data => {
   await visitorLoginAPI();
-  return request(`/web/auth/trade/orders/ce_suan/recent/${data}`, 'GET', data);
+  return request(`/web/auth/trade/orders/discount/check/${data}`, 'GET', data);
 };
 
 //查询塔罗折扣信息
 export const getTarotDiscountGetAPI = async data => {
-  return request(`/web/auth/master/recent/${data}`, 'GET', data);
+  return request(`/web/auth/trade/orders/discount/check/${data}`, 'GET', data);
 };
 
 

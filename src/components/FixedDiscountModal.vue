@@ -94,7 +94,7 @@ export default {
     async getData() {
       if (utils.isAndroid() && this.product_key === 'h5_emotion2024') {
         if (this.product_key && this.product_key === 'master_tarot') {
-          let res = await getTarotDiscountGetAPI();
+          let res = await getTarotDiscountGetAPI(this.product_key);
           if (res && res.status === 1000) {
             if (res.data.discount) {
               this.transfer_code = res.data.transfer_code;
@@ -103,7 +103,7 @@ export default {
             }
           }
         } else if (this.product_key && this.product_key !== 'master_tarot') {
-          let res = await getDiscountGetAPI();
+          let res = await getDiscountGetAPI(this.product_key);
           if (res && res.status === 1000) {
             if (res.data.discount) {
               this.transfer_code = res.data.transfer_code;
