@@ -112,7 +112,7 @@ export default {
     },
     // 牌展示延迟
     cardShowDelay() {
-      return 0
+      return 1500
       return this.customData.animation_time / (this.customData.card_num - 1);
     },
     tagBgStyle() {
@@ -137,11 +137,11 @@ export default {
     this.initCardList();
   },
   async mounted() {
-    await utils.asleep(1000)
+    // await utils.asleep(1000)
     //发牌
-    this.showNextImage()
+    // this.showNextImage()
     //虚拟牌动画，视觉流畅度
-    this.card_v_animation()
+    // this.card_v_animation()
 
   },
   methods: {
@@ -197,8 +197,8 @@ export default {
         clearTimeout(time);
         //创建一张旋转牌优化帧动画卡顿问题
         // this.$refs.card_v.style.transform = `rotate(${this.rotate_deg(this.customData.card_num)}deg)`;
-        this.$refs.arm_v.classList.remove('transparent');
-        this.$refs.arm_v.classList.add('arm_animation');
+        // this.$refs.arm_v.classList.remove('transparent');
+        // this.$refs.arm_v.classList.add('arm_animation');
         let hands_show_time = setTimeout(() => {
           clearTimeout(hands_show_time);
           this.hands_show = true;
