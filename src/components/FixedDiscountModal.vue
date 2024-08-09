@@ -173,7 +173,7 @@ export default {
       width: 5.22rem;
       height: 0.84rem;
       background: #FFF6E3;
-      border-radius: 16px;
+      border-radius: 0.16rem;
       border: 0.01rem solid #9E5613;
       margin-top: 1.4rem;
       display: flex;

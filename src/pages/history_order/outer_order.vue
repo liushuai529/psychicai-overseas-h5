@@ -1424,6 +1424,7 @@ export default {
   background: url('../../assets/img/pop/status-bg-2.webp') no-repeat;
   background-size: contain;
   position: relative;
+  padding-bottom: 0.2rem
 }
 .bg-4-nopay {
   width: 7.1rem;
