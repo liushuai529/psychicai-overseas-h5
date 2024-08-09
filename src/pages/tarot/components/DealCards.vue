@@ -1,29 +1,29 @@
 <template>
   <div :class="['main', { 'rise_move': rise_move }]">
     <div class="bg-img"></div>
-    <div :class="['dealing-area', { 'dealing-area_sink': hands_show }, { 'rise_fadeout': rise_transparent }]">
+    <div :class="['dealing-area', { 'dealing-area_sink': true }]">
       <div class="card_area">
         <img class="card" :src="paimian_img" v-for="num, idx in customData.card_num" :key="num"
-          :style="{ transform: `rotate(${rotate_deg(num)}deg)` }" v-show="cardList[idx].show"
+          :style="{ transform: `rotate(${rotate_deg(num)}deg)` }" 
           @click="card_clicked(idx, $event)" />
         <!-- <img class="card card_v" :src="paimian_img" 
          ref="card_v"
          v-if="currentImageIndex < customData.card_num"
         /> -->
       </div>
-      <div class='arm_area'>
+      <!-- <div class='arm_area'>
         <img class="arm_v transparent" :src="arm_img" ref="arm_v" />
-      </div>
+      </div> -->
     </div>
-    <div :class="['hands_area', { 'rise_fadeout': rise_transparent }]">
-      <img :class="['hands', { 'hands_show': hands_show }]" :src="hands_img" />
+    <div :class="['hands_area']">
+      <img :class="['hands', { 'hands_show': true }]" :src="hands_img" />
     </div>
-    <div :class="['text_area', { 'rise_fadeout': rise_transparent }]">
-      <img :src="shouzhi_img" style="opacity: 0;"
+    <div :class="['text_area', ]">
+      <img :src="shouzhi_img" style="opacity: 1;"
         :class='["shouzhi_img",  { "pointer_animation": !card_animation }]' ref="shouzhi_img" />
-      <img class="text_img" :src="is_cn ? cn_xipai_text_img : tw_xipai_text_img" ref="text_img" />
+      <img class="text_img" :src="is_cn ? cn_choupai_text_img : tw_choupai_text_img" ref="text_img" />
     </div>
-    <div :class="['card_selection_area', { 'show_fadein': hands_show }]" ref="card_selection_area" style="opacity: 0;">
+    <div :class="['card_selection_area', ]" ref="card_selection_area" style="opacity: 1;">
       <div v-for="item, idx in selected_card_list" :key="idx" class="card_wrapper">
         <img :src="item.img_url" :class="['card_img', { flipped: isFlipped }]" v-show="item.show" />
         <img :class="['flip_card', { flip_card_show: flip_show }]" :src="item.flip_img_url" />
@@ -92,7 +92,7 @@ export default {
       card_desc_right,
       card_desc_left,
       currentImageIndex: 0,
-      card_animation: true,//铺牌时不可点击
+      card_animation: false,//铺牌时不可点击
       hands_show: false,//双手展示
       selected_card_list: [],//选择展示的卡牌
       selected_card_num: 0,//选择展示的卡牌数量
@@ -132,6 +132,7 @@ export default {
     }
   },
   created() {
+    this.hands_show = true;
     this.initCardList();
   },
   async mounted() {
@@ -323,7 +324,7 @@ export default {
       setTimeout(() => {
         this.$refs.text_img.src = this.is_cn ? this.cn_choupai_text_img : this.tw_choupai_text_img;
         this.$refs.text_img.style.opacity = 1;
-      }, 200);
+      }, 0);
     },
     /**
      * 翻牌动画
