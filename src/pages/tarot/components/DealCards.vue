@@ -4,7 +4,7 @@
     <div :class="['dealing-area', { 'dealing-area_sink': true }]">
       <div class="card_area">
         <img class="card" :src="paimian_img" v-for="num, idx in customData.card_num" :key="num"
-          :style="{ transform: `rotate(${rotate_deg(num)}deg)` }" 
+          :style="{ transform: `rotate(${rotate_deg(num)}deg)` }" v-show="cardList[idx].show"
           @click="card_clicked(idx, $event)" />
         <!-- <img class="card card_v" :src="paimian_img" 
          ref="card_v"
@@ -112,6 +112,7 @@ export default {
     },
     // 牌展示延迟
     cardShowDelay() {
+      return 0
       return this.customData.animation_time / (this.customData.card_num - 1);
     },
     tagBgStyle() {
@@ -149,7 +150,7 @@ export default {
      */
     initCardList() {
       this.cardList = Array.from({ length: this.customData.card_num }, (_) => ({
-        show: false,
+        show: true,
       }));
       this.selected_card_list = Array.from({ length: 3 }, (_) => ({
         show: false,
