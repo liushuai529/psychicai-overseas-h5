@@ -74,9 +74,9 @@
               'write-bg': item.can_write && item.status == 'PAYED',
               'one-bg':
                 item.product_key !== 'h5_marriage' &&
-                !item.can_write,
+                !item.can_write ,
               'bg-2-nopay':
-                item.status !== 'PAYED' &&
+                item.status !== 'PAYED' && 
                 item.product_key === 'h5_marriage' &&
                 !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
                   item.product_key
@@ -89,12 +89,12 @@
                 item.status !== 'PAYED' &&
                 item.product_key !== 'h5_marriage' &&
                 ['h5_combo2', 'h5_combo2_attach'].includes(item.product_key),
-              // 'bg-1-nopay':
-              //   item.status !== 'PAYED' &&
-              //   item.product_key !== 'h5_marriage' &&
-              //   !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
-              //     item.product_key
-              //   ),
+              'bg-1-nopay':
+                item.status !== 'PAYED' && is_ios &&
+                item.product_key !== 'h5_marriage' &&
+                !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                  item.product_key
+                ),
             }"
             v-for="(item, k) in list"
             :key="'order' + k"
@@ -124,20 +124,26 @@
                   item.status === 'PAYED',
                 'one-info':
                   item.product_key !== 'h5_marriage',
-                // 'no-pay-1':
-                //   item.status !== 'PAYED' &&
-                //   item.product_key !== 'h5_marriage' &&
-                //   !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
-                //     item.product_key
-                //   ),
-                'no-pay-2':
+                'no-pay-1':
                   item.status !== 'PAYED' &&
+                  item.product_key !== 'h5_marriage' &&
+                  !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                    item.product_key
+                  ) && is_ios,
+                'no-pay-2':
+                  item.status !== 'PAYED' && 
                   (item.product_key === 'h5_marriage' ||
                     ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
                       item.product_key
                     )),
                 'ml-24':
                   item.status !== 'PAYED' &&
+                  (item.product_key === 'h5_marriage' ||
+                    ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                      item.product_key
+                    )),
+                 'no-pay-2-android':   
+                 item.status !== 'PAYED' && is_android &&
                   (item.product_key === 'h5_marriage' ||
                     ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
                       item.product_key
@@ -157,7 +163,7 @@
                     <span
                       :class="{
                         birth: true,
-                        // 'hidden-one': item.status !== 'PAYED',
+                        'hidden-one': item.status !== 'PAYED' && is_ios,
                       }"
                       >{{
                         formateTime(
@@ -187,7 +193,7 @@
                     <span
                       :class="{
                         birth: true,
-                        // 'hidden-one': item.status !== 'PAYED',
+                        'hidden-one': item.status !== 'PAYED' && is_ios,
                       }"
                       >{{
                         formateTime(
@@ -207,7 +213,7 @@
                     <span
                       :class="{
                         birth: true,
-                        // 'hidden-one': item.status !== 'PAYED',
+                        'hidden-one': item.status !== 'PAYED' && is_ios,
                       }"
                       >{{
                         formateTime(
@@ -290,11 +296,11 @@
               <div
                 :class="[
                   'left',
-                  // item.status !== 'PAYED'
-                  //   ? 'hidden-btn'
-                  //   : item.transfer_code
-                  //   ? ''
-                  //   : ' visible-hidden',
+                  item.status !== 'PAYED' && is_ios
+                    ? 'hidden-btn'
+                    : item.transfer_code
+                    ? ''
+                    : ' visible-hidden',
                 ]"
               >
                 <span>{{ $t('tips-7') }}{{ item.transfer_code || '-' }}</span>
@@ -308,6 +314,7 @@
                 :class="[
                   'right-btn',
                   `${getStatusStyle(item)}`,
+                  is_ios && getAbsoluteStyle(item),
                 ]"
               >
                 <div class="status-text status-btn">
@@ -447,6 +454,9 @@ export default {
     CodePop,
   },
   computed: {
+    is_ios() {
+      return utils.isIos();
+    },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -1410,7 +1420,7 @@ export default {
 
 .bg-2-nopay {
   width: 7.1rem;
-  height: 2.44rem;
+  // height: 2.44rem;
   background: url('../../assets/img/pop/status-bg-2.webp') no-repeat;
   background-size: contain;
   position: relative;
@@ -1423,7 +1433,7 @@ export default {
   position: relative;
 }
 .bg-1-nopay {
-  height: 1.92rem;
+  height: 1.92rem !important;
   background: url('../../assets/img/pop/status-bg-1.webp') no-repeat;
   background-size: contain;
   position: relative;
@@ -1439,6 +1449,9 @@ export default {
   height: 1.28rem;
   background: #dcece5;
   border-radius: 0.12rem;
+}
+.no-pay-2-android {
+  // width: 6.1rem;
 }
 .hidden-btn {
   display: none;
