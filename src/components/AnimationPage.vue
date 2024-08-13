@@ -3,10 +3,10 @@
     <canvas id="canvas_mp" :class="['daji']">
     </canvas>
     <img class="mp" :src="getMpImg" />
-    <div :class="['progress-container', getBgTip]">
+    <div :class="['progress-container', getBgTip, isConsult? 'consult-color': '']">
       <div>{{ getTipText }}</div>
-      <div class="progress-uncheck">
-        <div class="progress-check" :style="{ width: getWidth }"></div>
+      <div :class="['progress-uncheck', isConsult? 'consult-progress-uncheck': '']">
+        <div :class="['progress-check', isConsult? 'consult-progress-check': '']" :style="{ width: getWidth }"></div>
       </div>
     </div>
   </div>
@@ -17,10 +17,14 @@ import utils from '../libs/utils';
 import { Downloader, Parser, Player } from 'svga.lite';
 import bg_bzhh from '../assets/img/components/animation_page/img_bj_hehun.png';
 import bg_emotion from '../assets/img/components/animation_page/img_bj_ganqing.png';
+import cn_bg_emotion_fate from '../assets/img/components/animation_page/cn/img_loading_bj_cn.webp';
+import tw_bg_emotion_fate from '../assets/img/components/animation_page/tw/img_loading_bj_tw.webp';
 import cn_bzhh_mp from '../assets/img/components/animation_page/bzhh_mp.png';
 import cn_emotion_mp from '../assets/img/components/animation_page/emotion_mp.png';
 import tw_bzhh_mp from '../assets/img/components/animation_page/bzhh_mp.png';
 import tw_emotion_mp from '../assets/img/components/animation_page/emotion_mp.png';
+import cn_emotion_fate_mp from '../assets/img/components/animation_page/emotion_fate_mp.webp';
+import tw_emotion_fate_mp from '../assets/img/components/animation_page/emotion_fate_mp.webp';
 
 const log_info = {
   h5_emotion2024: { module: 10006, 'content_id': -10034, 'event_name': 'page_view_giflove', type: 'page_view' }, // 2024年爱情运势
@@ -46,7 +50,11 @@ export default {
       cn_bzhh_mp,
       cn_emotion_mp,
       tw_bzhh_mp,
-      tw_emotion_mp
+      tw_emotion_mp,
+      cn_bg_emotion_fate,
+      tw_bg_emotion_fate,
+      cn_emotion_fate_mp,
+      tw_emotion_fate_mp,
     }
   },
   props: {
@@ -78,6 +86,9 @@ export default {
     );
   },
   computed: {
+    isConsult() {
+      return this.product_key === 'consult_time';
+    },
     getWidth() {
 
       return `${6.3 * (this.content / 10)}rem`
@@ -85,16 +96,19 @@ export default {
     getBgImg() {
       if (this.product_key === 'h5_emotion2024') {
         return 'emotion-bg';
+      } else if(this.product_key === 'consult_time') {
+        return utils.getLanguage() === 'zh-CN' ? 'consult-bg-cn' : 'consult-bg-tw'
       } else {
         return 'bzhh-bg';
       }
+      
     },
-    isBzhh() {
-      return this.product_key === 'h5_marriage'
-    },
+    
     getMpImg() {
       if (this.product_key === 'h5_emotion2024') {
         return utils.getLanguage() === 'zh-CN' ? cn_emotion_mp : tw_emotion_mp
+      } else if(this.product_key === 'consult_time') {
+        return utils.getLanguage() === 'zh-CN' ? cn_emotion_fate_mp : tw_emotion_fate_mp
       } else {
         return utils.getLanguage() === 'zh-CN' ? cn_bzhh_mp : tw_bzhh_mp
       }
@@ -102,6 +116,8 @@ export default {
     getBgTip() {
       if (this.product_key === 'h5_emotion2024') {
         return 'emotion-tip-bg';
+      } else if(this.product_key === 'consult_time') {
+        return 'emotion-fate-tip-bg';
       } else {
         return 'bzhh-tip-bg';
       }
@@ -234,8 +250,17 @@ export default {
         border-radius: 0.08rem;
         opacity: 1;
       }
+      .consult-progress-check {
+        background: linear-gradient( 90deg, #DD8BC4 0%, #B85391 100%);
+      }
     }
+    .consult-progress-uncheck {
+      background: rgba(184,83,145,0.1);
+    } 
 
+  }
+  .consult-color {
+    color: #B85391;
   }
 }
 
@@ -251,6 +276,18 @@ export default {
   background-size: cover
 }
 
+.consult-bg-cn {
+  background: url('../assets/img/components/animation_page/cn/img_loading_bj_cn.webp') no-repeat;
+  // background-color: rgba(236, 69, 106, 1);
+  background-size: cover
+}
+
+.consult-bg-tw {
+  background: url('../assets/img/components/animation_page/tw/img_loading_bj_tw.webp') no-repeat;
+  // background-color: rgba(236, 69, 106, 1);
+  background-size: cover
+}
+
 .bzhh-tip-bg {
   background: url('../assets/img/components/animation_page/img_jindu_bj_hehun.png') no-repeat;
   background-size: contain;
@@ -258,6 +295,10 @@ export default {
 
 .emotion-tip-bg {
   background: url('../assets/img/components/animation_page/img_jindu_bj_ganqing.png') no-repeat;
+  background-size: contain;
+}
+.emotion-fate-tip-bg {
+  background: url('../assets/img/components/animation_page/img_jindu_bj_zhengyuan.webp') no-repeat;
   background-size: contain;
 }
 </style>

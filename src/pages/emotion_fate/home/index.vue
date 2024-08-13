@@ -1,44 +1,43 @@
 <template>
   <div>
-    
-    <FbShareNotice v-if="is_show_fb_notice"/>
-    
-    <div
-      :class="{
-        container: true,
-        'fix-box': choose_time ? true : false,
-        'cn-bg': language === 'zh-CN',
-        'tw-bg': language === 'zh-TW',
-      }"
-    >
-     
-     
-      <img
-        class="order-icon"
-        @click="toOrder"
-        :src="is_cn ? cn_history_order : tw_history_order"
-        alt=""
-      />
-      <div
-        :class="['info', utils.showEmail() ? 'info-height' : '']"
-      >
-        <div class="info-content">
-          <img class="info-img":src="language === 'zh-CN'? cn_info: tw_info"/>
+
+    <FbShareNotice v-if="is_show_fb_notice" />
+
+    <div :class="{
+      container: true,
+      'fix-box': choose_time ? true : false,
+      'cn-bg': language === 'zh-CN',
+      'tw-bg': language === 'zh-TW',
+    }">
+
+
+      <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
+      <div :class="['info',]">
+        <div class="top-bg">
+          <img class="top-bg" src="../../../assets/img/emotion_fate/xinxi_img_bj_shang.webp" />
+        </div>
+        <div  :class="['info-content', utils.showEmail() ? 'info-height' : '']">
+          <div class="title">
+            <img :src="is_cn ? cn_img_tittle_home_xinxi : tw_img_tittle_home_xinxi" />
+          </div>
           <div class="info-item">
-            <div class="info-label">{{ $t('name-label') }}:</div>
-            <div class="info-input">
-              <input
-                type="text"
-                id="username"
-                v-model="username"
-                :placeholder="$t('name-placeholder')"
-              />
+            <div class="left input-container">
+              <div>姓名：</div>
+              <div class="info-input">
+                <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
+              </div>
+
+            </div>
+            <div class="sex-container">
+              <img :src="sex == 1 ? boy : girl" @click="changeSex()"/>
             </div>
           </div>
           <div class="divider-line"></div>
+
           <div class="info-item">
-            <div class="info-label">{{ $t('birth-label') }}:</div>
-            <div class="info-input">
+            <div class="left input-container">
+              <div>生辰：</div>
+              <div class="info-input">
               <div
                 class="info-birth"
                 :style="{
@@ -48,68 +47,47 @@
               >
                 {{ picker_date || $t('birth-placeholder') }}
               </div>
-              <img
-                @click="openPicker"
-                class="info-arrow"
-                src="../../../assets/img/emotion_v2/new/icon_you.webp"
-              />
+            </div>
+
+            </div>
+            <div class="birth-container">
+              <img src="../../../assets/img/emotion_fate/icon_rili.webp" @click="openPicker"/>
             </div>
           </div>
           <div class="divider-line"></div>
 
-          <div class="info-item">
-            <div class="info-label">{{ $t('sex-label') }}:</div>
-            <div class="info-input">
-              <div
-                class="sex-tab left-tab"
-                :class="{ active: sex === '1' }"
-                ref="sex_male"
-                @click="changeSex(1)"
-              >
-                <div class="sex-text">男</div>
-              </div>
-              <div
-                class="sex-tab"
-                :class="{ active: sex === '0' }"
-                ref="sex_female"
-                @click="changeSex(0)"
-              >
-                <div class="sex-text">女</div>
+
+
+
+          
+
+          <div v-if="utils.showEmail()" class="info-item">
+            <div class="left input-container">
+              <div>{{ $t('email-label') }}：</div>
+              <div class="info-input">
+                <input style="width: 4rem;" type="text" id="email" v-model="email" :placeholder="$t('email-placeholder')" />
               </div>
             </div>
-            
           </div>
           <div v-if="utils.showEmail()" class="divider-line"></div>
 
-          <div v-if="utils.showEmail()" class="info-item">
-            <div class="info-label">{{ $t('email-label') }}:</div>
-            <div class="info-input">
-              <input
-                type="text"
-                id="email"
-                v-model="email"
-                :placeholder="$t('email-placeholder')"
-              />
-            </div>
+
+
+          <div id="info-btn" class="btn" @click="check">
+            <img src="../../../assets/img/emotion_fate/img_home_btu_chakan.webp" />
           </div>
 
-          <img
-            id="info-btn"
-            class="info-btn emo-btn"
-            :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
-            @click="check"
-          />
           <div class="info-bottom">
             <img
               v-if="privacyChecked"
               class="info-check"
-              src="../../../assets/img/emotion/xieyi-checked.webp"
+              src="../../../assets/img/emotion_fate/login_icon_choose.webp"
               @click="privacyChecked = !privacyChecked"
             />
             <img
               v-else
               class="info-check"
-              src="../../../assets/img/emotion/xieyi-no-check.webp"
+              src="../../../assets/img/emotion_fate/login_icon_choose_no.webp"
               @click="privacyChecked = !privacyChecked"
             />
             {{ $t('check-label') }}
@@ -120,78 +98,36 @@
               $t('privacy-policy')
             }}</span>
           </div>
+
         </div>
+        <div class="top-bg">
+          <img class="top-bg" src="../../../assets/img/emotion_fate/xinxi_img_bj_xia.webp" />
+        </div>
+       
       </div>
-      <img class="card mt-180" :src="is_cn ? cn_icon_1 : tw_icon_1" />
+      <img class="card " :src="is_cn ? cn_icon_1 : tw_icon_1" />
       <img class="card" :src="is_cn ? cn_icon_2 : tw_icon_2" />
       <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" />
       <img class="card" :src="is_cn ? cn_icon_4 : tw_icon_4" />
       <img class="card" :src="is_cn ? cn_icon_5 : tw_icon_5" />
-      <img
-        v-if="showFixedBtn"
-        class="fix-btn emo-btn"
-        :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
-        @click="check"
-      />
+      <img v-if="showFixedBtn" class="fix-btn emo-btn" src="../../../assets/img/emotion_fate/img_home_btu_chakan.webp"
+        @click="check" />
       <!-- 時间选择控件 -->
-      <DatetimePicker
-        start="1901"
-        end="2020"
-        :year="year"
-        :month="month"
-        :date="date"
-        :birth_hour="birth_hour"
-        v-show="choose_time && !show_nongli"
-      ></DatetimePicker>
-      <NongliPicker
-        start="1901"
-        end="2020"
-        :year="year"
-        :month="month"
-        :date="date"
-        :birth_hour="birth_hour"
-        v-show="choose_time && show_nongli"
-      ></NongliPicker>
-   
-      <HotProduct
-        v-if="!is_channel_05"
-        product_key="h5_emotion2024"
-        url="emotion_fortune"
-        e_id="10006"
-      />
-      <NewFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
-      <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
-      <PopNotice
-        v-if="is_show_notice"
-        @close="closeNotice"
-        :count_down="count_down"
-        :product_key="product_key"
-        e_id="10006"
-        c_id="-10021"
-        c_name="click_2024lovely_discount1"
-      />
-      <FixedOrder
-        v-if="show_fixed_order && !is_show_notice"
-        :title="local_title"
-        :is_show_move="is_show_notice"
-        :new_order_key="new_order_key"
-        name="local"
-        top="4.7rem"
-        :time="local_time"
-        @payOrder="checkOrder"
-        @jumpDetail="jumpOrder"
-      />
-      <FixedOrder
-        v-if="show_api_order && !is_show_notice"
-        :title="last_title"
-        :is_show_move="is_show_notice"
-        :last_order="last_order"
-        name="api"
-        top="6.7rem"
-        :time="api_time"
-        @payOrder="checkOrder"
-        @jumpDetail="jumpOrder"
-      />
+      <DatetimePicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+        v-show="choose_time && !show_nongli"></DatetimePicker>
+      <NongliPicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+        v-show="choose_time && show_nongli"></NongliPicker>
+
+      <NewFooter v-if="showFixedBtn" product_key="consult_time" />
+      <!-- <HomeFooter v-if="showFixedBtn" product_key="consult_time" /> -->
+      <!-- <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"
+        e_id="10006" c_id="-10021" c_name="click_2024lovely_discount1" /> -->
+      <!-- <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
+        :new_order_key="new_order_key" name="local" top="4.7rem" :time="local_time" @payOrder="checkOrder"
+        @jumpDetail="jumpOrder" />
+      <FixedOrder v-if="show_api_order && !is_show_notice" :title="last_title" :is_show_move="is_show_notice"
+        :last_order="last_order" name="api" top="6.7rem" :time="api_time" @payOrder="checkOrder"
+        @jumpDetail="jumpOrder" /> -->
     </div>
   </div>
 </template>
@@ -233,21 +169,26 @@ import tw_card_2 from '../../../assets/img/emotion/new/tw/3.webp';
 import cn_history_order from '../../../assets/img/emotion_v2/new/bgm_lsdd.webp';
 import tw_history_order from '../../../assets/img/emotion_v2/new/bgm_lsdd_fan.webp';
 
-import HotProduct from '../../../components/hotProduct.vue';
 import PopNotice from '../../../components/PopNotice.vue';
 
-import cn_icon_1 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home1.webp';
-import cn_icon_2 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home2.webp';
-import cn_icon_3 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home3.webp';
-import cn_icon_4 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home4.webp';
-import cn_icon_5 from '../../../assets/img/emotion_v2/new/cn/ganqing_img_home5.webp';
+import cn_img_tittle_home_xinxi from '../../../assets/img/emotion_fate/cn/img_tittle_home_xinxi_cn.webp';
+import tw_img_tittle_home_xinxi from '../../../assets/img/emotion_fate/tw/img_tittle_home_xinxi_tw.webp';
+
+import boy from '../../../assets/img/emotion_fate/img_boy.webp';
+import girl from '../../../assets/img/emotion_fate/img_girl.webp';
+
+import cn_icon_1 from '../../../assets/img/emotion_fate/cn/home_neirong_01_cn.webp';
+import cn_icon_2 from '../../../assets/img/emotion_fate/cn/home_neirong_02_cn.webp';
+import cn_icon_3 from '../../../assets/img/emotion_fate/cn/home_neirong_03_cn.webp';
+import cn_icon_4 from '../../../assets/img/emotion_fate/cn/home_neirong_04_cn.webp';
+import cn_icon_5 from '../../../assets/img/emotion_fate/cn/home_neirong_05_cn.webp';
 
 
-import tw_icon_1 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home1_fanti.webp';
-import tw_icon_2 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home2_fanti.webp';
-import tw_icon_3 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home3_fanti.webp';
-import tw_icon_4 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home4_fanti.webp';
-import tw_icon_5 from '../../../assets/img/emotion_v2/new/tw/ganqing_img_home5_fanti.webp';
+import tw_icon_1 from '../../../assets/img/emotion_fate/tw/home_neirong_01_tw.webp';
+import tw_icon_2 from '../../../assets/img/emotion_fate/tw/home_neirong_02_tw.webp';
+import tw_icon_3 from '../../../assets/img/emotion_fate/tw/home_neirong_03_tw.webp';
+import tw_icon_4 from '../../../assets/img/emotion_fate/tw/home_neirong_04_tw.webp';
+import tw_icon_5 from '../../../assets/img/emotion_fate/tw/home_neirong_05_tw.webp';
 import cn_info from '../../../assets/img/emotion_v2/new/cn/info.webp';
 import tw_info from '../../../assets/img/emotion_v2/new/tw/info.webp';
 import NewFooter from '../../../components/NewFooter.vue';
@@ -269,7 +210,6 @@ export default {
     DatetimePicker,
     NongliPicker,
     combinePayPop,
-    HotProduct,
     HomeFooter,
     PopNotice,
     FixedOrder,
@@ -278,6 +218,10 @@ export default {
   },
   data() {
     return {
+      cn_img_tittle_home_xinxi,
+      tw_img_tittle_home_xinxi,
+      boy,
+      girl,
       cn_icon_1,
       cn_icon_2,
       cn_icon_3,
@@ -346,7 +290,7 @@ export default {
   },
   computed: {
     is_show_fb_notice() {
-      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+      return utils.isFBContainer();
     },
     productList() {
       return this.$store.state.common.productList;
@@ -354,7 +298,7 @@ export default {
     is_cn() {
       return this.language === 'zh-CN';
     },
-  
+
     show_fixed_order() {
       if (this.last_order) {
         if (
@@ -424,12 +368,7 @@ export default {
     },
   },
   created() {
-    this.showComboAttach();
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
-        this.showComboAttach();
-      }
-    });
+    // this.showComboAttach();
     utils.isProd() &&
       tStatistic &&
       tStatistic.send({
@@ -454,7 +393,7 @@ export default {
     );
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
-    this.getLastOrder();
+    // this.getLastOrder();
     // 埋点事件上传
     reportBuryingEventAPI({
       event: 'page_view_2024lovely_main',
@@ -487,11 +426,11 @@ export default {
         console.log('no fbq:', err);
       }
     }
-    this.showNoticePop();
+    // this.showNoticePop();
 
     // 赋默认值
     let storaged_userInfo = window.localStorage.getItem(
-      '_emotion_fortune_info'
+      '_emotion_fate_info'
     );
     if (storaged_userInfo) {
       let arr = storaged_userInfo.split('|');
@@ -500,7 +439,7 @@ export default {
       this.month = arr[4];
       this.date = arr[5];
       this.birth_hour = arr[6];
-      this.email = (arr[7] == ''|| arr[7] == 'undefined')? '': arr[7];
+      this.email = (arr[7] == '' || arr[7] == 'undefined') ? '' : arr[7];
       this.username = arr[0];
       this.sex = arr[1] + '';
       this.gongli_nongli = arr[2];
@@ -558,11 +497,11 @@ export default {
       var svgaUrl = 'https://psychicai-static.psychicai.pro/imgs/2406c6f666683c824312b07e66feb0c73ad2.svga'; // 替换为你的SVGA文件路径
       var image = new Image();
       image.src = svgaUrl;
-      image.onload = function() {
-          console.log('SVGA preloaded successfully');
+      image.onload = function () {
+        console.log('SVGA preloaded successfully');
       };
-      image.onerror = function() {
-          console.error('Failed to preload SVGA');
+      image.onerror = function () {
+        console.error('Failed to preload SVGA');
       };
     },
     //顶部引导横幅，开始测算
@@ -573,11 +512,9 @@ export default {
       // } else {
 
       // }
-      location.href = `${
-        path_enums[this.comboAttachData.product_key]
-      }.html#/?has_pay=SUCCESS&order_id=${
-        this.comboAttachData.order_id
-      }&product_key=${this.comboAttachData.product_key}`;
+      location.href = `${path_enums[this.comboAttachData.product_key]
+        }.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id
+        }&product_key=${this.comboAttachData.product_key}`;
     },
     //请求接口，是否展示引导标识
     async showComboAttach() {
@@ -642,7 +579,7 @@ export default {
       querystring += time_obj.birth_hour || '-1';
       querystring += '|';
       querystring += email;
-      window.localStorage.setItem('_emotion_fortune_info', querystring);
+      window.localStorage.setItem('_emotion_fate_info', querystring);
       location.href = url;
     },
     /**
@@ -659,7 +596,12 @@ export default {
      * @return {*}
      */
     changeSex(val) {
-      this.sex = val + '';
+      if(this.sex == 0) {
+        this.sex = 1; 
+      } else {
+        this.sex = 0; 
+      }
+      // this.sex = val + '';
     },
 
     // 端内加载背景SVGA动画
@@ -749,7 +691,7 @@ export default {
       querystring += '|';
       querystring += email;
 
-      window.localStorage.setItem('_emotion_fortune_info', querystring);
+      window.localStorage.setItem('_emotion_fate_info', querystring);
       location.href = url;
     },
 
@@ -850,9 +792,9 @@ export default {
       //   dom.focus();
       //   return;
       // }
-      
 
-      
+
+
 
       let querystring = '';
       querystring += username;
@@ -872,7 +814,7 @@ export default {
       querystring += email;
       //设置过渡动画标识
       this.setAnimation();
-      window.localStorage.setItem('_emotion_fortune_info', querystring);
+      window.localStorage.setItem('_emotion_fate_info', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
@@ -1012,7 +954,7 @@ export default {
           male_is_gongli,
           female_is_gongli,
           sex,
-          email: email === undefined || !utils.showEmail()? '': email,
+          email: email === undefined || !utils.showEmail() ? '' : email,
         };
       }
       // 其他 单人信息
@@ -1035,10 +977,9 @@ export default {
           birth_month,
           birth_date,
           birth_hour,
-          email: email === undefined || !utils.showEmail()? '': email,
+          email: email === undefined || !utils.showEmail() ? '' : email,
           date: moment(
-            `${birth_year}${
-              +birth_month < 10 ? '0' + birth_month : birth_month
+            `${birth_year}${+birth_month < 10 ? '0' + birth_month : birth_month
             }${+birth_date < 10 ? '0' + birth_date : birth_date}`
           ).format('YYYYMMDD'),
         };
@@ -1170,11 +1111,9 @@ export default {
           fbp: utils.getcookieInfo('_fbp'),
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
         },
-        callback_url: `${location.origin}/${utils.getFBChannel()}/${
-          path_enums[product_key]
-        }.html#/result?path=${
-          path_enums[product_key]
-        }&report_price=${payment}&discount_pay=1`,
+        callback_url: `${location.origin}/${utils.getFBChannel()}/${path_enums[product_key]
+          }.html#/result?path=${path_enums[product_key]
+          }&report_price=${payment}&discount_pay=1`,
       };
 
       const res = await payOrderAPI(params);
@@ -1202,9 +1141,8 @@ export default {
         let female_str = marry_info.female_str;
         let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
 &pay_modal=1&use_fixed_time=1&discount_pay=1`;
-        location.href = `${location.origin}/${utils.getFBChannel()}/${
-          path_enums[this.new_order_key]
-        }.html#/${path}`;
+        location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
+          }.html#/${path}`;
 
         return;
       }
@@ -1214,9 +1152,8 @@ export default {
         '&pay_modal=1' +
         '&use_fixed_time=1&discount_pay=1';
 
-      location.href = `${location.origin}/${utils.getFBChannel()}/${
-        path_enums[this.new_order_key]
-      }.html#/${path}`;
+      location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
+        }.html#/${path}`;
     },
   },
 };
@@ -1225,23 +1162,29 @@ export default {
 .fix-box {
   position: fixed !important;
 }
+
 @keyframes scaleBtn {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(0.96);
   }
+
   100% {
     transform: scale(1.04);
   }
 }
+
 .cn-bg {
-  background-image: url('../../../assets/img/emotion_v2/new/cn/bg.webp');
+  background-image: url('../../../assets/img/emotion_fate/cn/img_home_topbj_cn.webp');
 }
+
 .tw-bg {
-  background-image: url('../../../assets/img/emotion_v2/new/cn/bg.webp');
+  background-image: url('../../../assets/img/emotion_fate/tw/img_home_topbj_tw.webp');
 }
+
 #bg-svga {
   position: absolute;
   width: 7.5rem;
@@ -1255,64 +1198,84 @@ export default {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: top center;
-  background-color: #ec436b;
+  background-color: #FEF1CF;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
   padding-bottom: 1.2rem;
-  .title {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    img {
-      margin-top: 0.35rem;
-      margin-left: 0.51rem;
-      width: 2.8rem;
-    }
-  }
 
-  
+  // .title {
+  //   position: relative;
+  //   z-index: 10;
+  //   width: 100%;
+
+  //   img {
+  //     margin-top: 0.35rem;
+  //     margin-left: 0.51rem;
+  //     width: 2.8rem;
+  //   }
+  // }
+
+
   .info {
-    justify-content: center;
     position: relative;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 7.1rem;
-    height: 4.47rem;
-    border-radius: 0.16rem;
-    background: rgba(255, 250, 250, 1);
-    margin-top: 8.83rem;
-    .info-bg {
-      display: block;
-      width: 7.22rem;
-      height: 8.06rem;
+    // height: 6.34rem;
+    margin-top: 8.3rem;
+
+    .top-bg {
+      width: 7.1rem;
+      height: 0.4rem;
+      display: flex;
+
     }
+
     .info-content {
-      position: absolute;
-      top: 1rem;
-      width: 100%;
+      background: url('../../../assets/img/emotion_fate/xinxi_img_bj_zhong.webp') no-repeat;
+      // background-size: contain;
+      width: 7.1rem;
+      height: 4.54rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      .info-img {
-        width: 6.68rem;
-        height: 0.9rem;
-        margin-top: -1.1rem;
+      padding: 0 0.4rem;
+
+      .title {
+        width: 6.1rem;
+        height: 0.7rem;
+        display: flex;
+
+        img {
+          width: 6.1rem;
+          height: 0.7rem;
+        }
       }
 
       .info-item {
-        // margin-bottom: 0.2rem;
-        width: 6.5rem;
-        display: flex;
+        width: 6.3rem;
+        height: 0.82rem;
+        line-height: 0.82rem;
+        overflow: hidden;
+        // border: 1px solid red;
         align-items: center;
-        .info-label {
-          flex: none;
-          color: #222;
-          font-size: 0.3rem;
-          margin-right: 0.14rem;
+        display: flex;
+        justify-content: space-between;
+        font-weight: 400;
+        font-size: 0.32rem;
+        color: #3A0922;
+        line-height: 0.48rem;
+        text-align: justify;
+        font-style: normal;
+
+        .left {
+          display: flex;
         }
-        .info-input {
+
+        .input-container {
           flex: auto;
           height: 0.92rem;
           // background-color: #fff;
@@ -1321,115 +1284,136 @@ export default {
           box-sizing: border-box;
           padding: 0.06rem;
           align-items: center;
+
           input {
-            width: 100%;
+            // width: 100%;
+            width: 3.2rem;
             font-size: 0.3rem;
             line-height: 0.42rem;
             outline: none;
             border: none;
             background-color: transparent;
             padding: 0;
-            margin: 0 0.3rem;
+            // margin: 0 0.3rem;
+
             &::input-placeholder {
               color: rgba(51, 51, 51, 0.5);
             }
+
             &::-webkit-input-placeholder {
               color: rgba(51, 51, 51, 0.5);
             }
+
             &::-moz-placeholder {
               color: rgba(51, 51, 51, 0.5);
             }
+
             &::-moz-placeholder {
               color: rgba(51, 51, 51, 0.5);
             }
+
             &::-ms-input-placeholder {
               color: rgba(51, 51, 51, 0.5);
             }
           }
-          .info-birth {
-            // flex: auto;
-            font-size: 0.3rem;
-            line-height: 0.42rem;
-            margin-left: 0.24rem;
-          }
-          .info-arrow {
-            flex: none;
-            width: 0.12rem;
-            height: 0.22rem;
-            margin-right: 0.14rem;
-            margin-left: 0.1rem;
-          }
-          .left-tab {
-            margin-left: 0.24rem;
-          }
-          .sex-tab {
-            width: 0.58rem;
-            height: 0.58rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.3rem;
-            color: #909090;
-            border-radius: 50%;
-            margin-right: 0.17rem;
-            background: #fff2f5;
-            border: 1px solid #ffcfda;
+        }
 
-            .sex-icon {
-              display: block;
-              width: 0.3rem;
-              height: 0.3rem;
-              margin-right: 0.1rem;
-            }
-            &.active {
-              color: #fff;
-              background-color: #ec436b;
-              border: none;
-            }
+        .sex-container {
+          display: flex;
+          width: 1.7rem;
+          height: 0.6rem;
+
+          img {
+            width: 1.7rem;
+            height: 0.6rem;
+          }
+        }
+
+        .birth-container {
+          margin-right: 0.13rem;
+          display: flex;
+          width: 0.46rem;
+          height: 0.46rem;
+
+          img {
+            width: 0.46rem;
+            height: 0.46rem;
           }
         }
       }
-      .info-btn {
-        width: 6.26rem;
-        height: 1.34rem;
-        margin-top: 0.7rem;
-        object-fit: contain;
+
+      .btn {
+        display: flex;
+        margin-top: 0.4rem;
+        width: 5.9rem;
+        height: 0.92rem;
+
+        img {
+          width: 5.9rem;
+          height: 0.92rem;
+        }
       }
       .info-bottom {
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #fff;
+        color: #95979F;
         font-size: 0.22rem;
         line-height: 0.3rem;
-        margin-top: 0.14rem;
+        margin-top: 0.3rem;
         img {
           width: 0.3rem;
           height: 0.3rem;
           margin-right: 0.12rem;
         }
+        span {
+          color: #CA8617;
+        }
       }
     }
-  }
-  .info-height {
+    .info-height {
     height: 5.4rem;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  }
+  
+  
+
   .card {
-    width: 7.06rem;
-    margin-bottom: 0.36rem;
+    width: 7.1rem;
+    // margin-bottom: 0.36rem;
+    margin-top: 0.24rem;
   }
 }
 
-.mt-180 {
-  margin-top: 2.4rem;
-}
+// .mt-180 {
+//   margin-top: 0.24rem;
+// }
+
 .divider-line {
   width: 6.5rem;
-  height: 1px;
-  background: #000000;
-  opacity: 0.13;
-  margin-bottom: 0.2rem;
+  height: 0.02rem;
+  background: #F7F3E9;
+  margin-top: 0.12rem;
 }
+
 .footer {
   width: 100%;
   height: 1rem;
@@ -1445,6 +1429,7 @@ export default {
 
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }
+
 .order-icon {
   position: fixed;
   right: 0;
@@ -1460,11 +1445,13 @@ export default {
   background: url('../../../assets/img/emotion/new/result_card2.webp') no-repeat;
   background-size: contain;
   margin-bottom: 0.2rem;
+
   #qian {
     width: 100%;
     height: 100%;
   }
 }
+
 .footer-box {
   width: 7.5rem;
   height: 1.6rem;
@@ -1495,15 +1482,18 @@ export default {
   font-weight: 500;
   font-size: 0.28rem;
   color: #ffffff;
+
   .left {
     margin-right: 0.08rem;
     width: 0.32rem;
     height: 0.32rem;
   }
 }
+
 .back-box-combo {
   top: 0.4rem;
 }
+
 @keyframes emoBtn {
   0% {
     transform: scale(0.95);
@@ -1513,6 +1503,7 @@ export default {
     transform: scale(1.1);
   }
 }
+
 .emo-btn {
   animation: emoBtn 1s infinite ease-in-out alternate;
 }

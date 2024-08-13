@@ -19,6 +19,8 @@ import h5_wealth2024 from '../assets/img/bottom_bg/h5_wealth2024.webp';
 import h5_career2024 from '../assets/img/bottom_bg/h5_career2024.webp';
 import h5_bai_gua from '../assets/img/bottom_bg/h5_bai_gua.webp';
 import h5_annual2024 from '../assets/img/bottom_bg/h5_annual2024.webp';
+import consult_time from '../assets/img/bottom_bg/consult_time.webp';
+
 
 export default {
   name: "NewFooter",
@@ -36,6 +38,7 @@ export default {
       h5_career2024,
       h5_bai_gua,
       h5_annual2024,
+      consult_time,
     }
   },
   computed: {
@@ -53,6 +56,8 @@ export default {
           return this.h5_bai_gua
         case 'h5_annual2024':
           return this.h5_annual2024
+        case 'consult_time':
+          return this.consult_time
         default:
           break;
       }

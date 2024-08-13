@@ -1,7 +1,7 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') || show_discount_modal}">
     <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')"/>
-    <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
+    <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="consult_time" :visible="showAnimation"  @update-visible="showAnimation = false"/>
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
     <img
       class="header-title"
@@ -80,29 +80,7 @@
     <NewFooter product_key="h5_emotion2024" />
 
     <div class="footer"></div>
-    <!-- <img
-      v-if="showFixedBtn"
-      @click="showPayModal"
-      class="ce-btn huxi-btn fix-box"
-      :src="language === 'zh-CN' ? cn_pay_btn : tw_pay_btn"
-      alt=""
-    /> -->
-    <!-- <payModal
-      :product_key="product_key"
-      v-model="pay_modal"
-      :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg"
-      :query_user_string="query_user_string"
-      :title="username_title"
-      title_style="color:#fff"
-      @close="pay_modal = false"
-      e_view_id="10006"
-      c_view_id="-10005"
-      e_view_name="view_2024lovely_pay"
-      a_view_token="184kba"
-      c_click_id="-10006"
-      e_click_name="click_2024lovely_pay"
-      a_click_token="2rov44"
-    /> -->
+    
     <img @click="payOrder" class="fix-btn emo-btn" :src="btn_url" />
     <HomeFooter product_key="h5_emotion2024" />
     <FixedDiscountModal product_key="h5_emotion2024" @change_discount_modal="change_discount_modal"/>
