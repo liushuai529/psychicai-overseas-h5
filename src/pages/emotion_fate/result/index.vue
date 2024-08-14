@@ -1,7 +1,44 @@
-
 <template>
-  <div class="result" :class="['result', show_pop_modal? 'hidden-scroll': '']">
-    
+  <div class="result" :class="['result']">
+    <div class="top">
+      <img :src="is_cn ? cn_img_chat_top_laoshi : tw_img_chat_top_laoshi" />
+    </div>
+    <div class="bottom">
+      <img :src="bottom_img" />
+    </div>
+    <div class="content-container">
+      <div class="item" v-if="message_show1">
+        <img src="../../../assets/img/emotion_fate/img_chat_avatar.webp" />
+        <div class="message">
+          您好，吴桂花，我是本次服务您的xxx老师！
+        </div>
+      </div>
+
+      <div class="item" v-if="message_show2">
+        <img src="../../../assets/img/emotion_fate/img_chat_avatar.webp" />
+        <div class="message">
+          <span>您的八字信息：</span>
+          <span>姓名：吴桂花</span>
+          <span>日期：1998年3月22日 时辰不清楚</span>
+        </div>
+      </div>
+
+      <div class="item" v-if="message_show3">
+        <img src="../../../assets/img/emotion_fate/img_chat_avatar.webp" />
+        <div class="message">
+          <div class="title">您的【Ta是你的正缘吗？】真人1v1咨询订单已生成，您可前往【命理寻真】App中进行实时咨询</div>
+          <div class="desc">复制邀请码，打开App即可咨询，前往「我的订单」—点击「继续沟通」</div>
+          <div class="code">
+            <div>邀请码：HJGE7HJ64JLSUF6S</div>
+            <div class="copy">复制</div>
+          </div>
+          <img class="logo" :src="logo_img" />
+          <div class="btn">复制邀请码并下载查看</div>
+        </div>
+      </div>
+    </div>
+
+
 
   </div>
 </template>
@@ -12,6 +49,24 @@ import { Indicator, Toast } from 'mint-ui';
 import contentDetail from './content_detail.vue';
 import utils from '../../../libs/utils.js';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
+import cn_img_chat_top_laoshi from '../../../assets/img/emotion_fate/cn/img_chat_top_laoshi_cn.webp';
+import tw_img_chat_top_laoshi from '../../../assets/img/emotion_fate/tw/img_chat_top_laoshi_tw.webp';
+
+import img_chat_dibu_ios_cn from '../../../assets/img/emotion_fate/cn/img_chat_dibu_ios_cn.webp';
+import img_chat_dibu_android_cn from '../../../assets/img/emotion_fate/cn/img_chat_dibu_android_cn.webp';
+
+import img_chat_dibu_ios_tw from '../../../assets/img/emotion_fate/tw/img_chat_dibu_ios_tw.webp';
+import img_chat_dibu_android_tw from '../../../assets/img/emotion_fate/tw/img_chat_dibu_android_tw.webp';
+
+
+import img_popovers_logo_ios_cn from '../../../assets/img/emotion_fate/cn/img_popovers_logo_ios_cn.webp';
+import img_popovers_logo_android_cn from '../../../assets/img/emotion_fate/cn/img_popovers_logo_android_cn.webp';
+
+import img_popovers_logo_ios_tw from '../../../assets/img/emotion_fate/tw/img_popovers_logo_ios_tw.webp';
+import img_popovers_logo_android_tw from '../../../assets/img/emotion_fate/tw/img_popovers_logo_android_tw.webp';
+
+
+
 import {
   getResultAPI,
   resultCheckAPI,
@@ -23,6 +78,17 @@ export default {
   components: { contentDetail },
   data() {
     return {
+      img_popovers_logo_ios_cn,
+      img_popovers_logo_android_cn,
+      img_popovers_logo_ios_tw,
+      img_popovers_logo_android_tw,
+      cn_img_chat_top_laoshi,
+      tw_img_chat_top_laoshi,
+      img_chat_dibu_ios_cn,
+      img_chat_dibu_ios_tw,
+      img_chat_dibu_android_cn,
+      img_chat_dibu_android_tw,
+
       loading: false,
       hasData: false,
 
@@ -77,11 +143,15 @@ export default {
       wuxingqiang: '',
       tao_hua_num: 0,
       fuqigong: '',
-      show_pop_modal: false,//底部引导用户下载遮罩
+      is_first: false,
+      message_show1: false,
+      message_show2: false,
+      message_show3: false,
+
     };
   },
   created() {
-   
+
     // localStorage.removeItem('mlxz_fixed_order_info');
     // localStorage.removeItem('mlxz_fixed_order_key');
     // localStorage.removeItem('mlxz_fixed_local_order_time');
@@ -89,6 +159,14 @@ export default {
   },
   async mounted() {
     this.order_id = this.$route.query.id || this.$route.query.order_id;
+    if(!localStorage.getItem(`emotion_fate_order_${this.order_id}`)) {
+      this.is_first = true;
+    } else {
+      this.message_show1= true;
+      this.message_show2= true;
+      this.message_show3= true;
+    }
+    localStorage.setItem(`emotion_fate_order_${this.order_id}`, 1)
 
     window.scrollTo(0, 0);
     utils.gcyLog(`order_id:${this.order_id}`, {
@@ -131,18 +209,60 @@ export default {
     this.query();
   },
   computed: {
-    lang() {
+    is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
-  },
-  watch: {},
-  methods: {
-    /**
-     * 显示底部引导用户下载app遮罩
-     */
-    change_pop_modal() {
-      this.show_pop_modal = true;
+    logo_img() {
+
+      if (utils.isIos()) {
+        if (utils.getLanguage() === 'zh-CN') {
+          return img_popovers_logo_ios_cn;
+        } else {
+          return img_popovers_logo_ios_tw;
+        }
+      } else {
+        if (utils.getLanguage() === 'zh-CN') {
+          return img_popovers_logo_android_cn;
+        } else {
+          return img_popovers_logo_android_tw;
+        }
+      }
     },
+    bottom_img() {
+      if (utils.isIos()) {
+        if (utils.getLanguage() === 'zh-CN') {
+          return img_chat_dibu_ios_cn;
+        } else {
+          return img_chat_dibu_ios_tw;
+        }
+      } else {
+        if (utils.getLanguage() === 'zh-CN') {
+          return img_chat_dibu_android_cn;
+        } else {
+          return img_chat_dibu_android_tw;
+        }
+      }
+    },
+  },
+  watch: {
+    is_first(val) {
+      console.log('va', val)
+      if(val) {
+        setTimeout(() => {
+          this.message_show1= true;
+    
+        }, 1000);
+        setTimeout(() => {
+      this.message_show2= true;
+        }, 2000);
+        setTimeout(() => {
+     
+      this.message_show3= true;
+        }, 3000);
+      }
+    },
+  },
+  methods: {
     /**
      * @description: 校验是否上报埋点
      * @return {*}
@@ -279,7 +399,7 @@ export default {
             fbq('track', 'Purchase', {
               value: report_price.toFixed(2),
               currency: currency_type,
-            },{eventID: this.order_id});
+            }, { eventID: this.order_id });
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '完成FB埋点上报，Purchase',
               mlxz_value: report_price.toFixed(2),
@@ -411,7 +531,7 @@ export default {
       getResultAPI({ order_id: this.$route.query.order_id }).then(res => {
         let can_store =
           (res.data && ['PAYED', 'FAIL'].includes(res.data.status)) ||
-          (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
+            (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
             ? true
             : false;
         if (res.data.status === 'PAYED') {
@@ -481,10 +601,10 @@ export default {
           road_forecast === '吉'
             ? 1
             : road_forecast === '小吉'
-            ? 2
-            : road_forecast === '平'
-            ? 3
-            : 4;
+              ? 2
+              : road_forecast === '平'
+                ? 3
+                : 4;
 
         this.fortune.concept = concept.replace(/\n/g, '<br/>');
         this.fortune.review = review.replace(/\n/g, '<br/>');
@@ -600,17 +720,16 @@ export default {
       );
       let lunar = solar.getLunar();
       this.picker_date_nongli = +is_gongli
-        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${
-            this.picker_hour
-          }`
+        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${this.picker_hour
+        }`
         : `${birth_year}年${utils.formateNongliMonth(
-            birth_month
-          )}${utils.formateNongliDate(birth_date)} ${this.picker_hour}`;
+          birth_month
+        )}${utils.formateNongliDate(birth_date)} ${this.picker_hour}`;
       this.picker_date_yangli = +is_gongli
         ? `${birth_year}-${birth_month}-${birth_date} ${this.picker_hour}`
         : `${Lunar.fromYmd(+birth_year, +birth_month, +birth_date)
-            .getSolar()
-            .toString()} ${this.picker_hour}`;
+          .getSolar()
+          .toString()} ${this.picker_hour}`;
     },
   },
 };
@@ -618,27 +737,149 @@ export default {
 
 <style scoped lang="less">
 .result {
-  padding: 0.43rem 0.22rem 0.5rem;
-  background-image: url('../../../assets/img/emotion_v2/new/cn/result/jieguo_ig_bj.webp');
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-color: #ec436b;
-}
+  // padding: 0.43rem 0.22rem 0.5rem;
+  width: 7.5rem;
+  // height: 15.36rem;
+  min-height: 100vh;
+  background-image: url('../../../assets/img/emotion_fate/img_chat_bj.webp');
+  // background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 2.28rem;
+  padding-bottom: 2.68rem;
 
-.cn-bg {
-  background-image: url('../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.webp');
-}
+  // background-color: #ec436b;
+  .top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 7.5rem;
+    height: 1.84rem;
 
-.tw-bg {
-  background-image: url('../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.webp');
-}
+    img {
+      width: 7.5rem;
+      height: 1.84rem;
+    }
+  }
 
-.info-box {
-  width: 7.1rem;
-  height: 7.09rem;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  padding-top: 1rem;
-  margin-bottom: 0.36rem;
+  .bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 7.5rem;
+    height: 2.45rem;
+
+    img {
+      width: 7.5rem;
+      height: 2.45rem;
+    }
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    .item {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 0.24rem;
+
+      img {
+        height: 0.74rem;
+        width: 0.74rem;
+        margin-right: 0.12rem;
+      }
+
+      .message {
+        display: flex;
+        flex-direction: column;
+        padding: 0.2rem;
+        background: #FFFFFF;
+        border-radius: 0.12rem;
+        font-weight: 400;
+        font-size: 0.28rem;
+        color: #3A0922;
+        line-height: 0.42rem;
+        text-align: left;
+        font-style: normal;
+        max-width: 6.12rem;
+
+        .title {
+          font-weight: 400;
+          font-size: 0.28rem;
+          color: #3A0922;
+          line-height: 0.42rem;
+          text-align: left;
+          font-style: normal;
+          margin-bottom: 0.12rem;
+        }
+
+        .desc {
+          font-weight: 400;
+          font-size: 0.26rem;
+          color: #A1969B;
+          line-height: 0.39rem;
+          text-align: left;
+          font-style: normal;
+          margin-bottom: 0.2rem;
+        }
+
+        .code {
+          width: 5.72rem;
+          height: 0.82rem;
+          background: #F6F6F6;
+          border-radius: 0.16rem;
+          display: flex;
+          justify-content: space-between;
+          padding: 0.2rem;
+          font-weight: 600;
+          font-size: 0.28rem;
+          color: #E8302E;
+          line-height: 0.42rem;
+          text-align: left;
+          font-style: normal;
+          margin-bottom: 0.2rem;
+
+          .copy {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            font-size: 0.24rem;
+            color: #3A0922;
+            line-height: 0.36rem;
+            text-align: left;
+            font-style: normal;
+            border-radius: 0.12rem;
+            border: 1px solid #3A0922;
+            padding: 0.12rem;
+
+          }
+
+        }
+
+        .logo {
+          width: 5.72rem;
+          height: 0.82rem;
+          margin-bottom: 0.2rem;
+        }
+
+        .btn {
+          width: 5.72rem;
+          height: 0.84rem;
+          background: linear-gradient(180deg, #F47553 0%, #E92424 99%);
+          border-radius: 0.16rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: 600;
+          font-size: 0.3rem;
+          color: #FFFCF6;
+          line-height: 0.44rem;
+          text-align: center;
+          font-style: normal;
+        }
+      }
+
+    }
+  }
 }
 </style>
