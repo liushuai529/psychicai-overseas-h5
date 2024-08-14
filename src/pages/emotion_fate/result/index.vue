@@ -1,16 +1,16 @@
 <template>
   <div class="result" :class="['result']">
-    <div class="top">
+    <div class="top" @click="downClick">
       <img :src="is_cn ? cn_img_chat_top_laoshi : tw_img_chat_top_laoshi" />
     </div>
-    <div class="bottom">
+    <div class="bottom" @click="downClick">
       <img :src="bottom_img" />
     </div>
     <div class="content-container">
       <div class="item" v-if="message_show1">
         <img src="../../../assets/img/emotion_fate/img_chat_avatar.webp" />
         <div class="message">
-          您好，吴桂花，我是本次服务您的xxx老师！
+          {{ `您好，${username}，我是本次服务您的xxx老师！` }}
         </div>
       </div>
 
@@ -18,8 +18,8 @@
         <img src="../../../assets/img/emotion_fate/img_chat_avatar.webp" />
         <div class="message">
           <span>您的八字信息：</span>
-          <span>姓名：吴桂花</span>
-          <span>日期：1998年3月22日 时辰不清楚</span>
+          <span>姓名：{{ username }}</span>
+          <span>日期：{{ gongli_nongli? picker_date_yangli: picker_date_nongli }}</span>
         </div>
       </div>
 
@@ -29,11 +29,11 @@
           <div class="title">您的【Ta是你的正缘吗？】真人1v1咨询订单已生成，您可前往【命理寻真】App中进行实时咨询</div>
           <div class="desc">复制邀请码，打开App即可咨询，前往「我的订单」—点击「继续沟通」</div>
           <div class="code">
-            <div>邀请码：HJGE7HJ64JLSUF6S</div>
-            <div class="copy">复制</div>
+            <div>邀请码：{{ transfer_code }}</div>
+            <div class="copy" @click="handleCopyCode(1)">复制</div>
           </div>
           <img class="logo" :src="logo_img" />
-          <div class="btn">复制邀请码并下载查看</div>
+          <div class="btn" @click="downClick(1)">复制邀请码并下载查看</div>
         </div>
       </div>
     </div>
@@ -65,10 +65,42 @@ import img_popovers_logo_android_cn from '../../../assets/img/emotion_fate/cn/im
 import img_popovers_logo_ios_tw from '../../../assets/img/emotion_fate/tw/img_popovers_logo_ios_tw.webp';
 import img_popovers_logo_android_tw from '../../../assets/img/emotion_fate/tw/img_popovers_logo_android_tw.webp';
 
+const lang = utils.getLanguage();
+const tips_arr4 = {
+  'zh-CN': '复制成功',
+  'zh-TW': '複製成功',
+};
 
+const show_info = {
+  h5_wealth2024: {module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view'}, // 2024年财运
+  h5_annual2024: {module: 10003, 'content_id': -10020, 'event_name': 'view_2024report_download', type: 'view'}, // 2024年年运
+  h5_weigh_bone: {module: 10009, 'content_id': -10020, 'event_name': 'view_chenggu_download', type: 'view'}, // 袁天罡秤骨
+  h5_bai_gua: {module: 10008, 'content_id': -10020, 'event_name': 'view_64gua_download', type: 'view'}, // 鬼谷子
+  h5_emotion2024: {module: 10006, 'content_id': -10029, 'event_name': 'view_2024lovely_download', type: 'view'}, // 2024年爱情运势
+  h5_marriage: {module: 10007, 'content_id': -10031, 'event_name': 'view_marriage_download', type: 'view'}, //合婚
+  h5_career2024: {module: 10004, 'content_id': -10020, 'event_name': 'view_2024career_download', type: 'view'}, // 2024年事业运势 
+}
+const copy_info = {
+  h5_wealth2024: {module: 10005, 'content_id': -10021, 'event_name': 'click_2024wealty_copy', type: 'click'}, // 2024年财运
+  h5_annual2024: {module: 10003, 'content_id': -10021, 'event_name': 'click_2024report_copy', type: 'click'}, // 2024年年运
+  h5_weigh_bone: {module: 10009, 'content_id': -10021, 'event_name': 'click_chenggu_copy', type: 'click'}, // 袁天罡秤骨
+  h5_bai_gua: {module: 10008, 'content_id': -10021, 'event_name': 'click_64gua_copy', type: 'click'}, // 鬼谷子
+  h5_emotion2024: {module: 10006, 'content_id': -10030, 'event_name': 'click_2024lovely_copy', type: 'click'}, // 2024年爱情运势
+  h5_marriage: {module: 10007, 'content_id': -10032, 'event_name': 'click_marriage_copy', type: 'click'}, //合婚
+  h5_career2024: {module: 10004, 'content_id': -10021, 'event_name': 'click_2024career_copy', type: 'click'}, // 2024年事业运势 
+}
+const down_info = {
+  h5_wealth2024: {module: 10005, 'content_id': -10022, 'event_name': 'click_2024wealty_download', type: 'click'}, // 2024年财运
+  h5_annual2024: {module: 10003, 'content_id': -10022, 'event_name': 'click_2024report_download', type: 'click'}, // 2024年年运
+  h5_weigh_bone: {module: 10009, 'content_id': -10022, 'event_name': 'click_chenggu_download', type: 'click'}, // 袁天罡秤骨
+  h5_bai_gua: {module: 10008, 'content_id': -10022, 'event_name': 'click_64gua_download', type: 'click'}, // 鬼谷子
+  h5_emotion2024: {module: 10006, 'content_id': -10031, 'event_name': 'click_2024lovely_download', type: 'click'}, // 2024年爱情运势
+  h5_marriage: {module: 10007, 'content_id': -10033, 'event_name': 'click_marriage_download', type: 'click'}, //合婚
+  h5_career2024: {module: 10004, 'content_id': -10022, 'event_name': 'click_2024career_download', type: 'click'}, // 2024年事业运势 
+}
 
 import {
-  getResultAPI,
+  getFateResultAPI,
   resultCheckAPI,
   getBaziAPI,
   checkSendEventApi,
@@ -78,6 +110,8 @@ export default {
   components: { contentDetail },
   data() {
     return {
+      tips_arr4,
+      lang,
       img_popovers_logo_ios_cn,
       img_popovers_logo_android_cn,
       img_popovers_logo_ios_tw,
@@ -89,33 +123,10 @@ export default {
       img_chat_dibu_android_cn,
       img_chat_dibu_android_tw,
 
-      loading: false,
-      hasData: false,
 
-      fortune: {
-        qian: 1,
-        // # 感情之路
-        road_forecast: '',
-        // # 感情观概述
-        concept: '',
-        // # 感情回顾
-        review: '',
-        // # 感情关键词
-        keyword: '',
-        // # 感情状况分两部分
-        // ### 状况1
-        status: '',
-        // ### 状况2
-        road_desc: '',
-        // # 感情趋势
-        trend: '',
-        // # 特别提醒,
-        notice: '',
-      },
-      advice: {},
+     
       count: 0,
       status: '',
-      is_finish: false,
       year: '',
       month: '',
       date: '',
@@ -126,6 +137,7 @@ export default {
       picker_hour: '',
       picker_date_yangli: '',
       picker_date_nongli: '',
+      
 
       extra_ce_suan: {},
       baoshi_icon: '',
@@ -159,13 +171,7 @@ export default {
   },
   async mounted() {
     this.order_id = this.$route.query.id || this.$route.query.order_id;
-    if(!localStorage.getItem(`emotion_fate_order_${this.order_id}`)) {
-      this.is_first = true;
-    } else {
-      this.message_show1= true;
-      this.message_show2= true;
-      this.message_show3= true;
-    }
+
     localStorage.setItem(`emotion_fate_order_${this.order_id}`, 1)
 
     window.scrollTo(0, 0);
@@ -247,22 +253,41 @@ export default {
   watch: {
     is_first(val) {
       console.log('va', val)
-      if(val) {
+      if (val) {
         setTimeout(() => {
-          this.message_show1= true;
-    
+          this.message_show1 = true;
+
         }, 1000);
         setTimeout(() => {
-      this.message_show2= true;
+          this.message_show2 = true;
         }, 2000);
         setTimeout(() => {
-     
-      this.message_show3= true;
+
+          this.message_show3 = true;
         }, 3000);
       }
     },
   },
   methods: {
+    async handleCopyCode(val) {
+      utils.copyText('mlxz-' + this.transfer_code);
+      Toast(tips_arr4[lang]);
+      if(val === 0) return
+      utils.firebaseLogEvent(copy_info[this.product_key]['module'], copy_info[this.product_key]['content_id'], copy_info[this.product_key]['event_name'], copy_info[this.product_key]['type'], {
+        args_name: copy_info[this.product_key]['event_name'],
+        channel: utils.getFBChannel(),
+      });
+    },
+    downClick(arg) {
+      utils.firebaseLogEvent(down_info[this.product_key]['module'], down_info[this.product_key]['content_id'], down_info[this.product_key]['event_name'], down_info[this.product_key]['type'], {
+        args_name: down_info[this.product_key]['event_name'],
+        channel: utils.getFBChannel(),
+      });
+      if(arg) {
+        this.handleCopyCode(0);
+      }
+      utils.openApp();
+    },
     /**
      * @description: 校验是否上报埋点
      * @return {*}
@@ -526,29 +551,23 @@ export default {
      */
     query() {
       this.count++;
-      this.loading = true;
       Indicator.open(this.$t('result-check'));
-      getResultAPI({ order_id: this.$route.query.order_id }).then(res => {
-        let can_store =
-          (res.data && ['PAYED', 'FAIL'].includes(res.data.status)) ||
-            (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
-            ? true
-            : false;
-        if (res.data.status === 'PAYED') {
-          //是否组合订单
-          if (res.data.sub_orders) {
-            getResultAPI({ order_id: res.data.sub_orders[0].order_id }).then(
-              response => {
-                this.renderResultAndComplete(response);
-              }
-            );
+      getFateResultAPI({ order_id: this.$route.query.order_id }).then(res => {
+        console.log('res', res)
+        if (res.data.order_status === 'PAYED') {
+          this.renderResultAndComplete(res);
+          this.transfer_code = res.data.transfer_code;
+          if (!localStorage.getItem(`emotion_fate_order_${this.order_id}`)) {
+            this.is_first = true;
           } else {
-            this.renderResultAndComplete(res);
+            this.message_show1 = true;
+            this.message_show2 = true;
+            this.message_show3 = true;
           }
         } else if (this.count < 6) {
-          if (['PAYED', 'FAIL', 'REFUNDED'].includes(res.data.status)) {
+          if (['PAYED', 'FAIL', 'REFUNDED'].includes(res.data.order_status)) {
             this.backNotice();
-            this.status = res.data.status;
+            this.status = res.data.order_status;
             return;
           }
           setTimeout(() => {
@@ -557,7 +576,7 @@ export default {
         } else {
           this.backNotice();
         }
-        this.status = res.data.status;
+        this.status = res.data.order_status;
       });
     },
 
@@ -579,48 +598,16 @@ export default {
      * @return {*}
      */
     renderResult(res) {
-      if (res.data.extra_ce_suan) {
-        this.extra_ce_suan = res.data.extra_ce_suan;
-        this.formateQueryUserInfo();
-        this.getUserBazi(res);
+      if (res.data.user_info) {
+       
+        this.formateQueryUserInfo(res.data.user_info);
       }
 
-      if (res.data.result) {
-        this.fortune = res.data.result;
-        this.fortune.transfer_code = res.data.transfer_code;
-        const {
-          road_forecast,
-          concept,
-          review,
-          status,
-          road_desc,
-          trend,
-          notice,
-        } = this.fortune;
-        this.fortune.qian =
-          road_forecast === '吉'
-            ? 1
-            : road_forecast === '小吉'
-              ? 2
-              : road_forecast === '平'
-                ? 3
-                : 4;
-
-        this.fortune.concept = concept.replace(/\n/g, '<br/>');
-        this.fortune.review = review.replace(/\n/g, '<br/>');
-        this.fortune.status = status.replace(/\n/g, '<br/>');
-        this.fortune.road_desc = road_desc.replace(/\n/g, '<br/>');
-        this.fortune.trend = trend.replace(/\n/g, '<br/>');
-        if (notice) {
-          this.fortune.notice = notice.replace(/\n/g, '<br/>');
-        }
-      }
+      
     },
 
     renderResultAndComplete(res) {
       this.renderResult(res);
-      this.loading = false;
-      this.hasData = true;
       Indicator.close();
     },
 
@@ -697,7 +684,7 @@ export default {
      * @description: 格式化用户信息
      * @return {*}
      */
-    formateQueryUserInfo() {
+    formateQueryUserInfo(user_info) {
       let {
         name,
         birth_hour,
@@ -705,10 +692,8 @@ export default {
         birth_month,
         birth_date,
         is_gongli,
-        date,
         sex,
-        userstring,
-      } = this.extra_ce_suan;
+      } = user_info;
       this.username = eval("'" + name + "'");
       this.sex = sex;
       this.gongli_nongli = +is_gongli;
@@ -777,6 +762,7 @@ export default {
   .content-container {
     display: flex;
     flex-direction: column;
+
     .item {
       display: flex;
       justify-content: flex-start;

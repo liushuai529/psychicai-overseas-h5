@@ -39,6 +39,7 @@ export const path_enums = {
   CAI_YUN_JING_PI: 'wealth_boutique_overseas',
   SHI_YE_JING_PI: 'career_divination_overseas',
   master_tarot:'tarot',
+  consult_time: 'consult_time',
 };
 
 export const color_enums = [

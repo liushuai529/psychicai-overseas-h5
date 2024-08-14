@@ -59,6 +59,18 @@ export const getResultAPI = async data => {
   return request(`/web/auth/trade/orders/${data.order_id}`, 'GET', data);
 };
 
+/**
+ * @description: 正缘查询订单结果
+ * @param {string} order_id 订单id
+ * @return {*}
+ */
+export const getFateResultAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/consult_time/detail`, 'GET', data);
+};
+
+
+
 // 商品查询
 export const getProductionsAPI = async (productGroup, isTarot) => {
   if(!isTarot) {
@@ -83,6 +95,12 @@ export const getTarotHistoryOrderAPI = async data => {
 export const payOrderAPI = async data => {
   await visitorLoginAPI();
   return request(`/web/auth/trade/orders/ce_suan`, 'POST', data);
+};
+
+// 正缘报告下单
+export const payFateOrderAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/trade/orders/consult_time`, 'POST', data);
 };
 
 // 塔罗下单
