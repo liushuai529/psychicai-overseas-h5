@@ -1,5 +1,5 @@
 <template>
-  <div class="pay-item"  :style="{marginBottom:product_key==='h5_emotion2024'? '0.37rem': '0.24rem'}" @click="pay">
+  <div class="pay-item"  @click="pay">
     <div class="pay-contaienr">
       <div class="left">
         <div class="title">{{is_cn? '您有待支付订单': '您有待支付訂單'}}</div>
@@ -28,22 +28,10 @@ import { payOrderAPI } from '../api/api';
 import { CountDown } from 'vant';
 
 const pay_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10023, 'event_name': 'click_paycardwealty_pay', type: 'click'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10023, 'event_name': 'click_paycardyear_pay', type: 'click'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10023, 'event_name': 'click_paycardchenggu_pay', type: 'click'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10023, 'event_name': 'click_paycard64gua_pay', type: 'click'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10032, 'event_name': 'click_paycardlove_pay', type: 'click'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10034, 'event_name': 'click_paycardmarriage_pay', type: 'click'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10023, 'event_name': 'click_paycardcareer_pay', type: 'click'}, // 2024年事业运势 
+  consult_time: {module: 10005, 'content_id': -10023, 'event_name': 'click_paycardwealty_pay', type: 'click'}, // 2024年财运
 }
 const modal_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10024, 'event_name': 'page_view_iosyear_guidance', type: 'page_view'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10024, 'event_name': 'page_view_ioschenggu_guidance', type: 'page_view'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10024, 'event_name': 'page_view_ios64gua_guidance', type: 'page_view'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10033, 'event_name': 'page_view_ioslove_guidance', type: 'page_view'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10035, 'event_name': 'page_view_iosmarriage_guidance', type: 'page_view'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10024, 'event_name': 'page_view_ioscareer_guidance', type: 'page_view'}, // 2024年事业运势 
+  consult_time: {module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view'}, // 2024年财运
 }
 export default {
   components: {
@@ -58,7 +46,7 @@ export default {
   props: {
     product_key: {
       type: String,
-      default: 'h5_emotion2024'
+      default: 'consult_time'
     },
     show_pay_guide_modal: {
       type: Boolean,
@@ -290,7 +278,7 @@ export default {
 .pay-item {
   width: 7.1rem;
   height: 2.04rem;
-  background: linear-gradient(180deg, #FDFAEC 0%, #FFF5D8 100%);
+  background: linear-gradient( 180deg, #FFAC49 0%, #DD5242 100%);
   border-radius: 0.2rem;
   display: flex;
   flex-direction: column;
@@ -315,7 +303,7 @@ export default {
       .title {
         font-weight: 600;
         font-size: 0.36rem;
-        color: #602E03;
+        color: #FFFFFF;
         line-height: 0.54rem;
         text-align: left;
         font-style: normal;
@@ -324,7 +312,7 @@ export default {
       .desc {
         font-weight: 400;
         font-size: 0.26rem;
-        color: #602E03;
+        color: #FFDEBE;
         line-height: 0.39rem;
         text-align: left;
         font-style: normal;
@@ -334,9 +322,9 @@ export default {
     .right {
       width: 1.68rem;
       height: 0.74rem;
-      background: linear-gradient(180deg, #F47553 0%, #E92424 99%);
+      background: linear-gradient( 180deg, #F47553 0%, #E92424 99%);
       border-radius: 0.2rem;
-      border: 0.02rem solid #FFFBED;
+      border: 0.02rem solid #FFCC97;
       font-weight: 600;
       font-size: 0.3rem;
       color: #FFFAEE;
@@ -352,13 +340,13 @@ export default {
   .time {
     width: 6.62rem;
     height: 0.5rem;
-    background: #FFF2CF;
+    background: #F47956;
     border-radius: 0.12rem;
-    border: 0.01rem solid #F6B87E;
+    border: 0.01rem solid #FFA858;
     margin-top: 0.18rem;
     font-weight: 600;
     font-size: 0.26rem;
-    color: #E24C2E;
+    color: #FFF722;
     line-height: 0.26rem;
     text-align: right;
     font-style: normal;
@@ -369,7 +357,7 @@ export default {
   .van-count-down {
     font-weight: 600;
     font-size: 0.26rem;
-    color: #E24C2E;
+    color: #FFF722;
     line-height: 0.26rem; 
   }
 }

@@ -256,7 +256,7 @@ export default {
       // 底部弹出popup版本所需数据
       visible: false,
       product_id: 2,
-      product_key: 'h5_emotion2024',
+      product_key: 'consult_time',
       query_user_string: '',
       is_combine,
       has_pay: '',
@@ -380,7 +380,7 @@ export default {
           channel: utils.getFBChannel(),
         },
       });
-    this.$store.dispatch('common/getProduction');
+    this.$store.dispatch('common/getProduction', 'consult_time');
     utils.firebaseLogEvent(
       '10006',
       '-10001',

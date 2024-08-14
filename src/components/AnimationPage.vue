@@ -3,10 +3,10 @@
     <canvas id="canvas_mp" :class="['daji']">
     </canvas>
     <img class="mp" :src="getMpImg" />
-    <div :class="['progress-container', getBgTip, isConsult? 'consult-color': '']">
+    <div :class="['progress-container', getBgTip, is_consult? 'consult-color': '']">
       <div>{{ getTipText }}</div>
-      <div :class="['progress-uncheck', isConsult? 'consult-progress-uncheck': '']">
-        <div :class="['progress-check', isConsult? 'consult-progress-check': '']" :style="{ width: getWidth }"></div>
+      <div :class="['progress-uncheck', is_consult? 'consult-progress-uncheck': '']">
+        <div :class="['progress-check', is_consult? 'consult-progress-check': '']" :style="{ width: getWidth }"></div>
       </div>
     </div>
   </div>
@@ -86,7 +86,7 @@ export default {
     );
   },
   computed: {
-    isConsult() {
+    is_consult() {
       return this.product_key === 'consult_time';
     },
     getWidth() {

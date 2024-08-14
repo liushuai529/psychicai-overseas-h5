@@ -1,49 +1,8 @@
-<!--
- * @Author: wujiang@weli.cn
- * @Date: 2023-11-15 11:33:50
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-06-05 18:56:46
- * @Description: 
--->
+
 <template>
   <div class="result" :class="['result', show_pop_modal? 'hidden-scroll': '']">
-    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />
-    <div :class="['info-box', lang ? 'cn-bg' : 'tw-bg']">
-      <BaziTable
-        :sex="sex"
-        :is_result="true"
-        :username="username"
-        :gongli_nongli="gongli_nongli"
-        :picker_date_yangli="picker_date_yangli"
-        :picker_date_nongli="picker_date_nongli"
-        :gan="gan"
-        :zhi="zhi"
-        :nayin="nayin"
-        :cai_bo_num="cai_bo_num"
-        :gui_ren_num="gui_ren_num"
-        :hun_yin_num="hun_yin_num"
-        :ming_ge="ming_ge"
-        :riyuanqiangruo="riyuanqiangruo"
-        :shi_ye_num="shi_ye_num"
-        :wuxingqiang="wuxingqiang"
-        :tao_hua_num="tao_hua_num"
-        :fuqigong="fuqigong"
-        text_color="#6D2215"
-        minge_color="#EC436B"
-        :show_daji="false"
-        bg="#FFFAFA"
-        width="6.5rem"
-        table_border="0.02rem solid #EC436B"
-        border_color="#EC436B"
-        :is_show_taohua="1"
-        :change_color="true"
-      />
-    </div>
+    
 
-    <contentDetail v-if="fortune.qian" :result="fortune.qian" :item_index="2" />
-    <contentDetail v-if="fortune.concept" :result="fortune" :item_index="3" />
-    <contentDetail v-if="fortune.keyword" :result="fortune" :item_index="5" />
-    <contentDetail class="hidden-code" :result="fortune" :item_index="6" />
   </div>
 </template>
 
@@ -52,7 +11,6 @@ import { Indicator, Toast } from 'mint-ui';
 //@ts-ignore
 import contentDetail from './content_detail.vue';
 import utils from '../../../libs/utils.js';
-import UserInfo from '../detail/user_info.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import {
   getResultAPI,
@@ -61,10 +19,8 @@ import {
   checkSendEventApi,
   sendEventApi,
 } from '../../../api/api';
-import BaziTable from '../../../components/baziTable.vue';
-import ResultPopup from '../../../components/ResultPopup.vue';
 export default {
-  components: { contentDetail, UserInfo, BaziTable, ResultPopup },
+  components: { contentDetail },
   data() {
     return {
       loading: false,

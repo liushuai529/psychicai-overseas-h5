@@ -31,7 +31,11 @@ export default {
       });
     },
     getProduction: async function ({ commit }, payload) {
-      const res = await getProductionsAPI('ceh5');
+      let productGroup = 'ceh5';
+      if(payload === 'consult_time') {
+        productGroup = 'consult_time'
+      }
+      const res = await getProductionsAPI(productGroup);
       if (res.status === 1000) {
         commit('setData', {
           key: 'productList',

@@ -1,89 +1,51 @@
 <template>
-  <div :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') || show_discount_modal}">
-    <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')"/>
-    <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="consult_time" :visible="showAnimation"  @update-visible="showAnimation = false"/>
-    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
-    <img
-      class="header-title"
-      :src="is_cn ? cn_info_title : tw_info_title"
-      alt=""
-    />
-    
-    
-    <div :class="{ 'pay-box': true, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
-      <BaziTable
-        :sex="sex"
-        :is_result="is_result"
-        :username="username"
-        :gongli_nongli="gongli_nongli"
-        :picker_date_yangli="picker_date_yangli"
-        :picker_date_nongli="picker_date_nongli"
-        :gan="gan"
-        :zhi="zhi"
-        :nayin="nayin"
-        :cai_bo_num="cai_bo_num"
-        :gui_ren_num="gui_ren_num"
-        :hun_yin_num="hun_yin_num"
-        :ming_ge="ming_ge"
-        :riyuanqiangruo="riyuanqiangruo"
-        :shi_ye_num="shi_ye_num"
-        :wuxingqiang="wuxingqiang"
-        :tao_hua_num="0"
-        fuqigong=""
-        text_color="#6D2215"
-        minge_color="#EC436B"
-        :show_daji="false"
-        bg="#fff"
-        width="6.5rem"
-        table_border="0.02rem solid #EC436B"
-        border_color="#EC436B"
-        :is_show_taohua="1"
-        :change_color="true"
-      >
-      </BaziTable>
+  <div
+    :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') || show_discount_modal }">
+    <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')" />
+    <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="consult_time"
+      :visible="showAnimation" @update-visible="showAnimation = false" />
+    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
+    <img class="header-title" :src="is_cn ? cn_info_title : tw_info_title" alt="" />
+    <UserInfo style="margin-top: -5.8rem; margin-bottom: 0.34rem;" :picker_date_nongli="picker_date_nongli"
+      :picker_date_yangli="picker_date_yangli" :username="username" :sex="sex" />
+
+
+
+
+    <FatePayItem product_key="consult_time" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
+    <div :class="['method-box', is_consult ? 'bg-color' : '', !is_show_combination ? 'method-height' : null]">
+      <img v-if="product_key !== 'consult_time'" id="method-title-img" class="method-title-img"
+        :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
+
+      <div id="method-title-img" class="method-title-img-consult" v-else>
+        <img :src="is_cn ? cn_paypage_tittle_pay : tw_paypage_tittle_pay" />
+      </div>
+      <PayDetail className="pay-method" ref="payDetail" :product_key="product_key"
+        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10006"
+        c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
+        e_click_name="click_2024lovely_pay" a_click_token="2rov44" :consult_time="consult_time" />
     </div>
-    <PayItem product_key="h5_emotion2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
-    <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
-      <img
-        id="method-title-img"
-        class="method-title-img"
-        :src="is_cn ? img_zhifu_jian : img_zhifu_fan"
-      />
-      <PayDetail
-        className="pay-method"
-        ref="payDetail"
-        :product_key="product_key"
-        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg"
-        :query_user_string="query_user_string"
-        e_view_id="10006"
-        c_view_id="-10005"
-        e_view_name="view_2024lovely_pay"
-        a_view_token="184kba"
-        c_click_id="-10006"
-        e_click_name="click_2024lovely_pay"
-        a_click_token="2rov44"
-      />
+
+    <div class="method-title-img-consult">
+      <img :src="is_cn ? cn_paypage_tittle_xiangqing : tw_paypage_tittle_xiangqing" />
     </div>
-    <GejuInfo
-      v-if="is_show_combinationSpecial02"
-      style="margin-bottom: 0.36rem"
-      :product_key="product_key"
-      :user_desc="[mingge_desc]"
-      :dataList="[gejujiedu]"
-    />
-    <!-- <div class="card-box">
-      <canvas id="qian"></canvas>
-    </div> -->
-    <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" />
-    <img class="module" :src="is_cn ? cn_bg_2 : tw_bg_2" />
-    <img class="module" :src="is_cn ? cn_bg_3 : tw_bg_3" />
-    <NewFooter product_key="h5_emotion2024" />
+
+    <div class="tag-bg">
+      <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" @click="scrollClick" />
+      <img class="module" :src="is_cn ? cn_bg_2 : tw_bg_2" @click="scrollClick" />
+      <img class="module" :src="is_cn ? cn_bg_3 : tw_bg_3" @click="scrollClick" />
+      <img class="module" :src="is_cn ? cn_bg_4 : tw_bg_4" @click="scrollClick" />
+    </div>
+
+
+
+
+    <NewFooter product_key="consult_time" />
 
     <div class="footer"></div>
-    
+
     <img @click="payOrder" class="fix-btn emo-btn" :src="btn_url" />
-    <HomeFooter product_key="h5_emotion2024" />
-    <FixedDiscountModal product_key="h5_emotion2024" @change_discount_modal="change_discount_modal"/>
+    <HomeFooter product_key="consult_time" />
   </div>
 </template>
 
@@ -95,12 +57,10 @@ import UserInfo from './user_info.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import cn_pay_btn from '../../../assets/img/emotion/home_btn.webp';
 
-import cn_home_btn1 from '../../../assets/img/emotion_v2/new/cn/btn.webp';
-import tw_home_btn1 from '../../../assets/img/emotion_v2/new/tw/btn.webp';
-import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/pay.webp';
-import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/pay.webp';
-import cn_home_xs_btn from '../../../assets/img/emotion_v2/new/cn/pay_xs.webp';
-import tw_home_xs_btn from '../../../assets/img/emotion_v2/new/tw/pay_xs.webp';
+
+import cn_home_btn from '../../../assets/img/emotion_fate/img_home_btu_chakan.webp';
+import tw_home_btn from '../../../assets/img/emotion_fate/img_home_btu_chakan.webp';
+
 
 import PayCard from '../../../components/PayCard.vue';
 import cn_card_1 from '../../../assets/img/emotion/home_card1.webp';
@@ -110,8 +70,8 @@ import tw_card_2 from '../../../assets/img/tw_mlxz/emotion/home_card2.webp';
 import payModal from '../../../components/PayModal.vue';
 import BaziTable from '../../../components/baziTable.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
-import cn_info_title from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_toutu.webp';
-import tw_info_title from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_toutu.webp';
+import cn_info_title from '../../../assets/img/emotion_fate/cn/img_bj_paypage_cn.webp';
+import tw_info_title from '../../../assets/img/emotion_fate/tw/img_bj_paypage_tw.webp';
 import cn_zhong3 from '../../../assets/img/emotion/new/zhong_3.webp';
 import tw_zhong3 from '../../../assets/img/emotion/new/tw/zhong_3.webp';
 import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
@@ -120,21 +80,38 @@ import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import PayDetail from '../../../components/PayDetail.vue';
 
-import cn_bg_1 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_1.webp';
-import cn_bg_2 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_2.webp';
-import cn_bg_3 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_3.webp';
-import tw_bg_1 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_1_fanti.webp';
-import tw_bg_2 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_2_fanti.webp';
-import tw_bg_3 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_3_fanti.webp';
+import cn_bg_1 from '../../../assets/img/emotion_fate/cn/paypage_neirong_01_cn.webp';
+import cn_bg_2 from '../../../assets/img/emotion_fate/cn/paypage_neirong_02_cn.webp';
+import cn_bg_3 from '../../../assets/img/emotion_fate/cn/paypage_neirong_03_cn.webp';
+import cn_bg_4 from '../../../assets/img/emotion_fate/cn/paypage_neirong_04_cn.webp';
+
+import tw_bg_1 from '../../../assets/img/emotion_fate/tw/paypage_neirong_01_tw.webp';
+import tw_bg_2 from '../../../assets/img/emotion_fate/tw/paypage_neirong_02_tw.webp';
+import tw_bg_3 from '../../../assets/img/emotion_fate/tw/paypage_neirong_03_tw.webp';
+import tw_bg_4 from '../../../assets/img/emotion_fate/tw/paypage_neirong_04_tw.webp';
+
+
 import img_zhifu_jian from '../../../assets/img/emotion_v2/new/cn/detail/img_zhifu_jian.webp';
 import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_jian.webp';
+
+
+import cn_paypage_tittle_xiangqing from '../../../assets/img/emotion_fate/cn/paypage_tittle_xiangqing_cn.webp';
+import tw_paypage_tittle_xiangqing from '../../../assets/img/emotion_fate/tw/paypage_tittle_xiangqing_tw.webp';
+
+import cn_paypage_tittle_pay from '../../../assets/img/emotion_fate/cn/paypage_tittle_pay_cn.webp';
+import tw_paypage_tittle_pay from '../../../assets/img/emotion_fate/tw/paypage_tittle_pay_tw.webp';
+
+
+
+import card_img_bj_shang from '../../../assets/img/emotion_fate/card_img_bj_shang.webp';
+
+
 import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
 import AnimationPage from '../../../components/AnimationPage.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
-import PayItem from '../../../components/PayItem.vue';
+import FatePayItem from '../../../components/FatePayItem.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
-import FixedDiscountModal from '../../../components/FixedDiscountModal.vue';
 
 export default {
   components: {
@@ -148,27 +125,30 @@ export default {
     GejuInfo,
     AnimationPage,
     FbShareNotice,
-    PayItem,
+    FatePayItem,
     PayGuideModal,
-    FixedDiscountModal,
   },
   data() {
     return {
       localStorage: window.localStorage,
+      cn_paypage_tittle_xiangqing,
+      tw_paypage_tittle_xiangqing,
+      cn_paypage_tittle_pay,
+      tw_paypage_tittle_pay,
+      card_img_bj_shang,
       cn_bg_1,
       cn_bg_2,
       cn_bg_3,
+      cn_bg_4,
       tw_bg_1,
       tw_bg_2,
       tw_bg_3,
+      tw_bg_4,
       img_zhifu_jian,
       img_zhifu_fan,
       cn_home_btn,
       tw_home_btn,
-      cn_home_btn1,
-      tw_home_btn1,
-      cn_home_xs_btn,
-      tw_home_xs_btn,
+
       cn_zhong3,
       cn_zhong4,
       tw_zhong3,
@@ -176,7 +156,7 @@ export default {
       cn_info_title,
       tw_info_title,
       product_id: 25,
-      product_key: 'h5_emotion2024',
+      product_key: 'consult_time',
       query_user_string: '',
       showBottomBtn: false,
       year: '',
@@ -220,15 +200,15 @@ export default {
       showAnimation: true,//过渡动画标识
       showPayGuideModal: false,//待支付蒙版
       show_discount_modal: false,//低价折扣弹窗
+      consult_time: null,//下单参数
     };
   },
   watch: {
     showAnimation(val) {
-      if(!val) {
+      if (!val) {
         setTimeout(() => {
           this.$nextTick(() => {
-            //排除渠道3
-            if (!this.is_show_combinationSpecial02) return;
+
             // 滚动到指定元素
             const element = document.getElementById('method-title-img');
             if (element) {
@@ -241,8 +221,11 @@ export default {
   },
 
   computed: {
+    is_consult() {
+      return this.product_key === 'consult_time';
+    },
     is_show_fb_notice() {
-      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02') > -1;
     },
     //套餐支付显示逻辑
     is_show_combination() {
@@ -250,9 +233,7 @@ export default {
         utils.getFBChannel()
       );
     },
-    is_show_combinationSpecial02() {
-      return !["enjoy03", "panda03", "ocean03", "enjoy05", "ocean05"].includes(utils.getFBChannel());
-    },
+
 
     //限时特惠
     is_show_limitTime() {
@@ -278,27 +259,9 @@ export default {
     },
     btn_url() {
       if (this.language === 'zh-CN') {
-        if (this.channel1) {
-          return cn_home_btn;
-        } 
-        else if (this.channel2) {
-          // return cn_home_xs_btn;
-          return cn_home_btn1;
-        } 
-        else {
-          return cn_home_btn1;
-        }
+        return cn_home_btn;
       } else {
-        if (this.channel1) {
-          return tw_home_btn;
-        } 
-        else if (this.channel2) {
-          // return tw_home_xs_btn;
-          return tw_home_btn1;
-        } 
-        else {
-          return tw_home_btn1;
-        }
+        return tw_home_btn;
       }
     },
   },
@@ -326,8 +289,6 @@ export default {
     window.scrollTo(0, 0);
     setTimeout(() => {
       this.$nextTick(() => {
-        //排除渠道3
-        if (!this.is_show_combinationSpecial02) return;
         // 滚动到指定元素
         const element = document.getElementById('method-title-img');
         if (element) {
@@ -360,10 +321,19 @@ export default {
     });
   },
   methods: {
-     /**
-     * 显示低价折扣遮罩
-     */
-     change_discount_modal(val) {
+    scrollClick() {
+      this.$nextTick(() => {
+        // 滚动到指定元素
+        const element = document.getElementById('method-title-img');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    },
+    /**
+    * 显示低价折扣遮罩
+    */
+    change_discount_modal(val) {
       this.show_discount_modal = val;
     },
     showModal() {
@@ -414,12 +384,12 @@ export default {
         leap_month: '0',
         gender: this.sex,
       };
-      const { status, data } = await getBaziAPI(params);
-      if (status !== 1000) return;
-      this.gan = data.gan;
-      this.zhi = data.zhi;
-      this.nayin = data.nayin;
-      this.gejujiedu = data.gejujiedu;
+      // const { status, data } = await getBaziAPI(params);
+      // if (status !== 1000) return;
+      // this.gan = data.gan;
+      // this.zhi = data.zhi;
+      // this.nayin = data.nayin;
+      // this.gejujiedu = data.gejujiedu;
     },
 
     /**
@@ -444,30 +414,52 @@ export default {
       );
       let lunar = solar.getLunar();
       this.picker_date_nongli = +this.gongli_nongli
-        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${
-            this.picker_hour
-          }`
+        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${this.picker_hour
+        }`
         : `${this.year}年${utils.formateNongliMonth(
-            this.month
-          )}${utils.formateNongliDate(this.date)} ${this.picker_hour}`;
+          this.month
+        )}${utils.formateNongliDate(this.date)} ${this.picker_hour}`;
+
+      console.log('this.picker_date_nongli', this.picker_date_nongli, this.gongli_nongli)
+
       this.picker_date_yangli = +this.gongli_nongli
         ? `${this.year}-${this.month}-${this.date} ${this.picker_hour}`
         : `${Lunar.fromYmd(+this.year, +this.month, +this.date)
-            .getSolar()
-            .toString()} ${this.picker_hour}`;
+          .getSolar()
+          .toString()} ${this.picker_hour}`;
+
+      console.log('this.picker_date_yangli', this.picker_date_yangli, this.gongli_nongli)
+
 
       let nongli_desc = +this.gongli_nongli
         ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} `
         : `${this.year}年${utils.formateNongliMonth(
-            this.month
-          )}${utils.formateNongliDate(this.date)}`;
+          this.month
+        )}${utils.formateNongliDate(this.date)}`;
+
+
+
       this.mingge_desc = +this.gongli_nongli
-        ? `${(this.username = utils.getShortStr(arr[0], 4))}，${
-            this.sex === 0 ? '女' : '男'
-          }，${this.year}年${this.month}月${this.date}日生人`
-        : `${(this.username = utils.getShortStr(arr[0], 4))}，${
-            this.sex === 0 ? '女' : '男'
-          }，${nongli_desc}生人`;
+        ? `${(this.username = utils.getShortStr(arr[0], 4))}，${this.sex === 0 ? '女' : '男'
+        }，${this.year}年${this.month}月${this.date}日生人`
+        : `${(this.username = utils.getShortStr(arr[0], 4))}，${this.sex === 0 ? '女' : '男'
+        }，${nongli_desc}生人`;
+
+      this.consult_time = {
+        user_info: {
+          birth_date: arr[5],
+          birth_hour: arr[6],
+          birth_month: arr[4],
+          birth_year: arr[3],
+          email: '',
+          is_gongli: +arr[2],
+          name: arr[0],
+          sex: +arr[1],
+        }
+      }
+      console.log('this.consult_time', this.consult_time)
+
+
     },
 
     // 支付弹窗
@@ -496,7 +488,23 @@ export default {
 <style scoped lang="less">
 .header-title {
   width: 7.5rem;
-  height: 3rem;
+  height: 7.5rem;
+}
+
+.method-title-img-consult {
+  width: 7.1rem;
+  height: 1.5rem;
+  background-image: url(../../../assets/img/emotion_fate/card_img_bj_shang.webp);
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 6.14rem;
+    height: 0.9rem;
+  }
 }
 
 .method-box {
@@ -507,7 +515,7 @@ export default {
   /* justify-content: center; */
   align-items: center;
   /* padding-top: 1.14rem; */
-  margin-bottom: 0.49rem;
+  margin-bottom: 0.24rem;
   background: #fffafa;
   border-radius: 0.16rem;
 
@@ -516,6 +524,35 @@ export default {
     height: 0.93rem;
     margin-top: -0.13rem;
   }
+
+}
+
+
+
+.tag-bg {
+  width: 7.1rem;
+  height: 21.4rem;
+  background-image: url(../../../assets/img/emotion_fate/card_img_bj_zhong.webp);
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  // justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  .module {
+    width: 6.6rem;
+
+    margin-bottom: 0.3rem;
+  }
+}
+
+
+
+
+.bg-color {
+  background: #FFFDF0;
 }
 
 .method-height {
@@ -526,7 +563,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ec436b;
+  background: #FEF1CF;
 
   .pay-box {
     margin-bottom: 0.3rem;
@@ -540,14 +577,12 @@ export default {
   }
 
   .cn-bg {
-    background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.webp)
-      no-repeat;
+    background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.webp) no-repeat;
     background-size: 100% 100%;
   }
 
   .tw-bg {
-    background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.webp)
-      no-repeat;
+    background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.webp) no-repeat;
     background-size: 100% 100%;
   }
 
@@ -556,11 +591,7 @@ export default {
     margin-bottom: 0.25rem;
   }
 
-  .module {
-    width: 7.02rem;
 
-    margin-bottom: 0.36rem;
-  }
 
   .fixed-btn {
     position: fixed;
@@ -607,8 +638,8 @@ export default {
 }
 
 .fix-btn {
-  width: 6.26rem;
-  height: 1.34rem;
+  width: 5.9rem;
+  height: 0.92rem;
   position: fixed;
   bottom: 0.2rem;
   z-index: 99;

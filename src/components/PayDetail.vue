@@ -84,7 +84,8 @@
           <img class="right" :src="check_index === k ? checked_icon : no_check_icon" alt="" />
         </div>
         <!--此处引用按钮组件-->
-        <PayBtn :product_key="product_key" :callback="payMoney" />
+        <PayBtn v-if="product_key !== 'consult_time'" :product_key="product_key" :callback="payMoney" />
+        <ConsultPayBtn v-else :product_key="product_key" :callback="payMoney" />
         <!-- <img
           :src="cn_home_btn"
         /> -->
@@ -110,6 +111,8 @@ import { CountDown, Toast } from 'vant';
 import 'vant/lib/index.css';
 import GroupPurchase from '../components/GroupPurchase.vue';
 import PayBtn from '../components/PayBtn.vue';
+import ConsultPayBtn from './ConsultPayBtn.vue';
+
 
 const e_id_arr = {
   h5_wealth2024: '60001',
@@ -162,6 +165,7 @@ export default {
     CountDown,
     GroupPurchase,
     PayBtn,
+    ConsultPayBtn,
   },
   data() {
     return {
@@ -245,6 +249,10 @@ export default {
       type: String,
       default: '',
     },
+    consult_time: {
+      type: Object,
+      default: null,
+    }
 
   },
 
@@ -360,7 +368,11 @@ export default {
      */
     async getProductionList() {
       this.product = null;
-      const { status, data } = await getProductionsAPI('ceh5');
+      let productGroup = 'ceh5';
+      if (this.product_key === 'consult_time') {
+        productGroup = 'consult_time'
+      }
+      const { status, data } = await getProductionsAPI(productGroup);
       if (status === 1000) {
         this.product = data.find(item => item.product_key === this.product_key);
         //获取所有报告以及套餐
@@ -496,41 +508,31 @@ export default {
 
       let discount_pay = this.$route.query.discount_pay || 0;
       let user_time = true;
-      if (pay_method === 'google_pay') {
-        const res = await payOrderAPI(params);
-        localStorage.removeItem('mlxz_set_event_times');
 
-        Indicator.close();
-        if (res.status !== 1000) return;
-        if (user_time) {
-          localStorage.removeItem('mlxz_fixed_order_info');
-          localStorage.removeItem('mlxz_fixed_order_key');
-          localStorage.removeItem('mlxz_fixed_local_order_time');
-          localStorage.removeItem('mlxz_fixed_api_order_time');
-        }
-
-        localStorage.setItem('report_order_id', res.data.id);
-      } else {
-        let pay_max_params = Object.assign({}, params, {
-          trade_pay_type,
-          trade_target_org,
+      let pay_max_params = Object.assign({}, params, {
+        trade_pay_type,
+        trade_target_org,
+      });
+      if (this.product_key === 'consult_time') {
+        pay_max_params = Object.assign({}, pay_max_params, {
+          consult_time: this.consult_time
         });
-        pay_max_params.callback_url = `${location.origin}${location.pathname
-          }#/result?path=${path_enums[this.product_key]}&report_price=${this.product.price
-          }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR' }`;
-        const res = await payOrderAPI(pay_max_params);
-        localStorage.removeItem('mlxz_set_event_times');
-        Indicator.close();
-        if (res.status !== 1000) return;
-        if (user_time) {
-          localStorage.removeItem('mlxz_fixed_order_info');
-          localStorage.removeItem('mlxz_fixed_order_key');
-          localStorage.removeItem('mlxz_fixed_local_order_time');
-          localStorage.removeItem('mlxz_fixed_api_order_time');
-        }
-        await utils.asleep(1000);
-        location.href = res.data.pay_url;
       }
+      pay_max_params.callback_url = `${location.origin}${location.pathname
+        }#/result?path=${path_enums[this.product_key]}&report_price=${this.product.price
+        }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}`;
+      const res = await payOrderAPI(pay_max_params);
+      localStorage.removeItem('mlxz_set_event_times');
+      Indicator.close();
+      if (res.status !== 1000) return;
+      if (user_time) {
+        localStorage.removeItem('mlxz_fixed_order_info');
+        localStorage.removeItem('mlxz_fixed_order_key');
+        localStorage.removeItem('mlxz_fixed_local_order_time');
+        localStorage.removeItem('mlxz_fixed_api_order_time');
+      }
+      await utils.asleep(1000);
+      location.href = res.data.pay_url;
     },
   },
 };
