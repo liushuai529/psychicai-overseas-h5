@@ -1009,7 +1009,7 @@ export default {
   background: #F4E1B0;
   font-weight: 500;
   font-size: 0.34rem;
-  color: #FFFFFF;
+  color: #362516;
   text-align: center;
   line-height: 0.88rem;
   position: sticky;
