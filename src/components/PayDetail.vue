@@ -524,6 +524,7 @@ export default {
         }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}`;
       let res = null;
       if (this.product_key === 'consult_time') {
+        delete pay_max_params.extra_ce_suan
         res = await payFateOrderAPI(pay_max_params);
       } else {
         res = await payOrderAPI(pay_max_params);

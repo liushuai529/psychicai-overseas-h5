@@ -19,8 +19,8 @@
           </div>
         </div>
         <div v-if="!list.length && is_empty" class="empty-list">
-          <img src="../../../assets/img/tarot/dayi_img_wait.webp" class="nothing-icon" alt="" />
-          <div class="tips">{{ is_cn ? '暂无数据' : '暫無數據' }}</div>
+          <img src="../../../assets/img/emotion_fate/img_order_history_nodata.webp" class="nothing-icon" alt="" />
+          <div class="tips">{{ is_cn ? '暂无订单数据' : '暫無訂單數據' }}</div>
 
         </div>
         <div v-else class="order-list">
@@ -39,11 +39,11 @@
             </div>
             <div class="line"></div>
             <div class="content-container">
-              <sapn class="item item1">{{ is_cn ? '支付成功即可获得真人咨询师的1对1私密沟' : '支付成功即可獲得真人咨詢師的1對1私密溝' }}</sapn>
-              <sapn class="item item-lable">{{ `${is_cn ? '咨询时间：' : '咨詢時間：'} ` }} <span class="item item2">{{
-                formatTime(item.create_time) }}</span></sapn>
-              <sapn class="item item-lable">{{ `${is_cn ? '咨询时长：' : '咨詢時長：'} ` }}<span class="item item2">{{
-                getConsultTime(item.consult_seconds) }}</span></sapn>
+              <span class="item item1">{{ is_cn ? '支付成功即可获得真人咨询师的1对1私密沟' : '支付成功即可獲得真人咨詢師的1對1私密溝' }}</span>
+              <span class="item item-lable">{{ `${is_cn ? '咨询时间：' : '咨詢時間：'} ` }} <span class="item item2">{{
+                formatTime(item.create_time) }}</span></span>
+              <span class="item item-lable">{{ `${is_cn ? '咨询时长：' : '咨詢時長：'} ` }}<span class="item item2">{{
+                getConsultTime(item.consult_seconds) }}</span></span>
             </div>
             <div class="btn-container">
               <div class="btn nopay" v-if="item.order_status !== 'PAYED'" @click="handleJump(item)">支付</div>
@@ -75,7 +75,7 @@
 import { Indicator, Toast } from 'mint-ui';
 import utils from '@/libs/utils';
 import { path_enums } from '../../../libs/enum';
-import { getFateHistoryOrderAPI, payTarotOrderAPI } from '../../../api/api';
+import { getFateHistoryOrderAPI, payFateOrderAPI } from '../../../api/api';
 import { getHistoryOrderImg } from '../../../libs/enum';
 import consult_time_android from '../../../assets/img/emotion_fate/img_order_history_logo_android.webp'
 import consult_time_ios from '../../../assets/img/emotion_fate/img_order_history_logo_ios.webp'
@@ -158,7 +158,7 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
     productList() {
-      return this.$store.state.common.tarotProductList;
+      return this.$store.state.common.productList;
     },
     is_android() {
       return utils.isAndroid();
@@ -189,7 +189,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('common/getProduction');
+    this.$store.dispatch('common/getProduction', 'consult_time');
 
     setInterval(() => {
       let is_reload = localStorage.getItem('mlxz_reload_page_history');
@@ -305,7 +305,7 @@ export default {
       setTimeout(() => {
         this.jump_loading = false;
       }, 2000);
-     
+      
       let url = path_enums[item.product_key || 'consult_time'];
       if (item.order_status === 'PAYED') {
         localStorage.setItem('mlxz_reload_page_history', 1);
@@ -353,18 +353,16 @@ export default {
             fbp: utils.getcookieInfo('_fbp'),
             external_id: localStorage.getItem('mlxz_outer_visitor_id'),
           },
-          question: item.question,
-          question_tarot: {
-            array_type: 'timeline',
-            ask_type: 'array',
-            items: item.tarot.items
-          },
+          consult_time: {
+            user_info: item.user_info
+          }
+          
         };
 
         params.callback_url = `${location.origin
           }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key || 'consult_time']
           }&report_price=${same_product.price}&repay=1`;
-        const res = await payTarotOrderAPI(params);
+        const res = await payFateOrderAPI(params);
 
         Indicator.close();
 
@@ -426,17 +424,17 @@ export default {
   flex-direction: column;
 
   .nothing-icon {
-    width: 2.6rem;
-    height: 2.6rem;
+    width: 2.2rem;
+    height: 2.2rem;
   }
 
   .tips {
     width: 100%;
     height: 0.33rem;
-    font-size: 0.24rem;
+    font-size: 0.26rem;
     font-weight: 400;
-    color: #999999;
-    line-height: 0.33rem;
+    color: #B19175;
+    line-height: 0.38rem;
     margin-top: 0.2rem;
     text-align: center;
   }
