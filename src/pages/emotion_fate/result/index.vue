@@ -767,6 +767,7 @@ export default {
       display: flex;
       justify-content: flex-start;
       margin-bottom: 0.24rem;
+      margin-left: 0.24rem;
 
       img {
         height: 0.74rem;

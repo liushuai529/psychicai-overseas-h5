@@ -86,6 +86,12 @@ export const getHistoryOrderAPI = async data => {
   return request(`/web/auth/trade/orders/ce_suan`, 'GET', data);
 };
 
+// 查询正缘历史订单
+export const getFateHistoryOrderAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/consult_time/paging`, 'GET', data);
+};
+
 // 查询塔罗订单
 export const getTarotHistoryOrderAPI = async data => {
   return request(`/web/auth/master/questions/paging`, 'GET', data);

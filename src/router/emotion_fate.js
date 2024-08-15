@@ -4,6 +4,7 @@ import Router from 'vue-router';
 import index from '../pages/emotion_fate/home/index.vue';
 import detail from '../pages/emotion_fate/detail/index.vue';
 import result from '../pages/emotion_fate/result/index.vue';
+import order from '../pages/emotion_fate/order/index.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -22,6 +23,11 @@ export default new Router({
       path: '/result',
       name: 'result',
       component: result,
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: order,
     },
     {
       path: '*',

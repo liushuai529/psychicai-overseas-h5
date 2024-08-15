@@ -39,7 +39,7 @@ export const path_enums = {
   CAI_YUN_JING_PI: 'wealth_boutique_overseas',
   SHI_YE_JING_PI: 'career_divination_overseas',
   master_tarot:'tarot',
-  consult_time: 'consult_time',
+  consult_time: 'emotion_fate',
 };
 
 export const color_enums = [
@@ -273,6 +273,9 @@ import combine2 from '../assets/img/emotion_v2/new/dingdan_img_er.webp';
 import combine3 from '../assets/img/emotion_v2/new/dingdan_img_san.webp';
 import combo2_attach from '../assets/img/new_order/dingdan_img_er.webp';
 import master_tarot from '../assets/img/tarot/img_taluo_avatar.webp'
+import consult_time_android from '../assets/img/emotion_fate/img_order_history_logo_android.webp'
+import consult_time_ios from '../assets/img/emotion_fate/img_order_history_logo_ios.webp'
+
 
 export const getHistoryOrderImg = {
   h5_weigh_bone: yuantiangang,
@@ -286,6 +289,8 @@ export const getHistoryOrderImg = {
   h5_combo2: combine2,
   h5_combo2_attach: combo2_attach,
   master_tarot,
+  consult_time_android,
+  consult_time_ios, 
 };
 
 export const report_id_arr = {
