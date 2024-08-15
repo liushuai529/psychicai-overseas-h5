@@ -166,8 +166,8 @@ import cn_card_1 from '../../../assets/img/emotion/new/2.webp';
 import tw_card_1 from '../../../assets/img/emotion/new/tw/2.webp';
 import cn_card_2 from '../../../assets/img/emotion/new/3.webp';
 import tw_card_2 from '../../../assets/img/emotion/new/tw/3.webp';
-import cn_history_order from '../../../assets/img/emotion_v2/new/bgm_lsdd.webp';
-import tw_history_order from '../../../assets/img/emotion_v2/new/bgm_lsdd_fan.webp';
+import cn_history_order from '../../../assets/img/emotion_fate/cn/home_lsdd_cn.webp';
+import tw_history_order from '../../../assets/img/emotion_fate/tw/home_lsdd_tw.webp';
 
 import PopNotice from '../../../components/PopNotice.vue';
 
@@ -587,7 +587,10 @@ export default {
      * @return {*}
      */
     toOrder() {
-      utils.jumpToOrder();
+      // utils.jumpToOrder();
+      this.$router.push({
+        path: 'order',
+      });
     },
 
     /**
@@ -1434,8 +1437,8 @@ export default {
   position: fixed;
   right: 0;
   top: 3rem;
-  width: 1.3rem;
-  height: 1.87rem;
+  width: 0.44rem;
+  height: 1.5rem;
   z-index: 100;
 }
 

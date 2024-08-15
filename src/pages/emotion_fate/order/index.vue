@@ -31,7 +31,7 @@
               <div class="left">
                 <img :src="is_ios ? consult_time_ios : consult_time_android" alt="" />
                 <div class="title">
-                  {{ is_cn ? '真人塔罗答疑解惑' : '真人塔羅答疑解惑' }}
+                  {{ is_cn ? '真人咨询为你揭秘' : '真人咨詢為你揭秘' }}
 
                 </div>
               </div>
