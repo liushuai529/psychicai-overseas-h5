@@ -1,5 +1,6 @@
 <template>
   <div class="result" :class="['result']">
+    <ChatCard v-if="is_first" />
     <div class="top" @click="downClick">
       <img :src="is_cn ? cn_img_chat_top_laoshi : tw_img_chat_top_laoshi" />
     </div>
@@ -19,7 +20,7 @@
         <div class="message">
           <span>您的八字信息：</span>
           <span>姓名：{{ username }}</span>
-          <span>日期：{{ gongli_nongli? picker_date_yangli: picker_date_nongli }}</span>
+          <span>日期：{{ gongli_nongli ? picker_date_yangli : picker_date_nongli }}</span>
         </div>
       </div>
 
@@ -47,6 +48,7 @@
 import { Indicator, Toast } from 'mint-ui';
 //@ts-ignore
 import contentDetail from './content_detail.vue';
+import ChatCard from '../../../components/ChatCard.vue'
 import utils from '../../../libs/utils.js';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import cn_img_chat_top_laoshi from '../../../assets/img/emotion_fate/cn/img_chat_top_laoshi_cn.webp';
@@ -72,31 +74,34 @@ const tips_arr4 = {
 };
 
 const show_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10020, 'event_name': 'view_2024report_download', type: 'view'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10020, 'event_name': 'view_chenggu_download', type: 'view'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10020, 'event_name': 'view_64gua_download', type: 'view'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10029, 'event_name': 'view_2024lovely_download', type: 'view'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10031, 'event_name': 'view_marriage_download', type: 'view'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10020, 'event_name': 'view_2024career_download', type: 'view'}, // 2024年事业运势 
+  h5_wealth2024: { module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view' }, // 2024年财运
+  h5_annual2024: { module: 10003, 'content_id': -10020, 'event_name': 'view_2024report_download', type: 'view' }, // 2024年年运
+  h5_weigh_bone: { module: 10009, 'content_id': -10020, 'event_name': 'view_chenggu_download', type: 'view' }, // 袁天罡秤骨
+  h5_bai_gua: { module: 10008, 'content_id': -10020, 'event_name': 'view_64gua_download', type: 'view' }, // 鬼谷子
+  h5_emotion2024: { module: 10006, 'content_id': -10029, 'event_name': 'view_2024lovely_download', type: 'view' }, // 2024年爱情运势
+  h5_marriage: { module: 10007, 'content_id': -10031, 'event_name': 'view_marriage_download', type: 'view' }, //合婚
+  h5_career2024: { module: 10004, 'content_id': -10020, 'event_name': 'view_2024career_download', type: 'view' }, // 2024年事业运势 
+  consult_time: { module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view' }, // 2024年财运
 }
 const copy_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10021, 'event_name': 'click_2024wealty_copy', type: 'click'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10021, 'event_name': 'click_2024report_copy', type: 'click'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10021, 'event_name': 'click_chenggu_copy', type: 'click'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10021, 'event_name': 'click_64gua_copy', type: 'click'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10030, 'event_name': 'click_2024lovely_copy', type: 'click'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10032, 'event_name': 'click_marriage_copy', type: 'click'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10021, 'event_name': 'click_2024career_copy', type: 'click'}, // 2024年事业运势 
+  h5_wealth2024: { module: 10005, 'content_id': -10021, 'event_name': 'click_2024wealty_copy', type: 'click' }, // 2024年财运
+  h5_annual2024: { module: 10003, 'content_id': -10021, 'event_name': 'click_2024report_copy', type: 'click' }, // 2024年年运
+  h5_weigh_bone: { module: 10009, 'content_id': -10021, 'event_name': 'click_chenggu_copy', type: 'click' }, // 袁天罡秤骨
+  h5_bai_gua: { module: 10008, 'content_id': -10021, 'event_name': 'click_64gua_copy', type: 'click' }, // 鬼谷子
+  h5_emotion2024: { module: 10006, 'content_id': -10030, 'event_name': 'click_2024lovely_copy', type: 'click' }, // 2024年爱情运势
+  h5_marriage: { module: 10007, 'content_id': -10032, 'event_name': 'click_marriage_copy', type: 'click' }, //合婚
+  h5_career2024: { module: 10004, 'content_id': -10021, 'event_name': 'click_2024career_copy', type: 'click' }, // 2024年事业运势 
+  consult_time: { module: 10004, 'content_id': -10021, 'event_name': 'click_2024career_copy', type: 'click' }, // 2024年事业运势 
 }
 const down_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10022, 'event_name': 'click_2024wealty_download', type: 'click'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10022, 'event_name': 'click_2024report_download', type: 'click'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10022, 'event_name': 'click_chenggu_download', type: 'click'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10022, 'event_name': 'click_64gua_download', type: 'click'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10031, 'event_name': 'click_2024lovely_download', type: 'click'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10033, 'event_name': 'click_marriage_download', type: 'click'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10022, 'event_name': 'click_2024career_download', type: 'click'}, // 2024年事业运势 
+  h5_wealth2024: { module: 10005, 'content_id': -10022, 'event_name': 'click_2024wealty_download', type: 'click' }, // 2024年财运
+  h5_annual2024: { module: 10003, 'content_id': -10022, 'event_name': 'click_2024report_download', type: 'click' }, // 2024年年运
+  h5_weigh_bone: { module: 10009, 'content_id': -10022, 'event_name': 'click_chenggu_download', type: 'click' }, // 袁天罡秤骨
+  h5_bai_gua: { module: 10008, 'content_id': -10022, 'event_name': 'click_64gua_download', type: 'click' }, // 鬼谷子
+  h5_emotion2024: { module: 10006, 'content_id': -10031, 'event_name': 'click_2024lovely_download', type: 'click' }, // 2024年爱情运势
+  h5_marriage: { module: 10007, 'content_id': -10033, 'event_name': 'click_marriage_download', type: 'click' }, //合婚
+  h5_career2024: { module: 10004, 'content_id': -10022, 'event_name': 'click_2024career_download', type: 'click' }, // 2024年事业运势 
+  consult_time: { module: 10004, 'content_id': -10022, 'event_name': 'click_2024career_download', type: 'click' }, // 2024年事业运势 
 }
 
 import {
@@ -107,7 +112,7 @@ import {
   sendEventApi,
 } from '../../../api/api';
 export default {
-  components: { contentDetail },
+  components: { contentDetail, ChatCard },
   data() {
     return {
       tips_arr4,
@@ -124,7 +129,7 @@ export default {
       img_chat_dibu_android_tw,
 
 
-     
+
       count: 0,
       status: '',
       year: '',
@@ -137,7 +142,7 @@ export default {
       picker_hour: '',
       picker_date_yangli: '',
       picker_date_nongli: '',
-      
+
 
       extra_ce_suan: {},
       baoshi_icon: '',
@@ -159,6 +164,7 @@ export default {
       message_show1: false,
       message_show2: false,
       message_show3: false,
+      product_key: 'consult_time',
 
     };
   },
@@ -172,7 +178,7 @@ export default {
   async mounted() {
     this.order_id = this.$route.query.id || this.$route.query.order_id;
 
-    localStorage.setItem(`emotion_fate_order_${this.order_id}`, 1)
+
 
     window.scrollTo(0, 0);
     utils.gcyLog(`order_id:${this.order_id}`, {
@@ -257,14 +263,14 @@ export default {
         setTimeout(() => {
           this.message_show1 = true;
 
-        }, 1000);
+        }, 1500);
         setTimeout(() => {
           this.message_show2 = true;
-        }, 2000);
+        }, 2900);
         setTimeout(() => {
 
           this.message_show3 = true;
-        }, 3000);
+        }, 4500);
       }
     },
   },
@@ -272,18 +278,19 @@ export default {
     async handleCopyCode(val) {
       utils.copyText('mlxz-' + this.transfer_code);
       Toast(tips_arr4[lang]);
-      if(val === 0) return
+      if (val === 0) return
       utils.firebaseLogEvent(copy_info[this.product_key]['module'], copy_info[this.product_key]['content_id'], copy_info[this.product_key]['event_name'], copy_info[this.product_key]['type'], {
         args_name: copy_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
     },
     downClick(arg) {
+      console.log('down_info', down_info)
       utils.firebaseLogEvent(down_info[this.product_key]['module'], down_info[this.product_key]['content_id'], down_info[this.product_key]['event_name'], down_info[this.product_key]['type'], {
         args_name: down_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
-      if(arg) {
+      if (arg) {
         this.handleCopyCode(0);
       }
       utils.openApp();
@@ -537,10 +544,6 @@ export default {
       const res = await resultCheckAPI(data);
       if (res.status === 1000) {
         if (!localStorage.getItem('report_price')) return;
-
-        const price = +localStorage.getItem('report_price');
-        const { status } = res.data;
-        const product_key = '2024_lovely_report';
       }
       localStorage.removeItem('report_price');
       return res.status === 1000 ? 1 : 0;
@@ -553,10 +556,10 @@ export default {
       this.count++;
       Indicator.open(this.$t('result-check'));
       getFateResultAPI({ order_id: this.$route.query.order_id }).then(res => {
-        console.log('res', res)
         if (res.data.order_status === 'PAYED') {
           this.renderResultAndComplete(res);
           this.transfer_code = res.data.transfer_code;
+          console.log('aaa', !localStorage.getItem(`emotion_fate_order_${this.order_id}`))
           if (!localStorage.getItem(`emotion_fate_order_${this.order_id}`)) {
             this.is_first = true;
           } else {
@@ -564,6 +567,7 @@ export default {
             this.message_show2 = true;
             this.message_show3 = true;
           }
+          localStorage.setItem(`emotion_fate_order_${this.order_id}`, 1)
         } else if (this.count < 6) {
           if (['PAYED', 'FAIL', 'REFUNDED'].includes(res.data.order_status)) {
             this.backNotice();
@@ -599,11 +603,11 @@ export default {
      */
     renderResult(res) {
       if (res.data.user_info) {
-       
+
         this.formateQueryUserInfo(res.data.user_info);
       }
 
-      
+
     },
 
     renderResultAndComplete(res) {
