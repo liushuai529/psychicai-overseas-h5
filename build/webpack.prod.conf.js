@@ -399,6 +399,29 @@ for (var pathname in entries) {
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// enjoy07代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy07/' + filename + '.html'),
+    template: 'template/index_enjoy07.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
 if (config.build.productionGzip) {
   var CompressionWebpackPlugin = require('compression-webpack-plugin');
 
