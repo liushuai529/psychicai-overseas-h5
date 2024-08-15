@@ -146,6 +146,7 @@ export default {
       icon_arr: getHistoryOrderImg,
       consult_time_android,
       consult_time_ios,
+      offset: 0,
     };
   },
   components: {
@@ -254,6 +255,7 @@ export default {
           ? data.list
           : [...this.list, ...data.list];
       this.has_next = data.has_more ? true : false;
+      this.offset = data.offset;
       console.log('this.list', this.list)
       this.is_empty = !this.list.length ? true : false;
       this.show_kf = true;
@@ -266,7 +268,8 @@ export default {
      */
     loadMore() {
       if (this.has_next) {
-        this.query.offset += this.query.limit;
+        // this.query.offset += this.query.limit;
+        this.query.offset = this.offset;
         this.getData();
       }
     },
