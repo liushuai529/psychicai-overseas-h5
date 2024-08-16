@@ -200,6 +200,10 @@ export default {
       showPayGuideModal: false,//待支付蒙版
       show_discount_modal: false,//低价折扣弹窗
       consult_time: null,//下单参数
+      duration_time: {
+        entry_time: 0,
+        exit_time: 0,
+      }
     };
   },
   watch: {
@@ -285,6 +289,7 @@ export default {
   },
 
   mounted() {
+    this.duration_time.entry_time = new Date().getTime()
     window.scrollTo(0, 0);
     setTimeout(() => {
       this.$nextTick(() => {
@@ -302,6 +307,22 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
+  },
+  destroyed() {
+    this.duration_time.exit_time = new Date().getTime();
+    if(this.duration_time.entry_time) {
+      utils.firebaseLogEvent(
+      '10011',
+      '-10005',
+      'view_truelove_duration',
+      'view',
+      {
+        args_name: 'view_truelove_duration',
+        channel: utils.getFBChannel(),
+        time: JSON.stringify({entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time,})
+      }
+    );
+    }
   },
   methods: {
     scrollClick() {

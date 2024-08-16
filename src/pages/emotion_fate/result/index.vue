@@ -152,6 +152,10 @@ export default {
       message_show2: false,
       message_show3: false,
       product_key: 'consult_time',
+      duration_time: {
+        entry_time: 0,
+        exit_time: 0,
+      }
 
     };
   },
@@ -163,6 +167,7 @@ export default {
     // localStorage.removeItem('mlxz_fixed_api_order_time');
   },
   async mounted() {
+    this.duration_time.entry_time = new Date().getTime()
     this.order_id = this.$route.query.id || this.$route.query.order_id;
     window.scrollTo(0, 0);
     utils.gcyLog(`order_id:${this.order_id}`, {
@@ -204,6 +209,24 @@ export default {
     await this.checkResult();
     this.query();
   },
+
+  destroyed() {
+    this.duration_time.exit_time = new Date().getTime();
+    if(this.duration_time.entry_time) {
+      utils.firebaseLogEvent(
+      '10011',
+      '-10010',
+      'view_truelove_chatpage_duration',
+      'view',
+      {
+        args_name: 'view_truelove_chatpage_duration',
+        channel: utils.getFBChannel(),
+        time: JSON.stringify({entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time,})
+      }
+    );
+    }
+  },
+
   computed: {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';

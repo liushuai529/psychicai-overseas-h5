@@ -350,6 +350,7 @@ export default {
     if (this.timer) {
       clearInterval(this.timer);
     }
+    console.log('销毁111')
   },
   mounted() {
     //svga动画预加载
