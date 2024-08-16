@@ -1,6 +1,6 @@
 <template>
   <div class="result" :class="['result']">
-    <ChatCard v-if="is_first" />
+    <ChatCard v-if="is_first" :transfer_code="transfer_code"/>
     <div class="top" @click="downClick">
       <img :src="is_cn ? cn_img_chat_top_laoshi : tw_img_chat_top_laoshi" />
     </div>
@@ -84,24 +84,11 @@ const show_info = {
   consult_time: { module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view' }, // 2024年财运
 }
 const copy_info = {
-  h5_wealth2024: { module: 10005, 'content_id': -10021, 'event_name': 'click_2024wealty_copy', type: 'click' }, // 2024年财运
-  h5_annual2024: { module: 10003, 'content_id': -10021, 'event_name': 'click_2024report_copy', type: 'click' }, // 2024年年运
-  h5_weigh_bone: { module: 10009, 'content_id': -10021, 'event_name': 'click_chenggu_copy', type: 'click' }, // 袁天罡秤骨
-  h5_bai_gua: { module: 10008, 'content_id': -10021, 'event_name': 'click_64gua_copy', type: 'click' }, // 鬼谷子
-  h5_emotion2024: { module: 10006, 'content_id': -10030, 'event_name': 'click_2024lovely_copy', type: 'click' }, // 2024年爱情运势
-  h5_marriage: { module: 10007, 'content_id': -10032, 'event_name': 'click_marriage_copy', type: 'click' }, //合婚
-  h5_career2024: { module: 10004, 'content_id': -10021, 'event_name': 'click_2024career_copy', type: 'click' }, // 2024年事业运势 
-  consult_time: { module: 10004, 'content_id': -10021, 'event_name': 'click_2024career_copy', type: 'click' }, // 2024年事业运势 
+  consult_time: { module: 10011, 'content_id': -10011, 'event_name': 'click_truelove_copy', type: 'click' }, 
 }
 const down_info = {
-  h5_wealth2024: { module: 10005, 'content_id': -10022, 'event_name': 'click_2024wealty_download', type: 'click' }, // 2024年财运
-  h5_annual2024: { module: 10003, 'content_id': -10022, 'event_name': 'click_2024report_download', type: 'click' }, // 2024年年运
-  h5_weigh_bone: { module: 10009, 'content_id': -10022, 'event_name': 'click_chenggu_download', type: 'click' }, // 袁天罡秤骨
-  h5_bai_gua: { module: 10008, 'content_id': -10022, 'event_name': 'click_64gua_download', type: 'click' }, // 鬼谷子
-  h5_emotion2024: { module: 10006, 'content_id': -10031, 'event_name': 'click_2024lovely_download', type: 'click' }, // 2024年爱情运势
-  h5_marriage: { module: 10007, 'content_id': -10033, 'event_name': 'click_marriage_download', type: 'click' }, //合婚
-  h5_career2024: { module: 10004, 'content_id': -10022, 'event_name': 'click_2024career_download', type: 'click' }, // 2024年事业运势 
-  consult_time: { module: 10004, 'content_id': -10022, 'event_name': 'click_2024career_download', type: 'click' }, // 2024年事业运势 
+
+  consult_time: { module: 10011, 'content_id': -10013, 'event_name': 'click_truelove_result', type: 'click' }, 
 }
 
 import {
@@ -177,21 +164,18 @@ export default {
   },
   async mounted() {
     this.order_id = this.$route.query.id || this.$route.query.order_id;
-
-
-
     window.scrollTo(0, 0);
     utils.gcyLog(`order_id:${this.order_id}`, {
       mlxz_action_desc: '已进入结果页',
     });
 
     utils.firebaseLogEvent(
-      '10006',
+      '10011',
       '-10009',
-      'page_view_2024lovely_result',
+      'page_view_truelove_chatpage',
       'page_view',
       {
-        args_name: 'page_view_2024lovely_result',
+        args_name: 'page_view_truelove_chatpage',
         channel: utils.getFBChannel(),
       }
     );
@@ -285,7 +269,6 @@ export default {
       });
     },
     downClick(arg) {
-      console.log('down_info', down_info)
       utils.firebaseLogEvent(down_info[this.product_key]['module'], down_info[this.product_key]['content_id'], down_info[this.product_key]['event_name'], down_info[this.product_key]['type'], {
         args_name: down_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
@@ -359,60 +342,19 @@ export default {
           mlxz_action_desc: '开始上报firebase埋点',
           mlxz_order_status: report_status,
         });
-        if (discount_pay) {
-          utils.firebaseLogEvent(
-            '10006',
-            '-10024',
-            'event_status_2024lovelydiscont_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovelydiscont_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (repay) {
-          let history_name =
-            repay == 3
-              ? 'event_status_2024lovelymarriagehistory_pay_success'
-              : 'event_status_2024lovelyhistory_pay_success';
 
-          utils.firebaseLogEvent(
-            '10002',
-            repay == 3 ? '-10032' : '-10013',
-            history_name,
-            'event_status',
-            {
-              args_name: history_name,
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (!discount_pay && !repay && !combine_product_ids) {
-          utils.firebaseLogEvent(
-            '10006',
-            '-10007',
-            'event_status_2024lovely_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovely_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (combine_product_ids) {
-          //成功
-          utils.firebaseLogEvent(
-            '10006',
-            '-10026',
-            'event_status_2024lovelymarriage_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovelymarriage_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
+
+        utils.firebaseLogEvent(
+          '10011',
+          '-10007',
+          'event_status_truelove_pay_success',
+          'event_status',
+          {
+            args_name: 'event_status_truelove_pay_success',
+            channel: utils.getFBChannel(),
+          }
+        );
+
 
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成firebase埋点上报',
@@ -451,59 +393,19 @@ export default {
           mlxz_action_desc: '开始上报埋点',
           mlxz_order_status: report_status,
         });
-        if (discount_pay) {
-          utils.firebaseLogEvent(
-            '10006',
-            '-10025',
-            'event_status_2024lovelydiscount_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovelydiscount_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (repay) {
-          let history_name =
-            repay == 3
-              ? 'event_status_2024lovelymarriagehistory_pay_fail'
-              : 'event_status_2024lovelyhistory_pay_fail';
-          utils.firebaseLogEvent(
-            '10002',
-            repay === 3 ? '-10033' : '-10022',
-            history_name,
-            'event_status',
-            {
-              args_name: history_name,
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (!discount_pay && !repay && !combine_product_ids) {
-          utils.firebaseLogEvent(
-            '10006',
-            '-10008',
-            'event_status_2024lovely_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovely_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (combine_product_ids) {
-          //失败
-          utils.firebaseLogEvent(
-            '10006',
-            '-10027',
-            'event_status_2024lovelymarriage_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovelymarriage_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
+
+
+        utils.firebaseLogEvent(
+          '10011',
+          '-10008',
+          'event_status_truelove_pay_fail',
+          'event_status',
+          {
+            args_name: 'event_status_truelove_pay_fail',
+            channel: utils.getFBChannel(),
+          }
+        );
+
 
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成上报埋点',

@@ -319,7 +319,8 @@ export default {
 
     this.getPayMethod();
 
-    utils.firebaseLogEvent(
+    if(this.c_view_id) {
+      utils.firebaseLogEvent(
       this.e_view_id,
       this.c_view_id,
       this.e_view_name,
@@ -329,6 +330,10 @@ export default {
         channel: utils.getFBChannel(),
       }
     );
+    }
+
+
+    
   },
   mounted() { },
 

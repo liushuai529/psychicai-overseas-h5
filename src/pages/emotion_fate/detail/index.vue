@@ -21,9 +21,8 @@
         <img :src="is_cn ? cn_paypage_tittle_pay : tw_paypage_tittle_pay" />
       </div>
       <PayDetail className="pay-method" ref="payDetail" :product_key="product_key"
-        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10006"
-        c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
-        e_click_name="click_2024lovely_pay" a_click_token="2rov44" :consult_time="consult_time" />
+        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10011"
+        c_click_id="-10006" e_click_name="click_truelove_pay" :consult_time="consult_time" />
     </div>
 
     <div class="method-title-img-consult">
@@ -270,12 +269,12 @@ export default {
   },
   async created() {
     utils.firebaseLogEvent(
-      '10006',
-      '-10003',
-      'page_view_2024lovely_mid',
+      '10011',
+      '-10004',
+      'page_view_truelove_mid',
       'page_view',
       {
-        args_name: 'page_view_2024lovely_mid',
+        args_name: 'page_view_truelove_mid',
         channel: utils.getFBChannel(),
       }
     );
@@ -302,22 +301,6 @@ export default {
     window.addEventListener('resize', function () {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
-    });
-    // self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
-    this.$nextTick(() => {
-      let dom = document.querySelector('.fix-btn');
-      if (dom) {
-        utils.firebaseLogEvent(
-          '10006',
-          '-10019',
-          'view_2024lovely_button',
-          'view',
-          {
-            args_name: 'view_2024lovely_button',
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
     });
   },
   methods: {
@@ -462,21 +445,7 @@ export default {
 
     },
 
-    // 支付弹窗
-    showPayModal() {
-      utils.firebaseLogEvent(
-        '10006',
-        '-10004',
-        'click_2024lovely_mid',
-        'click',
-        {
-          args_name: 'click_2024lovely_mid',
-          channel: utils.getFBChannel(),
-        }
-      );
 
-      this.pay_modal = true;
-    },
     payOrder() {
       localStorage.removeItem('mlxz_count_pay_item_h5_emotion2024');
       this.$refs.payDetail.payMoney();

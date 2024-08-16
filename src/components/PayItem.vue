@@ -1,5 +1,5 @@
 <template>
-  <div class="pay-item"  :style="{marginBottom:product_key==='h5_emotion2024'? '0.37rem': '0.24rem'}" @click="pay">
+  <div class="pay-item"  v-if="last_order" :style="{marginBottom:product_key==='h5_emotion2024'? '0.37rem': '0.24rem'}" @click="pay">
     <div class="pay-contaienr">
       <div class="left">
         <div class="title">{{is_cn? '您有待支付订单': '您有待支付訂單'}}</div>
@@ -233,7 +233,6 @@ export default {
         }
 
         const res = await payOrderAPI(params);
-
         Indicator.close();
 
         if (res.status !== 1000) return;

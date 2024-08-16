@@ -119,15 +119,7 @@
         v-show="choose_time && show_nongli"></NongliPicker>
 
       <NewFooter v-if="showFixedBtn" product_key="consult_time" />
-      <!-- <HomeFooter v-if="showFixedBtn" product_key="consult_time" /> -->
-      <!-- <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"
-        e_id="10006" c_id="-10021" c_name="click_2024lovely_discount1" /> -->
-      <!-- <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
-        :new_order_key="new_order_key" name="local" top="4.7rem" :time="local_time" @payOrder="checkOrder"
-        @jumpDetail="jumpOrder" />
-      <FixedOrder v-if="show_api_order && !is_show_notice" :title="last_title" :is_show_move="is_show_notice"
-        :last_order="last_order" name="api" top="6.7rem" :time="api_time" @payOrder="checkOrder"
-        @jumpDetail="jumpOrder" /> -->
+   
     </div>
   </div>
 </template>
@@ -273,8 +265,6 @@ export default {
       pay_modal: false,
       product_price: '',
 
-      // 挽留弹窗
-      is_show_notice: false, // 是否展示挽留弹窗
       count_down: 0, // 挽留弹窗倒计时
       fix_order_info: null, //最新一个订单信息
       new_order_key: '',
@@ -299,46 +289,13 @@ export default {
       return this.language === 'zh-CN';
     },
 
-    show_fixed_order() {
-      if (this.last_order) {
-        if (
-          this.last_order.product_key === this.new_order_key &&
-          this.last_order.status !== 'PAYED'
-        ) {
-          return false;
-        }
-      }
-
-      let flag =
-        this.fix_order_info && this.new_order_key !== this.product_key
-          ? true
-          : false;
-
-      if (flag) {
-        const { main_id, click_id, view_id, click_name, view_name } =
-          maidianEnum[this.new_order_key];
-        utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
-          args_name: view_name,
-          channel: utils.getFBChannel(),
-        });
-      }
-      return flag;
-    },
+   
     local_title() {
       return utils.getTitle(this.new_order_key);
     },
-    is_channel_01() {
-      return utils.getFBChannel().indexOf('01') > -1;
-    },
-    is_channel_05() {
-      return utils.getFBChannel().indexOf('05') > -1;
-    },
   },
   watch: {
-    is_show_notice(val) {
-      if (val) {
-      }
-    },
+  
     username(val) {
       if (val) {
         let new_ = val.trim();
@@ -352,48 +309,33 @@ export default {
         }
       }
     },
-    is_show_notice(val) {
-      if (val) {
-        utils.firebaseLogEvent(
-          '10006',
-          '-10020',
-          'view_2024lovely_discount1',
-          'view',
-          {
-            args_name: 'view_2024lovely_discount1',
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
-    },
+    
   },
   created() {
-    // this.showComboAttach();
     utils.isProd() &&
       tStatistic &&
       tStatistic.send({
-        event: 'page_view_lovely_main',
-        md: 10006,
+        event: 'page_view_truelove_main',
+        md: 10011,
         c_id: -10001,
         args: {
-          args_name: 'page_view_lovely_main',
+          args_name: 'page_view_truelove_main',
           channel: utils.getFBChannel(),
         },
       });
     this.$store.dispatch('common/getProduction', 'consult_time');
     utils.firebaseLogEvent(
-      '10006',
+      '10011',
       '-10001',
-      'page_view_2024lovely_main',
+      'page_view_truelove_main',
       'page_view',
       {
-        args_name: 'page_view_2024lovely_main',
+        args_name: 'page_view_truelove_main',
         channel: utils.getFBChannel(),
       }
     );
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
-    // this.getLastOrder();
     // 埋点事件上传
     reportBuryingEventAPI({
       event: 'page_view_2024lovely_main',
@@ -587,7 +529,6 @@ export default {
      * @return {*}
      */
     toOrder() {
-      // utils.jumpToOrder();
       this.$router.push({
         path: 'order',
       });
@@ -710,12 +651,12 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         utils.firebaseLogEvent(
-          '10006',
+          '10011',
           '-10002',
-          'click_2024lovely_main',
+          'click_truelove_main',
           'click',
           {
-            args_name: 'click_2024lovely_main',
+            args_name: 'click_truelove_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -732,12 +673,12 @@ export default {
       // }
       if (time_obj == null) {
         utils.firebaseLogEvent(
-          '10006',
+          '10011',
           '-10002',
-          'click_2024lovely_main',
+          'click_truelove_main',
           'click',
           {
-            args_name: 'click_2024lovely_main',
+            args_name: 'click_truelove_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -747,12 +688,12 @@ export default {
       }
       if (!this.privacyChecked) {
         utils.firebaseLogEvent(
-          '10006',
+          '10011',
           '-10002',
-          'click_2024lovely_main',
+          'click_truelove_main',
           'click',
           {
-            args_name: 'click_2024lovely_main',
+            args_name: 'click_truelove_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -763,12 +704,12 @@ export default {
 
       if (email == '' && utils.showEmail()) {
         utils.firebaseLogEvent(
-          '10006',
+          '10011',
           '-10002',
-          'click_2024lovely_main',
+          'click_truelove_main',
           'click',
           {
-            args_name: 'click_2024lovely_main',
+            args_name: 'click_truelove_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -778,23 +719,6 @@ export default {
         dom.focus();
         return;
       }
-      // if(!utils.checkEmail(email) && utils.showEmail()) {
-      //   utils.firebaseLogEvent(
-      //     '10006',
-      //     '-10002',
-      //     'click_2024lovely_main',
-      //     'click',
-      //     {
-      //       args_name: 'click_2024lovely_main',
-      //       channel: utils.getFBChannel(),
-      //       click_type: 'error',
-      //     }
-      //   );
-      //   Toast(this.$t('email-tips-1'));
-      //   let dom = document.getElementById('email');
-      //   dom.focus();
-      //   return;
-      // }
 
 
 
@@ -821,12 +745,12 @@ export default {
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
-        '10006',
+        '10011',
         '-10002',
-        'click_2024lovely_main',
+        'page_view_truelove_main',
         'click',
         {
-          args_name: 'click_2024lovely_main',
+          args_name: 'page_view_truelove_main',
           channel: utils.getFBChannel(),
           click_type: 'screen_tracking',
         }
@@ -991,173 +915,13 @@ export default {
       return params;
     },
 
-    async backHome() {
-      utils.firebaseLogEvent(
-        '10006',
-        '-10011',
-        'click_2024lovely_main_home',
-        'click',
-        {
-          args_name: 'click_2024lovely_main_home',
-          channel: utils.getFBChannel(),
-        }
-      );
-      await utils.asleep(600);
-      let check_event = utils.getQueryStr('check_event');
-      if (!check_event && utils.isProd()) {
-        location.href = 'index.html';
-      } else {
-        window.open('index.html', '_blank');
-      }
-    },
-    // 展示挽留弹窗  通过定时器
-    showNoticePop() {
-      this.timer = setInterval(() => {
-        this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
-        this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
-        let is_show_notice = localStorage.getItem(
-          `mlxz_show_notice_${this.product_key}`
-        );
-        this.is_show_notice = is_show_notice
-          ? +is_show_notice === 1
-            ? true
-            : false
-          : false;
-        let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
-        let set_time_ = (5 * 60 + 48) * 1000 + 280;
-        this.count_down = +time_ || 0;
-        // this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
-        this.local_time =
-          +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
-      }, 1000);
-    },
-    // 关闭当前报告的挽留弹窗
-    closeNotice() {
-      localStorage.setItem(`mlxz_show_notice_${this.product_key}`, 2);
-      localStorage.removeItem(`mlxz_count_down_${this.product_key}`);
-      this.is_show_notice = false;
-    },
+    
+   
+ 
 
-    // 获取最新一个订单信息
-    async getLastOrder() {
-      const res = await getLastOrderAPI();
-      if (res.status !== 1000) return;
-      this.last_order = res.data;
-      this.last_title = utils.getTitle(
-        this.last_order ? this.last_order.product_key : ''
-      );
-
-      if (
-        this.last_order &&
-        this.last_order.status !== 'PAYED' &&
-        this.last_order.product_key !== this.product_key
-      ) {
-        this.logDiscountEvent();
-
-        //
-        if (
-          +localStorage.getItem('mlxz_fixed_api_order_id') ===
-          this.last_order.id
-        ) {
-          this.api_time = +localStorage.getItem('mlxz_fixed_api_order_time');
-          this.show_api_order = true;
-          return;
-        }
-        this.api_time =
-          +localStorage.getItem('mlxz_fixed_api_order_time') || 15 * 60 * 1000;
-        localStorage.setItem('mlxz_fixed_api_order_id', this.last_order.id);
-        this.show_api_order = true;
-      } else {
-        this.show_api_order = false;
-      }
-    },
-    logDiscountEvent() {
-      const { ext, pay_method, product_key, product_id, payment } =
-        this.last_order;
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[product_key];
-      utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
-        args_name: view_name,
-        channel: utils.getFBChannel(),
-      });
-    },
-    // api订单下单
-    async checkOrder() {
-      const {
-        ext,
-        pay_method,
-        product_key,
-        product_id,
-        payment,
-        trade_pay_type,
-        trade_target_org,
-      } = this.last_order;
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[product_key];
-      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
-        args_name: click_name,
-        channel: utils.getFBChannel(),
-      });
-      Indicator.open(tipsArr5[utils.getLanguage()]);
-
-      if (this.last_order.status === 'PAYED') return;
-      let params = {
-        pay_method: pay_method,
-        product_key: product_key,
-        product_id: product_id,
-        platform: 'WEB',
-        extra_ce_suan: ext,
-        trade_pay_type,
-        trade_target_org,
-        fb_param: {
-          fbc: utils.getcookieInfo('_fbc'),
-          fbp: utils.getcookieInfo('_fbp'),
-          external_id: localStorage.getItem('mlxz_outer_visitor_id'),
-        },
-        callback_url: `${location.origin}/${utils.getFBChannel()}/${path_enums[product_key]
-          }.html#/result?path=${path_enums[product_key]
-          }&report_price=${payment}&discount_pay=1`,
-      };
-
-      const res = await payOrderAPI(params);
-      localStorage.removeItem('mlxz_fixed_api_order_id');
-      localStorage.removeItem('mlxz_fixed_api_order_time');
-      Indicator.close();
-      if (res.status !== 1000) return;
-      this.show_api_order = false;
-
-      await utils.asleep(1000);
-      location.href = res.data.pay_url;
-    },
-    jumpOrder() {
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[this.new_order_key];
-      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
-        args_name: click_name,
-        channel: utils.getFBChannel(),
-      });
-      if (this.new_order_key === 'h5_marriage') {
-        let marry_info = JSON.parse(
-          localStorage.getItem('mlxz_user_info_h5_marriage')
-        );
-        let male_str = marry_info.male_str;
-        let female_str = marry_info.female_str;
-        let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
-&pay_modal=1&use_fixed_time=1&discount_pay=1`;
-        location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
-          }.html#/${path}`;
-
-        return;
-      }
-      let path =
-        'detail?querystring=' +
-        this.fix_order_info +
-        '&pay_modal=1' +
-        '&use_fixed_time=1&discount_pay=1';
-
-      location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
-        }.html#/${path}`;
-    },
+  
+   
+    
   },
 };
 </script>

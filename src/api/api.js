@@ -232,6 +232,12 @@ export const getLastOrderGetAPI = async data => {
   return request(`/web/auth/trade/orders/ce_suan/recent/${data}`, 'GET', data);
 };
 
+//查询正缘报告最近一笔订单get请求
+export const getFateLastOrderGetAPI = async data => {
+  await visitorLoginAPI();
+  return request(`/web/auth/consult_time/recent/${data}`, 'GET', data);
+};
+
 //查询最近一笔订单get请求
 export const getTarotLastOrderGetAPI = async data => {
   return request(`/web/auth/master/recent/${data}`, 'GET', data);

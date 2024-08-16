@@ -202,16 +202,16 @@ export default {
   },
 
   mounted() {
-    // utils.firebaseLogEvent(
-    //   '10002',
-    //   '-10001',
-    //   'page_view_history',
-    //   'page_view',
-    //   {
-    //     args_name: 'page_view_history',
-    //     channel: utils.getFBChannel(),
-    //   }
-    // );
+    utils.firebaseLogEvent(
+      '10011',
+      '-10016',
+      'page_view_truelove_history',
+      'page_view',
+      {
+        args_name: 'page_view_truelove_history',
+        channel: utils.getFBChannel(),
+      }
+    );
 
     this.getData();
   },
@@ -225,10 +225,10 @@ export default {
 
   methods: {
     getConsultTime(time) {
-      return `${time/60}${this.is_cn? '分钟':'分鐘'}`
+      return `${time / 60}${this.is_cn ? '分钟' : '分鐘'}`
     },
     formatTime(date) {
-      date= new Date(date)
+      date = new Date(date)
       const day = date.getDate().toString().padStart(2, '0');
       const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 月份是从0开始的
       const year = date.getFullYear();
@@ -278,20 +278,7 @@ export default {
 
 
 
-    async openApp() {
-      utils.firebaseLogEvent(
-        '10002',
-        '-10002',
-        'click_history_download',
-        'click',
-        {
-          args_name: 'click_history_download',
-          channel: utils.getFBChannel(),
-        }
-      );
-      await utils.asleep(500);
-      utils.openApp();
-    },
+
 
     /**
      * @description: 跳转测算报告页
@@ -305,7 +292,7 @@ export default {
       setTimeout(() => {
         this.jump_loading = false;
       }, 2000);
-      
+
       let url = path_enums[item.product_key || 'consult_time'];
       if (item.order_status === 'PAYED') {
         localStorage.setItem('mlxz_reload_page_history', 1);
@@ -315,6 +302,16 @@ export default {
           path: 'result',
           query: { order_id: item.order_id, status: 'SUCCESS', product_key: item.product_key || 'consult_time' },
         });
+        utils.firebaseLogEvent(
+          10011,
+          -10018,
+          'click_history_truelove_check',
+          'click',
+          {
+            args_name: 'click_history_truelove_check',
+            channel: utils.getFBChannel(),
+          }
+        );
       } else {
         let same_product = this.productList.find(
           i => i.product_id === item.product_id
@@ -331,14 +328,13 @@ export default {
           trade_target_org,
         } = item;
         utils.firebaseLogEvent(
-          '10010',
-          event_enums[product_key || 'consult_time'].c_id,
-          event_enums[product_key || 'consult_time'].c_name,
+          10011,
+          -10017,
+          'click_history_truelove_repay',
           'click',
           {
-            args_name: event_enums[product_key || 'consult_time'].c_name,
+            args_name: 'click_history_truelove_repay',
             channel: utils.getFBChannel(),
-            // pay_type:trade_pay_type 
           }
         );
         let params = {
@@ -356,7 +352,7 @@ export default {
           consult_time: {
             user_info: item.user_info
           }
-          
+
         };
 
         params.callback_url = `${location.origin
@@ -379,26 +375,7 @@ export default {
 
 
 
-    /**
-     * @description: 复制订单邀请码
-     * @param {*} code
-     * @return {*}
-     */
-    copyCode(code) {
-      utils.copyText('mlxz-' + code);
-      Toast('复制成功');
-      this.code_modal = true;
-      utils.firebaseLogEvent(
-        '10010',
-        '-10025',
-        'click_tarothistory_copy',
-        'click',
-        {
-          args_name: 'click_tarothistory_copy',
-          channel: utils.getFBChannel(),
-        }
-      );
-    },
+
 
     backPage() {
       history.back();

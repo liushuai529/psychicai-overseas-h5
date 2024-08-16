@@ -1,6 +1,6 @@
 <template>
-  <div :class="['chat-card', {'hands_show': hands_show, 'hands_hidden': hands_hidden}]">
-    
+  <div :class="['chat-card', { 'hands_show': hands_show, 'hands_hidden': hands_hidden }]">
+
     <div class="content">
       <div class="left">
         <img :src="icon_url" />
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="btn" @click="downClick">
-      <img :src="chat_icon_message"/>
+      <img :src="chat_icon_message" />
       <span>{{ get_tip }}</span>
     </div>
   </div>
@@ -73,7 +73,7 @@ export default {
 
   },
   mounted() {
-    
+
     setTimeout(() => {
       this.init()
     }, 2000);
@@ -83,7 +83,7 @@ export default {
   },
   computed: {
     get_tip() {
-      if(utils.getLanguage() === 'zh-CN') {
+      if (utils.getLanguage() === 'zh-CN') {
         return `一键跳转谘询老师 (${this.time}s)`
       } else {
         return `一鍵跳轉諮詢老師 (${this.time}s)`
@@ -115,12 +115,20 @@ export default {
     init() {
       this.timer = setInterval(() => {
         this.time--;
-        if(this.time<=0) {
+        if (this.time <= 0) {
           clearInterval(this.timer)
         }
       }, 1000);
     },
+    handleCopyCode() {
+      utils.copyText('mlxz-' + this.transfer_code);
+    },
     downClick() {
+      this.handleCopyCode();
+      utils.firebaseLogEvent(10011, -10012, 'click_truelove_card_result', 'click', {
+        args_name: 'click_truelove_card_result',
+        channel: utils.getFBChannel(),
+      });
       utils.openApp();
     },
 
@@ -184,6 +192,7 @@ export default {
     line-height: 0.44rem;
     text-align: center;
     font-style: normal;
+
     img {
       width: 0.44rem;
       height: 0.44rem;
@@ -192,21 +201,33 @@ export default {
 
   }
 }
+
 .hands_show {
   animation: show 2s ease-in-out forwards;
 }
+
 .hands_hidden {
   animation: hidden 2s ease-in-out forwards;
 }
 
 @keyframes show {
-  from { top: -3.4rem }
-  to { top: 0.2rem; }
+  from {
+    top: -3.4rem
+  }
+
+  to {
+    top: 0.2rem;
+  }
 }
 
 @keyframes hidden {
-  from { top: 0.2rem }
-  to { top: -3.4rem; }
+  from {
+    top: 0.2rem
+  }
+
+  to {
+    top: -3.4rem;
+  }
 }
 </style>
 <style lang="less"></style>
