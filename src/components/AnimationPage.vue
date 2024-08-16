@@ -3,10 +3,10 @@
     <canvas id="canvas_mp" :class="['daji']">
     </canvas>
     <img class="mp" :src="getMpImg" />
-    <div :class="['progress-container', getBgTip, is_consult? 'consult-color': '']">
+    <div :class="['progress-container', getBgTip, is_consult ? 'consult-color' : '']">
       <div>{{ getTipText }}</div>
-      <div :class="['progress-uncheck', is_consult? 'consult-progress-uncheck': '']">
-        <div :class="['progress-check', is_consult? 'consult-progress-check': '']" :style="{ width: getWidth }"></div>
+      <div :class="['progress-uncheck', is_consult ? 'consult-progress-uncheck' : '']">
+        <div :class="['progress-check', is_consult ? 'consult-progress-check' : '']" :style="{ width: getWidth }"></div>
       </div>
     </div>
   </div>
@@ -46,6 +46,8 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/24069960be53a74c43b38ef1d79903e63d13.svga',
       emotion_svga:
         'https://psychicai-static.psychicai.pro/imgs/2406c6f666683c824312b07e66feb0c73ad2.svga',
+      emotion_fate_svga:
+        'https://psychicai-static.psychicai.pro/imgs/24084481306c796346a5ac7aafae1d5c50bf.svga',
       bg_bzhh,
       bg_emotion,
       cn_bzhh_mp,
@@ -83,7 +85,7 @@ export default {
   mounted() {
     this.loadBg(
       '#canvas_mp',
-      this.product_key === 'h5_emotion2024' ? this.emotion_svga : this.bzhh_svga
+      this.getSvgUrl
     );
   },
   computed: {
@@ -91,24 +93,32 @@ export default {
       return this.product_key === 'consult_time';
     },
     getWidth() {
-
       return `${6.3 * (this.content / 10)}rem`
+    },
+    getSvgUrl() {
+      if (this.product_key === 'h5_emotion2024') {
+        return this.emotion_svga
+      } else if (this.product_key === 'consult_time') {
+        return this.emotion_fate_svga
+      } else {
+        return this.bzhh_svga;
+      }
     },
     getBgImg() {
       if (this.product_key === 'h5_emotion2024') {
         return 'emotion-bg';
-      } else if(this.product_key === 'consult_time') {
+      } else if (this.product_key === 'consult_time') {
         return utils.getLanguage() === 'zh-CN' ? 'consult-bg-cn' : 'consult-bg-tw'
       } else {
         return 'bzhh-bg';
       }
-      
+
     },
-    
+
     getMpImg() {
       if (this.product_key === 'h5_emotion2024') {
         return utils.getLanguage() === 'zh-CN' ? cn_emotion_mp : tw_emotion_mp
-      } else if(this.product_key === 'consult_time') {
+      } else if (this.product_key === 'consult_time') {
         return utils.getLanguage() === 'zh-CN' ? cn_emotion_fate_mp : tw_emotion_fate_mp
       } else {
         return utils.getLanguage() === 'zh-CN' ? cn_bzhh_mp : tw_bzhh_mp
@@ -117,7 +127,7 @@ export default {
     getBgTip() {
       if (this.product_key === 'h5_emotion2024') {
         return 'emotion-tip-bg';
-      } else if(this.product_key === 'consult_time') {
+      } else if (this.product_key === 'consult_time') {
         return 'emotion-fate-tip-bg';
       } else {
         return 'bzhh-tip-bg';
@@ -251,15 +261,18 @@ export default {
         border-radius: 0.08rem;
         opacity: 1;
       }
+
       .consult-progress-check {
-        background: linear-gradient( 90deg, #DD8BC4 0%, #B85391 100%);
+        background: linear-gradient(90deg, #DD8BC4 0%, #B85391 100%);
       }
     }
+
     .consult-progress-uncheck {
-      background: rgba(184,83,145,0.1);
-    } 
+      background: rgba(184, 83, 145, 0.1);
+    }
 
   }
+
   .consult-color {
     color: #B85391;
   }
@@ -298,6 +311,7 @@ export default {
   background: url('../assets/img/components/animation_page/img_jindu_bj_ganqing.png') no-repeat;
   background-size: contain;
 }
+
 .emotion-fate-tip-bg {
   background: url('../assets/img/components/animation_page/img_jindu_bj_zhengyuan.webp') no-repeat;
   background-size: contain;
