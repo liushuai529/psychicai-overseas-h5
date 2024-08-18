@@ -1,5 +1,5 @@
 <template>
-  <img class="btn" src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="callback()" />
+  <img class="btn emo-btn1" src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="callback()" />
 </template>
 <script>
 import utils from '../libs/utils';
@@ -39,6 +39,21 @@ export default {
   .btn {
     width: 5.9rem;
     height: 0.9rem;
-    margin-bottom: 0.2rem;
+    margin: auto;
+    // margin-bottom: 0.2rem;
+    margin-top: 0.1rem;
   }
+  @keyframes emoBtn {
+  0% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.emo-btn {
+  animation: emoBtn 1s infinite ease-in-out alternate;
+}
 </style>

@@ -23,6 +23,9 @@
       <PayDetail className="pay-method" ref="payDetail" :product_key="product_key"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10011"
         c_click_id="-10006" e_click_name="click_truelove_pay" :consult_time="consult_time" />
+      <div class="img-consult-bottom">
+
+      </div>
     </div>
 
     <div class="method-title-img-consult">
@@ -33,8 +36,9 @@
       <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" @click="scrollClick" />
       <img class="module" :src="is_cn ? cn_bg_2 : tw_bg_2" @click="scrollClick" />
       <img class="module" :src="is_cn ? cn_bg_3 : tw_bg_3" @click="scrollClick" />
-      <img class="module" :src="is_cn ? cn_bg_4 : tw_bg_4" @click="scrollClick" />
+      <img class="module" style="margin-bottom: 0rem;" :src="is_cn ? cn_bg_4 : tw_bg_4" @click="scrollClick" />
     </div>
+    <div class="img-consult-bottom"></div>
 
 
 
@@ -310,18 +314,18 @@ export default {
   },
   destroyed() {
     this.duration_time.exit_time = new Date().getTime();
-    if(this.duration_time.entry_time) {
+    if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
-      '10011',
-      '-10005',
-      'view_truelove_duration',
-      'view',
-      {
-        args_name: 'view_truelove_duration',
-        channel: utils.getFBChannel(),
-        time: JSON.stringify({entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time,})
-      }
-    );
+        '10011',
+        '-10005',
+        'view_truelove_duration',
+        'view',
+        {
+          args_name: 'view_truelove_duration',
+          channel: utils.getFBChannel(),
+          time: JSON.stringify({ entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time, })
+        }
+      );
     }
   },
   methods: {
@@ -497,6 +501,25 @@ export default {
   }
 }
 
+.img-consult-bottom {
+  width: 7.1rem;
+    height: 0.5rem;
+  background-image: url(../../../assets/img/emotion_fate/card_img_bj_xia.webp);
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  margin-top: -0.07rem;
+  background-color: #FEF1CF;
+  
+
+  img {
+    width: 6.14rem;
+    height: 0.9rem;
+  }
+}
+
 .method-box {
   width: 7.1rem;
   // height: 11.06rem;
@@ -525,7 +548,7 @@ export default {
   background-image: url(../../../assets/img/emotion_fate/card_img_bj_zhong.webp);
   background-size: auto 100%;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center center;
   display: flex;
   // justify-content: center;
   flex-direction: column;
@@ -534,7 +557,7 @@ export default {
   .module {
     width: 6.6rem;
 
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
   }
 }
 
@@ -543,6 +566,7 @@ export default {
 
 .bg-color {
   background: #FFFDF0;
+
 }
 
 .method-height {
@@ -636,13 +660,17 @@ export default {
 }
 
 .pay-method {
-  width: 6.5rem;
+  width: 100%;
   min-height: 5.8rem;
   font-family: system-ui, sans-serif;
   margin-top: -0.11rem;
   // background: #ffffff;
   border-radius: 0.1rem;
+  background: url('../../../assets/img/emotion_fate/card_img_bj_zhong.webp') no-repeat;
+  background-size: cover;
+  padding: 0.2rem;
 }
+
 
 @keyframes emoBtn {
   0% {

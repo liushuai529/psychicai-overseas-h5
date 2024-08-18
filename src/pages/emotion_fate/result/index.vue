@@ -11,7 +11,7 @@
       <div class="item" v-if="message_show1">
         <img src="../../../assets/img/emotion_fate/img_chat_avatar.webp" />
         <div class="message">
-          {{ `您好，${username}，我是本次服务您的xxx老师！` }}
+          {{ `您好，${username}，${is_cn? '我是本次服务您的老师！': '我是本次服務您的老師！'}` }}
         </div>
       </div>
 
@@ -27,14 +27,14 @@
       <div class="item" v-if="message_show3">
         <img src="../../../assets/img/emotion_fate/img_chat_avatar.webp" />
         <div class="message">
-          <div class="title">您的【Ta是你的正缘吗？】真人1v1咨询订单已生成，您可前往【命理寻真】App中进行实时咨询</div>
-          <div class="desc">复制邀请码，打开App即可咨询，前往「我的订单」—点击「继续沟通」</div>
+          <div class="title">{{is_cn? '您的【Ta是你的正缘吗？】真人1v1咨询订单已生成，您可前往【命理寻真】App中进行实时咨询': '您的【Ta是你的正緣嗎？】真人1v1咨詢訂單已生成，您可前往【命理尋真】App中進行實時咨詢'}}</div>
+          <div class="desc">{{is_cn? '复制邀请码，打开App即可咨询，前往「我的订单」—点击「继续沟通」': '復製邀請碼，打開App即可咨詢，前往「我的訂單」—點擊「繼續溝通」'}}</div>
           <div class="code">
-            <div>邀请码：{{ transfer_code }}</div>
-            <div class="copy" @click="handleCopyCode(1)">复制</div>
+            <div>{{ `${is_cn? '邀请码：': '邀請碼：'}${transfer_code}` }}</div>
+            <div class="copy" @click="handleCopyCode(1)">{{ is_cn? '复制': '復製' }}</div>
           </div>
           <img class="logo" :src="logo_img" />
-          <div class="btn" @click="downClick(1)">复制邀请码并下载查看</div>
+          <div class="btn" @click="downClick(1)">{{ is_cn? '复制邀请码并下载查看': '復製邀請碼並下載查看' }}</div>
         </div>
       </div>
     </div>

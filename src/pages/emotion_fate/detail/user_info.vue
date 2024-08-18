@@ -10,7 +10,7 @@
           <div class="right">性别：{{ sex ? '女' : '男' }}</div>
         </div>
         <div class="name">
-          <div class="left-birth">出生时间：{{ picker_date_yangli }}</div>
+          <div class="left-birth">{{ `${is_cn? '出生时间：': '出生時間：'}${picker_date_yangli}` }}</div>
           <div></div>
         </div>
         <div>农历：{{ picker_date_nongli }}</div>
@@ -145,6 +145,7 @@ export default {
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 1;
           display: -webkit-box;
+          text-align: center;
         }
 
         .right {
@@ -183,8 +184,9 @@ export default {
 
     .img-container {
       display: flex;
-      justify-content: space-between;
       margin-top: 0.25rem;
+      justify-content: space-evenly;
+      width: 100%;
 
       img {
         width: 1.5rem;

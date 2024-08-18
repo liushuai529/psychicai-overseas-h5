@@ -3,7 +3,7 @@
     <div v-infinite-scroll="() => loadMore()" :infinite-scroll-immediate-check="true" infinite-scroll-disabled="loading"
       infinite-scroll-distance="10" :class="['container']">
       <div class="new-tab">
-        <img @click="backPage" src="../../../assets/img/tarot/dingdan_icon_back-left.webp" class="back" alt="" />
+        <img @click="backPage" src="../../../assets/img/emotion_fate/icon_order_history_back.webp" class="back" alt="" />
         {{ is_cn ? '历史订单' : '历史订单' }}
       </div>
       <div class="top-box">
@@ -39,7 +39,7 @@
             </div>
             <div class="line"></div>
             <div class="content-container">
-              <span class="item item1">{{ is_cn ? '支付成功即可获得真人咨询师的1对1私密沟' : '支付成功即可獲得真人咨詢師的1對1私密溝' }}</span>
+              <span class="item item1">{{ is_cn ? '支付成功即可获得真人咨询师的1对1私密沟通' : '支付成功即可獲得真人咨詢師的1對1私密溝通' }}</span>
               <span class="item item-lable">{{ `${is_cn ? '咨询时间：' : '咨詢時間：'} ` }} <span class="item item2">{{
                 formatTime(item.create_time) }}</span></span>
               <span class="item item-lable">{{ `${is_cn ? '咨询时长：' : '咨詢時長：'} ` }}<span class="item item2">{{
@@ -551,7 +551,7 @@ export default {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin: 0.2rem 0.3rem;
+          margin: 0.2rem 0.2rem;
           padding-top: 0.2rem;
 
           .left {
@@ -559,8 +559,8 @@ export default {
             align-items: center;
 
             img {
-              width: 0.4rem;
-              height: 0.4rem;
+              width: 0.6rem;
+              height: 0.6rem;
               border-radius: 0.08rem;
               margin-right: 0.16rem;
             }
@@ -593,7 +593,7 @@ export default {
           background: #362516;
           opacity: 0.1;
           margin: auto;
-          margin-top: 0.29rem;
+          margin-top: 0.2rem;
         }
 
         .content-container {

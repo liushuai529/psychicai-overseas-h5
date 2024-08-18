@@ -20,7 +20,10 @@
           <div class="title">
             <img :src="is_cn ? cn_img_tittle_home_xinxi : tw_img_tittle_home_xinxi" />
           </div>
-          <div class="info-item">
+
+
+          <div class="item-container">
+            <div class="info-item">
             <div class="left input-container">
               <div>姓名：</div>
               <div class="info-input">
@@ -70,10 +73,11 @@
             </div>
           </div>
           <div v-if="utils.showEmail()" class="divider-line"></div>
+          </div>
 
 
 
-          <div id="info-btn" class="btn" @click="check">
+          <div id="info-btn" class="btn emo-btn" @click="check">
             <img src="../../../assets/img/emotion_fate/img_home_btu_chakan.webp" />
           </div>
 
@@ -109,7 +113,7 @@
       <img class="card" :src="is_cn ? cn_icon_2 : tw_icon_2" />
       <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" />
       <img class="card" :src="is_cn ? cn_icon_4 : tw_icon_4" />
-      <img class="card" :src="is_cn ? cn_icon_5 : tw_icon_5" />
+      <img class="card" style="margin-bottom: 0.6rem;" :src="is_cn ? cn_icon_5 : tw_icon_5" />
       <img v-if="showFixedBtn" class="fix-btn emo-btn" src="../../../assets/img/emotion_fate/img_home_btu_chakan.webp"
         @click="check" />
       <!-- 時间选择控件 -->
@@ -1004,7 +1008,7 @@ export default {
 
     .info-content {
       background: url('../../../assets/img/emotion_fate/xinxi_img_bj_zhong.webp') no-repeat;
-      // background-size: contain;
+      background-size: cover;
       width: 7.1rem;
       height: 4.54rem;
       display: flex;
@@ -1023,7 +1027,12 @@ export default {
         }
       }
 
-      .info-item {
+      .item-container {
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.4rem;
+        .info-item {
         width: 6.3rem;
         height: 0.82rem;
         line-height: 0.82rem;
@@ -1041,6 +1050,7 @@ export default {
 
         .left {
           display: flex;
+          margin-top: 0.1rem;
         }
 
         .input-container {
@@ -1090,6 +1100,7 @@ export default {
           display: flex;
           width: 1.7rem;
           height: 0.6rem;
+          margin-top: 0.1rem;
 
           img {
             width: 1.7rem;
@@ -1102,13 +1113,16 @@ export default {
           display: flex;
           width: 0.46rem;
           height: 0.46rem;
-
+          margin-top: 0.1rem;
           img {
             width: 0.46rem;
             height: 0.46rem;
           }
         }
       }
+      }
+      
+      
 
       .btn {
         display: flex;

@@ -1,8 +1,8 @@
 <template>
   <div :class="['animation-page', getBgImg]" v-if="show_modal">
-    <canvas id="canvas_mp" :class="['daji']">
+    <canvas id="canvas_mp" :class="['daji', product_key==='consult_time'?'po-top': '']">
     </canvas>
-    <img class="mp" :src="getMpImg" />
+    <img :class="['mp', product_key==='consult_time'?'mg-top': '']" :src="getMpImg" />
     <div :class="['progress-container', getBgTip, is_consult ? 'consult-color' : '']">
       <div>{{ getTipText }}</div>
       <div :class="['progress-uncheck', is_consult ? 'consult-progress-uncheck' : '']">
@@ -213,6 +213,8 @@ export default {
   flex-direction: column;
   align-items: center;
 
+  
+
   .daji {
     position: absolute;
     left: 0.68rem;
@@ -225,6 +227,12 @@ export default {
     margin-top: 2rem;
     width: 6.1rem;
     height: 6.1rem;
+  }
+  .mg-top {
+    margin-top: 2.5rem;
+  }
+  .po-top {
+    top: 2.5rem;
   }
 
   .progress-container {
@@ -293,13 +301,16 @@ export default {
 .consult-bg-cn {
   background: url('../assets/img/components/animation_page/cn/img_loading_bj_cn.webp') no-repeat;
   // background-color: rgba(236, 69, 106, 1);
-  background-size: cover
+  background-size: cover;
+  background-position: center center;
+ 
 }
 
 .consult-bg-tw {
   background: url('../assets/img/components/animation_page/tw/img_loading_bj_tw.webp') no-repeat;
   // background-color: rgba(236, 69, 106, 1);
-  background-size: cover
+  background-size: cover;
+  background-position: center center;
 }
 
 .bzhh-tip-bg {
