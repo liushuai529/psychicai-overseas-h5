@@ -300,7 +300,7 @@ export default {
 
 .consult-bg-cn {
   background: url('../assets/img/components/animation_page/cn/img_loading_bj_cn.webp') no-repeat;
-  // background-color: rgba(236, 69, 106, 1);
+  background-color: #FEF1CF;
   background-size: cover;
   background-position: center center;
  
@@ -308,7 +308,7 @@ export default {
 
 .consult-bg-tw {
   background: url('../assets/img/components/animation_page/tw/img_loading_bj_tw.webp') no-repeat;
-  // background-color: rgba(236, 69, 106, 1);
+  background-color: #FEF1CF;
   background-size: cover;
   background-position: center center;
 }
