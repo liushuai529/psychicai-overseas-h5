@@ -459,7 +459,7 @@ export default {
           birth_hour: arr[6],
           birth_month: arr[4],
           birth_year: arr[3],
-          email: '',
+          email:arr[7]|| '',
           is_gongli: +arr[2],
           name: arr[0],
           sex: +arr[1],

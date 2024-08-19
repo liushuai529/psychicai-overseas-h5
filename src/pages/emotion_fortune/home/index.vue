@@ -1,81 +1,45 @@
 <template>
   <div>
     <NavigationBar v-if="is_channel_01" />
-    <CalculateBar
-      v-if="
-        comboAttachData && is_show_combination && is_show_current_combination
-      "
-      :is_home="false"
-      :product_key="comboAttachData.product_key"
-      :call_back="startCalculateClick"
-    />
+    <CalculateBar v-if="
+      comboAttachData && is_show_combination && is_show_current_combination
+    " :is_home="false" :product_key="comboAttachData.product_key" :call_back="startCalculateClick" />
     <header-notice v-if="has_pay"></header-notice>
-    <FbShareNotice v-if="is_show_fb_notice"/>
-    
-    <div
-      :class="{
-        container: true,
-        'fix-box': choose_time ? true : false,
-        'cn-bg': language === 'zh-CN',
-        'tw-bg': language === 'zh-TW',
-      }"
-    >
-     
-      <div
-        v-if="!is_channel_01 && !is_channel_05"
-        @click="backHome()"
-        :class="['back-box']"
-        :style="getStyle"
-      >
-        <img
-          src="../../../assets/img/common/baogao_icon_home.webp"
-          class="left"
-          alt=""
-        />
+    <FbShareNotice v-if="is_show_fb_notice" />
+
+    <div :class="{
+      container: true,
+      'fix-box': choose_time ? true : false,
+      'cn-bg': language === 'zh-CN',
+      'tw-bg': language === 'zh-TW',
+    }">
+
+      <div v-if="!is_channel_01 && !is_channel_05" @click="backHome()" :class="['back-box']" :style="getStyle">
+        <img src="../../../assets/img/common/baogao_icon_home.webp" class="left" alt="" />
         <div class="right">{{ is_cn ? '首页' : '首頁' }}</div>
       </div>
       <!-- <canvas id="bg-svga"></canvas> -->
-      <img
-        v-if="!is_channel_01"
-        class="order-icon"
-        @click="toOrder"
-        :src="is_cn ? cn_history_order : tw_history_order"
-        alt=""
-      />
-      <div
-        :class="['info', utils.showEmail() ? 'info-height' : '']"
-      >
+      <img v-if="!is_channel_01" class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order"
+        alt="" />
+      <div :class="['info', utils.showEmail() ? 'info-height' : '']">
         <div class="info-content">
-          <img class="info-img":src="language === 'zh-CN'? cn_info: tw_info"/>
+          <img class="info-img" :src="language === 'zh-CN' ? cn_info : tw_info" />
           <div class="info-item">
             <div class="info-label">{{ $t('name-label') }}:</div>
             <div class="info-input">
-              <input
-                type="text"
-                id="username"
-                v-model="username"
-                :placeholder="$t('name-placeholder')"
-              />
+              <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
             </div>
           </div>
           <div class="divider-line"></div>
           <div class="info-item">
             <div class="info-label">{{ $t('birth-label') }}:</div>
             <div class="info-input">
-              <div
-                class="info-birth"
-                :style="{
-                  color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
-                }"
-                @click="openPicker"
-              >
+              <div class="info-birth" :style="{
+                color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
+              }" @click="openPicker">
                 {{ picker_date || $t('birth-placeholder') }}
               </div>
-              <img
-                @click="openPicker"
-                class="info-arrow"
-                src="../../../assets/img/emotion_v2/new/icon_you.webp"
-              />
+              <img @click="openPicker" class="info-arrow" src="../../../assets/img/emotion_v2/new/icon_you.webp" />
             </div>
           </div>
           <div class="divider-line"></div>
@@ -83,65 +47,36 @@
           <div class="info-item">
             <div class="info-label">{{ $t('sex-label') }}:</div>
             <div class="info-input">
-              <div
-                class="sex-tab left-tab"
-                :class="{ active: sex === '1' }"
-                ref="sex_male"
-                @click="changeSex(1)"
-              >
+              <div class="sex-tab left-tab" :class="{ active: sex === '1' }" ref="sex_male" @click="changeSex(1)">
                 <div class="sex-text">男</div>
               </div>
-              <div
-                class="sex-tab"
-                :class="{ active: sex === '0' }"
-                ref="sex_female"
-                @click="changeSex(0)"
-              >
+              <div class="sex-tab" :class="{ active: sex === '0' }" ref="sex_female" @click="changeSex(0)">
                 <div class="sex-text">女</div>
               </div>
             </div>
-            
+
           </div>
           <div v-if="utils.showEmail()" class="divider-line"></div>
 
           <div v-if="utils.showEmail()" class="info-item">
             <div class="info-label">{{ $t('email-label') }}:</div>
             <div class="info-input">
-              <input
-                type="text"
-                id="email"
-                v-model="email"
-                :placeholder="$t('email-placeholder')"
-              />
+              <input type="text" id="email" v-model="email" :placeholder="$t('email-placeholder')" />
             </div>
           </div>
 
-          <img
-            id="info-btn"
-            class="info-btn emo-btn"
-            :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
-            @click="check"
-          />
+          <img id="info-btn" class="info-btn emo-btn" :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
+            @click="check" />
           <div class="info-bottom">
-            <img
-              v-if="privacyChecked"
-              class="info-check"
-              src="../../../assets/img/emotion/xieyi-checked.webp"
-              @click="privacyChecked = !privacyChecked"
-            />
-            <img
-              v-else
-              class="info-check"
-              src="../../../assets/img/emotion/xieyi-no-check.webp"
-              @click="privacyChecked = !privacyChecked"
-            />
+            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion/xieyi-checked.webp"
+              @click="privacyChecked = !privacyChecked" />
+            <img v-else class="info-check" src="../../../assets/img/emotion/xieyi-no-check.webp"
+              @click="privacyChecked = !privacyChecked" />
             {{ $t('check-label') }}
-            <span @click="link('user_agreement.html')"
-              >{{ $t('user-agreement') }} </span
-            >{{ $t('and') }}
+            <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
             <span @click="link('privacy.html')">{{
               $t('privacy-policy')
-            }}</span>
+              }}</span>
           </div>
         </div>
       </div>
@@ -155,31 +90,13 @@
       <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" />
       <img class="card" :src="is_cn ? cn_icon_4 : tw_icon_4" />
       <img class="card" :src="is_cn ? cn_icon_5 : tw_icon_5" />
-      <img
-        v-if="showFixedBtn"
-        class="fix-btn emo-btn"
-        :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
-        @click="check"
-      />
+      <img v-if="showFixedBtn" class="fix-btn emo-btn" :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
+        @click="check" />
       <!-- 時间选择控件 -->
-      <DatetimePicker
-        start="1901"
-        end="2020"
-        :year="year"
-        :month="month"
-        :date="date"
-        :birth_hour="birth_hour"
-        v-show="choose_time && !show_nongli"
-      ></DatetimePicker>
-      <NongliPicker
-        start="1901"
-        end="2020"
-        :year="year"
-        :month="month"
-        :date="date"
-        :birth_hour="birth_hour"
-        v-show="choose_time && show_nongli"
-      ></NongliPicker>
+      <DatetimePicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+        v-show="choose_time && !show_nongli"></DatetimePicker>
+      <NongliPicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+        v-show="choose_time && show_nongli"></NongliPicker>
       <!-- <combinePayPop
       :visible="pay_modal"
       :all_list="productList"
@@ -189,45 +106,17 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
-      <HotProduct
-        v-if="!is_channel_05"
-        product_key="h5_emotion2024"
-        url="emotion_fortune"
-        e_id="10006"
-      />
+      <HotProduct v-if="!is_channel_05" product_key="h5_emotion2024" url="emotion_fortune" e_id="10006" />
       <NewFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
       <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
-      <PopNotice
-        v-if="is_show_notice"
-        @close="closeNotice"
-        :count_down="count_down"
-        :product_key="product_key"
-        e_id="10006"
-        c_id="-10021"
-        c_name="click_2024lovely_discount1"
-      />
-      <FixedOrder
-        v-if="show_fixed_order && !is_show_notice"
-        :title="local_title"
-        :is_show_move="is_show_notice"
-        :new_order_key="new_order_key"
-        name="local"
-        top="4.7rem"
-        :time="local_time"
-        @payOrder="checkOrder"
-        @jumpDetail="jumpOrder"
-      />
-      <FixedOrder
-        v-if="show_api_order && !is_show_notice"
-        :title="last_title"
-        :is_show_move="is_show_notice"
-        :last_order="last_order"
-        name="api"
-        top="6.7rem"
-        :time="api_time"
-        @payOrder="checkOrder"
-        @jumpDetail="jumpOrder"
-      />
+      <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"
+        e_id="10006" c_id="-10021" c_name="click_2024lovely_discount1" />
+      <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
+        :new_order_key="new_order_key" name="local" top="4.7rem" :time="local_time" @payOrder="checkOrder"
+        @jumpDetail="jumpOrder" />
+      <FixedOrder v-if="show_api_order && !is_show_notice" :title="last_title" :is_show_move="is_show_notice"
+        :last_order="last_order" name="api" top="6.7rem" :time="api_time" @payOrder="checkOrder"
+        @jumpDetail="jumpOrder" />
     </div>
   </div>
 </template>
@@ -388,7 +277,7 @@ export default {
   },
   computed: {
     is_show_fb_notice() {
-      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02') > -1;
     },
     getStyle() {
       return
@@ -426,7 +315,7 @@ export default {
         console.warn('没有有未使用报告引导框、有FB引导');
         //没有有未使用报告引导框、有FB引导
         return 'top: 0.7rem';
-      } 
+      }
     },
     //套餐支付显示逻辑
     is_show_combination() {
@@ -465,7 +354,7 @@ export default {
       if (flag) {
         const { main_id, click_id, view_id, click_name, view_name } =
           maidianEnum[this.new_order_key];
-        utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
+        main_id && utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
           args_name: view_name,
           channel: utils.getFBChannel(),
         });
@@ -592,7 +481,7 @@ export default {
       this.month = arr[4];
       this.date = arr[5];
       this.birth_hour = arr[6];
-      this.email = (arr[7] == ''|| arr[7] == 'undefined')? '': arr[7];
+      this.email = (arr[7] == '' || arr[7] == 'undefined') ? '' : arr[7];
       this.username = arr[0];
       this.sex = arr[1] + '';
       this.gongli_nongli = arr[2];
@@ -652,11 +541,11 @@ export default {
       var svgaUrl = 'https://psychicai-static.psychicai.pro/imgs/2406c6f666683c824312b07e66feb0c73ad2.svga'; // 替换为你的SVGA文件路径
       var image = new Image();
       image.src = svgaUrl;
-      image.onload = function() {
-          console.log('SVGA preloaded successfully');
+      image.onload = function () {
+        console.log('SVGA preloaded successfully');
       };
-      image.onerror = function() {
-          console.error('Failed to preload SVGA');
+      image.onerror = function () {
+        console.error('Failed to preload SVGA');
       };
     },
     //顶部引导横幅，开始测算
@@ -667,11 +556,9 @@ export default {
       // } else {
 
       // }
-      location.href = `${
-        path_enums[this.comboAttachData.product_key]
-      }.html#/?has_pay=SUCCESS&order_id=${
-        this.comboAttachData.order_id
-      }&product_key=${this.comboAttachData.product_key}`;
+      location.href = `${path_enums[this.comboAttachData.product_key]
+        }.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id
+        }&product_key=${this.comboAttachData.product_key}`;
     },
     //请求接口，是否展示引导标识
     async showComboAttach() {
@@ -944,9 +831,9 @@ export default {
       //   dom.focus();
       //   return;
       // }
-      
 
-      
+
+
 
       let querystring = '';
       querystring += username;
@@ -1106,7 +993,7 @@ export default {
           male_is_gongli,
           female_is_gongli,
           sex,
-          email: email === undefined || !utils.showEmail()? '': email,
+          email: email === undefined || !utils.showEmail() ? '' : email,
         };
       }
       // 其他 单人信息
@@ -1129,10 +1016,9 @@ export default {
           birth_month,
           birth_date,
           birth_hour,
-          email: email === undefined || !utils.showEmail()? '': email,
+          email: email === undefined || !utils.showEmail() ? '' : email,
           date: moment(
-            `${birth_year}${
-              +birth_month < 10 ? '0' + birth_month : birth_month
+            `${birth_year}${+birth_month < 10 ? '0' + birth_month : birth_month
             }${+birth_date < 10 ? '0' + birth_date : birth_date}`
           ).format('YYYYMMDD'),
         };
@@ -1264,11 +1150,9 @@ export default {
           fbp: utils.getcookieInfo('_fbp'),
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
         },
-        callback_url: `${location.origin}/${utils.getFBChannel()}/${
-          path_enums[product_key]
-        }.html#/result?path=${
-          path_enums[product_key]
-        }&report_price=${payment}&discount_pay=1`,
+        callback_url: `${location.origin}/${utils.getFBChannel()}/${path_enums[product_key]
+          }.html#/result?path=${path_enums[product_key]
+          }&report_price=${payment}&discount_pay=1`,
       };
 
       const res = await payOrderAPI(params);
@@ -1296,9 +1180,8 @@ export default {
         let female_str = marry_info.female_str;
         let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
 &pay_modal=1&use_fixed_time=1&discount_pay=1`;
-        location.href = `${location.origin}/${utils.getFBChannel()}/${
-          path_enums[this.new_order_key]
-        }.html#/${path}`;
+        location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
+          }.html#/${path}`;
 
         return;
       }
@@ -1308,9 +1191,8 @@ export default {
         '&pay_modal=1' +
         '&use_fixed_time=1&discount_pay=1';
 
-      location.href = `${location.origin}/${utils.getFBChannel()}/${
-        path_enums[this.new_order_key]
-      }.html#/${path}`;
+      location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
+        }.html#/${path}`;
     },
   },
 };
@@ -1319,23 +1201,29 @@ export default {
 .fix-box {
   position: fixed !important;
 }
+
 @keyframes scaleBtn {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(0.96);
   }
+
   100% {
     transform: scale(1.04);
   }
 }
+
 .cn-bg {
   background-image: url('../../../assets/img/emotion_v2/new/cn/bg.webp');
 }
+
 .tw-bg {
   background-image: url('../../../assets/img/emotion_v2/new/cn/bg.webp');
 }
+
 #bg-svga {
   position: absolute;
   width: 7.5rem;
@@ -1355,10 +1243,12 @@ export default {
   align-items: center;
   overflow-x: hidden;
   padding-bottom: 1.2rem;
+
   .title {
     position: relative;
     z-index: 10;
     width: 100%;
+
     img {
       margin-top: 0.35rem;
       margin-left: 0.51rem;
@@ -1366,7 +1256,7 @@ export default {
     }
   }
 
-  
+
   .info {
     justify-content: center;
     position: relative;
@@ -1377,11 +1267,13 @@ export default {
     border-radius: 0.16rem;
     background: rgba(255, 250, 250, 1);
     margin-top: 8.83rem;
+
     .info-bg {
       display: block;
       width: 7.22rem;
       height: 8.06rem;
     }
+
     .info-content {
       position: absolute;
       top: 1rem;
@@ -1389,6 +1281,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+
       .info-img {
         width: 6.68rem;
         height: 0.9rem;
@@ -1400,12 +1293,14 @@ export default {
         width: 6.5rem;
         display: flex;
         align-items: center;
+
         .info-label {
           flex: none;
           color: #222;
           font-size: 0.3rem;
           margin-right: 0.14rem;
         }
+
         .info-input {
           flex: auto;
           height: 0.92rem;
@@ -1415,6 +1310,7 @@ export default {
           box-sizing: border-box;
           padding: 0.06rem;
           align-items: center;
+
           input {
             width: 100%;
             font-size: 0.3rem;
@@ -1424,28 +1320,35 @@ export default {
             background-color: transparent;
             padding: 0;
             margin: 0 0.3rem;
+
             &::input-placeholder {
               color: rgba(51, 51, 51, 0.5);
             }
+
             &::-webkit-input-placeholder {
               color: rgba(51, 51, 51, 0.5);
             }
+
             &::-moz-placeholder {
               color: rgba(51, 51, 51, 0.5);
             }
+
             &::-moz-placeholder {
               color: rgba(51, 51, 51, 0.5);
             }
+
             &::-ms-input-placeholder {
               color: rgba(51, 51, 51, 0.5);
             }
           }
+
           .info-birth {
             // flex: auto;
             font-size: 0.3rem;
             line-height: 0.42rem;
             margin-left: 0.24rem;
           }
+
           .info-arrow {
             flex: none;
             width: 0.12rem;
@@ -1453,9 +1356,11 @@ export default {
             margin-right: 0.14rem;
             margin-left: 0.1rem;
           }
+
           .left-tab {
             margin-left: 0.24rem;
           }
+
           .sex-tab {
             width: 0.58rem;
             height: 0.58rem;
@@ -1475,6 +1380,7 @@ export default {
               height: 0.3rem;
               margin-right: 0.1rem;
             }
+
             &.active {
               color: #fff;
               background-color: #ec436b;
@@ -1483,12 +1389,14 @@ export default {
           }
         }
       }
+
       .info-btn {
         width: 6.26rem;
         height: 1.34rem;
         margin-top: 0.7rem;
         object-fit: contain;
       }
+
       .info-bottom {
         display: flex;
         justify-content: center;
@@ -1497,6 +1405,7 @@ export default {
         font-size: 0.22rem;
         line-height: 0.3rem;
         margin-top: 0.14rem;
+
         img {
           width: 0.3rem;
           height: 0.3rem;
@@ -1505,9 +1414,11 @@ export default {
       }
     }
   }
+
   .info-height {
     height: 5.4rem;
   }
+
   .card {
     width: 7.06rem;
     margin-bottom: 0.36rem;
@@ -1517,6 +1428,7 @@ export default {
 .mt-180 {
   margin-top: 2.4rem;
 }
+
 .divider-line {
   width: 6.5rem;
   height: 1px;
@@ -1524,6 +1436,7 @@ export default {
   opacity: 0.13;
   margin-bottom: 0.2rem;
 }
+
 .footer {
   width: 100%;
   height: 1rem;
@@ -1539,6 +1452,7 @@ export default {
 
   // animation: scaleBtn 1s infinite ease-in-out alternate;
 }
+
 .order-icon {
   position: fixed;
   right: 0;
@@ -1554,11 +1468,13 @@ export default {
   background: url('../../../assets/img/emotion/new/result_card2.webp') no-repeat;
   background-size: contain;
   margin-bottom: 0.2rem;
+
   #qian {
     width: 100%;
     height: 100%;
   }
 }
+
 .footer-box {
   width: 7.5rem;
   height: 1.6rem;
@@ -1589,15 +1505,18 @@ export default {
   font-weight: 500;
   font-size: 0.28rem;
   color: #ffffff;
+
   .left {
     margin-right: 0.08rem;
     width: 0.32rem;
     height: 0.32rem;
   }
 }
+
 .back-box-combo {
   top: 0.4rem;
 }
+
 @keyframes emoBtn {
   0% {
     transform: scale(0.95);
@@ -1607,6 +1526,7 @@ export default {
     transform: scale(1.1);
   }
 }
+
 .emo-btn {
   animation: emoBtn 1s infinite ease-in-out alternate;
 }
