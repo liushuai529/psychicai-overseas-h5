@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <FbShareNotice v-if="is_show_fb_notice" />
+    <!-- <FbShareNotice v-if="is_show_fb_notice" /> -->
 
     <div :class="{
       container: true,
