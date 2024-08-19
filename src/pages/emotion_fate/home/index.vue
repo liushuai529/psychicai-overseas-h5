@@ -1000,7 +1000,7 @@ export default {
       background: url('../../../assets/img/emotion_fate/xinxi_img_bj_zhong.webp') no-repeat;
       background-size: cover;
       width: 7.1rem;
-      height: 4.54rem;
+      // height: 4.54rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1150,7 +1150,7 @@ export default {
     }
 
     .info-height {
-      height: 5.4rem;
+      // height: 5.4rem;
     }
 
 
