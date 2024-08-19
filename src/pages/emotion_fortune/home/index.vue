@@ -353,7 +353,7 @@ export default {
 
       if (flag) {
         const { main_id, click_id, view_id, click_name, view_name } =
-          maidianEnum[this.new_order_key];
+          maidianEnum[this.new_order_key]||{};
         main_id && utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
           args_name: view_name,
           channel: utils.getFBChannel(),
@@ -362,6 +362,7 @@ export default {
       return flag;
     },
     local_title() {
+      console.log('getTitle',this.new_order_key)
       return utils.getTitle(this.new_order_key);
     },
     is_channel_01() {

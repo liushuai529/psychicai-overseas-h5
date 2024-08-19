@@ -781,25 +781,25 @@ export default {
         );
         const { price, unit, product_id, google_goods_id, product_key } = same_;
         // 缓存最新一个订单信息
-        localStorage.setItem('mlxz_fixed_order_info', querystring);
-        localStorage.setItem('mlxz_fixed_order_key', this.product_key);
-        localStorage.setItem(
-          `mlxz_new_time_down_${this.product_key}`,
-          15 * 60 * 1000
-        );
+        // localStorage.setItem('mlxz_fixed_order_info', querystring);
+        // localStorage.setItem('mlxz_fixed_order_key', this.product_key);
+        // localStorage.setItem(
+        //   `mlxz_new_time_down_${this.product_key}`,
+        //   15 * 60 * 1000
+        // );
 
-        localStorage.setItem(
-          `mlxz_user_info_${this.product_key}`,
-          JSON.stringify({
-            user_info: querystring,
-            product_key: this.product_key,
-          })
-        );
-        let num_ = localStorage.getItem(`mlxz_show_notice_${this.product_key}`);
-        localStorage.setItem(
-          `mlxz_show_notice_${this.product_key}`,
-          num_ ? 2 : 1
-        );
+        // localStorage.setItem(
+        //   `mlxz_user_info_${this.product_key}`,
+        //   JSON.stringify({
+        //     user_info: querystring,
+        //     product_key: this.product_key,
+        //   })
+        // );
+        // let num_ = localStorage.getItem(`mlxz_show_notice_${this.product_key}`);
+        // localStorage.setItem(
+        //   `mlxz_show_notice_${this.product_key}`,
+        //   num_ ? 2 : 1
+        // );
         this.product_price = price || '-';
         this.$router.push({ path });
         return;
