@@ -76,7 +76,7 @@ export default {
 
     setTimeout(() => {
       this.init()
-    }, 2000);
+    }, 1000);
     setTimeout(() => {
       this.hands_hidden = true
     }, 5000);
@@ -203,11 +203,11 @@ export default {
 }
 
 .hands_show {
-  animation: show 2s ease-in-out forwards;
+  animation: show 1s ease-in-out forwards;
 }
 
 .hands_hidden {
-  animation: hidden 2s ease-in-out forwards;
+  animation: hidden 1s ease-in-out forwards;
 }
 
 @keyframes show {
