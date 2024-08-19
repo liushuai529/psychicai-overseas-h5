@@ -533,7 +533,10 @@ export default {
       Indicator.close();
       Toast(this.$t('fail-result'));
       setTimeout(() => {
-        location.href = 'emotion_fate.html';
+        let querystring = localStorage.getItem('_emotion_fate_info');
+        let path = 'detail?querystring=' + querystring;
+        this.$router.push({ path });
+        // location.href = 'emotion_fate.html';
       }, 1000);
     },
 
