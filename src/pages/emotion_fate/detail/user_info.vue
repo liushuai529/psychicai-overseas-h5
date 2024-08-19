@@ -4,7 +4,7 @@
       <img class="top-bg" src="../../../assets/img/emotion_fate/xinxi_img_bj_shang.webp" />
     </div>
     <div :class="['info-content']">
-      <div class="user-info">
+      <!-- <div class="user-info">
         <div class="name">
           <div class="left">姓名：{{ username | filter_name }}</div>
           <div class="right">性别：{{ sex ? '女' : '男' }}</div>
@@ -14,8 +14,24 @@
           <div></div>
         </div>
         <div>农历：{{ picker_date_nongli }}</div>
-        <!-- 11|1|1|1995|1|1|-1| -->
-      </div>
+      </div> -->
+
+      <table class="user-table">
+        <tr>
+          <td style="border-right: 0.01rem solid #FEE2B4;width: 50%;">姓名：{{ username | filter_name }}</td>
+          <td >性别：{{ sex ? '女' : '男' }}</td>
+         
+        </tr>
+        <tr>
+          <td colspan="2">{{ `${is_cn? '出生时间：': '出生時間：'}${picker_date_yangli}` }}</td>
+        </tr>
+        <tr>
+          <td colspan="2">农历：{{ picker_date_nongli }}</td>
+        </tr>
+
+      </table>
+
+
       <div class="img-container">
         <img :src="is_cn ? cn_tag1 : tw_tag1" />
         <img :src="is_cn ? cn_tag2 : tw_tag2" />
@@ -105,6 +121,24 @@ export default {
     // justify-content: space-between;
     padding: 0 0.22rem;
     background-size: cover;
+
+    .user-table {
+      width: 6.5rem;
+      height: 2.06rem;
+      min-height: 2.06rem;
+      background: #FFFBEF;
+      border: 0.01rem solid #FEE2B4;
+      font-weight: 500;
+      font-size: 0.28rem;
+      color: #3A0922;
+      line-height: 0.42rem;
+      text-align: center;
+      font-style: normal;
+      tr {
+        height: 0.68rem;
+        border: 0.01rem solid #FEE2B4;
+      }
+    }
 
     .user-info {
       width: 6.5rem;
