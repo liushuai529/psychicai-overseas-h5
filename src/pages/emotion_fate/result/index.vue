@@ -268,13 +268,13 @@ export default {
         if (utils.getLanguage() === 'zh-CN') {
           app_name = '寻真';
         } else {
-          return '尋真';
+          app_name = '尋真';
         }
       } else {
         if (utils.getLanguage() === 'zh-CN') {
-          return '命理寻真';
+          app_name = '命理寻真';
         } else {
-          return '命理尋真';
+          app_name = '命理尋真';
         }
       } 
       return utils.getLanguage() === 'zh-CN'? `您的【Ta是你的正缘吗？】真人1v1咨询订单已生成，您可前往【${app_name}】App中进行实时咨询`: `您的【Ta是你的正緣嗎？】真人1v1咨詢訂單已生成，您可前往【${app_name}】App中進行實時咨詢`
