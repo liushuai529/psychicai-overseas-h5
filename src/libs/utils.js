@@ -31,19 +31,25 @@ const getFBChannel = () => {
     return 'panda03';
   }  else if (url.indexOf('ocean03') > -1) {
     return 'ocean03';
-  }else if (url.indexOf('enjoy05') > -1) {
+  } else if (url.indexOf('enjoy05') > -1) {
     return 'enjoy05';
-  }else if (url.indexOf('ocean05') > -1) {
+  } else if (url.indexOf('ocean05') > -1) {
     return 'ocean05';
   } else if (url.indexOf('panda06') > -1) {
     return 'panda06';
   } else if (url.indexOf('enjoy06') > -1) {
     return 'enjoy06';
-  }else if (url.indexOf('ocean06') > -1) {
+  } else if (url.indexOf('ocean06') > -1) {
     return 'ocean06';
   } else if (url.indexOf('enjoy07') > -1) {
     return 'enjoy07';
-  }else {
+  } else if (url.indexOf('ocean07') > -1) {
+    return 'ocean07';
+  } else if (url.indexOf('enjoy08') > -1) {
+    return 'enjoy08';
+  } else if (url.indexOf('ocean08') > -1) {
+    return 'ocean08';
+  } else {
     return 'enjoy02';
   }
 };
@@ -66,6 +72,10 @@ const getFbId = () => {
     'enjoy06': '397861279464435',
     'panda06': '1031517837859732',
     'ocean06': '784751360516897',
+    'enjoy07': '418001307949732',
+    'ocean07': '1206292723951491',
+    'enjoy08': '1043411716668941',
+    'ocean08': '474155705440528',
   }
 }
 /**
