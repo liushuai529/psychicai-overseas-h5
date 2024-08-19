@@ -484,7 +484,6 @@ export default {
         if (res.data.order_status === 'PAYED') {
           this.renderResultAndComplete(res);
           this.transfer_code = res.data.transfer_code;
-          console.log('aaa', !localStorage.getItem(`emotion_fate_order_${this.order_id}`))
           if (!localStorage.getItem(`emotion_fate_order_${this.order_id}`)) {
             this.is_first = true;
           } else {
@@ -517,7 +516,7 @@ export default {
       Indicator.close();
       Toast(this.$t('fail-result'));
       setTimeout(() => {
-        location.href = 'emotion_fortune.html';
+        location.href = 'emotion_fate.html';
       }, 1000);
     },
 
