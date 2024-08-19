@@ -1,6 +1,6 @@
 <template>
   <div class="result" :class="['result']">
-    <ChatCard v-if="is_first" :transfer_code="transfer_code"/>
+    <ChatCard v-if="is_first" :transfer_code="transfer_code" />
     <div class="top" @click="downClick">
       <img :src="is_cn ? cn_img_chat_top_laoshi : tw_img_chat_top_laoshi" />
     </div>
@@ -11,7 +11,7 @@
       <div class="item" v-if="message_show1">
         <img src="../../../assets/img/emotion_fate/img_chat_avatar.webp" />
         <div class="message">
-          {{ `您好，${username}，${is_cn? '我是本次服务您的老师！': '我是本次服務您的老師！'}` }}
+          {{ `您好，${username}，${is_cn ? '我是本次服务您的老师！' : '我是本次服務您的老師！'}` }}
         </div>
       </div>
 
@@ -27,14 +27,14 @@
       <div class="item" v-if="message_show3">
         <img src="../../../assets/img/emotion_fate/img_chat_avatar.webp" />
         <div class="message">
-          <div class="title">{{is_cn? '您的【Ta是你的正缘吗？】真人1v1咨询订单已生成，您可前往【命理寻真】App中进行实时咨询': '您的【Ta是你的正緣嗎？】真人1v1咨詢訂單已生成，您可前往【命理尋真】App中進行實時咨詢'}}</div>
-          <div class="desc">{{is_cn? '复制邀请码，打开App即可咨询，前往「我的订单」—点击「继续沟通」': '復製邀請碼，打開App即可咨詢，前往「我的訂單」—點擊「繼續溝通」'}}</div>
+          <div class="title">{{ get_card_title}}</div>
+          <div class="desc">{{ is_cn ? '复制邀请码，打开App即可咨询，前往「我的订单」—点击「继续沟通」' : '復製邀請碼，打開App即可咨詢，前往「我的訂單」—點擊「繼續溝通」' }}</div>
           <div class="code">
-            <div>{{ `${is_cn? '邀请码：': '邀請碼：'}${transfer_code}` }}</div>
-            <div class="copy" @click="handleCopyCode(1)">{{ is_cn? '复制': '復製' }}</div>
+            <div>{{ `${is_cn ? '邀请码：' : '邀請碼：'}${transfer_code}` }}</div>
+            <div class="copy" @click="handleCopyCode(1)">{{ is_cn ? '复制' : '復製' }}</div>
           </div>
           <img class="logo" :src="logo_img" />
-          <div class="btn" @click="downClick(1)">{{ is_cn? '复制邀请码并下载查看': '復製邀請碼並下載查看' }}</div>
+          <div class="btn" @click="downClick(1)">{{ is_cn ? '复制邀请码并下载查看' : '復製邀請碼並下載查看' }}</div>
         </div>
       </div>
     </div>
@@ -84,11 +84,11 @@ const show_info = {
   consult_time: { module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view' }, // 2024年财运
 }
 const copy_info = {
-  consult_time: { module: 10011, 'content_id': -10011, 'event_name': 'click_truelove_copy', type: 'click' }, 
+  consult_time: { module: 10011, 'content_id': -10011, 'event_name': 'click_truelove_copy', type: 'click' },
 }
 const down_info = {
 
-  consult_time: { module: 10011, 'content_id': -10013, 'event_name': 'click_truelove_result', type: 'click' }, 
+  consult_time: { module: 10011, 'content_id': -10013, 'event_name': 'click_truelove_result', type: 'click' },
 }
 
 import {
@@ -212,18 +212,18 @@ export default {
 
   destroyed() {
     this.duration_time.exit_time = new Date().getTime();
-    if(this.duration_time.entry_time) {
+    if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
-      '10011',
-      '-10010',
-      'view_truelove_chatpage_duration',
-      'view',
-      {
-        args_name: 'view_truelove_chatpage_duration',
-        channel: utils.getFBChannel(),
-        time: JSON.stringify({entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time,})
-      }
-    );
+        '10011',
+        '-10010',
+        'view_truelove_chatpage_duration',
+        'view',
+        {
+          args_name: 'view_truelove_chatpage_duration',
+          channel: utils.getFBChannel(),
+          time: JSON.stringify({ entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time, })
+        }
+      );
     }
   },
 
@@ -262,6 +262,23 @@ export default {
         }
       }
     },
+    get_card_title() {
+      let app_name;
+      if (utils.isIos()) {
+        if (utils.getLanguage() === 'zh-CN') {
+          app_name = '寻真';
+        } else {
+          return '尋真';
+        }
+      } else {
+        if (utils.getLanguage() === 'zh-CN') {
+          return '命理寻真';
+        } else {
+          return '命理尋真';
+        }
+      } 
+      return utils.getLanguage() === 'zh-CN'? `您的【Ta是你的正缘吗？】真人1v1咨询订单已生成，您可前往【${app_name}】App中进行实时咨询`: `您的【Ta是你的正緣嗎？】真人1v1咨詢訂單已生成，您可前往【${app_name}】App中進行實時咨詢`
+    }
   },
   watch: {
     is_first(val) {
