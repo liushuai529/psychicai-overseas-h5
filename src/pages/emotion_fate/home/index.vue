@@ -535,6 +535,7 @@ export default {
      * @return {*}
      */
     changeSex(val) {
+     
       if (this.sex == 0) {
         this.sex = 1;
       } else {

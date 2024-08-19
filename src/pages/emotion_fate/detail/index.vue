@@ -448,9 +448,9 @@ export default {
 
 
       this.mingge_desc = +this.gongli_nongli
-        ? `${(this.username = utils.getShortStr(arr[0], 4))}，${this.sex === 0 ? '女' : '男'
+        ? `${(this.username = utils.getShortStr(arr[0], 4))}，${this.sex == 0 ? '女' : '男'
         }，${this.year}年${this.month}月${this.date}日生人`
-        : `${(this.username = utils.getShortStr(arr[0], 4))}，${this.sex === 0 ? '女' : '男'
+        : `${(this.username = utils.getShortStr(arr[0], 4))}，${this.sex == 0 ? '女' : '男'
         }，${nongli_desc}生人`;
 
       this.consult_time = {

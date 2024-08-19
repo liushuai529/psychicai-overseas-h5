@@ -19,7 +19,7 @@
       <table class="user-table">
         <tr>
           <td style="border-right: 0.01rem solid #FEE2B4;width: 50%;">姓名：{{ username | filter_name }}</td>
-          <td >性别：{{ sex ? '女' : '男' }}</td>
+          <td >性别：{{ sex==0 ? '女' : '男' }}</td>
          
         </tr>
         <tr>
