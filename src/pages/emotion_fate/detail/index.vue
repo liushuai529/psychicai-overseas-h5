@@ -6,7 +6,7 @@
       :visible="showAnimation" @update-visible="showAnimation = false" />
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <img class="header-title" :src="is_cn ? cn_info_title : tw_info_title" alt="" />
-    <UserInfo style="margin-top: -5.8rem; margin-bottom: 0.34rem;" :picker_date_nongli="picker_date_nongli"
+    <UserInfo style="margin-top: -5.8rem; margin-bottom: 0.44rem;" :picker_date_nongli="picker_date_nongli"
       :picker_date_yangli="picker_date_yangli" :username="username" :sex="sex" />
 
 
@@ -494,6 +494,7 @@ export default {
   background-position: center;
   display: flex;
   justify-content: center;
+  background-color: #FEF1CF;
 
   img {
     width: 6.14rem;
@@ -663,7 +664,7 @@ export default {
   width: 100%;
   min-height: 5.8rem;
   font-family: system-ui, sans-serif;
-  margin-top: -0.11rem;
+  margin-top: -0.31rem;
   // background: #ffffff;
   border-radius: 0.1rem;
   background: url('../../../assets/img/emotion_fate/card_img_bj_zhong.webp') no-repeat;

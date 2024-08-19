@@ -1021,7 +1021,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 0.4rem;
+        margin-top: 0.2rem;
 
         .info-item {
           width: 6.3rem;
