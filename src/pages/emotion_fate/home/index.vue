@@ -742,10 +742,10 @@ export default {
       utils.firebaseLogEvent(
         '10011',
         '-10002',
-        'page_view_truelove_main',
+        'click_truelove_main',
         'click',
         {
-          args_name: 'page_view_truelove_main',
+          args_name: 'click_truelove_main',
           channel: utils.getFBChannel(),
           click_type: 'screen_tracking',
         }
