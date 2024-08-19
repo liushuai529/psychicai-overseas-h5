@@ -1,5 +1,5 @@
 <template>
-  <div :class="['chat-card', { 'hands_show': hands_show, 'hands_hidden': hands_hidden }]">
+  <div :class="['chat-card', { 'hands_show': hands_show, 'hands_hidden': hands_hidden }]" @click="downClick">
 
     <div class="content">
       <div class="left">
@@ -9,7 +9,7 @@
         <img :src="is_cn ? img_chat_push_right_android_cn : img_chat_push_right_android_tw" />
       </div>
     </div>
-    <div class="btn" @click="downClick">
+    <div class="btn">
       <img :src="chat_icon_message" />
       <span>{{ get_tip }}</span>
     </div>

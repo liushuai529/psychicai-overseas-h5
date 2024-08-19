@@ -270,14 +270,14 @@ export default {
         setTimeout(() => {
           this.message_show1 = true;
 
-        }, 1500);
+        }, 6500);
         setTimeout(() => {
           this.message_show2 = true;
-        }, 2900);
+        }, 7900);
         setTimeout(() => {
 
           this.message_show3 = true;
-        }, 4500);
+        }, 9500);
       }
     },
   },
