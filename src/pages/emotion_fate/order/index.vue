@@ -167,19 +167,11 @@ export default {
       return utils.isIos();
     },
     top_tip() {
-      if (utils.isIos()) {
-        if (utils.getLanguage() === 'zh-CN') {
-          return '咨询过程中遇到问题请联系：plum7server@wekoi.cn'
+      if (utils.getLanguage() === 'zh-CN') {
+          return '咨询遇到问题联系：plum7server@wekoi.cn'
         } else {
-          return '咨詢過程中遇到問題請聯系：plum7server@wekoi.cn'
+          return '咨詢遇到問題聯系：plum7server@wekoi.cn'
         }
-      } else {
-        if (utils.getLanguage() === 'zh-CN') {
-          return '复制订单邀请码，打开命理寻真，你可以在命理寻真中查看你的提问';
-        } else {
-          return '復製訂單邀請碼，打開命理尋真，你可以在命理尋真中查看你的提問';
-        }
-      }
     }
 
   },
