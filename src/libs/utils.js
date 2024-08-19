@@ -78,6 +78,14 @@ const getFbId = () => {
     'ocean08': '474155705440528',
   }
 }
+
+/**
+ * @description: 获取TW代理渠道
+ * @return {*}
+ */
+const getTWChannel = () => {
+  return getFBChannel().indexOf('05')> -1 || getFBChannel().indexOf('06')> -1 || getFBChannel().indexOf('08')> -1;
+};
 /**
  * @description: 是否是生产环境
  * @return {*}
@@ -1677,6 +1685,7 @@ export default {
   checkFB,
   fbEvent,
   getFBChannel,
+  getTWChannel,
   getFbId,
   resetResultUrl,
   openAdjustApp,

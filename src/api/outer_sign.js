@@ -66,8 +66,8 @@ export const addOutParams = config => {
   config.params.channel = utils.getFBChannel() ? utils.getFBChannel() : '';
   config.params.os = utils.isIos() ? 'IPHONE' : utils.isAndroid()? 'ANDROID': '';
   config.params.device_id = utils.getDeviceId();
-  config.params.area_code = utils.getFBChannel().indexOf('05')> -1 || utils.getFBChannel().indexOf('06')> -1? '886': ''
-  config.params.iso_code = utils.getFBChannel().indexOf('05')> -1 || utils.getFBChannel().indexOf('06')> -1? 'TW': ''
+  config.params.area_code = utils.getTWChannel() ? '886': ''
+  config.params.iso_code = utils.getTWChannel() ? 'TW': ''
   config.params.app_sign = getAppSign(config);
 
   return config;
