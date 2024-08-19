@@ -12,7 +12,7 @@ export default {
   'birth-label': '生日',
   'sex-label': '性别',
   'name-placeholder': '请输入您的姓名',
-  'email-placeholder': '请输入有效邮箱用于接收报告',
+  'email-placeholder': '请输入您的邮箱',
   'birth-placeholder': '请选择出生日期(必填)',
   'check-label': '查看',
   'user-agreement': '《用户协议》',
