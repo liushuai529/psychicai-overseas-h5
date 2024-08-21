@@ -317,7 +317,7 @@ export default {
     },
   
     is_show_combinationSpecial02() {
-      return !["enjoy03", "panda03", "ocean03", "enjoy05", "ocean05"].includes(utils.getFBChannel());
+      return !["enjoy03", "enjoy103", "panda03", "ocean03", "enjoy05", "enjoy105", "ocean05"].includes(utils.getFBChannel());
     },
   },
   watch: {

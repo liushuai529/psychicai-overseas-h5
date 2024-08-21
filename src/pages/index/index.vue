@@ -1407,7 +1407,7 @@ export default {
     document.title = this.$t('dom-title');
     this.getLastOrder();
 
-    this.is_show_combine = ["enjoy03", "panda03", "ocean03", "enjoy05", "ocean05"].includes(
+    this.is_show_combine = ["enjoy03", "enjoy103","panda03", "ocean03", "enjoy05", "enjoy105","ocean05"].includes(
       utils.getFBChannel()
     );
 
@@ -2456,7 +2456,7 @@ export default {
     },
     logPageView(val) {
       let channel = utils.getFBChannel();
-      if (!["enjoy03", "panda03", "ocean03", "enjoy05", "ocean05"].includes(channel)) {
+      if (!["enjoy03", "enjoy103", "panda03", "ocean03", "enjoy05", "enjoy105","ocean05"].includes(channel)) {
         return;
       }
       if (val === 0) {
