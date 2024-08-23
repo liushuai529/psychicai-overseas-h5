@@ -29,6 +29,8 @@ const getFBChannel = () => {
     return 'enjoy03';
   } else if (url.indexOf('enjoy103') > -1) {
     return 'enjoy103';
+  } else if (url.indexOf('enjoy203') > -1) {
+    return 'enjoy203';
   } else if (url.indexOf('panda03') > -1) {
     return 'panda03';
   }  else if (url.indexOf('ocean03') > -1) {
@@ -37,6 +39,8 @@ const getFBChannel = () => {
     return 'enjoy05';
   } else if (url.indexOf('enjoy105') > -1) {
     return 'enjoy105';
+  } else if (url.indexOf('enjoy205') > -1) {
+    return 'enjoy205';
   } else if (url.indexOf('ocean05') > -1) {
     return 'ocean05';
   } else if (url.indexOf('panda06') > -1) {
@@ -74,10 +78,12 @@ const getFbId = () => {
     'panda02': '824193972893573',
     'enjoy03': '2368489400014794',
     'enjoy103': '526401886558503', 
+    'enjoy203': '861527552585605', 
     'ocean03': '1217293436105371',
     'panda03': '7693892440702728',
     'enjoy05': '1904115380074482',
     'enjoy105': '378704948392994',
+    'enjoy205': '860085072353121',
     'ocean05': '1632290727618886',
     'enjoy06': '397861279464435',
     'panda06': '1031517837859732',
@@ -96,7 +102,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  return getFBChannel().indexOf('05')> -1 || getFBChannel().indexOf('06')> -1 || getFBChannel().indexOf('08')> -1;
+  return getFBChannel().indexOf('05')> -1 || getFBChannel().indexOf('105')> -1 || getFBChannel().indexOf('205')> -1 || getFBChannel().indexOf('06')> -1 || getFBChannel().indexOf('08')> -1 || getFBChannel().indexOf('108')> -1;
 };
 /**
  * @description: 是否是生产环境
