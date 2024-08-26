@@ -55,7 +55,7 @@ export default {
       return ["enjoy02", "panda02"].includes(utils.getFBChannel());
     },
     channel3() {
-      return ["enjoy03", "enjoy103", "enjoy203","panda03", "ocean03", "enjoy05", "enjoy105", "enjoy205","ocean05"].includes(utils.getFBChannel());
+      return ["enjoy03", "enjoy103", "enjoy203","panda03", "ocean03", "ocean103", "enjoy05", "enjoy105", "enjoy205","ocean05","ocean105" ].includes(utils.getFBChannel());
     },
     btn_url() {
       if (utils.getLanguage() === 'zh-CN') {

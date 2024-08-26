@@ -329,6 +329,29 @@ for (var pathname in entries) {
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// ocean103代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ocean103/' + filename + '.html'),
+    template: 'template/index_ocean103.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
 // enjoy05代理
 for (var pathname in entries) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
@@ -404,6 +427,29 @@ for (var pathname in entries) {
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean05/' + filename + '.html'),
     template: 'template/index_ocean05.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// ocean105代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ocean105/' + filename + '.html'),
+    template: 'template/index_ocean105.html',
     inject: true,
     minify: {
       removeComments: true,
@@ -542,6 +588,29 @@ for (var pathname in entries) {
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean07/' + filename + '.html'),
     template: 'template/index_ocean07.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// ocean107代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ocean107/' + filename + '.html'),
+    template: 'template/index_ocean107.html',
     inject: true,
     minify: {
       removeComments: true,

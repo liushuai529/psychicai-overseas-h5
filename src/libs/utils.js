@@ -33,8 +33,10 @@ const getFBChannel = () => {
     return 'enjoy203';
   } else if (url.indexOf('panda03') > -1) {
     return 'panda03';
-  }  else if (url.indexOf('ocean03') > -1) {
+  } else if (url.indexOf('ocean03') > -1) {
     return 'ocean03';
+  } else if (url.indexOf('ocean103') > -1) {
+    return 'ocean103';
   } else if (url.indexOf('enjoy05') > -1) {
     return 'enjoy05';
   } else if (url.indexOf('enjoy105') > -1) {
@@ -43,6 +45,8 @@ const getFBChannel = () => {
     return 'enjoy205';
   } else if (url.indexOf('ocean05') > -1) {
     return 'ocean05';
+  } else if (url.indexOf('ocean105') > -1) {
+    return 'ocean105';
   } else if (url.indexOf('panda06') > -1) {
     return 'panda06';
   } else if (url.indexOf('enjoy06') > -1) {
@@ -55,6 +59,8 @@ const getFBChannel = () => {
     return 'enjoy107';
   } else if (url.indexOf('ocean07') > -1) {
     return 'ocean07';
+  } else if (url.indexOf('ocean107') > -1) {
+    return 'ocean107';
   } else if (url.indexOf('enjoy08') > -1) {
     return 'enjoy08';
   } else if (url.indexOf('enjoy108') > -1) {
@@ -80,17 +86,20 @@ const getFbId = () => {
     'enjoy103': '526401886558503', 
     'enjoy203': '861527552585605', 
     'ocean03': '1217293436105371',
+    'ocean103': '1032807048109332',
     'panda03': '7693892440702728',
     'enjoy05': '1904115380074482',
     'enjoy105': '378704948392994',
     'enjoy205': '860085072353121',
     'ocean05': '1632290727618886',
+    'ocean105': '1826896374468281',
     'enjoy06': '397861279464435',
     'panda06': '1031517837859732',
     'ocean06': '784751360516897',
     'enjoy07': '418001307949732',
     'enjoy107': '488106190527312',
     'ocean07': '1206292723951491',
+    'ocean107': '1449583662411065',
     'enjoy08': '1043411716668941',
     'enjoy108': '795008092714686',
     'ocean08': '474155705440528',
