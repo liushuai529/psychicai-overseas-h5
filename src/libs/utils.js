@@ -128,6 +128,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
+  return ['enjoy05','enjoy105', 'enjoy205', 'enjoy305', 'ocean05', 'ocean105', 'enjoy06', 'panda06', 'ocean06','enjoy08', 'enjoy108', 'enjoy308','ocean08'].includes(getFBChannel());
   return getFBChannel().indexOf('05')> -1 || getFBChannel().indexOf('105')> -1 || getFBChannel().indexOf('205')> -1 || getFBChannel().indexOf('305')> -1 || getFBChannel().indexOf('06')> -1 || getFBChannel().indexOf('08')> -1 || getFBChannel().indexOf('108') || getFBChannel().indexOf('308')> -1;
 };
 /**
