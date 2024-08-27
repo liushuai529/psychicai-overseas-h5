@@ -31,6 +31,8 @@ const getFBChannel = () => {
     return 'enjoy103';
   } else if (url.indexOf('enjoy203') > -1) {
     return 'enjoy203';
+  } else if (url.indexOf('enjoy303') > -1) {
+    return 'enjoy303';
   } else if (url.indexOf('panda03') > -1) {
     return 'panda03';
   } else if (url.indexOf('ocean03') > -1) {
@@ -43,6 +45,8 @@ const getFBChannel = () => {
     return 'enjoy105';
   } else if (url.indexOf('enjoy205') > -1) {
     return 'enjoy205';
+  } else if (url.indexOf('enjoy305') > -1) {
+    return 'enjoy305';
   } else if (url.indexOf('ocean05') > -1) {
     return 'ocean05';
   } else if (url.indexOf('ocean105') > -1) {
@@ -57,6 +61,8 @@ const getFBChannel = () => {
     return 'enjoy07';
   } else if (url.indexOf('enjoy107') > -1) {
     return 'enjoy107';
+  } else if (url.indexOf('enjoy307') > -1) {
+    return 'enjoy307';
   } else if (url.indexOf('ocean07') > -1) {
     return 'ocean07';
   } else if (url.indexOf('ocean107') > -1) {
@@ -65,12 +71,19 @@ const getFBChannel = () => {
     return 'enjoy08';
   } else if (url.indexOf('enjoy108') > -1) {
     return 'enjoy108';
+  } else if (url.indexOf('enjoy308') > -1) {
+    return 'enjoy308';
   } else if (url.indexOf('ocean08') > -1) {
     return 'ocean08';
   } else {
     return 'enjoy02';
   }
 };
+
+const isShowCombine = () => {
+  return ["enjoy03", "enjoy103", "enjoy203", "enjoy303", "panda03", "ocean03", "ocean103", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "ocean05","ocean105" ];
+};
+
 /**
  * @description: 获取FB初始化ID
  * @return {*}
@@ -85,12 +98,14 @@ const getFbId = () => {
     'enjoy03': '2368489400014794',
     'enjoy103': '526401886558503', 
     'enjoy203': '861527552585605', 
+    'enjoy303': '1564667847798341', 
     'ocean03': '1217293436105371',
     'ocean103': '1032807048109332',
     'panda03': '7693892440702728',
     'enjoy05': '1904115380074482',
     'enjoy105': '378704948392994',
     'enjoy205': '860085072353121',
+    'enjoy305': '933553268786721',
     'ocean05': '1632290727618886',
     'ocean105': '1826896374468281',
     'enjoy06': '397861279464435',
@@ -98,10 +113,12 @@ const getFbId = () => {
     'ocean06': '784751360516897',
     'enjoy07': '418001307949732',
     'enjoy107': '488106190527312',
+    'enjoy307': '731531429109054',
     'ocean07': '1206292723951491',
     'ocean107': '1449583662411065',
     'enjoy08': '1043411716668941',
     'enjoy108': '795008092714686',
+    'enjoy308': '721767303429125',
     'ocean08': '474155705440528',
   }
 }
@@ -111,7 +128,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  return getFBChannel().indexOf('05')> -1 || getFBChannel().indexOf('105')> -1 || getFBChannel().indexOf('205')> -1 || getFBChannel().indexOf('06')> -1 || getFBChannel().indexOf('08')> -1 || getFBChannel().indexOf('108')> -1;
+  return getFBChannel().indexOf('05')> -1 || getFBChannel().indexOf('105')> -1 || getFBChannel().indexOf('205')> -1 || getFBChannel().indexOf('305')> -1 || getFBChannel().indexOf('06')> -1 || getFBChannel().indexOf('08')> -1 || getFBChannel().indexOf('108') || getFBChannel().indexOf('308')> -1;
 };
 /**
  * @description: 是否是生产环境
@@ -1713,6 +1730,7 @@ export default {
   fbEvent,
   getFBChannel,
   getTWChannel,
+  isShowCombine,
   getFbId,
   resetResultUrl,
   openAdjustApp,
