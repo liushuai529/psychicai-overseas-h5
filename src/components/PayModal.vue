@@ -509,7 +509,10 @@ export default {
         await utils.checkFB();
         Indicator.close();
         try {
-          fbq('track', 'AddToCart');
+          fbq('track', 'AddToCart', {
+              value: this.product.price.toFixed(2),
+              currency: this.product.currency_type || 'MYR',
+            });
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
