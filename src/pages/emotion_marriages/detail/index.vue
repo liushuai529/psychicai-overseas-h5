@@ -9,7 +9,7 @@
 
 
 
-    <div style="width: 6.98rem;">
+    <div style="width: 6.98rem; margin-top: -6rem; margin-bottom: 0.24rem;">
       <MessageCard/>
     </div>
 
@@ -21,14 +21,13 @@
       <div v-else style="display: flex; flex-direction: column;">
         <div id="method-title-img" class="method-title-img-consult">
           <img :src="is_cn ? cn_paypage_tittle_pay : tw_paypage_tittle_pay" />
-
         </div>
-        <UserInfo :picker_date_nongli="picker_date_nongli" :picker_date_yangli="picker_date_yangli" :username="username"
+        <UserInfo style="margin-top: 0.24rem;" :picker_date_nongli="picker_date_nongli" :picker_date_yangli="picker_date_yangli" :username="username"
           :sex="sex" />
       </div>
 
 
-      <PayDetail className="pay-method" ref="payDetail" :product_key="product_key"
+      <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10011"
         c_click_id="-10006" e_click_name="click_truelove_pay" :consult_time="consult_time" />
       <div class="img-consult-bottom">
@@ -87,7 +86,7 @@ import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
 import tw_zhong4 from '../../../assets/img/emotion/new/tw/zhong_4.webp';
 import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
-import PayDetail from '../../../components/PayDetail.vue';
+import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
 
 import cn_bg_1 from '../../../assets/img/emotion_marriages/cn/paypage_neirong_cn.webp';
 
@@ -126,7 +125,7 @@ export default {
     payModal,
     BaziTable,
     HomeFooter,
-    PayDetail,
+    MarriagesPayDetail,
     NewFooter,
     GejuInfo,
     AnimationPage,
