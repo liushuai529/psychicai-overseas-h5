@@ -58,7 +58,7 @@
 
 
 
-            <div v-if="this.showEmail()" class="info-item">
+            <!-- <div v-if="this.showEmail()" class="info-item">
               <div class="left input-container">
                 <div>{{ $t('email-label') }}：</div>
                 <div class="info-input">
@@ -67,7 +67,7 @@
                 </div>
               </div>
             </div>
-            <div v-if="this.showEmail()" class="divider-line"></div>
+            <div v-if="this.showEmail()" class="divider-line"></div> -->
           </div>
 
 
