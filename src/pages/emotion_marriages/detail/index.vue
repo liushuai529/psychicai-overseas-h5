@@ -5,6 +5,7 @@
 
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <img class="header-title" :src="is_cn ? cn_info_title : tw_info_title" alt="" />
+    <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
 
 
 
@@ -67,6 +68,8 @@ import cn_pay_btn from '../../../assets/img/emotion/home_btn.webp';
 
 import cn_home_btn from '../../../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp';
 import tw_home_btn from '../../../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp';
+import cn_history_order from '../../../assets/img/emotion_fate/cn/home_lsdd_cn.webp';
+import tw_history_order from '../../../assets/img/emotion_fate/tw/home_lsdd_tw.webp';
 
 
 import PayCard from '../../../components/PayCard.vue';
@@ -135,6 +138,8 @@ export default {
   data() {
     return {
       localStorage: window.localStorage,
+      cn_history_order,
+      tw_history_order,
       // cn_paypage_tittle_xiangqing,
       // tw_paypage_tittle_xiangqing,
       cn_paypage_tittle_pay,
@@ -302,6 +307,15 @@ export default {
     }
   },
   methods: {
+     /**
+     * @description: 跳转历史订单页
+     * @return {*}
+     */
+     toOrder() {
+      this.$router.push({
+        path: 'order',
+      });
+    },
     scrollClick() {
       this.$nextTick(() => {
         // 滚动到指定元素
@@ -456,6 +470,14 @@ export default {
 .header-title {
   width: 7.5rem;
   height: 7.5rem;
+}
+.order-icon {
+  position: fixed;
+  right: 0;
+  top: 3rem;
+  width: 0.44rem;
+  height: 1.5rem;
+  z-index: 100;
 }
 
 .method-title-img-consult {
