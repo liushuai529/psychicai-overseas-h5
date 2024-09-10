@@ -76,7 +76,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('ocean08') > -1) {
     return 'ocean08';
   } else {
-    return 'enjoy02';
+    return 'enjoy09';
   }
 };
 
@@ -128,8 +128,16 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  return ['enjoy05','enjoy105', 'enjoy205', 'enjoy305', 'ocean05', 'ocean105', 'enjoy06', 'panda06', 'ocean06','enjoy08', 'enjoy108', 'enjoy308','ocean08'].includes(getFBChannel());
-  return getFBChannel().indexOf('05')> -1 || getFBChannel().indexOf('105')> -1 || getFBChannel().indexOf('205')> -1 || getFBChannel().indexOf('305')> -1 || getFBChannel().indexOf('06')> -1 || getFBChannel().indexOf('08')> -1 || getFBChannel().indexOf('108') || getFBChannel().indexOf('308')> -1;
+  if(getFBChannel()==='enjoy09') {
+    if(localStorage.getItem('current_country')) {
+      return {area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code']}
+    } else {
+      return {area_code: '60', iso_code: 'MY'}
+    }
+  } else {
+    return ['enjoy05','enjoy105', 'enjoy205', 'enjoy305', 'ocean05', 'ocean105', 'enjoy06', 'panda06', 'ocean06','enjoy08', 'enjoy108', 'enjoy308','ocean08'].includes(getFBChannel()) ? {area_code: '886', iso_code: 'TW'}: {area_code: '60', iso_code: 'MY'};
+  }
+  
 };
 /**
  * @description: 是否是生产环境

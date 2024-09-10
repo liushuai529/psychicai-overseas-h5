@@ -20,12 +20,17 @@ import h5_career2024 from '../assets/img/bottom_bg/h5_career2024.webp';
 import h5_bai_gua from '../assets/img/bottom_bg/h5_bai_gua.webp';
 import h5_annual2024 from '../assets/img/bottom_bg/h5_annual2024.webp';
 import consult_time from '../assets/img/bottom_bg/consult_time.webp';
+import consult_time1 from '../assets/img/emotion_marriages/hunyin_img_btnmengban.webp';
 
 
 export default {
   name: "NewFooter",
   props: {
     product_key: {
+      type: String,
+      default: '',
+    },
+    type: {
       type: String,
       default: '',
     },
@@ -39,10 +44,14 @@ export default {
       h5_bai_gua,
       h5_annual2024,
       consult_time,
+      consult_time1,
     }
   },
   computed: {
     imgUrl() {
+      if(this.type) {
+        return consult_time1;
+      }
       switch (this.product_key) {
         case 'h5_emotion2024':
           return this.h5_emotion2024

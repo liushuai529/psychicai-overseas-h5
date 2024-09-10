@@ -143,7 +143,7 @@ export default {
       if (utils.isFBContainer()) {
         this.$emit('show_modal', true)
         if (!utils.getQueryStr('mlxz_outer_visitor_id')) {
-          location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&_fbc=${localStorage.getItem('_fbc')}&_fbp=${localStorage.getItem('_fbp')}&timestamp=${new Date().getTime()}`
+          location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&current_country=${localStorage.getItem('current_country')}&_fbc=${localStorage.getItem('_fbc')}&_fbp=${localStorage.getItem('_fbp')}&timestamp=${new Date().getTime()}`
         }
         utils.firebaseLogEvent(modal_info[this.product_key]['module'], modal_info[this.product_key]['content_id'], modal_info[this.product_key]['event_name'], modal_info[this.product_key]['type'], {
           args_name: modal_info[this.product_key]['event_name'],
@@ -208,7 +208,7 @@ export default {
 .pay-item {
   width: 7.1rem;
   height: 2.04rem;
-  background: linear-gradient(180deg, #FFAC49 0%, #DD5242 100%);
+  background: linear-gradient( 180deg, #FDFAEC 0%, #FFF5D8 100%);
   border-radius: 0.2rem;
   display: flex;
   flex-direction: column;
@@ -233,7 +233,7 @@ export default {
       .title {
         font-weight: 600;
         font-size: 0.36rem;
-        color: #FFFFFF;
+        color: #602E03;
         line-height: 0.54rem;
         text-align: left;
         font-style: normal;
@@ -242,7 +242,7 @@ export default {
       .desc {
         font-weight: 400;
         font-size: 0.26rem;
-        color: #FFDEBE;
+        color: rgba(96,46,3,0.7);
         line-height: 0.39rem;
         text-align: left;
         font-style: normal;
@@ -252,7 +252,7 @@ export default {
     .right {
       width: 1.68rem;
       height: 0.74rem;
-      background: linear-gradient(180deg, #F47553 0%, #E92424 99%);
+      background: linear-gradient( 180deg, #F47553 0%, #E92424 100%);
       border-radius: 0.2rem;
       border: 0.02rem solid #FFCC97;
       font-weight: 600;
@@ -270,13 +270,13 @@ export default {
   .time {
     width: 6.62rem;
     height: 0.5rem;
-    background: #F47956;
+    background: #FFF2CF;
     border-radius: 0.12rem;
-    border: 0.01rem solid #FFA858;
+    border: 0.01rem solid #F6B87E;
     margin-top: 0.18rem;
     font-weight: 600;
     font-size: 0.26rem;
-    color: #FFF722;
+    color: #E24C2E;
     line-height: 0.26rem;
     text-align: right;
     font-style: normal;
@@ -288,7 +288,7 @@ export default {
   .van-count-down {
     font-weight: 600;
     font-size: 0.26rem;
-    color: #FFF722;
+    color: #E24C2E;
     line-height: 0.26rem;
   }
 }

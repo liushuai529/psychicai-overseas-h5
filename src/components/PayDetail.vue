@@ -524,7 +524,8 @@ export default {
       });
       if (this.product_key === 'consult_time') {
         pay_max_params = Object.assign({}, pay_max_params, {
-          consult_time: this.consult_time
+          consult_time: this.consult_time,
+          product_sub_type: 'zheng_yuan',
         });
       }
    

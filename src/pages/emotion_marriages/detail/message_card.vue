@@ -1,34 +1,37 @@
 <template>
-  <div class="message-card">
+  <div class="message-card" @click="$emit('scrollClick')">
     <img class="head-img" :src="is_cn ? cn_info_title : tw_info_title" />
     <div class="message-container">
       <div class="item">
         <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
         <div class="text">
-          您好，吴桂花，我是本次服务您的xxx老师
+          {{ `您好，${username}，${is_cn ? '我是本次服务您的老师！' : '我是本次服務您的老師！'}` }}
         </div>
       </div>
       <div class="item">
         <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
         <div class="text">
           <div>您的八字信息：</div>
-          <div>姓名：吴桂花</div>
-          <div>日期：1998年3月22日 时辰不清楚</div>
+          <div>{{ `姓名：${username}` }}</div>
+          <div>日期：{{ date }}</div>
         </div>
       </div>
-      <div class="item">
+      <div class="item" v-show="voice_show[0]">
         <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
-        <div class="voice">
-          <img src="../../../assets/img/emotion_marriages/chat_icon_sound_opposite_03.webp"/>
+        <div class="voice" @click="playSound">
+          <img v-if="is_playing" src="../../../assets/img/emotion_marriages/chat_sound_opposite.gif"/>
+          <img v-else src="../../../assets/img/emotion_marriages/chat_icon_sound_opposite_03.webp"/>
           <div>10s</div>
         </div>
+        <audio ref="audioPlayer" src="https://m10.music.126.net/20240910113437/f9416d55f422d5766d697932a8d96147/ymusic/obj/w5zDlMODwrDDiGjCn8Ky/2976638298/b399/5df9/4cc3/e1c53726fa632e5efe23f380f1675396.mp3" @ended="onEnded"></audio>
+   
       </div>
 
-      <div class="item">
+      <div class="item" v-show="voice_show[1]">
         <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
         <img class="un-voice" :src="is_cn? chat_voice_unlock_01_cn: chat_voice_unlock_01_tw" />
       </div>
-      <div class="item">
+      <div class="item" v-show="voice_show[2]">
         <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
         <img class="un-voice1" :src="is_cn? chat_voice_unlock_02_cn: chat_voice_unlock_02_tw" />
       </div>
@@ -47,9 +50,16 @@ import chat_voice_unlock_02_cn from '../../../assets/img/emotion_marriages/cn/ch
 import chat_voice_unlock_01_tw from '../../../assets/img/emotion_marriages/tw/chat_voice_unlock_01_tw.webp';
 import chat_voice_unlock_02_tw from '../../../assets/img/emotion_marriages/tw/chat_voice_unlock_02_tw.webp';
 export default {
-  props: [
-
-  ],
+  props: {
+    date: {
+      type: String,
+      default: '',
+    },
+    username: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
       language: utils.getLanguage(),
@@ -59,9 +69,26 @@ export default {
       chat_voice_unlock_02_cn,
       chat_voice_unlock_01_tw,
       chat_voice_unlock_02_tw,
+      is_playing: false,
+      voice_show: {
+        0: false,
+        1: false,
+        2: false
+      }
     };
   },
-  created() { },
+  created() { 
+    setTimeout(() => {
+      this.voice_show[0] =true;
+    }, 1000);
+    setTimeout(() => {
+      this.voice_show[1] =true;
+    }, 2200);
+    setTimeout(() => {
+      this.voice_show[2] =true;
+    }, 3200);
+  },
+
   computed: {
     is_cn() {
       return this.language === 'zh-CN';
@@ -69,7 +96,16 @@ export default {
   },
 
   methods: {
-
+    playSound() {
+      window.event.stopPropagation()
+      const audioPlayer = this.$refs.audioPlayer;
+      audioPlayer.play();
+      this.is_playing = true;
+    },
+    onEnded() {
+      console.log('声音播放结束');
+      this.is_playing = false;
+    }
   },
 };
 </script>

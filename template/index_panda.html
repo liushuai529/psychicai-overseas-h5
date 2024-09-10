@@ -54,6 +54,9 @@
         localStorage.setItem('mlxz_outer_access_token', getQueryStr('mlxz_outer_access_token'));
         localStorage.setItem('mlxz_outer_visitor_id', getQueryStr('mlxz_outer_visitor_id'));
       }
+      if(getQueryStr('current_country')) {
+        localStorage.setItem('current_country', decodeURIComponent(getQueryStr('current_country')));
+      }
       
     </script>
     <!-- <script

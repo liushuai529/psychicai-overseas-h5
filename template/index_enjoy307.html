@@ -65,6 +65,9 @@
         localStorage.setItem('selected_card_list', decodeURIComponent(getQueryStr('selected_card_list')));
         localStorage.setItem('question', decodeURIComponent(getQueryStr('question')));
       }
+      if(getQueryStr('current_country')) {
+        localStorage.setItem('current_country', decodeURIComponent(getQueryStr('current_country')));
+      }
       
     </script>
     

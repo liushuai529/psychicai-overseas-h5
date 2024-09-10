@@ -78,7 +78,7 @@
         <div class="method-text">支付方式</div>
         <div class="city">
           <div>国家/地区：</div>
-          <img :src="getImg()" @click="changeCity"/>
+          <img :src="getImg()" @click="changeCity" />
         </div>
       </div>
       <div class="item-container">
@@ -98,11 +98,10 @@
           <img class="right" :src="check_index === k ? checked_icon : no_check_icon" alt="" />
         </div>
         <!--此处引用按钮组件-->
-        <PayBtn v-if="product_key !== 'consult_time'" :product_key="product_key" :callback="payMoney" />
-        <ConsultPayBtn v-else :product_key="product_key" :callback="payMoney" />
-        <!-- <img
-          :src="cn_home_btn"
-        /> -->
+        <!-- <PayBtn v-if="product_key !== 'consult_time'" :product_key="product_key" :callback="payMoney" />
+        <ConsultPayBtn v-else :product_key="product_key" :callback="payMoney" /> -->
+        <img class="btn emo-btn" :src="is_cn? img_home_btu_zixun_cn: img_home_btu_zixun_tw" @click="payMoney" />
+      
 
       </div>
 
@@ -131,7 +130,8 @@ import img_district_malaysia_cn from '../assets/img/emotion_marriages/cn/img_dis
 import img_district_malaysia_tw from '../assets/img/emotion_marriages/tw/img_district_malaysia_tw.webp';
 import img_district_taiwan_cn from '../assets/img/emotion_marriages/cn/img_district_taiwan_cn.webp';
 import img_district_taiwan_tw from '../assets/img/emotion_marriages/tw/img_district_taiwan_tw.webp';
-
+import img_home_btu_zixun_cn from '../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp'
+import img_home_btu_zixun_tw from '../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp'
 
 const e_id_arr = {
   h5_wealth2024: '60001',
@@ -188,6 +188,8 @@ export default {
   },
   data() {
     return {
+      img_home_btu_zixun_cn,
+      img_home_btu_zixun_tw,
       img_district_malaysia_cn,
       img_district_malaysia_tw,
       img_district_taiwan_cn,
@@ -225,6 +227,7 @@ export default {
 
       all_product: [],//所有测算报告、组合优惠
       city: 0,
+      current_country: {}
     };
   },
   props: {
@@ -318,6 +321,7 @@ export default {
     },
   },
   created() {
+    this.current_country = JSON.parse(localStorage.getItem('current_country'))
     // 首次挽留的弹窗计时
     let use_fixed_time = this.$route.query.use_fixed_time;
     if (use_fixed_time) {
@@ -353,14 +357,14 @@ export default {
 
   methods: {
     getImg() {
-      if (this.city !== 1) {
-        if(this.is_cn) {
+      if (this.current_country.iso_code !== 'TW') {
+        if (this.is_cn) {
           return img_district_malaysia_cn
         } else {
           return img_district_malaysia_tw
         }
       } else {
-        if(this.is_cn) {
+        if (this.is_cn) {
           return img_district_taiwan_cn
         } else {
           return img_district_taiwan_tw
@@ -368,11 +372,17 @@ export default {
       }
     },
     changeCity() {
-      if(this.city === 0) {
-        this.city =1
+      if (this.current_country.iso_code === 'MY') {
+        this.current_country = { area_code: '886', iso_code: 'TW' }
+        localStorage.setItem('current_country', JSON.stringify({ area_code: '886', iso_code: 'TW' }))
       } else {
-        this.city =0
+        this.current_country = { area_code: '60', iso_code: 'MY' }
+        localStorage.setItem('current_country', JSON.stringify({ area_code: '60', iso_code: 'MY' }))
       }
+      this.getImg()
+      setTimeout(() => {
+        this.getPayMethod()
+      }, 0);
     },
     getCombineProductIds(product_ids) {
       this.combine_product_ids = product_ids;
@@ -547,7 +557,8 @@ export default {
           fbc: utils.getcookieInfo('_fbc'),
           fbp: utils.getcookieInfo('_fbp'),
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
-        }
+        },
+        product_sub_type: 'life_marriages',
       };
       // let user_time = this.$route.query.use_fixed_time;
 
@@ -906,6 +917,7 @@ export default {
     line-height: 0.38rem;
     text-align: right;
     font-style: normal;
+
     img {
       width: 1.64rem;
       height: 0.54rem;
@@ -917,5 +929,27 @@ export default {
   display: flex;
   flex-direction: row;
   height: 0.4rem;
+}
+
+.btn {
+  width: 5.7rem;
+  height: 0.98rem;
+  margin: auto;
+  // margin-bottom: 0.2rem;
+  margin-top: 0.1rem;
+}
+
+@keyframes emoBtn {
+  0% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.emo-btn {
+  animation: emoBtn 1s infinite ease-in-out alternate;
 }
 </style>

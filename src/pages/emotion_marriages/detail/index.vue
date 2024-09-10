@@ -1,19 +1,18 @@
 <template>
   <div
-    :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') || show_discount_modal }">
+    :class="{ detail: true, 'hidden-scroll': show_discount_modal }">
     <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')" />
-    <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="consult_time"
-      :visible="showAnimation" @update-visible="showAnimation = false" />
+
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <img class="header-title" :src="is_cn ? cn_info_title : tw_info_title" alt="" />
 
 
 
     <div style="width: 6.98rem; margin-top: -6rem; margin-bottom: 0.24rem;">
-      <MessageCard/>
+      <MessageCard  :date="query_user_string.split('|')[2] ? picker_date_yangli: picker_date_nongli" :username="username" @scrollClick="scrollClick"/>
     </div>
 
-    <FatePayItem product_key="consult_time" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
+    <MarriagesPayItem product_key="consult_time" sub_type="life_marriages"  @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
     <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
       <img v-if="product_key !== 'consult_time'" id="method-title-img" class="method-title-img"
         :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
@@ -47,12 +46,12 @@
 
 
 
-    <NewFooter product_key="consult_time" />
+    <NewFooter type="emotion_marriages" product_key="consult_time" />
 
     <div class="footer"></div>
 
     <img @click="payOrder" class="fix-btn emo-btn" :src="btn_url" />
-    <HomeFooter product_key="consult_time" />
+
   </div>
 </template>
 
@@ -66,8 +65,8 @@ import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import cn_pay_btn from '../../../assets/img/emotion/home_btn.webp';
 
 
-import cn_home_btn from '../../../assets/img/emotion_fate/img_home_btu_chakan.webp';
-import tw_home_btn from '../../../assets/img/emotion_fate/img_home_btu_chakan.webp';
+import cn_home_btn from '../../../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp';
+import tw_home_btn from '../../../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp';
 
 
 import PayCard from '../../../components/PayCard.vue';
@@ -114,7 +113,7 @@ import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
 import AnimationPage from '../../../components/AnimationPage.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
-import FatePayItem from '../../../components/FatePayItem.vue';
+import MarriagesPayItem from '../../../components/MarriagesPayItem.vue';
 import PayGuideModal from '../../../components/PayGuideModal.vue';
 
 export default {
@@ -130,7 +129,7 @@ export default {
     GejuInfo,
     AnimationPage,
     FbShareNotice,
-    FatePayItem,
+    MarriagesPayItem,
     PayGuideModal,
   },
   data() {
@@ -196,7 +195,6 @@ export default {
       showFixedBtn: false,
       is_show_btn: true,
       gejujiedu: [], //格局信息
-      showAnimation: true,//过渡动画标识
       showPayGuideModal: false,//待支付蒙版
       show_discount_modal: false,//低价折扣弹窗
       consult_time: null,//下单参数
@@ -207,20 +205,7 @@ export default {
     };
   },
   watch: {
-    showAnimation(val) {
-      if (!val) {
-        setTimeout(() => {
-          this.$nextTick(() => {
 
-            // 滚动到指定元素
-            const element = document.getElementById('method-title-img');
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
-            }
-          });
-        }, 0);
-      }
-    },
   },
 
   computed: {
@@ -260,7 +245,6 @@ export default {
     },
   },
   beforeCreate() {
-    this.showAnimation = true;
   },
   async created() {
     utils.firebaseLogEvent(
@@ -278,6 +262,8 @@ export default {
     await this.formateQueryUserInfo(this.query_user_string);
     this.getUserBazi();
   },
+
+
 
   mounted() {
     this.duration_time.entry_time = new Date().getTime()

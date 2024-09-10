@@ -343,7 +343,8 @@ export default {
           },
           consult_time: {
             user_info: item.user_info
-          }
+          },
+          product_sub_type: 'zheng_yuan',
 
         };
 

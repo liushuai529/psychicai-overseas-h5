@@ -105,7 +105,7 @@
       <NongliPicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
 
-      <NewFooter v-if="showFixedBtn" product_key="consult_time" />
+      <NewFooter type="emotion_marriages" v-if="showFixedBtn" product_key="consult_time" />
 
     </div>
   </div>

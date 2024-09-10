@@ -6,7 +6,7 @@
         <img :src="icon_url" />
       </div>
       <div class="right">
-        <img :src="is_cn ? img_chat_push_right_android_cn : img_chat_push_right_android_tw" />
+        <img :src="avatar_url" />
       </div>
     </div>
     <div class="btn">
@@ -18,6 +18,17 @@
 <script>
 import utils from '../libs/utils';
 
+import hunyin_img_chat_push_left_android_cn from '../assets/img/emotion_marriages/cn/hunyin_img_chat_push_left_android_cn.webp';
+import hunyin_img_chat_push_left_android_tw from '../assets/img/emotion_marriages/tw/hunyin_img_chat_push_left_android_tw.webp';
+
+import hunyin_img_chat_push_left_ios_cn from '../assets/img/emotion_marriages/cn/hunyin_img_chat_push_left_ios_cn.webp';
+import hunyin_img_chat_push_left_ios_tw from '../assets/img/emotion_marriages/tw/hunyin_img_chat_push_left_ios_tw.webp';
+
+import hunyin_img_chat_push_right_android_cn from '../assets/img/emotion_marriages/cn/hunyin_img_chat_push_right_android_cn.webp';
+import hunyin_img_chat_push_right_android_tw from '../assets/img/emotion_marriages/tw/hunyin_img_chat_push_right_android_tw.webp';
+
+
+
 import img_chat_push_left_android_cn from '../assets/img/emotion_fate/cn/img_chat_push_left_android_cn.webp';
 import img_chat_push_left_android_tw from '../assets/img/emotion_fate/tw/img_chat_push_left_android_tw.webp';
 
@@ -26,6 +37,8 @@ import img_chat_push_left_ios_tw from '../assets/img/emotion_fate/tw/img_chat_pu
 
 import img_chat_push_right_android_cn from '../assets/img/emotion_fate/cn/img_chat_push_right_android_cn.webp';
 import img_chat_push_right_android_tw from '../assets/img/emotion_fate/tw/img_chat_push_right_android_tw.webp';
+
+
 
 import chat_icon_message from '../assets/img/emotion_fate/chat_icon_message.webp';
 
@@ -50,10 +63,20 @@ export default {
     transfer_code: {
       type: String,
       default: ''
+    },
+    sub_type: {
+      type: String,
+      default: ''
     }
   },
   data() {
     return {
+      hunyin_img_chat_push_left_android_cn,
+      hunyin_img_chat_push_left_android_tw,
+      hunyin_img_chat_push_left_ios_cn,
+      hunyin_img_chat_push_left_ios_tw,
+      hunyin_img_chat_push_right_android_cn,
+      hunyin_img_chat_push_right_android_tw,
       img_chat_push_left_android_cn,
       img_chat_push_left_android_tw,
       img_chat_push_left_ios_cn,
@@ -89,19 +112,28 @@ export default {
         return `一鍵跳轉諮詢老師 (${this.time}s)`
       }
     },
+    avatar_url() {
+      is_cn ? img_chat_push_right_android_cn : img_chat_push_right_android_tw
+      if (utils.getLanguage() === 'zh-CN') {
+        return this.sub_type? hunyin_img_chat_push_right_android_cn: img_chat_push_right_android_cn
+      } else {
+        return this.sub_type? hunyin_img_chat_push_right_android_tw: img_chat_push_right_android_tw
+      }
+
+    },
     icon_url() {
 
       if (utils.getLanguage() === 'zh-CN') {
         if (utils.isIos()) {
-          return img_chat_push_left_ios_cn;
+          return this.sub_type ?  hunyin_img_chat_push_left_ios_cn: img_chat_push_left_ios_cn;
         } else {
-          return img_chat_push_left_android_cn;
+          return this.sub_type ? hunyin_img_chat_push_left_android_cn: img_chat_push_left_android_cn;
         }
       } else {
         if (utils.isIos()) {
-          return img_chat_push_left_ios_tw;
+          return this.sub_type ? hunyin_img_chat_push_left_ios_tw: img_chat_push_left_ios_tw;
         } else {
-          return img_chat_push_left_android_tw;
+          return this.sub_type ? hunyin_img_chat_push_left_android_tw: img_chat_push_left_android_tw;
         }
       }
     },
