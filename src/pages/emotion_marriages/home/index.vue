@@ -692,27 +692,6 @@ export default {
         return;
       }
 
-      if (email == '' && this.showEmail()) {
-        utils.firebaseLogEvent(
-          '10011',
-          '-10002',
-          'click_truelove_main',
-          'click',
-          {
-            args_name: 'click_truelove_main',
-            channel: utils.getFBChannel(),
-            click_type: 'error',
-          }
-        );
-        Toast(this.$t('email-tips'));
-        let dom = document.getElementById('email');
-        dom.focus();
-        return;
-      }
-
-
-
-
       let querystring = '';
       querystring += username;
       querystring += '|';

@@ -113,7 +113,7 @@ export default {
       }
     },
     avatar_url() {
-      is_cn ? img_chat_push_right_android_cn : img_chat_push_right_android_tw
+      utils.getLanguage() === 'zh-CN' ? img_chat_push_right_android_cn : img_chat_push_right_android_tw
       if (utils.getLanguage() === 'zh-CN') {
         return this.sub_type? hunyin_img_chat_push_right_android_cn: img_chat_push_right_android_cn
       } else {
