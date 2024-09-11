@@ -76,7 +76,7 @@ export default {
     } else {
       this.$store.dispatch('common/getProduction');
     }
-    const res = await getFateLastOrderGetAPI(this.product_key);
+    const res = await getFateLastOrderGetAPI(this.product_key, 'zheng_yuan');
     if (res.status !== 1000) return;
     if (res.data && res.data.order_status !== 'PAYED') {
       this.last_order = res.data;
@@ -90,7 +90,7 @@ export default {
     async show_pay_guide_modal(newVal) {
       if (!newVal) {
         console.log('刷新卡片')
-        const res = await getFateLastOrderGetAPI(this.product_key);
+        const res = await getFateLastOrderGetAPI(this.product_key, 'zheng_yuan');
         if (res.status !== 1000) return;
         if (res.data.order_status !== 'PAYED') {
           this.last_order = res.data;

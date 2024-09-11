@@ -131,6 +131,7 @@ export default {
         // page_size: 50,
         offset: 0,
         limit: 100,
+        product_sub_type: 'zheng_yuan'
       },
       list: [], // 列表数据
       status_enum: all_status_enums(),

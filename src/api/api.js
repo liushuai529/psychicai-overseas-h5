@@ -238,9 +238,9 @@ export const getLastOrderGetAPI = async data => {
 };
 
 //查询正缘报告最近一笔订单get请求
-export const getFateLastOrderGetAPI = async data => {
+export const getFateLastOrderGetAPI = async (key,product_sub_type) => {
   await visitorLoginAPI();
-  return request(`/web/auth/consult_time/recent/${data}`, 'GET', data);
+  return request(`/web/auth/consult_time/recent/${key}`, 'GET', {product_sub_type});
 };
 
 //查询最近一笔订单get请求
