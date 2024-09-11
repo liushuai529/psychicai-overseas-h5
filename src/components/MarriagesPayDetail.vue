@@ -569,6 +569,7 @@ export default {
         trade_pay_type,
         trade_target_org,
       });
+      delete this.consult_time.user_info.email
       if (this.product_key === 'consult_time') {
         pay_max_params = Object.assign({}, pay_max_params, {
           consult_time: this.consult_time
