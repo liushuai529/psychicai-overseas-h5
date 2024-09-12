@@ -499,7 +499,7 @@ export default {
 }
 
 .img-consult-bottom {
-  width: 7.08rem;
+  width: 7.1rem;
   height: 0.84rem;
   background-image: url(../../../assets/img/emotion_marriages/card_img_bj_xia.webp);
   background-size: auto 100%;
@@ -669,7 +669,7 @@ export default {
   border-radius: 0.1rem;
   // background: url('../../../assets/img/emotion_marriages/card_img_bj_zhong.png') ;
   // background-size: cover;
-  padding: 0.2rem;
+  padding: 0 0.2rem;
 }
 
 

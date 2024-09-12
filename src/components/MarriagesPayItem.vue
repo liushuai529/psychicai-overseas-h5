@@ -217,7 +217,7 @@ export default {
   padding-right: 0.24rem;
   padding-top: 0.15rem;
   padding-bottom: 0.24rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.24rem;
   animation: btnMove 0.5s infinite ease-in-out alternate;
 
   .pay-contaienr {
