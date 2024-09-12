@@ -23,7 +23,7 @@
           <img v-else src="../../../assets/img/emotion_marriages/chat_icon_sound_opposite_03.webp"/>
           <div>10s</div>
         </div>
-        <audio ref="audioPlayer" src="https://m10.music.126.net/20240910192028/6aaed91e8adcb0709503ab83238b3ddf/ymusic/obj/w5zDlMODwrDDiGjCn8Ky/2976638298/b399/5df9/4cc3/e1c53726fa632e5efe23f380f1675396.mp3" @ended="onEnded"></audio>
+        <audio ref="audioPlayer" src="https://psychicai-static.psychicai.pro/audio/life_marriage.mp3" @ended="onEnded"></audio>
    
       </div>
 
