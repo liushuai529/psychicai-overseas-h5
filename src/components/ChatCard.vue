@@ -157,8 +157,8 @@ export default {
     },
     downClick() {
       this.handleCopyCode();
-      utils.firebaseLogEvent(10011, -10012, 'click_truelove_card_result', 'click', {
-        args_name: 'click_truelove_card_result',
+      utils.firebaseLogEvent(10012, -10013, 'click_marriages_card_result', 'click', {
+        args_name: 'click_marriages_card_result',
         channel: utils.getFBChannel(),
       });
       utils.openApp();

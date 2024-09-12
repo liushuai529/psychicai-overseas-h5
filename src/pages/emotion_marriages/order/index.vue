@@ -196,12 +196,12 @@ export default {
 
   mounted() {
     utils.firebaseLogEvent(
-      '10011',
-      '-10016',
-      'page_view_truelove_history',
+      '10012',
+      '-10017',
+      'page_view_marriages_history',
       'page_view',
       {
-        args_name: 'page_view_truelove_history',
+        args_name: 'page_view_marriages_history',
         channel: utils.getFBChannel(),
       }
     );
@@ -286,7 +286,7 @@ export default {
         this.jump_loading = false;
       }, 2000);
 
-      let url = path_enums[item.product_key || 'consult_time'];
+      let url = 'emotion_marriages';
       if (item.order_status === 'PAYED') {
         localStorage.setItem('mlxz_reload_page_history', 1);
         localStorage.setItem('mlxz_reload_page_home', 1);
@@ -296,12 +296,12 @@ export default {
           query: { order_id: item.order_id, status: 'SUCCESS', product_key: item.product_key || 'consult_time' },
         });
         utils.firebaseLogEvent(
-          10011,
-          -10018,
-          'click_history_truelove_check',
+          10012,
+          -10019,
+          'click_history_marriages_check',
           'click',
           {
-            args_name: 'click_history_truelove_check',
+            args_name: 'click_history_marriages_check',
             channel: utils.getFBChannel(),
           }
         );
@@ -321,12 +321,12 @@ export default {
           trade_target_org,
         } = item;
         utils.firebaseLogEvent(
-          10011,
-          -10017,
-          'click_history_truelove_repay',
+          10012,
+          -10018,
+          'click_history_marriages_repay',
           'click',
           {
-            args_name: 'click_history_truelove_repay',
+            args_name: 'click_history_marriages_repay',
             channel: utils.getFBChannel(),
           }
         );

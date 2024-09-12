@@ -27,10 +27,10 @@ import { path_enums } from '../libs/enum';
 import { CountDown } from 'vant';
 
 const pay_info = {
-  consult_time: { module: 10011, 'content_id': -10014, 'event_name': 'click_truelove_wait_pay', type: 'click' },
+  consult_time: { module: 10012, 'content_id': -10015, 'event_name': 'click_marriages_wait_pay', type: 'click' },
 }
 const modal_info = {
-  consult_time: { module: 10011, 'content_id': -10015, 'event_name': 'page_view_truelove_guidance', type: 'page_view' },
+  consult_time: { module: 10012, 'content_id': -10016, 'event_name': 'page_view_marriages_guidance', type: 'page_view' },
 }
 export default {
   components: {
@@ -164,7 +164,7 @@ export default {
         trade_target_org,
         user_info,
       } = this.last_order;
-      let url = path_enums[product_key];
+      let url = 'emotion_marriages';
 
 
 
@@ -217,7 +217,7 @@ export default {
   padding-right: 0.24rem;
   padding-top: 0.15rem;
   padding-bottom: 0.24rem;
-  margin-bottom: 0.24rem;
+  margin-bottom: 0.5rem;
   animation: btnMove 0.5s infinite ease-in-out alternate;
 
   .pay-contaienr {

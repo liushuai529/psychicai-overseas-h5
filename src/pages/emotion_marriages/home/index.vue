@@ -300,22 +300,22 @@ export default {
     utils.isProd() &&
       tStatistic &&
       tStatistic.send({
-        event: 'page_view_truelove_main',
-        md: 10011,
+        event: 'page_view_marriages_main',
+        md: 10012,
         c_id: -10001,
         args: {
-          args_name: 'page_view_truelove_main',
+          args_name: 'page_view_marriages_main',
           channel: utils.getFBChannel(),
         },
       });
     this.$store.dispatch('common/getProduction', 'consult_time');
     utils.firebaseLogEvent(
-      '10011',
+      '10012',
       '-10001',
-      'page_view_truelove_main',
+      'page_view_marriages_main',
       'page_view',
       {
-        args_name: 'page_view_truelove_main',
+        args_name: 'page_view_marriages_main',
         channel: utils.getFBChannel(),
       }
     );
@@ -323,7 +323,7 @@ export default {
     this.has_pay = has_pay ? has_pay : '';
     // 埋点事件上传
     reportBuryingEventAPI({
-      event: 'page_view_2024lovely_main',
+      event: 'page_view_marriages_main',
       channel: utils.getFBChannel(),
     })
       .then()
@@ -641,12 +641,12 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         utils.firebaseLogEvent(
-          '10011',
+          '10012',
           '-10002',
-          'click_truelove_main',
+          'click_marriages_main',
           'click',
           {
-            args_name: 'click_truelove_main',
+            args_name: 'click_marriages_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -663,12 +663,12 @@ export default {
       // }
       if (time_obj == null) {
         utils.firebaseLogEvent(
-          '10011',
+          '10012',
           '-10002',
-          'click_truelove_main',
+          'click_marriages_main',
           'click',
           {
-            args_name: 'click_truelove_main',
+            args_name: 'click_marriages_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -678,12 +678,12 @@ export default {
       }
       if (!this.privacyChecked) {
         utils.firebaseLogEvent(
-          '10011',
+          '10012',
           '-10002',
-          'click_truelove_main',
+          'click_marriages_main',
           'click',
           {
-            args_name: 'click_truelove_main',
+            args_name: 'click_marriages_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -714,12 +714,12 @@ export default {
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
-        '10011',
+        '10012',
         '-10002',
-        'click_truelove_main',
+        'click_marriages_main',
         'click',
         {
-          args_name: 'click_truelove_main',
+          args_name: 'click_marriages_main',
           channel: utils.getFBChannel(),
           click_type: 'screen_tracking',
         }
@@ -961,7 +961,7 @@ export default {
     align-items: center;
     width: 7.1rem;
     // height: 6.34rem;
-    margin-top: 8.3rem;
+    margin-top: 8rem;
 
   
 
@@ -1161,7 +1161,7 @@ border: 0.06rem solid #FFBBBB;
 .divider-line {
   width: 6.5rem;
   height: 0.02rem;
-  background: #F7F3E9;
+  background: #F9E6E6;
   margin-top: 0.12rem;
 }
 

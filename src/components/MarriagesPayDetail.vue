@@ -100,8 +100,8 @@
         <!--此处引用按钮组件-->
         <!-- <PayBtn v-if="product_key !== 'consult_time'" :product_key="product_key" :callback="payMoney" />
         <ConsultPayBtn v-else :product_key="product_key" :callback="payMoney" /> -->
-        <img class="btn emo-btn" :src="is_cn? img_home_btu_zixun_cn: img_home_btu_zixun_tw" @click="payMoney" />
-      
+        <img class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw" @click="payMoney" />
+
 
       </div>
 
@@ -337,21 +337,6 @@ export default {
 
     this.getPayMethod();
 
-    if (this.c_view_id) {
-      utils.firebaseLogEvent(
-        this.e_view_id,
-        this.c_view_id,
-        this.e_view_name,
-        'view',
-        {
-          args_name: this.e_view_name,
-          channel: utils.getFBChannel(),
-        }
-      );
-    }
-
-
-
   },
   mounted() { },
 
@@ -381,7 +366,7 @@ export default {
       }
       this.getImg()
       setTimeout(() => {
-        this.getPayMethod()
+        this.getPayMethod(1)
       }, 0);
     },
     getCombineProductIds(product_ids) {
@@ -443,7 +428,7 @@ export default {
      * @description: 获取支付方式列表
      * @return {*}
      */
-    async getPayMethod() {
+    async getPayMethod(type) {
       this.loading = true;
       try {
         const res = await getPayMethodsAPI();
@@ -452,6 +437,9 @@ export default {
           this.start_down = true;
           this.pay_methods = res.data;
           // this.pay_methods = [...res.data,...res.data,...res.data];
+          if(type) {
+            this.getProductionList()
+          }
         }
       } catch (e) {
         this.loading = false;
@@ -508,32 +496,17 @@ export default {
         e_name: 'pay_click',
         product_id: this.product.product_id,
       });
-      //组合套餐购买埋点上报
-      if (this.combine_product_ids.length) {
-        utils.firebaseLogEvent(
-          this.product_key === 'h5_emotion2024' ? 10006 : 10007,
-          this.product_key === 'h5_emotion2024' ? -10028 : -10030,
-          this.product_key === 'h5_emotion2024' ? 'click_2024lovelymarriage_pay' : 'click_marriage2024lovely_pay',
-          'click',
-          {
-            args_name: this.product_key === 'h5_emotion2024' ? 'click_2024lovelymarriage_pay' : 'click_marriage2024lovely_pay',
-            pay_type: this.pay_methods[this.check_index].title,
-            channel: utils.getFBChannel(),
-          }
-        );
-      } else {
-        utils.firebaseLogEvent(
-          this.e_view_id,
-          this.c_click_id,
-          this.e_click_name,
-          'click',
-          {
-            args_name: this.e_click_name,
-            pay_type: this.pay_methods[this.check_index].title,
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
+      utils.firebaseLogEvent(
+        this.e_view_id,
+        this.c_click_id,
+        this.e_click_name,
+        'click',
+        {
+          args_name: this.e_click_name,
+          pay_type: this.pay_methods[this.check_index].title,
+          channel: utils.getFBChannel(),
+        }
+      );
       let pick_method = this.pay_methods[this.check_index];
       const { pay_method, trade_pay_type, trade_target_org, fake } = pick_method;
       //假支付
@@ -577,7 +550,7 @@ export default {
       }
 
       pay_max_params.callback_url = `${location.origin}${location.pathname
-        }#/result?path=${path_enums[this.product_key]}&report_price=${this.product.price
+        }#/result?path=emotion_marriages&report_price=${this.product.price
         }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}`;
       let res = null;
       if (this.product_key === 'consult_time') {

@@ -101,6 +101,16 @@ export default {
       const audioPlayer = this.$refs.audioPlayer;
       audioPlayer.play();
       this.is_playing = true;
+      utils.firebaseLogEvent(
+      '10012',
+      '-10006',
+      'click_voice_bar',
+      'click',
+      {
+        args_name: 'click_voice_bar',
+        channel: utils.getFBChannel(),
+      }
+    );
     },
     onEnded() {
       console.log('声音播放结束');

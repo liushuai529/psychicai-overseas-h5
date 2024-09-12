@@ -73,22 +73,11 @@ const tips_arr4 = {
   'zh-TW': '複製成功',
 };
 
-const show_info = {
-  h5_wealth2024: { module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view' }, // 2024年财运
-  h5_annual2024: { module: 10003, 'content_id': -10020, 'event_name': 'view_2024report_download', type: 'view' }, // 2024年年运
-  h5_weigh_bone: { module: 10009, 'content_id': -10020, 'event_name': 'view_chenggu_download', type: 'view' }, // 袁天罡秤骨
-  h5_bai_gua: { module: 10008, 'content_id': -10020, 'event_name': 'view_64gua_download', type: 'view' }, // 鬼谷子
-  h5_emotion2024: { module: 10006, 'content_id': -10029, 'event_name': 'view_2024lovely_download', type: 'view' }, // 2024年爱情运势
-  h5_marriage: { module: 10007, 'content_id': -10031, 'event_name': 'view_marriage_download', type: 'view' }, //合婚
-  h5_career2024: { module: 10004, 'content_id': -10020, 'event_name': 'view_2024career_download', type: 'view' }, // 2024年事业运势 
-  consult_time: { module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view' }, // 2024年财运
-}
 const copy_info = {
-  consult_time: { module: 10011, 'content_id': -10011, 'event_name': 'click_truelove_copy', type: 'click' },
+  consult_time: { module: 10012, 'content_id': -10012, 'event_name': 'click_marriages_copy', type: 'click' },
 }
 const down_info = {
-
-  consult_time: { module: 10011, 'content_id': -10013, 'event_name': 'click_truelove_result', type: 'click' },
+  consult_time: { module: 10012, 'content_id': -10014, 'event_name': 'click_marriages_result', type: 'click' },
 }
 
 import {
@@ -175,12 +164,12 @@ export default {
     });
 
     utils.firebaseLogEvent(
-      '10011',
-      '-10009',
-      'page_view_truelove_chatpage',
+      '10012',
+      '-10010',
+      'page_view_marriages_chatpage',
       'page_view',
       {
-        args_name: 'page_view_truelove_chatpage',
+        args_name: 'page_view_marriages_chatpage',
         channel: utils.getFBChannel(),
       }
     );
@@ -214,12 +203,12 @@ export default {
     this.duration_time.exit_time = new Date().getTime();
     if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
-        '10011',
-        '-10010',
-        'view_truelove_chatpage_duration',
+        '10012',
+        '-10011',
+        'view_marriages_chatpage_duration',
         'view',
         {
-          args_name: 'view_truelove_chatpage_duration',
+          args_name: 'view_marriages_chatpage_duration',
           channel: utils.getFBChannel(),
           time: JSON.stringify({ entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time, })
         }
@@ -385,12 +374,12 @@ export default {
 
 
         utils.firebaseLogEvent(
-          '10011',
-          '-10007',
-          'event_status_truelove_pay_success',
+          '10012',
+          '-10008',
+          'event_status_marriages_pay_success',
           'event_status',
           {
-            args_name: 'event_status_truelove_pay_success',
+            args_name: 'event_status_marriages_pay_success',
             channel: utils.getFBChannel(),
           }
         );
@@ -436,12 +425,12 @@ export default {
 
 
         utils.firebaseLogEvent(
-          '10011',
-          '-10008',
-          'event_status_truelove_pay_fail',
+          '10012',
+          '-10009',
+          'event_status_marriages_pay_fail',
           'event_status',
           {
-            args_name: 'event_status_truelove_pay_fail',
+            args_name: 'event_status_marriages_pay_fail',
             channel: utils.getFBChannel(),
           }
         );

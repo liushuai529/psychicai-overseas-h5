@@ -6,11 +6,11 @@
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <img class="header-title" :src="is_cn ? cn_info_title : tw_info_title" alt="" />
     <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
-
+    
 
 
     <div style="width: 6.98rem; margin-top: -6rem; margin-bottom: 0.24rem;">
-      <MessageCard  :date="query_user_string.split('|')[2] ? picker_date_yangli: picker_date_nongli" :username="username" @scrollClick="scrollClick"/>
+      <MessageCard  :date="query_user_string.split('|')[2] ==1 ? picker_date_yangli: picker_date_nongli" :username="username" @scrollClick="scrollClick"/>
     </div>
 
     <MarriagesPayItem product_key="consult_time" sub_type="life_marriages"  @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
@@ -28,8 +28,8 @@
 
 
       <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
-        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10011"
-        c_click_id="-10006" e_click_name="click_truelove_pay" :consult_time="consult_time" />
+        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10012"
+        c_click_id="-10007" e_click_name="click_marriages_pay" :consult_time="consult_time" />
       <div class="img-consult-bottom">
 
       </div>
@@ -253,12 +253,12 @@ export default {
   },
   async created() {
     utils.firebaseLogEvent(
-      '10011',
+      '10012',
       '-10004',
-      'page_view_truelove_mid',
+      'page_view_marriages_mid',
       'page_view',
       {
-        args_name: 'page_view_truelove_mid',
+        args_name: 'page_view_marriages_mid',
         channel: utils.getFBChannel(),
       }
     );
@@ -273,15 +273,15 @@ export default {
   mounted() {
     this.duration_time.entry_time = new Date().getTime()
     window.scrollTo(0, 0);
-    setTimeout(() => {
-      this.$nextTick(() => {
-        // 滚动到指定元素
-        const element = document.getElementById('method-title-img');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    }, 2000);
+    // setTimeout(() => {
+    //   this.$nextTick(() => {
+    //     // 滚动到指定元素
+    //     const element = document.getElementById('method-title-img');
+    //     if (element) {
+    //       element.scrollIntoView({ behavior: 'smooth' });
+    //     }
+    //   });
+    // }, 2000);
     let self = this;
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
@@ -294,9 +294,9 @@ export default {
     this.duration_time.exit_time = new Date().getTime();
     if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
-        '10011',
+        '10012',
         '-10005',
-        'view_truelove_duration',
+        'view_marriages_duration',
         'view',
         {
           args_name: 'view_truelove_duration',
