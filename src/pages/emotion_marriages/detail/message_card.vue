@@ -71,6 +71,7 @@ export default {
       chat_voice_unlock_01_tw,
       chat_voice_unlock_02_tw,
       is_playing: false,
+      is_loader: false,
       voice_show: {
         0: false,
         1: false,
@@ -78,10 +79,16 @@ export default {
       }
     };
   },
+  mounted() {
+    this.$refs.audioPlayer.oncanplaythrough = function () {
+      this.is_loader = true;
+      console.log('音频已加载完毕！');
+    };
+  },
   created() {
     let num1 = 3000;
-    let num2 = this.generateRandomNumber(6, 10)*1000;
-    let num3 = this.generateRandomNumber(6, 10)*1000;
+    let num2 = this.generateRandomNumber(6, 10) * 1000;
+    let num3 = this.generateRandomNumber(6, 10) * 1000;
     setTimeout(() => {
       this.voice_show[0] = true;
       setTimeout(() => {
@@ -92,10 +99,10 @@ export default {
       }, num2);
     }, num1);
     // setTimeout(() => {
-      
+
     // }, 2200);
     // setTimeout(() => {
-      
+
     // }, 3200);
   },
 
@@ -104,6 +111,7 @@ export default {
       return this.language === 'zh-CN';
     },
   },
+
 
   methods: {
     generateRandomNumber(min, max) {
