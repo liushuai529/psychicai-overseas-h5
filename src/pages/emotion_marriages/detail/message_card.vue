@@ -80,8 +80,8 @@ export default {
   },
   created() {
     let num1 = this.generateRandomNumber(4, 8)*1000;
-    let num2 = this.generateRandomNumber(4, 6)*1000;
-    let num3 = this.generateRandomNumber(4, 6)*1000;
+    let num2 = this.generateRandomNumber(6, 10)*1000;
+    let num3 = this.generateRandomNumber(6, 10)*1000;
     setTimeout(() => {
       this.voice_show[0] = true;
       setTimeout(() => {
