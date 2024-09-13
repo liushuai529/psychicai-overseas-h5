@@ -439,6 +439,7 @@ export default {
           // this.pay_methods = [...res.data,...res.data,...res.data];
           if(type) {
             this.getProductionList()
+            this.check_index = 0 
           }
         }
       } catch (e) {

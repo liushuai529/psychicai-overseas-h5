@@ -41,6 +41,7 @@
 
     <div class="tag-bg">
       <img class="module"  :src="is_cn ? cn_bg_1 : tw_bg_1" @click="scrollClick" />
+      <img class="module"  :src="is_cn ? cn_bg_2 : tw_bg_2" @click="scrollClick" />
     </div>
     <!-- <div class="img-consult-bottom"></div> -->
 
@@ -91,9 +92,9 @@ import HomeFooter from '../../../components/HomeFooter.vue';
 import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
 
 import cn_bg_1 from '../../../assets/img/emotion_marriages/cn/paypage_neirong_cn.webp';
-
-
 import tw_bg_1 from '../../../assets/img/emotion_marriages/tw/paypage_neirong_tw.webp';
+import cn_bg_2 from '../../../assets/img/emotion_marriages/cn/paypage_neirong_mark_cn.webp';
+import tw_bg_2 from '../../../assets/img/emotion_marriages/tw/paypage_neirong_mark_tw.webp';
 
 
 
@@ -147,6 +148,8 @@ export default {
       card_img_bj_shang,
       cn_bg_1,
       tw_bg_1,
+      cn_bg_2,
+      tw_bg_2,
       img_zhifu_jian,
       img_zhifu_fan,
       cn_home_btn,
@@ -299,7 +302,7 @@ export default {
         'view_marriages_duration',
         'view',
         {
-          args_name: 'view_truelove_duration',
+          args_name: 'view_marriages_duration',
           channel: utils.getFBChannel(),
           time: JSON.stringify({ entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time, })
         }
