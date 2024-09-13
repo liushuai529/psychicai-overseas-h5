@@ -79,7 +79,7 @@ export default {
     };
   },
   created() {
-    let num1 = this.generateRandomNumber(4, 6)*1000;
+    let num1 = 3000;
     let num2 = this.generateRandomNumber(6, 10)*1000;
     let num3 = this.generateRandomNumber(6, 10)*1000;
     setTimeout(() => {
