@@ -19,21 +19,22 @@
       <div class="item" v-show="voice_show[0]">
         <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
         <div class="voice" @click="playSound">
-          <img v-if="is_playing" src="../../../assets/img/emotion_marriages/chat_sound_opposite.gif"/>
-          <img v-else src="../../../assets/img/emotion_marriages/chat_icon_sound_opposite_03.webp"/>
+          <img v-if="is_playing" src="../../../assets/img/emotion_marriages/chat_sound_opposite.gif" />
+          <img v-else src="../../../assets/img/emotion_marriages/chat_icon_sound_opposite_03.webp" />
           <div>10s</div>
         </div>
-        <audio ref="audioPlayer" src="https://psychicai-static.psychicai.pro/audio/life_marriage.mp3" @ended="onEnded"></audio>
-   
+        <audio ref="audioPlayer" src="https://psychicai-static.psychicai.pro/audio/life_marriage.mp3"
+          @ended="onEnded"></audio>
+
       </div>
 
       <div class="item" v-show="voice_show[1]">
         <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
-        <img class="un-voice" :src="is_cn? chat_voice_unlock_01_cn: chat_voice_unlock_01_tw" />
+        <img class="un-voice" :src="is_cn ? chat_voice_unlock_01_cn : chat_voice_unlock_01_tw" />
       </div>
       <div class="item" v-show="voice_show[2]">
         <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
-        <img class="un-voice1" :src="is_cn? chat_voice_unlock_02_cn: chat_voice_unlock_02_tw" />
+        <img class="un-voice1" :src="is_cn ? chat_voice_unlock_02_cn : chat_voice_unlock_02_tw" />
       </div>
     </div>
 
@@ -77,16 +78,25 @@ export default {
       }
     };
   },
-  created() { 
+  created() {
+    let num1 = this.generateRandomNumber(4, 8)*1000;
+    let num2 = this.generateRandomNumber(4, 6)*1000;
+    let num3 = this.generateRandomNumber(4, 6)*1000;
     setTimeout(() => {
-      this.voice_show[0] =true;
-    }, 1000);
-    setTimeout(() => {
-      this.voice_show[1] =true;
-    }, 2200);
-    setTimeout(() => {
-      this.voice_show[2] =true;
-    }, 3200);
+      this.voice_show[0] = true;
+      setTimeout(() => {
+        this.voice_show[1] = true;
+        setTimeout(() => {
+          this.voice_show[2] = true;
+        }, num3);
+      }, num2);
+    }, num1);
+    // setTimeout(() => {
+      
+    // }, 2200);
+    // setTimeout(() => {
+      
+    // }, 3200);
   },
 
   computed: {
@@ -96,21 +106,24 @@ export default {
   },
 
   methods: {
+    generateRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
     playSound() {
       window.event.stopPropagation()
       const audioPlayer = this.$refs.audioPlayer;
       audioPlayer.play();
       this.is_playing = true;
       utils.firebaseLogEvent(
-      '10012',
-      '-10006',
-      'click_voice_bar',
-      'click',
-      {
-        args_name: 'click_voice_bar',
-        channel: utils.getFBChannel(),
-      }
-    );
+        '10012',
+        '-10006',
+        'click_voice_bar',
+        'click',
+        {
+          args_name: 'click_voice_bar',
+          channel: utils.getFBChannel(),
+        }
+      );
     },
     onEnded() {
       console.log('声音播放结束');
@@ -133,7 +146,7 @@ export default {
   .head-img {
     width: 6.98rem;
     height: 0.82rem;
-    margin-bottom: 0.24rem; 
+    margin-bottom: 0.24rem;
   }
 
   .message-container {
@@ -177,15 +190,18 @@ export default {
         font-style: normal;
         justify-content: space-between;
         padding: 0.2rem;
+
         img {
           width: 0.38rem;
           height: 0.38rem;
         }
       }
+
       .un-voice {
         width: 3.5rem;
         height: 0.82rem;
       }
+
       .un-voice1 {
         width: 3.34rem;
         height: 0.82rem;
