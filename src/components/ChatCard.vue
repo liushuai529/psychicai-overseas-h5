@@ -109,7 +109,7 @@ export default {
       if (utils.getLanguage() === 'zh-CN') {
         return `一键跳转咨询老师 (${this.time}s)`
       } else {
-        return `一鍵跳轉咨詢老師 (${this.time}s)`
+        return `一鍵跳轉諮詢老師 (${this.time}s)`
       }
     },
     avatar_url() {
