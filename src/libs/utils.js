@@ -75,6 +75,8 @@ const getFBChannel = () => {
     return 'enjoy308';
   } else if (url.indexOf('ocean08') > -1) {
     return 'ocean08';
+  } else if (url.indexOf('enjoy09') > -1) {
+    return 'enjoy09';
   } else {
     return 'enjoy09';
   }
