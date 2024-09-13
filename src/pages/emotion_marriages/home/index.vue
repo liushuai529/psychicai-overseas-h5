@@ -10,7 +10,7 @@
       'tw-bg': language === 'zh-TW',
     }">
 
-
+      <audio ref="audioPlayer" src="https://psychicai-static.psychicai.pro/audio/life_marriage.mp3"></audio>
       <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
       <div :class="['info',]">
        
