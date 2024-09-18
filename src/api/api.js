@@ -168,12 +168,6 @@ export const visitorLoginAPI = async data => {
   localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
   fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
   console.log('首次登录');
-  const res1 = await request('/web/auth/base/info', 'GET');
-  localStorage.setItem('current_country', JSON.stringify({area_code: res1.data.current_country.code, iso_code: res1.data.current_country.iso_code}))
-  
-
-  
-
   return true;
 };
 

@@ -9,13 +9,15 @@ import {getBaseInfoAPI} from '../api/api';
 Vue.use(Router);
 
 const checkCurrentCountry = async (callback) => {
-  if (localStorage.getItem('mlxz_outer_visitor_id') && !localStorage.getItem('current_country')) {
-    const res = await getBaseInfoAPI();
-    if (res.status !== 1000) return;
-    localStorage.setItem('current_country', JSON.stringify({area_code: res.data.current_country.code, iso_code: res.data.current_country.iso_code}))
+  if (localStorage.getItem('current_country')) {
     callback && callback();
   } else {
     callback && callback(); 
+    setTimeout(async () => {
+      const res = await getBaseInfoAPI();
+      if (res.status !== 1000) return;
+      localStorage.setItem('current_country', JSON.stringify({area_code: res.data.current_country.code, iso_code: res.data.current_country.iso_code}))
+    }, 3000);
   }
  
 };
