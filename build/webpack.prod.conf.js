@@ -813,12 +813,12 @@ for (var pathname in entries) {
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
-// ocena09代理
+// ocean09代理
 for (var pathname in entries) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
   var conf = {
-    filename: path.resolve(__dirname, '../dist/ocena09/' + filename + '.html'),
-    template: 'template/index_ocena09.html',
+    filename: path.resolve(__dirname, '../dist/ocean09/' + filename + '.html'),
+    template: 'template/index_ocean09.html',
     inject: true,
     minify: {
       removeComments: true,
