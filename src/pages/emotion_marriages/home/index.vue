@@ -342,9 +342,9 @@ export default {
     // this.preloadSVGA()
     if (utils.isProd()) {
       try {
-        fbq('trackCustom', 'CustomChannel', {
-          channel: `pageview_main_${utils.getFBChannel()}`,
-        });
+        // fbq('trackCustom', 'CustomChannel', {
+        //   channel: `pageview_main_${utils.getFBChannel()}`,
+        // });
         utils.gcyLog(`感情运首页`, {
           mlxz_action_desc: '查看感情运首页FB渠道上报',
           mlxz_action_type: 'view',
@@ -726,11 +726,11 @@ export default {
       );
       if (utils.isProd()) {
         await utils.checkFB();
-        try {
-          fbq('track', 'Lead');
-        } catch (err) {
-          console.error('Lead  error message:', err);
-        }
+        // try {
+        //   fbq('track', 'Lead');
+        // } catch (err) {
+        //   console.error('Lead  error message:', err);
+        // }
       }
       let { has_pay, order_id, product_key } = this.$route.query;
 

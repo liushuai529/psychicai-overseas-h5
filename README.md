@@ -49,3 +49,7 @@ https://test-overseas.psychicai.pro/ocean06/tarot.html
 https://overseas.psychicai.pro/ocean03/emotion_fortune.html
 https://overseas.psychicai.pro/ocean05/emotion_fortune.html
 https://overseas.psychicai.pro/ocean06/tarot.html
+
+07、08链接为正缘报告（07 马来，08台湾）
+
+09链接为几段婚姻（getTWChannel获取当前国家码需要特殊处理）
