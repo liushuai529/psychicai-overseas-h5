@@ -135,7 +135,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if(getFBChannel()==='enjoy09') {
+  if(getFBChannel()==='enjoy09'|| getFBChannel()==='ocean09') {
     if(localStorage.getItem('current_country')) {
       return {area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code']}
     } else {
