@@ -1126,6 +1126,7 @@ export default {
         product_key,
         product_id,
         payment,
+        trade_currency,
         trade_pay_type,
         trade_target_org,
       } = this.last_order;
@@ -1153,7 +1154,7 @@ export default {
         },
         callback_url: `${location.origin}/${utils.getFBChannel()}/${path_enums[product_key]
           }.html#/result?path=${path_enums[product_key]
-          }&report_price=${payment}&discount_pay=1`,
+          }&report_price=${payment}&discount_pay=1&currency_type=${trade_currency || 'MYR'}`,
       };
 
       const res = await payOrderAPI(params);

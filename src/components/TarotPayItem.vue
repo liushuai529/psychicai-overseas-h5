@@ -163,6 +163,7 @@ export default {
         platform: 'WEB',
         trade_pay_type,
         trade_target_org,
+        trade_currency,
         question: question,
         question_tarot: {
           array_type: 'timeline',
@@ -177,7 +178,7 @@ export default {
       };
       params.callback_url = `${location.origin
         }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
-        }&report_price=${payment}`;
+        }&report_price=${payment}&currency_type=${trade_currency || 'MYR'}`;
       const res = await payTarotOrderAPI(params);
 
       Indicator.close();

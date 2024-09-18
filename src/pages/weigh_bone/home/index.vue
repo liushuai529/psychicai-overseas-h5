@@ -839,6 +839,7 @@ export default {
         payment,
         trade_pay_type,
         trade_target_org,
+        trade_currency,
       } = this.last_order;
       const { main_id, click_id, view_id, click_name, view_name } =
         maidianEnum[product_key];
@@ -866,7 +867,7 @@ export default {
           path_enums[product_key]
         }.html#/result?path=${
           path_enums[product_key]
-        }&report_price=${payment}&discount_pay=1`,
+        }&report_price=${payment}&discount_pay=1&currency_type=${trade_currency || 'MYR'}`,
       };
 
       const res = await payOrderAPI(params);

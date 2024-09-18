@@ -78,7 +78,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('enjoy09') > -1) {
     return 'enjoy09';
   } else {
-    return 'enjoy09';
+    return 'enjoy03';
   }
 };
 

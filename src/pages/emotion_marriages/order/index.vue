@@ -318,6 +318,7 @@ export default {
           product_key,
           product_id,
           trade_pay_type,
+          trade_currency,
           trade_target_org,
         } = item;
         utils.firebaseLogEvent(
@@ -351,7 +352,7 @@ export default {
 
         params.callback_url = `${location.origin
           }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key || 'consult_time']
-          }&report_price=${same_product.price}&repay=1`;
+          }&report_price=${same_product.price}&repay=1&currency_type=${trade_currency || 'MYR'}`;
         const res = await payFateOrderAPI(params);
 
         Indicator.close();

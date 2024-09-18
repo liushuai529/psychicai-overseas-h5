@@ -637,6 +637,7 @@ export default {
           ext,
           trade_pay_type,
           trade_target_org,
+          trade_currency,
           combine_product_ids,
         } = item;
         if (combine_product_ids && combine_product_ids.length) {
@@ -704,7 +705,8 @@ export default {
               length_ +
               '&report_price=' +
               payment +
-              '&repay=1';
+              '&repay=1&currency_type='+trade_currency || 'MYR';
+            
           }
 
           const res = await payOrderAPI(params);
@@ -747,7 +749,7 @@ export default {
           location.origin
         }/${utils.getFBChannel()}/${url}.html#/result?path=${
           path_enums[product_key]
-        }&report_price=${payment}&repay=1`;
+        }&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}`;
         const res = await payOrderAPI(params);
 
         Indicator.close();

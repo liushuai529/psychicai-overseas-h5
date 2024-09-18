@@ -359,6 +359,7 @@ export default {
           product_id,
           trade_pay_type,
           trade_target_org,
+          trade_currency,
         } = item;
         utils.firebaseLogEvent(
           '10010',
@@ -393,7 +394,7 @@ export default {
 
         params.callback_url = `${location.origin
           }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key || 'master_tarot']
-          }&report_price=${same_product.price}&repay=1`;
+          }&report_price=${same_product.price}&repay=1&currency_type=${trade_currency || 'MYR'}`;
         const res = await payTarotOrderAPI(params);
 
         Indicator.close();
