@@ -295,6 +295,7 @@ export default {
 
   },
   created() {
+    console.log('aaa',utils.getFBChannel())
     utils.isProd() &&
       tStatistic &&
       tStatistic.send({
