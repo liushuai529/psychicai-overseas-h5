@@ -79,6 +79,8 @@ const getFBChannel = () => {
     return 'enjoy09';
   } else if (url.indexOf('ocean09') > -1) {
     return 'ocean09';
+  } else if (url.indexOf('enjoy10') > -1) {
+    return 'enjoy10';
   } else {
     return 'enjoy10';
   }
@@ -126,6 +128,7 @@ const getFbId = () => {
     'ocean08': '474155705440528',
     'enjoy09': '1165111734577298',
     'ocean09': '478529061843804',
+    'enjoy10': '478529061843804',
     
   }
 }
