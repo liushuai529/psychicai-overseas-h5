@@ -3,13 +3,13 @@
     <img class="head-img" :src="is_cn ? cn_info_title : tw_info_title" />
     <div class="message-container">
       <div class="item">
-        <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
+        <img class="icon" src="../../../assets/img/emotion_remarriage/hunyin_img_chat_avatar.webp" />
         <div class="text">
           {{ `您好，${username}，${is_cn ? '我是本次服务您的老师！' : '我是本次服務您的老師！'}` }}
         </div>
       </div>
       <div class="item">
-        <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
+        <img class="icon" src="../../../assets/img/emotion_remarriage/hunyin_img_chat_avatar.webp" />
         <div class="text">
           <div>您的八字信息：</div>
           <div>{{ `姓名：${username}` }}</div>
@@ -17,10 +17,10 @@
         </div>
       </div>
       <div class="item" v-show="voice_show[0]">
-        <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
+        <img class="icon" src="../../../assets/img/emotion_remarriage/hunyin_img_chat_avatar.webp" />
         <div class="voice" @click="playSound">
-          <img v-if="is_playing" src="../../../assets/img/emotion_marriages/chat_sound_opposite.gif" />
-          <img v-else src="../../../assets/img/emotion_marriages/chat_icon_sound_opposite_03.webp" />
+          <img v-if="is_playing" src="../../../assets/img/emotion_remarriage/chat_sound_opposite.gif" />
+          <img v-else src="../../../assets/img/emotion_remarriage/chat_icon_sound_opposite_03.webp" />
           <div>10s</div>
         </div>
         <audio ref="audioPlayer" src="https://psychicai-static.psychicai.pro/audio/life_marriage.mp3"
@@ -29,11 +29,11 @@
       </div>
 
       <div class="item" v-show="voice_show[1]">
-        <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
+        <img class="icon" src="../../../assets/img/emotion_remarriage/hunyin_img_chat_avatar.webp" />
         <img class="un-voice" :src="is_cn ? chat_voice_unlock_01_cn : chat_voice_unlock_01_tw" />
       </div>
       <div class="item" v-show="voice_show[2]">
-        <img class="icon" src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
+        <img class="icon" src="../../../assets/img/emotion_remarriage/hunyin_img_chat_avatar.webp" />
         <img class="un-voice1" :src="is_cn ? chat_voice_unlock_02_cn : chat_voice_unlock_02_tw" />
       </div>
     </div>
@@ -43,13 +43,13 @@
 
 <script>
 import utils from '../../../libs/utils.js';
-import cn_info_title from '../../../assets/img/emotion_marriages/cn/img_pay_top_laoshi_cn.webp';
-import tw_info_title from '../../../assets/img/emotion_marriages/tw/img_pay_top_laoshi_tw.webp';
-import chat_voice_unlock_01_cn from '../../../assets/img/emotion_marriages/cn/chat_voice_unlock_01_cn.webp';
-import chat_voice_unlock_02_cn from '../../../assets/img/emotion_marriages/cn/chat_voice_unlock_02_cn.webp';
+import cn_info_title from '../../../assets/img/emotion_remarriage/cn/img_pay_top_laoshi_cn.webp';
+import tw_info_title from '../../../assets/img/emotion_remarriage/tw/img_pay_top_laoshi_tw.webp';
+import chat_voice_unlock_01_cn from '../../../assets/img/emotion_remarriage/cn/chat_voice_unlock_01_cn.webp';
+import chat_voice_unlock_02_cn from '../../../assets/img/emotion_remarriage/cn/chat_voice_unlock_02_cn.webp';
 
-import chat_voice_unlock_01_tw from '../../../assets/img/emotion_marriages/tw/chat_voice_unlock_01_tw.webp';
-import chat_voice_unlock_02_tw from '../../../assets/img/emotion_marriages/tw/chat_voice_unlock_02_tw.webp';
+import chat_voice_unlock_01_tw from '../../../assets/img/emotion_remarriage/tw/chat_voice_unlock_01_tw.webp';
+import chat_voice_unlock_02_tw from '../../../assets/img/emotion_remarriage/tw/chat_voice_unlock_02_tw.webp';
 export default {
   props: {
     date: {

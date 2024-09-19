@@ -67,8 +67,8 @@ import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import cn_pay_btn from '../../../assets/img/emotion/home_btn.webp';
 
 
-import cn_home_btn from '../../../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp';
-import tw_home_btn from '../../../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp';
+import cn_home_btn from '../../../assets/img/emotion_remarriage/cn/img_home_btu_zixun_cn.webp';
+import tw_home_btn from '../../../assets/img/emotion_remarriage/tw/img_home_btu_zixun_tw.webp';
 import cn_history_order from '../../../assets/img/emotion_fate/cn/home_lsdd_cn.webp';
 import tw_history_order from '../../../assets/img/emotion_fate/tw/home_lsdd_tw.webp';
 
@@ -81,8 +81,8 @@ import tw_card_2 from '../../../assets/img/tw_mlxz/emotion/home_card2.webp';
 import payModal from '../../../components/PayModal.vue';
 import BaziTable from '../../../components/baziTable.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
-import cn_info_title from '../../../assets/img/emotion_marriages/cn/img_bj_paypage_cn.webp';
-import tw_info_title from '../../../assets/img/emotion_marriages/tw/img_bj_paypage_tw.webp';
+import cn_info_title from '../../../assets/img/emotion_remarriage/cn/img_bj_paypage_cn.webp';
+import tw_info_title from '../../../assets/img/emotion_remarriage/tw/img_bj_paypage_tw.webp';
 import cn_zhong3 from '../../../assets/img/emotion/new/zhong_3.webp';
 import tw_zhong3 from '../../../assets/img/emotion/new/tw/zhong_3.webp';
 import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
@@ -91,10 +91,10 @@ import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
 
-import cn_bg_1 from '../../../assets/img/emotion_marriages/cn/paypage_neirong_cn.webp';
-import tw_bg_1 from '../../../assets/img/emotion_marriages/tw/paypage_neirong_tw.webp';
-import cn_bg_2 from '../../../assets/img/emotion_marriages/cn/paypage_neirong_mark_cn.webp';
-import tw_bg_2 from '../../../assets/img/emotion_marriages/tw/paypage_neirong_mark_tw.webp';
+import cn_bg_1 from '../../../assets/img/emotion_remarriage/cn/paypage_neirong_cn.webp';
+import tw_bg_1 from '../../../assets/img/emotion_remarriage/tw/paypage_neirong_tw.webp';
+import cn_bg_2 from '../../../assets/img/emotion_remarriage/cn/paypage_neirong_mark_cn.webp';
+import tw_bg_2 from '../../../assets/img/emotion_remarriage/tw/paypage_neirong_mark_tw.webp';
 
 
 
@@ -102,11 +102,11 @@ import img_zhifu_jian from '../../../assets/img/emotion_v2/new/cn/detail/img_zhi
 import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_jian.webp';
 
 
-// import cn_paypage_tittle_xiangqing from '../../../assets/img/emotion_marriages/cn/paypage_tittle_xiangqing_cn.webp';
-// import tw_paypage_tittle_xiangqing from '../../../assets/img/emotion_marriages/tw/paypage_tittle_xiangqing_tw.webp';
+// import cn_paypage_tittle_xiangqing from '../../../assets/img/emotion_remarriage/cn/paypage_tittle_xiangqing_cn.webp';
+// import tw_paypage_tittle_xiangqing from '../../../assets/img/emotion_remarriage/tw/paypage_tittle_xiangqing_tw.webp';
 
-import cn_paypage_tittle_pay from '../../../assets/img/emotion_marriages/cn/paypage_tittle_pay_cn.webp';
-import tw_paypage_tittle_pay from '../../../assets/img/emotion_marriages/tw/paypage_tittle_pay_tw.webp';
+import cn_paypage_tittle_pay from '../../../assets/img/emotion_remarriage/cn/paypage_tittle_pay_cn.webp';
+import tw_paypage_tittle_pay from '../../../assets/img/emotion_remarriage/tw/paypage_tittle_pay_tw.webp';
 
 
 
@@ -486,7 +486,7 @@ export default {
 .method-title-img-consult {
   width: 7.1rem;
   height: 0.84rem;
-  background-image: url(../../../assets/img/emotion_marriages/card_img_bj_shang.webp);
+  background-image: url(../../../assets/img/emotion_remarriage/card_img_bj_shang.webp);
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -504,7 +504,7 @@ export default {
 .img-consult-bottom {
   width: 7.1rem;
   height: 0.84rem;
-  background-image: url(../../../assets/img/emotion_marriages/card_img_bj_xia.webp);
+  background-image: url(../../../assets/img/emotion_remarriage/card_img_bj_xia.webp);
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -531,8 +531,8 @@ export default {
   margin-bottom: 0.24rem;
   background: #fffafa;
   border-radius: 0.16rem;
-  // background: url(../../../assets/img/emotion_marriages/card_img_bj_shang.webp);
-  background: url('../../../assets/img/emotion_marriages/card_img_bj_zhong.png') ;
+  // background: url(../../../assets/img/emotion_remarriage/card_img_bj_shang.webp);
+  background: url('../../../assets/img/emotion_remarriage/card_img_bj_zhong.png') ;
   // background-size: cover;
   background-size: 7.1rem 9.91rem;
 
@@ -670,7 +670,7 @@ export default {
   margin-top: -0.31rem;
   // background: #ffffff;
   border-radius: 0.1rem;
-  // background: url('../../../assets/img/emotion_marriages/card_img_bj_zhong.png') ;
+  // background: url('../../../assets/img/emotion_remarriage/card_img_bj_zhong.png') ;
   // background-size: cover;
   padding: 0 0.2rem;
 }

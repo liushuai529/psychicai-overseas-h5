@@ -48,7 +48,7 @@
 
               </div>
               <div class="birth-container">
-                <img src="../../../assets/img/emotion_marriages/icon_rili.webp" @click="openPicker" />
+                <img src="../../../assets/img/emotion_remarriage/icon_rili.webp" @click="openPicker" />
               </div>
             </div>
             <div class="divider-line"></div>
@@ -73,13 +73,13 @@
 
 
           <div id="info-btn" class="btn emo-btn" @click="check">
-            <img src="../../../assets/img/emotion_marriages/img_home_btu_chakan.webp" />
+            <img src="../../../assets/img/emotion_remarriage/img_home_btu_chakan.webp" />
           </div>
 
           <div class="info-bottom">
-            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_marriages/login_icon_choose.webp"
+            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_remarriage/login_icon_choose.webp"
               @click="privacyChecked = !privacyChecked" />
-            <img v-else class="info-check" src="../../../assets/img/emotion_marriages/login_icon_choose_no.webp"
+            <img v-else class="info-check" src="../../../assets/img/emotion_remarriage/login_icon_choose_no.webp"
               @click="privacyChecked = !privacyChecked" />
             {{ $t('check-label') }}
             <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
@@ -92,12 +92,10 @@
   
 
       </div>
-      <img class="card " :src="is_cn ? cn_icon_1 : tw_icon_1" />
       <img class="card" :src="is_cn ? cn_icon_2 : tw_icon_2" />
-      <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" />
-      <img class="card" :src="is_cn ? cn_icon_4 : tw_icon_4" style="margin-bottom: 0.6rem;" />
+      <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" style="margin-bottom: 0.6rem;"/>
       <!-- <img class="card" style="margin-bottom: 0.6rem;" :src="is_cn ? cn_icon_5 : tw_icon_5" /> -->
-      <img v-if="showFixedBtn" class="fix-btn emo-btn" src="../../../assets/img/emotion_marriages/img_home_btu_chakan.webp"
+      <img v-if="showFixedBtn" class="fix-btn emo-btn" src="../../../assets/img/emotion_remarriage/img_home_btu_chakan.webp"
         @click="check" />
       <!-- 時间选择控件 -->
       <DatetimePicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
@@ -150,24 +148,24 @@ import tw_history_order from '../../../assets/img/emotion_fate/tw/home_lsdd_tw.w
 
 import PopNotice from '../../../components/PopNotice.vue';
 
-import cn_img_tittle_home_xinxi from '../../../assets/img/emotion_marriages/cn/img_tittle_home_xinxi_cn.webp';
-import tw_img_tittle_home_xinxi from '../../../assets/img/emotion_marriages/tw/img_tittle_home_xinxi_tw.webp';
+import cn_img_tittle_home_xinxi from '../../../assets/img/emotion_remarriage/cn/img_tittle_home_xinxi_cn.webp';
+import tw_img_tittle_home_xinxi from '../../../assets/img/emotion_remarriage/tw/img_tittle_home_xinxi_tw.webp';
 
-import boy from '../../../assets/img/emotion_marriages/img_boy.webp';
-import girl from '../../../assets/img/emotion_marriages/img_girl.webp';
+import boy from '../../../assets/img/emotion_remarriage/img_boy.webp';
+import girl from '../../../assets/img/emotion_remarriage/img_girl.webp';
 
-import cn_icon_1 from '../../../assets/img/emotion_marriages/cn/home_neirong_01_cn.webp';
-import cn_icon_2 from '../../../assets/img/emotion_marriages/cn/home_neirong_02_cn.webp';
-import cn_icon_3 from '../../../assets/img/emotion_marriages/cn/home_neirong_03_cn.webp';
-import cn_icon_4 from '../../../assets/img/emotion_marriages/cn/home_neirong_04_cn.webp';
-// import cn_icon_5 from '../../../assets/img/emotion_marriages/cn/home_neirong_05_cn.webp';
+import cn_icon_1 from '../../../assets/img/emotion_remarriage/cn/home_neirong_01_cn.webp';
+import cn_icon_2 from '../../../assets/img/emotion_remarriage/cn/home_neirong_02_cn.webp';
+import cn_icon_3 from '../../../assets/img/emotion_remarriage/cn/home_neirong_03_cn.webp';
+import cn_icon_4 from '../../../assets/img/emotion_remarriage/cn/home_neirong_04_cn.webp';
+// import cn_icon_5 from '../../../assets/img/emotion_remarriage/cn/home_neirong_05_cn.webp';
 
 
-import tw_icon_1 from '../../../assets/img/emotion_marriages/tw/home_neirong_01_tw.webp';
-import tw_icon_2 from '../../../assets/img/emotion_marriages/tw/home_neirong_02_tw.webp';
-import tw_icon_3 from '../../../assets/img/emotion_marriages/tw/home_neirong_03_tw.webp';
-import tw_icon_4 from '../../../assets/img/emotion_marriages/tw/home_neirong_04_tw.webp';
-// import tw_icon_5 from '../../../assets/img/emotion_marriages/tw/home_neirong_05_tw.webp';
+import tw_icon_1 from '../../../assets/img/emotion_remarriage/tw/home_neirong_01_tw.webp';
+import tw_icon_2 from '../../../assets/img/emotion_remarriage/tw/home_neirong_02_tw.webp';
+import tw_icon_3 from '../../../assets/img/emotion_remarriage/tw/home_neirong_03_tw.webp';
+import tw_icon_4 from '../../../assets/img/emotion_remarriage/tw/home_neirong_04_tw.webp';
+// import tw_icon_5 from '../../../assets/img/emotion_remarriage/tw/home_neirong_05_tw.webp';
 import cn_info from '../../../assets/img/emotion_v2/new/cn/info.webp';
 import tw_info from '../../../assets/img/emotion_v2/new/tw/info.webp';
 import NewFooter from '../../../components/NewFooter.vue';
@@ -914,11 +912,11 @@ export default {
 }
 
 .cn-bg {
-  background-image: url('../../../assets/img/emotion_marriages/cn/img_home_topbj_cn.webp');
+  background-image: url('../../../assets/img/emotion_remarriage/cn/img_home_topbj_cn.webp');
 }
 
 .tw-bg {
-  background-image: url('../../../assets/img/emotion_marriages/tw/img_home_topbj_tw.webp');
+  background-image: url('../../../assets/img/emotion_remarriage/tw/img_home_topbj_tw.webp');
 }
 
 #bg-svga {
@@ -966,7 +964,7 @@ export default {
   
 
     .info-content {
-      // background: url('../../../assets/img/emotion_marriages/xinxi_img_bj_zhong.webp') no-repeat;
+      // background: url('../../../assets/img/emotion_remarriage/xinxi_img_bj_zhong.webp') no-repeat;
       background-size: cover;
       width: 7.1rem;
       // height: 4.54rem;
