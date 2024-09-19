@@ -27,6 +27,8 @@ const getFBChannel = () => {
     return 'enjoy02';
   } else if (url.indexOf('enjoy03') > -1) {
     return 'enjoy03';
+  } else if (url.indexOf('enjoy10') > -1) {
+    return 'enjoy10';
   } else if (url.indexOf('enjoy103') > -1) {
     return 'enjoy103';
   } else if (url.indexOf('enjoy203') > -1) {
@@ -79,8 +81,6 @@ const getFBChannel = () => {
     return 'enjoy09';
   } else if (url.indexOf('ocean09') > -1) {
     return 'ocean09';
-  } else if (url.indexOf('enjoy10') > -1) {
-    return 'enjoy10';
   } else {
     return 'enjoy10';
   }
