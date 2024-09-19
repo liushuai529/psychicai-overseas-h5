@@ -38,7 +38,7 @@ export default {
   },
   data() {
     return {
-      time: this.sub_type ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`) : localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) || 30 * 60 * 1000,
+      time: localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`) || 30 * 60 * 1000,
       last_order: null,
     };
   },
@@ -58,25 +58,17 @@ export default {
 
 
   async created() {
-    if (this.sub_type) {
-      if (!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`)) {
+    if (!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`)) {
         localStorage.setItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`, 30 * 60 * 1000);
       }
       this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`) : 30 * 60 * 1000
-    } else {
-      if (!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
-        localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, 30 * 60 * 1000);
-      }
-      this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) : 30 * 60 * 1000
-    }
-
     
     if (this.product_key === 'consult_time') {
       this.$store.dispatch('common/getProduction', 'consult_time');
     } else {
       this.$store.dispatch('common/getProduction');
     }
-    const res = await getFateLastOrderGetAPI(this.product_key, 'life_marriages');
+    const res = await getFateLastOrderGetAPI(this.product_key, this.sub_type);
     if (res.status !== 1000) return;
     if (res.data && res.data.order_status !== 'PAYED') {
       this.last_order = res.data;
@@ -90,7 +82,7 @@ export default {
     async show_pay_guide_modal(newVal) {
       if (!newVal) {
         console.log('刷新卡片')
-        const res = await getFateLastOrderGetAPI(this.product_key, 'life_marriages');
+        const res = await getFateLastOrderGetAPI(this.product_key, this.sub_type);
         if (res.status !== 1000) return;
         if (res.data.order_status !== 'PAYED') {
           this.last_order = res.data;
@@ -125,7 +117,7 @@ export default {
     getTime(val) {
       const { minutes, seconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000;
-      let new_product_key = this.sub_type ? this.product_key+'_'+this.sub_type: this.product_key
+      let new_product_key = this.product_key+'_'+this.sub_type
       if (localStorage.getItem(`mlxz_count_pay_item_${new_product_key}`)) {
         localStorage.setItem(`mlxz_count_pay_item_${new_product_key}`, time_);
       } else {
@@ -185,7 +177,7 @@ export default {
         consult_time: {
           user_info: user_info
         },
-        product_sub_type: this.sub_type ? 'life_marriages': 'zheng_yuan',
+        product_sub_type: this.sub_type,
 
       };
 

@@ -235,6 +235,10 @@ export default {
       type: String,
       default: '',
     },
+    sub_type: {
+      type: String,
+      default: '',
+    },
     pay_modal: {
       type: Boolean,
       default: false,
@@ -547,7 +551,7 @@ export default {
           fbp: utils.getcookieInfo('_fbp'),
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
         },
-        product_sub_type: 'life_marriages',
+        product_sub_type: this.sub_type,
       };
       // let user_time = this.$route.query.use_fixed_time;
 

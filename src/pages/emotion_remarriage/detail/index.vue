@@ -13,7 +13,7 @@
       <MessageCard  :date="query_user_string.split('|')[2] ==1 ? picker_date_yangli: picker_date_nongli" :username="username" @scrollClick="scrollClick"/>
     </div>
 
-    <MarriagesPayItem product_key="consult_time" sub_type="life_marriages"  @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
+    <MarriagesPayItem product_key="consult_time" sub_type="fu_he"  @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
     <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
       <img v-if="product_key !== 'consult_time'" id="method-title-img" class="method-title-img"
         :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
@@ -29,7 +29,7 @@
 
       <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10012"
-        c_click_id="-10007" e_click_name="click_marriages_pay" :consult_time="consult_time" />
+        c_click_id="-10007" e_click_name="click_marriages_pay" :consult_time="consult_time" sub_type="fu_he"/>
       <div class="img-consult-bottom">
 
       </div>

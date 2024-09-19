@@ -131,7 +131,7 @@ export default {
         // page_size: 50,
         offset: 0,
         limit: 100,
-        product_sub_type: 'life_marriages'
+        product_sub_type: 'fu_he'
       },
       list: [], // 列表数据
       status_enum: all_status_enums(),
@@ -346,7 +346,7 @@ export default {
           consult_time: {
             user_info: item.user_info
           },
-          product_sub_type: 'life_marriages',
+          product_sub_type: 'fu_he',
 
         };
 

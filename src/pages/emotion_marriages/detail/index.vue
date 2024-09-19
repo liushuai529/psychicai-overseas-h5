@@ -29,7 +29,7 @@
 
       <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10012"
-        c_click_id="-10007" e_click_name="click_marriages_pay" :consult_time="consult_time" />
+        c_click_id="-10007" e_click_name="click_marriages_pay" :consult_time="consult_time" sub_type="life_marriages"/>
       <div class="img-consult-bottom">
 
       </div>
