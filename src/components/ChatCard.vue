@@ -115,9 +115,9 @@ export default {
     avatar_url() {
       utils.getLanguage() === 'zh-CN' ? img_chat_push_right_android_cn : img_chat_push_right_android_tw
       if (utils.getLanguage() === 'zh-CN') {
-        return this.sub_type? hunyin_img_chat_push_right_android_cn: img_chat_push_right_android_cn
+        return this.sub_type ? hunyin_img_chat_push_right_android_cn : img_chat_push_right_android_cn
       } else {
-        return this.sub_type? hunyin_img_chat_push_right_android_tw: img_chat_push_right_android_tw
+        return this.sub_type ? hunyin_img_chat_push_right_android_tw : img_chat_push_right_android_tw
       }
 
     },
@@ -125,15 +125,15 @@ export default {
 
       if (utils.getLanguage() === 'zh-CN') {
         if (utils.isIos()) {
-          return this.sub_type ?  hunyin_img_chat_push_left_ios_cn: img_chat_push_left_ios_cn;
+          return this.sub_type ? hunyin_img_chat_push_left_ios_cn : img_chat_push_left_ios_cn;
         } else {
-          return this.sub_type ? hunyin_img_chat_push_left_android_cn: img_chat_push_left_android_cn;
+          return this.sub_type ? hunyin_img_chat_push_left_android_cn : img_chat_push_left_android_cn;
         }
       } else {
         if (utils.isIos()) {
-          return this.sub_type ? hunyin_img_chat_push_left_ios_tw: img_chat_push_left_ios_tw;
+          return this.sub_type ? hunyin_img_chat_push_left_ios_tw : img_chat_push_left_ios_tw;
         } else {
-          return this.sub_type ? hunyin_img_chat_push_left_android_tw: img_chat_push_left_android_tw;
+          return this.sub_type ? hunyin_img_chat_push_left_android_tw : img_chat_push_left_android_tw;
         }
       }
     },
@@ -157,10 +157,18 @@ export default {
     },
     downClick() {
       this.handleCopyCode();
-      utils.firebaseLogEvent(10012, -10013, 'click_marriages_card_result', 'click', {
-        args_name: 'click_marriages_card_result',
-        channel: utils.getFBChannel(),
-      });
+      if (this.sub_type === 'fu_he') {
+        utils.firebaseLogEvent(10012, -10012, 'click_complex_card_result', 'click', {
+          args_name: 'click_complex_card_result',
+          channel: utils.getFBChannel(),
+        });
+      } else {
+        utils.firebaseLogEvent(10012, -10013, 'click_marriages_card_result', 'click', {
+          args_name: 'click_marriages_card_result',
+          channel: utils.getFBChannel(),
+        });
+      }
+
       utils.openApp();
     },
 

@@ -74,10 +74,10 @@ const tips_arr4 = {
 };
 
 const copy_info = {
-  consult_time: { module: 10012, 'content_id': -10012, 'event_name': 'click_marriages_copy', type: 'click' },
+  consult_time: { module: 10013, 'content_id': -10011, 'event_name': 'click_complex_copy', type: 'click' },
 }
 const down_info = {
-  consult_time: { module: 10012, 'content_id': -10014, 'event_name': 'click_marriages_result', type: 'click' },
+  consult_time: { module: 10013, 'content_id': -10013, 'event_name': 'click_complex_result', type: 'click' },
 }
 
 import {
@@ -164,12 +164,12 @@ export default {
     });
 
     utils.firebaseLogEvent(
-      '10012',
-      '-10010',
-      'page_view_marriages_chatpage',
+      '10013',
+      '-10009',
+      'page_view_complex_chatpage',
       'page_view',
       {
-        args_name: 'page_view_marriages_chatpage',
+        args_name: 'page_view_complex_chatpage',
         channel: utils.getFBChannel(),
       }
     );
@@ -203,12 +203,12 @@ export default {
     this.duration_time.exit_time = new Date().getTime();
     if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
-        '10012',
-        '-10011',
-        'view_marriages_chatpage_duration',
+        '10013',
+        '-10010',
+        'view_complex_chatpage_duration',
         'view',
         {
-          args_name: 'view_marriages_chatpage_duration',
+          args_name: 'view_complex_chatpage_duration',
           channel: utils.getFBChannel(),
           time: JSON.stringify({ entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time, })
         }
@@ -374,12 +374,12 @@ export default {
 
 
         utils.firebaseLogEvent(
-          '10012',
-          '-10008',
-          'event_status_marriages_pay_success',
+          '10013',
+          '-10007',
+          'event_status_complex_pay_success',
           'event_status',
           {
-            args_name: 'event_status_marriages_pay_success',
+            args_name: 'event_status_complex_pay_success',
             channel: utils.getFBChannel(),
           }
         );
@@ -425,12 +425,12 @@ export default {
 
 
         utils.firebaseLogEvent(
-          '10012',
-          '-10009',
-          'event_status_marriages_pay_fail',
+          '10013',
+          '-10008',
+          'event_status_complex_pay_fail',
           'event_status',
           {
-            args_name: 'event_status_marriages_pay_fail',
+            args_name: 'event_status_complex_pay_fail',
             channel: utils.getFBChannel(),
           }
         );

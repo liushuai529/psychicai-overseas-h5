@@ -298,22 +298,22 @@ export default {
     utils.isProd() &&
       tStatistic &&
       tStatistic.send({
-        event: 'page_view_marriages_main',
-        md: 10012,
+        event: 'page_view_complex_main',
+        md: 10013,
         c_id: -10001,
         args: {
-          args_name: 'page_view_marriages_main',
+          args_name: 'page_view_complex_main',
           channel: utils.getFBChannel(),
         },
       });
     this.$store.dispatch('common/getProduction', 'consult_time');
     utils.firebaseLogEvent(
-      '10012',
+      '10013',
       '-10001',
-      'page_view_marriages_main',
+      'page_view_complex_main',
       'page_view',
       {
-        args_name: 'page_view_marriages_main',
+        args_name: 'page_view_complex_main',
         channel: utils.getFBChannel(),
       }
     );
@@ -639,12 +639,12 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         utils.firebaseLogEvent(
-          '10012',
+          '10013',
           '-10002',
-          'click_marriages_main',
+          'click_complex_main',
           'click',
           {
-            args_name: 'click_marriages_main',
+            args_name: 'click_complex_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -661,12 +661,12 @@ export default {
       // }
       if (time_obj == null) {
         utils.firebaseLogEvent(
-          '10012',
+          '10013',
           '-10002',
-          'click_marriages_main',
+          'click_complex_main',
           'click',
           {
-            args_name: 'click_marriages_main',
+            args_name: 'click_complex_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -676,12 +676,12 @@ export default {
       }
       if (!this.privacyChecked) {
         utils.firebaseLogEvent(
-          '10012',
+          '10013',
           '-10002',
-          'click_marriages_main',
+          'click_complex_main',
           'click',
           {
-            args_name: 'click_marriages_main',
+            args_name: 'click_complex_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -712,12 +712,12 @@ export default {
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
-        '10012',
+        '10013',
         '-10002',
-        'click_marriages_main',
+        'click_complex_main',
         'click',
         {
-          args_name: 'click_marriages_main',
+          args_name: 'click_complex_main',
           channel: utils.getFBChannel(),
           click_type: 'screen_tracking',
         }

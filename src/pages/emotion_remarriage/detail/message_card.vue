@@ -123,7 +123,7 @@ export default {
       audioPlayer.play();
       this.is_playing = true;
       utils.firebaseLogEvent(
-        '10012',
+        '10013',
         '-10006',
         'click_voice_bar',
         'click',

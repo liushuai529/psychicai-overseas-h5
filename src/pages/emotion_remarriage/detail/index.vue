@@ -28,8 +28,8 @@
 
 
       <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
-        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10012"
-        c_click_id="-10007" e_click_name="click_marriages_pay" :consult_time="consult_time" sub_type="fu_he"/>
+        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10013"
+        c_click_id="-10006" e_click_name="click_complex_pay" :consult_time="consult_time" sub_type="fu_he"/>
       <div class="img-consult-bottom">
 
       </div>
@@ -256,12 +256,12 @@ export default {
   },
   async created() {
     utils.firebaseLogEvent(
-      '10012',
-      '-10004',
-      'page_view_marriages_mid',
+      '10013',
+      '-10003',
+      'page_view_complex_mid',
       'page_view',
       {
-        args_name: 'page_view_marriages_mid',
+        args_name: 'page_view_complex_mid',
         channel: utils.getFBChannel(),
       }
     );
@@ -297,12 +297,12 @@ export default {
     this.duration_time.exit_time = new Date().getTime();
     if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
-        '10012',
-        '-10005',
-        'view_marriages_duration',
+        '10013',
+        '-10004',
+        'view_complex_duration',
         'view',
         {
-          args_name: 'view_marriages_duration',
+          args_name: 'view_complex_duration',
           channel: utils.getFBChannel(),
           time: JSON.stringify({ entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time, })
         }

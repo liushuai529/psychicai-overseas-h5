@@ -27,10 +27,12 @@ import { path_enums } from '../libs/enum';
 import { CountDown } from 'vant';
 
 const pay_info = {
-  consult_time: { module: 10012, 'content_id': -10015, 'event_name': 'click_marriages_wait_pay', type: 'click' },
+  consult_time_life_marriages: { module: 10012, 'content_id': -10015, 'event_name': 'click_marriages_wait_pay', type: 'click' },
+  consult_time_fu_he: { module: 10013, 'content_id': -10014, 'event_name': 'click_complex_wait_pay', type: 'click' },
 }
 const modal_info = {
-  consult_time: { module: 10012, 'content_id': -10016, 'event_name': 'page_view_marriages_guidance', type: 'page_view' },
+  consult_time_life_marriages: { module: 10012, 'content_id': -10016, 'event_name': 'page_view_marriages_guidance', type: 'page_view' },
+  consult_time_fu_he: { module: 10013, 'content_id': -10015, 'event_name': 'page_view_complex_guidance', type: 'page_view' },
 }
 export default {
   components: {
@@ -127,8 +129,8 @@ export default {
 
     },
     async pay() {
-      utils.firebaseLogEvent(pay_info[this.product_key]['module'], pay_info[this.product_key]['content_id'], pay_info[this.product_key]['event_name'], pay_info[this.product_key]['type'], {
-        args_name: pay_info[this.product_key]['event_name'],
+      utils.firebaseLogEvent(pay_info[this.product_key+this.sub_type]['module'], pay_info[this.product_ke+this.sub_type]['content_id'], pay_info[this.product_key+this.sub_type]['event_name'], pay_info[this.product_key+this.sub_type]['type'], {
+        args_name: pay_info[this.product_key+this.sub_type]['event_name'],
         channel: utils.getFBChannel(),
         container: utils.isFBContainer() ? 'fb' : 'web'
       });
@@ -137,8 +139,8 @@ export default {
         if (!utils.getQueryStr('mlxz_outer_visitor_id')) {
           location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&current_country=${localStorage.getItem('current_country')}&_fbc=${localStorage.getItem('_fbc')}&_fbp=${localStorage.getItem('_fbp')}&timestamp=${new Date().getTime()}`
         }
-        utils.firebaseLogEvent(modal_info[this.product_key]['module'], modal_info[this.product_key]['content_id'], modal_info[this.product_key]['event_name'], modal_info[this.product_key]['type'], {
-          args_name: modal_info[this.product_key]['event_name'],
+        utils.firebaseLogEvent(modal_info[this.product_key+this.sub_type]['module'], modal_info[this.product_key+this.sub_type]['content_id'], modal_info[this.product_key+this.sub_type]['event_name'], modal_info[this.product_key+this.sub_type]['type'], {
+          args_name: modal_info[this.product_key+this.sub_type]['event_name'],
           channel: utils.getFBChannel(),
           os: utils.isAndroid() ? 'android' : 'ios'
         });

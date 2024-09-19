@@ -196,12 +196,12 @@ export default {
 
   mounted() {
     utils.firebaseLogEvent(
-      '10012',
-      '-10017',
-      'page_view_marriages_history',
+      '10013',
+      '-10016',
+      'page_view_complex_history',
       'page_view',
       {
-        args_name: 'page_view_marriages_history',
+        args_name: 'page_view_complex_history',
         channel: utils.getFBChannel(),
       }
     );
@@ -296,12 +296,12 @@ export default {
           query: { order_id: item.order_id, status: 'SUCCESS', product_key: item.product_key || 'consult_time' },
         });
         utils.firebaseLogEvent(
-          10012,
-          -10019,
-          'click_history_marriages_check',
+          10013,
+          -10018,
+          'click_history_complex_check',
           'click',
           {
-            args_name: 'click_history_marriages_check',
+            args_name: 'click_history_complex_check',
             channel: utils.getFBChannel(),
           }
         );
@@ -322,12 +322,12 @@ export default {
           trade_target_org,
         } = item;
         utils.firebaseLogEvent(
-          10012,
-          -10018,
-          'click_history_marriages_repay',
+          10013,
+          -10017,
+          'click_history_complex_repay',
           'click',
           {
-            args_name: 'click_history_marriages_repay',
+            args_name: 'click_history_complex_repay',
             channel: utils.getFBChannel(),
           }
         );
