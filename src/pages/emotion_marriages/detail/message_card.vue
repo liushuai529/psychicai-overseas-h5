@@ -126,29 +126,16 @@ export default {
       const audioPlayer = this.$refs.audioPlayer;
       audioPlayer.play();
       this.is_playing = true;
-      if (this.sub_type === 'fu_he') {
-        utils.firebaseLogEvent(
-          '10013',
-          '-10005',
-          'click_voice_bar',
-          'click',
-          {
-            args_name: 'click_voice_bar',
-            channel: utils.getFBChannel(),
-          }
-        );
-      } else {
-        utils.firebaseLogEvent(
-          '10012',
-          '-10006',
-          'click_voice_bar',
-          'click',
-          {
-            args_name: 'click_voice_bar',
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
+      utils.firebaseLogEvent(
+        '10012',
+        '-10006',
+        'click_voice_bar',
+        'click',
+        {
+          args_name: 'click_voice_bar',
+          channel: utils.getFBChannel(),
+        }
+      );
 
     },
     onEnded() {

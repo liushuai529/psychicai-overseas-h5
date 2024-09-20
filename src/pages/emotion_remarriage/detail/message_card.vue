@@ -124,7 +124,7 @@ export default {
       this.is_playing = true;
       utils.firebaseLogEvent(
         '10013',
-        '-10006',
+        '-10005',
         'click_voice_bar',
         'click',
         {
