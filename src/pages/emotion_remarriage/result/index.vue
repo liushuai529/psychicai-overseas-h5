@@ -266,7 +266,7 @@ export default {
           app_name = '命理尋真';
         }
       } 
-      return utils.getLanguage() === 'zh-CN'? `您的【你一生有几段婚姻】真人1v1咨询订单已生成，您可前往【${app_name}】App中进行实时咨询`: `您的【你一生有幾段婚姻】真人1v1咨詢訂單已生成，您可前往【${app_name}】App中進行實時咨詢`
+      return utils.getLanguage() === 'zh-CN'? `您的【你们能复合吗？】真人1v1咨询订单已生成，您可前往【${app_name}】App中进行实时咨询`: `您的【你們能復合嗎？】真人1v1咨詢訂單已生成，您可前往【${app_name}】App中進行實時咨詢`
     }
   },
   watch: {

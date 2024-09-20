@@ -158,7 +158,7 @@ export default {
     downClick() {
       this.handleCopyCode();
       if (this.sub_type === 'fu_he') {
-        utils.firebaseLogEvent(10012, -10012, 'click_complex_card_result', 'click', {
+        utils.firebaseLogEvent(10013, -10012, 'click_complex_card_result', 'click', {
           args_name: 'click_complex_card_result',
           channel: utils.getFBChannel(),
         });

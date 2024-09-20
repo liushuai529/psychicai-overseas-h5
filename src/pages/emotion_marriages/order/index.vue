@@ -351,8 +351,7 @@ export default {
         };
 
         params.callback_url = `${location.origin
-          }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key || 'consult_time']
-          }&report_price=${same_product.price}&repay=1&currency_type=${trade_currency || 'MYR'}`;
+          }/${utils.getFBChannel()}/${url}.html#/result?path=${url}&report_price=${same_product.price}&repay=1&currency_type=${trade_currency || 'MYR'}`;
         const res = await payFateOrderAPI(params);
 
         Indicator.close();

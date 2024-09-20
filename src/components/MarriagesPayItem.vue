@@ -160,10 +160,9 @@ export default {
         user_info,
       } = this.last_order;
       let url = 'emotion_marriages';
-
-
-
-
+      if(this.sub_type === 'fu_he') {
+        url = 'emotion_remarriage';
+      }
       let params = {
         pay_method,
         product_key,
@@ -184,8 +183,7 @@ export default {
       };
 
       params.callback_url = `${location.origin
-        }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
-        }&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}`;
+        }/${utils.getFBChannel()}/${url}.html#/result?path=${url}&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}`;
       const res = await payFateOrderAPI(params);
 
       Indicator.close();
