@@ -129,8 +129,8 @@ export default {
 
     },
     async pay() {
-      utils.firebaseLogEvent(pay_info[this.product_key+this.sub_type]['module'], pay_info[this.product_ke+this.sub_type]['content_id'], pay_info[this.product_key+this.sub_type]['event_name'], pay_info[this.product_key+this.sub_type]['type'], {
-        args_name: pay_info[this.product_key+this.sub_type]['event_name'],
+      utils.firebaseLogEvent(pay_info[this.product_key+'_'+this.sub_type]['module'], pay_info[this.product_key+'_'+this.sub_type]['content_id'], pay_info[this.product_key+'_'+this.sub_type]['event_name'], pay_info[this.product_key+'_'+this.sub_type]['type'], {
+        args_name: pay_info[this.product_key+'_'+this.sub_type]['event_name'],
         channel: utils.getFBChannel(),
         container: utils.isFBContainer() ? 'fb' : 'web'
       });
@@ -139,8 +139,8 @@ export default {
         if (!utils.getQueryStr('mlxz_outer_visitor_id')) {
           location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&current_country=${localStorage.getItem('current_country')}&_fbc=${localStorage.getItem('_fbc')}&_fbp=${localStorage.getItem('_fbp')}&timestamp=${new Date().getTime()}`
         }
-        utils.firebaseLogEvent(modal_info[this.product_key+this.sub_type]['module'], modal_info[this.product_key+this.sub_type]['content_id'], modal_info[this.product_key+this.sub_type]['event_name'], modal_info[this.product_key+this.sub_type]['type'], {
-          args_name: modal_info[this.product_key+this.sub_type]['event_name'],
+        utils.firebaseLogEvent(modal_info[this.product_key+'_'+this.sub_type]['module'], modal_info[this.product_key+'_'+this.sub_type]['content_id'], modal_info[this.product_key+'_'+this.sub_type]['event_name'], modal_info[this.product_key+'_'+this.sub_type]['type'], {
+          args_name: modal_info[this.product_key+'_'+this.sub_type]['event_name'],
           channel: utils.getFBChannel(),
           os: utils.isAndroid() ? 'android' : 'ios'
         });
