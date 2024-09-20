@@ -10,7 +10,7 @@
 
 
     <div style="width: 6.98rem; margin-top: -6rem; margin-bottom: 0.24rem;">
-      <MessageCard  :date="query_user_string.split('|')[2] ==1 ? picker_date_yangli: picker_date_nongli" :username="username" @scrollClick="scrollClick"/>
+      <MessageCard sub_type="life_marriages" :date="query_user_string.split('|')[2] ==1 ? picker_date_yangli: picker_date_nongli" :username="username" @scrollClick="scrollClick"/>
     </div>
 
     <MarriagesPayItem product_key="consult_time" sub_type="life_marriages"  @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
