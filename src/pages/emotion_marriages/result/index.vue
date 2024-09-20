@@ -1,6 +1,6 @@
 <template>
   <div class="result" :class="['result']">
-    <ChatCard v-if="is_first" :transfer_code="transfer_code" sub_type="life_marriages"/>
+    <ChatCard v-if="is_first" :transfer_code="transfer_code" sub_type="life_marriages" />
     <div class="top" @click="downClick">
       <img :src="is_cn ? cn_img_chat_top_laoshi : tw_img_chat_top_laoshi" />
     </div>
@@ -27,8 +27,9 @@
       <div class="item" v-if="message_show3">
         <img src="../../../assets/img/emotion_marriages/hunyin_img_chat_avatar.webp" />
         <div class="message">
-          <div class="title">{{ get_card_title}}</div>
-          <div class="desc">{{ is_cn ? '复制邀请码，打开App即可咨询，前往「我的订单」—点击「继续沟通」' : '復製邀請碼，打開App即可咨詢，前往「我的訂單」—點擊「繼續溝通」' }}</div>
+          <div class="title">{{ get_card_title }}</div>
+          <div class="desc">{{ is_cn ? '复制邀请码，打开App即可咨询，前往「我的订单」—点击「继续沟通」' : '復製邀請碼，打開App即可咨詢，前往「我的訂單」—點擊「繼續溝通」' }}
+          </div>
           <div class="code">
             <div>{{ `${is_cn ? '邀请码：' : '邀請碼：'}${transfer_code}` }}</div>
             <div class="copy" @click="handleCopyCode(1)">{{ is_cn ? '复制' : '復製' }}</div>
@@ -265,8 +266,8 @@ export default {
         } else {
           app_name = '命理尋真';
         }
-      } 
-      return utils.getLanguage() === 'zh-CN'? `您的【你一生有几段婚姻】真人1v1咨询订单已生成，您可前往【${app_name}】App中进行实时咨询`: `您的【你一生有幾段婚姻】真人1v1咨詢訂單已生成，您可前往【${app_name}】App中進行實時咨詢`
+      }
+      return utils.getLanguage() === 'zh-CN' ? `您的【你一生有几段婚姻】真人1v1咨询订单已生成，您可前往【${app_name}】App中进行实时咨询` : `您的【你一生有幾段婚姻】真人1v1咨詢訂單已生成，您可前往【${app_name}】App中進行實時咨詢`
     }
   },
   watch: {
@@ -390,7 +391,7 @@ export default {
           mlxz_order_status: report_status,
         });
         console.log('Purchase事件上报', this.order_id)
-        if (utils.isProd()) {
+        if (1 == 1) {
           await utils.checkFB();
           try {
             utils.gcyLog(`order_id:${this.order_id}`, {
@@ -399,10 +400,12 @@ export default {
               mlxz_currency: currency_type,
               mlxz_order_status: report_status,
             });
-            // fbq('track', 'Purchase', {
-            //   value: report_price.toFixed(2),
-            //   currency: currency_type,
-            // }, { eventID: this.order_id });
+            if (utils.getFBChannel() === 'ocean09') {
+              fbq('track', 'Purchase', {
+                value: report_price.toFixed(2),
+                currency: currency_type,
+              }, { eventID: this.order_id });
+            }
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '完成FB埋点上报，Purchase',
               mlxz_value: report_price.toFixed(2),

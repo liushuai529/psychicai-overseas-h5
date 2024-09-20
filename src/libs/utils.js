@@ -15,72 +15,72 @@ import moment from 'dayjs';
 const getFBChannel = () => {
   let url = location.href;
 
-  if (url.indexOf('enjoy01') > -1) {
+  if (url.indexOf('/enjoy01/') > -1) {
     return 'enjoy01';
-  } else if (url.indexOf('nova01') > -1) {
+  } else if (url.indexOf('/nova01/') > -1) {
     return 'nova01';
-  } else if (url.indexOf('panda01') > -1) {
+  } else if (url.indexOf('/panda01/') > -1) {
     return 'panda01';
-  } else if (url.indexOf('panda02') > -1) {
+  } else if (url.indexOf('/panda02/') > -1) {
     return 'panda02';
-  } else if (url.indexOf('enjoy02') > -1) {
+  } else if (url.indexOf('/enjoy02/') > -1) {
     return 'enjoy02';
-  } else if (url.indexOf('enjoy03') > -1) {
+  } else if (url.indexOf('/enjoy03/') > -1) {
     return 'enjoy03';
-  } else if (url.indexOf('enjoy10') > -1) {
-    return 'enjoy10';
-  } else if (url.indexOf('enjoy103') > -1) {
+  } else if (url.indexOf('/enjoy103/') > -1) {
     return 'enjoy103';
-  } else if (url.indexOf('enjoy203') > -1) {
+  } else if (url.indexOf('/enjoy203/') > -1) {
     return 'enjoy203';
-  } else if (url.indexOf('enjoy303') > -1) {
+  } else if (url.indexOf('/enjoy303/') > -1) {
     return 'enjoy303';
-  } else if (url.indexOf('panda03') > -1) {
+  } else if (url.indexOf('/panda03/') > -1) {
     return 'panda03';
-  } else if (url.indexOf('ocean03') > -1) {
+  } else if (url.indexOf('/ocean03/') > -1) {
     return 'ocean03';
-  } else if (url.indexOf('ocean103') > -1) {
+  } else if (url.indexOf('/ocean103/') > -1) {
     return 'ocean103';
-  } else if (url.indexOf('enjoy05') > -1) {
+  } else if (url.indexOf('/enjoy05/') > -1) {
     return 'enjoy05';
-  } else if (url.indexOf('enjoy105') > -1) {
+  } else if (url.indexOf('/enjoy105/') > -1) {
     return 'enjoy105';
-  } else if (url.indexOf('enjoy205') > -1) {
+  } else if (url.indexOf('/enjoy205/') > -1) {
     return 'enjoy205';
-  } else if (url.indexOf('enjoy305') > -1) {
+  } else if (url.indexOf('/enjoy305/') > -1) {
     return 'enjoy305';
-  } else if (url.indexOf('ocean05') > -1) {
+  } else if (url.indexOf('/ocean05/') > -1) {
     return 'ocean05';
-  } else if (url.indexOf('ocean105') > -1) {
+  } else if (url.indexOf('/ocean105/') > -1) {
     return 'ocean105';
-  } else if (url.indexOf('panda06') > -1) {
+  } else if (url.indexOf('/panda06/') > -1) {
     return 'panda06';
-  } else if (url.indexOf('enjoy06') > -1) {
+  } else if (url.indexOf('/enjoy06/') > -1) {
     return 'enjoy06';
-  } else if (url.indexOf('ocean06') > -1) {
+  } else if (url.indexOf('/ocean06/') > -1) {
     return 'ocean06';
-  } else if (url.indexOf('enjoy07') > -1) {
+  } else if (url.indexOf('/enjoy07/') > -1) {
     return 'enjoy07';
-  } else if (url.indexOf('enjoy107') > -1) {
+  } else if (url.indexOf('/enjoy107/') > -1) {
     return 'enjoy107';
-  } else if (url.indexOf('enjoy307') > -1) {
+  } else if (url.indexOf('/enjoy307/') > -1) {
     return 'enjoy307';
-  } else if (url.indexOf('ocean07') > -1) {
+  } else if (url.indexOf('/ocean07/') > -1) {
     return 'ocean07';
-  } else if (url.indexOf('ocean107') > -1) {
+  } else if (url.indexOf('/ocean107/') > -1) {
     return 'ocean107';
-  } else if (url.indexOf('enjoy08') > -1) {
+  } else if (url.indexOf('/enjoy08/') > -1) {
     return 'enjoy08';
-  } else if (url.indexOf('enjoy108') > -1) {
+  } else if (url.indexOf('/enjoy108/') > -1) {
     return 'enjoy108';
-  } else if (url.indexOf('enjoy308') > -1) {
+  } else if (url.indexOf('/enjoy308/') > -1) {
     return 'enjoy308';
-  } else if (url.indexOf('ocean08') > -1) {
+  } else if (url.indexOf('/ocean08/') > -1) {
     return 'ocean08';
-  } else if (url.indexOf('enjoy09') > -1) {
+  } else if (url.indexOf('/enjoy09/') > -1) {
     return 'enjoy09';
-  } else if (url.indexOf('ocean09') > -1) {
+  } else if (url.indexOf('/ocean09/') > -1) {
     return 'ocean09';
+  } else if (url.indexOf('/enjoy10/') > -1) {
+    return 'enjoy10';
   } else {
     return 'enjoy10';
   }
@@ -138,7 +138,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if(getFBChannel()==='enjoy09'|| getFBChannel()==='ocean09') {
+  if(getFBChannel()==='enjoy09'|| getFBChannel()==='ocean09' || getFBChannel()==='enjoy10') {
     if(localStorage.getItem('current_country')) {
       return {area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code']}
     } else {
