@@ -51,7 +51,10 @@ https://overseas.psychicai.pro/ocean05/emotion_fortune.html
 https://overseas.psychicai.pro/ocean06/tarot.html
 
 07、08链接为正缘报告（07 马来，08台湾）
+https://overseas.psychicai.pro/enjoy07/emotion_fate.html
 
 09链接为几段婚姻（getTWChannel获取当前国家码需要特殊处理）前端针对09链接，不做 FB 像素上报 Purchase
+https://overseas.psychicai.pro/enjoy09/emotion_marriages.html
 
 10链接为感情复合（getTWChannel获取当前国家码需要特殊处理）前端针对09链接，不做 FB 像素上报 Purchase
+https://overseas.psychicai.pro/enjoy10/emotion_remarriage.html
