@@ -215,6 +215,29 @@ for (var pathname in entries) {
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// ads03代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads03/' + filename + '.html'),
+    template: 'template/index_ads03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
 // enjoy03代理
 for (var pathname in entries) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
@@ -358,6 +381,29 @@ for (var pathname in entries) {
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean103/' + filename + '.html'),
     template: 'template/index_ocean103.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// ads05代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads05/' + filename + '.html'),
+    template: 'template/index_ads05.html',
     inject: true,
     minify: {
       removeComments: true,
@@ -582,6 +628,29 @@ for (var pathname in entries) {
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// ads07代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads07/' + filename + '.html'),
+    template: 'template/index_ads07.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
 // enjoy07代理
 for (var pathname in entries) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
@@ -680,6 +749,29 @@ for (var pathname in entries) {
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean107/' + filename + '.html'),
     template: 'template/index_ocean107.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// ads08代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads08/' + filename + '.html'),
+    template: 'template/index_ads08.html',
     inject: true,
     minify: {
       removeComments: true,
