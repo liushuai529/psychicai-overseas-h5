@@ -89,6 +89,8 @@ const getFBChannel = () => {
     return 'ocean09';
   } else if (url.indexOf('/enjoy10/') > -1) {
     return 'enjoy10';
+  } else if (url.indexOf('/ads10/') > -1) {
+    return 'ads10';
   } else {
     return 'enjoy10';
   }
@@ -141,6 +143,7 @@ const getFbId = () => {
     'enjoy09': '1165111734577298',
     'ocean09': '478529061843804',
     'enjoy10': '1218838549167537',
+    'ads10': '1559269891686110',
     
   }
 }
@@ -150,7 +153,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if(getFBChannel()==='enjoy09'|| getFBChannel()==='ocean09' || getFBChannel()==='enjoy10') {
+  if(getFBChannel()==='enjoy09'|| getFBChannel()==='ocean09' || getFBChannel()==='enjoy10' || getFBChannel()==='ads10') {
     if(localStorage.getItem('current_country')) {
       return {area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code']}
     } else {
