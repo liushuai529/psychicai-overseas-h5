@@ -216,8 +216,7 @@ for (var pathname in entries) {
 }
 
 // ads03代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads03/' + filename + '.html'),
     template: 'template/index_ads03.html',
@@ -234,13 +233,10 @@ for (var pathname in entries) {
     conf.chunks = ['manifest', 'vendor', pathname];
     conf.hash = false;
   }
-
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy03代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy03/' + filename + '.html'),
     template: 'template/index_enjoy03.html',
@@ -259,10 +255,8 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 // enjoy103代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy103/' + filename + '.html'),
     template: 'template/index_enjoy103.html',
@@ -281,11 +275,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy203代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy203/' + filename + '.html'),
     template: 'template/index_enjoy203.html',
@@ -304,11 +296,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy303代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy303/' + filename + '.html'),
     template: 'template/index_enjoy303.html',
@@ -327,11 +317,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // panda03代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/panda03/' + filename + '.html'),
     template: 'template/index_panda03.html',
@@ -350,11 +338,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ocean03代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean03/' + filename + '.html'),
     template: 'template/index_ocean03.html',
@@ -373,11 +359,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ocean103代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean103/' + filename + '.html'),
     template: 'template/index_ocean103.html',
@@ -396,11 +380,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ads05代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads05/' + filename + '.html'),
     template: 'template/index_ads05.html',
@@ -419,11 +401,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy05代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy05/' + filename + '.html'),
     template: 'template/index_enjoy05.html',
@@ -442,11 +422,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy105代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy105/' + filename + '.html'),
     template: 'template/index_enjoy105.html',
@@ -465,11 +443,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy205代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy205/' + filename + '.html'),
     template: 'template/index_enjoy205.html',
@@ -488,11 +464,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy305代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy305/' + filename + '.html'),
     template: 'template/index_enjoy305.html',
@@ -511,11 +485,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ocean05代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean05/' + filename + '.html'),
     template: 'template/index_ocean05.html',
@@ -534,11 +506,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ocean105代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fortune';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean105/' + filename + '.html'),
     template: 'template/index_ocean105.html',
@@ -557,80 +527,11 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
-// enjoy06代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
-  var conf = {
-    filename: path.resolve(__dirname, '../dist/enjoy06/' + filename + '.html'),
-    template: 'template/index_enjoy06.html',
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true,
-    },
-  };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
-    conf.hash = false;
-  }
 
-  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
-
-// panda06代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
-  var conf = {
-    filename: path.resolve(__dirname, '../dist/panda06/' + filename + '.html'),
-    template: 'template/index_panda06.html',
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true,
-    },
-  };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
-    conf.hash = false;
-  }
-
-  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
-
-// ocean06代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
-  var conf = {
-    filename: path.resolve(__dirname, '../dist/ocean06/' + filename + '.html'),
-    template: 'template/index_ocean06.html',
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true,
-    },
-  };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
-    conf.hash = false;
-  }
-
-  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ads07代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fate';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads07/' + filename + '.html'),
     template: 'template/index_ads07.html',
@@ -649,11 +550,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy07代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fate';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy07/' + filename + '.html'),
     template: 'template/index_enjoy07.html',
@@ -672,11 +571,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy107代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fate';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy107/' + filename + '.html'),
     template: 'template/index_enjoy107.html',
@@ -695,11 +592,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy307代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fate';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy307/' + filename + '.html'),
     template: 'template/index_enjoy307.html',
@@ -718,11 +613,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ocean07代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fate';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean07/' + filename + '.html'),
     template: 'template/index_ocean07.html',
@@ -741,11 +634,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ocean107代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fate';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean107/' + filename + '.html'),
     template: 'template/index_ocean107.html',
@@ -764,11 +655,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ads08代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fate';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads08/' + filename + '.html'),
     template: 'template/index_ads08.html',
@@ -787,12 +676,10 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 
 // enjoy08代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fate';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy08/' + filename + '.html'),
     template: 'template/index_enjoy08.html',
@@ -811,11 +698,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy108代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fate';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy108/' + filename + '.html'),
     template: 'template/index_enjoy108.html',
@@ -834,11 +719,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy308代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fate';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy308/' + filename + '.html'),
     template: 'template/index_enjoy308.html',
@@ -857,11 +740,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ocean08代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_fate';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean08/' + filename + '.html'),
     template: 'template/index_ocean08.html',
@@ -880,11 +761,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy09代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_marriages';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy09/' + filename + '.html'),
     template: 'template/index_enjoy09.html',
@@ -903,11 +782,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ocean09代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_marriages';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean09/' + filename + '.html'),
     template: 'template/index_ocean09.html',
@@ -926,11 +803,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // ads10代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_remarriage';
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads10/' + filename + '.html'),
     template: 'template/index_ads10.html',
@@ -949,11 +824,9 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // enjoy10代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+var filename = 'emotion_remarriage';
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy10/' + filename + '.html'),
     template: 'template/index_enjoy10.html',
@@ -972,7 +845,6 @@ for (var pathname in entries) {
   }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 if (config.build.productionGzip) {
   var CompressionWebpackPlugin = require('compression-webpack-plugin');
