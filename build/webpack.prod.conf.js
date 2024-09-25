@@ -247,11 +247,8 @@ for (var pathname in entries) {
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    console.log('========', pathname)
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 // enjoy103代理
@@ -268,10 +265,8 @@ for (var pathname in entries) {
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -289,10 +284,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -310,10 +303,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -331,10 +322,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -352,10 +341,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -373,10 +360,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -394,10 +379,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -415,10 +398,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -436,10 +417,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -457,10 +436,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -478,10 +455,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -499,10 +474,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -520,10 +493,8 @@ var filename = 'emotion_fortune';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -543,10 +514,8 @@ var filename = 'emotion_fate';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -564,10 +533,8 @@ var filename = 'emotion_fate';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -585,10 +552,8 @@ var filename = 'emotion_fate';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -606,10 +571,8 @@ var filename = 'emotion_fate';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -627,10 +590,8 @@ var filename = 'emotion_fate';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -648,10 +609,8 @@ var filename = 'emotion_fate';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -669,10 +628,8 @@ var filename = 'emotion_fate';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -691,10 +648,8 @@ var filename = 'emotion_fate';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -712,10 +667,8 @@ var filename = 'emotion_fate';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -733,10 +686,8 @@ var filename = 'emotion_fate';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -754,10 +705,8 @@ var filename = 'emotion_fate';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -775,10 +724,8 @@ var filename = 'emotion_marriages';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -796,10 +743,8 @@ var filename = 'emotion_marriages';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -817,10 +762,8 @@ var filename = 'emotion_remarriage';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -838,10 +781,8 @@ var filename = 'emotion_remarriage';
       minifyCSS: true,
     },
   };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.chunks = ['manifest', 'vendor', filename];
     conf.hash = false;
-  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
