@@ -229,8 +229,10 @@ for (var pathname in entries) {
       minifyCSS: true,
     },
   };
-    conf.chunks = ['manifest', 'vendor', filename];
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
     conf.hash = false;
+  }
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
 // enjoy03代理
@@ -247,8 +249,10 @@ for (var pathname in entries) {
       minifyCSS: true,
     },
   };
-    conf.chunks = ['manifest', 'vendor', filename];
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
     conf.hash = false;
+  }
 
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 // enjoy103代理
