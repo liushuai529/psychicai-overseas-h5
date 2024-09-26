@@ -131,7 +131,7 @@ export default {
         // page_size: 50,
         offset: 0,
         limit: 100,
-        product_sub_type: 'fu_he'
+        product_sub_type: 'yuan_jin'
       },
       list: [], // 列表数据
       status_enum: all_status_enums(),
@@ -286,7 +286,7 @@ export default {
         this.jump_loading = false;
       }, 2000);
 
-      let url = 'emotion_remarriage';
+      let url = 'emotion_end';
       if (item.order_status === 'PAYED') {
         localStorage.setItem('mlxz_reload_page_history', 1);
         localStorage.setItem('mlxz_reload_page_home', 1);
@@ -346,7 +346,7 @@ export default {
           consult_time: {
             user_info: item.user_info
           },
-          product_sub_type: 'fu_he',
+          product_sub_type: 'yuan_jin',
 
         };
 

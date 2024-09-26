@@ -46,7 +46,7 @@ export default {
   methods: {
 
     jump() {
-      if(1==2) {
+      if(1==1) {
         this.urlJump();
       } else {
         this.schemeJump();

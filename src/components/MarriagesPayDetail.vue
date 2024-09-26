@@ -570,7 +570,7 @@ export default {
       }
 
       pay_max_params.callback_url = `${location.origin}${location.pathname
-        }#/result?path=emotion_marriages&report_price=${this.product.price
+        }#/result?path=${location.pathname}&report_price=${this.product.price
         }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}`;
       let res = null;
       if (this.product_key === 'consult_time') {

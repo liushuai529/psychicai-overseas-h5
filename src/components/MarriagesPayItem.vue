@@ -29,10 +29,13 @@ import { CountDown } from 'vant';
 const pay_info = {
   consult_time_life_marriages: { module: 10012, 'content_id': -10015, 'event_name': 'click_marriages_wait_pay', type: 'click' },
   consult_time_fu_he: { module: 10013, 'content_id': -10014, 'event_name': 'click_complex_wait_pay', type: 'click' },
+  consult_time_yuan_jin: { module: 10014, 'content_id': -10014, 'event_name': 'click_complex_wait_pay', type: 'click' },
 }
 const modal_info = {
   consult_time_life_marriages: { module: 10012, 'content_id': -10016, 'event_name': 'page_view_marriages_guidance', type: 'page_view' },
   consult_time_fu_he: { module: 10013, 'content_id': -10015, 'event_name': 'page_view_complex_guidance', type: 'page_view' },
+  consult_time_yuan_jin: { module: 10014, 'content_id': -10015, 'event_name': 'page_view_complex_guidance', type: 'page_view' },
+  
 }
 export default {
   components: {
@@ -162,7 +165,9 @@ export default {
       let url = 'emotion_marriages';
       if(this.sub_type === 'fu_he') {
         url = 'emotion_remarriage';
-      }
+      } else if(this.sub_type === 'yuan_jin') {
+        url = 'emotion_end';
+      } 
       let params = {
         pay_method,
         product_key,
