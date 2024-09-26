@@ -215,155 +215,187 @@ for (var pathname in entries) {
 }
 
 // ads03代理
-var filename = 'emotion_fortune';
-var conf = {
-  filename: path.resolve(__dirname, '../dist/ads03/' + filename + '.html'),
-  template: 'template/index_ads03.html',
-  inject: true,
-  minify: {
-    removeComments: true,
-    collapseWhitespace: true,
-    removeAttributeQuotes: true,
-    minifyJS: true,
-    minifyCSS: true,
-  },
-};
-conf.chunks = ['manifest', 'vendor', 'emotion_fortune/emotion_fortune'];
-conf.hash = false;
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads03/' + filename + '.html'),
+    template: 'template/index_ads03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 // enjoy03代理
-var filename = 'emotion_fortune';
-var conf = {
-  filename: path.resolve(__dirname, '../dist/enjoy03/' + filename + '.html'),
-  template: 'template/index_enjoy03.html',
-  inject: true,
-  minify: {
-    removeComments: true,
-    collapseWhitespace: true,
-    removeAttributeQuotes: true,
-    minifyJS: true,
-    minifyCSS: true,
-  },
-};
-conf.chunks = ['manifest', 'vendor', 'emotion_fortune/emotion_fortune'];
-conf.hash = false;
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy03/' + filename + '.html'),
+    template: 'template/index_enjoy03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-console.log('====', conf)
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 // enjoy103代理
-var filename = 'emotion_fortune';
-var conf = {
-  filename: path.resolve(__dirname, '../dist/enjoy103/' + filename + '.html'),
-  template: 'template/index_enjoy103.html',
-  inject: true,
-  minify: {
-    removeComments: true,
-    collapseWhitespace: true,
-    removeAttributeQuotes: true,
-    minifyJS: true,
-    minifyCSS: true,
-  },
-};
-conf.chunks = ['manifest', 'vendor', 'emotion_fortune/emotion_fortune'];
-conf.hash = false;
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy103/' + filename + '.html'),
+    template: 'template/index_enjoy103.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 // enjoy203代理
-var filename = 'emotion_fortune';
-var conf = {
-  filename: path.resolve(__dirname, '../dist/enjoy203/' + filename + '.html'),
-  template: 'template/index_enjoy203.html',
-  inject: true,
-  minify: {
-    removeComments: true,
-    collapseWhitespace: true,
-    removeAttributeQuotes: true,
-    minifyJS: true,
-    minifyCSS: true,
-  },
-};
-conf.chunks = ['manifest', 'vendor', 'emotion_fortune/emotion_fortune'];
-conf.hash = false;
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy203/' + filename + '.html'),
+    template: 'template/index_enjoy203.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 // enjoy303代理
-var filename = 'emotion_fortune';
-var conf = {
-  filename: path.resolve(__dirname, '../dist/enjoy303/' + filename + '.html'),
-  template: 'template/index_enjoy303.html',
-  inject: true,
-  minify: {
-    removeComments: true,
-    collapseWhitespace: true,
-    removeAttributeQuotes: true,
-    minifyJS: true,
-    minifyCSS: true,
-  },
-};
-conf.chunks = ['manifest', 'vendor', 'emotion_fortune/emotion_fortune'];
-conf.hash = false;
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy303/' + filename + '.html'),
+    template: 'template/index_enjoy303.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 // panda03代理
-var filename = 'emotion_fortune';
-var conf = {
-  filename: path.resolve(__dirname, '../dist/panda03/' + filename + '.html'),
-  template: 'template/index_panda03.html',
-  inject: true,
-  minify: {
-    removeComments: true,
-    collapseWhitespace: true,
-    removeAttributeQuotes: true,
-    minifyJS: true,
-    minifyCSS: true,
-  },
-};
-conf.chunks = ['manifest', 'vendor', 'emotion_fortune/emotion_fortune'];
-conf.hash = false;
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/panda03/' + filename + '.html'),
+    template: 'template/index_panda03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 // ocean03代理
-var filename = 'emotion_fortune';
-var conf = {
-  filename: path.resolve(__dirname, '../dist/ocean03/' + filename + '.html'),
-  template: 'template/index_ocean03.html',
-  inject: true,
-  minify: {
-    removeComments: true,
-    collapseWhitespace: true,
-    removeAttributeQuotes: true,
-    minifyJS: true,
-    minifyCSS: true,
-  },
-};
-conf.chunks = ['manifest', 'vendor', 'emotion_fortune/emotion_fortune'];
-conf.hash = false;
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ocean03/' + filename + '.html'),
+    template: 'template/index_ocean03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 // ocean103代理
-var filename = 'emotion_fortune';
-var conf = {
-  filename: path.resolve(__dirname, '../dist/ocean103/' + filename + '.html'),
-  template: 'template/index_ocean103.html',
-  inject: true,
-  minify: {
-    removeComments: true,
-    collapseWhitespace: true,
-    removeAttributeQuotes: true,
-    minifyJS: true,
-    minifyCSS: true,
-  },
-};
-conf.chunks = ['manifest', 'vendor', 'emotion_fortune/emotion_fortune'];
-conf.hash = false;
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ocean103/' + filename + '.html'),
+    template: 'template/index_ocean103.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 // ads05代理
 var filename = 'emotion_fortune';
