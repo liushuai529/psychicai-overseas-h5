@@ -9,14 +9,14 @@
     </div>
     <div class="content-container">
       <div class="item" v-if="message_show1">
-        <img src="../../../assets/img/emotion_remarriage/hunyin_img_chat_avatar.webp" />
+        <img src="../../../assets/img/emotion_end/img_chat_avatar.webp" />
         <div class="message">
           {{ `您好，${username}，${is_cn ? '我是本次服务您的老师！' : '我是本次服務您的老師！'}` }}
         </div>
       </div>
 
       <div class="item" v-if="message_show2">
-        <img src="../../../assets/img/emotion_remarriage/hunyin_img_chat_avatar.webp" />
+        <img src="../../../assets/img/emotion_end/img_chat_avatar.webp" />
         <div class="message">
           <span>您的八字信息：</span>
           <span>姓名：{{ username }}</span>
@@ -25,7 +25,7 @@
       </div>
 
       <div class="item" v-if="message_show3">
-        <img src="../../../assets/img/emotion_remarriage/hunyin_img_chat_avatar.webp" />
+        <img src="../../../assets/img/emotion_end/img_chat_avatar.webp" />
         <div class="message">
           <div class="title">{{ get_card_title}}</div>
           <div class="desc">{{ is_cn ? '复制邀请码，打开App即可咨询，前往「我的订单」—点击「继续沟通」' : '復製邀請碼，打開App即可咨詢，前往「我的訂單」—點擊「繼續溝通」' }}</div>
@@ -51,8 +51,8 @@ import contentDetail from './content_detail.vue';
 import ChatCard from '../../../components/ChatCard.vue'
 import utils from '../../../libs/utils.js';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
-import cn_img_chat_top_laoshi from '../../../assets/img/emotion_remarriage/cn/hunyin_img_chat_top_laoshi_cn.webp';
-import tw_img_chat_top_laoshi from '../../../assets/img/emotion_remarriage/tw/hunyin_img_chat_top_laoshi_tw.webp';
+import cn_img_chat_top_laoshi from '../../../assets/img/emotion_end/cn/hunyin_img_chat_top_laoshi_cn.webp';
+import tw_img_chat_top_laoshi from '../../../assets/img/emotion_end/tw/hunyin_img_chat_top_laoshi_tw.webp';
 
 import img_chat_dibu_ios_cn from '../../../assets/img/emotion_fate/cn/img_chat_dibu_ios_cn.webp';
 import img_chat_dibu_android_cn from '../../../assets/img/emotion_fate/cn/img_chat_dibu_android_cn.webp';
@@ -266,7 +266,7 @@ export default {
           app_name = '命理尋真';
         }
       } 
-      return utils.getLanguage() === 'zh-CN'? `您的【你们能复合吗？】真人1v1咨询订单已生成，您可前往【${app_name}】App中进行实时咨询`: `您的【你們能復合嗎？】真人1v1咨詢訂單已生成，您可前往【${app_name}】App中進行實時咨詢`
+      return utils.getLanguage() === 'zh-CN'? `您的【你们的缘分尽了吗？】真人1v1咨询订单已生成，您可前往【${app_name}】App中进行实时咨询`: `您的【你們的緣分盡了嗎？】真人1v1咨詢訂單已生成，您可前往【${app_name}】App中進行實時咨詢`
     }
   },
   watch: {

@@ -155,7 +155,7 @@ import boy from '../../../assets/img/emotion_remarriage/img_boy.webp';
 import girl from '../../../assets/img/emotion_remarriage/img_girl.webp';
 
 import cn_icon_1 from '../../../assets/img/emotion_remarriage/cn/home_neirong_01_cn.webp';
-import cn_icon_2 from '../../../assets/img/emotion_remarriage/cn/home_neirong_02_cn.webp';
+import cn_icon_2 from '../../../assets/img/emotion_end/cn/home_neirong_02_cn.webp';
 import cn_icon_3 from '../../../assets/img/emotion_remarriage/cn/home_neirong_03_cn.webp';
 import cn_icon_4 from '../../../assets/img/emotion_remarriage/cn/home_neirong_04_cn.webp';
 // import cn_icon_5 from '../../../assets/img/emotion_remarriage/cn/home_neirong_05_cn.webp';
@@ -912,11 +912,11 @@ export default {
 }
 
 .cn-bg {
-  background-image: url('../../../assets/img/emotion_remarriage/cn/img_home_topbj_cn.webp');
+  background-image: url('../../../assets/img/emotion_end/cn/img_home_topbj_cn.webp');
 }
 
 .tw-bg {
-  background-image: url('../../../assets/img/emotion_remarriage/tw/img_home_topbj_tw.webp');
+  background-image: url('../../../assets/img/emotion_end/tw/img_home_topbj_tw.webp');
 }
 
 #bg-svga {

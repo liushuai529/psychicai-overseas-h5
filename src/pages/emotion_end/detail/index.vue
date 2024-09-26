@@ -22,12 +22,12 @@
         <div id="method-title-img" class="method-title-img-consult">
           <img :src="is_cn ? cn_paypage_tittle_pay : tw_paypage_tittle_pay" />
         </div>
-        <UserInfo style="margin-top: 0.24rem;" :picker_date_nongli="picker_date_nongli" :picker_date_yangli="picker_date_yangli" :username="username"
-          :sex="sex" />
+        <!-- <UserInfo style="margin-top: 0.24rem;" :picker_date_nongli="picker_date_nongli" :picker_date_yangli="picker_date_yangli" :username="username"
+          :sex="sex" /> -->
       </div>
 
 
-      <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
+      <MarriagesPayDetail style="margin-top: 0.24rem;" className="pay-method" ref="payDetail" :product_key="product_key"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10013"
         c_click_id="-10006" e_click_name="click_complex_pay" :consult_time="consult_time" sub_type="yuan_jin"/>
       <div class="img-consult-bottom">
@@ -81,8 +81,8 @@ import tw_card_2 from '../../../assets/img/tw_mlxz/emotion/home_card2.webp';
 import payModal from '../../../components/PayModal.vue';
 import BaziTable from '../../../components/baziTable.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
-import cn_info_title from '../../../assets/img/emotion_remarriage/cn/img_bj_paypage_cn.webp';
-import tw_info_title from '../../../assets/img/emotion_remarriage/tw/img_bj_paypage_tw.webp';
+import cn_info_title from '../../../assets/img/emotion_end/cn/img_bj_paypage_cn.webp';
+import tw_info_title from '../../../assets/img/emotion_end/tw/img_bj_paypage_tw.webp';
 import cn_zhong3 from '../../../assets/img/emotion/new/zhong_3.webp';
 import tw_zhong3 from '../../../assets/img/emotion/new/tw/zhong_3.webp';
 import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
@@ -93,8 +93,8 @@ import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
 
 import cn_bg_1 from '../../../assets/img/emotion_remarriage/cn/paypage_neirong_cn.webp';
 import tw_bg_1 from '../../../assets/img/emotion_remarriage/tw/paypage_neirong_tw.webp';
-import cn_bg_2 from '../../../assets/img/emotion_remarriage/cn/paypage_neirong_mark_cn.webp';
-import tw_bg_2 from '../../../assets/img/emotion_remarriage/tw/paypage_neirong_mark_tw.webp';
+import cn_bg_2 from '../../../assets/img/emotion_end/cn/paypage_neirong_mark_cn.webp';
+import tw_bg_2 from '../../../assets/img/emotion_end/tw/paypage_neirong_mark_tw.webp';
 
 
 

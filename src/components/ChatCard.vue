@@ -40,6 +40,26 @@ import img_chat_push_right_android_tw from '../assets/img/emotion_fate/tw/img_ch
 
 
 
+
+
+
+
+
+
+
+
+
+import end_img_chat_push_left_android_cn from '../assets/img/emotion_end/cn/hunyin_img_chat_push_left_android_cn.webp';
+import end_img_chat_push_left_android_tw from '../assets/img/emotion_end/tw/hunyin_img_chat_push_left_android_tw.webp';
+
+import end_img_chat_push_left_ios_cn from '../assets/img/emotion_end/cn/hunyin_img_chat_push_left_ios_cn.webp';
+import end_img_chat_push_left_ios_tw from '../assets/img/emotion_end/tw/hunyin_img_chat_push_left_ios_tw.webp';
+
+import end_img_chat_push_right_android_cn from '../assets/img/emotion_end/cn/hunyin_img_chat_push_right_android_cn.webp';
+import end_img_chat_push_right_android_tw from '../assets/img/emotion_end/tw/hunyin_img_chat_push_right_android_tw.webp';
+
+
+
 import chat_icon_message from '../assets/img/emotion_fate/chat_icon_message.webp';
 
 
@@ -77,6 +97,12 @@ export default {
       hunyin_img_chat_push_left_ios_tw,
       hunyin_img_chat_push_right_android_cn,
       hunyin_img_chat_push_right_android_tw,
+      end_img_chat_push_left_android_cn,
+      end_img_chat_push_left_android_tw,
+      end_img_chat_push_left_ios_cn,
+      end_img_chat_push_left_ios_tw,
+      end_img_chat_push_right_android_cn,
+      end_img_chat_push_right_android_tw,
       img_chat_push_left_android_cn,
       img_chat_push_left_android_tw,
       img_chat_push_left_ios_cn,
@@ -115,20 +141,18 @@ export default {
     avatar_url() {
       utils.getLanguage() === 'zh-CN' ? img_chat_push_right_android_cn : img_chat_push_right_android_tw
       if (utils.getLanguage() === 'zh-CN') {
-        return this.sub_type ? hunyin_img_chat_push_right_android_cn : img_chat_push_right_android_cn
         if (this.sub_type === 'fu_he') {
           return hunyin_img_chat_push_right_android_cn
         } else if (this.sub_type === 'yuan_jin') {
-          return hunyin_img_chat_push_right_android_cn
+          return end_img_chat_push_right_android_cn
         } else {
           return img_chat_push_right_android_cn
         }
       } else {
-        return this.sub_type ? hunyin_img_chat_push_right_android_tw : img_chat_push_right_android_tw
         if (this.sub_type === 'fu_he') {
           return hunyin_img_chat_push_right_android_tw
         } else if (this.sub_type === 'yuan_jin') {
-          return hunyin_img_chat_push_right_android_tw
+          return end_img_chat_push_right_android_tw
         } else {
           return img_chat_push_right_android_tw
         }
@@ -139,21 +163,19 @@ export default {
 
       if (utils.getLanguage() === 'zh-CN') {
         if (utils.isIos()) {
-          return this.sub_type ? hunyin_img_chat_push_left_ios_cn : img_chat_push_left_ios_cn;
           if (this.sub_type === 'fu_he') {
             return hunyin_img_chat_push_left_ios_cn
           } else if (this.sub_type === 'yuan_jin') {
-            return hunyin_img_chat_push_left_ios_cn
+            return end_img_chat_push_left_ios_cn
           } else {
             return img_chat_push_left_ios_cn
           }
 
         } else {
-          return this.sub_type ? hunyin_img_chat_push_left_android_cn : img_chat_push_left_android_cn;
           if (this.sub_type === 'fu_he') {
             return hunyin_img_chat_push_left_android_cn
           } else if (this.sub_type === 'yuan_jin') {
-            return hunyin_img_chat_push_left_android_cn
+            return end_img_chat_push_left_android_cn
           } else {
             return img_chat_push_left_android_cn
           }
@@ -161,20 +183,18 @@ export default {
         }
       } else {
         if (utils.isIos()) {
-          return this.sub_type ? hunyin_img_chat_push_left_ios_tw : img_chat_push_left_ios_tw;
           if (this.sub_type === 'fu_he') {
             return hunyin_img_chat_push_left_ios_tw
           } else if (this.sub_type === 'yuan_jin') {
-            return hunyin_img_chat_push_left_ios_tw
+            return end_img_chat_push_left_ios_tw
           } else {
             return img_chat_push_left_ios_tw
           }
         } else {
-          return this.sub_type ? hunyin_img_chat_push_left_android_tw : img_chat_push_left_android_tw;
           if (this.sub_type === 'fu_he') {
             return hunyin_img_chat_push_left_android_tw
           } else if (this.sub_type === 'yuan_jin') {
-            return hunyin_img_chat_push_left_android_tw
+            return end_img_chat_push_left_android_tw
           } else {
             return img_chat_push_left_android_tw
           }
