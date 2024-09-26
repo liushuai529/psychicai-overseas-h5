@@ -99,120 +99,120 @@ for (var pathname in entries) {
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
-// enjoy代理01
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
-  var conf = {
-    filename: path.resolve(__dirname, '../dist/enjoy01/' + filename + '.html'),
-    template: 'template/index_enjoy.html',
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true,
-    },
-  };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
-    conf.hash = false;
-  }
+// // enjoy代理01
+// for (var pathname in entries) {
+//   var filename = pathname.split('/')[pathname.split('/').length - 1];
+//   var conf = {
+//     filename: path.resolve(__dirname, '../dist/enjoy01/' + filename + '.html'),
+//     template: 'template/index_enjoy.html',
+//     inject: true,
+//     minify: {
+//       removeComments: true,
+//       collapseWhitespace: true,
+//       removeAttributeQuotes: true,
+//       minifyJS: true,
+//       minifyCSS: true,
+//     },
+//   };
+//   if (pathname in webpackConfig.entry) {
+//     conf.chunks = ['manifest', 'vendor', pathname];
+//     conf.hash = false;
+//   }
 
-  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
+//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+// }
 
-// nova代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
-  var conf = {
-    filename: path.resolve(__dirname, '../dist/nova01/' + filename + '.html'),
-    template: 'template/index_nova.html',
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true,
-    },
-  };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
-    conf.hash = false;
-  }
+// // nova代理
+// for (var pathname in entries) {
+//   var filename = pathname.split('/')[pathname.split('/').length - 1];
+//   var conf = {
+//     filename: path.resolve(__dirname, '../dist/nova01/' + filename + '.html'),
+//     template: 'template/index_nova.html',
+//     inject: true,
+//     minify: {
+//       removeComments: true,
+//       collapseWhitespace: true,
+//       removeAttributeQuotes: true,
+//       minifyJS: true,
+//       minifyCSS: true,
+//     },
+//   };
+//   if (pathname in webpackConfig.entry) {
+//     conf.chunks = ['manifest', 'vendor', pathname];
+//     conf.hash = false;
+//   }
 
-  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
+//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+// }
 
-// panda代理01
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
-  var conf = {
-    filename: path.resolve(__dirname, '../dist/panda01/' + filename + '.html'),
-    template: 'template/index_panda.html',
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true,
-    },
-  };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
-    conf.hash = false;
-  }
+// // panda代理01
+// for (var pathname in entries) {
+//   var filename = pathname.split('/')[pathname.split('/').length - 1];
+//   var conf = {
+//     filename: path.resolve(__dirname, '../dist/panda01/' + filename + '.html'),
+//     template: 'template/index_panda.html',
+//     inject: true,
+//     minify: {
+//       removeComments: true,
+//       collapseWhitespace: true,
+//       removeAttributeQuotes: true,
+//       minifyJS: true,
+//       minifyCSS: true,
+//     },
+//   };
+//   if (pathname in webpackConfig.entry) {
+//     conf.chunks = ['manifest', 'vendor', pathname];
+//     conf.hash = false;
+//   }
 
-  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
+//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+// }
 
-// panda代理02
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
-  var conf = {
-    filename: path.resolve(__dirname, '../dist/panda02/' + filename + '.html'),
-    template: 'template/index_panda02.html',
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true,
-    },
-  };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
-    conf.hash = false;
-  }
+// // panda代理02
+// for (var pathname in entries) {
+//   var filename = pathname.split('/')[pathname.split('/').length - 1];
+//   var conf = {
+//     filename: path.resolve(__dirname, '../dist/panda02/' + filename + '.html'),
+//     template: 'template/index_panda02.html',
+//     inject: true,
+//     minify: {
+//       removeComments: true,
+//       collapseWhitespace: true,
+//       removeAttributeQuotes: true,
+//       minifyJS: true,
+//       minifyCSS: true,
+//     },
+//   };
+//   if (pathname in webpackConfig.entry) {
+//     conf.chunks = ['manifest', 'vendor', pathname];
+//     conf.hash = false;
+//   }
 
-  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
+//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+// }
 
-// enjoy02代理
-for (var pathname in entries) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
-  var conf = {
-    filename: path.resolve(__dirname, '../dist/enjoy02/' + filename + '.html'),
-    template: 'template/index_enjoy02.html',
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true,
-    },
-  };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
-    conf.hash = false;
-  }
+// // enjoy02代理
+// for (var pathname in entries) {
+//   var filename = pathname.split('/')[pathname.split('/').length - 1];
+//   var conf = {
+//     filename: path.resolve(__dirname, '../dist/enjoy02/' + filename + '.html'),
+//     template: 'template/index_enjoy02.html',
+//     inject: true,
+//     minify: {
+//       removeComments: true,
+//       collapseWhitespace: true,
+//       removeAttributeQuotes: true,
+//       minifyJS: true,
+//       minifyCSS: true,
+//     },
+//   };
+//   if (pathname in webpackConfig.entry) {
+//     conf.chunks = ['manifest', 'vendor', pathname];
+//     conf.hash = false;
+//   }
 
-  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
+//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+// }
 
 // ads03代理
 for (var pathname in entries) {
