@@ -169,7 +169,6 @@ export default {
       'page_view_complex_chatpage',
       'page_view',
       {
-        args_name: 'page_view_complex_chatpage',
         channel: utils.getFBChannel(),
       }
     );
@@ -208,9 +207,8 @@ export default {
         'view_complex_chatpage_duration',
         'view',
         {
-          args_name: 'view_complex_chatpage_duration',
           channel: utils.getFBChannel(),
-          time: JSON.stringify({ entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time, })
+          time: (this.duration_time.entry_time - this.duration_time.exit_time)/1000
         }
       );
     }
@@ -379,7 +377,6 @@ export default {
           'event_status_complex_pay_success',
           'event_status',
           {
-            args_name: 'event_status_complex_pay_success',
             channel: utils.getFBChannel(),
           }
         );
@@ -430,7 +427,6 @@ export default {
           'event_status_complex_pay_fail',
           'event_status',
           {
-            args_name: 'event_status_complex_pay_fail',
             channel: utils.getFBChannel(),
           }
         );

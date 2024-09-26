@@ -132,7 +132,6 @@ export default {
         'click_voice_bar',
         'click',
         {
-          args_name: 'click_voice_bar',
           channel: utils.getFBChannel(),
         }
       );

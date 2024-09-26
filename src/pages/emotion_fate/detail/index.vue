@@ -314,7 +314,7 @@ export default {
         {
           args_name: 'view_truelove_duration',
           channel: utils.getFBChannel(),
-          time: JSON.stringify({ entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time, })
+          time: (this.duration_time.entry_time - this.duration_time.exit_time)/1000
         }
       );
     }

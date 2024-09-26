@@ -302,7 +302,6 @@ export default {
         md: 10013,
         c_id: -10001,
         args: {
-          args_name: 'page_view_complex_main',
           channel: utils.getFBChannel(),
         },
       });
@@ -313,7 +312,6 @@ export default {
       'page_view_complex_main',
       'page_view',
       {
-        args_name: 'page_view_complex_main',
         channel: utils.getFBChannel(),
       }
     );
@@ -644,7 +642,6 @@ export default {
           'click_complex_main',
           'click',
           {
-            args_name: 'click_complex_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -666,7 +663,6 @@ export default {
           'click_complex_main',
           'click',
           {
-            args_name: 'click_complex_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -681,7 +677,6 @@ export default {
           'click_complex_main',
           'click',
           {
-            args_name: 'click_complex_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -717,7 +712,6 @@ export default {
         'click_complex_main',
         'click',
         {
-          args_name: 'click_complex_main',
           channel: utils.getFBChannel(),
           click_type: 'screen_tracking',
         }

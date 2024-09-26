@@ -223,17 +223,14 @@ export default {
       this.handleCopyCode();
       if (this.sub_type === 'fu_he') {
         utils.firebaseLogEvent(10013, -10012, 'click_complex_card_result', 'click', {
-          args_name: 'click_complex_card_result',
           channel: utils.getFBChannel(),
         });
       } else if (this.sub_type === 'life_marriages') {
         utils.firebaseLogEvent(10012, -10013, 'click_marriages_card_result', 'click', {
-          args_name: 'click_marriages_card_result',
           channel: utils.getFBChannel(),
         });
       } else if (this.sub_type === 'yuan_jin') {
         utils.firebaseLogEvent(10012, -10013, 'click_marriages_card_result', 'click', {
-          args_name: 'click_marriages_card_result',
           channel: utils.getFBChannel(),
         });
       }

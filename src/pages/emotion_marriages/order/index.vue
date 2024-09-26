@@ -201,7 +201,6 @@ export default {
       'page_view_marriages_history',
       'page_view',
       {
-        args_name: 'page_view_marriages_history',
         channel: utils.getFBChannel(),
       }
     );
@@ -301,7 +300,6 @@ export default {
           'click_history_marriages_check',
           'click',
           {
-            args_name: 'click_history_marriages_check',
             channel: utils.getFBChannel(),
           }
         );
@@ -327,7 +325,6 @@ export default {
           'click_history_marriages_repay',
           'click',
           {
-            args_name: 'click_history_marriages_repay',
             channel: utils.getFBChannel(),
           }
         );

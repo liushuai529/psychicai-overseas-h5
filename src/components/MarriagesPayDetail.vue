@@ -522,7 +522,6 @@ export default {
         this.e_click_name,
         'click',
         {
-          args_name: this.e_click_name,
           pay_type: this.pay_methods[this.check_index].title,
           channel: utils.getFBChannel(),
         }

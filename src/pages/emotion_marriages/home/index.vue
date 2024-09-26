@@ -304,7 +304,6 @@ export default {
         md: 10012,
         c_id: -10001,
         args: {
-          args_name: 'page_view_marriages_main',
           channel: utils.getFBChannel(),
         },
       });
@@ -315,7 +314,6 @@ export default {
       'page_view_marriages_main',
       'page_view',
       {
-        args_name: 'page_view_marriages_main',
         channel: utils.getFBChannel(),
       }
     );
@@ -646,7 +644,6 @@ export default {
           'click_marriages_main',
           'click',
           {
-            args_name: 'click_marriages_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -668,7 +665,6 @@ export default {
           'click_marriages_main',
           'click',
           {
-            args_name: 'click_marriages_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -683,7 +679,6 @@ export default {
           'click_marriages_main',
           'click',
           {
-            args_name: 'click_marriages_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -719,7 +714,6 @@ export default {
         'click_marriages_main',
         'click',
         {
-          args_name: 'click_marriages_main',
           channel: utils.getFBChannel(),
           click_type: 'screen_tracking',
         }

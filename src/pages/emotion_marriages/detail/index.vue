@@ -261,7 +261,6 @@ export default {
       'page_view_marriages_mid',
       'page_view',
       {
-        args_name: 'page_view_marriages_mid',
         channel: utils.getFBChannel(),
       }
     );
@@ -302,9 +301,8 @@ export default {
         'view_marriages_duration',
         'view',
         {
-          args_name: 'view_marriages_duration',
           channel: utils.getFBChannel(),
-          time: JSON.stringify({ entry_time: this.duration_time.entry_time, exit_time: this.duration_time.exit_time, })
+          time: (this.duration_time.entry_time - this.duration_time.exit_time)/1000
         }
       );
     }

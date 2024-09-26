@@ -201,7 +201,6 @@ export default {
       'page_view_complex_history',
       'page_view',
       {
-        args_name: 'page_view_complex_history',
         channel: utils.getFBChannel(),
       }
     );
@@ -301,7 +300,6 @@ export default {
           'click_history_complex_check',
           'click',
           {
-            args_name: 'click_history_complex_check',
             channel: utils.getFBChannel(),
           }
         );
@@ -327,7 +325,6 @@ export default {
           'click_history_complex_repay',
           'click',
           {
-            args_name: 'click_history_complex_repay',
             channel: utils.getFBChannel(),
           }
         );
