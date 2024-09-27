@@ -96,7 +96,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('/ads11/') > -1) {
     return 'ads11';
   } else {
-    return 'enjoy09';
+    return 'ads11';
   }
 };
 
@@ -158,7 +158,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if(getFBChannel()==='enjoy09'|| getFBChannel()==='ocean09' || getFBChannel()==='ads09' || getFBChannel()==='enjoy10' || getFBChannel()==='ads10' || getFBChannel()==='enjoy11' ) {
+  if(getFBChannel()==='enjoy09'|| getFBChannel()==='ocean09' || getFBChannel()==='ads09' || getFBChannel()==='enjoy10' || getFBChannel()==='ads10' || getFBChannel()==='ads11' ) {
     if(localStorage.getItem('current_country')) {
       return {area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code']}
     } else {
