@@ -221,7 +221,7 @@ export default {
         {
           args_name: 'view_truelove_chatpage_duration',
           channel: utils.getFBChannel(),
-          time: (this.duration_time.entry_time - this.duration_time.exit_time)/1000
+          time: (this.duration_time.exit_time - this.duration_time.entry_time)/1000
         }
       );
     }
