@@ -950,12 +950,12 @@ for (var pathname of ['emotion_remarriage/emotion_remarriage', 'user_agreement/u
 
 
 
-// enjoy11代理
+// ads11代理
 for (var pathname of ['emotion_end/emotion_end', 'user_agreement/user_agreement', 'privacy/privacy']) {
   var filename = pathname.split('/')[0];
   var conf = {
-    filename: path.resolve(__dirname, '../dist/enjoy11/' + filename + '.html'),
-    template: 'template/index_enjoy11.html',
+    filename: path.resolve(__dirname, '../dist/ads11/' + filename + '.html'),
+    template: 'template/index_ads11.html',
     inject: true,
     minify: {
       removeComments: true,
