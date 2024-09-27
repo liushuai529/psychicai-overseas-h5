@@ -259,6 +259,10 @@ export default {
       last_title: '',
       timer: null,
       comboAttachData: null, //套餐未使用报告信息
+      duration_time: {
+        entry_time: 0,
+        exit_time: 0,
+      }
     };
   },
   computed: {
@@ -334,6 +338,7 @@ export default {
     console.log('销毁111')
   },
   mounted() {
+    this.duration_time.entry_time = new Date().getTime()
     //svga动画预加载
     // this.preloadSVGA()
     if (utils.isProd()) {
@@ -412,6 +417,21 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
+  },
+  destroyed() {
+    this.duration_time.exit_time = new Date().getTime();
+    if (this.duration_time.entry_time) {
+      utils.firebaseLogEvent(
+        '10014',
+        '-10002',
+        'view_fate_end_main',
+        'view',
+        {
+          channel: utils.getFBChannel(),
+          time: (this.duration_time.exit_time - this.duration_time.entry_time)/1000
+        }
+      );
+    }
   },
   methods: {
     showEmail() {
