@@ -436,9 +436,10 @@ var conf = {
 ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // enjoy105代理
 var filename = 'emotion_fortune';
@@ -457,9 +458,10 @@ var conf = {
 ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // enjoy205代理
 var filename = 'emotion_fortune';
@@ -478,8 +480,9 @@ var conf = {
 ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // enjoy305代理
 var filename = 'emotion_fortune';
@@ -498,9 +501,10 @@ var conf = {
 ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // ocean05代理
 var filename = 'emotion_fortune';
@@ -519,9 +523,10 @@ var conf = {
 ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // ocean105代理
 var filename = 'emotion_fortune';
@@ -540,9 +545,10 @@ var conf = {
 ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 
 
@@ -563,9 +569,10 @@ var conf = {
 ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // enjoy07代理
 var filename = 'emotion_fate';
@@ -584,9 +591,10 @@ var conf = {
 ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // enjoy107代理
 var filename = 'emotion_fate';
@@ -605,9 +613,10 @@ var conf = {
 if (pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
   conf.chunks = ['manifest', 'vendor', pathname];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // enjoy307代理
 var filename = 'emotion_fate';
@@ -626,9 +635,10 @@ var conf = {
 ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // ocean07代理
 var filename = 'emotion_fate';
@@ -647,9 +657,10 @@ var conf = {
 ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // ocean107代理
 var filename = 'emotion_fate';
@@ -668,9 +679,10 @@ var conf = {
 ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // ads08代理
 var filename = 'emotion_fate';
@@ -689,9 +701,10 @@ var conf = {
 ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 
 // enjoy08代理
@@ -711,9 +724,10 @@ var conf = {
 ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // enjoy108代理
 var filename = 'emotion_fate';
@@ -732,9 +746,10 @@ var conf = {
 ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // enjoy308代理
 var filename = 'emotion_fate';
@@ -753,9 +768,10 @@ var conf = {
 ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // ocean08代理
 var filename = 'emotion_fate';
@@ -774,9 +790,10 @@ var conf = {
 ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // enjoy09代理
 var filename = 'emotion_marriages';
@@ -795,9 +812,10 @@ var conf = {
 ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // ocean09代理
 var filename = 'emotion_marriages';
@@ -816,7 +834,9 @@ var conf = {
 ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
+
 
 // ads09代理
 var filename = 'emotion_marriages';
@@ -835,9 +855,10 @@ var conf = {
 ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // ads10代理
 var filename = 'emotion_remarriage';
@@ -856,9 +877,10 @@ var conf = {
 ['emotion_remarriage/emotion_remarriage', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // enjoy10代理
 var filename = 'emotion_remarriage';
@@ -877,9 +899,10 @@ var conf = {
 ['emotion_remarriage/emotion_remarriage', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 // enjoy11代理
 var filename = 'emotion_end';
@@ -898,9 +921,10 @@ var conf = {
 ['emotion_end/emotion_end', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
   conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 })
 
-webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
 
 if (config.build.productionGzip) {
   var CompressionWebpackPlugin = require('compression-webpack-plugin');
