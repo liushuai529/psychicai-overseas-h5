@@ -162,7 +162,7 @@ import cn_icon_4 from '../../../assets/img/emotion_remarriage/cn/home_neirong_04
 
 
 import tw_icon_1 from '../../../assets/img/emotion_remarriage/tw/home_neirong_01_tw.webp';
-import tw_icon_2 from '../../../assets/img/emotion_remarriage/tw/home_neirong_02_tw.webp';
+import tw_icon_2 from '../../../assets/img/emotion_end/tw/home_neirong_02_tw.webp';
 import tw_icon_3 from '../../../assets/img/emotion_remarriage/tw/home_neirong_03_tw.webp';
 import tw_icon_4 from '../../../assets/img/emotion_remarriage/tw/home_neirong_04_tw.webp';
 // import tw_icon_5 from '../../../assets/img/emotion_remarriage/tw/home_neirong_05_tw.webp';
