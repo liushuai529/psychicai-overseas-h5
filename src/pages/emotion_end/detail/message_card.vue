@@ -123,12 +123,11 @@ export default {
       audioPlayer.play();
       this.is_playing = true;
       utils.firebaseLogEvent(
-        '10013',
-        '-10005',
+        '10014',
+        '-10006',
         'click_voice_bar',
         'click',
         {
-          args_name: 'click_voice_bar',
           channel: utils.getFBChannel(),
         }
       );

@@ -298,8 +298,8 @@ export default {
     utils.isProd() &&
       tStatistic &&
       tStatistic.send({
-        event: 'page_view_complex_main',
-        md: 10013,
+        event: 'page_view_fate_end_main',
+        md: 10014,
         c_id: -10001,
         args: {
           channel: utils.getFBChannel(),
@@ -307,9 +307,9 @@ export default {
       });
     this.$store.dispatch('common/getProduction', 'consult_time');
     utils.firebaseLogEvent(
-      '10013',
+      '10014',
       '-10001',
-      'page_view_complex_main',
+      'page_view_fate_end_main',
       'page_view',
       {
         channel: utils.getFBChannel(),
@@ -637,9 +637,9 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         utils.firebaseLogEvent(
-          '10013',
-          '-10002',
-          'click_complex_main',
+          '10014',
+          '-10003',
+          'click_fate_end_main',
           'click',
           {
             channel: utils.getFBChannel(),
@@ -658,9 +658,9 @@ export default {
       // }
       if (time_obj == null) {
         utils.firebaseLogEvent(
-          '10013',
-          '-10002',
-          'click_complex_main',
+          '10014',
+          '-10003',
+          'click_fate_end_main',
           'click',
           {
             channel: utils.getFBChannel(),
@@ -672,9 +672,9 @@ export default {
       }
       if (!this.privacyChecked) {
         utils.firebaseLogEvent(
-          '10013',
-          '-10002',
-          'click_complex_main',
+          '10014',
+          '-10003',
+          'click_fate_end_main',
           'click',
           {
             channel: utils.getFBChannel(),
@@ -707,9 +707,9 @@ export default {
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
-        '10013',
-        '-10002',
-        'click_complex_main',
+        '10014',
+        '-10003',
+        'click_fate_end_main',
         'click',
         {
           channel: utils.getFBChannel(),

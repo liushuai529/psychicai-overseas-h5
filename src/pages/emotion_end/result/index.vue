@@ -74,10 +74,10 @@ const tips_arr4 = {
 };
 
 const copy_info = {
-  consult_time: { module: 10013, 'content_id': -10011, 'event_name': 'click_complex_copy', type: 'click' },
+  consult_time: { module: 10014, 'content_id': -10012, 'event_name': 'click_fate_end_copy', type: 'click' },
 }
 const down_info = {
-  consult_time: { module: 10013, 'content_id': -10013, 'event_name': 'click_complex_result', type: 'click' },
+  consult_time: { module: 10014, 'content_id': -10014, 'event_name': 'click_fate_end_result', type: 'click' },
 }
 
 import {
@@ -164,9 +164,9 @@ export default {
     });
 
     utils.firebaseLogEvent(
-      '10013',
-      '-10009',
-      'page_view_complex_chatpage',
+      '10014',
+      '-10010',
+      'page_view_fate_end_chatpage',
       'page_view',
       {
         channel: utils.getFBChannel(),
@@ -202,9 +202,9 @@ export default {
     this.duration_time.exit_time = new Date().getTime();
     if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
-        '10013',
-        '-10010',
-        'view_complex_chatpage_duration',
+        '10014',
+        '-10011',
+        'view_fate_end_chatpage_duration',
         'view',
         {
           channel: utils.getFBChannel(),
@@ -372,9 +372,9 @@ export default {
 
 
         utils.firebaseLogEvent(
-          '10013',
-          '-10007',
-          'event_status_complex_pay_success',
+          '10014',
+          '-10008',
+          'event_status_fate_end_pay_success',
           'event_status',
           {
             channel: utils.getFBChannel(),
@@ -422,9 +422,9 @@ export default {
 
 
         utils.firebaseLogEvent(
-          '10013',
-          '-10008',
-          'event_status_complex_pay_fail',
+          '10014',
+          '-10009',
+          'event_status_fate_end_pay_fail',
           'event_status',
           {
             channel: utils.getFBChannel(),

@@ -196,9 +196,9 @@ export default {
 
   mounted() {
     utils.firebaseLogEvent(
-      '10013',
-      '-10016',
-      'page_view_complex_history',
+      '10014',
+      '-10017',
+      'page_view_fate_end_history',
       'page_view',
       {
         channel: utils.getFBChannel(),
@@ -295,9 +295,9 @@ export default {
           query: { order_id: item.order_id, status: 'SUCCESS', product_key: item.product_key || 'consult_time' },
         });
         utils.firebaseLogEvent(
-          10013,
-          -10018,
-          'click_history_complex_check',
+          10014,
+          -10019,
+          'click_history_fate_end_check',
           'click',
           {
             channel: utils.getFBChannel(),
@@ -320,9 +320,9 @@ export default {
           trade_target_org,
         } = item;
         utils.firebaseLogEvent(
-          10013,
-          -10017,
-          'click_history_complex_repay',
+          10014,
+          -10018,
+          'click_history_fate_end_repay',
           'click',
           {
             channel: utils.getFBChannel(),

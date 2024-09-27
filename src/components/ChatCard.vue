@@ -229,7 +229,7 @@ export default {
           channel: utils.getFBChannel(),
         });
       } else if (this.sub_type === 'yuan_jin') {
-        utils.firebaseLogEvent(10012, -10013, 'click_marriages_card_result', 'click', {
+        utils.firebaseLogEvent(10014, -10013, 'click_fate_end_card_result', 'click', {
           channel: utils.getFBChannel(),
         });
       } else {
