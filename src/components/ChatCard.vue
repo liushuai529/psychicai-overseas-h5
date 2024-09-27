@@ -139,9 +139,8 @@ export default {
       }
     },
     avatar_url() {
-      utils.getLanguage() === 'zh-CN' ? img_chat_push_right_android_cn : img_chat_push_right_android_tw
       if (utils.getLanguage() === 'zh-CN') {
-        if (this.sub_type === 'fu_he') {
+        if (this.sub_type === 'fu_he' || this.sub_type === 'life_marriages') {
           return hunyin_img_chat_push_right_android_cn
         } else if (this.sub_type === 'yuan_jin') {
           return end_img_chat_push_right_android_cn
@@ -149,7 +148,7 @@ export default {
           return img_chat_push_right_android_cn
         }
       } else {
-        if (this.sub_type === 'fu_he') {
+        if (this.sub_type === 'fu_he' || this.sub_type === 'life_marriages') {
           return hunyin_img_chat_push_right_android_tw
         } else if (this.sub_type === 'yuan_jin') {
           return end_img_chat_push_right_android_tw
@@ -163,7 +162,7 @@ export default {
 
       if (utils.getLanguage() === 'zh-CN') {
         if (utils.isIos()) {
-          if (this.sub_type === 'fu_he') {
+          if (this.sub_type === 'fu_he' || this.sub_type === 'life_marriages') {
             return hunyin_img_chat_push_left_ios_cn
           } else if (this.sub_type === 'yuan_jin') {
             return end_img_chat_push_left_ios_cn
@@ -172,7 +171,7 @@ export default {
           }
 
         } else {
-          if (this.sub_type === 'fu_he') {
+          if (this.sub_type === 'fu_he' || this.sub_type === 'life_marriages') {
             return hunyin_img_chat_push_left_android_cn
           } else if (this.sub_type === 'yuan_jin') {
             return end_img_chat_push_left_android_cn
@@ -183,7 +182,7 @@ export default {
         }
       } else {
         if (utils.isIos()) {
-          if (this.sub_type === 'fu_he') {
+          if (this.sub_type === 'fu_he' || this.sub_type === 'life_marriages') {
             return hunyin_img_chat_push_left_ios_tw
           } else if (this.sub_type === 'yuan_jin') {
             return end_img_chat_push_left_ios_tw
@@ -191,7 +190,7 @@ export default {
             return img_chat_push_left_ios_tw
           }
         } else {
-          if (this.sub_type === 'fu_he') {
+          if (this.sub_type === 'fu_he' || this.sub_type === 'life_marriages') {
             return hunyin_img_chat_push_left_android_tw
           } else if (this.sub_type === 'yuan_jin') {
             return end_img_chat_push_left_android_tw
@@ -231,6 +230,10 @@ export default {
         });
       } else if (this.sub_type === 'yuan_jin') {
         utils.firebaseLogEvent(10012, -10013, 'click_marriages_card_result', 'click', {
+          channel: utils.getFBChannel(),
+        });
+      } else {
+        utils.firebaseLogEvent(10011, -10013, 'click_truelove_result', 'click', {
           channel: utils.getFBChannel(),
         });
       }

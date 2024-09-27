@@ -87,6 +87,8 @@ const getFBChannel = () => {
     return 'enjoy09';
   } else if (url.indexOf('/ocean09/') > -1) {
     return 'ocean09';
+  } else if (url.indexOf('/ads09/') > -1) {
+    return 'ads09';
   } else if (url.indexOf('/enjoy10/') > -1) {
     return 'enjoy10';
   } else if (url.indexOf('/ads10/') > -1) {
@@ -94,7 +96,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('/enjoy11/') > -1) {
     return 'enjoy11';
   } else {
-    return 'enjoy11';
+    return 'enjoy09';
   }
 };
 
@@ -156,7 +158,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if(getFBChannel()==='enjoy09'|| getFBChannel()==='ocean09' || getFBChannel()==='enjoy10' || getFBChannel()==='ads10' || getFBChannel()==='enjoy11' ) {
+  if(getFBChannel()==='enjoy09'|| getFBChannel()==='ocean09' || getFBChannel()==='ads09' || getFBChannel()==='enjoy10' || getFBChannel()==='ads10' || getFBChannel()==='enjoy11' ) {
     if(localStorage.getItem('current_country')) {
       return {area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code']}
     } else {

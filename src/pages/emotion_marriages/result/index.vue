@@ -1,6 +1,6 @@
 <template>
   <div class="result" :class="['result']">
-    <ChatCard v-if="is_first" :transfer_code="transfer_code" sub_type="life_marriages"/>
+    <ChatCard  :transfer_code="transfer_code" sub_type="life_marriages"/>
     <div class="top" @click="downClick">
       <img :src="is_cn ? cn_img_chat_top_laoshi : tw_img_chat_top_laoshi" />
     </div>
