@@ -400,7 +400,7 @@ for (var pathname in entries) {
 
 // ads05代理
 for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads05/' + filename + '.html'),
     template: 'template/index_ads05.html',
@@ -425,7 +425,7 @@ for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
 
 // enjoy05代理
 for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy05/' + filename + '.html'),
     template: 'template/index_enjoy05.html',
@@ -449,7 +449,7 @@ for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
 
 // enjoy105代理
 for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy105/' + filename + '.html'),
     template: 'template/index_enjoy105.html',
@@ -472,7 +472,7 @@ for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
 
 // enjoy205代理
 for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy205/' + filename + '.html'),
     template: 'template/index_enjoy205.html',
@@ -495,7 +495,7 @@ for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
 
 // enjoy305代理
 for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy305/' + filename + '.html'),
     template: 'template/index_enjoy305.html',
@@ -519,7 +519,7 @@ for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
 
 // ocean05代理
 for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean05/' + filename + '.html'),
     template: 'template/index_ocean05.html',
@@ -543,7 +543,7 @@ for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
 
 // ocean105代理
 for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean105/' + filename + '.html'),
     template: 'template/index_ocean105.html',
@@ -569,7 +569,7 @@ for (var pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
 
 // ads07代理
 for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads07/' + filename + '.html'),
     template: 'template/index_ads07.html',
@@ -593,7 +593,7 @@ for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
 
 // enjoy07代理
 for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy07/' + filename + '.html'),
     template: 'template/index_enjoy07.html',
@@ -617,7 +617,7 @@ for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
 
 // enjoy107代理
 for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy107/' + filename + '.html'),
     template: 'template/index_enjoy107.html',
@@ -641,7 +641,7 @@ for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
 
 // enjoy307代理
 for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy307/' + filename + '.html'),
     template: 'template/index_enjoy307.html',
@@ -665,7 +665,7 @@ for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
 
 // ocean07代理
 for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean07/' + filename + '.html'),
     template: 'template/index_ocean07.html',
@@ -689,7 +689,7 @@ for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
 
 // ocean107代理
 for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean107/' + filename + '.html'),
     template: 'template/index_ocean107.html',
@@ -713,7 +713,7 @@ for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
 
 // ads08代理
 for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads08/' + filename + '.html'),
     template: 'template/index_ads08.html',
@@ -738,7 +738,7 @@ for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
 
 // enjoy08代理
 for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy08/' + filename + '.html'),
     template: 'template/index_enjoy08.html',
@@ -761,7 +761,7 @@ for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
 
 // enjoy108代理
 for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy108/' + filename + '.html'),
     template: 'template/index_enjoy108.html',
@@ -785,7 +785,7 @@ for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
 
 // enjoy308代理
 for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy308/' + filename + '.html'),
     template: 'template/index_enjoy308.html',
@@ -809,7 +809,7 @@ for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
 
 // ocean08代理
 for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean08/' + filename + '.html'),
     template: 'template/index_ocean08.html',
@@ -833,7 +833,7 @@ for (var pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
 
 // enjoy09代理
 for (var pathname in ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy09/' + filename + '.html'),
     template: 'template/index_enjoy09.html',
@@ -857,7 +857,7 @@ for (var pathname in ['emotion_marriages/emotion_marriages', 'user_agreement/use
 
 // ocean09代理
 for (var pathname in ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean09/' + filename + '.html'),
     template: 'template/index_ocean09.html',
@@ -880,7 +880,7 @@ for (var pathname in ['emotion_marriages/emotion_marriages', 'user_agreement/use
 
 // ads09代理
 for (var pathname in ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads09/' + filename + '.html'),
     template: 'template/index_ads09.html',
@@ -904,7 +904,7 @@ for (var pathname in ['emotion_marriages/emotion_marriages', 'user_agreement/use
 
 // ads10代理
 for (var pathname in ['emotion_remarriage/emotion_remarriage', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads10/' + filename + '.html'),
     template: 'template/index_ads10.html',
@@ -928,7 +928,7 @@ for (var pathname in ['emotion_remarriage/emotion_remarriage', 'user_agreement/u
 
 // enjoy10代理
 for (var pathname in ['emotion_remarriage/emotion_remarriage', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy10/' + filename + '.html'),
     template: 'template/index_enjoy10.html',
@@ -952,7 +952,7 @@ for (var pathname in ['emotion_remarriage/emotion_remarriage', 'user_agreement/u
 
 // enjoy11代理
 for (var pathname in ['emotion_end/emotion_end', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy11/' + filename + '.html'),
     template: 'template/index_enjoy11.html',
