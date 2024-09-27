@@ -344,6 +344,7 @@ for (var pathname in entries) {
     },
   };
   if (pathname in webpackConfig.entry) {
+    console.log('pathname', pathname, '====', webpackConfig.entry)
     conf.chunks = ['manifest', 'vendor', pathname];
     conf.hash = false;
   }
@@ -411,10 +412,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -432,10 +433,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -453,10 +454,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -474,10 +475,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
 // enjoy305代理
@@ -494,10 +495,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -515,10 +516,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -536,8 +537,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-conf.chunks = ['manifest', 'vendor', 'emotion_fortune/emotion_fortune'];
-conf.hash = false;
+['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
+  conf.hash = false;
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -557,10 +560,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -578,10 +581,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -620,10 +623,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -641,10 +644,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -662,10 +665,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -683,10 +686,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -705,10 +708,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -726,10 +729,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -747,10 +750,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -768,10 +771,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -789,10 +792,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -810,12 +813,12 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
-// ocean09代理
+// ads09代理
 var filename = 'emotion_marriages';
 var conf = {
   filename: path.resolve(__dirname, '../dist/ads09/' + filename + '.html'),
@@ -829,10 +832,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -850,10 +853,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_remarriage/emotion_remarriage', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_remarriage/emotion_remarriage', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -871,10 +874,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_remarriage/emotion_remarriage', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_remarriage/emotion_remarriage', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
@@ -892,10 +895,10 @@ var conf = {
     minifyCSS: true,
   },
 };
-if (pathname in ['emotion_end/emotion_end', 'user_agreement/user_agreement', 'privacy/privacy']) {
-  conf.chunks = ['manifest', 'vendor', pathname];
+['emotion_end/emotion_end', 'user_agreement/user_agreement', 'privacy/privacy'].forEach(item=>{
+  conf.chunks = ['manifest', 'vendor', item];
   conf.hash = false;
-}
+})
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 
