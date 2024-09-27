@@ -267,6 +267,7 @@ export default {
         h5_annual2024: '193',
         h5_bai_gua: '146',
         h5_weigh_bone: '138',
+        consult_time: '138',
       };
       return buyList[this.product_key];
     },

@@ -96,7 +96,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('/ads11/') > -1) {
     return 'ads11';
   } else {
-    return 'ads11';
+    return 'enjoy07';
   }
 };
 
@@ -158,7 +158,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if(getFBChannel()==='enjoy09'|| getFBChannel()==='ocean09' || getFBChannel()==='ads09' || getFBChannel()==='enjoy10' || getFBChannel()==='ads10' || getFBChannel()==='ads11' ) {
+  if(getEndStr(getFBChannel(), 2) ==='09'|| getEndStr(getFBChannel(), 2) ==='10' || getEndStr(getFBChannel(), 2) ==='11' || getEndStr(getFBChannel(), 2) ==='07') {
     if(localStorage.getItem('current_country')) {
       return {area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code']}
     } else {
@@ -1734,6 +1734,14 @@ const showEmail = () => {
   return getFBChannel().indexOf('02')> -1 && isIos()
 };
 
+//获取字符串后几位
+const getEndStr = (str,n) => {
+  if(!str) return ''
+  return str.substr(str.length - n);
+};
+
+
+
 // 游客注册登录
 // const visitorLoginAPI = async (data, callback) => {
 //   if (
@@ -1835,5 +1843,6 @@ export default {
   getExtendUrl,
   checkEmail,
   showEmail,
+  getEndStr,
   // visitorLoginAPI,
 };
