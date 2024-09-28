@@ -96,7 +96,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('/ads11/') > -1) {
     return 'ads11';
   } else {
-    return 'enjoy07';
+    return 'enjoy08';
   }
 };
 
@@ -158,7 +158,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if(getEndStr(getFBChannel(), 2) ==='09'|| getEndStr(getFBChannel(), 2) ==='10' || getEndStr(getFBChannel(), 2) ==='11' || getEndStr(getFBChannel(), 2) ==='07') {
+  if(getEndStr(getFBChannel(), 2) ==='09'|| getEndStr(getFBChannel(), 2) ==='10' || getEndStr(getFBChannel(), 2) ==='11' || getEndStr(getFBChannel(), 2) ==='08') {
     if(localStorage.getItem('current_country')) {
       return {area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code']}
     } else {

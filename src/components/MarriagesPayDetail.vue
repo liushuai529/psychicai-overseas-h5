@@ -289,17 +289,17 @@ export default {
 
   computed: {
     getImg() {
-      if (this.current_country.iso_code !== 'TW') {
-        if (this.is_cn) {
-          return img_district_malaysia_cn
-        } else {
-          return img_district_malaysia_tw
-        }
-      } else {
+      if (this.current_country && this.current_country.iso_code === 'TW') {
         if (this.is_cn) {
           return img_district_taiwan_cn
         } else {
           return img_district_taiwan_tw
+        }
+      } else {
+        if (this.is_cn) {
+          return img_district_malaysia_cn
+        } else {
+          return img_district_malaysia_tw
         }
       }
     },
@@ -360,22 +360,10 @@ export default {
   mounted() { },
 
   methods: {
-    // getImg() {
-    //   if (this.current_country.iso_code !== 'TW') {
-    //     if (this.is_cn) {
-    //       return img_district_malaysia_cn
-    //     } else {
-    //       return img_district_malaysia_tw
-    //     }
-    //   } else {
-    //     if (this.is_cn) {
-    //       return img_district_taiwan_cn
-    //     } else {
-    //       return img_district_taiwan_tw
-    //     }
-    //   }
-    // },
     changeCity() {
+      if(!this.current_country) {
+        this.current_country = JSON.parse(localStorage.getItem('current_country'))
+      }
       if (this.current_country.iso_code === 'MY') {
         this.current_country = { area_code: '886', iso_code: 'TW' }
         localStorage.setItem('current_country', JSON.stringify({ area_code: '886', iso_code: 'TW' }))
@@ -384,7 +372,7 @@ export default {
         localStorage.setItem('current_country', JSON.stringify({ area_code: '60', iso_code: 'MY' }))
       }
       setTimeout(() => {
-        
+
         this.getPayMethod(1)
       }, 100);
     },
@@ -456,9 +444,9 @@ export default {
           this.start_down = true;
           this.pay_methods = res.data;
           // this.pay_methods = [...res.data,...res.data,...res.data];
-          if(type) {
+          if (type) {
             this.getProductionList()
-            this.check_index = 0 
+            this.check_index = 0
           }
         }
       } catch (e) {

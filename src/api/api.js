@@ -156,7 +156,6 @@ export const visitorLoginAPI = async data => {
     localStorage.getItem('mlxz_outer_access_token') ||
     localStorage.getItem('mlxz_outer_visitor_id')
   ) {
-    console.log('已登录');
     return true;
   }
   // localStorage.setItem('mlxz_get_visitor', 1);
