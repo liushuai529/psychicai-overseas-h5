@@ -100,7 +100,8 @@
         <!--此处引用按钮组件-->
         <!-- <PayBtn v-if="product_key !== 'consult_time'" :product_key="product_key" :callback="payMoney" />
         <ConsultPayBtn v-else :product_key="product_key" :callback="payMoney" /> -->
-        <img class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw" @click="payMoney" />
+        <img v-if="sub_type==='zheng_yuan'" class="btn emo-btn" src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
+        <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw" @click="payMoney" />
 
 
       </div>
