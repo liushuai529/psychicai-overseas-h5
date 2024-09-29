@@ -101,6 +101,7 @@
         <!-- <PayBtn v-if="product_key !== 'consult_time'" :product_key="product_key" :callback="payMoney" />
         <ConsultPayBtn v-else :product_key="product_key" :callback="payMoney" /> -->
         <img v-if="sub_type==='zheng_yuan'" class="btn emo-btn" src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
+        <img v-else-if="sub_type==='fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" />
         <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw" @click="payMoney" />
 
 
@@ -133,6 +134,12 @@ import img_district_taiwan_cn from '../assets/img/emotion_marriages/cn/img_distr
 import img_district_taiwan_tw from '../assets/img/emotion_marriages/tw/img_district_taiwan_tw.webp';
 import img_home_btu_zixun_cn from '../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp'
 import img_home_btu_zixun_tw from '../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp'
+
+import img_home_btu_zixun_nt_cn_1x from '../assets/img/emotion_remarriage/cn/img_home_btu_zixun_nt_cn_1x.webp';
+import img_home_btu_zixun_nt_tw_1x from '../assets/img/emotion_remarriage/tw/img_home_btu_zixun_nt_tw_1x.webp';
+import img_home_btu_zixun_rm_cn_1x from '../assets/img/emotion_remarriage/cn/img_home_btu_zixun_rm_cn_1x.webp';
+import img_home_btu_zixun_rm_tw_1x from '../assets/img/emotion_remarriage/tw/img_home_btu_zixun_rm_tw_1x.webp';
+
 
 const e_id_arr = {
   h5_wealth2024: '60001',
@@ -195,6 +202,10 @@ export default {
       img_district_malaysia_tw,
       img_district_taiwan_cn,
       img_district_taiwan_tw,
+      img_home_btu_zixun_nt_cn_1x,
+      img_home_btu_zixun_nt_tw_1x,
+      img_home_btu_zixun_rm_cn_1x,
+      img_home_btu_zixun_rm_tw_1x,
       tips1: tipsArr1[utils.getLanguage()],
       tips2: tipsArr2[utils.getLanguage()],
       tips3: tipsArr3[utils.getLanguage()],
@@ -289,6 +300,21 @@ export default {
   },
 
   computed: {
+    getBottomImg() {
+      if (this.current_country && this.current_country.iso_code === 'TW') {
+        if (this.is_cn) {
+          return img_home_btu_zixun_nt_cn_1x
+        } else {
+          return img_home_btu_zixun_nt_tw_1x
+        }
+      } else {
+        if (this.is_cn) {
+          return img_home_btu_zixun_rm_cn_1x
+        } else {
+          return img_home_btu_zixun_rm_tw_1x
+        }
+      }
+    },
     getImg() {
       if (this.current_country && this.current_country.iso_code === 'TW') {
         if (this.is_cn) {

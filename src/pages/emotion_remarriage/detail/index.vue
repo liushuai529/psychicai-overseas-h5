@@ -52,7 +52,7 @@
 
     <div class="footer"></div>
 
-    <img @click="payOrder" class="fix-btn emo-btn" :src="btn_url" />
+    <img @click="payOrder" class="fix-btn emo-btn" :src="getBottomImg" />
 
   </div>
 </template>
@@ -108,6 +108,11 @@ import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhif
 import cn_paypage_tittle_pay from '../../../assets/img/emotion_remarriage/cn/paypage_tittle_pay_cn.webp';
 import tw_paypage_tittle_pay from '../../../assets/img/emotion_remarriage/tw/paypage_tittle_pay_tw.webp';
 
+import img_home_btu_zixun_nt_cn_1x from '../../../assets/img/emotion_remarriage/cn/img_home_btu_zixun_nt_cn_1x.webp';
+import img_home_btu_zixun_nt_tw_1x from '../../../assets/img/emotion_remarriage/tw/img_home_btu_zixun_nt_tw_1x.webp';
+import img_home_btu_zixun_rm_cn_1x from '../../../assets/img/emotion_remarriage/cn/img_home_btu_zixun_rm_cn_1x.webp';
+import img_home_btu_zixun_rm_tw_1x from '../../../assets/img/emotion_remarriage/tw/img_home_btu_zixun_rm_tw_1x.webp';
+
 
 
 import card_img_bj_shang from '../../../assets/img/emotion_fate/card_img_bj_shang.webp';
@@ -154,6 +159,10 @@ export default {
       img_zhifu_fan,
       cn_home_btn,
       tw_home_btn,
+      img_home_btu_zixun_nt_cn_1x,
+      img_home_btu_zixun_nt_tw_1x,
+      img_home_btu_zixun_rm_cn_1x,
+      img_home_btu_zixun_rm_tw_1x,
 
       cn_zhong3,
       cn_zhong4,
@@ -209,7 +218,8 @@ export default {
       duration_time: {
         entry_time: 0,
         exit_time: 0,
-      }
+      },
+      current_country: {},
     };
   },
   watch: {
@@ -244,11 +254,19 @@ export default {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
-    btn_url() {
-      if (this.language === 'zh-CN') {
-        return cn_home_btn;
+    getBottomImg() {
+      if (this.current_country && this.current_country.iso_code === 'TW') {
+        if (this.is_cn) {
+          return img_home_btu_zixun_nt_cn_1x
+        } else {
+          return img_home_btu_zixun_nt_tw_1x
+        }
       } else {
-        return tw_home_btn;
+        if (this.is_cn) {
+          return img_home_btu_zixun_rm_cn_1x
+        } else {
+          return img_home_btu_zixun_rm_tw_1x
+        }
       }
     },
   },
@@ -274,6 +292,7 @@ export default {
 
   mounted() {
     this.duration_time.entry_time = new Date().getTime()
+    this.startWatching('current_country');
     window.scrollTo(0, 0);
     // setTimeout(() => {
     //   this.$nextTick(() => {
@@ -308,6 +327,21 @@ export default {
     }
   },
   methods: {
+    //监听localStorage数据变化
+    startWatching(key) {
+      setInterval(() => {
+        const currentStorage = JSON.parse(localStorage.getItem(key)) || {};
+        if (JSON.stringify(this.storage) !== JSON.stringify(currentStorage)) {
+          this.storage = currentStorage;
+          this.localStorageChanged();
+        }
+      }, 1000);
+    },
+    localStorageChanged() {
+      if(localStorage.getItem('current_country')) {
+        this.current_country = JSON.parse(localStorage.getItem('current_country'))
+      }
+    },
      /**
      * @description: 跳转历史订单页
      * @return {*}
