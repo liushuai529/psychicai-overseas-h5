@@ -63,3 +63,13 @@ https://overseas.psychicai.pro/enjoy10/emotion_remarriage.html
 
 11链接为感情复合（getTWChannel获取当前国家码需要特殊处理）前端针对09链接，不做 FB 像素上报 Purchase
 https://overseas.psychicai.pro/enjoy11/emotion_end.html
+
+
+bjzxmlxz域名投放链接
+
+https://test-overseas.bjzxmlxz.com/enjoyA03/emotion_fortune.html#/
+https://test-overseas.bjzxmlxz.com/enjoyA05/emotion_fortune.html#/
+https://test-overseas.bjzxmlxz.com/enjoyA08/emotion_fate.html#/
+https://test-overseas.bjzxmlxz.com/enjoyA09/emotion_marriages.html#/
+https://test-overseas.bjzxmlxz.com/enjoyA10/emotion_remarriage.html#/
+https://test-overseas.bjzxmlxz.com/enjoyA11/emotion_end.html#/
