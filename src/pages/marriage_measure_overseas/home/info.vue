@@ -244,7 +244,7 @@ export default {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  background: #ffedd8;
+  background-color: #ffedd8;
   border: 0.09rem solid #b70e08;
   border-radius: 0.2rem;
 }

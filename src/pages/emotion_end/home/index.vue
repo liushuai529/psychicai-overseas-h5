@@ -987,7 +987,7 @@ export default {
       align-items: center;
       padding: 0.34rem 0.4rem;
 height: 5.4rem;
-background: #FFF3F3;
+background-color: #FFF3F3;
 border-radius: 0.3rem;
 border: 0.06rem solid #FFBBBB;
 
