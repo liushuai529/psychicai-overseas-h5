@@ -219,7 +219,7 @@ for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
   var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads03/' + filename + '.html'),
-    template: 'template/ads03.html',
+    template: 'template/index_ads03.html',
     inject: true,
     minify: {
       removeComments: true,
@@ -241,7 +241,7 @@ for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
   var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy03/' + filename + '.html'),
-    template: 'template/enjoy03.html',
+    template: 'template/index_enjoy03.html',
     inject: true,
     minify: {
       removeComments: true,
@@ -262,7 +262,7 @@ for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
   var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy103/' + filename + '.html'),
-    template: 'template/enjoy103.html',
+    template: 'template/index_enjoy103.html',
     inject: true,
     minify: {
       removeComments: true,
@@ -284,7 +284,7 @@ for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
   var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy203/' + filename + '.html'),
-    template: 'template/enjoy203.html',
+    template: 'template/index_enjoy203.html',
     inject: true,
     minify: {
       removeComments: true,
@@ -306,7 +306,7 @@ for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
   var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy303/' + filename + '.html'),
-    template: 'template/enjoy303.html',
+    template: 'template/index_enjoy303.html',
     inject: true,
     minify: {
       removeComments: true,
@@ -328,7 +328,7 @@ for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
   var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoyA03/' + filename + '.html'),
-    template: 'template/enjoyA03.html',
+    template: 'template/index_enjoyA03.html',
     inject: true,
     minify: {
       removeComments: true,
