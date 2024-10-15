@@ -276,6 +276,9 @@ export default {
     };
   },
   computed: {
+    is03_series() {
+      return utils.getEndStr(utils.getFBChannel(), 2) ==='03'
+    },
     is_show_fb_notice() {
       return utils.isFBContainer() && utils.getFBChannel().indexOf('02') > -1;
     },
@@ -469,7 +472,9 @@ export default {
         console.log('no fbq:', err);
       }
     }
-    this.showNoticePop();
+    if(!this.is03_series) {
+      this.showNoticePop();
+    }
 
     // 赋默认值
     let storaged_userInfo = window.localStorage.getItem(
