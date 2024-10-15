@@ -11,7 +11,28 @@ import index from './../pages/emotion_fortune/home/index.vue';
 import detail from './../pages/emotion_fortune/detail/index.vue';
 import result from './../pages/emotion_fortune/result/index.vue';
 import utils from '../libs/utils';
+import request from '../api/request';
 Vue.use(Router);
+
+const visitorLoginAPI = async (data, callback) => {
+  if (
+    localStorage.getItem('mlxz_outer_open_uid') ||
+    localStorage.getItem('mlxz_outer_access_token') ||
+    localStorage.getItem('mlxz_outer_visitor_id')
+  ) {
+
+  }
+  else {
+    const res = await request('/web/login/visitor', 'POST', data);
+    if (res.status !== 1000) return;
+    localStorage.setItem('mlxz_outer_open_uid', res.data.open_uid);
+    localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
+    localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
+    fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
+    // console.log('首次登录');
+  }
+ 
+};
 
 const checkCurrentCountry = async (callback) => {
   if (localStorage.getItem('current_country')) {
@@ -34,6 +55,7 @@ export default new Router({
       name: 'index',
       component: index,
       beforeEnter: (to, from, next) => {
+        visitorLoginAPI()
         if (utils.getEndStr(utils.getFBChannel(), 2) === '03') {
           checkCurrentCountry(next)
         } else {
@@ -46,6 +68,7 @@ export default new Router({
       name: 'detail',
       component: detail,
       beforeEnter: (to, from, next) => {
+        visitorLoginAPI()
         if (utils.getEndStr(utils.getFBChannel(), 2) === '03') {
           checkCurrentCountry(next)
         } else {
@@ -58,6 +81,7 @@ export default new Router({
       name: 'result',
       component: result,
       beforeEnter: (to, from, next) => {
+        visitorLoginAPI()
         if (utils.getEndStr(utils.getFBChannel(), 2) === '03') {
           checkCurrentCountry(next)
         } else {
@@ -69,6 +93,7 @@ export default new Router({
       path: '*',
       redirect: '/',
       beforeEnter: (to, from, next) => {
+        visitorLoginAPI()
         if (utils.getEndStr(utils.getFBChannel(), 2) === '03') {
           checkCurrentCountry(next)
         } else {
