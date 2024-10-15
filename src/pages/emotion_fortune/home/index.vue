@@ -14,10 +14,10 @@
       'tw-bg': language === 'zh-TW',
     }">
 
-      <div v-if="!is_channel_01 && !is_channel_05" @click="backHome()" :class="['back-box']" :style="getStyle">
+      <!-- <div v-if="!is_channel_01 && !is_channel_05" @click="backHome()" :class="['back-box']" :style="getStyle">
         <img src="../../../assets/img/common/baogao_icon_home.webp" class="left" alt="" />
         <div class="right">{{ is_cn ? '首页' : '首頁' }}</div>
-      </div>
+      </div> -->
       <!-- <canvas id="bg-svga"></canvas> -->
       <img v-if="!is_channel_01" class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order"
         alt="" />
@@ -106,7 +106,7 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
-      <HotProduct v-if="!is_channel_05" product_key="h5_emotion2024" url="emotion_fortune" e_id="10006" />
+      <!-- <HotProduct v-if="!is_channel_05" product_key="h5_emotion2024" url="emotion_fortune" e_id="10006" /> -->
       <NewFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
       <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
       <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"

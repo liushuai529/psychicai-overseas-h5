@@ -49,7 +49,23 @@
         class="method-title-img"
         :src="is_cn ? img_zhifu_jian : img_zhifu_fan"
       />
+      <MarriagesPayDetail
+        v-if="is03_series"
+        className="pay-method"
+        ref="payDetail"
+        :product_key="product_key"
+        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg"
+        :query_user_string="query_user_string"
+        e_view_id="10006"
+        c_view_id="-10005"
+        e_view_name="view_2024lovely_pay"
+        a_view_token="184kba"
+        c_click_id="-10006"
+        e_click_name="click_2024lovely_pay"
+        a_click_token="2rov44"
+      />
       <PayDetail
+        v-else
         className="pay-method"
         ref="payDetail"
         :product_key="product_key"
@@ -140,6 +156,7 @@ import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
 import tw_zhong4 from '../../../assets/img/emotion/new/tw/zhong_4.webp';
 import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
+import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
 import PayDetail from '../../../components/PayDetail.vue';
 
 import cn_bg_1 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_1.webp';
@@ -165,6 +182,7 @@ export default {
     payModal,
     BaziTable,
     HomeFooter,
+    MarriagesPayDetail,
     PayDetail,
     NewFooter,
     GejuInfo,
@@ -263,6 +281,9 @@ export default {
   },
 
   computed: {
+    is03_series() {
+      return utils.getEndStr(utils.getFBChannel(), 2) ==='03'
+    },
     is_show_fb_notice() {
       return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
     },
