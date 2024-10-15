@@ -12,6 +12,7 @@ import detail from './../pages/emotion_fortune/detail/index.vue';
 import result from './../pages/emotion_fortune/result/index.vue';
 import utils from '../libs/utils';
 import request from '../api/request';
+import {getBaseInfoAPI} from '../api/api';
 Vue.use(Router);
 
 const visitorLoginAPI = async (data, callback) => {
@@ -30,6 +31,11 @@ const visitorLoginAPI = async (data, callback) => {
     localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
     fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
     // console.log('首次登录');
+  }
+  if (utils.getEndStr(utils.getFBChannel(), 2) === '03') {
+    checkCurrentCountry(callback)
+  } else {
+    callback()
   }
  
 };
@@ -55,12 +61,8 @@ export default new Router({
       name: 'index',
       component: index,
       beforeEnter: (to, from, next) => {
-        visitorLoginAPI()
-        if (utils.getEndStr(utils.getFBChannel(), 2) === '03') {
-          checkCurrentCountry(next)
-        } else {
-          next()
-        }
+        visitorLoginAPI({}, next)
+       
       }
     },
     {
@@ -68,12 +70,7 @@ export default new Router({
       name: 'detail',
       component: detail,
       beforeEnter: (to, from, next) => {
-        visitorLoginAPI()
-        if (utils.getEndStr(utils.getFBChannel(), 2) === '03') {
-          checkCurrentCountry(next)
-        } else {
-          next()
-        }
+        visitorLoginAPI({}, next)
       }
     },
     {
@@ -81,24 +78,14 @@ export default new Router({
       name: 'result',
       component: result,
       beforeEnter: (to, from, next) => {
-        visitorLoginAPI()
-        if (utils.getEndStr(utils.getFBChannel(), 2) === '03') {
-          checkCurrentCountry(next)
-        } else {
-          next()
-        }
+        visitorLoginAPI({}, next)
       }
     },
     {
       path: '*',
       redirect: '/',
       beforeEnter: (to, from, next) => {
-        visitorLoginAPI()
-        if (utils.getEndStr(utils.getFBChannel(), 2) === '03') {
-          checkCurrentCountry(next)
-        } else {
-          next()
-        }
+        visitorLoginAPI({}, next)
       }
     },
   ],
