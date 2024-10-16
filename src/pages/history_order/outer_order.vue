@@ -52,16 +52,16 @@
             alt=""
           />
           <div class="tips">{{ $t('tips-3') }}</div>
-          <div class="ad-list">
+          <!-- <div class="ad-list">
             <img
               v-for="(it, k) in ad_list"
               :key="'ad' + k"
               class="it"
               :src="it.icon"
-              @click="jumpUrl(it.url)"
+              @click="jumpUrl(it.url, k)"
               alt=""
             />
-          </div>
+          </div> -->
         </div>
         <div v-else class="order-list">
           <div
@@ -577,8 +577,13 @@ export default {
      * @param {*} url
      * @return {*}
      */
-    jumpUrl(url) {
-      location.href = `${url}.html`;
+    jumpUrl(url, index) {
+      if(index === 0) {
+
+      } else {
+        location.href = `${url}.html`;
+      }
+      
     },
 
     async openApp() {
