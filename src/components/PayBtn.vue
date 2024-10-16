@@ -54,9 +54,6 @@ export default {
     channel2() {
       return ["enjoy02", "panda02"].includes(utils.getFBChannel());
     },
-    channel3() {
-      return utils.isShowCombine().includes(utils.getFBChannel());
-    },
     btn_url() {
       if (utils.getLanguage() === 'zh-CN') {
         if (this.channel1) {

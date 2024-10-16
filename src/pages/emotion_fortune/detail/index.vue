@@ -1,76 +1,36 @@
 <template>
-  <div :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') || show_discount_modal}">
-    <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')"/>
-    <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_emotion2024" :visible="showAnimation"  @update-visible="showAnimation = false"/>
-    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal"/> 
-    <img
-      class="header-title"
-      :src="is_cn ? cn_info_title : tw_info_title"
-      alt=""
-    />
-    
-    
+  <div
+    :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') || show_discount_modal }">
+    <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')" />
+    <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_emotion2024"
+      :visible="showAnimation" @update-visible="showAnimation = false" />
+    <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
+    <img class="header-title" :src="is_cn ? cn_info_title : tw_info_title" alt="" />
+
+
     <div :class="{ 'pay-box': true, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
-      <BaziTable
-        :sex="sex"
-        :is_result="is_result"
-        :username="username"
-        :gongli_nongli="gongli_nongli"
-        :picker_date_yangli="picker_date_yangli"
-        :picker_date_nongli="picker_date_nongli"
-        :gan="gan"
-        :zhi="zhi"
-        :nayin="nayin"
-        :cai_bo_num="cai_bo_num"
-        :gui_ren_num="gui_ren_num"
-        :hun_yin_num="hun_yin_num"
-        :ming_ge="ming_ge"
-        :riyuanqiangruo="riyuanqiangruo"
-        :shi_ye_num="shi_ye_num"
-        :wuxingqiang="wuxingqiang"
-        :tao_hua_num="0"
-        fuqigong=""
-        text_color="#6D2215"
-        minge_color="#EC436B"
-        :show_daji="false"
-        bg="#fff"
-        width="6.5rem"
-        table_border="0.02rem solid #EC436B"
-        border_color="#EC436B"
-        :is_show_taohua="1"
-        :change_color="true"
-      >
+      <BaziTable :sex="sex" :is_result="is_result" :username="username" :gongli_nongli="gongli_nongli"
+        :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
+        :nayin="nayin" :cai_bo_num="cai_bo_num" :gui_ren_num="gui_ren_num" :hun_yin_num="hun_yin_num" :ming_ge="ming_ge"
+        :riyuanqiangruo="riyuanqiangruo" :shi_ye_num="shi_ye_num" :wuxingqiang="wuxingqiang" :tao_hua_num="0"
+        fuqigong="" text_color="#6D2215" minge_color="#EC436B" :show_daji="false" bg="#fff" width="6.5rem"
+        table_border="0.02rem solid #EC436B" border_color="#EC436B" :is_show_taohua="1" :change_color="true">
       </BaziTable>
     </div>
-    <PayItem product_key="h5_emotion2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal"/>
+    <PayItem product_key="h5_emotion2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
     <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
-      <img
-        id="method-title-img"
-        class="method-title-img"
-        :src="is_cn ? img_zhifu_jian : img_zhifu_fan"
-      />
-      <PayDetail
-        className="pay-method"
-        ref="payDetail"
-        :product_key="product_key"
-        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg"
-        :query_user_string="query_user_string"
-        e_view_id="10006"
-        c_view_id="-10005"
-        e_view_name="view_2024lovely_pay"
-        a_view_token="184kba"
-        c_click_id="-10006"
-        e_click_name="click_2024lovely_pay"
-        a_click_token="2rov44"
-      />
+      <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
+      <MarriagesPayDetail v-if="is03_series" className="pay-method" ref="payDetail" :product_key="product_key"
+        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10006"
+        c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
+        e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
+      <PayDetail v-else className="pay-method" ref="payDetail" :product_key="product_key"
+        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10006"
+        c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
+        e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
     </div>
-    <GejuInfo
-      v-if="is_show_combinationSpecial02"
-      style="margin-bottom: 0.36rem"
-      :product_key="product_key"
-      :user_desc="[mingge_desc]"
-      :dataList="[gejujiedu]"
-    />
+    <GejuInfo v-if="is_show_combinationSpecial02" style="margin-bottom: 0.36rem" :product_key="product_key"
+      :user_desc="[mingge_desc]" :dataList="[gejujiedu]" />
     <!-- <div class="card-box">
       <canvas id="qian"></canvas>
     </div> -->
@@ -103,9 +63,9 @@
       e_click_name="click_2024lovely_pay"
       a_click_token="2rov44"
     /> -->
-    <img @click="payOrder" class="fix-btn emo-btn" :src="btn_url" />
+    <img @click="payOrder" :class="['emo-btn', is03_series? 'fix-btn1': 'fix-btn']" :src="btn_url" />
     <HomeFooter product_key="h5_emotion2024" />
-    <FixedDiscountModal product_key="h5_emotion2024" @change_discount_modal="change_discount_modal"/>
+    <FixedDiscountModal product_key="h5_emotion2024" @change_discount_modal="change_discount_modal" />
   </div>
 </template>
 
@@ -124,6 +84,10 @@ import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/pay.webp';
 import cn_home_xs_btn from '../../../assets/img/emotion_v2/new/cn/pay_xs.webp';
 import tw_home_xs_btn from '../../../assets/img/emotion_v2/new/tw/pay_xs.webp';
 
+import img_home_btu_zixun_cn from '../../../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp'
+import img_home_btu_zixun_tw from '../../../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp'
+
+
 import PayCard from '../../../components/PayCard.vue';
 import cn_card_1 from '../../../assets/img/emotion/home_card1.webp';
 import tw_card_1 from '../../../assets/img/tw_mlxz/emotion/home_card1.webp';
@@ -140,6 +104,7 @@ import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
 import tw_zhong4 from '../../../assets/img/emotion/new/tw/zhong_4.webp';
 import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
+import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
 import PayDetail from '../../../components/PayDetail.vue';
 
 import cn_bg_1 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_1.webp';
@@ -165,6 +130,7 @@ export default {
     payModal,
     BaziTable,
     HomeFooter,
+    MarriagesPayDetail,
     PayDetail,
     NewFooter,
     GejuInfo,
@@ -191,6 +157,8 @@ export default {
       tw_home_btn1,
       cn_home_xs_btn,
       tw_home_xs_btn,
+      img_home_btu_zixun_cn,
+      img_home_btu_zixun_tw,
       cn_zhong3,
       cn_zhong4,
       tw_zhong3,
@@ -246,7 +214,7 @@ export default {
   },
   watch: {
     showAnimation(val) {
-      if(!val) {
+      if (!val) {
         setTimeout(() => {
           this.$nextTick(() => {
             //排除渠道3
@@ -263,8 +231,11 @@ export default {
   },
 
   computed: {
+    is03_series() {
+      return utils.getEndStr(utils.getFBChannel(), 2) === '03'
+    },
     is_show_fb_notice() {
-      return utils.isFBContainer() && utils.getFBChannel().indexOf('02')>-1;
+      return utils.isFBContainer() && utils.getFBChannel().indexOf('02') > -1;
     },
     //套餐支付显示逻辑
     is_show_combination() {
@@ -292,6 +263,9 @@ export default {
     channel2() {
       return ['enjoy02', 'panda02'].includes(utils.getFBChannel());
     },
+    is03_series() {
+      return utils.getEndStr(utils.getFBChannel(), 2) === '03'
+    },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -299,22 +273,26 @@ export default {
       if (this.language === 'zh-CN') {
         if (this.channel1) {
           return cn_home_btn;
-        } 
+        }
         else if (this.channel2) {
           // return cn_home_xs_btn;
           return cn_home_btn1;
-        } 
+        } else if (this.is03_series) {
+          return img_home_btu_zixun_cn;
+        }
         else {
           return cn_home_btn1;
         }
       } else {
         if (this.channel1) {
           return tw_home_btn;
-        } 
+        }
         else if (this.channel2) {
           // return tw_home_xs_btn;
           return tw_home_btn1;
-        } 
+        } else if (this.is03_series) {
+          return img_home_btu_zixun_tw;
+        }
         else {
           return tw_home_btn1;
         }
@@ -379,10 +357,10 @@ export default {
     });
   },
   methods: {
-     /**
-     * 显示低价折扣遮罩
-     */
-     change_discount_modal(val) {
+    /**
+    * 显示低价折扣遮罩
+    */
+    change_discount_modal(val) {
       this.show_discount_modal = val;
     },
     showModal() {
@@ -463,30 +441,27 @@ export default {
       );
       let lunar = solar.getLunar();
       this.picker_date_nongli = +this.gongli_nongli
-        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${
-            this.picker_hour
-          }`
+        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${this.picker_hour
+        }`
         : `${this.year}年${utils.formateNongliMonth(
-            this.month
-          )}${utils.formateNongliDate(this.date)} ${this.picker_hour}`;
+          this.month
+        )}${utils.formateNongliDate(this.date)} ${this.picker_hour}`;
       this.picker_date_yangli = +this.gongli_nongli
         ? `${this.year}-${this.month}-${this.date} ${this.picker_hour}`
         : `${Lunar.fromYmd(+this.year, +this.month, +this.date)
-            .getSolar()
-            .toString()} ${this.picker_hour}`;
+          .getSolar()
+          .toString()} ${this.picker_hour}`;
 
       let nongli_desc = +this.gongli_nongli
         ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} `
         : `${this.year}年${utils.formateNongliMonth(
-            this.month
-          )}${utils.formateNongliDate(this.date)}`;
+          this.month
+        )}${utils.formateNongliDate(this.date)}`;
       this.mingge_desc = +this.gongli_nongli
-        ? `${(this.username = utils.getShortStr(arr[0], 4))}，${
-            this.sex === 0 ? '女' : '男'
-          }，${this.year}年${this.month}月${this.date}日生人`
-        : `${(this.username = utils.getShortStr(arr[0], 4))}，${
-            this.sex === 0 ? '女' : '男'
-          }，${nongli_desc}生人`;
+        ? `${(this.username = utils.getShortStr(arr[0], 4))}，${this.sex === 0 ? '女' : '男'
+        }，${this.year}年${this.month}月${this.date}日生人`
+        : `${(this.username = utils.getShortStr(arr[0], 4))}，${this.sex === 0 ? '女' : '男'
+        }，${nongli_desc}生人`;
     },
 
     // 支付弹窗
@@ -559,14 +534,12 @@ export default {
   }
 
   .cn-bg {
-    background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.webp)
-      no-repeat;
+    background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.webp) no-repeat;
     background-size: 100% 100%;
   }
 
   .tw-bg {
-    background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.webp)
-      no-repeat;
+    background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.webp) no-repeat;
     background-size: 100% 100%;
   }
 
@@ -626,12 +599,21 @@ export default {
 }
 
 .fix-btn {
-  width: 6.26rem;
+  width: 6.28rem;
   height: 1.34rem;
   position: fixed;
   bottom: 0.2rem;
   z-index: 99;
 }
+.fix-btn1 {
+  width: 5.7rem;
+  height: 0.98rem;
+  position: fixed;
+  bottom: 0.2rem;
+  z-index: 99;
+}
+
+
 
 .pay-method {
   width: 6.5rem;
