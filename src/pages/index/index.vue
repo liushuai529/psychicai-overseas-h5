@@ -1777,7 +1777,7 @@ export default {
         });
         console.log('Purchase事件上报', this.order_id)
         if (utils.isProd()) {
-          await utils.checkFB();
+          
           try {
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '开始上报FB埋点，Purchase',
@@ -1785,7 +1785,7 @@ export default {
               mlxz_currency: 'MYR',
               mlxz_order_status: report_status,
             });
-            fbq('track', 'Purchase', {
+            fbq && fbq('track', 'Purchase', {
               value: report_price.toFixed(2),
               currency: 'MYR',
             },{eventID: this.order_id});
@@ -2130,9 +2130,9 @@ export default {
      */
     async logHome() {
       if (utils.isProd()) {
-        await utils.checkFB();
+        
         try {
-          fbq('track', 'CompleteRegistration');
+          fbq && fbq('track', 'CompleteRegistration');
         } catch (err) {
           console.error('CompleteRegistration  error message:', err);
         }

@@ -409,6 +409,7 @@ export default {
     },
   },
   created() {
+    console.log('gata', gtag)
     this.showComboAttach();
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
@@ -874,9 +875,9 @@ export default {
         }
       );
       if (utils.isProd()) {
-        await utils.checkFB();
+        
         try {
-          fbq('track', 'Lead');
+          fbq && fbq('track', 'Lead');
         } catch (err) {
           console.error('Lead  error message:', err);
         }

@@ -752,9 +752,9 @@ export default {
         }
       );
       if (utils.isProd()) {
-        await utils.checkFB();
+        
         try {
-          fbq('track', 'Lead');
+          fbq && fbq('track', 'Lead');
         } catch (err) {
           console.error('Lead  error message:', err);
         }

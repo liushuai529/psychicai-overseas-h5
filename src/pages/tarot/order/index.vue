@@ -394,7 +394,7 @@ export default {
 
         params.callback_url = `${location.origin
           }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key || 'master_tarot']
-          }&report_price=${same_product.price}&repay=1&currency_type=${trade_currency || 'MYR'}`;
+          }&report_price=${same_product.price}&repay=1&currency_type=${trade_currency || 'MYR'}&product_id=${product_id}`;
         const res = await payTarotOrderAPI(params);
 
         Indicator.close();

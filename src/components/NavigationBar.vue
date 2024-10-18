@@ -231,9 +231,9 @@ export default {
     },
     async sendEventFbq() {
       if (utils.isProd()) {
-        await utils.checkFB();
+        
         try {
-          fbq('track', 'CompleteRegistration');
+          fbq && fbq('track', 'CompleteRegistration');
         } catch (err) {
           console.error('CompleteRegistration  error message:', err);
         }

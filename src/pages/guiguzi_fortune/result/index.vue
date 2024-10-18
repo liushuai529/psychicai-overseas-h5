@@ -256,7 +256,7 @@ export default {
         });
         console.log('Purchase事件上报', this.order_id)
         if (utils.isProd()) {
-          await utils.checkFB();
+          
           try {
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '开始上报FB埋点，Purchase',
@@ -264,10 +264,20 @@ export default {
               mlxz_currency: currency_type,
               mlxz_order_status: report_status,
             });
-            fbq('track', 'Purchase', {
+            fbq && fbq('track', 'Purchase', {
               value: report_price.toFixed(2),
               currency: currency_type,
             },{eventID: this.order_id});
+            gtag && gtag("event", "purchase", {
+              transaction_id: this.order_id,
+              value: report_price.toFixed(2),
+              currency: currency_type, 
+              items: [
+                {
+                  item_id: 0 
+                }
+              ]
+            })
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '完成FB埋点上报，Purchase',
               mlxz_value: report_price.toFixed(2),

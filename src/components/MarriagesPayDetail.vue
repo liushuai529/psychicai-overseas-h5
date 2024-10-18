@@ -515,10 +515,10 @@ export default {
       }, 2000);
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
-        await utils.checkFB();
+        
         Indicator.close();
         try {
-          fbq('track', 'AddToCart', {
+          fbq && fbq('track', 'AddToCart', {
             value: this.product.price.toFixed(2),
             currency: this.product.currency_type || 'MYR',
           });
@@ -585,7 +585,7 @@ export default {
 
       pay_max_params.callback_url = `${location.origin}${location.pathname
         }#/result?path=${location.pathname}&report_price=${this.product.price
-        }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}`;
+        }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}&product_id=${this.product.product_id}`;
       let res = null;
       if (this.product_key === 'consult_time') {
         delete pay_max_params.extra_ce_suan

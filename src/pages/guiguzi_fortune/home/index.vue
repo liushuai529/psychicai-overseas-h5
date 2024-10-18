@@ -647,9 +647,9 @@ export default {
         click_type: 'screen_tracking',
       });
       if (utils.isProd()) {
-        await utils.checkFB();
+        
         try {
-          fbq('track', 'Lead');
+          fbq && fbq('track', 'Lead');
         } catch (err) {
           console.error('Lead  error message:', err);
         }

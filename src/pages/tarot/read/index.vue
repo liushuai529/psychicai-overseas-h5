@@ -181,9 +181,9 @@ export default {
       );
       console.log('localStorage.getIt', localStorage.getItem('selected_card_list'))
       if (utils.isProd()) {
-        await utils.checkFB();
+        
         try {
-          fbq('track', 'Lead');
+          fbq && fbq('track', 'Lead');
         } catch (err) {
           console.error('Lead  error message:', err);
         }

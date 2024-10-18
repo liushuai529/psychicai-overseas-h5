@@ -412,10 +412,10 @@ export default {
       }, 2000);
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
-        await utils.checkFB();
+        
         Indicator.close();
         try {
-          fbq('track', 'AddToCart', {
+          fbq && fbq('track', 'AddToCart', {
               value: this.product.price.toFixed(2),
               currency: this.product.currency_type || 'MYR',
             });
@@ -481,7 +481,7 @@ export default {
       });
       pay_max_params.callback_url = `${location.origin}${location.pathname
         }#/result?path=${path_enums[this.product_key]}&report_price=${this.product && this.product.price ? this.product.price : '19.9'
-        }&currency_type=${this.product.currency_type || 'MYR'}`;
+        }&currency_type=${this.product.currency_type || 'MYR'}&product_id=${this.product.product_id}`;
       const res = await payTarotOrderAPI(pay_max_params);
       localStorage.removeItem('mlxz_set_event_times');
       Indicator.close();

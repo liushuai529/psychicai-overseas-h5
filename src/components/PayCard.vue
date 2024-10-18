@@ -563,7 +563,7 @@ export default {
         };
         params.callback_url = `${location.origin}${
           location.pathname
-        }#/result?path=${path_enums[this.product_key]}`;
+        }#/result?path=${path_enums[this.product_key]}&product_id=${product_id}`;
         params.extra_ce_suan = this.getExtra();
         if (this.paying) return false;
         this.paying = true;

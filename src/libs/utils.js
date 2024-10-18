@@ -1272,6 +1272,8 @@ const getShortStr = (str, len = 4) => {
   }
 };
 
+
+
 // 获取语言
 const getLanguage = () => {
   // return 'zh-TW';
@@ -1620,66 +1622,8 @@ const fbEvent = () => {
   return fb;
 };
 
-let timer = null;
-const checkFB = () => {
-  const has_fb = typeof fbq === 'function';
-  console.log('has_fb', has_fb);
-  // 如果有fb就触发事件 ，没有就每秒轮询，有fb就触发,没有就5秒后重置
-  if (has_fb) {
-    if (timer) {
-      clearInterval(timer);
-    }
-    return Promise.resolve(true);
-  } else {
-    return new Promise((resolve, reject) => {
-      let i = 0;
-      let count = 0;
-      timer = setInterval(() => {
-        i++;
-        if (i > 5) {
-          console.log(count);
-          // clearInterval(timer);
-          if (count > 5) {
-            clearInterval(timer);
-            reject('fbq is not a function after 5 times check');
-          } else {
-            count++;
-            resetInitFB();
-          }
-        }
-        if (typeof fbq === 'function') {
-          clearInterval(timer);
-          resolve(true);
-        }
-      }, 1000);
-    });
-  }
-};
-const resetInitFB = () => {
-  let script = document.createElement('script');
-  script.innerHTML = `
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', ${channel_obj[getFBChannel()]});
-    fbq('track', 'PageView');
-  `;
-  document.body.appendChild(script);
 
-  let noscript = document.createElement('noscript');
-  noscript.innerHTML = `
-    <img height="1" width="1" style="display:none" 
-         src="https://www.facebook.com/tr?id=${channel_obj[getFBChannel()]
-    }&ev=PageView&noscript=1"/>
-  `;
-  document.body.appendChild(noscript);
-  checkFB();
-};
+
 
 const copyResultCode = text => {
   navigator.clipboard
@@ -1791,7 +1735,6 @@ export default {
   resetPageUrl,
   getUrlParams,
   copyResultCode,
-  checkFB,
   fbEvent,
   getFBChannel,
   getTWChannel,
