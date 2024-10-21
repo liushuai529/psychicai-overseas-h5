@@ -388,7 +388,7 @@ export default {
         });
         console.log('Purchase事件上报', this.order_id)
         if (utils.isProd()) {
-          await utils.checkFB();
+          
           try {
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '开始上报FB埋点，Purchase',

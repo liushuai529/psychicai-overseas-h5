@@ -100,9 +100,11 @@
         <!--此处引用按钮组件-->
         <!-- <PayBtn v-if="product_key !== 'consult_time'" :product_key="product_key" :callback="payMoney" />
         <ConsultPayBtn v-else :product_key="product_key" :callback="payMoney" /> -->
-        <img v-if="sub_type==='zheng_yuan'" class="btn emo-btn" src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
-        <img v-else-if="sub_type==='fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" />
-        <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw" @click="payMoney" />
+        <img v-if="sub_type === 'zheng_yuan'" class="btn emo-btn"
+          src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
+        <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" />
+        <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"
+          @click="payMoney" />
 
 
       </div>
@@ -388,7 +390,7 @@ export default {
 
   methods: {
     changeCity() {
-      if(!this.current_country) {
+      if (!this.current_country) {
         this.current_country = JSON.parse(localStorage.getItem('current_country'))
       }
       if (this.current_country.iso_code === 'MY') {
@@ -515,16 +517,25 @@ export default {
       }, 2000);
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
-        await utils.checkFB();
+
         Indicator.close();
         try {
-          fbq('track', 'AddToCart', {
+          fbq && fbq('track', 'AddToCart', {
             value: this.product.price.toFixed(2),
             currency: this.product.currency_type || 'MYR',
           });
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
+        gata && gtag("event", "add_to_cart", {
+          value: this.product.price.toFixed(2),
+          currency: this.product.currency_type || 'MYR',
+          items: [
+            {
+              item_id: this.product.product_id,
+            }
+          ]
+        });
       }
 
       this.logEventForSort({
@@ -585,7 +596,7 @@ export default {
 
       pay_max_params.callback_url = `${location.origin}${location.pathname
         }#/result?path=${location.pathname}&report_price=${this.product.price
-        }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}`;
+        }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}&product_id=${this.product.product_id}`;
       let res = null;
       if (this.product_key === 'consult_time') {
         delete pay_max_params.extra_ce_suan

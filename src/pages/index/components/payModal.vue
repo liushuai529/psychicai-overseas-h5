@@ -132,7 +132,7 @@ export default {
     eventSend(index, title) {
       if (!index) return;
       try {
-        fbq('track', 'AddToCart');
+        fbq && fbq('track', 'AddToCart');
       } catch (err) {
         console.error('error message:', err);
       }

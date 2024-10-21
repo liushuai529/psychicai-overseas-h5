@@ -192,7 +192,7 @@ export default {
           params.extra_ce_suan = ext;
           params.callback_url = `${location.origin
             }/${utils.getFBChannel()}/${back_url}.html#/result?path=${path_enums[same_product.product_key]
-            }&report_price=${payment}&repay=3`;
+            }&report_price=${payment}&repay=3&product_id=${product_id}`;
 
           let e_name =
             same_product.product_key === 'h5_emotion2024'
@@ -230,7 +230,7 @@ export default {
             length_ +
             '&report_price=' +
             payment +
-            '&repay=1';
+            '&repay=1'+'&product_id='+product_id;
         }
 
         const res = await payOrderAPI(params);
@@ -272,7 +272,7 @@ export default {
 
       params.callback_url = `${location.origin
         }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
-        }&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}`;
+        }&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}&product_id=${product_id}`;
       const res = await payOrderAPI(params);
 
       Indicator.close();

@@ -690,9 +690,9 @@ export default {
         }
       );
       if (utils.isProd()) {
-        await utils.checkFB();
+        
         try {
-          fbq('track', 'Lead');
+           
         } catch (err) {
           console.error('Lead  error message:', err);
         }

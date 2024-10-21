@@ -672,7 +672,7 @@ export default {
               location.origin
             }/${utils.getFBChannel()}/${back_url}.html#/result?path=${
               path_enums[same_product.product_key]
-            }&report_price=${payment}&repay=3`;
+            }&report_price=${payment}&repay=3&product_id=${product_id}`;
 
             let e_name =
               same_product.product_key === 'h5_emotion2024'
@@ -710,7 +710,7 @@ export default {
               length_ +
               '&report_price=' +
               payment +
-              '&repay=1&currency_type='+trade_currency || 'MYR';
+              '&repay=1&currency_type='+trade_currency || 'MYR' + '&product_id='+product_id;
             
           }
 
@@ -754,7 +754,7 @@ export default {
           location.origin
         }/${utils.getFBChannel()}/${url}.html#/result?path=${
           path_enums[product_key]
-        }&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}`;
+        }&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}&product_id=${product_id}`;
         const res = await payOrderAPI(params);
 
         Indicator.close();
