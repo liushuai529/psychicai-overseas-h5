@@ -653,6 +653,14 @@ export default {
         } catch (err) {
           console.error('Lead  error message:', err);
         }
+        let same_ = this.productList.find(
+          item => item.product_key === this.product_key
+        );
+        const { price, currency_type } = same_; 
+        gtag && gtag("event", "generate_lead", {
+          currency: currency_type,
+          value: price,
+        });
       }
       if (show_popup) {
         this.visible = true;

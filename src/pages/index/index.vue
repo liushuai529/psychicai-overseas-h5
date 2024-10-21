@@ -1718,6 +1718,7 @@ export default {
       let report_status =
         utils.getQueryString('status') || this.order_id ? 'SUCCESS' : '';
       let repay = +utils.getQueryString('repay');
+      let product_id = utils.getQueryStr('product_id');
 
       // let pay_index = +utils.getQueryString('pay_index') ;
       let pay_index;
@@ -1789,6 +1790,16 @@ export default {
               value: report_price.toFixed(2),
               currency: 'MYR',
             },{eventID: this.order_id});
+            gtag && gtag("event", "purchase", {
+              transaction_id: this.order_id,
+              value: report_price.toFixed(2),
+              currency: currency_type, 
+              items: [
+                {
+                  item_id: product_id, 
+                }
+              ]
+            })
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '完成FB埋点上报，Purchase',
               mlxz_value: report_price.toFixed(2),

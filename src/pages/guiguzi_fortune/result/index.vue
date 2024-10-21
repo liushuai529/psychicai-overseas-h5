@@ -203,6 +203,7 @@ export default {
       let discount_pay = +utils.getQueryStr('discount_pay');
       let currency_type = utils.getQueryStr('currency_type');
       let repay = +utils.getQueryStr('repay');
+      let product_id = utils.getQueryStr('product_id');
 
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
@@ -274,7 +275,7 @@ export default {
               currency: currency_type, 
               items: [
                 {
-                  item_id: 0 
+                  item_id: product_id, 
                 }
               ]
             })

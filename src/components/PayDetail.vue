@@ -320,21 +320,21 @@ export default {
 
     this.getPayMethod();
 
-    if(this.c_view_id) {
+    if (this.c_view_id) {
       utils.firebaseLogEvent(
-      this.e_view_id,
-      this.c_view_id,
-      this.e_view_name,
-      'view',
-      {
-        args_name: this.e_view_name,
-        channel: utils.getFBChannel(),
-      }
-    );
+        this.e_view_id,
+        this.c_view_id,
+        this.e_view_name,
+        'view',
+        {
+          args_name: this.e_view_name,
+          channel: utils.getFBChannel(),
+        }
+      );
     }
 
 
-    
+
   },
   mounted() { },
 
@@ -447,16 +447,25 @@ export default {
       }, 2000);
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
-        
+
         Indicator.close();
         try {
           fbq && fbq('track', 'AddToCart', {
-              value: this.product.price.toFixed(2),
-              currency: this.product.currency_type || 'MYR',
-            });
+            value: this.product.price.toFixed(2),
+            currency: this.product.currency_type || 'MYR',
+          });
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
+        gata && gtag("event", "add_to_cart", {
+          value: this.product.price.toFixed(2),
+          currency: this.product.currency_type || 'MYR',
+          items: [
+            {
+              item_id: this.product.product_id,
+            }
+          ]
+        });
       }
 
       this.logEventForSort({
@@ -529,7 +538,7 @@ export default {
           product_sub_type: 'zheng_yuan',
         });
       }
-   
+
       pay_max_params.callback_url = `${location.origin}${location.pathname
         }#/result?path=${path_enums[this.product_key]}&report_price=${this.product.price
         }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}&product_id=${this.product.product_id}`;
