@@ -1704,29 +1704,6 @@ const getEndStr = (str,n) => {
 
 
 
-// 游客注册登录
-// const visitorLoginAPI = async (data, callback) => {
-//   if (
-//     localStorage.getItem('mlxz_outer_open_uid') ||
-//     localStorage.getItem('mlxz_outer_access_token') ||
-//     localStorage.getItem('mlxz_outer_visitor_id')
-//   ) {
-//     console.log('已登录');
-//     callback && callback()
-//     return true;
-//   }
-//   // localStorage.setItem('mlxz_get_visitor', 1);
-
-//   const res = await request('/web/login/visitor', 'POST', data);
-//   if (res.status !== 1000) return;
-//   callback && callback()
-//   localStorage.setItem('mlxz_outer_open_uid', res.data.open_uid);
-//   localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
-//   localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
-//   fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
-
-//   return true;
-// };
 
 
 export default {
@@ -1805,5 +1782,4 @@ export default {
   checkEmail,
   showEmail,
   getEndStr,
-  // visitorLoginAPI,
 };

@@ -6,7 +6,6 @@
  * @Description:
  */
 import axios from 'axios';
-import { addParams } from './sign';
 import { testBaseURL, prodBaseURL, devBaseUrl } from './baseURL';
 import { Toast, Indicator } from 'mint-ui';
 import utils from '../libs/utils';

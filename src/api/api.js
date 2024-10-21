@@ -73,9 +73,6 @@ export const getFateResultAPI = async data => {
 
 // 商品查询
 export const getProductionsAPI = async (productGroup, isTarot) => {
-  if(!isTarot) {
-    
-  }
   return request(`/web/auth/trade/products/${productGroup}`, 'GET');
 };
 
@@ -147,27 +144,6 @@ export const getPayMethodsAPI = async data => {
 export const getBazihehunAPI = async data => {
   
   return request(`/web/auth/bazi/hehun`, 'POST', data);
-};
-
-// 游客注册登录
-export const visitorLoginAPI = async data => {
-  // if (
-  //   localStorage.getItem('mlxz_outer_open_uid') ||
-  //   localStorage.getItem('mlxz_outer_access_token') ||
-  //   localStorage.getItem('mlxz_outer_visitor_id')
-  // ) {
-  //   return true;
-  // }
-  // // localStorage.setItem('mlxz_get_visitor', 1);
-
-  // const res = await request('/web/login/visitor', 'POST', data);
-  // if (res.status !== 1000) return;
-  // localStorage.setItem('mlxz_outer_open_uid', res.data.open_uid);
-  // localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
-  // localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
-  // fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
-  // console.log('首次登录');
-  // return true;
 };
 
 // 已支付待填写子订单查询

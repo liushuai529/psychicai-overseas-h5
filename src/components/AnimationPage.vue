@@ -1,8 +1,8 @@
 <template>
   <div :class="['animation-page', getBgImg]" v-if="show_modal">
-    <canvas id="canvas_mp" :class="['daji', product_key==='consult_time'?'po-top': '']">
+    <canvas id="canvas_mp" :class="['daji', product_key === 'consult_time' ? 'po-top' : '']">
     </canvas>
-    <img :class="['mp', product_key==='consult_time'?'mg-top': '']" :src="getMpImg" />
+    <img :class="['mp', product_key === 'consult_time' ? 'mg-top' : '']" :src="getMpImg" />
     <div :class="['progress-container', getBgTip, is_consult ? 'consult-color' : '']">
       <div>{{ getTipText }}</div>
       <div :class="['progress-uncheck', is_consult ? 'consult-progress-uncheck' : '']">
@@ -134,22 +134,12 @@ export default {
       }
     },
     getTipText() {
-      if (this.product_key === 'h5_emotion2024') {
-        if (this.current_time === 1) {
-          return utils.getLanguage() === 'zh-CN' ? '1.正在录入你的信息...' : '1.正在錄入你的信息...'
-        } else if (this.current_time === 2) {
-          return utils.getLanguage() === 'zh-CN' ? '2.正在计算你的八字...' : '2.正在計算你的八字...'
-        } else if (this.current_time === 3) {
-          return utils.getLanguage() === 'zh-CN' ? '3.正在分析你的运势...' : '3.正在分析你的運勢...'
-        }
-      } else {
-        if (this.current_time === 1) {
-          return utils.getLanguage() === 'zh-CN' ? '1.正在录入你的信息...' : '1.正在錄入你的信息...'
-        } else if (this.current_time === 2) {
-          return utils.getLanguage() === 'zh-CN' ? '2.正在计算你的八字...' : '2.正在計算你的八字...'
-        } else if (this.current_time === 3) {
-          return utils.getLanguage() === 'zh-CN' ? '3.正在分析你的运势...' : '3.正在分析你的運勢...'
-        }
+      if (this.current_time === 1) {
+        return utils.getLanguage() === 'zh-CN' ? '1.正在录入你的信息...' : '1.正在錄入你的信息...'
+      } else if (this.current_time === 2) {
+        return utils.getLanguage() === 'zh-CN' ? '2.正在计算你的八字...' : '2.正在計算你的八字...'
+      } else if (this.current_time === 3) {
+        return utils.getLanguage() === 'zh-CN' ? '3.正在分析你的运势...' : '3.正在分析你的運勢...'
       }
     },
   },
@@ -213,7 +203,7 @@ export default {
   flex-direction: column;
   align-items: center;
 
-  
+
 
   .daji {
     position: absolute;
@@ -228,9 +218,11 @@ export default {
     width: 6.1rem;
     height: 6.1rem;
   }
+
   .mg-top {
     margin-top: 2.5rem;
   }
+
   .po-top {
     top: 2.5rem;
   }
@@ -303,7 +295,7 @@ export default {
   background-color: #FEF1CF;
   background-size: cover;
   background-position: center center;
- 
+
 }
 
 .consult-bg-tw {

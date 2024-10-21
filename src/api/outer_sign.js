@@ -26,7 +26,16 @@ export const getAppSign = config => {
   for (let key in params) {
     keys.push(key);
   }
-  keys = keys.sort((x, y) => (x > y ? 1 : x < y ? -1 : 0));
+  // keys = keys.sort((x, y) => (x > y ? 1 : x < y ? -1 : 0));
+  keys = keys.sort((x, y) => {
+    if (x > y) {
+      return 1
+    } else if (x < y) {
+      return -1
+    } else {
+      0
+    }
+  });
 
   // 拼接重新排好的参数
   let keysStr = '';
@@ -64,9 +73,15 @@ export const addOutParams = config => {
     localStorage.getItem('mlxz_outer_access_token') || '';
   config.params.language = utils.getLanguage();
   config.params.channel = utils.getFBChannel() ? utils.getFBChannel() : '';
-  config.params.os = utils.isIos() ? 'IPHONE' : utils.isAndroid()? 'ANDROID': '';
+  if(utils.isIos()) {
+    config.params.os = 'IPHONE';
+  } else if(utils.isAndroid()) {
+    config.params.os = 'ANDROID';
+  } else {
+    config.params.os = ''; 
+  }
   config.params.device_id = utils.getDeviceId();
-  config.params.area_code = utils.getTWChannel()['area_code'] 
+  config.params.area_code = utils.getTWChannel()['area_code']
   config.params.iso_code = utils.getTWChannel()['iso_code']
   config.params.app_sign = getAppSign(config);
 
