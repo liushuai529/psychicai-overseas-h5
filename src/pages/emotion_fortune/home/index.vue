@@ -409,7 +409,7 @@ export default {
     },
   },
   created() {
-    console.log('gata', gtag)
+    console.log('gtag', gtag)
     this.showComboAttach();
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
@@ -874,6 +874,14 @@ export default {
           click_type: 'screen_tracking',
         }
       );
+      let same_ = this.productList.find(
+          item => item.product_key === this.product_key
+        );
+        const { price, currency_type } = same_; 
+        gtag && gtag("event", "generate_lead", {
+          currency: currency_type,
+          value: price,
+        });
       if (utils.isProd()) {
         
         try {

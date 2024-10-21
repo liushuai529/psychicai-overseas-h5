@@ -515,6 +515,15 @@ export default {
       this.pay_lock_time = setTimeout(() => {
         this.payCanClick = false
       }, 2000);
+      gtag && gtag("event", "add_to_cart", {
+          value: this.product.price.toFixed(2),
+          currency: this.product.currency_type || 'MYR',
+          items: [
+            {
+              item_id: this.product.product_id,
+            }
+          ]
+        });
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
 
@@ -527,7 +536,7 @@ export default {
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
-        gata && gtag("event", "add_to_cart", {
+        gtag && gtag("event", "add_to_cart", {
           value: this.product.price.toFixed(2),
           currency: this.product.currency_type || 'MYR',
           items: [
