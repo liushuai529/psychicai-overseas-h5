@@ -151,12 +151,10 @@ export default {
       }
       Indicator.open('订单创建中');
       const {
-        order_status,
         payment,
         pay_method,
         product_key,
         product_id,
-        ext,
         trade_pay_type,
         trade_currency,
         trade_target_org,

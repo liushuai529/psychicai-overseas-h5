@@ -58,19 +58,7 @@ export default {
 
 
   async created() {
-    if (this.sub_type) {
-      if (!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`)) {
-        localStorage.setItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`, 30 * 60 * 1000);
-      }
-      this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`) : 30 * 60 * 1000
-    } else {
-      if (!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
-        localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, 30 * 60 * 1000);
-      }
-      this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) : 30 * 60 * 1000
-    }
-
-    
+    this.resetTime();
     if (this.product_key === 'consult_time') {
       this.$store.dispatch('common/getProduction', 'consult_time');
     } else {
@@ -116,6 +104,19 @@ export default {
     }
   },
   methods: {
+    resetTime() {
+      if (this.sub_type) {
+        if (!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`)) {
+          localStorage.setItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`, 30 * 60 * 1000);
+        }
+        this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}_${this.sub_type}`) : 30 * 60 * 1000
+      } else {
+        if (!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
+          localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, 30 * 60 * 1000);
+        }
+        this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) : 30 * 60 * 1000
+      }
+    },
     autoPay() {
       if (this.canAutoPay) {
         localStorage.setItem(`auto_pay_${utils.getQueryStr('timestamp')}`, 1)
@@ -125,7 +126,7 @@ export default {
     getTime(val) {
       const { minutes, seconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000;
-      let new_product_key = this.sub_type ? this.product_key+'_'+this.sub_type: this.product_key
+      let new_product_key = this.sub_type ? this.product_key + '_' + this.sub_type : this.product_key
       if (localStorage.getItem(`mlxz_count_pay_item_${new_product_key}`)) {
         localStorage.setItem(`mlxz_count_pay_item_${new_product_key}`, time_);
       } else {
@@ -154,12 +155,10 @@ export default {
       }
       Indicator.open('订单创建中');
       const {
-        order_status,
         payment,
         pay_method,
         product_key,
         product_id,
-        ext,
         trade_pay_type,
         trade_currency,
         trade_target_org,
@@ -185,7 +184,7 @@ export default {
         consult_time: {
           user_info: user_info
         },
-        product_sub_type: this.sub_type ? 'life_marriages': 'zheng_yuan',
+        product_sub_type: this.sub_type ? 'life_marriages' : 'zheng_yuan',
 
       };
 

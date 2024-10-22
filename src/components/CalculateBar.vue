@@ -27,7 +27,6 @@
            &>.desc_content{
             margin-top: 0.14rem;
             height: 0.26rem;
-            font-family: PingFangSC, PingFang SC;
             font-weight: 400;
             font-size: 0.26rem;
             color: #8DA5A1;
@@ -38,7 +37,6 @@
                 justify-content: center;
                 &>.header_left{
                     color: #314A46;
-                    font-family: PingFangSC, PingFang SC;
                     font-weight: 600;
                     font-size: 0.32rem;
                     line-height: 0.32rem;
@@ -48,7 +46,6 @@
                     margin-left: 0.1rem;
                     padding-inline:0.08rem;
                     text-align: center;
-                    font-family: PingFangSC, PingFang SC;
                     font-weight: 400;
                     font-size: 0.22rem;
                     line-height: 0.36rem;
@@ -68,7 +65,6 @@
         border: 0.02rem solid #E79999;
         border-radius: 0.16rem;
         &>.calculate_text{
-            font-family: PingFangSC, PingFang SC;
             font-weight: 600;
             font-size: 0.28rem;
             color: #E3453D;
@@ -108,9 +104,8 @@ import utils from '../libs/utils';
 export default {
     props:{
         product_key: {
-        type: String,
-        default: "h5_marriage",//八字合婚
-        //h5_emotion2024//大揭秘
+            type: String,
+            default: "h5_marriage",
         },
         is_home:{
             type:Boolean,

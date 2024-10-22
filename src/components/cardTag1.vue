@@ -39,9 +39,6 @@ export default {
     width: 0.24rem;
     height: 0.36rem;
   }
-  .img-bg {
-  
-  }
   
 }
 </style>

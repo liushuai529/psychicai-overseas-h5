@@ -365,7 +365,6 @@ export default {
   display: flex;
   justify-content: space-between;
   font-size: 0.28rem;
-  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #ffffff;
   padding: 0 0.3rem;
