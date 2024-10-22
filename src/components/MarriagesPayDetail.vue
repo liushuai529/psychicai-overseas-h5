@@ -436,7 +436,7 @@ export default {
         //组合两项优惠
         this.h5_combo2_attach = data.find(item => item.product_key === 'h5_combo2_attach');
         //判断是否是新用户
-        this.is_new_user = getNewUser();
+        this.is_new_user = this.getNewUser();
       }
     },
     getNewUser() {

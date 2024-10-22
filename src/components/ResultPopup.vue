@@ -3,7 +3,6 @@
     <div class="result-container">
       <div class="head">
         <div class="title">{{ tips_arr1[lang] }}</div>
-        <!-- <div>您的【】 {{ tips_arr2[lang] }}</div> -->
         <div style="margin-top: 0.2rem;">{{ `您的【${tips_arr9[product_key][lang]}】${tips_arr2[lang]}` }}</div>
       </div>
       <div class="copy-container">
@@ -177,8 +176,9 @@ export default {
   },
   computed: {
     show_modal() {
-      // return ["enjoy02", "panda02", "enjoy03", "panda03", "ocean03", "enjoy05", "ocean05"].includes(utils.getFBChannel()) && !utils.getQueryStr('hidden_modal');
-      //所有报告的渠道均展示引导app下载遮罩
+      /**
+       * 所有报告的渠道均展示引导app下载遮罩
+       */
       return !utils.getQueryStr('hidden_modal');
     },
 

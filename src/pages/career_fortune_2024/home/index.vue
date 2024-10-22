@@ -626,10 +626,6 @@ export default {
         dom.focus();
         return;
       }
-      // if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
-      //   Toast(this.$t('tips-2'));
-      //   return;
-      // }
       if (time_obj == null) {
         utils.firebaseLogEvent(
           '10004',
@@ -719,11 +715,6 @@ export default {
             });
           }
         } else {
-          let same_ = this.productList.find(
-            item => item.product_key === this.product_key
-          );
-          const { price, unit, product_id, google_goods_id, product_key } =
-            same_;
           // 缓存最新一个订单信息
           localStorage.setItem('mlxz_fixed_order_info', querystring);
           localStorage.setItem('mlxz_fixed_order_key', this.product_key);
@@ -743,35 +734,6 @@ export default {
             `mlxz_show_notice_${this.product_key}`,
             num_ ? 2 : 1
           );
-          this.$router.push({ path });
-          return;
-          this.product_price = price || '-';
-          if (utils.isVersionMoreThan('1.1.1')) {
-            this.pay_modal = true;
-            return;
-          }
-
-          let params = {
-            pay_method: 'google_pay',
-            product_key: product_key,
-            platform: 'ANDROID',
-            product_id: product_id,
-            extra_ce_suan: this.getExtra(product_key, querystring),
-          };
-          payOrderAPI(params).then(res => {
-            if (res.status === 1000) {
-              Indicator.close();
-              this.order_id = res.data.id;
-              window.psychicai_client.onWebPayDialog(
-                res.data.id,
-                price + '',
-                unit,
-                google_goods_id,
-                reportEnum[product_key]
-              );
-            }
-          });
-          return;
           this.$router.push({ path });
         }
       }

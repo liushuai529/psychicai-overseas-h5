@@ -116,7 +116,6 @@
                   'rgb-light': is_show_shandong,
                 }"
               >
-                <!-- :class="{ mill: time_ === 1 }" -->
                 <span>
                   {{ timeData.milliseconds | filterTime }}
                 </span>
@@ -251,16 +250,15 @@ export default {
         );
         let male_str = marry_info.male_str;
         let female_str = marry_info.female_str;
-        let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}&pay_modal=1&use_fixed_time=1&discount_pay=0`;
+        let path_marriage = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}&pay_modal=1&use_fixed_time=1&discount_pay=0`;
         location.href = `${location.origin}/${utils.getFBChannel()}/${
           path_enums[this.product_key]
-        }.html#/${path}`;
+        }.html#/${path_marriage}`;
         localStorage.setItem(
           `mlxz_new_time_down_${this.product_key}`,
           this.new_time
         );
         this.$emit('close');
-        // this.$router.push({ path });
         return;
       }
       let path =
@@ -357,9 +355,7 @@ export default {
       let year = arr[3];
       let month = arr[4];
       let date = arr[5];
-      let birth_hour = arr[6];
       let username = arr[0];
-      let sex = +arr[1];
       let gongli_nongli = +arr[2];
       let picker_hour = utils.formateNongliHour(arr[6]);
       let android_date = `${year}-${month}-${date}`;
