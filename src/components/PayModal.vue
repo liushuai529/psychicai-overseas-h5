@@ -41,7 +41,6 @@
           <div class="right">
             <div class="title">{{ tips1 }}</div>
             <div class="desc">
-              <!-- <count-down :time="time" @change="getTime" format="mm:ss" /> -->
               <count-down
                 ref="countDown"
                 :time="time"
@@ -337,13 +336,6 @@ export default {
         if (val) {
           this.getProductionList();
           this.getPayMethod();
-          if (this.product_key === 'h5_marriage') {
-            // this.loadBg(
-            //   '#bg',
-            //   this.is_cn ? this.cn_bazi_modal : this.tw_bazi_modal
-            // );
-          }
-
           utils.firebaseLogEvent(
             this.e_view_id,
             this.c_view_id,
@@ -447,11 +439,19 @@ export default {
       const { status, data } = await getProductionsAPI('ceh5');
       if (status === 1000) {
         this.product = data.find(item => item.product_key === this.product_key);
-        this.is_new_user = this.product
-          ? this.product.tags
-            ? this.product.tags.includes('newcomer_discount')
-            : false
-          : false;
+        this.is_new_user = this.getNewUser();
+      }
+    },
+    getNewUser() {
+      //Ternary operators should not be nested 三元运算符不应嵌套
+      if (this.product) {
+        if (this.product.tags) {
+          return this.product.tags.includes('newcomer_discount')
+        } else {
+          return false
+        }
+      } else {
+        return false
       }
     },
     /**
@@ -572,7 +572,6 @@ export default {
         },
       };
       let discount_pay = this.$route.query.discount_pay || 0;
-      // let user_time = this.$route.query.use_fixed_time;
       let user_time = true;
       let pay_max_params = Object.assign({}, params, {
         trade_pay_type,

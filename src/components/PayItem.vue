@@ -154,7 +154,6 @@ export default {
       }
       Indicator.open('订单创建中');
       const {
-        status,
         payment,
         pay_method,
         product_key,
@@ -169,7 +168,7 @@ export default {
 
       if (combine_product_ids && combine_product_ids.length) {
         let length_ = combine_product_ids.length;
-        let params = {
+        let params_combine = {
           pay_method,
           product_key,
           product_id,
@@ -189,40 +188,12 @@ export default {
             item => item.product_id === combine_product_ids[0]
           );
           const back_url = path_enums[same_product.product_key];
-          params.extra_ce_suan = ext;
-          params.callback_url = `${location.origin
+          params_combine.extra_ce_suan = ext;
+          params_combine.callback_url = `${location.origin
             }/${utils.getFBChannel()}/${back_url}.html#/result?path=${path_enums[same_product.product_key]
             }&report_price=${payment}&repay=3&product_id=${product_id}`;
-
-          let e_name =
-            same_product.product_key === 'h5_emotion2024'
-              ? 'click_history_2024lovelymarriage_repay'
-              : 'click_history_marriage2024lovely_repay';
-          let e_id =
-            same_product.product_key === 'h5_emotion2024'
-              ? '-10030'
-              : '-10031';
-          // utils.firebaseLogEvent('10002', e_id, e_name, 'click', {
-          //   args_name: e_name,
-          //   channel: utils.getFBChannel(),
-          // });
         } else {
-          // utils.firebaseLogEvent(
-          //   '10002',
-          //   length_ === 2 ? '-10010' : '-10011',
-          //   length_ === 2
-          //     ? 'click_history_report2_repay'
-          //     : 'click_history_report3_repay',
-          //   'click',
-          //   {
-          //     args_name:
-          //       length_ === 2
-          //         ? 'click_history_report2_repay'
-          //         : 'click_history_report3_repay',
-          //     channel: utils.getFBChannel(),
-          //   }
-          // );
-          params.callback_url =
+          params_combine.callback_url =
             location.origin +
             `/${utils.getFBChannel()}/` +
             'index.html' +
@@ -233,28 +204,17 @@ export default {
             '&repay=1'+'&product_id='+product_id;
         }
 
-        const res = await payOrderAPI(params);
+        const res_combine = await payOrderAPI(params_combine);
         Indicator.close();
 
-        if (res.status !== 1000) return;
+        if (res_combine.status !== 1000) return;
         localStorage.setItem('mlxz_reload_page_history', 1);
 
-        location.href = res.data.pay_url;
+        location.href = res_combine.data.pay_url;
         // 组合下单结束
         return;
       }
       
-
-      // utils.firebaseLogEvent(
-      //     '10002',
-      //     event_enums[product_key].c_id,
-      //     event_enums[product_key].c_name,
-      //     'click',
-      //     {
-      //       args_name: event_enums[product_key].c_name,
-      //       channel: utils.getFBChannel(),
-      //     }
-      //   );
       let params = {
         pay_method,
         product_key,
