@@ -1117,6 +1117,28 @@ for (let pathname_enjoyA11 of ['emotion_end/emotion_end', 'user_agreement/user_a
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf_enjoyA11));
 }
 
+// test代理
+for (let pathname_enjoyA11 of ['year_of_lucky_2024/year_of_lucky_2024', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  let filename_enjoyA11 = pathname_enjoyA11.split('/')[0];
+  let conf_enjoyA11 = {
+    filename: path.resolve(__dirname, '../dist/test/' + filename_enjoyA11 + '.html'),
+    template: 'template/index.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname_enjoyA11 in webpackConfig.entry) {
+    conf_enjoyA11.chunks = ['manifest', 'vendor', pathname_enjoyA11];
+    conf_enjoyA11.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf_enjoyA11));
+}
+
 
 
 if (config.build.productionGzip) {
