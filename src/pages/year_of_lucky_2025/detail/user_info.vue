@@ -101,7 +101,7 @@ export default {
   mounted() {
     this.$nextTick(async () => {
       if (!this.is_result) {
-        this.getEcharts();
+        this.getEcharts_year();
         const shiye = document.getElementById('shiye');
         const jiankang = document.getElementById('jiankang');
         const haoyun = document.getElementById('haoyun');
@@ -127,7 +127,7 @@ export default {
      * @description: 折线图配置及初始化
      * @return {*}
      */
-    async getEcharts() {
+    async getEcharts_year() {
       let self = this;
       await utils.asleep(1000)
       let myChart = echarts.init(document.getElementById('echarts')); 

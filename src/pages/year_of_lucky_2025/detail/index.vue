@@ -26,7 +26,7 @@
         :is_show="true"
       >
       </PayCard> -->
-      <div @click="showPayModal" id="info-btn" class="get-report-btn">
+      <div @click="showPayModal_year" id="info-btn" class="get-report-btn">
         <img class="huxi-btn" :src="is_cn ? cn_pay_btn : tw_pay_btn" alt="" />
       </div>
     </div>
@@ -43,7 +43,7 @@
 
     <div
       v-if="showFixedBtn"
-      @click="showPayModal"
+      @click="showPayModal_year"
       class="get-report-btn fix-box"
     >
       <img class="huxi-btn" :src="is_cn ? cn_pay_btn : tw_pay_btn" alt="" />
@@ -280,8 +280,8 @@ export default {
     if (pay_modal) {
       this.pay_modal = true;
     }
-    await this.formateQueryUserInfo(this.query_user_string);
-    this.getUserBazi();
+    await this.formateQueryUserInfo_year(this.query_user_string);
+    this.getUserBazi_year();
   },
   mounted() {
     window.scrollTo(0, 0);
@@ -323,7 +323,7 @@ export default {
      * @description: 获取用户八字
      * @return {*}
      */
-    async getUserBazi() {
+    async getUserBazi_year() {
       let hour_ = this.birth_hour === '-1' ? '12' : this.birth_hour;
       let str_date = `${this.year}-${this.month}-${this.date} ${hour_}:00:00`;
       let ios_date = `${this.year}/${this.month}/${this.date} ${hour_}:00:00`;
@@ -355,7 +355,7 @@ export default {
      * @param {*} string
      * @return {*}
      */
-    async formateQueryUserInfo(string) {
+    async formateQueryUserInfo_year(string) {
       let arr = string.split('|');
       this.year = arr[3];
       this.month = arr[4];
@@ -389,7 +389,7 @@ export default {
      * @description: 打开支付弹窗
      * @return {*}
      */
-    showPayModal() {
+    showPayModal_year() {
       utils.firebaseLogEvent(
         '10003',
         '-10004',
