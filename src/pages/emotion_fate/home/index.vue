@@ -328,14 +328,14 @@ export default {
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
     // 埋点事件上传
-    reportBuryingEventAPI({
-      event: 'page_view_2024lovely_main',
-      channel: utils.getFBChannel(),
-    })
-      .then()
-      .catch(err => {
-        console.warn(`埋点事件上传失败${err}`);
-      });
+    // reportBuryingEventAPI({
+    //   event: 'page_view_2024lovely_main',
+    //   channel: utils.getFBChannel(),
+    // })
+    //   .then()
+    //   .catch(err => {
+    //     console.warn(`埋点事件上传失败${err}`);
+    //   });
   },
   beforeDestroy() {
     if (this.timer) {

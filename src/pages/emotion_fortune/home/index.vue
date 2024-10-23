@@ -442,14 +442,14 @@ export default {
     this.has_pay = has_pay ? has_pay : '';
     this.getLastOrder();
     // 埋点事件上传
-    reportBuryingEventAPI({
-      event: 'page_view_2024lovely_main',
-      channel: utils.getFBChannel(),
-    })
-      .then()
-      .catch(err => {
-        console.warn(`埋点事件上传失败${err}`);
-      });
+    // reportBuryingEventAPI({
+    //   event: 'page_view_2024lovely_main',
+    //   channel: utils.getFBChannel(),
+    // })
+    //   .then()
+    //   .catch(err => {
+    //     console.warn(`埋点事件上传失败${err}`);
+    //   });
   },
   beforeDestroy() {
     if (this.timer) {
