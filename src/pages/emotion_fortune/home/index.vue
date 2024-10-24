@@ -409,13 +409,20 @@ export default {
     },
   },
   created() {
-    console.log('gtag', gtag)
+    // console.log('gtag', gtag)
     gtag('get', 'G-WZWW0H87QJ', 'client_id', (clientID) => {
       console.log('Client ID: ' + clientID);
     });
     gtag('get', 'G-43C3GF0Z45', 'client_id', (clientID) => {
       console.log('Client ID: ' + clientID);
     });
+    const cookieMap = new Map();
+
+    document.cookie.split("; ").forEach((cookie) => {
+        const [key, value] = cookie.split("=");
+        cookieMap.set(key, value);
+    })
+    console.log('client_id', cookieMap.get("_ga"))
     
     this.showComboAttach();
     document.addEventListener('visibilitychange', () => {
