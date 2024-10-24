@@ -139,7 +139,6 @@ export default {
       }
       Indicator.open('订单创建中');
       const {
-        order_status,
         payment,
         pay_method,
         product_key,
@@ -150,12 +149,6 @@ export default {
         tarot,
       } = this.last_order;
       let url = path_enums[product_key];
-      let selected_card_list = JSON.parse(localStorage.getItem('selected_card_list'));
-      selected_card_list = selected_card_list.map((item) => {
-        return {
-          card_key: item.card.card_key, upright: item.upright
-        }
-      })
       let params = {
         pay_method,
         product_key,
@@ -178,7 +171,7 @@ export default {
       };
       params.callback_url = `${location.origin
         }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
-        }&report_price=${payment}&currency_type=${trade_currency || 'MYR'}`;
+        }&report_price=${payment}&currency_type=${trade_currency || 'MYR'}&product_id=${product_id}`;
       const res = await payTarotOrderAPI(params);
 
       Indicator.close();

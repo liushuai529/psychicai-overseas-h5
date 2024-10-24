@@ -30,18 +30,12 @@
         >
           <span class="left">RM</span>
           <span class="right">{{ product.price || '-' }}</span>
-          <!-- v-if="is_new_user" -->
-          <!-- <img class="first-order-tag" :src="firstOrderTag" alt="" /> -->
         </div>
         <div v-if="is_new_user" class="origin-price">
           <span>{{ price_desc[language] }} RM</span>
           <span>{{ product.origin_price_str || '-' }}</span>
         </div>
       </div>
-      <!-- <div v-else-if="back_url === 'emotion_fortune'" class="emotion-box">
-        <span class="left">RM</span>
-        <span class="right">{{ product.price || '-' }}</span>
-      </div> -->
       <div
         v-else-if="product"
         :class="{ price: true, 'white-text': back_url === 'emotion_fortune' }"
@@ -81,16 +75,6 @@
             >
               {{ item.title }}
             </div>
-            <!-- <div
-              :class="[
-                'refund',
-                ['weigh_bone', 'emotion_fortune'].includes(back_url)
-                  ? 'white-text'
-                  : '',
-              ]"
-            >
-              {{ canRefund(item.payment_name) }}
-            </div> -->
           </div>
           <img
             class="check"
@@ -177,7 +161,6 @@
       {{ unlock_style[language] }}
     </div>
 
-    <!-- <div v-else class="guiguzi-btn" @click="pay()"></div> -->
   </div>
 </template>
 
@@ -328,11 +311,7 @@ export default {
     const { status, data } = await getProductionsAPI('ceh5');
     if (status === 1000) {
       this.product = data.find(it => it.product_key === this.product_key);
-      this.is_new_user = this.product
-        ? this.product.tags
-          ? this.product.tags.includes('newcomer_discount')
-          : false
-        : false;
+      this.is_new_user = this.getNewUser();
       this.payment_details = this.product.payment_details || {};
       this.product_id = this.product.product_id;
     }
@@ -346,6 +325,18 @@ export default {
   mounted() {},
   methods: {
     getProductions,
+    getNewUser() {
+      //Ternary operators should not be nested 三元运算符不应嵌套
+      if (this.product) {
+        if (this.product.tags) {
+          return this.product.tags.includes('newcomer_discount')
+        } else {
+          return false
+        }
+      } else {
+        return false
+      }
+    },
 
     /**
      * @description: 获取支付方式列表
@@ -537,7 +528,6 @@ export default {
             if (res.status === 1000) {
               Indicator.close();
               this.order_id = res.data.id;
-              // this.$emit('getOrderId', res.data.id);
               localStorage.setItem('report_order_id', res.data.id);
             }
           })
@@ -563,7 +553,7 @@ export default {
         };
         params.callback_url = `${location.origin}${
           location.pathname
-        }#/result?path=${path_enums[this.product_key]}`;
+        }#/result?path=${path_enums[this.product_key]}&product_id=${product_id}`;
         params.extra_ce_suan = this.getExtra();
         if (this.paying) return false;
         this.paying = true;
@@ -707,7 +697,6 @@ export default {
 
 .guiguzi-price {
   width: 100%;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 700;
   color: #cc4b44;
   height: 0.72rem;
@@ -729,7 +718,6 @@ export default {
 }
 .year-2024-price {
   width: 100%;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 700;
   color: #ee8130;
   display: flex;
@@ -800,7 +788,6 @@ export default {
 
 .weigh-bone {
   width: 100%;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 700;
   color: #fff7cc;
   height: 0.72rem;

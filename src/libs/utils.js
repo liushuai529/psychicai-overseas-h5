@@ -41,6 +41,8 @@ const getFBChannel = () => {
     return 'panda03';
   } else if (url.indexOf('/ocean03/') > -1) {
     return 'ocean03';
+  } else if (url.indexOf('/google_ocean03/') > -1) {
+    return 'google_ocean03';
   } else if (url.indexOf('/ocean103/') > -1) {
     return 'ocean103';
   } else if (url.indexOf('/enjoy05/') > -1) {
@@ -113,7 +115,7 @@ const getFBChannel = () => {
 };
 
 const isShowCombine = () => {
-  return ["ads03", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103",  "ads05", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05","ocean05","ocean105" ];
+  return ["ads03", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "ads05", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05","ocean05","ocean105" ];
 };
 
 /**
@@ -1272,6 +1274,8 @@ const getShortStr = (str, len = 4) => {
   }
 };
 
+
+
 // 获取语言
 const getLanguage = () => {
   // return 'zh-TW';
@@ -1620,66 +1624,8 @@ const fbEvent = () => {
   return fb;
 };
 
-let timer = null;
-const checkFB = () => {
-  const has_fb = typeof fbq === 'function';
-  console.log('has_fb', has_fb);
-  // 如果有fb就触发事件 ，没有就每秒轮询，有fb就触发,没有就5秒后重置
-  if (has_fb) {
-    if (timer) {
-      clearInterval(timer);
-    }
-    return Promise.resolve(true);
-  } else {
-    return new Promise((resolve, reject) => {
-      let i = 0;
-      let count = 0;
-      timer = setInterval(() => {
-        i++;
-        if (i > 5) {
-          console.log(count);
-          // clearInterval(timer);
-          if (count > 5) {
-            clearInterval(timer);
-            reject('fbq is not a function after 5 times check');
-          } else {
-            count++;
-            resetInitFB();
-          }
-        }
-        if (typeof fbq === 'function') {
-          clearInterval(timer);
-          resolve(true);
-        }
-      }, 1000);
-    });
-  }
-};
-const resetInitFB = () => {
-  let script = document.createElement('script');
-  script.innerHTML = `
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', ${channel_obj[getFBChannel()]});
-    fbq('track', 'PageView');
-  `;
-  document.body.appendChild(script);
 
-  let noscript = document.createElement('noscript');
-  noscript.innerHTML = `
-    <img height="1" width="1" style="display:none" 
-         src="https://www.facebook.com/tr?id=${channel_obj[getFBChannel()]
-    }&ev=PageView&noscript=1"/>
-  `;
-  document.body.appendChild(noscript);
-  checkFB();
-};
+
 
 const copyResultCode = text => {
   navigator.clipboard
@@ -1760,29 +1706,6 @@ const getEndStr = (str,n) => {
 
 
 
-// 游客注册登录
-// const visitorLoginAPI = async (data, callback) => {
-//   if (
-//     localStorage.getItem('mlxz_outer_open_uid') ||
-//     localStorage.getItem('mlxz_outer_access_token') ||
-//     localStorage.getItem('mlxz_outer_visitor_id')
-//   ) {
-//     console.log('已登录');
-//     callback && callback()
-//     return true;
-//   }
-//   // localStorage.setItem('mlxz_get_visitor', 1);
-
-//   const res = await request('/web/login/visitor', 'POST', data);
-//   if (res.status !== 1000) return;
-//   callback && callback()
-//   localStorage.setItem('mlxz_outer_open_uid', res.data.open_uid);
-//   localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
-//   localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
-//   fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
-
-//   return true;
-// };
 
 
 export default {
@@ -1791,7 +1714,6 @@ export default {
   resetPageUrl,
   getUrlParams,
   copyResultCode,
-  checkFB,
   fbEvent,
   getFBChannel,
   getTWChannel,
@@ -1862,5 +1784,4 @@ export default {
   checkEmail,
   showEmail,
   getEndStr,
-  // visitorLoginAPI,
 };

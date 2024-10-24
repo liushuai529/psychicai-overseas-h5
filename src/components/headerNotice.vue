@@ -34,7 +34,6 @@ export default {
   height: 0.6rem;
   background: #ffe6e6;
   font-size: 0.24rem;
-  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #fe2f2f;
   line-height: 0.28rem;

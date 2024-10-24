@@ -15,15 +15,6 @@
         </div>
         <div class="right">
           <div class="desc">
-            <!-- <div class="count-down">
-              <span class="block rgb-light">{{ time_str_1 }}</span>
-              <span class="colon rgb-color">:</span>
-              <span class="block rgb-light">{{ time_str_2 }}</span>
-              <span class="colon rgb-color">:</span>
-              <span class="block rgb-light">
-                <span :class="{ mill: !time }">{{ time_str_3 }}</span>
-              </span>
-            </div> -->
             <count-down ref="countDown" :time="time" millisecond class="time-box" @change="getTime">
               <template #default="timeData">
                 <span :class="{
@@ -70,10 +61,6 @@
 
       <div class="divider-line"></div>
 
-      <!-- <div class="pay-type">支付方式</div>
-      <div class="buy-people">
-        今日已有<span>{{ buy_people }}</span>{{ tips2 }}
-      </div> -->
       <div class="item-container">
         <div class="method-text">支付方式</div>
         <div class="city">
@@ -97,12 +84,11 @@
           </div>
           <img class="right" :src="check_index === k ? checked_icon : no_check_icon" alt="" />
         </div>
-        <!--此处引用按钮组件-->
-        <!-- <PayBtn v-if="product_key !== 'consult_time'" :product_key="product_key" :callback="payMoney" />
-        <ConsultPayBtn v-else :product_key="product_key" :callback="payMoney" /> -->
-        <img v-if="sub_type==='zheng_yuan'" class="btn emo-btn" src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
-        <img v-else-if="sub_type==='fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" />
-        <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw" @click="payMoney" />
+        <img v-if="sub_type === 'zheng_yuan'" class="btn emo-btn"
+          src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
+        <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" />
+        <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"
+          @click="payMoney" />
 
 
       </div>
@@ -375,7 +361,6 @@ export default {
       localStorage.removeItem('mlxz_fixed_local_order_time');
     } else {
       this.time = 15 * 60 * 1000;
-      // localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
     }
 
 
@@ -388,7 +373,7 @@ export default {
 
   methods: {
     changeCity() {
-      if(!this.current_country) {
+      if (!this.current_country) {
         this.current_country = JSON.parse(localStorage.getItem('current_country'))
       }
       if (this.current_country.iso_code === 'MY') {
@@ -450,12 +435,20 @@ export default {
         this.all_product = data;
         //组合两项优惠
         this.h5_combo2_attach = data.find(item => item.product_key === 'h5_combo2_attach');
-
-        this.is_new_user = this.product
-          ? this.product.tags
-            ? this.product.tags.includes('newcomer_discount')
-            : false
-          : false;
+        //判断是否是新用户
+        this.is_new_user = this.getNewUser();
+      }
+    },
+    getNewUser() {
+      //Ternary operators should not be nested 三元运算符不应嵌套
+      if (this.product) {
+        if (this.product.tags) {
+          return this.product.tags.includes('newcomer_discount')
+        } else {
+          return false
+        }
+      } else {
+        return false
       }
     },
     /**
@@ -470,7 +463,6 @@ export default {
         if (res.status === 1000) {
           this.start_down = true;
           this.pay_methods = res.data;
-          // this.pay_methods = [...res.data,...res.data,...res.data];
           if (type) {
             this.getProductionList()
             this.check_index = 0
@@ -515,16 +507,26 @@ export default {
       }, 2000);
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
-        await utils.checkFB();
+
         Indicator.close();
         try {
-          fbq('track', 'AddToCart', {
+          fbq && fbq('track', 'AddToCart', {
             value: this.product.price.toFixed(2),
             currency: this.product.currency_type || 'MYR',
           });
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
+        gtag && gtag("event", "add_to_cart", {
+          value: this.product.price.toFixed(2),
+          currency: this.product.currency_type || 'MYR',
+          items: [
+            {
+              item_id: this.product.product_id,
+            }
+          ]
+        });
+        
       }
 
       this.logEventForSort({
@@ -567,7 +569,6 @@ export default {
         },
         product_sub_type: this.sub_type,
       };
-      // let user_time = this.$route.query.use_fixed_time;
 
       let discount_pay = this.$route.query.discount_pay || 0;
       let user_time = true;
@@ -585,7 +586,7 @@ export default {
 
       pay_max_params.callback_url = `${location.origin}${location.pathname
         }#/result?path=${location.pathname}&report_price=${this.product.price
-        }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}`;
+        }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}&product_id=${this.product.product_id}`;
       let res = null;
       if (this.product_key === 'consult_time') {
         delete pay_max_params.extra_ce_suan

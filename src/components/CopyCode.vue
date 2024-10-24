@@ -161,7 +161,6 @@ export default {
       utils.copyText('mlxz-' + this.transfer_code);
       Toast(tips_arr4[lang]);
 
-      // utils.logCopyEvent(val);
       if (!val) {
         utils.firebaseLogEvent(this.e_id, this.c_id, this.e_name, 'click', {
           args_name: this.e_name,
@@ -173,7 +172,6 @@ export default {
       }
       this.$emit('showModal');
 
-      // utils.logCopyOther();
     },
   },
 };

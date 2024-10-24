@@ -368,7 +368,7 @@ export default {
           : false;
 
       if (flag) {
-        const { main_id, click_id, view_id, click_name, view_name } =
+        const { main_id, view_id, view_name } =
           maidianEnum[this.new_order_key];
         utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
           args_name: view_name,
@@ -574,10 +574,6 @@ export default {
         location.href = url;
         return;
       }
-      // if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
-      //   location.href = url;
-      //   return;
-      // }
       if (time_obj == null) {
         location.href = url;
         return;
@@ -626,10 +622,6 @@ export default {
         dom.focus();
         return;
       }
-      // if (!/^[\u4e00-\u9fa5]+$/g.test(username)) {
-      //   Toast(this.$t('tips-2'));
-      //   return;
-      // }
       if (time_obj == null) {
         utils.firebaseLogEvent(
           '10004',
@@ -690,9 +682,9 @@ export default {
         }
       );
       if (utils.isProd()) {
-        await utils.checkFB();
+        
         try {
-          fbq('track', 'Lead');
+           
         } catch (err) {
           console.error('Lead  error message:', err);
         }
@@ -719,11 +711,6 @@ export default {
             });
           }
         } else {
-          let same_ = this.productList.find(
-            item => item.product_key === this.product_key
-          );
-          const { price, unit, product_id, google_goods_id, product_key } =
-            same_;
           // 缓存最新一个订单信息
           localStorage.setItem('mlxz_fixed_order_info', querystring);
           localStorage.setItem('mlxz_fixed_order_key', this.product_key);
@@ -743,35 +730,6 @@ export default {
             `mlxz_show_notice_${this.product_key}`,
             num_ ? 2 : 1
           );
-          this.$router.push({ path });
-          return;
-          this.product_price = price || '-';
-          if (utils.isVersionMoreThan('1.1.1')) {
-            this.pay_modal = true;
-            return;
-          }
-
-          let params = {
-            pay_method: 'google_pay',
-            product_key: product_key,
-            platform: 'ANDROID',
-            product_id: product_id,
-            extra_ce_suan: this.getExtra(product_key, querystring),
-          };
-          payOrderAPI(params).then(res => {
-            if (res.status === 1000) {
-              Indicator.close();
-              this.order_id = res.data.id;
-              window.psychicai_client.onWebPayDialog(
-                res.data.id,
-                price + '',
-                unit,
-                google_goods_id,
-                reportEnum[product_key]
-              );
-            }
-          });
-          return;
           this.$router.push({ path });
         }
       }
@@ -819,13 +777,16 @@ export default {
         let is_show_notice = localStorage.getItem(
           `mlxz_show_notice_${this.product_key}`
         );
-        this.is_show_notice = is_show_notice
-          ? +is_show_notice === 1
-            ? true
-            : false
-          : false;
+        if(is_show_notice) {
+          if(parseInt(is_show_notice) === 1) {
+            this.is_show_notice = true;
+          } else {
+            this.is_show_notice = false;
+          }
+        } else {
+          this.is_show_notice = false;
+        }
         let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
-        let set_time_ = (5 * 60 + 48) * 1000 + 280;
         this.count_down = +time_ || 0;
         this.local_time =
           +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
@@ -871,10 +832,10 @@ export default {
       }
     },
     logDiscountEvent() {
-      const { ext, pay_method, product_key, product_id, payment } =
+      const { product_key } =
         this.last_order;
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[product_key];
+      const { main_id, view_id, view_name } =
+        maidianEnum[product_key]; 
       utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
         args_name: view_name,
         channel: utils.getFBChannel(),
@@ -943,11 +904,11 @@ export default {
         );
         let male_str = marry_info.male_str;
         let female_str = marry_info.female_str;
-        let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
+        let path_marriage = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
 &pay_modal=1&use_fixed_time=1&discount_pay=1`;
         location.href = `${location.origin}/${utils.getFBChannel()}/${
           path_enums[this.new_order_key]
-        }.html#/${path}`;
+        }.html#/${path_marriage}`;
 
         return;
       }

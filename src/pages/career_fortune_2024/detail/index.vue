@@ -93,7 +93,6 @@ import { getBaziAPI } from '../../../api/api';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import payModal from '../../../components/PayModal.vue';
 import BaziTable from '../../../components/baziTable.vue';
-// import * as echarts from 'echarts';
 
 import cn_info_title from '../../../assets/img/mlxz/career_2024/detail/yu_img_title.webp';
 import cn_hude from '../../../assets/img/mlxz/career_2024/detail/huode.webp';
@@ -745,7 +744,6 @@ export default {
 .info-btn {
   width: 4.98rem;
   height: 1rem;
-  margin-top: 0.1rem;
   margin-bottom: 0.2rem;
   // animation: scaleBtn 1s infinite ease-in-out alternate;
   margin-top: 0.4rem;

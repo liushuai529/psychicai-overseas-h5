@@ -320,14 +320,14 @@ export default {
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
     // 埋点事件上传
-    reportBuryingEventAPI({
-      event: 'page_view_marriages_main',
-      channel: utils.getFBChannel(),
-    })
-      .then()
-      .catch(err => {
-        console.warn(`埋点事件上传失败${err}`);
-      });
+    // reportBuryingEventAPI({
+    //   event: 'page_view_marriages_main',
+    //   channel: utils.getFBChannel(),
+    // })
+    //   .then()
+    //   .catch(err => {
+    //     console.warn(`埋点事件上传失败${err}`);
+    //   });
   },
   beforeDestroy() {
     if (this.timer) {
@@ -719,12 +719,20 @@ export default {
         }
       );
       if (utils.isProd()) {
-        await utils.checkFB();
+        
         try {
-          fbq('track', 'Lead');
+          fbq && fbq('track', 'Lead');
         } catch (err) {
           console.error('Lead  error message:', err);
         }
+        let same_ = this.productList.find(
+          item => item.product_key === this.product_key
+        );
+        const { price, currency_type } = same_; 
+        gtag && gtag("event", "generate_lead", {
+          currency: currency_type,
+          value: price,
+        });
       }
       let { has_pay, order_id, product_key } = this.$route.query;
 

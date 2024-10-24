@@ -16,10 +16,8 @@
           <template v-for="(item, i) in new_pay_methods">
             <div v-if="i < 2 || expand" class="item" @click="index = i">
               <div class="left">
-                <!-- <div class="icon" :class="getPayIcon(item.payment_name)"></div> -->
                 <img :src="item.icon" class="icon" alt="" />
                 <div class="name">{{ item.title }}</div>
-                <!-- <div class="refund">{{ canRefund(item.payment_name) }}</div> -->
               </div>
               <img
                 class="check"
@@ -428,7 +426,6 @@ export default {
   position: relative;
   background: #222222;
   border-radius: 0.4rem 0.4rem 0 0;
-  font-family: PingFangTC;
   .pay-header {
     width: 100%;
     height: 0.36rem;

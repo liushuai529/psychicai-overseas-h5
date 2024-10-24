@@ -151,12 +151,10 @@ export default {
       }
       Indicator.open('订单创建中');
       const {
-        order_status,
         payment,
         pay_method,
         product_key,
         product_id,
-        ext,
         trade_pay_type,
         trade_currency,
         trade_target_org,
@@ -188,7 +186,7 @@ export default {
       };
 
       params.callback_url = `${location.origin
-        }/${utils.getFBChannel()}/${url}.html#/result?path=${url}&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}`;
+        }/${utils.getFBChannel()}/${url}.html#/result?path=${url}&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}&product_id=${product_id}`;
       const res = await payFateOrderAPI(params);
 
       Indicator.close();

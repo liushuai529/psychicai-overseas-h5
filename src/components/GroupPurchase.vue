@@ -165,7 +165,6 @@ export default {
       localStorage.removeItem("mlxz_fixed_local_order_time");
     } else {
       this.time = 15 * 60 * 1000;
-      // localStorage.removeItem(`mlxz_new_time_down_${this.product_key}`);
     }
 
   },
@@ -335,21 +334,17 @@ export default {
         top: 0;
         right: -0.025rem;
 
-        /* right: 0rem; */
         width: 0.44rem;
         height: 0.44rem;
       }
 
       .title {
-        font-family: PingFangSC, PingFang SC;
         font-weight: 600;
         font-size: 0.36rem;
         color: #e24c2e;
-        // margin-top: 0.2rem;
       }
 
       .title-unselect {
-        font-family: PingFangSC, PingFang SC;
         font-weight: 600;
         font-size: 0.3rem;
         color: #393939;
@@ -442,7 +437,6 @@ export default {
         margin-top: 0.2rem;
         width: 100%;
         height: 0.64rem;
-        /* background: #e24c2e; */
         border-radius: 0rem 0rem 0.05rem 0.05rem;
 
         margin-bottom: 0rem;
@@ -481,7 +475,6 @@ export default {
     }
 
     .right-product-select {
-      /* right: 0; */
       left: 3.05rem;
       top: 0;
       width: 3.45rem;
@@ -553,7 +546,6 @@ export default {
     justify-content: center;
     color: #fff;
     background-color: #e24c2e;
-    /* 初始背景色 */
   }
 
   .count-down {

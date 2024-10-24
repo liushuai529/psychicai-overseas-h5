@@ -41,7 +41,6 @@
           <div class="right">
             <div class="title">{{ tips1 }}</div>
             <div class="desc">
-              <!-- <count-down :time="time" @change="getTime" format="mm:ss" /> -->
               <count-down
                 ref="countDown"
                 :time="time"
@@ -337,13 +336,6 @@ export default {
         if (val) {
           this.getProductionList();
           this.getPayMethod();
-          if (this.product_key === 'h5_marriage') {
-            // this.loadBg(
-            //   '#bg',
-            //   this.is_cn ? this.cn_bazi_modal : this.tw_bazi_modal
-            // );
-          }
-
           utils.firebaseLogEvent(
             this.e_view_id,
             this.c_view_id,
@@ -447,11 +439,19 @@ export default {
       const { status, data } = await getProductionsAPI('ceh5');
       if (status === 1000) {
         this.product = data.find(item => item.product_key === this.product_key);
-        this.is_new_user = this.product
-          ? this.product.tags
-            ? this.product.tags.includes('newcomer_discount')
-            : false
-          : false;
+        this.is_new_user = this.getNewUser();
+      }
+    },
+    getNewUser() {
+      //Ternary operators should not be nested 三元运算符不应嵌套
+      if (this.product) {
+        if (this.product.tags) {
+          return this.product.tags.includes('newcomer_discount')
+        } else {
+          return false
+        }
+      } else {
+        return false
       }
     },
     /**
@@ -506,16 +506,25 @@ export default {
       }, 2000);
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
-        await utils.checkFB();
+        
         Indicator.close();
         try {
-          fbq('track', 'AddToCart', {
+          fbq && fbq('track', 'AddToCart', {
               value: this.product.price.toFixed(2),
               currency: this.product.currency_type || 'MYR',
             });
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
+        gtag && gtag("event", "add_to_cart", {
+          value: this.product.price.toFixed(2),
+          currency: this.product.currency_type || 'MYR',
+          items: [
+            {
+              item_id: this.product.product_id,
+            }
+          ]
+        });
       }
       this.logEventForSort({
         e_name: 'pay_click',
@@ -563,7 +572,6 @@ export default {
         },
       };
       let discount_pay = this.$route.query.discount_pay || 0;
-      // let user_time = this.$route.query.use_fixed_time;
       let user_time = true;
       let pay_max_params = Object.assign({}, params, {
         trade_pay_type,
@@ -573,7 +581,7 @@ export default {
         location.pathname
       }#/result?path=${path_enums[this.product_key]}&report_price=${
         this.product.price
-      }&discount_pay=${discount_pay}&currency_type=${this.product.currency_type || 'MYR' }`;
+      }&discount_pay=${discount_pay}&currency_type=${this.product.currency_type || 'MYR' }&product_id=${this.product.product_id}`;
       const res = await payOrderAPI(pay_max_params);
       Indicator.close();
       localStorage.removeItem('mlxz_set_event_times');

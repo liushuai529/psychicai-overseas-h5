@@ -23,9 +23,8 @@ const visitorLoginAPI = async (data, callback) => {
     localStorage.setItem('mlxz_outer_open_uid', res.data.open_uid);
     localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
     localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
-    fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
+    fbq && fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
     callback && callback();
-    // console.log('首次登录');
   }
  
 };

@@ -3,11 +3,6 @@
 </template>
 <script>
 import utils from '../libs/utils';
-//h5_emotion2024
-// import cn_h5_emotion2024 from '../assets/img/emotion_v2/new/cn/pay.webp';
-// import tw_h5_emotion2024 from '../assets/img/emotion_v2/new/tw/pay.webp';
-// import cn_h5_emotion2024_xs from '../assets/img/emotion_v2/new/cn/pay_xs.webp';
-// import tw_h5_emotion2024_xs from '../assets/img/emotion_v2/new/tw/pay_xs.webp';
 
 
 export default {

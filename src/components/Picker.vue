@@ -415,7 +415,6 @@ export default {
   }
   .dw-li {
     position: relative;
-    text-align: center;
     white-space: nowrap;
     vertical-align: bottom;
     opacity: 0.3;
@@ -423,7 +422,6 @@ export default {
     cursor: pointer;
     font-size: 0.32rem;
     color: #8f8f8f;
-
     text-align: center !important;
   }
   /* Valid entry */

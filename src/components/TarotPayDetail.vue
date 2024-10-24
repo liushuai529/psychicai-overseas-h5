@@ -295,8 +295,6 @@ export default {
     },
   },
   created() {
-    // this.time = +localStorage.getItem(`mlxz_count_down_${this.product_key}`);
-
     this.getProductionList();
     this.getPayMethod();
 
@@ -315,37 +313,8 @@ export default {
 
   methods: {
     getTime(val) {
-      // const { minutes, seconds, milliseconds } = val;
-      // let time_ = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
-      // // 是否展示首次挽留弹窗 0 1展示 2不展示  并缓存当前时间用于弹窗倒计时
-      // let notice_num = localStorage.getItem(
-      //   `mlxz_show_notice_${this.product_key}`
-      // );
-      // console.log('time_', time_)
-      // if (notice_num) {
-      //   if (+notice_num === 1) {
-      //     localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
-      //   }
-      // } else {
-      //   localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_);
-      // }
-      // localStorage.setItem(`mlxz_fixed_local_order_time`, time_);
-
-      // this.is_show_shandong = time_ < 60 * 1000;
-      // this.is_show_daoqi = time_ < 31 * 1000;
-      // if (!minutes && !seconds && milliseconds < 10) {
-      //   this.time = 0;
-      //   this.$refs.countDown.pause();
-      //   this.$refs.countDown.reset();
-      // }
-      
       const { minutes, seconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000;
-      // if (this.time) {
-      //   localStorage.setItem(`mlxz_count_down_${this.product_key}`, time_ ,);
-      // } else {
-      //   this.time = 15 * 60 * 1000
-      // }
       this.is_show_shandong = time_ < 60 * 1000;
       this.is_show_daoqi = time_ < 31 * 1000;
     },
@@ -361,11 +330,19 @@ export default {
         this.product = data.find(item => item.product_key === this.product_key);
         //获取所有报告以及套餐
         this.all_product = data;
-        this.is_new_user = this.product
-          ? this.product.tags
-            ? this.product.tags.includes('newcomer_discount')
-            : false
-          : false;
+        this.is_new_user = this.getNewUser();
+      }
+    },
+    getNewUser() {
+      //Ternary operators should not be nested 三元运算符不应嵌套
+      if (this.product) {
+        if (this.product.tags) {
+          return this.product.tags.includes('newcomer_discount')
+        } else {
+          return false
+        }
+      } else {
+        return false
       }
     },
 
@@ -383,7 +360,6 @@ export default {
         if (res.status === 1000) {
           this.start_down = true;
           this.pay_methods = res.data;
-          // this.pay_methods = [...res.data,...res.data,...res.data];
         }
       } catch (e) {
         this.loading = false;
@@ -412,16 +388,25 @@ export default {
       }, 2000);
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
-        await utils.checkFB();
+        
         Indicator.close();
         try {
-          fbq('track', 'AddToCart', {
+          fbq && fbq('track', 'AddToCart', {
               value: this.product.price.toFixed(2),
               currency: this.product.currency_type || 'MYR',
             });
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
+        gtag && gtag("event", "add_to_cart", {
+          value: this.product.price.toFixed(2),
+          currency: this.product.currency_type || 'MYR',
+          items: [
+            {
+              item_id: this.product.product_id,
+            }
+          ]
+        });
       }
 
 
@@ -434,7 +419,6 @@ export default {
         {
           args_name: this.e_click_name,
           pay_type: this.pay_methods[this.check_index].title,
-          // pay_type: this.pay_methods[this.check_index].trade_pay_type,
           channel: utils.getFBChannel(),
         }
       );
@@ -445,7 +429,6 @@ export default {
         Toast(this.is_cn ? '请选择其他支付方式' : '請選擇其他支付方式')
         return
       }
-      // localStorage.setItem('report_price', this.product.price);
       Indicator.open(tipsArr5[utils.getLanguage()]);
       let selected_card_list = JSON.parse(localStorage.getItem('selected_card_list'));
       selected_card_list = selected_card_list.map((item) => {
@@ -471,9 +454,7 @@ export default {
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
         }
       };
-      // let user_time = this.$route.query.use_fixed_time;
 
-      let discount_pay = this.$route.query.discount_pay || 0;
       let user_time = true;
       let pay_max_params = Object.assign({}, params, {
         trade_pay_type,
@@ -481,7 +462,7 @@ export default {
       });
       pay_max_params.callback_url = `${location.origin}${location.pathname
         }#/result?path=${path_enums[this.product_key]}&report_price=${this.product && this.product.price ? this.product.price : '19.9'
-        }&currency_type=${this.product.currency_type || 'MYR'}`;
+        }&currency_type=${this.product.currency_type || 'MYR'}&product_id=${this.product.product_id}`;
       const res = await payTarotOrderAPI(pay_max_params);
       localStorage.removeItem('mlxz_set_event_times');
       Indicator.close();

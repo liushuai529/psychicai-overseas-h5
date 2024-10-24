@@ -8,20 +8,21 @@
       }"
       class="user-table"
     >
-      <div class="gua">
-        <img
-          src="https://psychicai-static.psychicai.pro/imgs/2404347a9915ae984267b0aab1e48afe650c.png"
-          alt=""
-        />
-        <span>{{ sex | filter_sex }}</span>
-      </div>
-      <canvas
-        v-show="!is_result && show_daji"
-        id="canvasji"
-        :class="['daji', is_career ? 'career-ji' : 'year-ji']" 
-      >
-      </canvas>
-
+      <th>
+        <div class="gua">
+          <img
+            src="https://psychicai-static.psychicai.pro/imgs/2404347a9915ae984267b0aab1e48afe650c.png"
+            alt=""
+          />
+          <span>{{ sex | filter_sex }}</span>
+        </div>
+        <canvas
+          v-show="!is_result && show_daji"
+          id="canvasji"
+          :class="['daji', is_career ? 'career-ji' : 'year-ji']" 
+        >
+        </canvas>
+      </th>
       <tr
         class="name"
         :style="{
@@ -615,7 +616,6 @@ export default {
       .minge-row {
         display: flex;
         flex-direction: row;
-        justify-content: center;
         align-items: center;
         height: 33.33%;
         justify-content: space-around;

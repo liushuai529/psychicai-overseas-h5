@@ -1,11 +1,7 @@
 <template>
-  <div
-    :class="{ 'fixed-order': true, 'move-right': !is_show_move }"
-    :style="{
-      top: top,
-    }"
-    @click="orderReport()"
-  >
+  <div :class="{ 'fixed-order': true, 'move-right': !is_show_move }" :style="{
+    top: top,
+  }" @click="orderReport()">
     <div class="title">
       {{ title }}
     </div>
@@ -13,38 +9,23 @@
       <div v-for="it in 30" :key="it" class="line"></div>
     </div>
     <div :class="{ 'youhui-tips': true }">限时优惠</div>
-    <count-down
-      ref="countDown"
-      :time="new_time"
-      millisecond
-      class="time-box"
-      @change="getTime"
-    >
+    <count-down ref="countDown" :time="new_time" millisecond class="time-box" @change="getTime">
       <template #default="timeData">
-        <span
-          :class="{
-            block: true,
-            'rgb-light': is_show_shandong,
-          }"
-          >{{ timeData.minutes | filterTime }}</span
-        >
+        <span :class="{
+          block: true,
+          'rgb-light': is_show_shandong,
+        }">{{ timeData.minutes | filterTime }}</span>
         <span :class="{ colon: true, 'rgb-color': is_show_shandong }">:</span>
-        <span
-          :class="{
-            block: true,
-            'rgb-light': is_show_shandong,
-          }"
-          >{{ timeData.seconds | filterTime }}</span
-        >
+        <span :class="{
+          block: true,
+          'rgb-light': is_show_shandong,
+        }">{{ timeData.seconds | filterTime }}</span>
         <span :class="{ colon: true, 'rgb-color': is_show_shandong }">:</span>
 
-        <span
-          :class="{
-            block: true,
-            'rgb-light': is_show_shandong,
-          }"
-        >
-          <!-- :class="{ mill: new_time === 1 }" -->
+        <span :class="{
+          block: true,
+          'rgb-light': is_show_shandong,
+        }">
           <span>
             {{ timeData.milliseconds | filterTime }}
           </span>
@@ -82,7 +63,7 @@ export default {
     },
     last_order: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     time: {
       type: Number,
@@ -90,11 +71,11 @@ export default {
     },
     payOrder: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
     jumpDetail: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
     is_show_move: {
       type: Boolean,
@@ -129,11 +110,15 @@ export default {
   computed: {},
   methods: {
     getTitle(val) {
-      return val
-        ? utils.getLanguage() === 'zh-CN'
-          ? reportName[val].cn
-          : reportName[val].tw
-        : '';
+      if (val) {
+        if (utils.getLanguage() === 'zh-CN') {
+          return reportName[val].cn
+        } else {
+          reportName[val].tw
+        }
+      } else {
+        return ''
+      }
     },
 
     getTime(val) {
@@ -173,12 +158,6 @@ export default {
   },
   mounted() {
     this.new_time = this.time;
-    // setInterval(() => {
-    //   if (this.name === 'local') {
-    //     this.new_time = +localStorage.getItem('mlxz_fixed_local_order_time');
-    //     this.$refs.countDown.reset();
-    //   }
-    // }, 500);
   },
 };
 </script>
@@ -199,9 +178,11 @@ export default {
     transition: right 0.5s;
   }
 }
+
 .move-right {
   animation: moveRight 0.5s forwards;
 }
+
 .fixed-order {
   width: 2.56rem;
   height: 1.9rem;
@@ -215,6 +196,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .title {
     width: 90%;
     text-align: center;
@@ -227,6 +209,7 @@ export default {
     color: #5b3825;
     line-height: 0.28rem;
   }
+
   .divider {
     width: 2.08rem;
     height: 0.01rem;
@@ -234,6 +217,7 @@ export default {
     flex-wrap: nowrap;
     overflow: hidden;
     margin: 0.12rem auto;
+
     .line {
       width: 0.05rem;
       height: 100%;
@@ -242,6 +226,7 @@ export default {
       background: #ebd1b4;
     }
   }
+
   .youhui-tips {
     width: 90%;
     text-align: center;
@@ -253,9 +238,11 @@ export default {
     margin: 0 auto 0.12rem;
   }
 }
+
 .top-470 {
   top: 4.7rem;
 }
+
 .top-670 {
   top: 6.7rem;
 }
@@ -278,7 +265,8 @@ export default {
   align-items: center;
   justify-content: center;
   color: #fff;
-  background-color: #e24c2e; /* 初始背景色 */
+  background-color: #e24c2e;
+  /* 初始背景色 */
   padding-top: 0.01rem;
 }
 
@@ -291,10 +279,12 @@ export default {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
 }
+
 .mill {
   animation: noticeTime 0.24s infinite;
 }
@@ -303,12 +293,15 @@ export default {
   0% {
     background-color: #e24c2e;
   }
+
   33.333% {
     background-color: #f5ae00;
   }
+
   66.666% {
     background-color: #662cf3;
   }
+
   100% {
     background-color: #e24c2e;
   }
@@ -321,16 +314,20 @@ export default {
 .rgb-color {
   animation: rgb-text 720ms infinite linear;
 }
+
 @keyframes rgb-text {
   0% {
     color: #e24c2e;
   }
+
   33.333% {
     color: #f5ae00;
   }
+
   66.666% {
     color: #662cf3;
   }
+
   100% {
     color: #e24c2e;
   }
