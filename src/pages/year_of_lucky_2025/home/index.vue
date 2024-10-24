@@ -118,7 +118,7 @@
             <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
             <span @click="link('privacy.html')">{{
               $t('privacy-policy')
-              }}</span>
+            }}</span>
           </div>
 
         </div>
@@ -423,9 +423,9 @@ export default {
     },
   },
   created() {
-    console.log('gata', gtag)
-    gtag('get', 'G-WZWW0H87QJ', 'client_id', function(clientId) {
-      console.log('Client ID: ' + clientId);
+  
+    gtag('get', 'G-WZWW0H87QJ', 'client_id', (clientID) => {
+      console.log('Client ID: ' + clientID);
     });
 
     this.created_year();

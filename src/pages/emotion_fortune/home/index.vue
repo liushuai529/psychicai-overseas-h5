@@ -410,8 +410,8 @@ export default {
   },
   created() {
     console.log('gtag', gtag)
-    gtag('get', 'G-WZWW0H87QJ', 'client_id', function(clientId) {
-      console.log('Client ID: ' + clientId);
+    gtag('get', 'G-WZWW0H87QJ', 'client_id', (clientID) => {
+      console.log('Client ID: ' + clientID);
     });
     this.showComboAttach();
     document.addEventListener('visibilitychange', () => {
