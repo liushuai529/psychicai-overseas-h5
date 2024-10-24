@@ -410,7 +410,7 @@ export default {
   },
   created() {
     console.log('gtag', gtag)
-    gtag('get', 'G-WZWW0H87QJ', 'client_id', (clientID) => {
+    gtag('get', 'G-43C3GF0Z45', 'client_id', (clientID) => {
       console.log('Client ID: ' + clientID);
     });
     this.showComboAttach();
