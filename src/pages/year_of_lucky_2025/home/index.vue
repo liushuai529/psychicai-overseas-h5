@@ -16,7 +16,7 @@
       <div class="bar">
         <canvas class="canvas-tag" id="canvas2"></canvas>
       </div>
-      <div class="info">
+      <!-- <div class="info">
         <div class="info-content">
           <div class="info-name">
             <div class="label">姓名</div>
@@ -53,7 +53,101 @@
               }}</span>
           </div>
         </div>
+      </div> -->
+
+
+
+
+
+      <div :class="['info',]">
+        <div class="top-bg">
+          <img class="top-bg" src="../../../assets/img/emotion_fate/xinxi_img_bj_shang.webp" />
+        </div>
+        <div :class="['info-content']">
+          <div class="title">
+            <img :src="is_cn ? cn_img_tittle_home_xinxi : tw_img_tittle_home_xinxi" />
+          </div>
+
+
+          <div class="item-container">
+            <div class="info-item">
+              <div class="left input-container">
+                <div>姓名：</div>
+                <div class="info-input">
+                  <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
+                </div>
+
+              </div>
+              <div class="sex-container">
+                <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
+              </div>
+            </div>
+            <div class="divider-line"></div>
+
+            <div class="info-item">
+              <div class="left input-container">
+                <div>生辰：</div>
+                <div class="info-input">
+                  <div class="info-birth" :style="{
+                    color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
+                  }" @click="openPicker">
+                    {{ picker_date || $t('birth-placeholder') }}
+                  </div>
+                </div>
+
+              </div>
+              <div class="birth-container">
+                <img src="../../../assets/img/emotion_fate/icon_rili.webp" @click="openPicker" />
+              </div>
+            </div>
+            <div class="divider-line"></div>
+          </div>
+
+
+
+          <div id="info-btn" class="btn emo-btn" @click="check_year">
+            <img src="../../../assets/img/emotion_fate/img_home_btu_chakan.webp" />
+          </div>
+
+          <div class="info-bottom">
+            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_fate/login_icon_choose.webp"
+              @click="privacyChecked = !privacyChecked" />
+            <img v-else class="info-check" src="../../../assets/img/emotion_fate/login_icon_choose_no.webp"
+              @click="privacyChecked = !privacyChecked" />
+            {{ $t('check-label') }}
+            <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
+            <span @click="link('privacy.html')">{{
+              $t('privacy-policy')
+              }}</span>
+          </div>
+
+        </div>
+        <div class="top-bg">
+          <img class="top-bg" src="../../../assets/img/emotion_fate/xinxi_img_bj_xia.webp" />
+        </div>
+
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div :style="`background-image:url(${is_cn ? cn_card_1 : tw_card_1})`" class="card-1">
         <canvas class="canvas-card" id="canvas3"></canvas>
       </div>
@@ -120,6 +214,13 @@ import {
 import moment from 'dayjs';
 import HeaderNotice from '../../../components/headerNotice.vue';
 
+
+import cn_img_tittle_home_xinxi from '../../../assets/img/emotion_fate/cn/img_tittle_home_xinxi_cn.webp';
+import tw_img_tittle_home_xinxi from '../../../assets/img/emotion_fate/tw/img_tittle_home_xinxi_tw.webp';
+
+import boy from '../../../assets/img/emotion_fate/img_boy.webp';
+import girl from '../../../assets/img/emotion_fate/img_girl.webp';
+
 import cn_tag from '../../../assets/img/mlxz/year_of_lucky_2024/img_4tag.webp';
 import tw_tag from '../../../assets/img/tw_mlxz/year_24/img_4tag.webp';
 import cn_order from '../../../assets/img/mlxz/year_of_lucky_2024/btn_ling.webp';
@@ -160,6 +261,10 @@ const tipsArr5 = {
   'zh-TW': '訂單創建中...',
 };
 const year_data = {
+  boy,
+  girl,
+  cn_img_tittle_home_xinxi,
+  tw_img_tittle_home_xinxi,
   cn_history_order,
   tw_history_order,
   svg: 'https://mixmedia.rili.cn/1425252e-6c76-4bec-9d74-1b09ec40d6bd.svga',
@@ -318,6 +423,12 @@ export default {
     },
   },
   created() {
+    console.log('gata', gtag)
+    gtag('get', 'G-WZWW0H87QJ', 'client_id', function(clientId) {
+      alert(111)
+      console.log('Client ID: ' + clientId);
+    });
+
     this.created_year();
   },
   mounted() {
@@ -1031,132 +1142,356 @@ export default {
     }
   }
 
+  // .info {
+  //   position: relative;
+  //   z-index: 10;
+  //   display: flex;
+  //   justify-content: center;
+  //   width: 7.1rem;
+  //   height: 4.5rem;
+  //   margin-bottom: 0.3rem;
+  //   background: url('../../../assets/img/mlxz/year_of_lucky_2024/img_info_bg.webp') no-repeat;
+  //   background-size: contain;
+
+  //   .info-content {
+  //     width: 100%;
+  //     height: 100%;
+  //     padding: 0 0.8rem;
+
+  //     box-sizing: border-box;
+
+  //     display: flex;
+  //     flex-direction: column;
+  //     justify-content: center;
+  //     align-items: center;
+
+  //     .info-title {
+  //       width: 5.48rem;
+  //       margin-bottom: 0.3rem;
+  //     }
+
+  //     .info-title2 {
+  //       width: 5.96rem;
+  //       margin-top: -1.2rem;
+  //       margin-bottom: 0.2rem;
+  //     }
+
+  //     .info-name,
+  //     .info-time {
+  //       width: 100%;
+  //       height: 0.68rem;
+  //       border-bottom: 2px solid #ac8f52;
+  //       display: flex;
+  //       align-items: center;
+  //       margin-bottom: 0.2rem;
+
+  //       .label {
+  //         flex: none;
+  //         color: #3c2f22;
+  //         font-size: 0.34rem;
+  //         line-height: 1;
+  //         font-weight: bold;
+  //         margin-right: 0.2rem;
+  //       }
+
+  //       .info-input {
+  //         flex: 1 1 auto;
+  //         width: 1.5rem;
+  //         font-size: 0.34rem;
+  //         line-height: 1;
+  //         font-weight: bold;
+  //         outline: none;
+  //         border: none;
+  //         color: #3c2f22;
+  //         background-color: transparent;
+  //         padding: 0;
+
+  //         &::input-placeholder {
+  //           color: rgba(60, 47, 34, 0.5);
+  //         }
+
+  //         &::-webkit-input-placeholder {
+  //           color: rgba(60, 47, 34, 0.5);
+  //         }
+
+  //         &::-moz-placeholder {
+  //           color: rgba(60, 47, 34, 0.5);
+  //         }
+
+  //         &::-moz-placeholder {
+  //           color: rgba(60, 47, 34, 0.5);
+  //         }
+
+  //         &::-ms-input-placeholder {
+  //           color: rgba(60, 47, 34, 0.5);
+  //         }
+  //       }
+
+  //       .sex {
+  //         flex: none;
+  //         display: block;
+  //         width: 1.4rem;
+  //       }
+
+  //       .calendar {
+  //         flex: none;
+  //         display: block;
+  //         width: 0.4rem;
+  //       }
+  //     }
+
+  //     .info-btn {
+  //       width: 5.19rem;
+  //       height: 1.03rem;
+  //       margin-top: 0.1rem;
+  //       // animation: scaleBtn 1s infinite ease-in-out alternate;
+  //     }
+
+  //     .info-bottom {
+  //       font-size: 0.24rem;
+  //       line-height: 1;
+  //       display: flex;
+  //       align-items: center;
+  //       color: rgba(60, 47, 34, 0.6);
+  //       position: absolute;
+  //       bottom: 0;
+
+  //       .check {
+  //         width: 0.24rem;
+  //         margin-right: 0.1rem;
+  //         display: block;
+  //       }
+
+  //       .link {
+  //         color: #445cba;
+  //       }
+  //     }
+  //   }
+  // }
+
+
+
+
+
   .info {
     position: relative;
-    z-index: 10;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 7.1rem;
-    height: 4.5rem;
-    margin-bottom: 0.3rem;
-    background: url('../../../assets/img/mlxz/year_of_lucky_2024/img_info_bg.webp') no-repeat;
-    background-size: contain;
+    // height: 6.34rem;
+    margin-top: 1.3rem;
+
+    .top-bg {
+      width: 7.1rem;
+      height: 0.4rem;
+      display: flex;
+
+    }
 
     .info-content {
-      width: 100%;
-      height: 100%;
-      padding: 0 0.8rem;
-
-      box-sizing: border-box;
-
+      background: url('../../../assets/img/emotion_fate/xinxi_img_bj_zhong.webp') no-repeat;
+      background-size: cover;
+      width: 7.1rem;
+      // height: 4.54rem;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      padding: 0 0.4rem;
 
-      .info-title {
-        width: 5.48rem;
-        margin-bottom: 0.3rem;
-      }
-
-      .info-title2 {
-        width: 5.96rem;
-        margin-top: -1.2rem;
-        margin-bottom: 0.2rem;
-      }
-
-      .info-name,
-      .info-time {
-        width: 100%;
-        height: 0.68rem;
-        border-bottom: 2px solid #ac8f52;
+      .title {
+        width: 6.1rem;
+        height: 0.7rem;
         display: flex;
-        align-items: center;
-        margin-bottom: 0.2rem;
 
-        .label {
-          flex: none;
-          color: #3c2f22;
-          font-size: 0.34rem;
-          line-height: 1;
-          font-weight: bold;
-          margin-right: 0.2rem;
-        }
-
-        .info-input {
-          flex: 1 1 auto;
-          width: 1.5rem;
-          font-size: 0.34rem;
-          line-height: 1;
-          font-weight: bold;
-          outline: none;
-          border: none;
-          color: #3c2f22;
-          background-color: transparent;
-          padding: 0;
-
-          &::input-placeholder {
-            color: rgba(60, 47, 34, 0.5);
-          }
-
-          &::-webkit-input-placeholder {
-            color: rgba(60, 47, 34, 0.5);
-          }
-
-          &::-moz-placeholder {
-            color: rgba(60, 47, 34, 0.5);
-          }
-
-          &::-moz-placeholder {
-            color: rgba(60, 47, 34, 0.5);
-          }
-
-          &::-ms-input-placeholder {
-            color: rgba(60, 47, 34, 0.5);
-          }
-        }
-
-        .sex {
-          flex: none;
-          display: block;
-          width: 1.4rem;
-        }
-
-        .calendar {
-          flex: none;
-          display: block;
-          width: 0.4rem;
+        img {
+          width: 6.1rem;
+          height: 0.7rem;
         }
       }
 
-      .info-btn {
-        width: 5.19rem;
-        height: 1.03rem;
-        margin-top: 0.1rem;
-        // animation: scaleBtn 1s infinite ease-in-out alternate;
+      .item-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0.2rem;
+
+        .info-item {
+          width: 6.3rem;
+          height: 0.82rem;
+          line-height: 0.82rem;
+          overflow: hidden;
+          // border: 1px solid red;
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          font-weight: 400;
+          font-size: 0.32rem;
+          color: #3A0922;
+          line-height: 0.48rem;
+          text-align: justify;
+          font-style: normal;
+
+          .left {
+            display: flex;
+            margin-top: 0.1rem;
+          }
+
+          .input-container {
+            flex: auto;
+            height: 0.92rem;
+            // background-color: #fff;
+            border-radius: 0.12rem;
+            display: flex;
+            box-sizing: border-box;
+            padding: 0.06rem;
+            align-items: center;
+
+            input {
+              // width: 100%;
+              width: 3.2rem;
+              font-size: 0.3rem;
+              line-height: 0.42rem;
+              outline: none;
+              border: none;
+              background-color: transparent;
+              padding: 0;
+              // margin: 0 0.3rem;
+
+              &::input-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-webkit-input-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-moz-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-moz-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-ms-input-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+            }
+          }
+
+          .sex-container {
+            display: flex;
+            width: 1.7rem;
+            height: 0.6rem;
+            margin-top: 0.1rem;
+
+            img {
+              width: 1.7rem;
+              height: 0.6rem;
+            }
+          }
+
+          .birth-container {
+            margin-right: 0.13rem;
+            display: flex;
+            width: 0.46rem;
+            height: 0.46rem;
+            margin-top: 0.1rem;
+
+            img {
+              width: 0.46rem;
+              height: 0.46rem;
+            }
+          }
+        }
+      }
+
+
+
+      .btn {
+        display: flex;
+        margin-top: 0.4rem;
+        width: 5.9rem;
+        height: 0.92rem;
+
+        img {
+          width: 5.9rem;
+          height: 0.92rem;
+        }
       }
 
       .info-bottom {
-        font-size: 0.24rem;
-        line-height: 1;
         display: flex;
+        justify-content: center;
         align-items: center;
-        color: rgba(60, 47, 34, 0.6);
-        position: absolute;
-        bottom: 0;
+        color: #95979F;
+        font-size: 0.22rem;
+        line-height: 0.3rem;
+        margin-top: 0.3rem;
 
-        .check {
-          width: 0.24rem;
-          margin-right: 0.1rem;
-          display: block;
+        img {
+          width: 0.3rem;
+          height: 0.3rem;
+          margin-right: 0.12rem;
         }
 
-        .link {
-          color: #445cba;
+        span {
+          color: #CA8617;
         }
       }
     }
+
+    .info-height {
+      // height: 5.4rem;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   .card {
     width: 7.1rem;
