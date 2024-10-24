@@ -526,7 +526,7 @@ export default {
             }
           ]
         });
-        
+
       }
 
       this.logEventForSort({
@@ -552,6 +552,11 @@ export default {
       }
       localStorage.setItem('report_price', this.product.price);
       Indicator.open(tipsArr5[utils.getLanguage()]);
+      const cookieMap = new Map();
+      document.cookie.split("; ").forEach((cookie) => {
+        const [key, value] = cookie.split("=");
+        cookieMap.set(key, value);
+      })
       let params = {
         pay_method: pay_method,
         product_key: this.combine_product_ids.length ? this.h5_combo2_attach.product_key : this.product_key,
@@ -577,6 +582,13 @@ export default {
         trade_pay_type,
         trade_target_org,
       });
+      if (cookieMap.get("_ga")) {
+        pay_max_params = Object.assign({}, pay_max_params, {
+          ga_param: {
+            client_id: cookieMap.get("_ga")
+          },
+        });
+      }
       this.consult_time && this.consult_time.user_info && this.consult_time.user_info.email && delete this.consult_time.user_info.email
       if (this.product_key === 'consult_time') {
         pay_max_params = Object.assign({}, pay_max_params, {
