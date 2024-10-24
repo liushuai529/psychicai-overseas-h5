@@ -58,7 +58,7 @@ const i18n = new VueI18n({
 });
 
 Vue.config.productionTip = false;
-document.body.style.backgroundColor = '#FFAA41';
+document.body.style.backgroundColor = '#B5291E';
 new Vue({
   el: '#app',
   router,

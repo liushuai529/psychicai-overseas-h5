@@ -471,6 +471,9 @@ export default {
   },
 
   methods: {
+    setAnimation() {
+      localStorage.setItem('mlxz_outer_animation', '1');
+    },
     created_year() {
       this.$store.dispatch('common/getProduction');
       const { has_pay } = this.$route.query;
@@ -761,7 +764,8 @@ export default {
       querystring += time_obj.date;
       querystring += '|';
       querystring += time_obj.birth_hour || '-1';
-
+      //设置过渡动画标识
+      this.setAnimation();
       window.localStorage.setItem('year_of_lucky_info', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
