@@ -410,9 +410,13 @@ export default {
   },
   created() {
     console.log('gtag', gtag)
+    gtag('get', 'G-WZWW0H87QJ', 'client_id', (clientID) => {
+      console.log('Client ID: ' + clientID);
+    });
     gtag('get', 'G-43C3GF0Z45', 'client_id', (clientID) => {
       console.log('Client ID: ' + clientID);
     });
+    
     this.showComboAttach();
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
@@ -877,14 +881,6 @@ export default {
           click_type: 'screen_tracking',
         }
       );
-      let same_ = this.productList.find(
-          item => item.product_key === this.product_key
-        );
-        const { price, currency_type } = same_; 
-        gtag && gtag("event", "generate_lead", {
-          currency: currency_type,
-          value: price,
-        });
       if (utils.isProd()) {
         
         try {
