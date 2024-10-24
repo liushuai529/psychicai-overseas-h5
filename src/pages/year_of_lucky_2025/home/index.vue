@@ -425,7 +425,6 @@ export default {
   created() {
     console.log('gata', gtag)
     gtag('get', 'G-WZWW0H87QJ', 'client_id', function(clientId) {
-      alert(111)
       console.log('Client ID: ' + clientId);
     });
 
