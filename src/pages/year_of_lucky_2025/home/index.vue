@@ -106,7 +106,7 @@
 
 
           <div id="info-btn" class="btn emo-btn" @click="check_year">
-            <img src="../../../assets/img/emotion_fate/img_home_btu_chakan.webp" />
+            <img :src="is_cn? btn_chakan_cn_1x: btn_chakan_tw_1x" />
           </div>
 
           <div class="info-bottom">
@@ -218,8 +218,12 @@ import HeaderNotice from '../../../components/headerNotice.vue';
 import cn_img_tittle_home_xinxi from '../../../assets/img/year_of_lucky_2025/cn/home_img_tittle_xinxi_cn.webp';
 import tw_img_tittle_home_xinxi from '../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_xinxi_tw.webp';
 
+import btn_chakan_cn_1x from '../../../assets/img/year_of_lucky_2025/cn/btn_chakan_cn_1x.webp';
+import btn_chakan_tw_1x from '../../../assets/img/year_of_lucky_2025/tw/btn_chakan_tw_1x.webp';
+
 import boy from '../../../assets/img/emotion_fate/img_boy.webp';
 import girl from '../../../assets/img/emotion_fate/img_girl.webp';
+
 
 import cn_tag from '../../../assets/img/mlxz/year_of_lucky_2024/img_4tag.webp';
 import tw_tag from '../../../assets/img/tw_mlxz/year_24/img_4tag.webp';
@@ -261,6 +265,8 @@ const tipsArr5 = {
   'zh-TW': '訂單創建中...',
 };
 const year_data = {
+  btn_chakan_cn_1x,
+  btn_chakan_tw_1x,
   boy,
   girl,
   cn_img_tittle_home_xinxi,
@@ -1088,6 +1094,14 @@ export default {
   background-image: url('../../../assets/img/tw_mlxz/year_24/bj.webp');
 }
 
+.divider-line {
+  width: 6.5rem;
+  height: 1px;
+  background: #000000;
+  opacity: 0.13;
+  // margin-bottom: 0.2rem;
+}
+
 .container {
   width: 7.5rem;
   position: relative;
@@ -1408,12 +1422,12 @@ export default {
       .btn {
         display: flex;
         margin-top: 0.4rem;
-        width: 5.9rem;
-        height: 0.92rem;
+        width: 5.7rem;
+        height: 0.96rem;
 
         img {
-          width: 5.9rem;
-          height: 0.92rem;
+          width: 5.7rem;
+          height: 0.96rem;
         }
       }
 
