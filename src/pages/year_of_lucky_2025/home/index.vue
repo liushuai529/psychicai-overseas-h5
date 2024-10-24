@@ -61,7 +61,7 @@
 
       <div :class="['info',]">
         <div class="top-bg">
-          <img class="top-bg" src="../../../assets/img/emotion_fate/xinxi_img_bj_shang.webp" />
+          <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_shang.webp" />
         </div>
         <div :class="['info-content']">
           <div class="title">
@@ -123,7 +123,7 @@
 
         </div>
         <div class="top-bg">
-          <img class="top-bg" src="../../../assets/img/emotion_fate/xinxi_img_bj_xia.webp" />
+          <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_xia.webp" />
         </div>
 
       </div>
@@ -215,8 +215,8 @@ import moment from 'dayjs';
 import HeaderNotice from '../../../components/headerNotice.vue';
 
 
-import cn_img_tittle_home_xinxi from '../../../assets/img/emotion_fate/cn/img_tittle_home_xinxi_cn.webp';
-import tw_img_tittle_home_xinxi from '../../../assets/img/emotion_fate/tw/img_tittle_home_xinxi_tw.webp';
+import cn_img_tittle_home_xinxi from '../../../assets/img/year_of_lucky_2025/cn/home_img_tittle_xinxi_cn.webp';
+import tw_img_tittle_home_xinxi from '../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_xinxi_tw.webp';
 
 import boy from '../../../assets/img/emotion_fate/img_boy.webp';
 import girl from '../../../assets/img/emotion_fate/img_girl.webp';
@@ -423,11 +423,6 @@ export default {
     },
   },
   created() {
-  
-    gtag('get', 'G-WZWW0H87QJ', 'client_id', (clientID) => {
-      console.log('Client ID: ' + clientID);
-    });
-
     this.created_year();
   },
   mounted() {
@@ -1117,11 +1112,11 @@ export default {
     z-index: 10;
     width: 100%;
 
-    img {
-      margin-top: 0.35rem;
-      margin-left: 0.51rem;
-      width: 2.8rem;
-    }
+    // img {
+    //   margin-top: 0.35rem;
+    //   margin-left: 0.51rem;
+    //   width: 2.8rem;
+    // }
   }
 
   .bar {
@@ -1279,33 +1274,35 @@ export default {
     align-items: center;
     width: 7.1rem;
     // height: 6.34rem;
-    margin-top: 1.3rem;
+    margin-top: 1.8rem;
 
     .top-bg {
       width: 7.1rem;
-      height: 0.4rem;
+      height: 1rem;
       display: flex;
 
     }
 
     .info-content {
-      background: url('../../../assets/img/emotion_fate/xinxi_img_bj_zhong.webp') no-repeat;
+      background: url('../../../assets/img/year_of_lucky_2025/xinxi_img_bj_zhong.webp') no-repeat;
       background-size: cover;
       width: 7.1rem;
+      height: 3.28rem;
       // height: 4.54rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 0.4rem;
+      // padding: 0 0.4rem;
 
       .title {
-        width: 6.1rem;
-        height: 0.7rem;
+        width: 7.1rem;
+        height: 1rem;
         display: flex;
 
         img {
-          width: 6.1rem;
-          height: 0.7rem;
+          width: 7.1rem;
+          height: 1rem;
+          margin-top: -1rem;
         }
       }
 
