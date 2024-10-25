@@ -22,8 +22,6 @@
       <div class="bottom">
         <img src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_xia.webp" />
       </div>
-
-
     </div>
 
 
@@ -51,16 +49,19 @@
     <img :src="is_cn ? cn_card_9 : tw_card_9" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_10 : tw_card_10" class="card-bg" alt="" />
 
-    <div v-if="showFixedBtn" @click="showPayModal_year" class="get-report-btn fix-box">
+    <!-- <div  @click="showPayModal_year" class="get-report-btn fix-box">
       <img class="huxi-btn" :src="is_cn ? cn_pay_btn : tw_pay_btn" alt="" />
-    </div>
+    </div> -->
     <div class="footer"></div>
 
-    <payModal :product_key="product_key" v-model="pay_modal" :bg="modal_bg" :query_user_string="query_user_string"
+    <!-- <payModal :product_key="product_key" v-model="pay_modal" :bg="modal_bg" :query_user_string="query_user_string"
       :title="username_title" e_view_id="10003" c_view_id="-10005" e_view_name="view_2024report_pay"
       a_view_token="t57k8s" c_click_id="-10006" e_click_name="click_2024report_pay" a_click_token="pil6oj"
-      @close="pay_modal = false" />
-    <NewFooter v-if="showFixedBtn" product_key="h5_annual2024" />
+      @close="pay_modal = false" /> -->
+
+      
+    <NewFooter  product_key="h5_annual2024" />
+    <img @click="payOrder" :class="['emo-btn', 'fix-btn']" :src="is_cn? btn_pay_cn_1x: btn_pay_tw_1x" />
     <FixedDiscountModal product_key="h5_annual2024" @change_discount_modal="change_discount_modal" />
   </div>
 </template>
@@ -84,16 +85,10 @@ import home_img_tittle_xinxi_tw_1x from './../../../assets/img/year_of_lucky_202
 import img_zhifu_jian from './../../../assets/img/year_of_lucky_2025/cn/home_img_tittle_pay_cn_1x.webp';
 import img_zhifu_fan from './../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_pay_tw_1x.webp';
 
+import btn_pay_cn_1x from './../../../assets/img/year_of_lucky_2025/cn/btn_pay_cn_1x.webp'
+import btn_pay_tw_1x from './../../../assets/img/year_of_lucky_2025/tw/btn_pay_tw_1x.webp'
 
-import title1 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_1.webp';
-import title2 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_2.webp';
-import title3 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_3.webp';
-import title4 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_nian.webp';
-import title5 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_4.webp';
-import title6 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_caifu.webp';
-import title7 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_5.webp';
-import title8 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_6.webp';
-import title9 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_7.webp';
+
 
 import cn_card_0 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_huode_cn_1x.webp';
 import cn_card_1 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_01_cn_1x.webp';
@@ -206,24 +201,8 @@ export default {
       home_img_tittle_xinxi_tw_1x,
       img_zhifu_jian,
       img_zhifu_fan,
-      title1,
-      title2,
-      title3,
-      title4,
-      title5,
-      title6,
-      title7,
-      title8,
-      title9,
-      topic1,
-      topic2,
-      topic3,
-      topic4,
-      topic5,
-      topic6,
-      topic7,
-      topic8,
-      topic9,
+      btn_pay_cn_1x,
+      btn_pay_tw_1x,
       cn_card_0,
       cn_card_1,
       cn_card_2,
@@ -308,20 +287,20 @@ export default {
     window.scrollTo(0, 0);
     let btn = document.getElementById('info-btn');
     let self = this;
-    document.addEventListener('scroll', e => {
-      let flag = utils.isElementInViewport(btn);
-      let scroll_distance =
-        window.pageYOffset || document.documentElement.scrollTop;
-      if (!self.is_show_btn || scroll_distance < 100) {
-        self.showFixedBtn = false;
-        return;
-      }
-      if (!flag) {
-        self.showFixedBtn = true;
-      } else {
-        self.showFixedBtn = false;
-      }
-    });
+    // document.addEventListener('scroll', e => {
+    //   let flag = utils.isElementInViewport(btn);
+    //   let scroll_distance =
+    //     window.pageYOffset || document.documentElement.scrollTop;
+    //   if (!self.is_show_btn || scroll_distance < 100) {
+    //     self.showFixedBtn = false;
+    //     return;
+    //   }
+    //   if (!flag) {
+    //     self.showFixedBtn = true;
+    //   } else {
+    //     self.showFixedBtn = false;
+    //   }
+    // });
 
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
@@ -421,6 +400,10 @@ export default {
         }
       );
       this.pay_modal = true;
+    },
+    payOrder() {
+      // localStorage.removeItem('mlxz_count_pay_item_h5_emotion2024');
+      this.$refs.payDetail.payMoney();
     },
   },
 };
@@ -570,5 +553,15 @@ export default {
 .footer {
   width: 7.5rem;
   height: 2.4rem;
+}
+.emo-btn {
+  animation: emoBtn 1s infinite ease-in-out alternate;
+}
+.fix-btn {
+  width: 5.7rem;
+  height: 0.96rem;
+  position: fixed;
+  bottom: 0.2rem;
+  z-index: 99;
 }
 </style>

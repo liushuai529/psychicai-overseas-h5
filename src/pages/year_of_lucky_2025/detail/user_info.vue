@@ -94,18 +94,18 @@ export default {
   },
   mounted() {
     this.$nextTick(async () => {
-      if (!this.is_result) {
-        this.getEcharts_year();
-        const shiye = document.getElementById('shiye');
-        const jiankang = document.getElementById('jiankang');
-        const haoyun = document.getElementById('haoyun');
-        await utils.asleep(2000);
-        shiye.classList.add('move1');
-        await utils.asleep(500);
-        jiankang.classList.add('move2');
-        await utils.asleep(500);
-        haoyun.classList.add('move3');
-      }
+      // if (!this.is_result) {
+      //   // this.getEcharts_year();
+      //   const shiye = document.getElementById('shiye');
+      //   const jiankang = document.getElementById('jiankang');
+      //   const haoyun = document.getElementById('haoyun');
+      //   await utils.asleep(2000);
+      //   shiye.classList.add('move1');
+      //   await utils.asleep(500);
+      //   jiankang.classList.add('move2');
+      //   await utils.asleep(500);
+      //   haoyun.classList.add('move3');
+      // }
     });
   },
   filters: {
