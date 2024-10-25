@@ -42,6 +42,7 @@
 ## 投放链接
 03、05渠道为感情运。05渠道仅为感情运（页面没有首页按钮）
 03系列链接改为根据ip获取商品信息(10.15)
+05系列链接改为根据ip获取商品信息(10.25)
 测试
 https://test-overseas.psychicai.pro/ocean03/emotion_fortune.html
 https://test-overseas.psychicai.pro/ocean05/emotion_fortune.html

@@ -1,16 +1,17 @@
 <template>
-  <div class="pay-item"  v-if="last_order" :style="{marginBottom:product_key==='h5_emotion2024'? '0.37rem': '0.24rem'}" @click="pay">
+  <div class="pay-item" v-if="last_order"
+    :style="{ marginBottom: product_key === 'h5_emotion2024' ? '0.37rem' : '0.24rem' }" @click="pay">
     <div class="pay-contaienr">
       <div class="left">
-        <div class="title">{{is_cn? '您有待支付订单': '您有待支付訂單'}}</div>
-        <div class="desc">{{ is_cn? '已根据您的八字信息成功生成「报告」': '已根據您的八字信息成功生成「報告」' }}</div>
+        <div class="title">{{ is_cn ? '您有待支付订单' : '您有待支付訂單' }}</div>
+        <div class="desc">{{ is_cn ? '已根据您的八字信息成功生成「报告」' : '已根據您的八字信息成功生成「報告」' }}</div>
       </div>
       <div class="right">立即支付</div>
     </div>
     <div class="time">
-      <div>{{ is_cn? '请在' : '請在' }}</div>
-      <count-down :time="time" @change="getTime" style="margin-left: 5px; margin-right: 5px;"/>
-      <div>{{ is_cn? '内完成支付': '內完成支付' }}</div>
+      <div>{{ is_cn ? '请在' : '請在' }}</div>
+      <count-down :time="time" @change="getTime" style="margin-left: 5px; margin-right: 5px;" />
+      <div>{{ is_cn ? '内完成支付' : '內完成支付' }}</div>
     </div>
 
   </div>
@@ -28,22 +29,22 @@ import { payOrderAPI } from '../api/api';
 import { CountDown } from 'vant';
 
 const pay_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10023, 'event_name': 'click_paycardwealty_pay', type: 'click'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10023, 'event_name': 'click_paycardyear_pay', type: 'click'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10023, 'event_name': 'click_paycardchenggu_pay', type: 'click'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10023, 'event_name': 'click_paycard64gua_pay', type: 'click'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10032, 'event_name': 'click_paycardlove_pay', type: 'click'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10034, 'event_name': 'click_paycardmarriage_pay', type: 'click'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10023, 'event_name': 'click_paycardcareer_pay', type: 'click'}, // 2024年事业运势 
+  h5_wealth2024: { module: 10005, 'content_id': -10023, 'event_name': 'click_paycardwealty_pay', type: 'click' }, // 2024年财运
+  h5_annual2024: { module: 10003, 'content_id': -10023, 'event_name': 'click_paycardyear_pay', type: 'click' }, // 2024年年运
+  h5_weigh_bone: { module: 10009, 'content_id': -10023, 'event_name': 'click_paycardchenggu_pay', type: 'click' }, // 袁天罡秤骨
+  h5_bai_gua: { module: 10008, 'content_id': -10023, 'event_name': 'click_paycard64gua_pay', type: 'click' }, // 鬼谷子
+  h5_emotion2024: { module: 10006, 'content_id': -10032, 'event_name': 'click_paycardlove_pay', type: 'click' }, // 2024年爱情运势
+  h5_marriage: { module: 10007, 'content_id': -10034, 'event_name': 'click_paycardmarriage_pay', type: 'click' }, //合婚
+  h5_career2024: { module: 10004, 'content_id': -10023, 'event_name': 'click_paycardcareer_pay', type: 'click' }, // 2024年事业运势 
 }
 const modal_info = {
-  h5_wealth2024: {module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view'}, // 2024年财运
-  h5_annual2024: {module: 10003, 'content_id': -10024, 'event_name': 'page_view_iosyear_guidance', type: 'page_view'}, // 2024年年运
-  h5_weigh_bone: {module: 10009, 'content_id': -10024, 'event_name': 'page_view_ioschenggu_guidance', type: 'page_view'}, // 袁天罡秤骨
-  h5_bai_gua: {module: 10008, 'content_id': -10024, 'event_name': 'page_view_ios64gua_guidance', type: 'page_view'}, // 鬼谷子
-  h5_emotion2024: {module: 10006, 'content_id': -10033, 'event_name': 'page_view_ioslove_guidance', type: 'page_view'}, // 2024年爱情运势
-  h5_marriage: {module: 10007, 'content_id': -10035, 'event_name': 'page_view_iosmarriage_guidance', type: 'page_view'}, //合婚
-  h5_career2024: {module: 10004, 'content_id': -10024, 'event_name': 'page_view_ioscareer_guidance', type: 'page_view'}, // 2024年事业运势 
+  h5_wealth2024: { module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view' }, // 2024年财运
+  h5_annual2024: { module: 10003, 'content_id': -10024, 'event_name': 'page_view_iosyear_guidance', type: 'page_view' }, // 2024年年运
+  h5_weigh_bone: { module: 10009, 'content_id': -10024, 'event_name': 'page_view_ioschenggu_guidance', type: 'page_view' }, // 袁天罡秤骨
+  h5_bai_gua: { module: 10008, 'content_id': -10024, 'event_name': 'page_view_ios64gua_guidance', type: 'page_view' }, // 鬼谷子
+  h5_emotion2024: { module: 10006, 'content_id': -10033, 'event_name': 'page_view_ioslove_guidance', type: 'page_view' }, // 2024年爱情运势
+  h5_marriage: { module: 10007, 'content_id': -10035, 'event_name': 'page_view_iosmarriage_guidance', type: 'page_view' }, //合婚
+  h5_career2024: { module: 10004, 'content_id': -10024, 'event_name': 'page_view_ioscareer_guidance', type: 'page_view' }, // 2024年事业运势 
 }
 export default {
   components: {
@@ -65,40 +66,40 @@ export default {
       default: false
     },
   },
-  
+
 
   async created() {
-    if(!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
+    if (!localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
       localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, 30 * 60 * 1000);
-    } 
-    this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`):  30 * 60 * 1000
-    if(this.product_key === 'consult_time') {
+    }
+    this.time = localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) ? localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`) : 30 * 60 * 1000
+    if (this.product_key === 'consult_time') {
       this.$store.dispatch('common/getProduction', 'consult_time');
     } else {
       this.$store.dispatch('common/getProduction');
     }
     const res = await getLastOrderGetAPI(this.product_key);
     if (res.status !== 1000) return;
-    if(res.data && res.data.status !== 'PAYED') {
+    if (res.data && res.data.status !== 'PAYED') {
       this.last_order = res.data;
     }
-    if(this.last_order) {
+    if (this.last_order) {
       //自动下单
       this.autoPay()
     }
   },
   watch: {
     async show_pay_guide_modal(newVal) {
-     if(!newVal) {
-      console.log('刷新卡片')
-      const res = await getLastOrderGetAPI(this.product_key);
-      if (res.status !== 1000) return;
-      if(res.data.status !== 'PAYED') {
-        this.last_order = res.data;
-      } else {
-        this.last_order = null; 
+      if (!newVal) {
+        console.log('刷新卡片')
+        const res = await getLastOrderGetAPI(this.product_key);
+        if (res.status !== 1000) return;
+        if (res.data.status !== 'PAYED') {
+          this.last_order = res.data;
+        } else {
+          this.last_order = null;
+        }
       }
-     } 
     }
   },
 
@@ -107,7 +108,7 @@ export default {
       return utils.getLanguage() === 'zh-CN';
     },
     show() {
-      return utils.getFBChannel().indexOf('02')>-1 && this.last_order
+      return utils.getFBChannel().indexOf('02') > -1 && this.last_order
     },
     productList() {
       return this.$store.state.common.productList;
@@ -117,8 +118,15 @@ export default {
     }
   },
   methods: {
+    findSecondIndexOf(str, char) {
+      const firstIndex = str.indexOf(char);
+      if (firstIndex === -1) {
+        return -1; // 字符没有出现，返回-1
+      }
+      return str.indexOf(char, firstIndex + 1);
+    },
     autoPay() {
-      if(this.canAutoPay) {
+      if (this.canAutoPay) {
         localStorage.setItem(`auto_pay_${utils.getQueryStr('timestamp')}`, 1)
         this.pay();
       }
@@ -126,19 +134,19 @@ export default {
     getTime(val) {
       const { minutes, seconds } = val;
       let time_ = minutes * 60 * 1000 + seconds * 1000;
-      if(localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
+      if (localStorage.getItem(`mlxz_count_pay_item_${this.product_key}`)) {
         localStorage.setItem(`mlxz_count_pay_item_${this.product_key}`, time_);
       } else {
         this.time = 30 * 60 * 1000
       }
-      
-      
+
+
     },
     async pay() {
       utils.firebaseLogEvent(pay_info[this.product_key]['module'], pay_info[this.product_key]['content_id'], pay_info[this.product_key]['event_name'], pay_info[this.product_key]['type'], {
         args_name: pay_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
-        container: utils.isFBContainer()? 'fb': 'web'
+        container: utils.isFBContainer() ? 'fb' : 'web'
       });
       if (utils.isFBContainer()) {
         this.$emit('show_modal', true)
@@ -148,7 +156,7 @@ export default {
         utils.firebaseLogEvent(modal_info[this.product_key]['module'], modal_info[this.product_key]['content_id'], modal_info[this.product_key]['event_name'], modal_info[this.product_key]['type'], {
           args_name: modal_info[this.product_key]['event_name'],
           channel: utils.getFBChannel(),
-          os: utils.isAndroid()? 'android': 'ios'
+          os: utils.isAndroid() ? 'android' : 'ios'
         });
         return
       }
@@ -183,6 +191,20 @@ export default {
             external_id: localStorage.getItem('mlxz_outer_visitor_id'),
           },
         };
+        const cookieMap = new Map();
+        document.cookie.split("; ").forEach((cookie) => {
+          const [key, value] = cookie.split("=");
+          cookieMap.set(key, value);
+        })
+        if (cookieMap.get("_ga")) {
+          let _ga = cookieMap.get("_ga");
+          const secondIndex = this.findSecondIndexOf(_ga, '.');
+          params_combine = Object.assign({}, params_combine, {
+            ga_param: {
+              client_id: _ga.substr(secondIndex + 1)
+            },
+          });
+        }
         if (product_key === 'h5_combo2_attach') {
           let same_product = this.productList.find(
             item => item.product_id === combine_product_ids[0]
@@ -201,7 +223,7 @@ export default {
             length_ +
             '&report_price=' +
             payment +
-            '&repay=1'+'&product_id='+product_id;
+            '&repay=1' + '&product_id=' + product_id;
         }
 
         const res_combine = await payOrderAPI(params_combine);
@@ -214,7 +236,7 @@ export default {
         // 组合下单结束
         return;
       }
-      
+
       let params = {
         pay_method,
         product_key,
@@ -229,6 +251,20 @@ export default {
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
         },
       };
+      const cookieMap = new Map();
+      document.cookie.split("; ").forEach((cookie) => {
+        const [key, value] = cookie.split("=");
+        cookieMap.set(key, value);
+      })
+      if (cookieMap.get("_ga")) {
+        let _ga = cookieMap.get("_ga");
+        const secondIndex = this.findSecondIndexOf(_ga, '.');
+        params = Object.assign({}, params, {
+          ga_param: {
+            client_id: _ga.substr(secondIndex + 1)
+          },
+        });
+      }
 
       params.callback_url = `${location.origin
         }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
@@ -326,11 +362,12 @@ export default {
     justify-content: center;
     align-items: center
   }
+
   .van-count-down {
     font-weight: 600;
     font-size: 0.26rem;
     color: #E24C2E;
-    line-height: 0.26rem; 
+    line-height: 0.26rem;
   }
 }
 </style>

@@ -231,9 +231,6 @@ export default {
   },
 
   computed: {
-    is03_series() {
-      return utils.getEndStr(utils.getFBChannel(), 2) === '03'
-    },
     is_show_fb_notice() {
       return utils.isFBContainer() && utils.getFBChannel().indexOf('02') > -1;
     },
@@ -264,7 +261,7 @@ export default {
       return ['enjoy02', 'panda02'].includes(utils.getFBChannel());
     },
     is03_series() {
-      return utils.getEndStr(utils.getFBChannel(), 2) === '03'
+      return utils.getEndStr(utils.getFBChannel(), 2) === '03' || utils.getEndStr(utils.getFBChannel(), 2) === '05'
     },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
