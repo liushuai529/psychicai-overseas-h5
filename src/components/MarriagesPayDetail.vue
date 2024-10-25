@@ -372,6 +372,13 @@ export default {
   mounted() { },
 
   methods: {
+    findSecondIndexOf(str, char) {
+      const firstIndex = str.indexOf(char);
+      if (firstIndex === -1) {
+        return -1; // 字符没有出现，返回-1
+      }
+      return str.indexOf(char, firstIndex + 1);
+    },
     changeCity() {
       if (!this.current_country) {
         this.current_country = JSON.parse(localStorage.getItem('current_country'))
@@ -505,15 +512,15 @@ export default {
       this.pay_lock_time = setTimeout(() => {
         this.payCanClick = false
       }, 2000);
-      utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "add_to_cart", {
-          value: this.product.price.toFixed(2),
-          currency: this.product.currency_type || 'MYR',
-          items: [
-            {
-              item_id: this.product.product_id,
-            }
-          ]
-        });
+      utils.getFBChannel().indexOf('google') > -1 && gtag && gtag("event", "add_to_cart", {
+        value: this.product.price.toFixed(2),
+        currency: this.product.currency_type || 'MYR',
+        items: [
+          {
+            item_id: this.product.product_id,
+          }
+        ]
+      });
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
 
@@ -526,7 +533,7 @@ export default {
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
-        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "add_to_cart", {
+        utils.getFBChannel().indexOf('google') > -1 && gtag && gtag("event", "add_to_cart", {
           value: this.product.price.toFixed(2),
           currency: this.product.currency_type || 'MYR',
           items: [
@@ -592,9 +599,11 @@ export default {
         trade_target_org,
       });
       if (cookieMap.get("_ga")) {
+        let _ga = cookieMap.get("_ga");
+        const secondIndex = this.findSecondIndexOf(_ga, '.');
         pay_max_params = Object.assign({}, pay_max_params, {
           ga_param: {
-            client_id: cookieMap.get("_ga")
+            client_id: _ga.substr(secondIndex+1)
           },
         });
       }
@@ -752,6 +761,7 @@ export default {
 }
 
 .method-list {
+  // min-height: 11rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

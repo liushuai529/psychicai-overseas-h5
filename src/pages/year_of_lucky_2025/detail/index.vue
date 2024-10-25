@@ -32,6 +32,13 @@
         :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" /> -->
 
     <PayItem product_key="h5_annual2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
+    <div :class="['method-box']">
+      <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
+      <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
+        :query_user_string="query_user_string" e_view_id="10006"
+        c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
+        e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
+    </div>
     <img :src="is_cn ? cn_card_1 : tw_card_1" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_2 : tw_card_2" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_3 : tw_card_3" class="card-bg" alt="" />
@@ -66,10 +73,15 @@ import tw_pay_btn from '../../../assets/img/mlxz/year_of_lucky_2024/tw/img_butto
 import analyzeModal from './analyze.vue';
 import payModal from '../../../components/PayModal.vue';
 import AnimationYearPage from '../../../components/AnimationYearPage.vue';
+import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
 import { report_id_arr } from '../../../libs/enum';
 
 import home_img_tittle_xinxi_cn_1x from './../../../assets/img/year_of_lucky_2025/cn/home_img_tittle_xinxi_cn_1x.webp';
 import home_img_tittle_xinxi_tw_1x from './../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_xinxi_tw_1x.webp';
+
+import img_zhifu_jian from './../../../assets/img/year_of_lucky_2025/cn/home_img_tittle_pay_cn_1x.webp';
+import img_zhifu_fan from './../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_pay_tw_1x.webp';
+
 
 import title1 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_1.webp';
 import title2 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_2.webp';
@@ -158,6 +170,7 @@ export default {
     PayGuideModal,
     FixedDiscountModal,
     AnimationYearPage,
+    MarriagesPayDetail,
   },
   data() {
     return {
@@ -185,6 +198,8 @@ export default {
       language: utils.getLanguage(),
       home_img_tittle_xinxi_cn_1x,
       home_img_tittle_xinxi_tw_1x,
+      img_zhifu_jian,
+      img_zhifu_fan,
       title1,
       title2,
       title3,
@@ -414,6 +429,22 @@ export default {
   background-size: contain;
   width: 7.5rem;
   height: 12rem;
+}
+
+.method-box {
+  width: 7.1rem;
+  min-width: 7.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.49rem;
+  background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_1x.webp') no-repeat;
+  background-size: contain;
+  .method-title-img {
+    width: 7.1rem;
+    height: 1rem;
+    margin-top: -0.13rem;
+  }
 }
 
 .detail {
