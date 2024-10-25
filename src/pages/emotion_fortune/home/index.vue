@@ -875,14 +875,6 @@ export default {
           click_type: 'screen_tracking',
         }
       );
-      let same_ = this.productList.find(
-          item => item.product_key === this.product_key
-        );
-        const { price, currency_type } = same_; 
-        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "generate_lead", {
-          currency: currency_type,
-          value: price,
-        });
       if (utils.isProd()) {
         
         try {
