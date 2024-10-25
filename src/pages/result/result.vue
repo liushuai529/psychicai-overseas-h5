@@ -141,7 +141,7 @@ export default {
             let price = localStorage.getItem('fb_price');
             if (currency && price) {
               console.log('Purchase事件上报', this.order_id)
-              fbq && fbq('track', 'Purchase', { currency, value: price },{eventID: this.order_id});
+              utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Purchase', { currency, value: price },{eventID: this.order_id});
               localStorage.removeItem('fb_currency');
               localStorage.removeItem('fb_price');
             } else {

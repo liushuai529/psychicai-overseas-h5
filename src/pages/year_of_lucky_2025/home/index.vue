@@ -109,6 +109,10 @@
             <img :src="is_cn? btn_chakan_cn_1x: btn_chakan_tw_1x" />
           </div>
 
+          
+
+        </div>
+        <div class="top-bg">
           <div class="info-bottom">
             <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_fate/login_icon_choose.webp"
               @click="privacyChecked = !privacyChecked" />
@@ -120,9 +124,6 @@
               $t('privacy-policy')
             }}</span>
           </div>
-
-        </div>
-        <div class="top-bg">
           <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_xia.webp" />
         </div>
 
@@ -470,6 +471,9 @@ export default {
   },
 
   methods: {
+    setAnimation() {
+      localStorage.setItem('mlxz_outer_animation', '1');
+    },
     created_year() {
       this.$store.dispatch('common/getProduction');
       const { has_pay } = this.$route.query;
@@ -760,7 +764,8 @@ export default {
       querystring += time_obj.date;
       querystring += '|';
       querystring += time_obj.birth_hour || '-1';
-
+      //设置过渡动画标识
+      this.setAnimation();
       window.localStorage.setItem('year_of_lucky_info', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
@@ -778,7 +783,7 @@ export default {
       if (utils.isProd()) {
 
         try {
-          fbq && fbq('track', 'Lead');
+          utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Lead');
         } catch (err) {
           console.error('Lead  error message:', err);
         }
@@ -786,7 +791,7 @@ export default {
           item => item.product_key === this.product_key
         );
         const { price, currency_type } = same_;
-        gtag && gtag("event", "generate_lead", {
+        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "generate_lead", {
           currency: currency_type,
           value: price,
         });
@@ -1095,11 +1100,9 @@ export default {
 }
 
 .divider-line {
-  width: 6.5rem;
-  height: 1px;
-  background: #000000;
-  opacity: 0.13;
-  // margin-bottom: 0.2rem;
+  width: 6.3rem;
+  height: 0.02rem;
+  background: #F1E0D2;
 }
 
 .container {
@@ -1294,6 +1297,27 @@ export default {
       width: 7.1rem;
       height: 1rem;
       display: flex;
+      .info-bottom {
+        position: absolute;
+        left: 2.06rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #95979F;
+        font-size: 0.22rem;
+        line-height: 0.3rem;
+        margin-top: 0.3rem;
+
+        img {
+          width: 0.3rem;
+          height: 0.3rem;
+          margin-right: 0.12rem;
+        }
+
+        span {
+          color: #CA8617;
+        }
+      }
 
     }
 
@@ -1431,25 +1455,7 @@ export default {
         }
       }
 
-      .info-bottom {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #95979F;
-        font-size: 0.22rem;
-        line-height: 0.3rem;
-        margin-top: 0.3rem;
-
-        img {
-          width: 0.3rem;
-          height: 0.3rem;
-          margin-right: 0.12rem;
-        }
-
-        span {
-          color: #CA8617;
-        }
-      }
+      
     }
 
     .info-height {

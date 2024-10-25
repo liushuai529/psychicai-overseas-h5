@@ -52,7 +52,7 @@
 
     <div class="footer"></div>
 
-    <img @click="payOrder" class="fix-btn emo-btn" :src="getBottomImg" />
+    <img @click="payOrder" class="fix-btn emo-btn" :src="is_cn? cn_home_btn: tw_home_btn" />
 
   </div>
 </template>
@@ -78,6 +78,8 @@ import cn_card_1 from '../../../assets/img/emotion/home_card1.webp';
 import tw_card_1 from '../../../assets/img/tw_mlxz/emotion/home_card1.webp';
 import cn_card_2 from '../../../assets/img/emotion/home_card2.webp';
 import tw_card_2 from '../../../assets/img/tw_mlxz/emotion/home_card2.webp';
+
+
 import payModal from '../../../components/PayModal.vue';
 import BaziTable from '../../../components/baziTable.vue';
 import { Downloader, Parser, Player } from 'svga.lite';

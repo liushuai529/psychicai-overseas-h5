@@ -1,20 +1,14 @@
-<!--
- * @Author: wujiang@weli.cn
- * @Date: 2023-11-15 11:33:50
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 20:38:59
- * @Description: 
--->
+
 <template>
   <div :class="{ 'user-info': true }">
-    <div class="title">
+    <!-- <div class="title">
       <img :src="language == 'zh-CN' ? cn_title_1 : tw_title_1" alt="" />
     </div>
     <img
       :src="language == 'zh-CN' ? cn_title_2 : tw_title_2"
       class="title-2"
       alt=""
-    />
+    /> -->
     <BaziTable
       :sex="sex"
       :is_result="is_result"
@@ -36,7 +30,7 @@
     ></BaziTable>
 
     <!-- 折线图 -->
-    <div v-if="!is_result" class="graph-box">
+    <!-- <div v-if="!is_result" class="graph-box">
       <div class="mock-box"></div>
       <div id="shiye" class="tag-1 com-text shiye">{{ $t('tips-1') }}</div>
       <div id="jiankang" class="tag-1 com-text jiankang">
@@ -44,7 +38,7 @@
       </div>
       <div id="haoyun" class="tag-2 com-text haoyun">{{ $t('tips-3') }}</div>
       <div id="echarts" class="echarts"></div>
-    </div>
+    </div> -->
 
   </div>
 </template>

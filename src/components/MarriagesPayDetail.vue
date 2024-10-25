@@ -86,7 +86,8 @@
         </div>
         <img v-if="sub_type === 'zheng_yuan'" class="btn emo-btn"
           src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
-        <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" />
+        <!-- <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" /> -->
+        <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn" :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x"@click="payMoney" />
         <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"
           @click="payMoney" />
 
@@ -120,6 +121,10 @@ import img_district_taiwan_cn from '../assets/img/emotion_marriages/cn/img_distr
 import img_district_taiwan_tw from '../assets/img/emotion_marriages/tw/img_district_taiwan_tw.webp';
 import img_home_btu_zixun_cn from '../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp'
 import img_home_btu_zixun_tw from '../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp'
+import btn_pay_cn_1x from '../assets/img/year_of_lucky_2025/cn/btn_pay_cn_1x.webp'
+import btn_pay_tw_1x from '../assets/img/year_of_lucky_2025/tw/btn_pay_tw_1x.webp'
+
+
 
 import img_home_btu_zixun_nt_cn_1x from '../assets/img/emotion_remarriage/cn/img_home_btu_zixun_nt_cn_1x.webp';
 import img_home_btu_zixun_nt_tw_1x from '../assets/img/emotion_remarriage/tw/img_home_btu_zixun_nt_tw_1x.webp';
@@ -184,6 +189,8 @@ export default {
     return {
       img_home_btu_zixun_cn,
       img_home_btu_zixun_tw,
+      btn_pay_cn_1x,
+      btn_pay_tw_1x,
       img_district_malaysia_cn,
       img_district_malaysia_tw,
       img_district_taiwan_cn,
@@ -372,6 +379,13 @@ export default {
   mounted() { },
 
   methods: {
+    findSecondIndexOf(str, char) {
+      const firstIndex = str.indexOf(char);
+      if (firstIndex === -1) {
+        return -1; // 字符没有出现，返回-1
+      }
+      return str.indexOf(char, firstIndex + 1);
+    },
     changeCity() {
       if (!this.current_country) {
         this.current_country = JSON.parse(localStorage.getItem('current_country'))
@@ -505,19 +519,28 @@ export default {
       this.pay_lock_time = setTimeout(() => {
         this.payCanClick = false
       }, 2000);
+      utils.getFBChannel().indexOf('google') > -1 && gtag && gtag("event", "add_to_cart", {
+        value: this.product.price.toFixed(2),
+        currency: this.product.currency_type || 'MYR',
+        items: [
+          {
+            item_id: this.product.product_id,
+          }
+        ]
+      });
       if (utils.isProd()) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
 
         Indicator.close();
         try {
-          fbq && fbq('track', 'AddToCart', {
+          utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'AddToCart', {
             value: this.product.price.toFixed(2),
             currency: this.product.currency_type || 'MYR',
           });
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
-        gtag && gtag("event", "add_to_cart", {
+        utils.getFBChannel().indexOf('google') > -1 && gtag && gtag("event", "add_to_cart", {
           value: this.product.price.toFixed(2),
           currency: this.product.currency_type || 'MYR',
           items: [
@@ -526,7 +549,7 @@ export default {
             }
           ]
         });
-        
+
       }
 
       this.logEventForSort({
@@ -552,6 +575,11 @@ export default {
       }
       localStorage.setItem('report_price', this.product.price);
       Indicator.open(tipsArr5[utils.getLanguage()]);
+      const cookieMap = new Map();
+      document.cookie.split("; ").forEach((cookie) => {
+        const [key, value] = cookie.split("=");
+        cookieMap.set(key, value);
+      })
       let params = {
         pay_method: pay_method,
         product_key: this.combine_product_ids.length ? this.h5_combo2_attach.product_key : this.product_key,
@@ -577,6 +605,15 @@ export default {
         trade_pay_type,
         trade_target_org,
       });
+      if (cookieMap.get("_ga")) {
+        let _ga = cookieMap.get("_ga");
+        const secondIndex = this.findSecondIndexOf(_ga, '.');
+        pay_max_params = Object.assign({}, pay_max_params, {
+          ga_param: {
+            client_id: _ga.substr(secondIndex+1)
+          },
+        });
+      }
       this.consult_time && this.consult_time.user_info && this.consult_time.user_info.email && delete this.consult_time.user_info.email
       if (this.product_key === 'consult_time') {
         pay_max_params = Object.assign({}, pay_max_params, {
@@ -635,6 +672,7 @@ export default {
 }
 
 .pay-list {
+  
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -731,6 +769,7 @@ export default {
 }
 
 .method-list {
+  // min-height: 11rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -945,7 +984,7 @@ export default {
   height: 0.98rem;
   margin: auto;
   // margin-bottom: 0.2rem;
-  margin-top: 0.1rem;
+  margin-top: -0.2rem;
 }
 
 @keyframes emoBtn {

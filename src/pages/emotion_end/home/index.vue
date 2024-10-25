@@ -343,7 +343,7 @@ export default {
     // this.preloadSVGA()
     if (utils.isProd()) {
       try {
-        fbq('trackCustom', 'CustomChannel', {
+        utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('trackCustom', 'CustomChannel', {
           channel: `pageview_main_${utils.getFBChannel()}`,
         });
         utils.gcyLog(`感情运首页`, {
@@ -738,7 +738,7 @@ export default {
       );
       if (utils.isProd()) {
         try {
-          fbq && fbq('track', 'Lead');
+          utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Lead');
         } catch (err) {
           console.error('Lead  error message:', err);
         }
@@ -746,7 +746,7 @@ export default {
           item => item.product_key === this.product_key
         );
         const { price, currency_type } = same_; 
-        gtag && gtag("event", "generate_lead", {
+        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "generate_lead", {
           currency: currency_type,
           value: price,
         });
