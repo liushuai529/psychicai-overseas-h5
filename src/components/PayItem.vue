@@ -259,7 +259,7 @@ export default {
       if (cookieMap.get("_ga")) {
         let _ga = cookieMap.get("_ga");
         const secondIndex = this.findSecondIndexOf(_ga, '.');
-        params_combine = Object.assign({}, params_combine, {
+        params = Object.assign({}, params, {
           ga_param: {
             client_id: _ga.substr(secondIndex + 1)
           },
