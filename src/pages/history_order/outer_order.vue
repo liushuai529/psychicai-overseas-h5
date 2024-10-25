@@ -134,17 +134,17 @@
                       birth: true,
                       'hidden-one': item.status !== 'PAYED' && is_ios,
                     }">{{
-                        formateTime(
-                          item.ext.is_gongli,
-                          item.ext.birth_year,
-                          item.ext.birth_month,
-                          item.ext.birth_date,
-                          item.ext.birth_hour
-                        )
-                      }}</span>
+                      formateTime(
+                        item.ext.is_gongli,
+                        item.ext.birth_year,
+                        item.ext.birth_month,
+                        item.ext.birth_date,
+                        item.ext.birth_hour
+                      )
+                    }}</span>
                     <img v-if="item.ext.sex" class="sex" :src="['1', 'male'].includes(item.ext.sex)
-                        ? male_icon
-                        : female_icon
+                      ? male_icon
+                      : female_icon
                       " alt="" />
                   </div>
                 </div>
@@ -155,14 +155,14 @@
                       birth: true,
                       'hidden-one': item.status !== 'PAYED' && is_ios,
                     }">{{
-                        formateTime(
-                          item.ext.male_is_gongli,
-                          item.ext.male_birth_year,
-                          item.ext.male_birth_month,
-                          item.ext.male_birth_date,
-                          item.ext.male_birth_hour
-                        )
-                      }}</span>
+                      formateTime(
+                        item.ext.male_is_gongli,
+                        item.ext.male_birth_year,
+                        item.ext.male_birth_month,
+                        item.ext.male_birth_date,
+                        item.ext.male_birth_hour
+                      )
+                    }}</span>
                     <img class="sex" :src="male_icon" alt="" />
                   </div>
                   <div class="name mt-28">
@@ -172,14 +172,14 @@
                       birth: true,
                       'hidden-one': item.status !== 'PAYED' && is_ios,
                     }">{{
-                        formateTime(
-                          item.ext.female_is_gongli,
-                          item.ext.female_birth_year,
-                          item.ext.female_birth_month,
-                          item.ext.female_birth_date,
-                          item.ext.female_birth_hour
-                        )
-                      }}</span>
+                      formateTime(
+                        item.ext.female_is_gongli,
+                        item.ext.female_birth_year,
+                        item.ext.female_birth_month,
+                        item.ext.female_birth_date,
+                        item.ext.female_birth_hour
+                      )
+                    }}</span>
                     <img class="sex" :src="female_icon" alt="" />
                   </div>
                 </div>
@@ -189,12 +189,12 @@
                   item.product_key
                 )
               " :style="{
-                  height: ['h5_combo2_attach', 'h5_combo2'].includes(
-                    item.product_key
-                  )
-                    ? '1.28rem'
-                    : '1.8rem',
-                }" class="combine-whole">
+                height: ['h5_combo2_attach', 'h5_combo2'].includes(
+                  item.product_key
+                )
+                  ? '1.28rem'
+                  : '1.8rem',
+              }" class="combine-whole">
                 <div :style="{
                   padding: ['h5_combo2_attach'].includes(item.product_key)
                     ? '0'
@@ -240,7 +240,7 @@
                 <span>{{ $t('tips-7') }}{{ item.transfer_code || '-' }}</span>
                 <span @click="copyCode(item.transfer_code)" class="copy">{{
                   $t('tips-8')
-                  }}</span>
+                }}</span>
               </div>
 
               <div @click="handleJump(item)" :class="[
@@ -495,8 +495,8 @@ export default {
     formateTime(is_gongli, year, month, date, hour) {
       if (is_gongli == '1') {
         return `${year}年${month}月${date}日${hour === '-1'
-            ? `未知${this.$t('tips-11')}辰`
-            : hour + this.$t('tips-11')
+          ? `未知${this.$t('tips-11')}辰`
+          : hour + this.$t('tips-11')
           }`;
       } else {
         return `${year}年${utils.nongliMonthEnum()[+month - 1]}${utils.nongliDayEnum()[+date - 1]
@@ -696,6 +696,20 @@ export default {
             external_id: localStorage.getItem('mlxz_outer_visitor_id'),
           },
         };
+        const cookieMap = new Map();
+        document.cookie.split("; ").forEach((cookie) => {
+          const [key, value] = cookie.split("=");
+          cookieMap.set(key, value);
+        })
+        if (cookieMap.get("_ga")) {
+          let _ga = cookieMap.get("_ga");
+          const secondIndex = this.findSecondIndexOf(_ga, '.');
+          params = Object.assign({}, params, {
+            ga_param: {
+              client_id: _ga.substr(secondIndex + 1)
+            },
+          });
+        }
 
         params.callback_url = `${location.origin
           }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
