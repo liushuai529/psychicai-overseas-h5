@@ -516,7 +516,7 @@ export default {
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
-        gtag && gtag("event", "add_to_cart", {
+        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "add_to_cart", {
           value: this.product.price.toFixed(2),
           currency: this.product.currency_type || 'MYR',
           items: [
