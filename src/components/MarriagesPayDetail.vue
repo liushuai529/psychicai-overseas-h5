@@ -87,7 +87,7 @@
         <img v-if="sub_type === 'zheng_yuan'" class="btn emo-btn"
           src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
         <!-- <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" /> -->
-        <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"@click="payMoney" />
+        <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn" :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x"@click="payMoney" />
         <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"
           @click="payMoney" />
 
@@ -121,6 +121,10 @@ import img_district_taiwan_cn from '../assets/img/emotion_marriages/cn/img_distr
 import img_district_taiwan_tw from '../assets/img/emotion_marriages/tw/img_district_taiwan_tw.webp';
 import img_home_btu_zixun_cn from '../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp'
 import img_home_btu_zixun_tw from '../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp'
+import btn_pay_cn_1x from '../assets/img/year_of_lucky_2025/cn/btn_pay_cn_1x.webp'
+import btn_pay_tw_1x from '../assets/img/year_of_lucky_2025/tw/btn_pay_tw_1x.webp'
+
+
 
 import img_home_btu_zixun_nt_cn_1x from '../assets/img/emotion_remarriage/cn/img_home_btu_zixun_nt_cn_1x.webp';
 import img_home_btu_zixun_nt_tw_1x from '../assets/img/emotion_remarriage/tw/img_home_btu_zixun_nt_tw_1x.webp';
@@ -185,6 +189,8 @@ export default {
     return {
       img_home_btu_zixun_cn,
       img_home_btu_zixun_tw,
+      btn_pay_cn_1x,
+      btn_pay_tw_1x,
       img_district_malaysia_cn,
       img_district_malaysia_tw,
       img_district_taiwan_cn,

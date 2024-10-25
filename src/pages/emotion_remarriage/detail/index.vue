@@ -52,7 +52,7 @@
 
     <div class="footer"></div>
 
-    <img @click="payOrder" class="fix-btn emo-btn" :src="getBottomImg" />
+    <img @click="payOrder" class="fix-btn emo-btn" :src="is_cn? cn_home_btn: tw_home_btn" />
 
   </div>
 </template>
