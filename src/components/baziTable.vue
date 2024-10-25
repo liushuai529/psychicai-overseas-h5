@@ -346,11 +346,11 @@ export default {
     },
     text_color: {
       type: String,
-      default: '#cb6735',
+      default: '#4D1A1A',
     },
     minge_color: {
       type: String,
-      default: '#cb6735',
+      default: '#4D1A1A',
     },
     show_daji: {
       type: Boolean,
@@ -374,11 +374,11 @@ export default {
     },
     table_border: {
       type: String,
-      default: '0.02rem solid #cb6735',
+      default: '0.02rem solid #4D1A1A',
     },
     border_color: {
       type: String,
-      default: '#cb6735',
+      default: '#4D1A1A',
     },
     change_color: {
       type: Boolean,
@@ -476,7 +476,7 @@ export default {
   width: 6.5rem;
   min-height: 5.69rem;
   background: #fdfaec;
-  border: 0.02rem solid #cb6735;
+  border: 0.02rem solid #4D1A1A;
   margin: 0 auto 0.21rem;
   display: flex;
   flex-direction: column;
@@ -517,7 +517,7 @@ export default {
     height: 0.68rem;
     overflow: hidden;
     text-overflow: ellipsis;
-    border-bottom: 1px solid #cb6735;
+    border-bottom: 1px solid #4D1A1A;
     font-weight: 600;
     font-size: 0.28rem;
     color: #444;
@@ -530,11 +530,11 @@ export default {
   .c-zhu {
     font-weight: 400;
     font-size: 0.28rem;
-    color: #cb6735;
+    color: #4D1A1A;
     td {
       width: 25%;
       height: 100%;
-      border-right: 1px solid #cb6735;
+      border-right: 1px solid #4D1A1A;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -557,7 +557,7 @@ export default {
     td {
       width: 25%;
       height: 100%;
-      border-right: 1px solid #cb6735;
+      border-right: 1px solid #4D1A1A;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -580,7 +580,7 @@ export default {
     td {
       width: 25%;
       height: 100%;
-      border-right: 1px solid #cb6735;
+      border-right: 1px solid #4D1A1A;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -602,9 +602,9 @@ export default {
     justify-content: flex-start !important;
     .label-minge {
       width: 25%;
-      color: #cb6735;
+      color: #4D1A1A;
       height: 100%;
-      border-right: 1px solid #cb6735;
+      border-right: 1px solid #4D1A1A;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -624,7 +624,7 @@ export default {
     .geju {
       width: 7%;
       height: 100%;
-      background: #cb6735;
+      background: #4D1A1A;
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -638,7 +638,7 @@ export default {
   text-align: left;
 }
 .bottom-1 {
-  border-bottom: 1px solid #cb6735;
+  border-bottom: 1px solid #4D1A1A;
 }
 
 @keyframes circle_rotate {
