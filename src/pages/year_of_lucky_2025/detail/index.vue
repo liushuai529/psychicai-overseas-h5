@@ -433,13 +433,14 @@ export default {
 
 .method-box {
   width: 7.1rem;
-  min-width: 7.1rem;
+  height: 9.28rem;
+  min-height: 9.28rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 0.49rem;
   background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_1x.webp') no-repeat;
-  background-size: contain;
+  background-size: cover;
   .method-title-img {
     width: 7.1rem;
     height: 1rem;

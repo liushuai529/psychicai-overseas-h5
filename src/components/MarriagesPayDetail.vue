@@ -665,6 +665,7 @@ export default {
 }
 
 .pay-list {
+  
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -976,7 +977,7 @@ export default {
   height: 0.98rem;
   margin: auto;
   // margin-bottom: 0.2rem;
-  margin-top: 0.1rem;
+  margin-top: -0.2rem;
 }
 
 @keyframes emoBtn {

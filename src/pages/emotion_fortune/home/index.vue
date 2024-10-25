@@ -458,6 +458,7 @@ export default {
   mounted() {
     //svga动画预加载
     // this.preloadSVGA()
+    utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "select_content", {});
     if (utils.isProd()) {
       try {
         fbq('trackCustom', 'CustomChannel', {
@@ -468,6 +469,7 @@ export default {
           mlxz_action_type: 'view',
           mlxz_channel: `pageview_main_${utils.getFBChannel()}`,
         });
+        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "select_content", {});
       } catch (err) {
         console.log('no fbq:', err);
       }
