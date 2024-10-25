@@ -7,20 +7,10 @@
 -->
 <template>
   <div class="main">
-    <div
-      v-infinite-scroll="() => loadMore()"
-      :infinite-scroll-immediate-check="true"
-      infinite-scroll-disabled="loading"
-      infinite-scroll-distance="10"
-      :class="['container']"
-    >
+    <div v-infinite-scroll="() => loadMore()" :infinite-scroll-immediate-check="true" infinite-scroll-disabled="loading"
+      infinite-scroll-distance="10" :class="['container']">
       <div class="new-tab">
-        <img
-          @click="backPage"
-          src="../../assets/img/common/dingdan_icon_back.webp"
-          class="back"
-          alt=""
-        />
+        <img @click="backPage" src="../../assets/img/common/dingdan_icon_back.webp" class="back" alt="" />
         历史订单
       </div>
       <div class="top-box">
@@ -33,24 +23,15 @@
       </div>
       <div class="content">
         <div class="tab-list hidden">
-          <div
-            v-for="(tab, k) in status_options"
-            :key="'tab' + k"
-            @click="active_tab = tab.v"
-            :class="{
-              item: true,
-              'active-tab': active_tab === tab.v ? true : false,
-            }"
-          >
+          <div v-for="(tab, k) in status_options" :key="'tab' + k" @click="active_tab = tab.v" :class="{
+            item: true,
+            'active-tab': active_tab === tab.v ? true : false,
+          }">
             {{ tab.k }}
           </div>
         </div>
         <div v-if="!list.length && is_empty" class="empty-list">
-          <img
-            src="../../assets/img/mlxz/quesheng_no_nothinh.png"
-            class="nothing-icon"
-            alt=""
-          />
+          <img src="../../assets/img/mlxz/quesheng_no_nothinh.png" class="nothing-icon" alt="" />
           <div class="tips">{{ $t('tips-3') }}</div>
           <!-- <div class="ad-list">
             <img
@@ -64,108 +45,95 @@
           </div> -->
         </div>
         <div v-else class="order-list">
-          <div
-            :class="{
-              item: true,
-              'two-bg':
-                item.product_key === 'h5_marriage' &&
-                !item.can_write &&
-                item.status == 'PAYED',
-              'write-bg': item.can_write && item.status == 'PAYED',
-              'one-bg':
-                item.product_key !== 'h5_marriage' &&
-                !item.can_write ,
-              'bg-2-nopay':
-                item.status !== 'PAYED' && 
-                item.product_key === 'h5_marriage' &&
-                !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
-                  item.product_key
-                ),
-              'bg-3-nopay':
-                item.status !== 'PAYED' &&
-                item.product_key !== 'h5_marriage' &&
-                ['h5_combo3'].includes(item.product_key),
-              'bg-4-nopay':
-                item.status !== 'PAYED' &&
-                item.product_key !== 'h5_marriage' &&
-                ['h5_combo2', 'h5_combo2_attach'].includes(item.product_key),
-              'bg-1-nopay':
-                item.status !== 'PAYED' && is_ios &&
-                item.product_key !== 'h5_marriage' &&
-                !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
-                  item.product_key
-                ),
-            }"
-            v-for="(item, k) in list"
-            :key="'order' + k"
-          >
+          <div :class="{
+            item: true,
+            'two-bg':
+              item.product_key === 'h5_marriage' &&
+              !item.can_write &&
+              item.status == 'PAYED',
+            'write-bg': item.can_write && item.status == 'PAYED',
+            'one-bg':
+              item.product_key !== 'h5_marriage' &&
+              !item.can_write,
+            'bg-2-nopay':
+              item.status !== 'PAYED' &&
+              item.product_key === 'h5_marriage' &&
+              !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                item.product_key
+              ),
+            'bg-3-nopay':
+              item.status !== 'PAYED' &&
+              item.product_key !== 'h5_marriage' &&
+              ['h5_combo3'].includes(item.product_key),
+            'bg-4-nopay':
+              item.status !== 'PAYED' &&
+              item.product_key !== 'h5_marriage' &&
+              ['h5_combo2', 'h5_combo2_attach'].includes(item.product_key),
+            'bg-1-nopay':
+              item.status !== 'PAYED' && is_ios &&
+              item.product_key !== 'h5_marriage' &&
+              !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                item.product_key
+              ),
+          }" v-for="(item, k) in list" :key="'order' + k">
             <div class="title-box">
               <div class="left">
                 <img :src="icon_arr[item.product_key]" alt="" />
                 <div class="title">
                   {{ getTitle(item) }}
-                  <span
-                    :class="`btn-${item.status} btn-common ${getStyleTag(
-                      item
-                    )}`"
-                  >
+                  <span :class="`btn-${item.status} btn-common ${getStyleTag(
+                    item
+                  )}`">
                     {{ getTagName(item) }}
                   </span>
                 </div>
               </div>
               <div class="right">{{ $t('tips-4') }}{{ item.id }}</div>
             </div>
-            <div
-              :class="{
-                info: !item.can_write,
-                'two-info':
-                  item.product_key === 'h5_marriage' &&
-                  !item.can_write &&
-                  item.status === 'PAYED',
-                'one-info':
-                  item.product_key !== 'h5_marriage',
-                'no-pay-1':
-                  item.status !== 'PAYED' &&
-                  item.product_key !== 'h5_marriage' &&
-                  !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+            <div :class="{
+              info: !item.can_write,
+              'two-info':
+                item.product_key === 'h5_marriage' &&
+                !item.can_write &&
+                item.status === 'PAYED',
+              'one-info':
+                item.product_key !== 'h5_marriage',
+              'no-pay-1':
+                item.status !== 'PAYED' &&
+                item.product_key !== 'h5_marriage' &&
+                !['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                  item.product_key
+                ) && is_ios,
+              'no-pay-2':
+                item.status !== 'PAYED' &&
+                (item.product_key === 'h5_marriage' ||
+                  ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
                     item.product_key
-                  ) && is_ios,
-                'no-pay-2':
-                  item.status !== 'PAYED' && 
-                  (item.product_key === 'h5_marriage' ||
-                    ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
-                      item.product_key
-                    )),
-                'ml-24':
-                  item.status !== 'PAYED' &&
-                  (item.product_key === 'h5_marriage' ||
-                    ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
-                      item.product_key
-                    )),
-                 'no-pay-2-android':   
-                 item.status !== 'PAYED' && is_android &&
-                  (item.product_key === 'h5_marriage' ||
-                    ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
-                      item.product_key
-                    )),
-              }"
-            >
-              <div
-                v-if="
-                  (item.ext.name || item.ext.male_name) &&
-                  item.product_key !== 'h5_combo2_attach'
-                "
-                class="left"
-              >
+                  )),
+              'ml-24':
+                item.status !== 'PAYED' &&
+                (item.product_key === 'h5_marriage' ||
+                  ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                    item.product_key
+                  )),
+              'no-pay-2-android':
+                item.status !== 'PAYED' && is_android &&
+                (item.product_key === 'h5_marriage' ||
+                  ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                    item.product_key
+                  )),
+            }">
+              <div v-if="
+                (item.ext.name || item.ext.male_name) &&
+                item.product_key !== 'h5_combo2_attach'
+              " class="left">
                 <div v-if="item.ext.name" class="one">
                   <div class="name">
                     <span>{{ item.ext.name | filterName }}</span>
-                    <span
-                      :class="{
-                        birth: true,
-                        'hidden-one': item.status !== 'PAYED' && is_ios,
-                      }"
-                      >{{
+                    <span :class="{
+                      birth: true,
+                      'hidden-one': item.status !== 'PAYED' && is_ios,
+                    }">{{
                         formateTime(
                           item.ext.is_gongli,
                           item.ext.birth_year,
@@ -173,29 +141,20 @@
                           item.ext.birth_date,
                           item.ext.birth_hour
                         )
-                      }}</span
-                    >
-                    <img
-                      v-if="item.ext.sex"
-                      class="sex"
-                      :src="
-                        ['1', 'male'].includes(item.ext.sex)
-                          ? male_icon
-                          : female_icon
-                      "
-                      alt=""
-                    />
+                      }}</span>
+                    <img v-if="item.ext.sex" class="sex" :src="['1', 'male'].includes(item.ext.sex)
+                        ? male_icon
+                        : female_icon
+                      " alt="" />
                   </div>
                 </div>
                 <div v-else>
                   <div class="name">
                     <span>{{ item.ext.male_name | filterName }}</span>
-                    <span
-                      :class="{
-                        birth: true,
-                        'hidden-one': item.status !== 'PAYED' && is_ios,
-                      }"
-                      >{{
+                    <span :class="{
+                      birth: true,
+                      'hidden-one': item.status !== 'PAYED' && is_ios,
+                    }">{{
                         formateTime(
                           item.ext.male_is_gongli,
                           item.ext.male_birth_year,
@@ -203,19 +162,16 @@
                           item.ext.male_birth_date,
                           item.ext.male_birth_hour
                         )
-                      }}</span
-                    >
+                      }}</span>
                     <img class="sex" :src="male_icon" alt="" />
                   </div>
                   <div class="name mt-28">
                     <span>{{ item.ext.female_name | filterName }}</span>
 
-                    <span
-                      :class="{
-                        birth: true,
-                        'hidden-one': item.status !== 'PAYED' && is_ios,
-                      }"
-                      >{{
+                    <span :class="{
+                      birth: true,
+                      'hidden-one': item.status !== 'PAYED' && is_ios,
+                    }">{{
                         formateTime(
                           item.ext.female_is_gongli,
                           item.ext.female_birth_year,
@@ -223,60 +179,43 @@
                           item.ext.female_birth_date,
                           item.ext.female_birth_hour
                         )
-                      }}</span
-                    >
+                      }}</span>
                     <img class="sex" :src="female_icon" alt="" />
                   </div>
                 </div>
               </div>
-              <div
-                v-else-if="
-                  ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
-                    item.product_key
-                  )
-                "
-                :style="{
+              <div v-else-if="
+                ['h5_combo3', 'h5_combo2', 'h5_combo2_attach'].includes(
+                  item.product_key
+                )
+              " :style="{
                   height: ['h5_combo2_attach', 'h5_combo2'].includes(
                     item.product_key
                   )
                     ? '1.28rem'
                     : '1.8rem',
-                }"
-                class="combine-whole"
-              >
-                <div
-                  :style="{
-                    padding: ['h5_combo2_attach'].includes(item.product_key)
-                      ? '0'
-                      : '0 .24rem',
-                  }"
-                  class="combine-box"
-                >
-                  <div
-                    v-for="(i, index) in item.combine_product_names"
-                    :key="index"
-                    class="one"
-                    :style="{
-                      'margin-bottom':
-                        index !== item.combine_product_names.length - 1
-                          ? '.24rem'
-                          : '',
-                    }"
-                  >
+                }" class="combine-whole">
+                <div :style="{
+                  padding: ['h5_combo2_attach'].includes(item.product_key)
+                    ? '0'
+                    : '0 .24rem',
+                }" class="combine-box">
+                  <div v-for="(i, index) in item.combine_product_names" :key="index" class="one" :style="{
+                    'margin-bottom':
+                      index !== item.combine_product_names.length - 1
+                        ? '.24rem'
+                        : '',
+                  }">
                     {{ i }}
                   </div>
                 </div>
-                <div
-                  @click="handleJump(item)"
-                  :style="{
-                    top: ['h5_combo2_attach', 'h5_combo2'].includes(
-                      item.product_key
-                    )
-                      ? '1.1rem'
-                      : '',
-                  }"
-                  class="right-btn status-other no-pay-btn3"
-                >
+                <div @click="handleJump(item)" :style="{
+                  top: ['h5_combo2_attach', 'h5_combo2'].includes(
+                    item.product_key
+                  )
+                    ? '1.1rem'
+                    : '',
+                }" class="right-btn status-other no-pay-btn3">
                   <div class="status-text status-btn">重新测算</div>
                 </div>
               </div>
@@ -289,34 +228,26 @@
                 </div>
               </div>
             </div>
-            <div
-              v-if="!item.can_write && item.product_key !== 'h5_combo2_attach'"
-              class="code-box"
-            >
-              <div
-                :class="[
-                  'left',
-                  item.status !== 'PAYED' && is_ios
-                    ? 'hidden-btn'
-                    : item.transfer_code
+            <div v-if="!item.can_write && item.product_key !== 'h5_combo2_attach'" class="code-box">
+              <div :class="[
+                'left',
+                item.status !== 'PAYED' && is_ios
+                  ? 'hidden-btn'
+                  : item.transfer_code
                     ? ''
                     : ' visible-hidden',
-                ]"
-              >
+              ]">
                 <span>{{ $t('tips-7') }}{{ item.transfer_code || '-' }}</span>
                 <span @click="copyCode(item.transfer_code)" class="copy">{{
                   $t('tips-8')
-                }}</span>
+                  }}</span>
               </div>
 
-              <div
-                @click="handleJump(item)"
-                :class="[
-                  'right-btn',
-                  `${getStatusStyle(item)}`,
-                  is_ios && getAbsoluteStyle(item),
-                ]"
-              >
+              <div @click="handleJump(item)" :class="[
+                'right-btn',
+                `${getStatusStyle(item)}`,
+                is_ios && getAbsoluteStyle(item),
+              ]">
                 <div class="status-text status-btn">
                   {{ statusShow(item) }}
                 </div>
@@ -506,6 +437,13 @@ export default {
   },
 
   methods: {
+    findSecondIndexOf(str, char) {
+      const firstIndex = str.indexOf(char);
+      if (firstIndex === -1) {
+        return -1; // 字符没有出现，返回-1
+      }
+      return str.indexOf(char, firstIndex + 1);
+    },
     /**
      * @description: 订单数据获取
      * @return {*}
@@ -556,19 +494,16 @@ export default {
      */
     formateTime(is_gongli, year, month, date, hour) {
       if (is_gongli == '1') {
-        return `${year}年${month}月${date}日${
-          hour === '-1'
+        return `${year}年${month}月${date}日${hour === '-1'
             ? `未知${this.$t('tips-11')}辰`
             : hour + this.$t('tips-11')
-        }`;
+          }`;
       } else {
-        return `${year}年${utils.nongliMonthEnum()[+month - 1]}${
-          utils.nongliDayEnum()[+date - 1]
-        }${
-          hour === '-1'
+        return `${year}年${utils.nongliMonthEnum()[+month - 1]}${utils.nongliDayEnum()[+date - 1]
+          }${hour === '-1'
             ? `未知${this.$t('tips-11')}辰`
             : utils.nongliHourEnum()[+hour / 2]
-        }`;
+          }`;
       }
     },
 
@@ -578,12 +513,12 @@ export default {
      * @return {*}
      */
     jumpUrl(url, index) {
-      if(index === 0) {
+      if (index === 0) {
 
       } else {
         location.href = `${url}.html`;
       }
-      
+
     },
 
     async openApp() {
@@ -662,17 +597,29 @@ export default {
               external_id: localStorage.getItem('mlxz_outer_visitor_id'),
             },
           };
+          const cookieMap = new Map();
+          document.cookie.split("; ").forEach((cookie) => {
+            const [key, value] = cookie.split("=");
+            cookieMap.set(key, value);
+          })
+          if (cookieMap.get("_ga")) {
+            let _ga = cookieMap.get("_ga");
+            const secondIndex = this.findSecondIndexOf(_ga, '.');
+            params = Object.assign({}, params, {
+              ga_param: {
+                client_id: _ga.substr(secondIndex + 1)
+              },
+            });
+          }
           if (product_key === 'h5_combo2_attach') {
             let same_product = this.productList.find(
               item => item.product_id === combine_product_ids[0]
             );
             const back_url = path_enums[same_product.product_key];
             params.extra_ce_suan = ext;
-            params.callback_url = `${
-              location.origin
-            }/${utils.getFBChannel()}/${back_url}.html#/result?path=${
-              path_enums[same_product.product_key]
-            }&report_price=${payment}&repay=3&product_id=${product_id}`;
+            params.callback_url = `${location.origin
+              }/${utils.getFBChannel()}/${back_url}.html#/result?path=${path_enums[same_product.product_key]
+              }&report_price=${payment}&repay=3&product_id=${product_id}`;
 
             let e_name =
               same_product.product_key === 'h5_emotion2024'
@@ -710,8 +657,8 @@ export default {
               length_ +
               '&report_price=' +
               payment +
-              '&repay=1&currency_type='+trade_currency || 'MYR' + '&product_id='+product_id;
-            
+              '&repay=1&currency_type=' + trade_currency || 'MYR' + '&product_id=' + product_id;
+
           }
 
           const res = await payOrderAPI(params);
@@ -750,11 +697,9 @@ export default {
           },
         };
 
-        params.callback_url = `${
-          location.origin
-        }/${utils.getFBChannel()}/${url}.html#/result?path=${
-          path_enums[product_key]
-        }&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}&product_id=${product_id}`;
+        params.callback_url = `${location.origin
+          }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
+          }&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}&product_id=${product_id}`;
         const res = await payOrderAPI(params);
 
         Indicator.close();
@@ -974,10 +919,12 @@ export default {
   justify-content: center;
   margin-top: 2.4rem;
   flex-direction: column;
+
   .nothing-icon {
     width: 1.84rem;
     height: 1.84rem;
   }
+
   .tips {
     width: 100%;
     height: 0.33rem;
@@ -988,10 +935,12 @@ export default {
     margin-top: 0.2rem;
     text-align: center;
   }
+
   .ad-list {
     display: flex;
     flex-direction: column;
     margin-top: 2.8rem;
+
     img {
       width: 7.1rem;
       height: 2.06rem;
@@ -1000,11 +949,13 @@ export default {
     }
   }
 }
+
 .main {
   width: 7.5rem;
   height: 100vh;
   font-family: system-ui;
 }
+
 .top-box {
   width: 100%;
   display: flex;
@@ -1015,11 +966,13 @@ export default {
   padding-bottom: 0.3rem;
   // padding-top: 0.3rem;
   z-index: 10;
+
   .order-icon {
     width: 4.16rem;
     height: 0.8rem;
     margin-bottom: 0.3rem;
   }
+
   .text {
     width: 7.1rem;
     font-weight: 400;
@@ -1027,19 +980,21 @@ export default {
     color: #314a46;
     text-align: left;
     margin: 0 0.2rem;
+
     span {
       color: #e3453d;
       text-decoration: underline;
     }
+
     .download {
       position: relative;
     }
+
     .download::after {
       content: '';
       width: 0.16rem;
       height: 0.24rem;
-      background: url('https://psychicai-static.psychicai.pro/imgs/240412c87e7ec56340849244e4490471de13.png')
-        no-repeat;
+      background: url('https://psychicai-static.psychicai.pro/imgs/240412c87e7ec56340849244e4490471de13.png') no-repeat;
       background-size: contain;
       margin-left: 0.02rem;
       position: absolute;
@@ -1048,6 +1003,7 @@ export default {
     }
   }
 }
+
 .container {
   width: 100%;
   height: 100%;
@@ -1060,33 +1016,38 @@ export default {
   .header-box {
     width: 7.5rem;
     height: 1.52rem;
-    background: url('../../assets/img/mlxz/cesuan_home/history_bg.webp')
-      no-repeat;
+    background: url('../../assets/img/mlxz/cesuan_home/history_bg.webp') no-repeat;
     background-size: contain;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     .back-icon {
       width: 0.44rem;
       height: 0.44rem;
       margin-left: 0.3rem;
     }
+
     .title {
       font-size: 0.36rem;
       font-weight: 600;
       color: #222222;
       line-height: 0.36rem;
     }
+
     .ji-icon {
       width: 0.44rem;
       height: 0.44rem;
       margin-right: 0.3rem;
     }
   }
+
   .hidden {
     display: none !important;
   }
+
   .content {
+
     // margin-top: 0.26rem;
     // width: 100%;
     // height: 100%;
@@ -1095,6 +1056,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       padding: 0 0.69rem;
+
       .item {
         font-size: 0.28rem;
         font-weight: 700;
@@ -1103,6 +1065,7 @@ export default {
         width: 1.2rem;
         text-align: center;
       }
+
       .active-tab {
         font-weight: 600;
         color: #ef4c32;
@@ -1112,6 +1075,7 @@ export default {
         justify-content: center;
         position: relative;
       }
+
       .active-tab::after {
         content: '';
         display: block;
@@ -1123,37 +1087,43 @@ export default {
         bottom: -0.2rem;
       }
     }
+
     .one-bg {
       height: 2.84rem;
-      background: url('https://psychicai-static.psychicai.pro/imgs/240404d44820f30143cc9ee32b6002252eaa.png')
-        no-repeat;
+      background: url('https://psychicai-static.psychicai.pro/imgs/240404d44820f30143cc9ee32b6002252eaa.png') no-repeat;
     }
+
     .two-bg {
       height: 3.36rem;
-      background: url('https://psychicai-static.psychicai.pro/imgs/240458bae33f18e2408dacdf40a83f6d0069.png')
-        no-repeat;
+      background: url('https://psychicai-static.psychicai.pro/imgs/240458bae33f18e2408dacdf40a83f6d0069.png') no-repeat;
     }
+
     .order-list {
       margin: 0 0.2rem;
+
       .item {
         width: 7.1rem;
         background-size: 100% 100%;
         margin-bottom: 0.24rem;
         overflow-x: hidden;
+
         .title-box {
           display: flex;
           align-items: center;
           justify-content: space-between;
           margin: 0.2rem 0.3rem;
+
           .left {
             display: flex;
             align-items: center;
+
             img {
               width: 0.4rem;
               height: 0.4rem;
               border-radius: 0.08rem;
               margin-right: 0.16rem;
             }
+
             .title {
               min-width: 2.8rem;
               overflow: hidden;
@@ -1166,18 +1136,22 @@ export default {
               align-items: center;
             }
           }
+
           .right {
             font-size: 0.24rem;
             font-weight: 400;
             color: #8da5a1;
           }
         }
+
         .one-info {
           height: 0.76rem;
         }
+
         .two-info {
           height: 1.28rem;
         }
+
         .info {
           display: flex;
           align-items: center;
@@ -1186,10 +1160,12 @@ export default {
           background: #dcece5;
           border-radius: 0.12rem;
           padding: 0 0.24rem;
+
           .left {
             display: flex;
             flex-direction: column;
             justify-content: center;
+
             .name {
               font-size: 0.28rem;
               display: flex;
@@ -1198,15 +1174,18 @@ export default {
 
               line-height: 0.28rem;
               white-space: nowrap;
+
               .birth {
                 margin-left: 0.24rem;
               }
+
               .sex {
                 width: 0.28rem;
                 height: 0.28rem;
                 margin-left: 0.12rem;
               }
             }
+
             .time {
               font-size: 0.24rem;
               font-weight: 400;
@@ -1223,6 +1202,7 @@ export default {
 .mt-28 {
   margin-top: 0.28rem;
 }
+
 .code-box {
   display: flex;
   align-items: center;
@@ -1231,6 +1211,7 @@ export default {
   font-size: 0.26rem;
   color: #314a46;
   margin: 0 0.24rem;
+
   .left .copy {
     margin-left: 0.16rem;
     color: #314a46;
@@ -1238,6 +1219,7 @@ export default {
     opacity: 0.5;
   }
 }
+
 .right-btn {
   width: 1.44rem;
   height: 0.68rem;
@@ -1248,6 +1230,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .status-btn {
   width: 100%;
   height: 100%;
@@ -1256,15 +1239,19 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .android-container {
   height: 82%;
 }
+
 .ios-container {
   height: 81%;
 }
+
 .visible-hidden {
   visibility: hidden !important;
 }
+
 .kefu {
   width: 100%;
   height: 8%;
@@ -1275,16 +1262,20 @@ export default {
   line-height: 0.24rem;
   margin-top: 0.2rem;
 }
+
 .ios-kefu {
   height: 8%;
 }
+
 .android-kefu {
   height: 0.6rem;
 }
+
 .right-1 {
   border: 0.02rem solid #e79999;
   color: #e3453d;
 }
+
 .right-0,
 .right-2 {
   background: #ef4c32;
@@ -1311,6 +1302,7 @@ export default {
   display: flex;
   align-items: center;
   margin: 0 0.3rem;
+
   .left-box {
     width: 4.4rem;
     height: 0.76rem;
@@ -1320,6 +1312,7 @@ export default {
     background: #dcece5;
     border-radius: 0.12rem;
     padding: 0 0.24rem;
+
     .one {
       height: 0.28rem;
       font-weight: 400;
@@ -1328,6 +1321,7 @@ export default {
       line-height: 0.28rem;
       opacity: 0.7;
     }
+
     .tag {
       width: 0.82rem;
       height: 0.36rem;
@@ -1341,6 +1335,7 @@ export default {
       font-weight: 600;
     }
   }
+
   .right-btn {
     width: 1.44rem;
     height: 0.68rem;
@@ -1351,6 +1346,7 @@ export default {
     margin-left: 0.24rem;
     background: transparent;
     border: 0.02rem solid #e79999;
+
     .text {
       width: 100%;
       height: 100%;
@@ -1375,6 +1371,7 @@ export default {
   position: sticky;
   top: 0;
   z-index: 2;
+
   .back {
     width: 0.44rem;
     height: 0.44rem;
@@ -1418,6 +1415,7 @@ export default {
 .status-other {
   border-radius: 0.16rem;
   border: 0.02rem solid #ffd192;
+
   .status-text {
     color: #fef8eb;
     border-radius: 0.16rem;
@@ -1433,6 +1431,7 @@ export default {
   position: relative;
   padding-bottom: 0.2rem
 }
+
 .bg-4-nopay {
   width: 7.1rem;
   height: 2.44rem;
@@ -1440,40 +1439,48 @@ export default {
   background-size: contain;
   position: relative;
 }
+
 .bg-1-nopay {
   height: 1.92rem !important;
   background: url('../../assets/img/pop/status-bg-1.webp') no-repeat;
   background-size: contain;
   position: relative;
 }
+
 .no-pay-1 {
   width: 4.4rem;
   height: 0.76rem;
   background: #dcece5;
   border-radius: 0.12rem;
 }
+
 .no-pay-2 {
   width: 4.4rem;
   height: 1.28rem;
   background: #dcece5;
   border-radius: 0.12rem;
 }
+
 .no-pay-2-android {
   // width: 6.1rem;
 }
+
 .hidden-btn {
   display: none;
 }
+
 .no-pay-btn1 {
   position: absolute;
   right: 0.2rem;
   top: 0.9rem;
 }
+
 .no-pay-btn2 {
   position: absolute;
   right: 0.2rem;
   top: 1.2rem;
 }
+
 .no-pay-btn3 {
   position: absolute;
   right: 0.2rem;
@@ -1486,6 +1493,7 @@ export default {
   width: 2.4rem;
   text-overflow: ellipsis;
 }
+
 .w-140 {
   width: 1.4rem;
 }
@@ -1494,6 +1502,7 @@ export default {
   width: 4.4rem;
   height: 1.8rem;
 }
+
 .combine-box {
   width: 4.4rem;
   height: 100%;
@@ -1507,6 +1516,7 @@ export default {
   font-weight: 400;
   color: #314a46;
   white-space: nowrap;
+
   .one {
     height: 0.28rem;
     line-height: 0.28rem;
@@ -1521,10 +1531,10 @@ export default {
 .ml-24 {
   margin-left: 0.24rem;
 }
+
 .bg-3-nopay {
   height: 2.96rem;
-  background: url('../../assets/img/emotion_v2/new/home_img_card_dingdan.webp')
-    no-repeat;
+  background: url('../../assets/img/emotion_v2/new/home_img_card_dingdan.webp') no-repeat;
   background-size: contain;
   position: relative;
 }
