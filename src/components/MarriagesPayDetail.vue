@@ -533,7 +533,7 @@ export default {
 
         Indicator.close();
         try {
-          fbq && fbq('track', 'AddToCart', {
+          utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'AddToCart', {
             value: this.product.price.toFixed(2),
             currency: this.product.currency_type || 'MYR',
           });

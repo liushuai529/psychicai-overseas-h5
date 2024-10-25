@@ -132,7 +132,7 @@ export default {
     eventSend(index, title) {
       if (!index) return;
       try {
-        fbq && fbq('track', 'AddToCart');
+        utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'AddToCart');
       } catch (err) {
         console.error('error message:', err);
       }
