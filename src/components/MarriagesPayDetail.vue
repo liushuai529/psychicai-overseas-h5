@@ -86,7 +86,8 @@
         </div>
         <img v-if="sub_type === 'zheng_yuan'" class="btn emo-btn"
           src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
-        <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" />
+        <!-- <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" /> -->
+        <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"@click="payMoney" />
         <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"
           @click="payMoney" />
 
