@@ -39,6 +39,7 @@
         c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
         e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
     </div>
+    <img :src="is_cn ? cn_card_0 : tw_card_0" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_1 : tw_card_1" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_2 : tw_card_2" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_3 : tw_card_3" class="card-bg" alt="" />
@@ -48,6 +49,7 @@
     <img :src="is_cn ? cn_card_7 : tw_card_7" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_8 : tw_card_8" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_9 : tw_card_9" class="card-bg" alt="" />
+    <img :src="is_cn ? cn_card_10 : tw_card_10" class="card-bg" alt="" />
 
     <div v-if="showFixedBtn" @click="showPayModal_year" class="get-report-btn fix-box">
       <img class="huxi-btn" :src="is_cn ? cn_pay_btn : tw_pay_btn" alt="" />
@@ -93,25 +95,29 @@ import title7 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_5
 import title8 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_6.webp';
 import title9 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_7.webp';
 
-import cn_card_1 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_1.webp';
-import cn_card_2 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_2.webp';
-import cn_card_3 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_3.webp';
-import cn_card_4 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_4.webp';
-import cn_card_5 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_5.webp';
-import cn_card_6 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_6.webp';
-import cn_card_7 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_7.webp';
-import cn_card_8 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_8.webp';
-import cn_card_9 from './../../../assets/img/mlxz/year_of_lucky_2024/detail/img_zhong_9.webp';
+import cn_card_0 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_huode_cn_1x.webp';
+import cn_card_1 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_01_cn_1x.webp';
+import cn_card_2 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_02_cn_1x.webp';
+import cn_card_3 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_03_cn_1x.webp';
+import cn_card_4 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_04_cn_1x.webp';
+import cn_card_5 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_05_cn_1x.webp';
+import cn_card_6 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_06_cn_1x.webp';
+import cn_card_7 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_07_cn_1x.webp';
+import cn_card_8 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_08_cn_1x.webp';
+import cn_card_9 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_09_cn_1x.webp';
+import cn_card_10 from './../../../assets/img/year_of_lucky_2025/cn/mid_img_details_10_cn_1x.webp';
 
-import tw_card_1 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_1.webp';
-import tw_card_2 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_2.webp';
-import tw_card_3 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_3.webp';
-import tw_card_4 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_4.webp';
-import tw_card_5 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_5.webp';
-import tw_card_6 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_6.webp';
-import tw_card_7 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_7.webp';
-import tw_card_8 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_8.webp';
-import tw_card_9 from './../../../assets/img/tw_mlxz/year_24/detail/img_zhong_9.webp';
+import tw_card_0 from './../../../assets/img/year_of_lucky_2025/tw/mid_img_details_huode_tw_1x.webp';
+import tw_card_1 from './../../../assets/img/year_of_lucky_2025/tw/mid_img_details_01_tw_1x.webp';
+import tw_card_2 from './../../../assets/img/year_of_lucky_2025/tw/mid_img_details_02_tw_1x.webp';
+import tw_card_3 from './../../../assets/img/year_of_lucky_2025/tw/mid_img_details_03_tw_1x.webp';
+import tw_card_4 from './../../../assets/img/year_of_lucky_2025/tw/mid_img_details_04_tw_1x.webp';
+import tw_card_5 from './../../../assets/img/year_of_lucky_2025/tw/mid_img_details_05_tw_1x.webp';
+import tw_card_6 from './../../../assets/img/year_of_lucky_2025/tw/mid_img_details_06_tw_1x.webp';
+import tw_card_7 from './../../../assets/img/year_of_lucky_2025/tw/mid_img_details_07_tw_1x.webp';
+import tw_card_8 from './../../../assets/img/year_of_lucky_2025/tw/mid_img_details_08_tw_1x.webp';
+import tw_card_9 from './../../../assets/img/year_of_lucky_2025/tw/mid_img_details_09_tw_1x.webp';
+import tw_card_10 from './../../../assets/img/year_of_lucky_2025/tw/mid_img_details_10_tw_1x.webp';
 
 import NewFooter from '../../../components/NewFooter.vue';
 import FbShareNotice from '../../../components/FbShareNotice.vue';
@@ -218,6 +224,7 @@ export default {
       topic7,
       topic8,
       topic9,
+      cn_card_0,
       cn_card_1,
       cn_card_2,
       cn_card_3,
@@ -227,6 +234,8 @@ export default {
       cn_card_7,
       cn_card_8,
       cn_card_9,
+      cn_card_10,
+      tw_card_0,
       tw_card_1,
       tw_card_2,
       tw_card_3,
@@ -236,6 +245,7 @@ export default {
       tw_card_7,
       tw_card_8,
       tw_card_9,
+      tw_card_10,
       showFixedBtn: false,
       is_show_btn: true,
       pay_modal: false, //支付弹窗
