@@ -237,6 +237,29 @@ for (var pathname in entries) {
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// ads103代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads103/' + filename + '.html'),
+    template: 'template/index_ads103.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
 // enjoy03代理
 for (var pathname in entries) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
@@ -466,6 +489,28 @@ for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// ads105代理
+for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads105/' + filename + '.html'),
+    template: 'template/index_ads105.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
 
 
 
@@ -641,6 +686,28 @@ for (var pathname of ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads07/' + filename + '.html'),
     template: 'template/index_ads07.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// ads107代理
+for (var pathname of ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads107/' + filename + '.html'),
+    template: 'template/index_ads107.html',
     inject: true,
     minify: {
       removeComments: true,
@@ -1036,6 +1103,28 @@ for (var pathname of ['emotion_remarriage/emotion_remarriage', 'user_agreement/u
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// ads110代理
+for (var pathname of ['emotion_remarriage/emotion_remarriage', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads110/' + filename + '.html'),
+    template: 'template/index_ads110.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
 
 
 // enjoy10代理
@@ -1090,6 +1179,28 @@ for (var pathname of ['emotion_end/emotion_end', 'user_agreement/user_agreement'
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads11/' + filename + '.html'),
     template: 'template/index_ads11.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// ads111代理
+for (var pathname of ['emotion_end/emotion_end', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads111/' + filename + '.html'),
+    template: 'template/index_ads111.html',
     inject: true,
     minify: {
       removeComments: true,

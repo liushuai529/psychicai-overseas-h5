@@ -16,12 +16,12 @@
           />
           <span>{{ sex | filter_sex }}</span>
         </div>
-        <canvas
+        <!-- <canvas
           v-show="!is_result && show_daji"
           id="canvasji"
           :class="['daji', is_career ? 'career-ji' : 'year-ji']" 
         >
-        </canvas>
+        </canvas> -->
       </th>
       <tr
         class="name"
@@ -350,7 +350,7 @@ export default {
     },
     minge_color: {
       type: String,
-      default: '#4D1A1A',
+      default: '#DB4539',
     },
     show_daji: {
       type: Boolean,
@@ -411,10 +411,10 @@ export default {
 
   computed: {},
   mounted() {
-    this.loadBg(
-      '#canvasji',
-      this.is_career ? this.career_ji : this.year_ji_svga
-    );
+    // this.loadBg(
+    //   '#canvasji',
+    //   this.is_career ? this.career_ji : this.year_ji_svga
+    // );
   },
   methods: {
     /**
@@ -520,7 +520,7 @@ export default {
     border-bottom: 1px solid #4D1A1A;
     font-weight: 600;
     font-size: 0.28rem;
-    color: #444;
+    color: #4D2B1A;
     white-space: nowrap;
     display: flex;
     flex-direction: row;
@@ -530,7 +530,7 @@ export default {
   .c-zhu {
     font-weight: 400;
     font-size: 0.28rem;
-    color: #4D1A1A;
+    color: #DF2113;
     td {
       width: 25%;
       height: 100%;
@@ -577,6 +577,7 @@ export default {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    color: #4D2B1A;
     td {
       width: 25%;
       height: 100%;
@@ -602,7 +603,7 @@ export default {
     justify-content: flex-start !important;
     .label-minge {
       width: 25%;
-      color: #4D1A1A;
+      color: #DF2113;
       height: 100%;
       border-right: 1px solid #4D1A1A;
       display: flex;
@@ -613,6 +614,7 @@ export default {
     .minge-text {
       width: 34%;
       height: 100%;
+      color: #4D2B1A;
       .minge-row {
         display: flex;
         flex-direction: row;

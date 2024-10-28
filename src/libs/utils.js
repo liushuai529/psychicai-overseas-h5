@@ -27,6 +27,8 @@ const getFBChannel = () => {
     return 'enjoy02';
   } else if (url.indexOf('/ads03/') > -1) {
     return 'ads03';
+  } else if (url.indexOf('/ads103/') > -1) {
+    return 'ads103';
   } else if (url.indexOf('/enjoy03/') > -1) {
     return 'enjoy03';
   } else if (url.indexOf('/enjoy103/') > -1) {
@@ -51,6 +53,8 @@ const getFBChannel = () => {
     return 'enjoyA05';
   } else if (url.indexOf('/ads05/') > -1) {
     return 'ads05';
+  } else if (url.indexOf('/ads105/') > -1) {
+    return 'ads105';
   } else if (url.indexOf('/enjoy105/') > -1) {
     return 'enjoy105';
   } else if (url.indexOf('/enjoy205/') > -1) {
@@ -71,6 +75,8 @@ const getFBChannel = () => {
     return 'enjoy07';
   } else if (url.indexOf('/ads07/') > -1) {
     return 'ads07';
+  } else if (url.indexOf('/ads107/') > -1) {
+    return 'ads107';
   } else if (url.indexOf('/enjoy107/') > -1) {
     return 'enjoy107';
   } else if (url.indexOf('/enjoy307/') > -1) {
@@ -105,8 +111,12 @@ const getFBChannel = () => {
     return 'enjoyA10';
   } else if (url.indexOf('/ads10/') > -1) {
     return 'ads10';
+  } else if (url.indexOf('/ads110/') > -1) {
+    return 'ads110';
   } else if (url.indexOf('/ads11/') > -1) {
     return 'ads11';
+  } else if (url.indexOf('/ads111/') > -1) {
+    return 'ads111';
   } else if (url.indexOf('/enjoyA11/') > -1) {
     return 'enjoyA11';
   } else {
@@ -115,7 +125,7 @@ const getFBChannel = () => {
 };
 
 const isShowCombine = () => {
-  return ["ads03", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "ads05", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05","ocean05","ocean105" ];
+  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05","ocean05","ocean105" ];
 };
 
 /**
@@ -130,6 +140,7 @@ const getFbId = () => {
     'enjoy02': '1505987713629330',
     'panda02': '824193972893573',
     'ads03': '1044851500346581', 
+    'ads103': '1253997898931627',
     'enjoy03': '2368489400014794',
     'enjoy103': '526401886558503', 
     'enjoy203': '861527552585605', 
@@ -139,6 +150,7 @@ const getFbId = () => {
     'ocean103': '1032807048109332',
     'panda03': '7693892440702728',
     'ads05': '490328103920810',
+    'ads105': '1253997898931627',
     'enjoy05': '1904115380074482',
     'enjoy105': '378704948392994',
     'enjoy205': '860085072353121',
@@ -150,6 +162,7 @@ const getFbId = () => {
     'panda06': '1031517837859732',
     'ocean06': '784751360516897',
     'ads07': '1082498803210018',
+    'ads107': '1253997898931627',
     'enjoy07': '418001307949732',
     'enjoy107': '488106190527312',
     'enjoy307': '731531429109054',
@@ -168,7 +181,9 @@ const getFbId = () => {
     'enjoy10': '1218838549167537',
     'enjoyA10': '940102441294401',
     'ads10': '1559269891686110',
+    'ads110': '1253997898931627',
     'ads11': '1089075609227088',
+    'ads111': '1253997898931627',
     'enjoyA11': '1621066301776872',
   }
 }

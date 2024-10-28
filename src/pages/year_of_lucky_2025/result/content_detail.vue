@@ -1,22 +1,11 @@
 <template>
-  <div
-    :class="`content-item ${
-      [1, 4, 9].includes(item_index) ? 'item-1-bg' : 'item-normal-bg'
-    }`"
-  >
-    <img
-      class="title-box"
-      :src="item_index === 4 ? getGoldYear(result.gold2024) : titleImg"
-      alt=""
-    />
+  <div :class="`content-item ${[1, 4, 9].includes(item_index) ? 'item-1-bg' : 'item-normal-bg'
+    }`">
+    <img class="title-box" :src="item_index === 4 ? getGoldYear(result.gold2024) : titleImg" alt="" />
     <div v-if="item_index === 2" class="content-2">
       <div class="item-box">
         <div class="tip">{{ $t('kaiyun-label') }}</div>
-        <img
-          :src="getDirection(result.guide2024direction)"
-          class="baoshi"
-          alt=""
-        />
+        <img :src="getDirection(result.guide2024direction)" class="baoshi" alt="" />
         <div class="desc">{{ result.guide2024direction }}</div>
       </div>
       <div class="item-box">
@@ -35,7 +24,13 @@
       </div>
     </div>
     <div v-else-if="item_index === 3" v-html="result" class="content"></div>
-    <div v-else-if="item_index === 1" v-html="result" class="content"></div>
+    <div v-else-if="item_index === 1" class="content">
+      <div class="item-tag">
+        <div class="score">99分</div>
+        <div class="year">好运之年</div>
+      </div>
+      <div v-html="result"></div>
+    </div>
     <div v-else-if="item_index === 4" class="content-4 content">
       <!-- <template v-if="result.gold2024content.length">
         <span v-for="(it, k) in result.gold2024content" :key="'gold' + k">
@@ -51,11 +46,7 @@
     <div v-else-if="item_index === 9" class="content-tu">
       <div id="echarts" class="echarts"></div>
       <template v-if="content_arr.length">
-        <div
-          v-for="(it, k) in content_arr"
-          :key="'score' + k"
-          class="content-score"
-        >
+        <div v-for="(it, k) in content_arr" :key="'score' + k" class="content-score">
           {{ it }}
         </div>
       </template>
@@ -66,24 +57,28 @@
   </div>
 </template>
 <script>
-import title1 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_1.webp';
-import title2 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_2.webp';
-import title3 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_3.webp';
-import title4 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_guiren.webp';
-import title5 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_4.webp';
-import title6 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_caifu.webp';
-import title7 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_5.webp';
-import title8 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_6.webp';
-import title9 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_7.webp';
+import title1 from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_01_cn_1x.webp';
+import title2 from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_02_cn_1x.webp';
+import title3 from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_03_cn_1x.webp';
+import title4 from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_04_cn_1x.webp';
+import title5 from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_05_cn_1x.webp';
+import title6 from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_06_cn_1x.webp';
+import title7 from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_07_cn_1x.webp';
+import title8 from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_08_cn_1x.webp';
+import title9 from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_09_cn_1x.webp';
+import title10 from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_10_cn_1x.webp';
 
-import tw_title1 from './../../../assets/img/tw_mlxz/year_24/result/title/result_title_1.webp';
-import tw_title2 from './../../../assets/img/tw_mlxz/year_24/result/title/result_title_2.webp';
-import tw_title3 from './../../../assets/img/tw_mlxz/year_24/result/title/result_title_3.webp';
-import tw_title5 from './../../../assets/img/tw_mlxz/year_24/result/title/result_title_4.webp';
-import tw_title7 from './../../../assets/img/tw_mlxz/year_24/result/title/result_title_5.webp';
-import tw_title6 from './../../../assets/img/tw_mlxz/year_24/result/title/result_title_6.webp';
-import tw_title9 from './../../../assets/img/tw_mlxz/year_24/result/title/result_title_7.webp';
-import tw_title8 from './../../../assets/img/mlxz/year_of_lucky_2024/result_title_6.webp';
+import tw_title1 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_01_tw_1x.webp';
+import tw_title2 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_02_tw_1x.webp';
+import tw_title3 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_03_tw_1x.webp';
+import tw_title4 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_04_tw_1x.webp';
+import tw_title5 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_05_tw_1x.webp';
+import tw_title6 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_06_tw_1x.webp';
+import tw_title7 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_07_tw_1x.webp';
+import tw_title8 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_08_tw_1x.webp';
+import tw_title9 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_09_tw_1x.webp';
+import tw_title10 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_10_tw_1x.webp';
+
 
 // import * as echarts from 'echarts';
 import { color_enums, icon_enums } from '../../../libs/enum';
@@ -123,7 +118,7 @@ import tw_qinmian from '../../../assets/img/tw_mlxz/year_24/result/result_title_
 
 import cn_jiaoji from './../../../assets/img/mlxz/year_of_lucky_2024/title/result_title_nian_9@3x.webp';
 import tw_jiaoji from '../../../assets/img/tw_mlxz/year_24/result/result_title_nian_9.webp';
- 
+
 import cn_shenzao from './../../../assets/img/mlxz/year_of_lucky_2024/title/result_title_nian_10@3x.webp';
 import tw_shenzao from '../../../assets/img/tw_mlxz/year_24/result/result_title_nian_10.webp';
 
@@ -177,15 +172,17 @@ export default {
       title7,
       title8,
       title9,
+      title10,
       tw_title1,
       tw_title2,
       tw_title3,
-      tw_title5,
+      tw_title4,
       tw_title5,
       tw_title6,
       tw_title7,
       tw_title8,
       tw_title9,
+      tw_title10,
       direction_arr: [
         {
           k: '北方',
@@ -483,13 +480,13 @@ export default {
 </script>
 <style scoped lang="less">
 .item-1-bg {
-  background: url('../../../assets/img/mlxz/year_of_lucky_2024/pay_img_bg.webp')
-    no-repeat;
+  background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_1x.webp') no-repeat;
 }
+
 .item-normal-bg {
-  background: url('../../../assets/img/mlxz/year_of_lucky_2024/result_img_bg.webp')
-    no-repeat;
+  background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp') no-repeat;
 }
+
 .content-item {
   width: 7.1rem;
   min-height: 4.64rem;
@@ -498,10 +495,12 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 0.29rem 0.4rem 0.3rem;
+  padding: 0 0.4rem 0.3rem;
+
   .title-box {
-    height: 0.8rem;
+    height: 1rem;
   }
+
   .content {
     // width: 6.1rem;
     font-size: 0.28rem;
@@ -511,26 +510,63 @@ export default {
     line-height: 0.48rem;
     margin-top: 0.31rem;
     font-weight: 400;
+
+    .item-tag {
+      width: 5rem;
+      height: 1.85rem;
+      background: #FFE6DB;
+      border-radius: 0.2rem;
+      border: 0.02rem solid #FD8E8E;
+      margin: auto;
+      justify-content: center;
+      align-content: center;
+      flex-direction: column;
+      margin-bottom: 0.3rem;
+      .score {
+        font-weight: 500;
+        font-size: 0.6rem;
+        color: #DF2113;
+        text-align: center;
+        font-style: normal;
+        text-transform: none;
+        line-height: 0.9rem;
+      }
+
+      .year {
+        font-weight: 500;
+        font-size: 0.3rem;
+        color: #DF2113;
+        text-align: center;
+        font-style: normal;
+        text-transform: none;
+        line-height: 0.45rem;
+      }
+    }
   }
 }
+
 .content-2 {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 0.36rem;
+
+
+
   .item-box {
     width: 1.82rem;
     height: 2.18rem;
-    background: url('../../../assets/img/mlxz/year_of_lucky_2024/result_img_kuang.webp')
-      no-repeat;
+    background: #FFE6DB;
+    border-radius: 0.16rem;
+    border: 0.02rem solid #FD8E8E;
     background-size: contain;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    font-family: PingFangSC-Regular, PingFang SC;
     margin: 0 0.15rem;
+
     .tip {
       height: 0.26rem;
       font-size: 0.26rem;
@@ -540,6 +576,7 @@ export default {
       position: absolute;
       top: 0.24rem;
     }
+
     .desc {
       height: 0.28rem;
       font-size: 0.28rem;
@@ -550,6 +587,7 @@ export default {
       position: absolute;
       bottom: 0.24rem;
     }
+
     .baoshi {
       width: 0.72rem;
       height: 0.72rem;
@@ -562,6 +600,7 @@ export default {
   height: 0.56rem;
   border-radius: 50%;
 }
+
 .year-title {
   height: 0.4rem;
   font-weight: 600;
@@ -575,6 +614,7 @@ export default {
   width: 6.62rem;
   height: 3.2rem;
 }
+
 .content-score {
   font-size: 0.28rem;
   font-family: PingFangSC-Regular, PingFang SC;

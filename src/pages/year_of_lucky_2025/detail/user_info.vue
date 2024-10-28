@@ -369,7 +369,7 @@ export default {
   align-items: center;
 }
 .user-info {
-  margin-top: 0.37rem;
+  // margin-top: 0.37rem;
   display: flex;
   flex-direction: column;
   font-family: PingFangSC;
