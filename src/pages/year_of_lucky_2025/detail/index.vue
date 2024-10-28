@@ -6,21 +6,10 @@
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <div class="info-box">
       <div class="card">
-       <UserInfo :username="username" :sex="sex" :gongli_nongli="gongli_nongli" :picker_date_yangli="picker_date_yangli"
-        :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi" :nayin="nayin" :is_result="false"
-        :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" /> 
-      </div>
-      <div class="top">
-        <img src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_shang.webp" />
-        <div class="title">
-          <img :src="is_cn? home_img_tittle_xinxi_cn_1x: home_img_tittle_xinxi_tw_1x" />
-        </div>
-      </div>
-      <div class="middle">
-        <img src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_zhong.webp" />
-      </div>
-      <div class="bottom">
-        <img src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_xia.webp" />
+        <img :src="is_cn? home_img_tittle_xinxi_cn_1x: home_img_tittle_xinxi_tw_1x" />
+        <UserInfo :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
+          :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
+          :nayin="nayin" :is_result="false" :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" />
       </div>
     </div>
 
@@ -33,9 +22,8 @@
     <div :class="['method-box']">
       <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
       <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
-        :query_user_string="query_user_string" e_view_id="10006"
-        c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
-        e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
+        :query_user_string="query_user_string" e_view_id="10006" c_view_id="-10005" e_view_name="view_2024lovely_pay"
+        a_view_token="184kba" c_click_id="-10006" e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
     </div>
     <img :src="is_cn ? cn_card_0 : tw_card_0" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_1 : tw_card_1" class="card-bg" alt="" />
@@ -48,7 +36,7 @@
     <img :src="is_cn ? cn_card_8 : tw_card_8" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_9 : tw_card_9" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_10 : tw_card_10" class="card-bg" alt="" />
-
+    <div style="width: 100%; height: 0.02rem; opacity: 0.1;">.</div>
     <!-- <div  @click="showPayModal_year" class="get-report-btn fix-box">
       <img class="huxi-btn" :src="is_cn ? cn_pay_btn : tw_pay_btn" alt="" />
     </div> -->
@@ -59,9 +47,9 @@
       a_view_token="t57k8s" c_click_id="-10006" e_click_name="click_2024report_pay" a_click_token="pil6oj"
       @close="pay_modal = false" /> -->
 
-      
-    <NewFooter  product_key="h5_annual2024" />
-    <img @click="payOrder" :class="['emo-btn', 'fix-btn']" :src="is_cn? btn_pay_cn_1x: btn_pay_tw_1x" />
+
+    <NewFooter product_key="h5_annual2024" />
+    <img @click="payOrder" :class="['emo-btn', 'fix-btn']" :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x" />
     <FixedDiscountModal product_key="h5_annual2024" @change_discount_modal="change_discount_modal" />
   </div>
 </template>
@@ -434,6 +422,7 @@ export default {
   margin-bottom: 0.49rem;
   background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_1x.webp') no-repeat;
   background-size: cover;
+
   .method-title-img {
     width: 7.1rem;
     height: 1rem;
@@ -452,22 +441,34 @@ export default {
     display: flex;
     flex-direction: column;
     width: 7.1rem;
+    margin-top: 1.32rem;
 
     .card {
-      position: absolute;
-      left: 0.5rem;
-      top: 0.8rem;
+      width: 7.1rem;
+      height: 7.19rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0.49rem;
+      background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp') no-repeat;
+      background-size: cover;
+      img {
+        width: 7.1rem;
+        height: 1rem;
+      }
     }
 
     .top {
       height: 0.99rem;
+
       .title {
         position: absolute;
         top: 0;
         left: 0.23rem;
+
         img {
           width: 7.1rem;
-          height: 1rem; 
+          height: 1rem;
         }
       }
 
@@ -554,9 +555,21 @@ export default {
   width: 7.5rem;
   height: 2.4rem;
 }
+
 .emo-btn {
   animation: emoBtn 1s infinite ease-in-out alternate;
 }
+
+@keyframes emoBtn {
+  0% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
 .fix-btn {
   width: 5.7rem;
   height: 0.96rem;

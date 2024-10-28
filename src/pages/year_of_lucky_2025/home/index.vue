@@ -13,52 +13,10 @@
       <img v-if="!is_channel_01" class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order"
         alt="" />
       <canvas class="canvas-bg" id="canvas1"></canvas>
-      <div class="bar">
+      <!-- <div class="bar">
         <canvas class="canvas-tag" id="canvas2"></canvas>
-      </div>
-      <!-- <div class="info">
-        <div class="info-content">
-          <div class="info-name">
-            <div class="label">姓名</div>
-            <input v-model="username" id="username" class="info-input" type="text"
-              :placeholder="$t('name-placeholder')" />
-            <img v-if="sex == '1'" class="sex" src="../../../assets/img/new_year_luck_overseas/home/switch-male.webp"
-              ref="sex_male" @click="changeSex(0)" />
-            <img v-else class="sex" src="../../../assets/img/new_year_luck_overseas/home/switch-female.webp"
-              ref="sex_female" @click="changeSex(1)" />
-          </div>
-          <div class="info-time">
-            <div class="label">生辰</div>
-            <div class="info-input" :style="{
-              color: picker_date ? '#3c2f22' : 'rgba(60, 47, 34, 0.5)',
-            }" @click="openPicker">
-              {{ picker_date || $t('birth-placeholder') }}
-            </div>
-            <img class="calendar" src="../../../assets/img/new_year_luck_overseas/home/calendar.webp"
-              @click="openPicker" />
-          </div>
-          <img id="info-btn" class="info-btn huxi-btn" :src="pay_btn_img" @click="check_year" />
-          <div class="info-bottom">
-            <img v-if="privacyChecked" class="check" src="../../../assets/img/new_year_luck_overseas/home/checked.webp"
-              @click="privacyChecked = !privacyChecked" />
-            <img v-else class="check" src="../../../assets/img/new_year_luck_overseas/home/unchecked.webp"
-              @click="privacyChecked = !privacyChecked" />
-            <span>{{ $t('agree-label') }}</span>
-            <span class="link" @click="toPrivacy('user_agreement.html')">{{
-              $t('user-agreement')
-              }}</span>
-            <span>{{ $t('and') }}</span>
-            <span class="link" @click="toPrivacy('privacy.html')">{{
-              $t('privacy-policy')
-              }}</span>
-          </div>
-        </div>
       </div> -->
-
-
-
-
-
+      
       <div :class="['info',]">
         <div class="top-bg">
           <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_shang.webp" />
@@ -184,12 +142,12 @@
       <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"
         e_id="10003" c_id="-10014" c_name="click_2024report_discount1" />
 
-      <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
+      <!-- <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
         :new_order_key="new_order_key" name="local" top="4.7rem" :time="local_time" @payOrder="checkOrder_year"
         @jumpDetail="jumpOrder_year" />
       <FixedOrder v-if="show_api_order && !is_show_notice" :title="last_title" :is_show_move="is_show_notice"
         :last_order="last_order" name="api" top="6.7rem" :time="api_time" @payOrder="checkOrder_year"
-        @jumpDetail="jumpOrder_year" />
+        @jumpDetail="jumpOrder_year" /> -->
       <NewFooter v-if="showFixedBtn" product_key="h5_annual2024" />
     </div>
   </div>
@@ -228,11 +186,14 @@ import girl from '../../../assets/img/emotion_fate/img_girl.webp';
 
 import cn_tag from '../../../assets/img/mlxz/year_of_lucky_2024/img_4tag.webp';
 import tw_tag from '../../../assets/img/tw_mlxz/year_24/img_4tag.webp';
-import cn_order from '../../../assets/img/mlxz/year_of_lucky_2024/btn_ling.webp';
-import tw_order from '../../../assets/img/mlxz/year_of_lucky_2024/tw/btn_ling.webp';
+// import cn_order from '../../../assets/img/mlxz/year_of_lucky_2024/btn_ling.webp';
+// import tw_order from '../../../assets/img/mlxz/year_of_lucky_2024/tw/btn_ling.webp';
 
-import cn_card_1 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai1.webp';
-import tw_card_1 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai1.webp';
+import cn_order from '../../../assets/img/year_of_lucky_2025/cn/btn_chakan_cn_1x.webp';
+import tw_order from '../../../assets/img/year_of_lucky_2025/tw/btn_chakan_tw_1x.webp';
+
+import cn_card_1 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_1_cn_1x.webp';
+import tw_card_1 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_1_tw_1x.webp';
 
 import cn_card_2 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai2.webp';
 import tw_card_2 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai2.webp';
@@ -325,10 +286,14 @@ const year_data = {
     'https://psychicai-static.psychicai.pro/imgs/2406d412215566e64563b9f288d8e6ce1781.svga',
   tw_tag_svga:
     'https://psychicai-static.psychicai.pro/imgs/2406f7acfeff41b54aa491aed151218685a9.svga',
+  cn_home_svga:
+    'https://psychicai-static.psychicai.pro/imgs/241051d7724daabd4986879ceed0962065f2.svga',  
+  tw_home_svga:
+    'https://psychicai-static.psychicai.pro/imgs/2410f5e3149572634cba992455b98881ee10.svga',   
   cn_card_svga:
-    'https://psychicai-static.psychicai.pro/imgs/24064b0c177e97f34241a4efeb71f3aa3b4f.svga',
+    'https://psychicai-static.psychicai.pro/imgs/2410153e466e2ee141c1aa2a09cd07760f4a.svga',
   tw_card_svga:
-    'https://psychicai-static.psychicai.pro/imgs/240658ab9754108a4953abd38fe13c41e3f8.svga',
+    'https://psychicai-static.psychicai.pro/imgs/2410122a94fd1a32435c8f6233b114d9fdfb.svga',
   // 挽留弹窗
   is_show_notice: false, // 是否展示挽留弹窗
   count_down: 0, // 挽留弹窗倒计时
@@ -566,13 +531,9 @@ export default {
       });
       this.loadBg_year(
         '#canvas1',
-        this.is_cn ? this.cn_header_svga : this.tw_header_svga
+        this.is_cn ? this.cn_home_svga : this.tw_home_svga
       );
-      this.loadBg_year(
-        '#canvas2',
-        this.is_cn ? this.cn_tag_svga : this.tw_tag_svga,
-        1
-      );
+     
       this.loadBg_year('#canvas3', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
     },
 
@@ -1092,11 +1053,13 @@ export default {
 }
 
 .cn-bg {
-  background-image: url('../../../assets/img/mlxz/year_of_lucky_2024/bg.webp');
+  background-image: url('../../../assets/img/year_of_lucky_2025/cn/home_img_topbj_cn_1x.webp');
+  // height: 9.8rem;
 }
 
 .tw-bg {
-  background-image: url('../../../assets/img/tw_mlxz/year_24/bj.webp');
+  background-image: url('../../../assets/img/year_of_lucky_2025/tw/home_img_topbj_tw_1x.webp');
+  // height: 9.8rem;
 }
 
 .divider-line {
@@ -1111,7 +1074,7 @@ export default {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: top center;
-  background-color: #ffaa41;
+  // background-color: #ffaa41;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1121,7 +1084,7 @@ export default {
     position: absolute;
     width: 7.5rem;
     height: 10.42rem;
-    z-index: 1;
+    z-index: 2;
   }
 
   .title {
@@ -1153,135 +1116,6 @@ export default {
     }
   }
 
-  // .info {
-  //   position: relative;
-  //   z-index: 10;
-  //   display: flex;
-  //   justify-content: center;
-  //   width: 7.1rem;
-  //   height: 4.5rem;
-  //   margin-bottom: 0.3rem;
-  //   background: url('../../../assets/img/mlxz/year_of_lucky_2024/img_info_bg.webp') no-repeat;
-  //   background-size: contain;
-
-  //   .info-content {
-  //     width: 100%;
-  //     height: 100%;
-  //     padding: 0 0.8rem;
-
-  //     box-sizing: border-box;
-
-  //     display: flex;
-  //     flex-direction: column;
-  //     justify-content: center;
-  //     align-items: center;
-
-  //     .info-title {
-  //       width: 5.48rem;
-  //       margin-bottom: 0.3rem;
-  //     }
-
-  //     .info-title2 {
-  //       width: 5.96rem;
-  //       margin-top: -1.2rem;
-  //       margin-bottom: 0.2rem;
-  //     }
-
-  //     .info-name,
-  //     .info-time {
-  //       width: 100%;
-  //       height: 0.68rem;
-  //       border-bottom: 2px solid #ac8f52;
-  //       display: flex;
-  //       align-items: center;
-  //       margin-bottom: 0.2rem;
-
-  //       .label {
-  //         flex: none;
-  //         color: #3c2f22;
-  //         font-size: 0.34rem;
-  //         line-height: 1;
-  //         font-weight: bold;
-  //         margin-right: 0.2rem;
-  //       }
-
-  //       .info-input {
-  //         flex: 1 1 auto;
-  //         width: 1.5rem;
-  //         font-size: 0.34rem;
-  //         line-height: 1;
-  //         font-weight: bold;
-  //         outline: none;
-  //         border: none;
-  //         color: #3c2f22;
-  //         background-color: transparent;
-  //         padding: 0;
-
-  //         &::input-placeholder {
-  //           color: rgba(60, 47, 34, 0.5);
-  //         }
-
-  //         &::-webkit-input-placeholder {
-  //           color: rgba(60, 47, 34, 0.5);
-  //         }
-
-  //         &::-moz-placeholder {
-  //           color: rgba(60, 47, 34, 0.5);
-  //         }
-
-  //         &::-moz-placeholder {
-  //           color: rgba(60, 47, 34, 0.5);
-  //         }
-
-  //         &::-ms-input-placeholder {
-  //           color: rgba(60, 47, 34, 0.5);
-  //         }
-  //       }
-
-  //       .sex {
-  //         flex: none;
-  //         display: block;
-  //         width: 1.4rem;
-  //       }
-
-  //       .calendar {
-  //         flex: none;
-  //         display: block;
-  //         width: 0.4rem;
-  //       }
-  //     }
-
-  //     .info-btn {
-  //       width: 5.19rem;
-  //       height: 1.03rem;
-  //       margin-top: 0.1rem;
-  //       // animation: scaleBtn 1s infinite ease-in-out alternate;
-  //     }
-
-  //     .info-bottom {
-  //       font-size: 0.24rem;
-  //       line-height: 1;
-  //       display: flex;
-  //       align-items: center;
-  //       color: rgba(60, 47, 34, 0.6);
-  //       position: absolute;
-  //       bottom: 0;
-
-  //       .check {
-  //         width: 0.24rem;
-  //         margin-right: 0.1rem;
-  //         display: block;
-  //       }
-
-  //       .link {
-  //         color: #445cba;
-  //       }
-  //     }
-  //   }
-  // }
-
-
-
 
 
   .info {
@@ -1291,7 +1125,8 @@ export default {
     align-items: center;
     width: 7.1rem;
     // height: 6.34rem;
-    margin-top: 1.8rem;
+    z-index: 2;
+    margin-top: 9.8rem;
 
     .top-bg {
       width: 7.1rem;

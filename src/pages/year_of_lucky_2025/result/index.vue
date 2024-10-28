@@ -1,12 +1,6 @@
-<!--
- * @Author: wujiang@weli.cn
- * @Date: 2023-11-15 11:33:50
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 21:21:10
- * @Description: 
--->
+
 <template>
-  <div :class="['result', show_pop_modal? 'hidden-scroll': '']">   
+  <div :class="['result', is_cn? 'cn-bg': 'tw-bg', show_pop_modal? 'hidden-scroll': '']">   
     <ResultPopup product_key="h5_annual2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />  
     <!-- <UserInfo
       :username="username"
@@ -16,7 +10,7 @@
       :gan="gan"
       :zhi="zhi"
     /> -->
-    <div class="pay-box">
+    <!-- <div class="pay-box">
       <UserInfo
         :username="username"
         :sex="sex"
@@ -35,6 +29,15 @@
         :wuxingqiang="wuxingqiang"
         :is_result="true"
       />
+    </div> -->
+
+    <div class="info-box">
+      <div class="card">
+        <img :src="is_cn? home_img_tittle_xinxi_cn_1x: home_img_tittle_xinxi_tw_1x" />
+        <UserInfo :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
+          :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
+          :nayin="nayin" :is_result="false" :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" />
+      </div>
     </div>
 
     <contentDetail
@@ -125,11 +128,15 @@ import { icon_enums } from '../../../libs/enum';
 import CodePop from '../../../components/CodePop.vue';
 import CopyCode from '../../../components/CopyCode.vue';
 import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/year24.webp';
+import home_img_tittle_xinxi_cn_1x from './../../../assets/img/year_of_lucky_2025/cn/home_img_tittle_xinxi_cn_1x.webp';
+import home_img_tittle_xinxi_tw_1x from './../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_xinxi_tw_1x.webp';
 import ResultPopup from '../../../components/ResultPopup.vue'
 export default {
   components: { contentDetail, UserInfo, CodePop, CopyCode, ResultPopup },
   data() {
     return {
+      home_img_tittle_xinxi_cn_1x,
+      home_img_tittle_xinxi_tw_1x,
       loading: false,
       hasData: false,
 
@@ -654,10 +661,85 @@ export default {
 </script>
 
 <style scoped lang="less">
-.result {
-  background: #ffaa41;
-  padding: 1.05rem 0.2rem 0.3rem;
+.cn-bg {
+  background: url('../../../assets/img/year_of_lucky_2025/cn/mig_img_topbj_cn_1x.webp') no-repeat;
+  background-size: contain;
+  width: 7.5rem;
+  height: 12rem;
 }
+
+.tw-bg {
+  background: url('../../../assets/img/year_of_lucky_2025/tw/mig_img_topbj_tw_1x.webp') no-repeat;
+  background-size: contain;
+  width: 7.5rem;
+  height: 12rem;
+}
+.result {
+  background-color: #B5291E;
+  padding: 1.05rem 0.2rem 0.3rem;
+
+  .info-box {
+    display: flex;
+    flex-direction: column;
+    width: 7.1rem;
+    margin-top: 1.32rem;
+
+    .card {
+      width: 7.1rem;
+      height: 7.19rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0.49rem;
+      background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp') no-repeat;
+      background-size: cover;
+      img {
+        width: 7.1rem;
+        height: 1rem;
+      }
+    }
+
+    .top {
+      height: 0.99rem;
+
+      .title {
+        position: absolute;
+        top: 0;
+        left: 0.23rem;
+
+        img {
+          width: 7.1rem;
+          height: 1rem;
+        }
+      }
+
+      img {
+        width: 7.1rem;
+        height: 1rem;
+      }
+    }
+
+    .middle {
+      height: 5.19rem;
+
+      img {
+        width: 7.1rem;
+        height: 5.19rem;
+      }
+    }
+
+    .bottom {
+      height: 1rem;
+      line-height: 1;
+
+      img {
+        width: 7.1rem;
+        height: 1rem;
+      }
+    }
+  }
+}
+
 .pay-box {
   width: 7.1rem;
   height: 7.61rem;
