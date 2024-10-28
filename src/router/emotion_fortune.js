@@ -32,7 +32,7 @@ const visitorLoginAPI = async (data, callback) => {
     utils.getFBChannel().indexOf('google') < 0 && utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
     // console.log('首次登录');
   }
-  if (utils.getEndStr(utils.getFBChannel(), 2) === '03') {
+  if (utils.getEndStr(utils.getFBChannel(), 2) === '03' || utils.getEndStr(utils.getFBChannel(), 2) === '05') {
     checkCurrentCountry(callback)
   } else {
     callback()
