@@ -40,14 +40,14 @@
       </div>
     </div>
 
-    <contentDetail
+    <!-- <contentDetail
       v-if="fortune.review2023"
       :result="fortune.review2023"
       :item_index="1"
-    />
+    /> -->
     <contentDetail
-      v-if="fortune.whole"
-      :result="fortune.whole"
+      v-if="fortune.whole2024"
+      :result="fortune.whole2024"
       :item_index="1"
     />
     <contentDetail
@@ -676,7 +676,7 @@ export default {
 }
 .result {
   background-color: #B5291E;
-  padding: 1.05rem 0.2rem 0.3rem;
+  padding: 0.1rem 0.2rem 0.3rem;
 
   .info-box {
     display: flex;
