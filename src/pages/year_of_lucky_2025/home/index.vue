@@ -490,19 +490,19 @@ export default {
           birth_hour: arr[6],
         };
         this.picker_date_obj = pick_date;
-        this.$nextTick(() => {
-          if (this.sex === '1') {
-            this.$refs.sex_male.click();
-            setTimeout(() => {
-              this.$refs.sex_female.click();
-            }, 500);
-          } else {
-            this.$refs.sex_female.click();
-            setTimeout(() => {
-              this.$refs.sex_male.click();
-            }, 500);
-          }
-        });
+        // this.$nextTick(() => {
+        //   if (this.sex === '1') {
+        //     this.$refs.sex_male.click();
+        //     setTimeout(() => {
+        //       this.$refs.sex_female.click();
+        //     }, 500);
+        //   } else {
+        //     this.$refs.sex_female.click();
+        //     setTimeout(() => {
+        //       this.$refs.sex_male.click();
+        //     }, 500);
+        //   }
+        // });
       }
       let self = this;
 
@@ -559,7 +559,12 @@ export default {
      * @return {*}
      */
     changeSex(val) {
-      this.sex = val + '';
+      if (this.sex == 0) {
+        this.sex = 1;
+      } else {
+        this.sex = 0;
+      }
+      // this.sex = val + '';
     },
 
     // 端内加载背景SVGA动画
