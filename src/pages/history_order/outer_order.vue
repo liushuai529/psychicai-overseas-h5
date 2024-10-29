@@ -449,10 +449,11 @@ export default {
      * @return {*}
      */
     async getData() {
+      let product_key = utils.getQueryString('product_key');
       Indicator.open('加载中...');
       this.show_kf = false;
       this.query.status = query_enums[this.active_tab] || '';
-      const { status, data } = await getHistoryOrderAPI(this.query);
+      const { status, data } = await getHistoryOrderAPI(product_key, this.query);
       localStorage.removeItem('mlxz_reload_page_history');
 
       Indicator.close();

@@ -1,7 +1,7 @@
 
 <template>
   <div :class="['result', is_cn? 'cn-bg': 'tw-bg', show_pop_modal? 'hidden-scroll': '']">   
-    <ResultPopup product_key="h5_annual2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />  
+    <!-- <ResultPopup product_key="h5_annual2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />   -->
     <!-- <UserInfo
       :username="username"
       :sex="sex"
@@ -57,36 +57,47 @@
       :item_index="2"
     />
     <contentDetail
-      v-if="fortune.taisui2024"
-      :result="fortune.taisui2024"
+      v-if="fortune.career2024"
+      :result="fortune.career2024"
       :item_index="3"
     />
-    <contentDetail v-if="fortune.gold2024" :result="fortune" :item_index="4" />
+    <contentDetail v-if="fortune.career2024" :result="fortune.career2024" :item_index="4" />
+    <!--年度事业分析-->
     <contentDetail
       v-if="fortune.career2024"
       :result="fortune.career2024"
       :item_index="5"
     />
+    <!--年度财运分析-->
     <contentDetail
       v-if="fortune.wealth2024"
       :result="fortune.wealth2024"
       :item_index="6"
     />
+    <!--年度感情分析-->
     <contentDetail
       v-if="fortune.emotion2024"
       :result="fortune.emotion2024"
       :item_index="7"
     />
+    <!--年度健康提示-->
     <contentDetail
       v-if="fortune.health2024"
       :result="fortune.health2024"
       :item_index="8"
     />
+    <!--特别提示-->
+    <contentDetail
+      v-if="fortune.health2024"
+      :result="fortune.health2024"
+      :item_index="9"
+    />
+    <!--每月运势-->
     <contentDetail
       v-if="fortune.scores2024"
-      :result="fortune.scores2024"
+      :result="fortune"
       :content_arr="fortune.scores2024content"
-      :item_index="9"
+      :item_index="10"
     />
     <CopyCode
       :set_title="true"
@@ -549,7 +560,7 @@ export default {
           /\n/g,
           '<br/>'
         );
-        this.fortune.review2023 = this.fortune.review2023.replace(
+        this.fortune.review2023 = this.fortune.review2023 && this.fortune.review2023.replace(
           /\n/g,
           '<br/>'
         );

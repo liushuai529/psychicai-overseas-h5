@@ -451,7 +451,7 @@ export default {
     },
     // 跳转到订单列表
     toOrder() {
-      utils.jumpToOrder();
+      utils.jumpToOrder(this.product_key);
     },
     // 端内加载背景SVGA动画
     loadBg(dom, url, is_loop = true) {

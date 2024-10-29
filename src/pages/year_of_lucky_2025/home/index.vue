@@ -138,7 +138,7 @@
       @update-visible="pay_modal = false"
       @getOrderId="getOrderId"
     ></combinePayPop> -->
-      <HomeFooter v-if="showFixedBtn" product_key="h5_annual2024" />
+      <HomeFooter v-if="showFixedBtn" product_key="h5_annual2025" />
       <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"
         e_id="10003" c_id="-10014" c_name="click_2024report_discount1" />
 
@@ -148,7 +148,7 @@
       <FixedOrder v-if="show_api_order && !is_show_notice" :title="last_title" :is_show_move="is_show_notice"
         :last_order="last_order" name="api" top="6.7rem" :time="api_time" @payOrder="checkOrder_year"
         @jumpDetail="jumpOrder_year" /> -->
-      <NewFooter v-if="showFixedBtn" product_key="h5_annual2024" />
+      <NewFooter v-if="showFixedBtn" product_key="h5_annual2025" />
     </div>
   </div>
 </template>
@@ -252,7 +252,7 @@ const year_data = {
   // 底部弹出popup版本所需数据
   visible: false,
   product_id: 2,
-  product_key: 'h5_annual2024',
+  product_key: 'h5_annual2025',
   query_user_string: '',
   is_combine,
   has_pay: '',
@@ -338,7 +338,7 @@ export default {
     },
     is_new_user() {
       let obj = this.$store.state.common.productList.find(
-        it => it.product_key === 'h5_annual2024'
+        it => it.product_key === 'h5_annual2025'
       );
       if (obj) {
         return obj.tags ? obj.tags.includes('newcomer_discount') : false;
@@ -550,7 +550,7 @@ export default {
      * @return {*}
      */
     toOrder() {
-      utils.jumpToOrder();
+      utils.jumpToOrder(this.product_key);
     },
 
     /**

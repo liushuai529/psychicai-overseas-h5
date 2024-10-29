@@ -551,7 +551,7 @@ export default {
      * @return {*}
      */
     toOrder() {
-      utils.jumpToOrder();
+      utils.jumpToOrder(this.product_key);
     },
     /**
      * @description: 打开时间选择器

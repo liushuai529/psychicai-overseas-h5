@@ -442,7 +442,7 @@ export default {
       if (this.product_key === 'consult_time') {
         productGroup = 'consult_time'
       }
-      const { status, data } = await getProductionsAPI(productGroup);
+      const { status, data } = await getProductionsAPI(productGroup, {product_key: this.product_key});
       if (status === 1000) {
         this.product = data.find(item => item.product_key === this.product_key);
         //获取所有报告以及套餐

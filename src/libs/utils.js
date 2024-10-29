@@ -1492,8 +1492,8 @@ const logCopyOther = () => {
  * @description: 跳转历史订单
  * @return {*}
  */
-const jumpToOrder = () => {
-  location.href = 'history_order.html';
+const jumpToOrder = (product_key) => {
+  location.href = `history_order.html?product_key=${product_key}`;
 };
 
 /**

@@ -1,6 +1,6 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal || show_discount_modal, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
-    <AnimationYearPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_annual2024"
+    <AnimationYearPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_annual2025"
       :visible="showAnimation" @update-visible="showAnimation = false" />
     <FbShareNotice v-if="is_show_fb_notice" />
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
@@ -18,7 +18,7 @@
         :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi" :nayin="nayin" :is_result="false"
         :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" /> -->
 
-    <PayItem product_key="h5_annual2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
+    <PayItem product_key="h5_annual2025" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
     <div :class="['method-box']">
       <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
       <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
@@ -48,9 +48,9 @@
       @close="pay_modal = false" /> -->
 
 
-    <NewFooter product_key="h5_annual2024" />
+    <NewFooter product_key="h5_annual2025" />
     <img @click="payOrder" :class="['emo-btn', 'fix-btn']" :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x" />
-    <FixedDiscountModal product_key="h5_annual2024" @change_discount_modal="change_discount_modal" />
+    <FixedDiscountModal product_key="h5_annual2025" @change_discount_modal="change_discount_modal" />
   </div>
 </template>
 
@@ -168,7 +168,7 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/2404fd60302100a5446496cdca97c22caf51.png',
       tw_pay_btn,
       product_id: 25,
-      product_key: 'h5_annual2024',
+      product_key: 'h5_annual2025',
       query_user_string: '',
       showBottomBtn: false,
       year: '',

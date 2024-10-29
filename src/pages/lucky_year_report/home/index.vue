@@ -546,7 +546,7 @@ export default {
       })();
     },
     toOrder() {
-      utils.jumpToOrder();
+      utils.jumpToOrder(this.product_key);
     },
     openPicker() {
       this.choose_time = true;

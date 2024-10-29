@@ -552,7 +552,7 @@ export default {
      * @return {*}
      */
     toOrder() {
-      utils.jumpToOrder();
+      utils.jumpToOrder(this.product_key);
     },
 
     /**

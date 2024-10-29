@@ -1,8 +1,15 @@
 <template>
-  <div :class="`content-item ${[1, 4, 9].includes(item_index) ? 'item-1-bg' : 'item-normal-bg'
+  <div :class="`content-item ${[1, 2, 4, 10].includes(item_index) ? 'item-1-bg' : 'item-normal-bg'
     }`">
-    <img class="title-box" :src="item_index === 4 ? getGoldYear(result.gold2024) : titleImg" alt="" />
-    <div v-if="item_index === 2" class="content-2">
+    <img class="title-box" :src="titleImg" alt="" />
+    <div v-if="item_index === 1" class="content">
+      <div class="item-tag">
+        <div class="score">99分</div>
+        <div class="year">好运之年</div>
+      </div>
+      <div v-html="result"></div>
+    </div>
+    <div v-else-if="item_index === 2" class="content-2">
       <div class="item-box">
         <div class="tip">{{ $t('kaiyun-label') }}</div>
         <img :src="getDirection(result.guide2024direction)" class="baoshi" alt="" />
@@ -24,33 +31,51 @@
       </div>
     </div>
     <div v-else-if="item_index === 3" v-html="result" class="content"></div>
-    <div v-else-if="item_index === 1" class="content">
-      <div class="item-tag">
-        <div class="score">99分</div>
-        <div class="year">好运之年</div>
-      </div>
-      <div v-html="result"></div>
-    </div>
+    
     <div v-else-if="item_index === 4" class="content-4 content">
-      <!-- <template v-if="result.gold2024content.length">
-        <span v-for="(it, k) in result.gold2024content" :key="'gold' + k">
-          {{ it }}
-        </span>
-      </template> -->
-      <div class="year-title">今年是你的{{ result.gold2024 }}之年</div>
+     
+      <!-- <div class="year-title">今年是你的{{ result.gold2024 }}之年</div>
       <div>
         {{ result.gold2024content }}
       </div>
-      <div>{{ result.whole2024 }}</div>
-    </div>
-    <div v-else-if="item_index === 9" class="content-tu">
-      <div id="echarts" class="echarts"></div>
-      <template v-if="content_arr.length">
-        <div v-for="(it, k) in content_arr" :key="'score' + k" class="content-score">
-          {{ it }}
+      <div>{{ result.whole2024 }}</div> -->
+      <div class="taisui-container">
+        <div class="tag">
+          <img :src="tw_title1"/>
         </div>
-      </template>
+        <div class="text">生肖虎-害太岁</div>
+      </div> 
+      <div v-html="result"></div>
     </div>
+    <div v-else-if="item_index === 10" class="content">
+      <div id="echarts" class="echarts"></div>
+      <div v-if="1===1" class="red-black-container">
+        <img :src="is_cn ? honghei_cn_1x: honghei_tw_1x"/>
+        <div class="card-container">
+          <div class="item-container">
+            <div class="head">
+              <img :src="result_icon_gou_cn"/>
+              <div>标题</div>
+            </div>
+            <div class="content">
+              <div class="month">9月</div>
+              <div class="text">我愿意陪你长大 陪你吃苦 拿我的青春来赌 这辈子我都不想听从你口中说出的对不起 我要被对的起。</div>
+            </div>
+          </div>
+          <div class="item-container" style="background: #F7E4D4;">
+            <div class="head head1">
+              <img :src="result_icon_tan_cn_1x"/>
+              <div>标题</div>
+            </div>
+            <div class="content">
+              <div class="month">9月</div>
+              <div class="text">我愿意陪你长大 陪你吃苦 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-else v-html="result.health2024" class="content"></div>
+    </div> 
     <div v-else class="content">
       {{ result }}
     </div>
@@ -78,6 +103,12 @@ import tw_title7 from './../../../assets/img/year_of_lucky_2025/tw/result_img_ti
 import tw_title8 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_08_tw_1x.webp';
 import tw_title9 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_09_tw_1x.webp';
 import tw_title10 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_10_tw_1x.webp';
+
+import honghei_cn_1x from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_honghei_cn_1x.webp';
+import honghei_tw_1x from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_honghei_tw_1x.webp';
+
+import result_icon_gou_cn from './../../../assets/img/year_of_lucky_2025/result_icon_gou_cn.webp';
+import result_icon_tan_cn_1x from './../../../assets/img/year_of_lucky_2025/result_icon_tan_cn_1x.webp';
 
 
 // import * as echarts from 'echarts';
@@ -163,6 +194,10 @@ export default {
   },
   data() {
     return {
+      result_icon_gou_cn,
+      result_icon_tan_cn_1x,
+      honghei_cn_1x,
+      honghei_tw_1x,
       title1,
       title2,
       title3,
@@ -330,10 +365,11 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      if (this.item_index === 9) {
+      if (this.item_index === 10) {
         this.getEcharts();
       }
     });
+    
   },
   methods: {
     /**
@@ -413,19 +449,19 @@ export default {
             type: 'line', //类型 折线
             smooth: true, //是否平滑
             itemStyle: {
-              color: '#FF7A00',
+              color: '#FE3A3A',
             },
-            data: self.result,
+            data: self.result.scores2024,
             showSymbol: false,
             areaStyle: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
                   offset: 0,
-                  color: '#FFF1E3',
+                  color: '#FFCCC0',
                 },
                 {
                   offset: 1,
-                  color: '#FDFAEC',
+                  color: '#FFCCC0',
                 },
               ]),
             },
@@ -489,7 +525,7 @@ export default {
 
 .content-item {
   width: 7.1rem;
-  min-height: 4.64rem;
+  min-height: 3rem;
   background-size: 100% 100%;
   margin-bottom: 0.3rem;
   display: flex;
@@ -510,6 +546,7 @@ export default {
     line-height: 0.48rem;
     margin-top: 0.31rem;
     font-weight: 400;
+
 
     .item-tag {
       width: 5rem;
@@ -541,6 +578,95 @@ export default {
         text-transform: none;
         line-height: 0.45rem;
       }
+    }
+    .taisui-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      .tag {
+        width: 2.28rem;
+        height: 2.28rem;
+        background: #FFE6DB;
+        border-radius: 0.16rem;
+        border: 0.02rem solid #FD8E8E;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 1.88rem;
+          height: 1.88rem;
+        }
+      }
+      .text {
+        font-weight: 600;
+        font-size: 0.32rem;
+        color: #DF2113;
+        line-height: 0.48rem;
+        text-align: center;
+        font-style: normal;
+        text-transform: none;
+        margin-top: 0.3rem;
+        margin-bottom: 0.2rem;
+      }
+    }
+    .red-black-container {
+      width: 6.5rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: auto;
+      img {
+        width: 6.5rem;
+      }
+      .card-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        .item-container {
+          width: 3.13rem;
+          background: #FFECE6;
+          border-radius: 0.2rem;
+          border: 0.02rem solid #E14210;
+          .head {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 0.81rem;
+            background: #E14210;
+            border-radius: 0.1rem 0.1rem 0rem 0rem;
+            font-weight: 600;
+            font-size: 0.34rem;
+            color: #FFFFFF;
+            line-height: 0.51rem;
+            img {
+              width: 0.39rem;
+              height: 0.39rem;
+              margin-right: 0.12rem;
+            }
+          }
+          .head1 {
+            background: #F67600; 
+          }
+          .content {
+            // background: #FFECE6;
+            .month {
+              font-weight: 600;
+              font-size: 0.36rem;
+              color: #E14210;
+              line-height: 0.54rem;
+              text-align: center;
+            }
+            .text {
+              font-weight: 400;
+              margin: 0.1rem;
+            }
+          }
+        }
+      }
+    
     }
   }
 }
