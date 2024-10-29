@@ -119,6 +119,8 @@ const getFBChannel = () => {
     return 'ads111';
   } else if (url.indexOf('/enjoyA11/') > -1) {
     return 'enjoyA11';
+  } else if (url.indexOf('/ads12/') > -1) {
+    return 'ads12';
   } else {
     return 'enjoy05';
   }
@@ -185,6 +187,7 @@ const getFbId = () => {
     'ads11': '1089075609227088',
     'ads111': '1253997898931627',
     'enjoyA11': '1621066301776872',
+    'ads12': '1253997898931627',
   }
 }
 

@@ -1239,6 +1239,29 @@ for (var pathname of ['emotion_end/emotion_end', 'user_agreement/user_agreement'
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// ads12代理
+for (var pathname of ['year_of_lucky_2025/year_of_lucky_2025', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads12/' + filename + '.html'),
+    template: 'template/index_ads12.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+
 
 
 if (config.build.productionGzip) {
