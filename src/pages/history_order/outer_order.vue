@@ -332,6 +332,10 @@ const event_enums = {
     c_id: '-10003',
     c_name: 'click_history_2024report_repay',
   },
+  h5_annual2025: {
+    c_id: '-10003',
+    c_name: 'click_history_2024report_repay',
+  },
   h5_emotion2024: {
     c_id: '-10004',
     c_name: 'click_history_2024lovely_repay',
