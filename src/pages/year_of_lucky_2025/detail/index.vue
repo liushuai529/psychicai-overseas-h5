@@ -1,7 +1,7 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal || show_discount_modal, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
-    <AnimationYearPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_annual2025"
-      :visible="showAnimation" @update-visible="showAnimation = false" />
+    <!-- <AnimationYearPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_annual2025"
+      :visible="showAnimation" @update-visible="showAnimation = false" /> -->
     <FbShareNotice v-if="is_show_fb_notice" />
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <div class="info-box">

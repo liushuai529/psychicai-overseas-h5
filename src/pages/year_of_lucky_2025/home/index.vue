@@ -110,8 +110,8 @@
       <div :style="`background-image:url(${is_cn ? cn_card_1 : tw_card_1})`" class="card-1">
         <canvas class="canvas-card" id="canvas3"></canvas>
       </div>
-      <img class="card" :src="is_cn ? cn_card_3 : tw_card_3" />
       <img class="card" :src="is_cn ? cn_card_2 : tw_card_2" />
+      <img class="card" :src="is_cn ? cn_card_3 : tw_card_3" />
       <img class="card" :src="is_cn ? cn_card_4 : tw_card_4" />
       <img class="card last-card" :src="is_cn ? cn_card_5 : tw_card_5" />
       <img v-if="showFixedBtn" class="fix-btn fix-box huxi-btn" :src="pay_btn_img" @click="check_year" />
@@ -195,17 +195,17 @@ import tw_order from '../../../assets/img/year_of_lucky_2025/tw/btn_chakan_tw_1x
 import cn_card_1 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_1_cn_1x.webp';
 import tw_card_1 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_1_tw_1x.webp';
 
-import cn_card_2 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai2.webp';
-import tw_card_2 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai2.webp';
+import cn_card_2 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_2_cn_1x.webp';
+import tw_card_2 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_2_tw_1x.webp';
 
-import cn_card_3 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_cn.webp';
-import tw_card_3 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_tw.webp';
+import cn_card_3 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_3_cn_1x.webp';
+import tw_card_3 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_3_tw_1x.webp';
 
-import cn_card_4 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_cn.webp';
-import tw_card_4 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_tw.webp';
+import cn_card_4 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_4_cn_1x.webp';
+import tw_card_4 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_4_tw_1x.webp';
 
-import cn_card_5 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai5.webp';
-import tw_card_5 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai5.webp';
+import cn_card_5 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_5_cn_1x.webp';
+import tw_card_5 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_5_tw_1x.webp';
 import {
   reportEnum,
   reportName,

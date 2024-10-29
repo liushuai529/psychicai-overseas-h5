@@ -31,6 +31,7 @@ export const path_enums = {
   h5_weigh_bone: 'weigh_bone',
   h5_bai_gua: 'guiguzi_fortune',
   h5_annual2024: 'year_of_lucky_2024',
+  h5_annual2025: 'year_of_lucky_2025',
   h5_emotion2024: 'emotion_fortune',
   h5_career2024: 'career_fortune_2024',
   BA_ZI_HE_HUN: 'marriage_measure_overseas',
@@ -247,6 +248,7 @@ export const icon_enums = [
 export const reportEnum = {
   h5_wealth2024: '2024_wealty_report', // 2024年财运
   h5_annual2024: '2024_report', // 2024年年运
+  h5_annual2025: '2025_report', // 2025年年运
   h5_weigh_bone: 'chenggu_report', // 袁天罡秤骨
   h5_bai_gua: '64gua_report', // 鬼谷子
   h5_emotion2024: '2024_lovely_report', // 2024年爱情运势
@@ -262,6 +264,7 @@ export const commonBaoshi = {
 };
 
 import nianyun from '../assets/img/mlxz/history_order/dingdan_img_nianyun.webp';
+import nianyun2025 from '../assets/img/mlxz/history_order/dingdan_img_nianyun.webp';
 import yuantiangang from '../assets/img/mlxz/history_order/dingdan_img_yuantiangang.webp';
 import guiguzi from '../assets/img/mlxz/history_order/dingdan_img_guiguzi.webp';
 import ganqingyun from '../assets/img/mlxz/history_order/dingdan_img_ganqing.webp';
@@ -285,6 +288,7 @@ export const getHistoryOrderImg = {
   h5_wealth2024: caiyun,
   h5_marriage: hehun,
   h5_annual2024: nianyun,
+  h5_annual2025: nianyun2025,
   h5_combo3: combine3,
   h5_combo2: combine2,
   h5_combo2_attach: combo2_attach,
@@ -299,6 +303,7 @@ export const report_id_arr = {
   h5_bai_gua: '60003',
   h5_marriage: '60005',
   h5_annual2024: '60009',
+  h5_annual2025: '60009',
   h5_emotion2024: '60010',
   h5_career2024: '60011',
 };
@@ -380,6 +385,16 @@ export const banner_enums = {
       tw: tw_small_year,
     },
   },
+  h5_annual2025: {
+    big: {
+      cn: cn_big_year,
+      tw: tw_big_year,
+    },
+    small: {
+      cn: cn_small_year,
+      tw: tw_small_year,
+    },
+  },
   h5_wealth2024: {
     big: {
       cn: cn_big_wealth,
@@ -435,6 +450,10 @@ export const reportName = {
     cn: '2024年年运',
     tw: '2024年年運',
   },
+  h5_annual2025: {
+    cn: '2025年年运',
+    tw: '2025年年運',
+  },
   h5_wealth2024: {
     cn: '2024年财运',
     tw: '2024年財運',
@@ -469,6 +488,13 @@ export const maidianEnum = {
     view_name: 'view_2024lovely_discount2',
   },
   h5_annual2024: {
+    main_id: '10003',
+    click_id: '-10016',
+    view_id: '-10015',
+    click_name: 'click_2024report_discount2',
+    view_name: 'view_2024report_discount2',
+  },
+  h5_annual2025: {
     main_id: '10003',
     click_id: '-10016',
     view_id: '-10015',
@@ -514,6 +540,7 @@ export const url_enums = {
   h5_weigh_bone: 'weigh_bone',
   h5_bai_gua: 'guiguzi_fortune',
   h5_annual2024: 'year_of_lucky_2024',
+  h5_annual2025: 'year_of_lucky_2025',
   h5_emotion2024: 'emotion_fortune',
   h5_career2024: 'career_fortune_2024',
 };
@@ -540,6 +567,10 @@ export const tabEventEnums = {
     e_name: 'click_2024wealty_home',
   },
   h5_annual2024: {
+    c_id: '-10021',
+    e_name: 'click_2024report_home',
+  },
+  h5_annual2025: {
     c_id: '-10021',
     e_name: 'click_2024report_home',
   },
