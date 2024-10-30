@@ -178,6 +178,11 @@ const tipsArr6 = {
   'zh-CN': '请稍等...',
   'zh-TW': '請稍等...',
 };
+
+const buyPeople = {
+  h5_annual2025: 8687
+}
+
 export default {
   components: {
     CountDown,
@@ -324,7 +329,18 @@ export default {
       }
     },
     buy_people() {
-      return 3571;
+      const buyList = {
+        h5_marriage: '87',
+        h5_wealth2024: '142',
+        h5_career2024: '103',
+        h5_emotion2024: '98',
+        h5_annual2024: '193',
+        h5_annual2025: '8687',
+        h5_bai_gua: '146',
+        h5_weigh_bone: '138',
+        consult_time: '138',
+      };
+      return buyList[this.product_key] || 3571;
     },
     now_price() {
       return this.product
