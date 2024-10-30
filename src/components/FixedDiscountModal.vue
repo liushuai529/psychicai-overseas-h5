@@ -105,19 +105,17 @@ export default {
       utils.openApp();
     },
     async getData() {
-      if (utils.isAndroid()) {
-        //塔罗测算报告逻辑判断删除。time:2024-10-22
-        let res = await getDiscountGetAPI(this.product_key);
-        if (res && res.status === 1000) {
-          if (res.data.discount) {
-            this.transfer_code = res.data.transfer_code;
-            this.$emit('change_discount_modal', true)
-            this.show = true;
-            utils.firebaseLogEvent(show_info[this.product_key]['module'], show_info[this.product_key]['content_id'], show_info[this.product_key]['event_name'], show_info[this.product_key]['type'], {
-              args_name: show_info[this.product_key]['event_name'],
-              channel: utils.getFBChannel(),
-            });
-          }
+      //塔罗测算报告逻辑判断删除。time:2024-10-22
+      let res = await getDiscountGetAPI(this.product_key);
+      if (res && res.status === 1000) {
+        if (res.data.discount) {
+          this.transfer_code = res.data.transfer_code;
+          this.$emit('change_discount_modal', true)
+          this.show = true;
+          utils.firebaseLogEvent(show_info[this.product_key]['module'], show_info[this.product_key]['content_id'], show_info[this.product_key]['event_name'], show_info[this.product_key]['type'], {
+            args_name: show_info[this.product_key]['event_name'],
+            channel: utils.getFBChannel(),
+          });
         }
       }
     }
