@@ -4,6 +4,7 @@ import index from '../pages/year_of_lucky_2025/home/index.vue';
 import detail from '../pages/year_of_lucky_2025/detail/index.vue';
 import result from '../pages/year_of_lucky_2025/result/index.vue';
 import utils from '../libs/utils';
+import {getBaseInfoAPI} from '../api/api';
 import request from '../api/request';
 
 Vue.use(Router);
