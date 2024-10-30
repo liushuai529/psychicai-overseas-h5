@@ -25,6 +25,20 @@ const visitorLoginAPI_year = async (data, callback) => {
     utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
     callback && callback();
   }
+  checkCurrentCountry(callback);
+};
+
+const checkCurrentCountry = async (callback) => {
+  if (localStorage.getItem('current_country')) {
+    callback && callback();
+  } else {
+    callback && callback(); 
+    setTimeout(async () => {
+      const res = await getBaseInfoAPI();
+      if (res.status !== 1000) return;
+      localStorage.setItem('current_country', JSON.stringify({area_code: res.data.current_country.code, iso_code: res.data.current_country.iso_code}))
+    }, 3000);
+  }
  
 };
 
