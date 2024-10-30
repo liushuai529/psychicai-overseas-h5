@@ -55,21 +55,21 @@
           <div class="item-container">
             <div class="head">
               <img :src="result_icon_gou_cn"/>
-              <div>标题</div>
+              <div>{{ is_cn? '好运连连': '好運連連' }}</div>
             </div>
             <div class="content">
-              <div class="month">9月</div>
-              <div class="text">我愿意陪你长大 陪你吃苦 拿我的青春来赌 这辈子我都不想听从你口中说出的对不起 我要被对的起。</div>
+              <div class="month">{{`${result.scores2024content[0].month}月`}}</div>
+              <div class="text">{{`${result.scores2024content[0].content}`}}</div>
             </div>
           </div>
           <div class="item-container" style="background: #F7E4D4;">
             <div class="head head1">
               <img :src="result_icon_tan_cn_1x"/>
-              <div>标题</div>
+              <div>{{ is_cn? '警惕注意': '警惕註意' }}</div>
             </div>
             <div class="content">
-              <div class="month">9月</div>
-              <div class="text">我愿意陪你长大 陪你吃苦 </div>
+              <div class="month">{{`${result.scores2024content[1].month}月`}}</div>
+              <div class="text">{{`${result.scores2024content[1].content}`}}</div>
             </div>
           </div>
         </div>
