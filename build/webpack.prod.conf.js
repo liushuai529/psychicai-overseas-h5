@@ -1240,7 +1240,7 @@ for (var pathname of ['emotion_end/emotion_end', 'user_agreement/user_agreement'
 }
 
 // ads12代理
-for (var pathname of ['year_of_lucky_2025/year_of_lucky_2025', 'user_agreement/user_agreement', 'privacy/privacy']) {
+for (var pathname of ['year_of_lucky_2025/year_of_lucky_2025', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
   var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads12/' + filename + '.html'),

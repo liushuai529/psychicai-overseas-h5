@@ -142,8 +142,7 @@
       @getOrderId="getOrderId"
     ></combinePayPop> -->
       <HomeFooter v-if="showFixedBtn" product_key="h5_annual2025" />
-      <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"
-        e_id="10003" c_id="-10014" c_name="click_2024report_discount1" />
+ 
 
       <!-- <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
         :new_order_key="new_order_key" name="local" top="4.7rem" :time="local_time" @payOrder="checkOrder_year"
@@ -221,7 +220,6 @@ import tw_new_user_btn from '../../../assets/img/tw_mlxz/year_24/nianyun_btn_jie
 
 import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/year_order.webp';
 import cn_history_order from '../../../assets/img/mlxz/downloadBtn/year.webp';
-import PopNotice from '../../../components/PopNotice.vue';
 import NewFooter from '../../../components/NewFooter.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
@@ -320,7 +318,6 @@ export default {
     TopBar,
     combinePayPop,
     HomeFooter,
-    PopNotice,
     FixedOrder,
     NewFooter,
     NavigationBar,
@@ -460,7 +457,7 @@ export default {
     },
 
     mounted_year() {
-      this.showNoticePop();
+      // this.showNoticePop();
 
       // 赋默认值
       let storaged_userInfo = localStorage.getItem('year_of_lucky_info');
@@ -880,36 +877,6 @@ export default {
       return params;
     },
 
-    // 展示挽留弹窗  通过定时器
-    showNoticePop() {
-      this.timer = setInterval(() => {
-        // 最新一个订单信息
-        this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
-        this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
-        let is_show_notice = localStorage.getItem(
-          `mlxz_show_notice_${this.product_key}`
-        );
-        this.is_show_notice = is_show_notice
-          ? +is_show_notice === 1
-            ? true
-            : false
-          : false;
-        let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
-        let set_time_ = (5 * 60 + 48) * 1000 + 280;
-        this.count_down = +time_ || 0;
-
-        // this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
-
-        this.local_time =
-          +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
-      }, 1000);
-    },
-    // 关闭当前报告的挽留弹窗
-    closeNotice() {
-      localStorage.setItem(`mlxz_show_notice_${this.product_key}`, 2);
-      localStorage.removeItem(`mlxz_count_down_${this.product_key}`);
-      this.is_show_notice = false;
-    },
 
     // 获取最新一个订单信息
     async getLastOrder() {
