@@ -237,7 +237,8 @@ export default {
 
       all_product: [],//所有测算报告、组合优惠
       city: 0,
-      current_country: {}
+      current_country: {},
+      testFbUpload: '',//拼接参数
     };
   },
   props: {
@@ -392,7 +393,9 @@ export default {
     this.getPayMethod();
 
   },
-  mounted() { },
+  mounted() { 
+    this.testFbUpload = utils.getQueryString('testFbUpload')
+  },
 
   methods: {
     findSecondIndexOf(str, char) {
@@ -631,6 +634,9 @@ export default {
       pay_max_params.callback_url = `${location.origin}${location.pathname
         }#/result?path=${location.pathname}&report_price=${this.product.price
         }&discount_pay=${discount_pay}&combine_product_ids=${this.combine_product_ids.length ? 1 : 0}&currency_type=${this.product.currency_type || 'MYR'}&product_id=${this.product.product_id}`;
+      if(this.testFbUpload) {
+        pay_max_params.callback_url = `${pay_max_params.callback_url}&testFbUpload=1`
+      }  
       let res = null;
       if (this.product_key === 'consult_time') {
         delete pay_max_params.extra_ce_suan
