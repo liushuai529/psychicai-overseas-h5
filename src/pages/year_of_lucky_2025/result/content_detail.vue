@@ -10,7 +10,8 @@
       <div v-html="result.whole2024"></div>
     </div>
     <div v-else-if="item_index === 2" class="content-2">
-      <div class="item-box">
+      <div style="display: flex;">
+        <div class="item-box">
         <div class="tip">{{ $t('kaiyun-label') }}</div>
         <img :src="getDirection(result.guide2024direction)" class="baoshi" alt="" />
         <div class="desc">{{ result.guide2024direction }}</div>
@@ -29,6 +30,8 @@
           {{ result.guide2024decoration }}
         </div>
       </div>
+      </div>
+      <div class="content">{{ getText(result) }}</div>
     </div>
     <div v-else-if="item_index === 3" v-html="result" class="content"></div>
     
@@ -380,6 +383,13 @@ export default {
     
   },
   methods: {
+    getText(result) {
+      if(this.is_cn) {
+        return `25年你日常出行或旅行适合去【${result.guide2024direction}】，日常穿搭适合的颜色为【${result.guide2024color}】，也可以搭配【${result.guide2024decoration}】作为装饰，这些都有利于提升你25年的整体运势。`
+      } else {
+        return `25年你日常出行或旅行適合去【${result.guide2024direction}】，日常穿搭適合的顏色為【${result.guide2024color}】，也可以搭配【${result.guide2024decoration}】作為裝飾，這些都有利於提升你25年的整體運勢。`
+      }
+    },
     getImage() {
       let taisuititle = this.result.taisuititle;
         if(taisuititle.indexOf('猴')>-1) {
@@ -700,6 +710,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: 0.36rem;
+  flex-direction: column;
 
 
 
