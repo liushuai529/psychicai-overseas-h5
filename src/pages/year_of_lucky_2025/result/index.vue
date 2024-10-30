@@ -484,7 +484,10 @@ export default {
       Indicator.close();
       Toast(this.$t('fail-result'));
       setTimeout(() => {
-        location.href = 'year_of_lucky_2024.html';
+        // location.href = 'year_of_lucky_2024.html';
+        let querystring = localStorage.getItem('year_of_lucky_info');
+        let path = 'detail?querystring=' + querystring;
+        this.$router.push({ path });
       }, 1000);
     },
 
