@@ -119,9 +119,9 @@
       <img class="card last-card" :src="is_cn ? cn_card_5 : tw_card_5" />
       <img v-if="showFixedBtn" class="fix-btn fix-box huxi-btn" :src="pay_btn_img" @click="check_year" />
       <!-- 時间选择控件 -->
-      <DatetimePicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+      <DatetimePicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && !show_nongli"></DatetimePicker>
-      <NongliPicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+      <NongliPicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
 
       <!-- Popup -->
@@ -238,8 +238,8 @@ const year_data = {
   tw_history_order,
   svg: 'https://mixmedia.rili.cn/1425252e-6c76-4bec-9d74-1b09ec40d6bd.svga',
   privacyChecked: true, // 同意隐私协议
-  sex: '1',
-  year: '1995',
+  sex: '0',
+  year: '2000',
   month: '',
   date: '',
   birth_hour: '-1',
