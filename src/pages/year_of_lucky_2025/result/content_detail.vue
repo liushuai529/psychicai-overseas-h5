@@ -7,7 +7,7 @@
         <div class="score">{{ `${result.nianscore ? result.nianscore: '' }分` }}</div>
         <div class="year">{{ `${result.gold2024}之年` }}</div>
       </div>
-      <div v-html="result.career2024"></div>
+      <div v-html="result.whole2024"></div>
     </div>
     <div v-else-if="item_index === 2" class="content-2">
       <div class="item-box">
