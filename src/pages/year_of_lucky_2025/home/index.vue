@@ -74,8 +74,8 @@
             <img v-else class="info-check" src="../../../assets/img/emotion_fate/login_icon_choose_no.webp"
               @click="privacyChecked = !privacyChecked" />
             {{ $t('check-label') }}
-            <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
-            <span @click="link('privacy.html')">{{
+            <span @click="toPrivacy('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
+            <span @click="toPrivacy('privacy.html')">{{
               $t('privacy-policy')
             }}</span>
           </div>
