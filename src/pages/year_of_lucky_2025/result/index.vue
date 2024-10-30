@@ -34,9 +34,24 @@
     <div class="info-box">
       <div class="card">
         <img :src="is_cn ? home_img_tittle_xinxi_cn_1x : home_img_tittle_xinxi_tw_1x" />
-        <UserInfo :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
-          :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
-          :nayin="nayin" :is_result="false" :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" />
+        <UserInfo
+          :username="username"
+          :sex="sex"
+          :gongli_nongli="gongli_nongli"
+          :picker_date_yangli="picker_date_yangli"
+          :picker_date_nongli="picker_date_nongli"
+          :gan="gan"
+          :zhi="zhi"
+          :nayin="nayin"
+          :cai_bo_num="cai_bo_num"
+          :gui_ren_num="gui_ren_num"
+          :hun_yin_num="hun_yin_num"
+          :ming_ge="ming_ge"
+          :riyuanqiangruo="riyuanqiangruo"
+          :shi_ye_num="shi_ye_num"
+          :wuxingqiang="wuxingqiang"
+          :is_result="true"
+          />
       </div>
     </div>
 
@@ -45,23 +60,59 @@
       :result="fortune.review2023"
       :item_index="1"
     /> -->
-    <contentDetail v-if="fortune.whole2024" :result="fortune.whole2024" :item_index="1" />
-    <contentDetail v-if="advice" :result="advice" :baoshi_icon="baoshi_icon" :item_index="2" />
-    <contentDetail v-if="fortune.career2024" :result="fortune.career2024" :item_index="3" />
-    <contentDetail v-if="fortune.career2024" :result="fortune.career2024" :item_index="4" />
+    <contentDetail
+      :result="fortune"
+      :item_index="1"
+    />
+    <contentDetail
+      v-if="advice"
+      :result="advice"
+      :baoshi_icon="baoshi_icon"
+      :item_index="2"
+    />
+    <contentDetail
+      v-if="fortune.xinggedesc"
+      :result="fortune.xinggedesc"
+      :item_index="3"
+    />
+    <contentDetail v-if="fortune.taisuititle" :result="fortune" :item_index="4" />
     <!--年度事业分析-->
-    <contentDetail v-if="fortune.career2024" :result="fortune.career2024" :item_index="5" />
+    <contentDetail
+      v-if="fortune.career2024"
+      :result="fortune.career2024"
+      :item_index="5"
+    />
     <!--年度财运分析-->
-    <contentDetail v-if="fortune.wealth2024" :result="fortune.wealth2024" :item_index="6" />
+    <contentDetail
+      v-if="fortune.wealth2024"
+      :result="fortune.wealth2024"
+      :item_index="6"
+    />
     <!--年度感情分析-->
-    <contentDetail v-if="fortune.emotion2024" :result="fortune.emotion2024" :item_index="7" />
+    <contentDetail
+      v-if="fortune.emotion2024"
+      :result="fortune.emotion2024"
+      :item_index="7"
+    />
     <!--年度健康提示-->
-    <contentDetail v-if="fortune.health2024" :result="fortune.health2024" :item_index="8" />
+    <contentDetail
+      v-if="fortune.health2024"
+      :result="fortune.health2024"
+      :item_index="8"
+    />
     <!--特别提示-->
-    <contentDetail v-if="fortune.health2024" :result="fortune.health2024" :item_index="9" />
+    <contentDetail
+      v-if="fortune.gold2024content"
+      :result="fortune.gold2024content"
+      :item_index="9"
+    />
     <!--每月运势-->
-    <contentDetail v-if="fortune.scores2024" :result="fortune" :content_arr="fortune.scores2024content"
-      :item_index="10" />
+    <contentDetail
+      v-if="fortune.scores2024"
+      :result="fortune"
+      :content_arr="fortune.scores2024content"
+      :item_index="10"
+    />
 
     <CodePop v-if="code_modal" @close="code_modal = false" />
   </div>

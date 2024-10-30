@@ -4,10 +4,10 @@
     <img class="title-box" :src="titleImg" alt="" />
     <div v-if="item_index === 1" class="content">
       <div class="item-tag">
-        <div class="score">99分</div>
-        <div class="year">好运之年</div>
+        <div class="score">{{ `${result.nianscore ? result.nianscore: '' }分` }}</div>
+        <div class="year">{{ `${result.gold2024}之年` }}</div>
       </div>
-      <div v-html="result"></div>
+      <div v-html="result.career2024"></div>
     </div>
     <div v-else-if="item_index === 2" class="content-2">
       <div class="item-box">
@@ -40,16 +40,16 @@
       </div>
       <div>{{ result.whole2024 }}</div> -->
       <div class="taisui-container">
-        <div class="tag">
-          <img :src="tw_title1"/>
-        </div>
-        <div class="text">生肖虎-害太岁</div>
+        <!-- <div class="tag"> -->
+          <img :src="getImage()"/>
+        <!-- </div> -->
+        <div class="text">{{ result.taisuititle }}</div>
       </div> 
-      <div v-html="result"></div>
+      <div v-html="result.taisuidesc"></div>
     </div>
     <div v-else-if="item_index === 10" class="content">
       <div id="echarts" class="echarts"></div>
-      <div v-if="1===1" class="red-black-container">
+      <div v-if="result.scores2024content.length >1" class="red-black-container">
         <img :src="is_cn ? honghei_cn_1x: honghei_tw_1x"/>
         <div class="card-container">
           <div class="item-container">
@@ -74,7 +74,7 @@
           </div>
         </div>
       </div>
-      <div v-else v-html="result.health2024" class="content"></div>
+      <div v-else v-html="result.scores2024content[0].content" class="content"></div>
     </div> 
     <div v-else class="content">
       {{ result }}
@@ -110,6 +110,10 @@ import honghei_tw_1x from './../../../assets/img/year_of_lucky_2025/tw/result_im
 import result_icon_gou_cn from './../../../assets/img/year_of_lucky_2025/result_icon_gou_cn.webp';
 import result_icon_tan_cn_1x from './../../../assets/img/year_of_lucky_2025/result_icon_tan_cn_1x.webp';
 
+import hou from './../../../assets/img/year_of_lucky_2025/result_img_shengxiao_hou_1x.webp';
+import hu from './../../../assets/img/year_of_lucky_2025/result_img_shengxiao_hu_1x.webp';
+import she from './../../../assets/img/year_of_lucky_2025/result_img_shengxiao_she_1x.webp';
+import zhu from './../../../assets/img/year_of_lucky_2025/result_img_shengxiao_zhu_1x.webp';
 
 // import * as echarts from 'echarts';
 import { color_enums, icon_enums } from '../../../libs/enum';
@@ -194,6 +198,10 @@ export default {
   },
   data() {
     return {
+      hou,
+      hu,
+      she,
+      zhu,
       result_icon_gou_cn,
       result_icon_tan_cn_1x,
       honghei_cn_1x,
@@ -372,6 +380,18 @@ export default {
     
   },
   methods: {
+    getImage() {
+      let taisuititle = this.result.taisuititle;
+        if(taisuititle.indexOf('猴')>-1) {
+          return this.hou;
+        } else if (taisuititle.indexOf('虎')>-1) {
+          return this.hu;
+        } else if (taisuititle.indexOf('蛇')>-1) {
+          return this.she;
+        } else if (taisuititle.indexOf('猪')>-1 || taisuititle.indexOf('豬')>-1) {
+          return this.zhu;
+        }
+    },
     /**
      * @description: 折线图配置及初始化
      * @return {*}
@@ -585,6 +605,10 @@ export default {
       justify-content: center;
       align-items: center;
       margin: auto;
+      img {
+        width: 2.28rem;
+        height: 2.28rem;
+      }
       .tag {
         width: 2.28rem;
         height: 2.28rem;
