@@ -85,7 +85,7 @@ export default {
 
   img {
     width: 7.5rem;
-    height: 2rem;
+    // height: 2rem;
   }
 }
 </style>

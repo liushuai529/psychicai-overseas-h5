@@ -18,9 +18,6 @@
       </div> -->
       
       <div :class="['info',]">
-        <div class="top-bg">
-          <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_shang.webp" />
-        </div>
         <div :class="['info-content']">
           <div class="title">
             <img :src="is_cn ? cn_img_tittle_home_xinxi : tw_img_tittle_home_xinxi" />
@@ -67,10 +64,10 @@
             <img :src="is_cn? btn_chakan_cn_1x: btn_chakan_tw_1x" />
           </div>
 
-          
 
-        </div>
-        <div class="top-bg">
+
+
+          <!-- <div class="top-bg"> -->
           <div class="info-bottom">
             <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_fate/login_icon_choose.webp"
               @click="privacyChecked = !privacyChecked" />
@@ -82,8 +79,14 @@
               $t('privacy-policy')
             }}</span>
           </div>
-          <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_xia.webp" />
+          <!-- <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_xia.webp" /> -->
+        <!-- </div> -->
+
+
+          
+
         </div>
+       
 
       </div>
 
@@ -1133,43 +1136,42 @@ export default {
     z-index: 2;
     margin-top: 9.8rem;
 
-    .top-bg {
-      width: 7.1rem;
-      height: 1rem;
-      display: flex;
-      .info-bottom {
-        position: absolute;
-        left: 2.06rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #95979F;
-        font-size: 0.22rem;
-        line-height: 0.3rem;
-        margin-top: 0.3rem;
+    // .top-bg {
+    //   width: 7.1rem;
+    //   height: 1rem;
+    //   display: flex;
+    //   .info-bottom {
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     color: #95979F;
+    //     font-size: 0.22rem;
+    //     line-height: 0.3rem;
+    //     margin-top: 0.3rem;
 
-        img {
-          width: 0.3rem;
-          height: 0.3rem;
-          margin-right: 0.12rem;
-        }
+    //     img {
+    //       width: 0.3rem;
+    //       height: 0.3rem;
+    //       margin-right: 0.12rem;
+    //     }
 
-        span {
-          color: #CA8617;
-        }
-      }
+    //     span {
+    //       color: #CA8617;
+    //     }
+    //   }
 
-    }
+    // }
 
     .info-content {
-      background: url('../../../assets/img/year_of_lucky_2025/xinxi_img_bj_zhong.webp') no-repeat;
-      background-size: cover;
+      background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp') no-repeat;
+      background-size: 100% 100%;
       width: 7.1rem;
-      height: 3.28rem;
+      height: 5.28rem;
       // height: 4.54rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-bottom: 0.2rem;
       // padding: 0 0.4rem;
 
       .title {
@@ -1180,7 +1182,6 @@ export default {
         img {
           width: 7.1rem;
           height: 1rem;
-          margin-top: -1rem;
         }
       }
 
@@ -1292,6 +1293,27 @@ export default {
         img {
           width: 5.7rem;
           height: 0.96rem;
+        }
+      }
+
+
+      .info-bottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #95979F;
+        font-size: 0.22rem;
+        line-height: 0.3rem;
+        margin-top: 0.3rem;
+
+        img {
+          width: 0.3rem;
+          height: 0.3rem;
+          margin-right: 0.12rem;
+        }
+
+        span {
+          color: #CA8617;
         }
       }
 
