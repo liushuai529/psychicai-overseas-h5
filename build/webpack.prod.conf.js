@@ -1050,12 +1050,12 @@ for (var pathname of ['emotion_marriages/emotion_marriages', 'user_agreement/use
       minifyCSS: true,
     },
   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 
 
