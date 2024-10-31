@@ -264,7 +264,7 @@ export const commonBaoshi = {
 };
 
 import nianyun from '../assets/img/mlxz/history_order/dingdan_img_nianyun.webp';
-import nianyun2025 from '../assets/img/mlxz/history_order/dingdan_img_nianyun.webp';
+import nianyun2025 from '../assets/img/mlxz/history_order/dingdan_img_nianyun2025.webp';
 import yuantiangang from '../assets/img/mlxz/history_order/dingdan_img_yuantiangang.webp';
 import guiguzi from '../assets/img/mlxz/history_order/dingdan_img_guiguzi.webp';
 import ganqingyun from '../assets/img/mlxz/history_order/dingdan_img_ganqing.webp';

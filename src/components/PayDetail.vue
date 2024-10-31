@@ -517,8 +517,8 @@ export default {
           fbc: utils.getcookieInfo('_fbc'),
           fbp: utils.getcookieInfo('_fbp'),
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+          test_fb_upload: this.test_fb_upload,
         },
-        test_fb_upload: this.test_fb_upload,
       };
 
       let discount_pay = this.$route.query.discount_pay || 0;
