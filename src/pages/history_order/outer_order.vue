@@ -11,7 +11,7 @@
       infinite-scroll-distance="10" :class="['container']">
       <div class="new-tab">
         <img @click="backPage" src="../../assets/img/common/dingdan_icon_back.webp" class="back" alt="" />
-        历史订单
+        {{ is_cn ? '历史订单' : '歷史訂單' }}
       </div>
       <div class="top-box">
         <!-- <img class="order-icon" :src="is_cn ? cn_title : tw_title" alt="" /> -->
@@ -332,6 +332,10 @@ const event_enums = {
     c_id: '-10003',
     c_name: 'click_history_2024report_repay',
   },
+  h5_annual2025: {
+    c_id: '-10003',
+    c_name: 'click_history_2024report_repay',
+  },
   h5_emotion2024: {
     c_id: '-10004',
     c_name: 'click_history_2024lovely_repay',
@@ -449,10 +453,11 @@ export default {
      * @return {*}
      */
     async getData() {
+      let product_key = utils.getQueryString('product_key');
       Indicator.open('加载中...');
       this.show_kf = false;
       this.query.status = query_enums[this.active_tab] || '';
-      const { status, data } = await getHistoryOrderAPI(this.query);
+      const { status, data } = await getHistoryOrderAPI(product_key, this.query);
       localStorage.removeItem('mlxz_reload_page_history');
 
       Indicator.close();

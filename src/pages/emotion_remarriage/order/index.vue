@@ -4,7 +4,7 @@
       infinite-scroll-distance="10" :class="['container']">
       <div class="new-tab">
         <img @click="backPage" src="../../../assets/img/emotion_fate/icon_order_history_back.webp" class="back" alt="" />
-        {{ is_cn ? '历史订单' : '历史订单' }}
+        {{ is_cn ? '历史订单' : '歷史訂單' }}
       </div>
       <div class="top-box">
         {{ top_tip }}

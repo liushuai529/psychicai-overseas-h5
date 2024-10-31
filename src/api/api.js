@@ -72,15 +72,15 @@ export const getFateResultAPI = async data => {
 
 
 // 商品查询
-export const getProductionsAPI = async (productGroup, isTarot) => {
-  return request(`/web/auth/trade/products/${productGroup}`, 'GET');
+export const getProductionsAPI = async (productGroup, data= {}) => {
+  return request(`/web/auth/trade/products/${productGroup}`, 'GET', data);
 };
 
 
 // 查询历史订单
-export const getHistoryOrderAPI = async data => {
+export const getHistoryOrderAPI = async (product_key, data) => {
   
-  return request(`/web/auth/trade/orders/ce_suan`, 'GET', data);
+  return request(`/web/auth/trade/orders/ce_suan/${product_key}`, 'GET', data);
 };
 
 // 查询正缘历史订单

@@ -119,6 +119,8 @@ const getFBChannel = () => {
     return 'ads111';
   } else if (url.indexOf('/enjoyA11/') > -1) {
     return 'enjoyA11';
+  } else if (url.indexOf('/ads12/') > -1) {
+    return 'ads12';
   } else {
     return 'enjoy05';
   }
@@ -185,6 +187,7 @@ const getFbId = () => {
     'ads11': '1089075609227088',
     'ads111': '1253997898931627',
     'enjoyA11': '1621066301776872',
+    'ads12': '1253997898931627',
   }
 }
 
@@ -193,7 +196,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if(getEndStr(getFBChannel(), 2) ==='03'|| getEndStr(getFBChannel(), 2) ==='05'|| getEndStr(getFBChannel(), 2) ==='09'|| getEndStr(getFBChannel(), 2) ==='10' || getEndStr(getFBChannel(), 2) ==='11' || getEndStr(getFBChannel(), 2) ==='08' || getEndStr(getFBChannel(), 2) ==='07') {
+  if(getEndStr(getFBChannel(), 2) ==='03'|| getEndStr(getFBChannel(), 2) ==='05'|| getEndStr(getFBChannel(), 2) ==='09'|| getEndStr(getFBChannel(), 2) ==='10' || getEndStr(getFBChannel(), 2) ==='11' || getEndStr(getFBChannel(), 2) ==='12' || getEndStr(getFBChannel(), 2) ==='08' || getEndStr(getFBChannel(), 2) ==='07') {
     if(localStorage.getItem('current_country')) {
       return {area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code']}
     } else {
@@ -1492,8 +1495,8 @@ const logCopyOther = () => {
  * @description: 跳转历史订单
  * @return {*}
  */
-const jumpToOrder = () => {
-  location.href = 'history_order.html';
+const jumpToOrder = (product_key) => {
+  location.href = `history_order.html?product_key=${product_key}`;
 };
 
 /**

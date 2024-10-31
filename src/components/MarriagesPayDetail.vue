@@ -87,7 +87,8 @@
         <img v-if="sub_type === 'zheng_yuan'" class="btn emo-btn"
           src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
         <!-- <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" /> -->
-        <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn" :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x"@click="payMoney" />
+        <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn"
+          :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x" @click="payMoney" />
         <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"
           @click="payMoney" />
 
@@ -178,6 +179,11 @@ const tipsArr6 = {
   'zh-CN': '请稍等...',
   'zh-TW': '請稍等...',
 };
+
+const buyPeople = {
+  h5_annual2025: 8687
+}
+
 export default {
   components: {
     CountDown,
@@ -232,7 +238,8 @@ export default {
 
       all_product: [],//所有测算报告、组合优惠
       city: 0,
-      current_country: {}
+      current_country: {},
+      test_fb_upload: '',//拼接参数
     };
   },
   props: {
@@ -324,7 +331,18 @@ export default {
       }
     },
     buy_people() {
-      return 3571;
+      const buyList = {
+        h5_marriage: '87',
+        h5_wealth2024: '142',
+        h5_career2024: '103',
+        h5_emotion2024: '98',
+        h5_annual2024: '193',
+        h5_annual2025: '8687',
+        h5_bai_gua: '146',
+        h5_weigh_bone: '138',
+        consult_time: '138',
+      };
+      return buyList[this.product_key] || 3571;
     },
     now_price() {
       return this.product
@@ -376,7 +394,9 @@ export default {
     this.getPayMethod();
 
   },
-  mounted() { },
+  mounted() {
+    this.test_fb_upload = utils.getQueryStr('test_fb_upload')
+  },
 
   methods: {
     findSecondIndexOf(str, char) {
@@ -442,7 +462,7 @@ export default {
       if (this.product_key === 'consult_time') {
         productGroup = 'consult_time'
       }
-      const { status, data } = await getProductionsAPI(productGroup);
+      const { status, data } = await getProductionsAPI(productGroup, { product_key: this.product_key });
       if (status === 1000) {
         this.product = data.find(item => item.product_key === this.product_key);
         //获取所有报告以及套餐
@@ -585,6 +605,7 @@ export default {
           fbc: utils.getcookieInfo('_fbc'),
           fbp: utils.getcookieInfo('_fbp'),
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
+          test_fb_upload: this.test_fb_upload,
         },
         product_sub_type: this.sub_type,
       };
@@ -601,7 +622,7 @@ export default {
         const secondIndex = this.findSecondIndexOf(_ga, '.');
         pay_max_params = Object.assign({}, pay_max_params, {
           ga_param: {
-            client_id: _ga.substr(secondIndex+1)
+            client_id: _ga.substr(secondIndex + 1)
           },
         });
       }
@@ -663,7 +684,7 @@ export default {
 }
 
 .pay-list {
-  
+
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -974,8 +995,8 @@ export default {
   width: 5.7rem;
   height: 0.98rem;
   margin: auto;
-  // margin-bottom: 0.2rem;
-  margin-top: -0.2rem;
+  margin-bottom: 0.4rem;
+  // margin-top: -0.2rem;
 }
 
 @keyframes emoBtn {

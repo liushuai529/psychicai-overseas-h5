@@ -1,6 +1,6 @@
 
 export default {
-  'dom-title': '2024年流年运势',
+  'dom-title': '2025年流年运势',
   'name-label': '姓名',
   'birth-label': '生日',
   'sex-label': '性别',

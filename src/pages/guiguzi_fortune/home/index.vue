@@ -537,7 +537,7 @@ export default {
     },
     // 跳转历史订单
     toOrder() {
-      utils.jumpToOrder();
+      utils.jumpToOrder(this.product_key);
     },
     // 打开时间选择器
     openPicker() {

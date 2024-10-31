@@ -301,6 +301,13 @@ export default {
     no-repeat;
   background-size: 100% 100%;
 }
+.year-box-2025 {
+  width: 7.1rem;
+  min-height: 6.74rem;
+  background: url('../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp')
+    no-repeat;
+  background-size: 100% 100%;
+}
 .year-code {
   background: url('../assets/img/mlxz/moreResult/year_bg.webp') no-repeat;
   background-size: 100% 100%;

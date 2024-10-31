@@ -16,11 +16,8 @@
       <!-- <div class="bar">
         <canvas class="canvas-tag" id="canvas2"></canvas>
       </div> -->
-      
+
       <div :class="['info',]">
-        <div class="top-bg">
-          <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_shang.webp" />
-        </div>
         <div :class="['info-content']">
           <div class="title">
             <img :src="is_cn ? cn_img_tittle_home_xinxi : tw_img_tittle_home_xinxi" />
@@ -55,7 +52,7 @@
 
               </div>
               <div class="birth-container">
-                <img src="../../../assets/img/emotion_fate/icon_rili.webp" @click="openPicker" />
+                <img src="../../../assets/img/year_of_lucky_2025/icon_rili_1x.webp" @click="openPicker" />
               </div>
             </div>
             <div class="divider-line"></div>
@@ -63,27 +60,33 @@
 
 
 
-          <div id="info-btn" class="btn emo-btn" @click="check_year">
-            <img :src="is_cn? btn_chakan_cn_1x: btn_chakan_tw_1x" />
+          <div id="info-btn" class="btn huxi-btn" @click="check_year">
+            <img :src="is_cn ? btn_chakan_cn_1x : btn_chakan_tw_1x" />
           </div>
 
-          
 
-        </div>
-        <div class="top-bg">
+
+
+          <!-- <div class="top-bg"> -->
           <div class="info-bottom">
-            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_fate/login_icon_choose.webp"
+            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/year_of_lucky_2025/login_icon_choose.webp"
               @click="privacyChecked = !privacyChecked" />
-            <img v-else class="info-check" src="../../../assets/img/emotion_fate/login_icon_choose_no.webp"
+            <img v-else class="info-check" src="../../../assets/img/year_of_lucky_2025/login_icon_choose_no.webp"
               @click="privacyChecked = !privacyChecked" />
             {{ $t('check-label') }}
-            <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
-            <span @click="link('privacy.html')">{{
+            <span @click="toPrivacy('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
+            <span @click="toPrivacy('privacy.html')">{{
               $t('privacy-policy')
             }}</span>
           </div>
-          <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_xia.webp" />
+          <!-- <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_xia.webp" /> -->
+          <!-- </div> -->
+
+
+
+
         </div>
+
 
       </div>
 
@@ -110,45 +113,22 @@
       <div :style="`background-image:url(${is_cn ? cn_card_1 : tw_card_1})`" class="card-1">
         <canvas class="canvas-card" id="canvas3"></canvas>
       </div>
-      <img class="card" :src="is_cn ? cn_card_3 : tw_card_3" />
       <img class="card" :src="is_cn ? cn_card_2 : tw_card_2" />
+      <img class="card" :src="is_cn ? cn_card_3 : tw_card_3" />
       <img class="card" :src="is_cn ? cn_card_4 : tw_card_4" />
-      <img class="card last-card" :src="is_cn ? cn_card_5 : tw_card_5" />
+      <img class="card" :src="is_cn ? cn_card_5 : tw_card_5" />
+      <img class="card last-card" :src="is_cn ? cn_card_6 : tw_card_6" />
       <img v-if="showFixedBtn" class="fix-btn fix-box huxi-btn" :src="pay_btn_img" @click="check_year" />
       <!-- 時间选择控件 -->
-      <DatetimePicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+      <DatetimePicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && !show_nongli"></DatetimePicker>
-      <NongliPicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+      <NongliPicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
 
-      <!-- Popup -->
-      <!-- <PayPopup
-      ref="PayPopup"
-      :visible="visible"
-      :product_key="product_key"
-      :query_user_string="query_user_string"
-      @update-visible="visible = false"
-    ></PayPopup>
-    <combinePayPop
-      :visible="pay_modal"
-      :all_list="productList"
-      :product_key="product_key"
-      :product_price="product_price"
-      :query_user_string="query_user_string"
-      @update-visible="pay_modal = false"
-      @getOrderId="getOrderId"
-    ></combinePayPop> -->
-      <HomeFooter v-if="showFixedBtn" product_key="h5_annual2024" />
-      <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"
-        e_id="10003" c_id="-10014" c_name="click_2024report_discount1" />
 
-      <!-- <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
-        :new_order_key="new_order_key" name="local" top="4.7rem" :time="local_time" @payOrder="checkOrder_year"
-        @jumpDetail="jumpOrder_year" />
-      <FixedOrder v-if="show_api_order && !is_show_notice" :title="last_title" :is_show_move="is_show_notice"
-        :last_order="last_order" name="api" top="6.7rem" :time="api_time" @payOrder="checkOrder_year"
-        @jumpDetail="jumpOrder_year" /> -->
-      <NewFooter v-if="showFixedBtn" product_key="h5_annual2024" />
+      <HomeFooter v-if="showFixedBtn" product_key="h5_annual2025" />
+
+      <NewFooter v-if="showFixedBtn" product_key="h5_annual2025" />
     </div>
   </div>
 </template>
@@ -175,13 +155,13 @@ import HeaderNotice from '../../../components/headerNotice.vue';
 
 
 import cn_img_tittle_home_xinxi from '../../../assets/img/year_of_lucky_2025/cn/home_img_tittle_xinxi_cn.webp';
-import tw_img_tittle_home_xinxi from '../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_xinxi_tw.webp';
+import tw_img_tittle_home_xinxi from '../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_xinxi_tw_1x.webp';
 
 import btn_chakan_cn_1x from '../../../assets/img/year_of_lucky_2025/cn/btn_chakan_cn_1x.webp';
 import btn_chakan_tw_1x from '../../../assets/img/year_of_lucky_2025/tw/btn_chakan_tw_1x.webp';
 
-import boy from '../../../assets/img/emotion_fate/img_boy.webp';
-import girl from '../../../assets/img/emotion_fate/img_girl.webp';
+import boy from '../../../assets/img/year_of_lucky_2025/img_boy.webp';
+import girl from '../../../assets/img/year_of_lucky_2025/img_girl.webp';
 
 
 import cn_tag from '../../../assets/img/mlxz/year_of_lucky_2024/img_4tag.webp';
@@ -195,17 +175,19 @@ import tw_order from '../../../assets/img/year_of_lucky_2025/tw/btn_chakan_tw_1x
 import cn_card_1 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_1_cn_1x.webp';
 import tw_card_1 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_1_tw_1x.webp';
 
-import cn_card_2 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai2.webp';
-import tw_card_2 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai2.webp';
+import cn_card_2 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_2_cn_1x.webp';
+import tw_card_2 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_2_tw_1x.webp';
 
-import cn_card_3 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_cn.webp';
-import tw_card_3 from '../../../assets/img/mlxz/year_of_lucky_2024/card_2_tw.webp';
+import cn_card_3 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_3_cn_1x.webp';
+import tw_card_3 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_3_tw_1x.webp';
 
-import cn_card_4 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_cn.webp';
-import tw_card_4 from '../../../assets/img/mlxz/year_of_lucky_2024/card_4_tw.webp';
+import cn_card_4 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_4_cn_1x.webp';
+import tw_card_4 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_4_tw_1x.webp';
 
-import cn_card_5 from '../../../assets/img/mlxz/year_of_lucky_2024/home_img_mokuai5.webp';
-import tw_card_5 from '../../../assets/img/tw_mlxz/year_24/home_img_mokuai5.webp';
+import cn_card_5 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_5_cn_1x.webp';
+import tw_card_5 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_5_tw_1x.webp';
+import cn_card_6 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_pingjia_cn_1x.webp';
+import tw_card_6 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_pingjia_tw_1x.webp';
 import {
   reportEnum,
   reportName,
@@ -216,9 +198,8 @@ import combinePayPop from '../../../components/combinePayPop.vue';
 import cn_new_user_btn from '../../../assets/img/mlxz/year_of_lucky_2024/nianyun_btn_jiexiao.webp';
 import tw_new_user_btn from '../../../assets/img/tw_mlxz/year_24/nianyun_btn_jiexiao_fanti.webp';
 
-import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/year_order.webp';
-import cn_history_order from '../../../assets/img/mlxz/downloadBtn/year.webp';
-import PopNotice from '../../../components/PopNotice.vue';
+import tw_history_order from '../../../assets/img/year_of_lucky_2025/tw/home_lsdd_tw_1x.webp';
+import cn_history_order from '../../../assets/img/year_of_lucky_2025/cn/home_lsdd_cn_1x.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
@@ -227,6 +208,8 @@ const tipsArr5 = {
   'zh-TW': '訂單創建中...',
 };
 const year_data = {
+  cn_card_6,
+  tw_card_6,
   btn_chakan_cn_1x,
   btn_chakan_tw_1x,
   boy,
@@ -237,8 +220,8 @@ const year_data = {
   tw_history_order,
   svg: 'https://mixmedia.rili.cn/1425252e-6c76-4bec-9d74-1b09ec40d6bd.svga',
   privacyChecked: true, // 同意隐私协议
-  sex: '1',
-  year: '1995',
+  sex: '0',
+  year: '2000',
   month: '',
   date: '',
   birth_hour: '-1',
@@ -252,7 +235,7 @@ const year_data = {
   // 底部弹出popup版本所需数据
   visible: false,
   product_id: 2,
-  product_key: 'h5_annual2024',
+  product_key: 'h5_annual2025',
   query_user_string: '',
   is_combine,
   has_pay: '',
@@ -287,15 +270,14 @@ const year_data = {
   tw_tag_svga:
     'https://psychicai-static.psychicai.pro/imgs/2406f7acfeff41b54aa491aed151218685a9.svga',
   cn_home_svga:
-    'https://psychicai-static.psychicai.pro/imgs/241051d7724daabd4986879ceed0962065f2.svga',  
+    'https://psychicai-static.psychicai.pro/imgs/241051d7724daabd4986879ceed0962065f2.svga',
   tw_home_svga:
-    'https://psychicai-static.psychicai.pro/imgs/2410f5e3149572634cba992455b98881ee10.svga',   
+    'https://psychicai-static.psychicai.pro/imgs/2410f5e3149572634cba992455b98881ee10.svga',
   cn_card_svga:
     'https://psychicai-static.psychicai.pro/imgs/2410153e466e2ee141c1aa2a09cd07760f4a.svga',
   tw_card_svga:
     'https://psychicai-static.psychicai.pro/imgs/2410122a94fd1a32435c8f6233b114d9fdfb.svga',
   // 挽留弹窗
-  is_show_notice: false, // 是否展示挽留弹窗
   count_down: 0, // 挽留弹窗倒计时
   fix_order_info: null, //最新一个订单信息
   new_order_key: '',
@@ -307,6 +289,10 @@ const year_data = {
   local_time: 0,
   last_title: '',
   timer: null,
+  duration_time: {
+    entry_time: 0,
+    exit_time: 0,
+  }
 };
 export default {
   components: {
@@ -317,7 +303,6 @@ export default {
     TopBar,
     combinePayPop,
     HomeFooter,
-    PopNotice,
     FixedOrder,
     NewFooter,
     NavigationBar,
@@ -338,7 +323,7 @@ export default {
     },
     is_new_user() {
       let obj = this.$store.state.common.productList.find(
-        it => it.product_key === 'h5_annual2024'
+        it => it.product_key === 'h5_annual2025'
       );
       if (obj) {
         return obj.tags ? obj.tags.includes('newcomer_discount') : false;
@@ -360,32 +345,7 @@ export default {
       return this.language === 'zh-CN';
     },
 
-    show_fixed_order() {
-      // return true;
-      if (this.last_order) {
-        if (
-          this.last_order.product_key === this.new_order_key &&
-          this.last_order.status !== 'PAYED'
-        ) {
-          return false;
-        }
-      }
 
-      let flag =
-        this.fix_order_info && this.new_order_key !== this.product_key
-          ? true
-          : false;
-
-      if (flag) {
-        const { main_id, click_id, view_id, click_name, view_name } =
-          maidianEnum[this.new_order_key];
-        utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
-          args_name: view_name,
-          channel: utils.getFBChannel(),
-        });
-      }
-      return flag;
-    },
 
     is_android() {
       return utils.isAndroid();
@@ -398,6 +358,7 @@ export default {
     this.created_year();
   },
   mounted() {
+    this.duration_time.entry_time = new Date().getTime()
     this.mounted_year();
   },
   beforeDestroy() {
@@ -419,20 +380,22 @@ export default {
         }
       }
     },
-    is_show_notice(val) {
-      if (val) {
-        utils.firebaseLogEvent(
-          '10003',
-          '-10013',
-          'view_2024report_discount1',
-          'view',
-          {
-            args_name: 'view_2024report_discount1',
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
-    },
+
+  },
+  destroyed() {
+    this.duration_time.exit_time = new Date().getTime();
+    if (this.duration_time.entry_time) {
+      utils.firebaseLogEvent(
+        '10015',
+        '-10002',
+        'view_year05_end_main',
+        'view',
+        {
+          channel: utils.getFBChannel(),
+          time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
+        }
+      );
+    }
   },
 
   methods: {
@@ -444,12 +407,12 @@ export default {
       const { has_pay } = this.$route.query;
       this.has_pay = has_pay ? has_pay : '';
       utils.firebaseLogEvent(
-        '10003',
+        '10015',
         '-10001',
-        'page_view_2024report_main',
+        'page_view_year2025_end_main',
         'page_view',
         {
-          args_name: 'page_view_2024report_main',
+          args_name: 'page_view_year2025_end_main',
           channel: utils.getFBChannel(),
         }
       );
@@ -457,7 +420,7 @@ export default {
     },
 
     mounted_year() {
-      this.showNoticePop();
+      // this.showNoticePop();
 
       // 赋默认值
       let storaged_userInfo = localStorage.getItem('year_of_lucky_info');
@@ -490,19 +453,19 @@ export default {
           birth_hour: arr[6],
         };
         this.picker_date_obj = pick_date;
-        this.$nextTick(() => {
-          if (this.sex === '1') {
-            this.$refs.sex_male.click();
-            setTimeout(() => {
-              this.$refs.sex_female.click();
-            }, 500);
-          } else {
-            this.$refs.sex_female.click();
-            setTimeout(() => {
-              this.$refs.sex_male.click();
-            }, 500);
-          }
-        });
+        // this.$nextTick(() => {
+        //   if (this.sex === '1') {
+        //     this.$refs.sex_male.click();
+        //     setTimeout(() => {
+        //       this.$refs.sex_female.click();
+        //     }, 500);
+        //   } else {
+        //     this.$refs.sex_female.click();
+        //     setTimeout(() => {
+        //       this.$refs.sex_male.click();
+        //     }, 500);
+        //   }
+        // });
       }
       let self = this;
 
@@ -533,7 +496,7 @@ export default {
         '#canvas1',
         this.is_cn ? this.cn_home_svga : this.tw_home_svga
       );
-     
+
       this.loadBg_year('#canvas3', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
     },
 
@@ -550,7 +513,7 @@ export default {
      * @return {*}
      */
     toOrder() {
-      utils.jumpToOrder();
+      utils.jumpToOrder(this.product_key);
     },
 
     /**
@@ -559,7 +522,12 @@ export default {
      * @return {*}
      */
     changeSex(val) {
-      this.sex = val + '';
+      if (this.sex == 0) {
+        this.sex = 1;
+      } else {
+        this.sex = 0;
+      }
+      // this.sex = val + '';
     },
 
     // 端内加载背景SVGA动画
@@ -661,12 +629,11 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         utils.firebaseLogEvent(
-          '10003',
-          '-10002',
-          'click_2024report_main',
+          '10015',
+          '-10003',
+          'click_year2025_end_main',
           'click',
           {
-            args_name: 'click_2024report_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -682,12 +649,11 @@ export default {
       // }
       if (time_obj == null) {
         utils.firebaseLogEvent(
-          '10003',
-          '-10002',
-          'click_2024report_main',
+          '10015',
+          '-10003',
+          'click_year2025_end_main',
           'click',
           {
-            args_name: 'click_2024report_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -697,12 +663,11 @@ export default {
       }
       if (!this.privacyChecked) {
         utils.firebaseLogEvent(
-          '10003',
-          '-10002',
-          'click_2024report_main',
+          '10015',
+          '-10003',
+          'click_year2025_end_main',
           'click',
           {
-            args_name: 'click_2024report_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -731,12 +696,11 @@ export default {
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
-        '10003',
-        '-10002',
-        'click_2024report_main',
+        '10015',
+        '-10003',
+        'click_year2025_end_main',
         'click',
         {
-          args_name: 'click_2024report_main',
           channel: utils.getFBChannel(),
           click_type: 'screen_tracking',
         }
@@ -752,7 +716,7 @@ export default {
           item => item.product_key === this.product_key
         );
         const { price, currency_type } = same_;
-        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "generate_lead", {
+        utils.getFBChannel().indexOf('google') > -1 && gtag && gtag("event", "generate_lead", {
           currency: currency_type,
           value: price,
         });
@@ -872,36 +836,6 @@ export default {
       return params;
     },
 
-    // 展示挽留弹窗  通过定时器
-    showNoticePop() {
-      this.timer = setInterval(() => {
-        // 最新一个订单信息
-        this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
-        this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
-        let is_show_notice = localStorage.getItem(
-          `mlxz_show_notice_${this.product_key}`
-        );
-        this.is_show_notice = is_show_notice
-          ? +is_show_notice === 1
-            ? true
-            : false
-          : false;
-        let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
-        let set_time_ = (5 * 60 + 48) * 1000 + 280;
-        this.count_down = +time_ || 0;
-
-        // this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
-
-        this.local_time =
-          +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
-      }, 1000);
-    },
-    // 关闭当前报告的挽留弹窗
-    closeNotice() {
-      localStorage.setItem(`mlxz_show_notice_${this.product_key}`, 2);
-      localStorage.removeItem(`mlxz_count_down_${this.product_key}`);
-      this.is_show_notice = false;
-    },
 
     // 获取最新一个订单信息
     async getLastOrder() {
@@ -936,93 +870,16 @@ export default {
       }
     },
     logDiscountEvent() {
-      const { ext, pay_method, product_key, product_id, payment } =
-        this.last_order;
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[product_key];
-      utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
-        args_name: view_name,
-        channel: utils.getFBChannel(),
-      });
+      // const { ext, pay_method, product_key, product_id, payment } =
+      //   this.last_order;
+      // const { main_id, click_id, view_id, click_name, view_name } =
+      //   maidianEnum[product_key];
+      // utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
+      //   args_name: view_name,
+      //   channel: utils.getFBChannel(),
+      // });
     },
-    // api订单下单
-    async checkOrder_year() {
-      const {
-        ext,
-        pay_method,
-        product_key,
-        product_id,
-        payment,
-        trade_pay_type,
-        trade_target_org,
-        currency_type,
-      } = this.last_order;
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[product_key];
-      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
-        args_name: click_name,
-        channel: utils.getFBChannel(),
-      });
-      Indicator.open(tipsArr5[utils.getLanguage()]);
 
-      if (this.last_order.status === 'PAYED') return;
-      let params = {
-        pay_method: pay_method,
-        product_key: product_key,
-        product_id: product_id,
-        platform: 'WEB',
-        extra_ce_suan: ext,
-        trade_pay_type,
-        trade_target_org,
-        fb_param: {
-          fbc: utils.getcookieInfo('_fbc'),
-          fbp: utils.getcookieInfo('_fbp'),
-          external_id: localStorage.getItem('mlxz_outer_visitor_id'),
-        },
-        callback_url: `${location.origin}/${utils.getFBChannel()}/${path_enums[product_key]
-          }.html#/result?path=${path_enums[product_key]
-          }&report_price=${payment}&discount_pay=1&currency_type=${trade_currency || 'MYR'}`,
-      };
-
-      const res = await payOrderAPI(params);
-      localStorage.removeItem('mlxz_fixed_api_order_time');
-      localStorage.removeItem('mlxz_fixed_api_order_id');
-      Indicator.close();
-      if (res.status !== 1000) return;
-      this.show_api_order = false;
-
-      await utils.asleep(1000);
-      location.href = res.data.pay_url;
-    },
-    jumpOrder_year() {
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[this.new_order_key];
-      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
-        args_name: click_name,
-        channel: utils.getFBChannel(),
-      });
-      if (this.new_order_key === 'h5_marriage') {
-        let marry_info = JSON.parse(
-          localStorage.getItem('mlxz_user_info_h5_marriage')
-        );
-        let male_str = marry_info.male_str;
-        let female_str = marry_info.female_str;
-        let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
-&pay_modal=1&use_fixed_time=1&discount_pay=1`;
-        location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
-          }.html#/${path}`;
-
-        return;
-      }
-      let path =
-        'detail?querystring=' +
-        this.fix_order_info +
-        '&pay_modal=1' +
-        '&use_fixed_time=1&discount_pay=1';
-
-      location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
-        }.html#/${path}`;
-    },
   },
 };
 </script>
@@ -1045,8 +902,8 @@ export default {
 }
 
 .fix-btn {
-  width: 5.19rem;
-  height: 1.03rem;
+  width: 5.7rem;
+  height: 0.96rem;
   bottom: 0.2rem;
   z-index: 99;
   // animation: scaleBtn 1s infinite ease-in-out alternate;
@@ -1128,43 +985,42 @@ export default {
     z-index: 2;
     margin-top: 9.8rem;
 
-    .top-bg {
-      width: 7.1rem;
-      height: 1rem;
-      display: flex;
-      .info-bottom {
-        position: absolute;
-        left: 2.06rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #95979F;
-        font-size: 0.22rem;
-        line-height: 0.3rem;
-        margin-top: 0.3rem;
+    // .top-bg {
+    //   width: 7.1rem;
+    //   height: 1rem;
+    //   display: flex;
+    //   .info-bottom {
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     color: #95979F;
+    //     font-size: 0.22rem;
+    //     line-height: 0.3rem;
+    //     margin-top: 0.3rem;
 
-        img {
-          width: 0.3rem;
-          height: 0.3rem;
-          margin-right: 0.12rem;
-        }
+    //     img {
+    //       width: 0.3rem;
+    //       height: 0.3rem;
+    //       margin-right: 0.12rem;
+    //     }
 
-        span {
-          color: #CA8617;
-        }
-      }
+    //     span {
+    //       color: #CA8617;
+    //     }
+    //   }
 
-    }
+    // }
 
     .info-content {
-      background: url('../../../assets/img/year_of_lucky_2025/xinxi_img_bj_zhong.webp') no-repeat;
-      background-size: cover;
+      background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp') no-repeat;
+      background-size: 100% 100%;
       width: 7.1rem;
-      height: 3.28rem;
+      height: 5.28rem;
       // height: 4.54rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-bottom: 0.2rem;
       // padding: 0 0.4rem;
 
       .title {
@@ -1175,7 +1031,7 @@ export default {
         img {
           width: 7.1rem;
           height: 1rem;
-          margin-top: -1rem;
+          margin-top: -0.05rem;
         }
       }
 
@@ -1290,7 +1146,28 @@ export default {
         }
       }
 
-      
+
+      .info-bottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #95979F;
+        font-size: 0.22rem;
+        line-height: 0.3rem;
+        margin-top: 0.3rem;
+
+        img {
+          width: 0.3rem;
+          height: 0.3rem;
+          margin-right: 0.12rem;
+        }
+
+        span {
+          color: #CA8617;
+        }
+      }
+
+
     }
 
     .info-height {
@@ -1354,8 +1231,8 @@ export default {
   position: fixed;
   right: -0.02rem;
   top: 2.33rem;
-  width: 0.56rem;
-  height: 1.54rem;
+  width: 0.44rem;
+  height: 1.5rem;
   z-index: 100;
 }
 

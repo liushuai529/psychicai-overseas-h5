@@ -1,9 +1,17 @@
 <template>
-  <div :class="`content-item ${[1, 4, 9].includes(item_index) ? 'item-1-bg' : 'item-normal-bg'
+  <div :class="`content-item ${[1, 2, 4, 10].includes(item_index) ? 'item-1-bg' : 'item-normal-bg'
     }`">
-    <img class="title-box" :src="item_index === 4 ? getGoldYear(result.gold2024) : titleImg" alt="" />
-    <div v-if="item_index === 2" class="content-2">
-      <div class="item-box">
+    <img class="title-box" :src="titleImg" alt="" />
+    <div v-if="item_index === 1" class="content">
+      <div class="item-tag">
+        <div class="score">{{ `${result.nianscore ? result.nianscore: '' }分` }}</div>
+        <div class="year">{{ `${result.gold2024}之年` }}</div>
+      </div>
+      <div v-html="result.whole2024"></div>
+    </div>
+    <div v-else-if="item_index === 2" class="content-2">
+      <div style="display: flex;">
+        <div class="item-box">
         <div class="tip">{{ $t('kaiyun-label') }}</div>
         <img :src="getDirection(result.guide2024direction)" class="baoshi" alt="" />
         <div class="desc">{{ result.guide2024direction }}</div>
@@ -22,35 +30,58 @@
           {{ result.guide2024decoration }}
         </div>
       </div>
-    </div>
-    <div v-else-if="item_index === 3" v-html="result" class="content"></div>
-    <div v-else-if="item_index === 1" class="content">
-      <div class="item-tag">
-        <div class="score">99分</div>
-        <div class="year">好运之年</div>
       </div>
-      <div v-html="result"></div>
+      <div class="content">{{ getText(result) }}</div>
     </div>
+    <div v-else-if="item_index === 3" class="content">
+      <div v-html="result.xinggedesc" ></div>
+      <div v-html="result.gejuall" ></div>
+    </div>
+    
     <div v-else-if="item_index === 4" class="content-4 content">
-      <!-- <template v-if="result.gold2024content.length">
-        <span v-for="(it, k) in result.gold2024content" :key="'gold' + k">
-          {{ it }}
-        </span>
-      </template> -->
-      <div class="year-title">今年是你的{{ result.gold2024 }}之年</div>
+     
+      <!-- <div class="year-title">今年是你的{{ result.gold2024 }}之年</div>
       <div>
         {{ result.gold2024content }}
       </div>
-      <div>{{ result.whole2024 }}</div>
+      <div>{{ result.whole2024 }}</div> -->
+      <div class="taisui-container">
+        <!-- <div class="tag"> -->
+          <img :src="getImage()"/>
+        <!-- </div> -->
+        <div class="text">{{ result.taisuititle }}</div>
+      </div> 
+      <div v-html="result.taisuidesc"></div>
     </div>
-    <div v-else-if="item_index === 9" class="content-tu">
+    <div v-else-if="item_index === 10" class="content">
       <div id="echarts" class="echarts"></div>
-      <template v-if="content_arr.length">
-        <div v-for="(it, k) in content_arr" :key="'score' + k" class="content-score">
-          {{ it }}
+      <div v-if="result.scores2024content.length >1" class="red-black-container">
+        <img :src="is_cn ? honghei_cn_1x: honghei_tw_1x"/>
+        <div class="card-container">
+          <div class="item-container">
+            <div class="head">
+              <img :src="result_icon_gou_cn"/>
+              <div>{{ is_cn? '好运连连': '好運連連' }}</div>
+            </div>
+            <div class="content">
+              <div class="month">{{`${result.scores2024content[0].month}月`}}</div>
+              <div class="text">{{`${result.scores2024content[0].content}`}}</div>
+            </div>
+          </div>
+          <div class="item-container" style="background: #F7E4D4;">
+            <div class="head head1">
+              <img :src="result_icon_tan_cn_1x"/>
+              <div>{{ is_cn? '警惕注意': '警惕註意' }}</div>
+            </div>
+            <div class="content">
+              <div class="month">{{`${result.scores2024content[1].month}月`}}</div>
+              <div class="text">{{`${result.scores2024content[1].content}`}}</div>
+            </div>
+          </div>
         </div>
-      </template>
-    </div>
+      </div>
+      <div v-else v-html="result.scores2024content[0].content" class="content"></div>
+    </div> 
     <div v-else class="content">
       {{ result }}
     </div>
@@ -79,6 +110,16 @@ import tw_title8 from './../../../assets/img/year_of_lucky_2025/tw/result_img_ti
 import tw_title9 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_09_tw_1x.webp';
 import tw_title10 from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_10_tw_1x.webp';
 
+import honghei_cn_1x from './../../../assets/img/year_of_lucky_2025/cn/result_img_tittle_honghei_cn_1x.webp';
+import honghei_tw_1x from './../../../assets/img/year_of_lucky_2025/tw/result_img_tittle_honghei_tw_1x.webp';
+
+import result_icon_gou_cn from './../../../assets/img/year_of_lucky_2025/result_icon_gou_cn.webp';
+import result_icon_tan_cn_1x from './../../../assets/img/year_of_lucky_2025/result_icon_tan_cn_1x.webp';
+
+import hou from './../../../assets/img/year_of_lucky_2025/result_img_shengxiao_hou_1x.webp';
+import hu from './../../../assets/img/year_of_lucky_2025/result_img_shengxiao_hu_1x.webp';
+import she from './../../../assets/img/year_of_lucky_2025/result_img_shengxiao_she_1x.webp';
+import zhu from './../../../assets/img/year_of_lucky_2025/result_img_shengxiao_zhu_1x.webp';
 
 // import * as echarts from 'echarts';
 import { color_enums, icon_enums } from '../../../libs/enum';
@@ -163,6 +204,14 @@ export default {
   },
   data() {
     return {
+      hou,
+      hu,
+      she,
+      zhu,
+      result_icon_gou_cn,
+      result_icon_tan_cn_1x,
+      honghei_cn_1x,
+      honghei_tw_1x,
       title1,
       title2,
       title3,
@@ -330,12 +379,33 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      if (this.item_index === 9) {
+      if (this.item_index === 10) {
         this.getEcharts();
       }
     });
+    
   },
   methods: {
+    getText(result) {
+      if(this.is_cn) {
+        return `25年你日常出行或旅行适合去【${result.guide2024direction}】，日常穿搭适合的颜色为【${result.guide2024color}】，也可以搭配【${result.guide2024decoration}】作为装饰，这些都有利于提升你25年的整体运势。`
+      } else {
+        return `25年你日常出行或旅行適合去【${result.guide2024direction}】，日常穿搭適合的顏色為【${result.guide2024color}】，也可以搭配【${result.guide2024decoration}】作為裝飾，這些都有利於提升你25年的整體運勢。`
+      }
+    },
+    getImage() {
+      let taisuititle = this.result.taisuititle;
+      if(!taisuititle) return
+        if(taisuititle.indexOf('猴')>-1) {
+          return this.hou;
+        } else if (taisuititle.indexOf('虎')>-1) {
+          return this.hu;
+        } else if (taisuititle.indexOf('蛇')>-1) {
+          return this.she;
+        } else if (taisuititle.indexOf('猪')>-1 || taisuititle.indexOf('豬')>-1) {
+          return this.zhu;
+        }
+    },
     /**
      * @description: 折线图配置及初始化
      * @return {*}
@@ -413,19 +483,19 @@ export default {
             type: 'line', //类型 折线
             smooth: true, //是否平滑
             itemStyle: {
-              color: '#FF7A00',
+              color: '#FE3A3A',
             },
-            data: self.result,
+            data: self.result.scores2024,
             showSymbol: false,
             areaStyle: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
                   offset: 0,
-                  color: '#FFF1E3',
+                  color: '#FFCCC0',
                 },
                 {
                   offset: 1,
-                  color: '#FDFAEC',
+                  color: '#FFCCC0',
                 },
               ]),
             },
@@ -489,7 +559,7 @@ export default {
 
 .content-item {
   width: 7.1rem;
-  min-height: 4.64rem;
+  min-height: 3rem;
   background-size: 100% 100%;
   margin-bottom: 0.3rem;
   display: flex;
@@ -511,6 +581,7 @@ export default {
     margin-top: 0.31rem;
     font-weight: 400;
 
+
     .item-tag {
       width: 5rem;
       height: 1.85rem;
@@ -530,6 +601,7 @@ export default {
         font-style: normal;
         text-transform: none;
         line-height: 0.9rem;
+        font-weight: bold;
       }
 
       .year {
@@ -540,7 +612,101 @@ export default {
         font-style: normal;
         text-transform: none;
         line-height: 0.45rem;
+        font-weight: bold;
       }
+    }
+    .taisui-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      img {
+        width: 2.28rem;
+        height: 2.28rem;
+      }
+      .tag {
+        width: 2.28rem;
+        height: 2.28rem;
+        background: #FFE6DB;
+        border-radius: 0.16rem;
+        border: 0.02rem solid #FD8E8E;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 1.88rem;
+          height: 1.88rem;
+        }
+      }
+      .text {
+        font-weight: 600;
+        font-size: 0.32rem;
+        color: #DF2113;
+        line-height: 0.48rem;
+        text-align: center;
+        font-style: normal;
+        text-transform: none;
+        margin-top: 0.3rem;
+        margin-bottom: 0.2rem;
+      }
+    }
+    .red-black-container {
+      width: 6.5rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: auto;
+      img {
+        width: 6.5rem;
+      }
+      .card-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        .item-container {
+          width: 3.13rem;
+          background: #FFECE6;
+          border-radius: 0.2rem;
+          border: 0.02rem solid #E14210;
+          .head {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 0.81rem;
+            background: #E14210;
+            border-radius: 0.1rem 0.1rem 0rem 0rem;
+            font-weight: 600;
+            font-size: 0.34rem;
+            color: #FFFFFF;
+            line-height: 0.51rem;
+            img {
+              width: 0.39rem;
+              height: 0.39rem;
+              margin-right: 0.12rem;
+            }
+          }
+          .head1 {
+            background: #F67600; 
+          }
+          .content {
+            // background: #FFECE6;
+            .month {
+              font-weight: 600;
+              font-size: 0.36rem;
+              color: #E14210;
+              line-height: 0.54rem;
+              text-align: center;
+            }
+            .text {
+              font-weight: 400;
+              margin: 0.1rem;
+            }
+          }
+        }
+      }
+    
     }
   }
 }
@@ -550,6 +716,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: 0.36rem;
+  flex-direction: column;
 
 
 

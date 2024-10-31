@@ -189,6 +189,7 @@ export default {
       combine_product_ids: [],//组合下单ID集合，由前端拼接
 
       all_product: [],//所有测算报告、组合优惠
+      test_fb_upload: '',//拼接参数
     };
   },
   props: {
@@ -322,7 +323,9 @@ export default {
 
 
   },
-  mounted() { },
+  mounted() {
+    this.test_fb_upload = utils.getQueryStr('test_fb_upload')
+  },
 
   methods: {
     getCombineProductIds(product_ids) {
@@ -450,7 +453,7 @@ export default {
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
-        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "add_to_cart", {
+        utils.getFBChannel().indexOf('google') > -1 && gtag && gtag("event", "add_to_cart", {
           value: this.product.price.toFixed(2),
           currency: this.product.currency_type || 'MYR',
           items: [
@@ -514,7 +517,8 @@ export default {
           fbc: utils.getcookieInfo('_fbc'),
           fbp: utils.getcookieInfo('_fbp'),
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
-        }
+          test_fb_upload: this.test_fb_upload,
+        },
       };
 
       let discount_pay = this.$route.query.discount_pay || 0;

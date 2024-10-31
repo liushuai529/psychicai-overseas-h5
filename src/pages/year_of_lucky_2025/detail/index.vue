@@ -1,12 +1,12 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal || show_discount_modal, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
-    <AnimationYearPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_annual2024"
-      :visible="showAnimation" @update-visible="showAnimation = false" />
+    <!-- <AnimationYearPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_annual2025"
+      :visible="showAnimation" @update-visible="showAnimation = false" /> -->
     <FbShareNotice v-if="is_show_fb_notice" />
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <div class="info-box">
       <div class="card">
-        <img :src="is_cn? home_img_tittle_xinxi_cn_1x: home_img_tittle_xinxi_tw_1x" />
+        <img :src="is_cn ? home_img_tittle_xinxi_cn_1x : home_img_tittle_xinxi_tw_1x" />
         <UserInfo :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
           :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
           :nayin="nayin" :is_result="false" :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" />
@@ -18,7 +18,7 @@
         :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi" :nayin="nayin" :is_result="false"
         :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" /> -->
 
-    <PayItem product_key="h5_annual2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
+    <PayItem product_key="h5_annual2025" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
     <div :class="['method-box']">
       <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
       <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
@@ -48,9 +48,9 @@
       @close="pay_modal = false" /> -->
 
 
-    <NewFooter product_key="h5_annual2024" />
+    <NewFooter product_key="h5_annual2025" />
     <img @click="payOrder" :class="['emo-btn', 'fix-btn']" :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x" />
-    <FixedDiscountModal product_key="h5_annual2024" @change_discount_modal="change_discount_modal" />
+    <FixedDiscountModal product_key="h5_annual2025" @change_discount_modal="change_discount_modal" />
   </div>
 </template>
 
@@ -168,7 +168,7 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/2404fd60302100a5446496cdca97c22caf51.png',
       tw_pay_btn,
       product_id: 25,
-      product_key: 'h5_annual2024',
+      product_key: 'h5_annual2025',
       query_user_string: '',
       showBottomBtn: false,
       year: '',
@@ -213,7 +213,6 @@ export default {
       tw_card_8,
       tw_card_9,
       tw_card_10,
-      showFixedBtn: false,
       is_show_btn: true,
       pay_modal: false, //支付弹窗
       modal_bg:
@@ -221,6 +220,10 @@ export default {
       showPayGuideModal: false,//待支付蒙版    
       show_discount_modal: false,//低价折扣弹窗
       showAnimation: true, //过渡动画标识
+      duration_time: {
+        entry_time: 0,
+        exit_time: 0,
+      }
     };
   },
   computed: {
@@ -236,34 +239,21 @@ export default {
     },
   },
   watch: {
-    showFixedBtn(val) {
-      if (val) {
-        utils.firebaseLogEvent(
-          '10003',
-          '-10019',
-          'view_2024report_button',
-          'view',
-          {
-            args_name: 'view_2024report_button',
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
-    },
+
   },
   async created() {
     utils.firebaseLogEvent(
-      '10003',
-      '-10003',
-      'page_view_2024report_mid',
+      '10015',
+      '-10004',
+      'page_view_year2025_end_mid',
       'page_view',
       {
-        args_name: 'page_view_2024report_mid',
         channel: utils.getFBChannel(),
       }
     );
 
     this.query_user_string = this.$route.query.querystring;
+    localStorage.setItem('year_of_lucky_info', this.query_user_string);
     let pay_modal = this.$route.query.pay_modal;
     if (pay_modal) {
       this.pay_modal = true;
@@ -272,23 +262,11 @@ export default {
     this.getUserBazi_year();
   },
   mounted() {
+    this.duration_time.entry_time = new Date().getTime()
     window.scrollTo(0, 0);
     let btn = document.getElementById('info-btn');
     let self = this;
-    // document.addEventListener('scroll', e => {
-    //   let flag = utils.isElementInViewport(btn);
-    //   let scroll_distance =
-    //     window.pageYOffset || document.documentElement.scrollTop;
-    //   if (!self.is_show_btn || scroll_distance < 100) {
-    //     self.showFixedBtn = false;
-    //     return;
-    //   }
-    //   if (!flag) {
-    //     self.showFixedBtn = true;
-    //   } else {
-    //     self.showFixedBtn = false;
-    //   }
-    // });
+
 
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
@@ -296,6 +274,21 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
+  },
+  destroyed() {
+    this.duration_time.exit_time = new Date().getTime();
+    if (this.duration_time.entry_time) {
+      utils.firebaseLogEvent(
+        '10015',
+        '-10005',
+        'view_year2025_end_duration',
+        'view',
+        {
+          channel: utils.getFBChannel(),
+          time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
+        }
+      );
+    }
   },
   methods: {
     /**
@@ -414,8 +407,8 @@ export default {
 
 .method-box {
   width: 7.1rem;
-  height: 9.28rem;
-  min-height: 9.28rem;
+  // height: 9.28rem;
+  min-height: 9.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -426,7 +419,6 @@ export default {
   .method-title-img {
     width: 7.1rem;
     height: 1rem;
-    margin-top: -0.13rem;
   }
 }
 
@@ -449,9 +441,10 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 0.49rem;
+      margin-bottom: 0.24rem;
       background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp') no-repeat;
       background-size: cover;
+
       img {
         width: 7.1rem;
         height: 1rem;

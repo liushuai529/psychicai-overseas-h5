@@ -609,7 +609,7 @@ export default {
       this.order_id = val;
     },
     toOrderUrl() {
-      utils.jumpToOrder();
+      utils.jumpToOrder(this.product_key);
     },
     openPicker(isSdate) {
       let person = null;
