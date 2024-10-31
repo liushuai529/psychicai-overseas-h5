@@ -324,7 +324,7 @@ export default {
 
   },
   mounted() {
-    this.testFbUpload = utils.getQueryString('testFbUpload')
+    this.testFbUpload = utils.getQueryStr('testFbUpload')
   },
 
   methods: {
