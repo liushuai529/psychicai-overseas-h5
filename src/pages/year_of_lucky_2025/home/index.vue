@@ -16,7 +16,7 @@
       <!-- <div class="bar">
         <canvas class="canvas-tag" id="canvas2"></canvas>
       </div> -->
-      
+
       <div :class="['info',]">
         <div :class="['info-content']">
           <div class="title">
@@ -61,7 +61,7 @@
 
 
           <div id="info-btn" class="btn emo-btn" @click="check_year">
-            <img :src="is_cn? btn_chakan_cn_1x: btn_chakan_tw_1x" />
+            <img :src="is_cn ? btn_chakan_cn_1x : btn_chakan_tw_1x" />
           </div>
 
 
@@ -80,13 +80,13 @@
             }}</span>
           </div>
           <!-- <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_xia.webp" /> -->
-        <!-- </div> -->
+          <!-- </div> -->
 
 
-          
+
 
         </div>
-       
+
 
       </div>
 
@@ -124,32 +124,9 @@
       <NongliPicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
 
-      <!-- Popup -->
-      <!-- <PayPopup
-      ref="PayPopup"
-      :visible="visible"
-      :product_key="product_key"
-      :query_user_string="query_user_string"
-      @update-visible="visible = false"
-    ></PayPopup>
-    <combinePayPop
-      :visible="pay_modal"
-      :all_list="productList"
-      :product_key="product_key"
-      :product_price="product_price"
-      :query_user_string="query_user_string"
-      @update-visible="pay_modal = false"
-      @getOrderId="getOrderId"
-    ></combinePayPop> -->
-      <HomeFooter v-if="showFixedBtn" product_key="h5_annual2025" />
- 
 
-      <!-- <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
-        :new_order_key="new_order_key" name="local" top="4.7rem" :time="local_time" @payOrder="checkOrder_year"
-        @jumpDetail="jumpOrder_year" />
-      <FixedOrder v-if="show_api_order && !is_show_notice" :title="last_title" :is_show_move="is_show_notice"
-        :last_order="last_order" name="api" top="6.7rem" :time="api_time" @payOrder="checkOrder_year"
-        @jumpDetail="jumpOrder_year" /> -->
+      <HomeFooter v-if="showFixedBtn" product_key="h5_annual2025" />
+
       <NewFooter v-if="showFixedBtn" product_key="h5_annual2025" />
     </div>
   </div>
@@ -288,15 +265,14 @@ const year_data = {
   tw_tag_svga:
     'https://psychicai-static.psychicai.pro/imgs/2406f7acfeff41b54aa491aed151218685a9.svga',
   cn_home_svga:
-    'https://psychicai-static.psychicai.pro/imgs/241051d7724daabd4986879ceed0962065f2.svga',  
+    'https://psychicai-static.psychicai.pro/imgs/241051d7724daabd4986879ceed0962065f2.svga',
   tw_home_svga:
-    'https://psychicai-static.psychicai.pro/imgs/2410f5e3149572634cba992455b98881ee10.svga',   
+    'https://psychicai-static.psychicai.pro/imgs/2410f5e3149572634cba992455b98881ee10.svga',
   cn_card_svga:
     'https://psychicai-static.psychicai.pro/imgs/2410153e466e2ee141c1aa2a09cd07760f4a.svga',
   tw_card_svga:
     'https://psychicai-static.psychicai.pro/imgs/2410122a94fd1a32435c8f6233b114d9fdfb.svga',
   // 挽留弹窗
-  is_show_notice: false, // 是否展示挽留弹窗
   count_down: 0, // 挽留弹窗倒计时
   fix_order_info: null, //最新一个订单信息
   new_order_key: '',
@@ -308,6 +284,10 @@ const year_data = {
   local_time: 0,
   last_title: '',
   timer: null,
+  duration_time: {
+    entry_time: 0,
+    exit_time: 0,
+  }
 };
 export default {
   components: {
@@ -360,32 +340,7 @@ export default {
       return this.language === 'zh-CN';
     },
 
-    show_fixed_order() {
-      // return true;
-      if (this.last_order) {
-        if (
-          this.last_order.product_key === this.new_order_key &&
-          this.last_order.status !== 'PAYED'
-        ) {
-          return false;
-        }
-      }
 
-      let flag =
-        this.fix_order_info && this.new_order_key !== this.product_key
-          ? true
-          : false;
-
-      if (flag) {
-        const { main_id, click_id, view_id, click_name, view_name } =
-          maidianEnum[this.new_order_key];
-        utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
-          args_name: view_name,
-          channel: utils.getFBChannel(),
-        });
-      }
-      return flag;
-    },
 
     is_android() {
       return utils.isAndroid();
@@ -398,6 +353,7 @@ export default {
     this.created_year();
   },
   mounted() {
+    this.duration_time.entry_time = new Date().getTime()
     this.mounted_year();
   },
   beforeDestroy() {
@@ -419,20 +375,22 @@ export default {
         }
       }
     },
-    is_show_notice(val) {
-      if (val) {
-        utils.firebaseLogEvent(
-          '10003',
-          '-10013',
-          'view_2024report_discount1',
-          'view',
-          {
-            args_name: 'view_2024report_discount1',
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
-    },
+
+  },
+  destroyed() {
+    this.duration_time.exit_time = new Date().getTime();
+    if (this.duration_time.entry_time) {
+      utils.firebaseLogEvent(
+        '10015',
+        '-10002',
+        'view_year05_end_main',
+        'view',
+        {
+          channel: utils.getFBChannel(),
+          time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
+        }
+      );
+    }
   },
 
   methods: {
@@ -444,12 +402,12 @@ export default {
       const { has_pay } = this.$route.query;
       this.has_pay = has_pay ? has_pay : '';
       utils.firebaseLogEvent(
-        '10003',
+        '10015',
         '-10001',
-        'page_view_2024report_main',
+        'page_view_year2025_end_main',
         'page_view',
         {
-          args_name: 'page_view_2024report_main',
+          args_name: 'page_view_year2025_end_main',
           channel: utils.getFBChannel(),
         }
       );
@@ -533,7 +491,7 @@ export default {
         '#canvas1',
         this.is_cn ? this.cn_home_svga : this.tw_home_svga
       );
-     
+
       this.loadBg_year('#canvas3', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
     },
 
@@ -666,12 +624,11 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         utils.firebaseLogEvent(
-          '10003',
-          '-10002',
-          'click_2024report_main',
+          '10015',
+          '-10003',
+          'click_year2025_end_main',
           'click',
           {
-            args_name: 'click_2024report_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -687,12 +644,11 @@ export default {
       // }
       if (time_obj == null) {
         utils.firebaseLogEvent(
-          '10003',
-          '-10002',
-          'click_2024report_main',
+          '10015',
+          '-10003',
+          'click_year2025_end_main',
           'click',
           {
-            args_name: 'click_2024report_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -702,12 +658,11 @@ export default {
       }
       if (!this.privacyChecked) {
         utils.firebaseLogEvent(
-          '10003',
-          '-10002',
-          'click_2024report_main',
+          '10015',
+          '-10003',
+          'click_year2025_end_main',
           'click',
           {
-            args_name: 'click_2024report_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -736,12 +691,11 @@ export default {
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
-        '10003',
-        '-10002',
-        'click_2024report_main',
+        '10015',
+        '-10003',
+        'click_year2025_end_main',
         'click',
         {
-          args_name: 'click_2024report_main',
           channel: utils.getFBChannel(),
           click_type: 'screen_tracking',
         }
@@ -757,7 +711,7 @@ export default {
           item => item.product_key === this.product_key
         );
         const { price, currency_type } = same_;
-        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "generate_lead", {
+        utils.getFBChannel().indexOf('google') > -1 && gtag && gtag("event", "generate_lead", {
           currency: currency_type,
           value: price,
         });
@@ -911,93 +865,16 @@ export default {
       }
     },
     logDiscountEvent() {
-      const { ext, pay_method, product_key, product_id, payment } =
-        this.last_order;
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[product_key];
-      utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
-        args_name: view_name,
-        channel: utils.getFBChannel(),
-      });
+      // const { ext, pay_method, product_key, product_id, payment } =
+      //   this.last_order;
+      // const { main_id, click_id, view_id, click_name, view_name } =
+      //   maidianEnum[product_key];
+      // utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
+      //   args_name: view_name,
+      //   channel: utils.getFBChannel(),
+      // });
     },
-    // api订单下单
-    async checkOrder_year() {
-      const {
-        ext,
-        pay_method,
-        product_key,
-        product_id,
-        payment,
-        trade_pay_type,
-        trade_target_org,
-        currency_type,
-      } = this.last_order;
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[product_key];
-      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
-        args_name: click_name,
-        channel: utils.getFBChannel(),
-      });
-      Indicator.open(tipsArr5[utils.getLanguage()]);
 
-      if (this.last_order.status === 'PAYED') return;
-      let params = {
-        pay_method: pay_method,
-        product_key: product_key,
-        product_id: product_id,
-        platform: 'WEB',
-        extra_ce_suan: ext,
-        trade_pay_type,
-        trade_target_org,
-        fb_param: {
-          fbc: utils.getcookieInfo('_fbc'),
-          fbp: utils.getcookieInfo('_fbp'),
-          external_id: localStorage.getItem('mlxz_outer_visitor_id'),
-        },
-        callback_url: `${location.origin}/${utils.getFBChannel()}/${path_enums[product_key]
-          }.html#/result?path=${path_enums[product_key]
-          }&report_price=${payment}&discount_pay=1&currency_type=${trade_currency || 'MYR'}`,
-      };
-
-      const res = await payOrderAPI(params);
-      localStorage.removeItem('mlxz_fixed_api_order_time');
-      localStorage.removeItem('mlxz_fixed_api_order_id');
-      Indicator.close();
-      if (res.status !== 1000) return;
-      this.show_api_order = false;
-
-      await utils.asleep(1000);
-      location.href = res.data.pay_url;
-    },
-    jumpOrder_year() {
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[this.new_order_key];
-      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
-        args_name: click_name,
-        channel: utils.getFBChannel(),
-      });
-      if (this.new_order_key === 'h5_marriage') {
-        let marry_info = JSON.parse(
-          localStorage.getItem('mlxz_user_info_h5_marriage')
-        );
-        let male_str = marry_info.male_str;
-        let female_str = marry_info.female_str;
-        let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
-&pay_modal=1&use_fixed_time=1&discount_pay=1`;
-        location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
-          }.html#/${path}`;
-
-        return;
-      }
-      let path =
-        'detail?querystring=' +
-        this.fix_order_info +
-        '&pay_modal=1' +
-        '&use_fixed_time=1&discount_pay=1';
-
-      location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
-        }.html#/${path}`;
-    },
   },
 };
 </script>
@@ -1284,7 +1161,7 @@ export default {
         }
       }
 
-      
+
     }
 
     .info-height {

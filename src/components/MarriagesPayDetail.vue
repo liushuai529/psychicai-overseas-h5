@@ -87,7 +87,8 @@
         <img v-if="sub_type === 'zheng_yuan'" class="btn emo-btn"
           src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
         <!-- <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" /> -->
-        <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn" :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x"@click="payMoney" />
+        <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn"
+          :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x" @click="payMoney" />
         <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"
           @click="payMoney" />
 
@@ -393,7 +394,7 @@ export default {
     this.getPayMethod();
 
   },
-  mounted() { 
+  mounted() {
     this.test_fb_upload = utils.getQueryStr('test_fb_upload')
   },
 
@@ -461,7 +462,7 @@ export default {
       if (this.product_key === 'consult_time') {
         productGroup = 'consult_time'
       }
-      const { status, data } = await getProductionsAPI(productGroup, {product_key: this.product_key});
+      const { status, data } = await getProductionsAPI(productGroup, { product_key: this.product_key });
       if (status === 1000) {
         this.product = data.find(item => item.product_key === this.product_key);
         //获取所有报告以及套餐
@@ -621,7 +622,7 @@ export default {
         const secondIndex = this.findSecondIndexOf(_ga, '.');
         pay_max_params = Object.assign({}, pay_max_params, {
           ga_param: {
-            client_id: _ga.substr(secondIndex+1)
+            client_id: _ga.substr(secondIndex + 1)
           },
         });
       }
@@ -683,7 +684,7 @@ export default {
 }
 
 .pay-list {
-  
+
   width: 100%;
   display: flex;
   flex-direction: column;

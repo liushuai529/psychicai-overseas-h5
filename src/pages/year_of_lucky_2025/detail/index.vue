@@ -6,7 +6,7 @@
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <div class="info-box">
       <div class="card">
-        <img :src="is_cn? home_img_tittle_xinxi_cn_1x: home_img_tittle_xinxi_tw_1x" /> 
+        <img :src="is_cn ? home_img_tittle_xinxi_cn_1x : home_img_tittle_xinxi_tw_1x" />
         <UserInfo :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
           :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
           :nayin="nayin" :is_result="false" :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" />
@@ -213,7 +213,6 @@ export default {
       tw_card_8,
       tw_card_9,
       tw_card_10,
-      showFixedBtn: false,
       is_show_btn: true,
       pay_modal: false, //支付弹窗
       modal_bg:
@@ -221,6 +220,10 @@ export default {
       showPayGuideModal: false,//待支付蒙版    
       show_discount_modal: false,//低价折扣弹窗
       showAnimation: true, //过渡动画标识
+      duration_time: {
+        entry_time: 0,
+        exit_time: 0,
+      }
     };
   },
   computed: {
@@ -236,29 +239,15 @@ export default {
     },
   },
   watch: {
-    showFixedBtn(val) {
-      if (val) {
-        utils.firebaseLogEvent(
-          '10003',
-          '-10019',
-          'view_2024report_button',
-          'view',
-          {
-            args_name: 'view_2024report_button',
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
-    },
+
   },
   async created() {
     utils.firebaseLogEvent(
-      '10003',
-      '-10003',
-      'page_view_2024report_mid',
+      '10015',
+      '-10004',
+      'page_view_year2025_end_mid',
       'page_view',
       {
-        args_name: 'page_view_2024report_mid',
         channel: utils.getFBChannel(),
       }
     );
@@ -272,23 +261,11 @@ export default {
     this.getUserBazi_year();
   },
   mounted() {
+    this.duration_time.entry_time = new Date().getTime()
     window.scrollTo(0, 0);
     let btn = document.getElementById('info-btn');
     let self = this;
-    // document.addEventListener('scroll', e => {
-    //   let flag = utils.isElementInViewport(btn);
-    //   let scroll_distance =
-    //     window.pageYOffset || document.documentElement.scrollTop;
-    //   if (!self.is_show_btn || scroll_distance < 100) {
-    //     self.showFixedBtn = false;
-    //     return;
-    //   }
-    //   if (!flag) {
-    //     self.showFixedBtn = true;
-    //   } else {
-    //     self.showFixedBtn = false;
-    //   }
-    // });
+
 
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
@@ -296,6 +273,21 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
+  },
+  destroyed() {
+    this.duration_time.exit_time = new Date().getTime();
+    if (this.duration_time.entry_time) {
+      utils.firebaseLogEvent(
+        '10015',
+        '-10005',
+        'view_year2025_end_duration',
+        'view',
+        {
+          channel: utils.getFBChannel(),
+          time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
+        }
+      );
+    }
   },
   methods: {
     /**
@@ -452,6 +444,7 @@ export default {
       margin-bottom: 0.49rem;
       background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp') no-repeat;
       background-size: cover;
+
       img {
         width: 7.1rem;
         height: 1rem;
