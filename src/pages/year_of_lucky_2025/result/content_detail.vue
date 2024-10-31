@@ -395,6 +395,7 @@ export default {
     },
     getImage() {
       let taisuititle = this.result.taisuititle;
+      if(!taisuititle) return
         if(taisuititle.indexOf('猴')>-1) {
           return this.hou;
         } else if (taisuititle.indexOf('虎')>-1) {

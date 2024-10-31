@@ -547,14 +547,19 @@ export default {
         this.advice.guide2024color = res.data.result.guide2024color;
         this.advice.guide2024decoration = res.data.result.guide2024decoration;
         this.advice.guide2024direction = res.data.result.guide2024direction;
-        this.fortune.taisui2024 = this.fortune.taisui2024.replace(
+        if(this.fortune.taisui2024) {
+          this.fortune.taisui2024 = this.fortune.taisui2024.replace(
           /\n/g,
           '<br/>'
         );
-        this.fortune.review2023 = this.fortune.review2023.replace(
-          /\n/g,
-          '<br/>'
-        );
+        }
+        if(this.fortune.review2023) {
+          this.fortune.review2023 = this.fortune.review2023.replace(
+            /\n/g,
+            '<br/>'
+          );
+        }
+        
         this.baoshi_icon = icon_enums.find(
           it =>
             this.advice.guide2024decoration === it.cn_k ||
