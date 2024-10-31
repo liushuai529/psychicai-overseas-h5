@@ -1036,20 +1036,20 @@ for (var pathname of ['emotion_marriages/emotion_marriages', 'user_agreement/use
 
 
 // // ads09代理
-// for (var pathname of ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy']) {
-//   var filename = pathname.split('/')[0];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/ads09/' + filename + '.html'),
-//     template: 'template/index_ads09.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
+for (var pathname of ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads09/' + filename + '.html'),
+    template: 'template/index_ads09.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
 //   if (pathname in webpackConfig.entry) {
 //     conf.chunks = ['manifest', 'vendor', pathname];
 //     conf.hash = false;
