@@ -1,7 +1,7 @@
+
 <template>
-  <div :class="['result', is_cn ? 'cn-bg' : 'tw-bg', show_pop_modal ? 'hidden-scroll' : '']">
-    <ResultPopup product_key="h5_annual2025" @change_pop_modal="change_pop_modal"
-      :transfer_code="fortune.transfer_code || ''" />
+  <div :class="['result', is_cn? 'cn-bg': 'tw-bg', show_pop_modal? 'hidden-scroll': '']">   
+    <ResultPopup product_key="h5_annual2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />  
     <!-- <UserInfo
       :username="username"
       :sex="sex"
@@ -33,25 +33,10 @@
 
     <div class="info-box">
       <div class="card">
-        <img :src="is_cn ? home_img_tittle_xinxi_cn_1x : home_img_tittle_xinxi_tw_1x" />
-        <UserInfo
-          :username="username"
-          :sex="sex"
-          :gongli_nongli="gongli_nongli"
-          :picker_date_yangli="picker_date_yangli"
-          :picker_date_nongli="picker_date_nongli"
-          :gan="gan"
-          :zhi="zhi"
-          :nayin="nayin"
-          :cai_bo_num="cai_bo_num"
-          :gui_ren_num="gui_ren_num"
-          :hun_yin_num="hun_yin_num"
-          :ming_ge="ming_ge"
-          :riyuanqiangruo="riyuanqiangruo"
-          :shi_ye_num="shi_ye_num"
-          :wuxingqiang="wuxingqiang"
-          :is_result="true"
-          />
+        <img :src="is_cn? home_img_tittle_xinxi_cn_1x: home_img_tittle_xinxi_tw_1x" />
+        <UserInfo :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
+          :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
+          :nayin="nayin" :is_result="false" :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" />
       </div>
     </div>
 
@@ -62,7 +47,7 @@
     /> -->
     <contentDetail
       v-if="fortune.whole2024"
-      :result="fortune"
+      :result="fortune.whole2024"
       :item_index="1"
     />
     <contentDetail
@@ -72,54 +57,42 @@
       :item_index="2"
     />
     <contentDetail
-      v-if="fortune.xinggedesc"
-      :result="fortune"
+      v-if="fortune.taisui2024"
+      :result="fortune.taisui2024"
       :item_index="3"
     />
-    <contentDetail v-if="fortune.taisuititle" :result="fortune" :item_index="4" />
-    <!--年度事业分析-->
+    <contentDetail v-if="fortune.gold2024" :result="fortune" :item_index="4" />
     <contentDetail
       v-if="fortune.career2024"
       :result="fortune.career2024"
       :item_index="5"
     />
-    <!--年度财运分析-->
     <contentDetail
       v-if="fortune.wealth2024"
       :result="fortune.wealth2024"
       :item_index="6"
     />
-    <!--年度感情分析-->
     <contentDetail
       v-if="fortune.emotion2024"
       :result="fortune.emotion2024"
       :item_index="7"
     />
-    <!--年度健康提示-->
     <contentDetail
       v-if="fortune.health2024"
       :result="fortune.health2024"
       :item_index="8"
     />
-    <!--特别提示-->
-    <contentDetail
-      v-if="fortune.gold2024content"
-      :result="fortune.gold2024content"
-      :item_index="9"
-    />
-    <!--每月运势-->
     <contentDetail
       v-if="fortune.scores2024"
-      :result="fortune"
+      :result="fortune.scores2024"
       :content_arr="fortune.scores2024content"
-      :item_index="10"
+      :item_index="9"
     />
-
     <CopyCode
       :set_title="true"
       title_icon="https://psychicai-static.psychicai.pro/imgs/24044ccbe8a8dcea4ff3b56f8b525ba1f351.png"
       title_icon_style="width:4.2rem;height: .8rem;margin:.29rem auto .5rem;"
-      className="year-box-2025"
+      className="year-box"
       tips1_color="#222"
       code_color="#EE5050"
       :transfer_code="fortune.transfer_code"
@@ -133,7 +106,6 @@
       c_id="-10010"
       e_name="click_2024report_result"
     />
-
 
     <CodePop v-if="code_modal" @close="code_modal = false" />
   </div>
@@ -276,7 +248,7 @@ export default {
     /**
      * 显示底部引导用户下载app遮罩
      */
-    change_pop_modal() {
+     change_pop_modal() {
       this.show_pop_modal = true;
     },
     /**
@@ -387,7 +359,7 @@ export default {
         });
         console.log('Purchase事件上报', this.order_id)
         if (utils.isProd()) {
-
+          
           try {
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '开始上报FB埋点，Purchase',
@@ -398,7 +370,7 @@ export default {
             utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Purchase', {
               value: report_price.toFixed(2),
               currency: currency_type,
-            }, { eventID: this.order_id });
+            },{eventID: this.order_id});
             // utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "purchase", {
             //   transaction_id: this.order_id,
             //   value: report_price.toFixed(2),
@@ -524,7 +496,7 @@ export default {
       getResultAPI({ order_id: this.$route.query.order_id }).then(res => {
         let can_store =
           (res.data && ['PAYED', 'FAIL'].includes(res.data.status)) ||
-            (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
+          (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
             ? true
             : false;
 
@@ -557,7 +529,6 @@ export default {
       Indicator.close();
       Toast(this.$t('fail-result'));
       setTimeout(() => {
-        // location.href = 'year_of_lucky_2024.html';
         let querystring = localStorage.getItem('year_of_lucky_info');
         let path = 'detail?querystring=' + querystring;
         this.$router.push({ path });
@@ -576,18 +547,14 @@ export default {
         this.advice.guide2024color = res.data.result.guide2024color;
         this.advice.guide2024decoration = res.data.result.guide2024decoration;
         this.advice.guide2024direction = res.data.result.guide2024direction;
-        if (this.fortune.taisui2024) {
-          this.fortune.taisui2024 = this.fortune.taisui2024.replace(
-            /\n/g,
-            '<br/>'
-          );
-        }
-        if (this.fortune.review2023) {
-          this.fortune.review2023 = this.fortune.review2023 && this.fortune.review2023.replace(
-            /\n/g,
-            '<br/>'
-          );
-        }
+        this.fortune.taisui2024 = this.fortune.taisui2024.replace(
+          /\n/g,
+          '<br/>'
+        );
+        this.fortune.review2023 = this.fortune.review2023.replace(
+          /\n/g,
+          '<br/>'
+        );
         this.baoshi_icon = icon_enums.find(
           it =>
             this.advice.guide2024decoration === it.cn_k ||
@@ -679,16 +646,17 @@ export default {
       );
       let lunar = solar.getLunar();
       this.picker_date_nongli = +is_gongli
-        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${this.picker_hour
-        }`
+        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${
+            this.picker_hour
+          }`
         : `${birth_year}年${utils.formateNongliMonth(
-          birth_month
-        )}${utils.formateNongliDate(birth_date)} ${this.picker_hour}`;
+            birth_month
+          )}${utils.formateNongliDate(birth_date)} ${this.picker_hour}`;
       this.picker_date_yangli = +is_gongli
         ? `${birth_year}-${birth_month}-${birth_date} ${this.picker_hour}`
         : `${Lunar.fromYmd(+birth_year, +birth_month, +birth_date)
-          .getSolar()
-          .toString()} ${this.picker_hour}`;
+            .getSolar()
+            .toString()} ${this.picker_hour}`;
     },
   },
 };
@@ -708,7 +676,6 @@ export default {
   width: 7.5rem;
   height: 12rem;
 }
-
 .result {
   background-color: #B5291E;
   padding: 0.1rem 0.2rem 0.3rem;
@@ -728,7 +695,6 @@ export default {
       margin-bottom: 0.49rem;
       background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp') no-repeat;
       background-size: cover;
-
       img {
         width: 7.1rem;
         height: 1rem;
@@ -780,7 +746,8 @@ export default {
   width: 7.1rem;
   height: 7.61rem;
   margin-bottom: 0.21rem;
-  background: url('https://psychicai-static.psychicai.pro/imgs/24043fd43250af19446888c2b6c6723ebf4f.png') no-repeat;
+  background: url('https://psychicai-static.psychicai.pro/imgs/24043fd43250af19446888c2b6c6723ebf4f.png')
+    no-repeat;
   background-size: 100% 100%;
   padding: 0.01rem 0.01rem 0.4rem;
 }
@@ -788,26 +755,24 @@ export default {
 .download-box {
   min-width: 6.9rem;
   min-height: 4.84rem;
-  background: url('../../../assets/img/mlxz/year_of_lucky_2024/result_img_bg.webp') no-repeat;
+  background: url('../../../assets/img/mlxz/year_of_lucky_2024/result_img_bg.webp')
+    no-repeat;
   background-size: 100% 100%;
   margin: 0.2rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-
   .title {
     width: 4.2rem;
     height: 0.8rem;
     margin-top: 0.29rem;
   }
-
   .logo {
     margin-top: 0.5rem;
     width: 3.05rem;
     height: 0.82rem;
     margin-bottom: 0.32rem;
   }
-
   .tip {
     height: 0.28rem;
     font-weight: 400;
@@ -816,11 +781,11 @@ export default {
     line-height: 0.28rem;
     margin-bottom: 0.2rem;
   }
-
   .code {
     min-width: 4.56rem;
     height: 1.04rem;
-    background: url('https://psychicai-static.psychicai.pro/imgs/24045e9023a6becb465f92ee2c83d1d73bd9.png') no-repeat;
+    background: url('https://psychicai-static.psychicai.pro/imgs/24045e9023a6becb465f92ee2c83d1d73bd9.png')
+      no-repeat;
     background-size: 100% 100%;
     font-weight: 600;
     font-size: 0.32rem;
@@ -831,20 +796,17 @@ export default {
     margin-bottom: 0.2rem;
     white-space: nowrap;
     padding: 0 0.2rem;
-
     span {
       margin-left: 0.1rem;
       color: #222222;
       text-decoration: underline;
     }
   }
-
   .desc {
     margin-bottom: 0.2rem;
     color: #999;
     font-size: 0.24rem;
   }
-
   .copy {
     width: 5.19rem;
     height: 1.03rem;

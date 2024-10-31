@@ -418,7 +418,6 @@ export default {
   .method-title-img {
     width: 7.1rem;
     height: 1rem;
-    margin-top: -0.13rem;
   }
 }
 
@@ -441,7 +440,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 0.49rem;
+      margin-bottom: 0.24rem;
       background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp') no-repeat;
       background-size: cover;
 

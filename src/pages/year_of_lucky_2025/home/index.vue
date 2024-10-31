@@ -52,7 +52,7 @@
 
               </div>
               <div class="birth-container">
-                <img src="../../../assets/img/emotion_fate/icon_rili.webp" @click="openPicker" />
+                <img src="../../../assets/img/year_of_lucky_2025/icon_rili_1x.webp" @click="openPicker" />
               </div>
             </div>
             <div class="divider-line"></div>
@@ -60,7 +60,7 @@
 
 
 
-          <div id="info-btn" class="btn emo-btn" @click="check_year">
+          <div id="info-btn" class="btn huxi-btn" @click="check_year">
             <img :src="is_cn ? btn_chakan_cn_1x : btn_chakan_tw_1x" />
           </div>
 
@@ -69,9 +69,9 @@
 
           <!-- <div class="top-bg"> -->
           <div class="info-bottom">
-            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_fate/login_icon_choose.webp"
+            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/year_of_lucky_2025/login_icon_choose.webp"
               @click="privacyChecked = !privacyChecked" />
-            <img v-else class="info-check" src="../../../assets/img/emotion_fate/login_icon_choose_no.webp"
+            <img v-else class="info-check" src="../../../assets/img/year_of_lucky_2025/login_icon_choose_no.webp"
               @click="privacyChecked = !privacyChecked" />
             {{ $t('check-label') }}
             <span @click="toPrivacy('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
@@ -116,7 +116,8 @@
       <img class="card" :src="is_cn ? cn_card_2 : tw_card_2" />
       <img class="card" :src="is_cn ? cn_card_3 : tw_card_3" />
       <img class="card" :src="is_cn ? cn_card_4 : tw_card_4" />
-      <img class="card last-card" :src="is_cn ? cn_card_5 : tw_card_5" />
+      <img class="card" :src="is_cn ? cn_card_5 : tw_card_5" />
+      <img class="card last-card" :src="is_cn ? cn_card_6 : tw_card_6" />
       <img v-if="showFixedBtn" class="fix-btn fix-box huxi-btn" :src="pay_btn_img" @click="check_year" />
       <!-- 時间选择控件 -->
       <DatetimePicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
@@ -159,8 +160,8 @@ import tw_img_tittle_home_xinxi from '../../../assets/img/year_of_lucky_2025/tw/
 import btn_chakan_cn_1x from '../../../assets/img/year_of_lucky_2025/cn/btn_chakan_cn_1x.webp';
 import btn_chakan_tw_1x from '../../../assets/img/year_of_lucky_2025/tw/btn_chakan_tw_1x.webp';
 
-import boy from '../../../assets/img/emotion_fate/img_boy.webp';
-import girl from '../../../assets/img/emotion_fate/img_girl.webp';
+import boy from '../../../assets/img/year_of_lucky_2025/img_boy.webp';
+import girl from '../../../assets/img/year_of_lucky_2025/img_girl.webp';
 
 
 import cn_tag from '../../../assets/img/mlxz/year_of_lucky_2024/img_4tag.webp';
@@ -185,6 +186,8 @@ import tw_card_4 from '../../../assets/img/year_of_lucky_2025/tw/home_img_detail
 
 import cn_card_5 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_5_cn_1x.webp';
 import tw_card_5 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_5_tw_1x.webp';
+import cn_card_6 from '../../../assets/img/year_of_lucky_2025/cn/home_img_details_pingjia_cn_1x.webp';
+import tw_card_6 from '../../../assets/img/year_of_lucky_2025/tw/home_img_details_pingjia_tw_1x.webp';
 import {
   reportEnum,
   reportName,
@@ -195,8 +198,8 @@ import combinePayPop from '../../../components/combinePayPop.vue';
 import cn_new_user_btn from '../../../assets/img/mlxz/year_of_lucky_2024/nianyun_btn_jiexiao.webp';
 import tw_new_user_btn from '../../../assets/img/tw_mlxz/year_24/nianyun_btn_jiexiao_fanti.webp';
 
-import tw_history_order from '../../../assets/img/mlxz/downloadBtn/tw/year_order.webp';
-import cn_history_order from '../../../assets/img/mlxz/downloadBtn/year.webp';
+import tw_history_order from '../../../assets/img/year_of_lucky_2025/tw/home_lsdd_tw_1x.webp';
+import cn_history_order from '../../../assets/img/year_of_lucky_2025/cn/home_lsdd_cn_1x.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
@@ -205,6 +208,8 @@ const tipsArr5 = {
   'zh-TW': '訂單創建中...',
 };
 const year_data = {
+  cn_card_6,
+  tw_card_6,
   btn_chakan_cn_1x,
   btn_chakan_tw_1x,
   boy,
@@ -897,8 +902,8 @@ export default {
 }
 
 .fix-btn {
-  width: 5.19rem;
-  height: 1.03rem;
+  width: 5.7rem;
+  height: 0.96rem;
   bottom: 0.2rem;
   z-index: 99;
   // animation: scaleBtn 1s infinite ease-in-out alternate;
@@ -1026,6 +1031,7 @@ export default {
         img {
           width: 7.1rem;
           height: 1rem;
+          margin-top: -0.05rem;
         }
       }
 
@@ -1225,8 +1231,8 @@ export default {
   position: fixed;
   right: -0.02rem;
   top: 2.33rem;
-  width: 0.56rem;
-  height: 1.54rem;
+  width: 0.44rem;
+  height: 1.5rem;
   z-index: 100;
 }
 
