@@ -1151,7 +1151,7 @@ for (var pathname of ['emotion_remarriage/emotion_remarriage', 'user_agreement/u
 
 
 
-ads11代理
+//ads11代理
 for (var pathname of ['emotion_end/emotion_end', 'user_agreement/user_agreement', 'privacy/privacy']) {
   var filename = pathname.split('/')[0];
   var conf = {
