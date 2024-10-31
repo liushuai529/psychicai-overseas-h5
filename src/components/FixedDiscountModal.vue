@@ -7,6 +7,7 @@
       </div>
       <div class="tip-container">{{ is_cn ? '复制邀请码，打开命理寻真App即可享受更多折扣' : '復製邀請碼，打開命理尋真App即可享受更多折扣' }}</div>
       <img class="btn-logo" @click="down" :src="is_cn ? cn_btn_zhekou_xaizai : tw_btn_zhekou_xaizai" />
+      <p class="tip">{{ is_cn? '我的-我的报告中查看': '我的-我的報告中查看' }}</p>
     </div>
     <div class="close" @click="close">
       <img src="../assets/img/components/fixed_discount_modal/icon_close.webp" />
@@ -214,6 +215,17 @@ export default {
       width: 4.8rem;
       height: 0.94rem;
       margin-top: 1.03rem;
+    }
+    .tip {
+      font-weight: 400;
+      font-size: 0.26rem;
+      color: #FFBCAF;
+      line-height: 0.39rem;
+      text-align: center;
+      font-style: normal;
+      text-transform: none;
+      margin-top: 0.2rem;
+      margin-bottom: 0.2rem;
     }
 
   }

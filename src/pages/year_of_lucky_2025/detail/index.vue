@@ -407,8 +407,8 @@ export default {
 
 .method-box {
   width: 7.1rem;
-  height: 9.28rem;
-  min-height: 9.28rem;
+  // height: 9.28rem;
+  min-height: 9.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;

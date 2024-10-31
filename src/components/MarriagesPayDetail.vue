@@ -995,8 +995,8 @@ export default {
   width: 5.7rem;
   height: 0.98rem;
   margin: auto;
-  // margin-bottom: 0.2rem;
-  margin-top: -0.2rem;
+  margin-bottom: 0.4rem;
+  // margin-top: -0.2rem;
 }
 
 @keyframes emoBtn {

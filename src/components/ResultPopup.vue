@@ -4,6 +4,7 @@
       <div class="head">
         <div class="title">{{ tips_arr1[lang] }}</div>
         <div style="margin-top: 0.2rem;">{{ `您的【${tips_arr9[product_key][lang]}】${tips_arr2[lang]}` }}</div>
+        <div style="margin-top: 0.2rem;">{{ is_cn? '【命理寻真】赠送15分钟免费在线咨询，职业咨询师针对性解决您的困扰。': '【命理尋真】贈送15分鐘免費在線咨詢，職業咨詢師針對性解決您的困擾。' }}</div>
       </div>
       <div class="copy-container">
         <div class="left">{{tips_arr6[lang]}}：{{ transfer_code }}</div>

@@ -600,6 +600,7 @@ export default {
         font-style: normal;
         text-transform: none;
         line-height: 0.9rem;
+        font-weight: bold;
       }
 
       .year {
@@ -610,6 +611,7 @@ export default {
         font-style: normal;
         text-transform: none;
         line-height: 0.45rem;
+        font-weight: bold;
       }
     }
     .taisui-container {
