@@ -73,7 +73,7 @@
     />
     <contentDetail
       v-if="fortune.xinggedesc"
-      :result="fortune.xinggedesc"
+      :result="fortune"
       :item_index="3"
     />
     <contentDetail v-if="fortune.taisuititle" :result="fortune" :item_index="4" />

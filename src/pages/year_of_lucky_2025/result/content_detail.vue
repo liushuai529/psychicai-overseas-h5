@@ -33,7 +33,10 @@
       </div>
       <div class="content">{{ getText(result) }}</div>
     </div>
-    <div v-else-if="item_index === 3" v-html="result" class="content"></div>
+    <div v-else-if="item_index === 3" class="content">
+      <div v-html="result.xinggedesc" ></div>
+      <div v-html="result.gejuall" ></div>
+    </div>
     
     <div v-else-if="item_index === 4" class="content-4 content">
      
