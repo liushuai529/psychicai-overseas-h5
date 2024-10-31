@@ -1,7 +1,7 @@
 <template>
-  <div :class="['result', is_cn ? 'cn-bg' : 'tw-bg', show_pop_modal ? 'hidden-scroll' : '']">
-    <ResultPopup product_key="h5_annual2025" @change_pop_modal="change_pop_modal"
-      :transfer_code="fortune.transfer_code || ''" />
+  <div :class="['result', is_cn ? 'cn-bg' : 'tw-bg', show_pop_modal ? 'hidden-scroll1' : '']">
+    <!-- <ResultPopup product_key="h5_annual2025" @change_pop_modal="change_pop_modal"
+      :transfer_code="fortune.transfer_code || ''" /> -->
     <!-- <UserInfo
       :username="username"
       :sex="sex"
@@ -115,6 +115,26 @@
       :item_index="10"
     />
 
+    <CopyCode
+      :set_title="true"
+      title_icon="https://psychicai-static.psychicai.pro/imgs/24044ccbe8a8dcea4ff3b56f8b525ba1f351.png"
+      title_icon_style="width:4.2rem;height: .8rem;margin:.29rem auto .5rem;"
+      className="year-box-2025"
+      tips1_color="#222"
+      code_color="#EE5050"
+      :transfer_code="fortune.transfer_code"
+      codeClass="year-code"
+      :code_btn="is_cn ? cn_code_btn : tw_code_btn"
+      code_text_style="margin:.3rem auto .39rem;color:#6E6E6E"
+      tips5_style="width: 5.19rem;height: 1.03rem;margin-bottom: .3rem;"
+      @showModal="code_modal = true"
+      a_token="qncisx"
+      e_id="10003"
+      c_id="-10010"
+      e_name="click_2024report_result"
+    />
+
+
     <CodePop v-if="code_modal" @close="code_modal = false" />
   </div>
 </template>
@@ -134,12 +154,13 @@ import UserInfo from '../detail/user_info.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
 import { icon_enums } from '../../../libs/enum';
 import CodePop from '../../../components/CodePop.vue';
+import CopyCode from '../../../components/CopyCode.vue';
 import tw_code_btn from '../../../assets/img/mlxz/downloadBtn/tw/year24.webp';
 import home_img_tittle_xinxi_cn_1x from './../../../assets/img/year_of_lucky_2025/cn/home_img_tittle_xinxi_cn_1x.webp';
 import home_img_tittle_xinxi_tw_1x from './../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_xinxi_tw_1x.webp';
 import ResultPopup from '../../../components/ResultPopup.vue'
 export default {
-  components: { contentDetail, UserInfo, CodePop, ResultPopup },
+  components: { contentDetail, UserInfo, CodePop, CopyCode, ResultPopup },
   data() {
     return {
       home_img_tittle_xinxi_cn_1x,
