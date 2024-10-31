@@ -237,11 +237,18 @@ export const icon_enums = [
     v: '9501',
     icon: 'https://psychicai-static.psychicai.pro/imgs/2311f1f91ce0d92447f69db4e56702952425.png',
   },
+ 
   {
     cn_k: '黄金',
     tw_k: '黃金',
     v: '9601',
     icon: 'https://psychicai-static.psychicai.pro/imgs/23111d6767f435d2496292cd92f317894e82.png',
+  },
+  {
+    cn_k: '银饰',
+    tw_k: '银饰',
+    v: '9701',
+    icon: 'https://psychicai-static.psychicai.pro/imgs/2311f1f91ce0d92447f69db4e56702952425.png',
   },
 ];
 

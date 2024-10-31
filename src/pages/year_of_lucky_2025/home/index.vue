@@ -177,7 +177,7 @@ import HeaderNotice from '../../../components/headerNotice.vue';
 
 
 import cn_img_tittle_home_xinxi from '../../../assets/img/year_of_lucky_2025/cn/home_img_tittle_xinxi_cn.webp';
-import tw_img_tittle_home_xinxi from '../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_xinxi_tw.webp';
+import tw_img_tittle_home_xinxi from '../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_xinxi_tw_1x.webp';
 
 import btn_chakan_cn_1x from '../../../assets/img/year_of_lucky_2025/cn/btn_chakan_cn_1x.webp';
 import btn_chakan_tw_1x from '../../../assets/img/year_of_lucky_2025/tw/btn_chakan_tw_1x.webp';
