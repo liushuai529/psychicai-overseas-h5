@@ -679,11 +679,6 @@ import ResultPop from '../../components/ResultPop.vue';
 import CalculateBar from '../../components/CalculateBar.vue';
 
 import TimeDown from './components/timeDown.vue';
-import tStatistic from 'tstatistic';
-tStatistic.init({
-  app_key: 20002003,
-  channel: utils.getFBChannel(),
-});
 
 const tipsArr5 = {
   'zh-CN': '订单创建中...',
@@ -1393,17 +1388,6 @@ export default {
     this.time_3 = store_time_3 ? +store_time_3 : 15 * 60 * 1000;
     this.time_2 = store_time_2 ? +store_time_2 : 15 * 60 * 1000;
 
-    utils.isProd() &&
-      tStatistic &&
-      tStatistic.send({
-        event: 'page_view_main',
-        md: 10001,
-        c_id: -10001,
-        args: {
-          args_name: 'page_view_main',
-          channel: utils.getFBChannel(),
-        },
-      });
     document.title = this.$t('dom-title');
     this.getLastOrder();
 

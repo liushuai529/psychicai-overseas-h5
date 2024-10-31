@@ -176,11 +176,7 @@ import cn_info from '../../../assets/img/emotion_v2/new/cn/info.webp';
 import tw_info from '../../../assets/img/emotion_v2/new/tw/info.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 
-import tStatistic from 'tstatistic';
-tStatistic.init({
-  app_key: 20002003,
-  channel: utils.getFBChannel(),
-});
+
 
 // 组合测算相关参数
 let is_combine = utils.getQueryString('is_combine');
@@ -303,17 +299,6 @@ export default {
 
   },
   created() {
-    utils.isProd() &&
-      tStatistic &&
-      tStatistic.send({
-        event: 'page_view_truelove_main',
-        md: 10011,
-        c_id: -10001,
-        args: {
-          args_name: 'page_view_truelove_main',
-          channel: utils.getFBChannel(),
-        },
-      });
     this.$store.dispatch('common/getProduction', 'consult_time');
     utils.firebaseLogEvent(
       '10011',

@@ -259,11 +259,7 @@ import combinePayPop from '../../../components/combinePayPop.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
 import PopNotice from '../../../components/PopNotice.vue';
 import NewFooter from '../../../components/NewFooter.vue';
-import tStatistic from 'tstatistic';
-tStatistic.init({
-  app_key: 20002003,
-  channel: utils.getFBChannel(),
-});
+
 const tipsArr5 = {
   'zh-CN': '订单创建中...',
   'zh-TW': '訂單創建中...',
@@ -375,17 +371,6 @@ export default {
         });
       }
     });
-    utils.isProd() &&
-      tStatistic &&
-      tStatistic.send({
-        event: 'page_view_marriage_main',
-        md: 10007,
-        c_id: -10001,
-        args: {
-          args_name: 'page_view_marriage_main',
-          channel: utils.getFBChannel(),
-        },
-      });
     this.$store.dispatch('common/getProduction');
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
