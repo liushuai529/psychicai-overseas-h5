@@ -47,7 +47,7 @@
     /> -->
     <contentDetail
       v-if="fortune.whole2024"
-      :result="fortune.whole2024"
+      :result="fortune"
       :item_index="1"
     />
     <contentDetail
