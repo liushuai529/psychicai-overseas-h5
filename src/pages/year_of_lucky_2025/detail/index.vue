@@ -253,6 +253,7 @@ export default {
     );
 
     this.query_user_string = this.$route.query.querystring;
+    localStorage.setItem('year_of_lucky_info', this.query_user_string);
     let pay_modal = this.$route.query.pay_modal;
     if (pay_modal) {
       this.pay_modal = true;
