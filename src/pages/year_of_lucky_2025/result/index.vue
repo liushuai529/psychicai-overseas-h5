@@ -1,7 +1,7 @@
 <template>
-  <div :class="['result', is_cn ? 'cn-bg' : 'tw-bg', show_pop_modal ? 'hidden-scroll1' : '']">
-    <!-- <ResultPopup product_key="h5_annual2025" @change_pop_modal="change_pop_modal"
-      :transfer_code="fortune.transfer_code || ''" /> -->
+  <div :class="['result', is_cn ? 'cn-bg' : 'tw-bg', show_pop_modal ? 'hidden-scroll' : '']">
+    <ResultPopup product_key="h5_annual2025" @change_pop_modal="change_pop_modal"
+      :transfer_code="fortune.transfer_code || ''" />
     <!-- <UserInfo
       :username="username"
       :sex="sex"
