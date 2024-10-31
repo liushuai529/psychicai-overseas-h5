@@ -31,7 +31,7 @@ import { CountDown } from 'vant';
 const pay_info = {
   h5_wealth2024: { module: 10005, 'content_id': -10023, 'event_name': 'click_paycardwealty_pay', type: 'click' }, // 2024年财运
   h5_annual2024: { module: 10003, 'content_id': -10023, 'event_name': 'click_paycardyear_pay', type: 'click' }, // 2024年年运
-  h5_annual2025: { module: 10003, 'content_id': -10023, 'event_name': 'click_paycardyear_pay', type: 'click' }, // 2025年年运
+  h5_annual2025: { module: 10015, 'content_id': -10010, 'event_name': 'click_Year2025_end_wait_pay', type: 'click' }, // 2025年年运
   h5_weigh_bone: { module: 10009, 'content_id': -10023, 'event_name': 'click_paycardchenggu_pay', type: 'click' }, // 袁天罡秤骨
   h5_bai_gua: { module: 10008, 'content_id': -10023, 'event_name': 'click_paycard64gua_pay', type: 'click' }, // 鬼谷子
   h5_emotion2024: { module: 10006, 'content_id': -10032, 'event_name': 'click_paycardlove_pay', type: 'click' }, // 2024年爱情运势
@@ -41,7 +41,7 @@ const pay_info = {
 const modal_info = {
   h5_wealth2024: { module: 10005, 'content_id': -10024, 'event_name': 'page_view_ioswealty_guidance', type: 'page_view' }, // 2024年财运
   h5_annual2024: { module: 10003, 'content_id': -10024, 'event_name': 'page_view_iosyear_guidance', type: 'page_view' }, // 2024年年运
-  h5_annual2025: { module: 10003, 'content_id': -10024, 'event_name': 'page_view_iosyear_guidance', type: 'page_view' }, // 2024年年运
+  h5_annual2025: { module: 10015, 'content_id': -10011, 'event_name': 'page_view_Year2025_end_guidance', type: 'page_view' }, // 2025年年运
   h5_weigh_bone: { module: 10009, 'content_id': -10024, 'event_name': 'page_view_ioschenggu_guidance', type: 'page_view' }, // 袁天罡秤骨
   h5_bai_gua: { module: 10008, 'content_id': -10024, 'event_name': 'page_view_ios64gua_guidance', type: 'page_view' }, // 鬼谷子
   h5_emotion2024: { module: 10006, 'content_id': -10033, 'event_name': 'page_view_ioslove_guidance', type: 'page_view' }, // 2024年爱情运势

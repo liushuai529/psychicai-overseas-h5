@@ -1,7 +1,6 @@
 <template>
   <div :class="['animation-page', getBgImg]" v-if="show_modal">
-    <canvas id="canvas_mp" :class="['daji', product_key === 'consult_time' ? 'po-top' : '']">
-    </canvas>
+  
     <img :class="['mp', product_key === 'consult_time' ? 'mg-top' : '']" :src="getMpImg" />
     <div :class="['progress-container', getBgTip, is_consult ? 'consult-color' : '']">
       <div>{{ getTipText }}</div>

@@ -163,7 +163,6 @@ export default {
 
       if (!val) {
         utils.firebaseLogEvent(this.e_id, this.c_id, this.e_name, 'click', {
-          args_name: this.e_name,
           channel: utils.getFBChannel(),
         });
         await utils.asleep(1000);

@@ -102,9 +102,9 @@
       tips5_style="width: 5.19rem;height: 1.03rem;margin-bottom: .3rem;"
       @showModal="code_modal = true"
       a_token="qncisx"
-      e_id="10003"
-      c_id="-10010"
-      e_name="click_2024report_result"
+      e_id="10015"
+      c_id="-10009"
+      e_name="click_Year2025_end_copy"
     />
 
     <CodePop v-if="code_modal" @close="code_modal = false" />
@@ -315,43 +315,18 @@ export default {
           mlxz_action_desc: '开始上报firebase埋点',
           mlxz_order_status: report_status,
         });
-        if (discount_pay) {
-          utils.firebaseLogEvent(
-            '10003',
-            '-10017',
-            'event_status_2024reportdiscont_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024reportdiscont_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (repay) {
-          utils.firebaseLogEvent(
-            '10002',
-            '-10012',
-            'event_status_2024reporthistory_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024reporthistory_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
+      
+       
 
-        if (!discount_pay && !repay) {
-          utils.firebaseLogEvent(
-            '10003',
-            '-10007',
-            'event_status_2024report_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024report_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
+        utils.firebaseLogEvent(
+          '10015',
+          '-10007',
+          'event_status_Year2025_end_pay_success',
+          'event_status',
+          {
+            channel: utils.getFBChannel(),
+          }
+        );
 
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成firebase埋点上报',
@@ -400,42 +375,16 @@ export default {
           mlxz_action_desc: '开始上报埋点',
           mlxz_order_status: report_status,
         });
-        if (discount_pay) {
-          utils.firebaseLogEvent(
-            '10003',
-            '-10018',
-            'event_status_2024reportdiscount_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024reportdiscount_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (repay) {
-          utils.firebaseLogEvent(
-            '10002',
-            '-10021',
-            'event_status_2024reporthistory_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024reporthistory_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (!discount_pay && !repay) {
-          utils.firebaseLogEvent(
-            '10003',
-            '-10008',
-            'event_status_2024report_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024report_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
+       
+        utils.firebaseLogEvent(
+          '10015',
+          '-10008',
+          'event_status_Year2025_end_pay_fail',
+          'event_status',
+          {
+            channel: utils.getFBChannel(),
+          }
+        );
 
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成上报埋点',

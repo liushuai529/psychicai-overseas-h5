@@ -240,7 +240,7 @@
                 <span>{{ $t('tips-7') }}{{ item.transfer_code || '-' }}</span>
                 <span @click="copyCode(item.transfer_code)" class="copy">{{
                   $t('tips-8')
-                }}</span>
+                  }}</span>
               </div>
 
               <div @click="handleJump(item)" :class="[
@@ -333,8 +333,8 @@ const event_enums = {
     c_name: 'click_history_2024report_repay',
   },
   h5_annual2025: {
-    c_id: '-10003',
-    c_name: 'click_history_2024report_repay',
+    c_id: '-10013',
+    c_name: 'click_history_Year2025_end_repay',
   },
   h5_emotion2024: {
     c_id: '-10004',
@@ -418,16 +418,28 @@ export default {
   },
 
   mounted() {
-    utils.firebaseLogEvent(
-      '10002',
-      '-10001',
-      'page_view_history',
-      'page_view',
-      {
-        args_name: 'page_view_history',
-        channel: utils.getFBChannel(),
-      }
-    );
+
+    if (product_key === 'h5_annual2025') {
+      utils.firebaseLogEvent(
+        '10015',
+        '-10012',
+        'page_view_Year2025_end_history',
+        'page_view',
+        {
+          channel: utils.getFBChannel(),
+        }
+      );
+    } else {
+      utils.firebaseLogEvent(
+        '10002',
+        '-10001',
+        'page_view_history',
+        'page_view',
+        {
+          channel: utils.getFBChannel(),
+        }
+      );
+    }
 
     this.is_android = utils.isAndroid();
     this.getData();
@@ -561,6 +573,17 @@ export default {
       // }
       let url = path_enums[item.product_key];
       if (item.status === 'PAYED') {
+        if (item.product_key === 'h5_annual2025') {
+          utils.firebaseLogEvent(
+            '10015',
+            '-10014',
+            'click_history_Year2025_end_check',
+            'click',
+            {
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
         if (item.ext.name || item.ext.male_name) {
           // 跳转详情页
           location.href = `${url}.html#/result?order_id=${item.id}&status=${item.status}`;
@@ -677,16 +700,30 @@ export default {
           // 组合下单结束
           return;
         }
-        utils.firebaseLogEvent(
-          '10002',
-          event_enums[product_key].c_id,
-          event_enums[product_key].c_name,
-          'click',
-          {
-            args_name: event_enums[product_key].c_name,
-            channel: utils.getFBChannel(),
-          }
-        );
+        if (product_key === 'h5_annual2025') {
+          utils.firebaseLogEvent(
+            '10015',
+            event_enums[product_key].c_id,
+            event_enums[product_key].c_name,
+            'click',
+            {
+              args_name: event_enums[product_key].c_name,
+              channel: utils.getFBChannel(),
+            }
+          );
+        } else {
+          utils.firebaseLogEvent(
+            '10002',
+            event_enums[product_key].c_id,
+            event_enums[product_key].c_name,
+            'click',
+            {
+              args_name: event_enums[product_key].c_name,
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+
         let params = {
           pay_method,
           product_key,

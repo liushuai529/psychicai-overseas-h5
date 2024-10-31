@@ -22,8 +22,8 @@
     <div :class="['method-box']">
       <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
       <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
-        :query_user_string="query_user_string" e_view_id="10006" c_view_id="-10005" e_view_name="view_2024lovely_pay"
-        a_view_token="184kba" c_click_id="-10006" e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
+        :query_user_string="query_user_string" e_view_id="10015" c_view_id="-10006" e_view_name="click_Year2025_end_pay"
+        a_view_token="184kba" c_click_id="-10006" e_click_name="click_Year2025_end_pay" a_click_token="2rov44" />
     </div>
     <img :src="is_cn ? cn_card_0 : tw_card_0" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_1 : tw_card_1" class="card-bg" alt="" />
@@ -37,16 +37,8 @@
     <img :src="is_cn ? cn_card_9 : tw_card_9" class="card-bg" alt="" />
     <img :src="is_cn ? cn_card_10 : tw_card_10" class="card-bg" alt="" />
     <div style="width: 100%; height: 0.02rem; opacity: 0.1;">.</div>
-    <!-- <div  @click="showPayModal_year" class="get-report-btn fix-box">
-      <img class="huxi-btn" :src="is_cn ? cn_pay_btn : tw_pay_btn" alt="" />
-    </div> -->
+   
     <div class="footer"></div>
-
-    <!-- <payModal :product_key="product_key" v-model="pay_modal" :bg="modal_bg" :query_user_string="query_user_string"
-      :title="username_title" e_view_id="10003" c_view_id="-10005" e_view_name="view_2024report_pay"
-      a_view_token="t57k8s" c_click_id="-10006" e_click_name="click_2024report_pay" a_click_token="pil6oj"
-      @close="pay_modal = false" /> -->
-
 
     <NewFooter product_key="h5_annual2025" />
     <img @click="payOrder" :class="['emo-btn', 'fix-btn']" :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x" />
@@ -365,23 +357,7 @@ export default {
           .toString()} ${this.picker_hour}`;
     },
 
-    /**
-     * @description: 打开支付弹窗
-     * @return {*}
-     */
-    showPayModal_year() {
-      utils.firebaseLogEvent(
-        '10003',
-        '-10004',
-        'click_2024report_mid',
-        'click',
-        {
-          args_name: 'click_2024report_mid',
-          channel: utils.getFBChannel(),
-        }
-      );
-      this.pay_modal = true;
-    },
+  
     payOrder() {
       // localStorage.removeItem('mlxz_count_pay_item_h5_emotion2024');
       this.$refs.payDetail.payMoney();

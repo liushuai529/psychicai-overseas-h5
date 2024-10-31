@@ -412,7 +412,6 @@ export default {
         'page_view_year2025_end_main',
         'page_view',
         {
-          args_name: 'page_view_year2025_end_main',
           channel: utils.getFBChannel(),
         }
       );
