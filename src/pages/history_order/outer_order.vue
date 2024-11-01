@@ -418,7 +418,7 @@ export default {
   },
 
   mounted() {
-
+    let product_key = utils.getQueryString('product_key');
     if (product_key === 'h5_annual2025') {
       utils.firebaseLogEvent(
         '10015',
