@@ -209,12 +209,11 @@ export default {
     });
 
     utils.firebaseLogEvent(
-      '10003',
-      '-10009',
-      'page_view_2024report_result',
+      '10015',
+      '-10018',
+      'page_view_year2025_result',
       'page_view',
       {
-        args_name: 'page_view_2024report_result',
         channel: utils.getFBChannel(),
       }
     );
