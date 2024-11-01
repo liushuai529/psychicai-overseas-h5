@@ -121,13 +121,29 @@ const getFBChannel = () => {
     return 'enjoyA11';
   } else if (url.indexOf('/ads12/') > -1) {
     return 'ads12';
+  } else if (url.indexOf('/mlzyy03/') > -1) {
+    return 'mlzyy03';
+  } else if (url.indexOf('/mlzyy05/') > -1) {
+    return 'mlzyy05';
+  } else if (url.indexOf('/mlzyy07/') > -1) {
+    return 'mlzyy07';
+  } else if (url.indexOf('/mlzyy08') > -1) {
+    return 'mlzyy08';
+  } else if (url.indexOf('/mlzyy09/') > -1) {
+    return 'mlzyy09';
+  } else if (url.indexOf('/mlzyy10/') > -1) {
+    return 'mlzyy10';
+  } else if (url.indexOf('/mlzyy11/') > -1) {
+    return 'mlzyy11';
+  } else if (url.indexOf('/mlzyy12/') > -1) {
+    return 'mlzyy12';
   } else {
     return 'enjoy05';
   }
 };
 
 const isShowCombine = () => {
-  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05","ocean05","ocean105" ];
+  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "mlzyy03","ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05","ocean05","ocean105", "mlzyy05" ];
 };
 
 /**
@@ -188,6 +204,14 @@ const getFbId = () => {
     'ads111': '1253997898931627',
     'enjoyA11': '1621066301776872',
     'ads12': '1253997898931627',
+    'mlzyy03': '484821661378293',
+    'mlzyy05': '484821661378293',
+    'mlzyy07': '484821661378293',
+    'mlzyy08': '484821661378293',
+    'mlzyy09': '484821661378293',
+    'mlzyy10': '484821661378293',
+    'mlzyy11': '484821661378293',
+    'mlzyy12': '484821661378293',
   }
 }
 
