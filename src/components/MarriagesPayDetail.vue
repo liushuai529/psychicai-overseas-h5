@@ -116,10 +116,12 @@ import 'vant/lib/index.css';
 import GroupPurchase from './GroupPurchase.vue';
 import PayBtn from './PayBtn.vue';
 import ConsultPayBtn from './ConsultPayBtn.vue';
-import img_district_malaysia_cn from '../assets/img/emotion_marriages/cn/img_district_malaysia_cn.webp';
-import img_district_malaysia_tw from '../assets/img/emotion_marriages/tw/img_district_malaysia_tw.webp';
-import img_district_taiwan_cn from '../assets/img/emotion_marriages/cn/img_district_taiwan_cn.webp';
-import img_district_taiwan_tw from '../assets/img/emotion_marriages/tw/img_district_taiwan_tw.webp';
+// import img_district_malaysia_cn from '../assets/img/emotion_marriages/cn/img_district_malaysia_cn.webp';
+// import img_district_malaysia_tw from '../assets/img/emotion_marriages/tw/img_district_malaysia_tw.webp';
+// import img_district_taiwan_cn from '../assets/img/emotion_marriages/cn/img_district_taiwan_cn.webp';
+// import img_district_taiwan_tw from '../assets/img/emotion_marriages/tw/img_district_taiwan_tw.webp';
+import img_district_malaysia from '../assets/img/emotion_marriages/img_district_malaysia.webp';
+import img_district_taiwan from '../assets/img/emotion_marriages/img_district_taiwan.webp';
 import img_home_btu_zixun_cn from '../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp'
 import img_home_btu_zixun_tw from '../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp'
 import btn_pay_cn_1x from '../assets/img/year_of_lucky_2025/cn/btn_pay_cn_1x.webp'
@@ -197,10 +199,8 @@ export default {
       img_home_btu_zixun_tw,
       btn_pay_cn_1x,
       btn_pay_tw_1x,
-      img_district_malaysia_cn,
-      img_district_malaysia_tw,
-      img_district_taiwan_cn,
-      img_district_taiwan_tw,
+      img_district_malaysia,
+      img_district_taiwan,
       img_home_btu_zixun_nt_cn_1x,
       img_home_btu_zixun_nt_tw_1x,
       img_home_btu_zixun_rm_cn_1x,
@@ -317,17 +317,9 @@ export default {
     },
     getImg() {
       if (this.current_country && this.current_country.iso_code === 'TW') {
-        if (this.is_cn) {
-          return img_district_taiwan_cn
-        } else {
-          return img_district_taiwan_tw
-        }
+        return img_district_taiwan
       } else {
-        if (this.is_cn) {
-          return img_district_malaysia_cn
-        } else {
-          return img_district_malaysia_tw
-        }
+        return img_district_malaysia
       }
     },
     buy_people() {
