@@ -75,17 +75,6 @@ export default {
             }
 
             // 运势 今日运势订单成功支付事件 action
-            tStatistic.send({
-              event: 'action',
-              md: 2,
-              c_id: 107,
-              args: {
-                type:
-                  this.fortune_index == 0 ? 1 : this.fortune_index == 1 ? 2 : 3,
-                origin: location.origin,
-                channel: localStorage.getItem('suishen_overseas_channel'),
-              },
-            });
           } else if (this.combine_type) {
             try {
               fbq('trackCustom', 'CustomPurchase', {
@@ -95,17 +84,7 @@ export default {
               console.log('no fbq:', err);
             }
 
-            // 测测 成功支付组合商品
-            tStatistic.send({
-              event: 'action',
-              md: 10,
-              c_id: 117,
-              args: {
-                type: this.combine_type,
-                origin: location.origin,
-                channel: localStorage.getItem('suishen_overseas_channel'),
-              },
-            });
+           
           } else {
             let typeMap = {
               marriage_measure_overseas: '1',
@@ -123,17 +102,7 @@ export default {
               console.log('no fbq:', err);
             }
 
-            // 测算详情 订单成功支付事件
-            tStatistic.send({
-              event: 'action',
-              md: 13,
-              c_id: 104,
-              args: {
-                type: typeMap[this.path],
-                origin: location.origin,
-                channel: localStorage.getItem('suishen_overseas_channel'),
-              },
-            });
+            
           }
 
           try {
