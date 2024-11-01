@@ -40,54 +40,23 @@
       </div>
     </div>
 
-    <!-- <contentDetail
-      v-if="fortune.review2023"
-      :result="fortune.review2023"
-      :item_index="1"
-    /> -->
-    <contentDetail
-      v-if="fortune.whole2024"
-      :result="fortune"
-      :item_index="1"
-    />
-    <contentDetail
-      v-if="advice"
-      :result="advice"
-      :baoshi_icon="baoshi_icon"
-      :item_index="2"
-    />
-    <contentDetail
-      v-if="fortune.taisui2024"
-      :result="fortune.taisui2024"
-      :item_index="3"
-    />
-    <contentDetail v-if="fortune.gold2024" :result="fortune" :item_index="4" />
-    <contentDetail
-      v-if="fortune.career2024"
-      :result="fortune.career2024"
-      :item_index="5"
-    />
-    <contentDetail
-      v-if="fortune.wealth2024"
-      :result="fortune.wealth2024"
-      :item_index="6"
-    />
-    <contentDetail
-      v-if="fortune.emotion2024"
-      :result="fortune.emotion2024"
-      :item_index="7"
-    />
-    <contentDetail
-      v-if="fortune.health2024"
-      :result="fortune.health2024"
-      :item_index="8"
-    />
-    <contentDetail
-      v-if="fortune.scores2024"
-      :result="fortune.scores2024"
-      :content_arr="fortune.scores2024content"
-      :item_index="9"
-    />
+    <contentDetail v-if="fortune.whole2024" :result="fortune" :item_index="1" />
+    <contentDetail v-if="advice" :result="advice" :baoshi_icon="baoshi_icon" :item_index="2" />
+    <contentDetail v-if="fortune.xinggedesc" :result="fortune" :item_index="3" />
+    <contentDetail v-if="fortune.taisuititle" :result="fortune" :item_index="4" />
+    <!--年度事业分析-->
+    <contentDetail v-if="fortune.career2024" :result="fortune.career2024" :item_index="5" />
+    <!--年度财运分析-->
+    <contentDetail v-if="fortune.wealth2024" :result="fortune.wealth2024" :item_index="6" />
+    <!--年度感情分析-->
+    <contentDetail v-if="fortune.emotion2024" :result="fortune.emotion2024" :item_index="7" />
+    <!--年度健康提示-->
+    <contentDetail v-if="fortune.health2024" :result="fortune.health2024" :item_index="8" />
+    <!--特别提示-->
+    <contentDetail v-if="fortune.gold2024content" :result="fortune.gold2024content" :item_index="9" />
+    <!--每月运势-->
+    <contentDetail v-if="fortune.scores2024" :result="fortune" :content_arr="fortune.scores2024content"
+      :item_index="10" />
     <CopyCode
       :set_title="true"
       title_icon="https://psychicai-static.psychicai.pro/imgs/24044ccbe8a8dcea4ff3b56f8b525ba1f351.png"

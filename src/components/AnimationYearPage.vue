@@ -82,10 +82,10 @@ export default {
       type: String,
     },
     sex: {
-      type: String,
+      type: Number,
     },
     gongli_nongli: {
-      type: String,
+      type: Number,
     },
     picker_date_yangli: {
       type: String,
@@ -94,19 +94,19 @@ export default {
       type: String,
     },
     gan: {
-      type: String,
+      type: Array,
     },
     zhi: {
-      type: String,
+      type: Array,
     },
     nayin: {
-      type: String,
+      type: Array,
     },
     is_result: {
-      type: String,
+      type: Boolean,
     },
     score: {
-      type: String,
+      type: Array,
     },
 
   },
