@@ -97,7 +97,7 @@ const tips_arr9 = {
 const show_info = {
   h5_wealth2024: {module: 10005, 'content_id': -10020, 'event_name': 'view_2024wealty_download', type: 'view'}, // 2024年财运
   h5_annual2024: {module: 10003, 'content_id': -10020, 'event_name': 'view_2024report_download', type: 'view'}, // 2024年年运
-  h5_annual2025: {module: 10003, 'content_id': -10020, 'event_name': 'view_2024report_download', type: 'view'}, // 2025年年运
+  h5_annual2025: {module: 10015, 'content_id': -10020, 'event_name': 'view_year2025_download', type: 'view'}, // 2025年年运
   h5_weigh_bone: {module: 10009, 'content_id': -10020, 'event_name': 'view_chenggu_download', type: 'view'}, // 袁天罡秤骨
   h5_bai_gua: {module: 10008, 'content_id': -10020, 'event_name': 'view_64gua_download', type: 'view'}, // 鬼谷子
   h5_emotion2024: {module: 10006, 'content_id': -10029, 'event_name': 'view_2024lovely_download', type: 'view'}, // 2024年爱情运势
@@ -107,7 +107,7 @@ const show_info = {
 const copy_info = {
   h5_wealth2024: {module: 10005, 'content_id': -10021, 'event_name': 'click_2024wealty_copy', type: 'click'}, // 2024年财运
   h5_annual2024: {module: 10003, 'content_id': -10021, 'event_name': 'click_2024report_copy', type: 'click'}, // 2024年年运
-  h5_annual2025: {module: 10003, 'content_id': -10021, 'event_name': 'click_2024report_copy', type: 'click'}, // 2025年年运
+  h5_annual2025: {module: 10015, 'content_id': -10021, 'event_name': 'click_year2025_copy', type: 'click'}, // 2025年年运
   h5_weigh_bone: {module: 10009, 'content_id': -10021, 'event_name': 'click_chenggu_copy', type: 'click'}, // 袁天罡秤骨
   h5_bai_gua: {module: 10008, 'content_id': -10021, 'event_name': 'click_64gua_copy', type: 'click'}, // 鬼谷子
   h5_emotion2024: {module: 10006, 'content_id': -10030, 'event_name': 'click_2024lovely_copy', type: 'click'}, // 2024年爱情运势
@@ -117,7 +117,7 @@ const copy_info = {
 const down_info = {
   h5_wealth2024: {module: 10005, 'content_id': -10022, 'event_name': 'click_2024wealty_download', type: 'click'}, // 2024年财运
   h5_annual2024: {module: 10003, 'content_id': -10022, 'event_name': 'click_2024report_download', type: 'click'}, // 2024年年运
-  h5_annual2025: {module: 10003, 'content_id': -10022, 'event_name': 'click_2024report_download', type: 'click'}, // 2024年年运
+  h5_annual2025: {module: 10015, 'content_id': -10022, 'event_name': 'click_year2025_download', type: 'click'}, // 2025年年运
   h5_weigh_bone: {module: 10009, 'content_id': -10022, 'event_name': 'click_chenggu_download', type: 'click'}, // 袁天罡秤骨
   h5_bai_gua: {module: 10008, 'content_id': -10022, 'event_name': 'click_64gua_download', type: 'click'}, // 鬼谷子
   h5_emotion2024: {module: 10006, 'content_id': -10031, 'event_name': 'click_2024lovely_download', type: 'click'}, // 2024年爱情运势
@@ -178,7 +178,6 @@ export default {
     if(this.show_modal) {
       this.$emit('change_pop_modal', true)
       utils.firebaseLogEvent(show_info[this.product_key]['module'], show_info[this.product_key]['content_id'], show_info[this.product_key]['event_name'], show_info[this.product_key]['type'], {
-        args_name: show_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
     }
@@ -204,13 +203,11 @@ export default {
       if(val === 0) return
       Toast(tips_arr4[lang]);
       utils.firebaseLogEvent(copy_info[this.product_key]['module'], copy_info[this.product_key]['content_id'], copy_info[this.product_key]['event_name'], copy_info[this.product_key]['type'], {
-        args_name: copy_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
     },
     downClick() {
       utils.firebaseLogEvent(down_info[this.product_key]['module'], down_info[this.product_key]['content_id'], down_info[this.product_key]['event_name'], down_info[this.product_key]['type'], {
-        args_name: down_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
       this.handleCopyCode(0);

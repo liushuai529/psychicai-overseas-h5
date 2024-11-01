@@ -123,74 +123,74 @@ for (var pathname in entries) {
 }
 
 
-// // panda代理01
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/panda01/' + filename + '.html'),
-//     template: 'template/index_panda.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
+// panda代理01
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/panda01/' + filename + '.html'),
+    template: 'template/index_panda.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
-// // // panda代理02
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/panda02/' + filename + '.html'),
-//     template: 'template/index_panda02.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
+// // panda代理02
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/panda02/' + filename + '.html'),
+    template: 'template/index_panda02.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
-// // // enjoy02代理
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/enjoy02/' + filename + '.html'),
-//     template: 'template/index_enjoy02.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
+// // enjoy02代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy02/' + filename + '.html'),
+    template: 'template/index_enjoy02.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 // ads03代理
 for (var pathname in entries) {
@@ -215,234 +215,234 @@ for (var pathname in entries) {
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
-// // ads103代理
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/ads103/' + filename + '.html'),
-//     template: 'template/index_ads103.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
+// ads103代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads103/' + filename + '.html'),
+    template: 'template/index_ads103.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
-// // enjoy03代理
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/enjoy03/' + filename + '.html'),
-//     template: 'template/index_enjoy03.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
+// enjoy03代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy03/' + filename + '.html'),
+    template: 'template/index_enjoy03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
-// // enjoy103代理
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/enjoy103/' + filename + '.html'),
-//     template: 'template/index_enjoy103.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+// enjoy103代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy103/' + filename + '.html'),
+    template: 'template/index_enjoy103.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
-// // enjoy203代理
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/enjoy203/' + filename + '.html'),
-//     template: 'template/index_enjoy203.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
+// enjoy203代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy203/' + filename + '.html'),
+    template: 'template/index_enjoy203.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
-// // enjoy303代理
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/enjoy303/' + filename + '.html'),
-//     template: 'template/index_enjoy303.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
+// enjoy303代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy303/' + filename + '.html'),
+    template: 'template/index_enjoy303.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
-// // enjoyA03代理
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/enjoyA03/' + filename + '.html'),
-//     template: 'template/index_enjoyA03.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
+// enjoyA03代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoyA03/' + filename + '.html'),
+    template: 'template/index_enjoyA03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
-// // panda03代理
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/panda03/' + filename + '.html'),
-//     template: 'template/index_panda03.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
+// panda03代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/panda03/' + filename + '.html'),
+    template: 'template/index_panda03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
     
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
 
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
-// // ocean03代理
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/ocean03/' + filename + '.html'),
-//     template: 'template/index_ocean03.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+// ocean03代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ocean03/' + filename + '.html'),
+    template: 'template/index_ocean03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
-// // ocean103代理
-// for (var pathname in entries) {
-//   var filename = pathname.split('/')[pathname.split('/').length - 1];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/ocean103/' + filename + '.html'),
-//     template: 'template/index_ocean103.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
+// ocean103代理
+for (var pathname in entries) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ocean103/' + filename + '.html'),
+    template: 'template/index_ocean103.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
    
-//   }
+  }
 
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
-// // google_ocean03代理
-// for (let pathname_google_ocean03 of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
-//   let filename_google_ocean03 = pathname_google_ocean03.split('/')[0];
-//   let conf_google_ocean03 = {
-//     filename: path.resolve(__dirname, '../dist/google_ocean03/' + filename_google_ocean03 + '.html'),
-//     template: 'template/index_google_ocean03.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname_google_ocean03 in webpackConfig.entry) {
-//     conf_google_ocean03.chunks = ['manifest', 'vendor', pathname_google_ocean03];
-//     conf_google_ocean03.hash = false;
-//   }
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf_google_ocean03));
-// }
+// google_ocean03代理
+for (let pathname_google_ocean03 of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  let filename_google_ocean03 = pathname_google_ocean03.split('/')[0];
+  let conf_google_ocean03 = {
+    filename: path.resolve(__dirname, '../dist/google_ocean03/' + filename_google_ocean03 + '.html'),
+    template: 'template/index_google_ocean03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname_google_ocean03 in webpackConfig.entry) {
+    conf_google_ocean03.chunks = ['manifest', 'vendor', pathname_google_ocean03];
+    conf_google_ocean03.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf_google_ocean03));
+}
 
 
 // ads05代理
@@ -467,192 +467,192 @@ for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
-// // ads105代理
-// for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
-//   var filename = pathname.split('/')[0];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/ads105/' + filename + '.html'),
-//     template: 'template/index_ads105.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+// ads105代理
+for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads105/' + filename + '.html'),
+    template: 'template/index_ads105.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 
 
 
-// // enjoy05代理
-// for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
-//   var filename = pathname.split('/')[0];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/enjoy05/' + filename + '.html'),
-//     template: 'template/index_enjoy05.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+// enjoy05代理
+for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy05/' + filename + '.html'),
+    template: 'template/index_enjoy05.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 
 
-// // enjoy105代理
-// for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
-//   var filename = pathname.split('/')[0];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/enjoy105/' + filename + '.html'),
-//     template: 'template/index_enjoy105.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+// enjoy105代理
+for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy105/' + filename + '.html'),
+    template: 'template/index_enjoy105.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 
-// // enjoy205代理
-// for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
-//   var filename = pathname.split('/')[0];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/enjoy205/' + filename + '.html'),
-//     template: 'template/index_enjoy205.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+// enjoy205代理
+for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy205/' + filename + '.html'),
+    template: 'template/index_enjoy205.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 
-// // enjoy305代理
-// for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
-//   var filename = pathname.split('/')[0];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/enjoy305/' + filename + '.html'),
-//     template: 'template/index_enjoy305.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+// enjoy305代理
+for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoy305/' + filename + '.html'),
+    template: 'template/index_enjoy305.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
-// // enjoyA05代理
-// for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
-//   var filename = pathname.split('/')[0];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/enjoyA05/' + filename + '.html'),
-//     template: 'template/index_enjoyA05.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
-
-
-
-// // ocean05代理
-// for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
-//   var filename = pathname.split('/')[0];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/ocean05/' + filename + '.html'),
-//     template: 'template/index_ocean05.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+// enjoyA05代理
+for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/enjoyA05/' + filename + '.html'),
+    template: 'template/index_enjoyA05.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 
 
-// // ocean105代理
-// for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
-//   var filename = pathname.split('/')[0];
-//   var conf = {
-//     filename: path.resolve(__dirname, '../dist/ocean105/' + filename + '.html'),
-//     template: 'template/index_ocean105.html',
-//     inject: true,
-//     minify: {
-//       removeComments: true,
-//       collapseWhitespace: true,
-//       removeAttributeQuotes: true,
-//       minifyJS: true,
-//       minifyCSS: true,
-//     },
-//   };
-//   if (pathname in webpackConfig.entry) {
-//     conf.chunks = ['manifest', 'vendor', pathname];
-//     conf.hash = false;
-//   }
-//   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-// }
+// ocean05代理
+for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ocean05/' + filename + '.html'),
+    template: 'template/index_ocean05.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+
+
+// ocean105代理
+for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ocean105/' + filename + '.html'),
+    template: 'template/index_ocean105.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 
 
@@ -1223,6 +1223,186 @@ for (var pathname of ['year_of_lucky_2025/year_of_lucky_2025', 'user_agreement/u
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads12/' + filename + '.html'),
     template: 'template/index_ads12.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+
+
+// mlzyy03代理
+for (let pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  let filename = pathname.split('/')[0];
+  let conf = {
+    filename: path.resolve(__dirname, '../dist/mlzyy03/' + filename + '.html'),
+    template: 'template/index_mlzyy03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+
+// mlzyy05代理
+for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/mlzyy05/' + filename + '.html'),
+    template: 'template/index_mlzyy05.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// mlzyy07代理
+for (var pathname of ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/mlzyy07/' + filename + '.html'),
+    template: 'template/index_mlzyy07.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+
+// mlzyy08代理
+for (var pathname of ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/mlzyy08/' + filename + '.html'),
+    template: 'template/index_mlzyy08.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// mlzyy09代理
+for (var pathname of ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/mlzyy09/' + filename + '.html'),
+    template: 'template/index_mlzyy09.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// mlzyy10代理
+for (var pathname of ['emotion_remarriage/emotion_remarriage', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/mlzyy10/' + filename + '.html'),
+    template: 'template/index_mlzyy10.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// mlzyy11代理
+for (var pathname of ['emotion_end/emotion_end', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/mlzyy11/' + filename + '.html'),
+    template: 'template/index_mlzyy11.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// mlzyy12代理
+for (var pathname of ['year_of_lucky_2025/year_of_lucky_2025', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/mlzyy12/' + filename + '.html'),
+    template: 'template/index_mlzyy12.html',
     inject: true,
     minify: {
       removeComments: true,

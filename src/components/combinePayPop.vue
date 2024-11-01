@@ -363,7 +363,6 @@ export default {
         'event_status_pay_type',
         'event_status',
         {
-          args_name: 'event_status_pay_type',
           pay_type: click_.title,
         }
       );

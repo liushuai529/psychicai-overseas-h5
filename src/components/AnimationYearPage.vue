@@ -1,8 +1,9 @@
 <template>
   <div :class="['animation-page', getBgImg]" v-if="show_modal">
-    <canvas id="canvas_mp" :class="['daji', product_key === 'consult_time' ? 'po-top' : '']">
-    </canvas>
-    <img :class="['mp', product_key === 'consult_time' ? 'mg-top' : '']" :src="getMpImg" />
+
+    <UserInfoAnimation :username="username" :sex="sex" :gongli_nongli="gongli_nongli" :picker_date_yangli="picker_date_yangli"
+      :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi" :nayin="nayin" :is_result="false"
+      :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" />
     <div :class="['progress-container', getBgTip, is_consult ? 'consult-color' : '']">
       <div>{{ getTipText }}</div>
       <div :class="['progress-uncheck', is_consult ? 'consult-progress-uncheck' : '']">
@@ -15,6 +16,7 @@
 import utils from '../libs/utils';
 
 import { Downloader, Parser, Player } from 'svga.lite';
+import UserInfoAnimation from '../pages/year_of_lucky_2025/detail/user_info_animation.vue';
 import bg_bzhh from '../assets/img/components/animation_page/img_bj_hehun.png';
 import bg_emotion from '../assets/img/components/animation_page/img_bj_ganqing.png';
 import cn_bg_emotion_fate from '../assets/img/components/animation_page/cn/img_loading_bj_cn.webp';
@@ -35,6 +37,10 @@ const log_info = {
 
 export default {
   name: 'AnimationPage',
+  components: {
+    UserInfoAnimation,
+
+  },
   data() {
     return {
       show_modal: true,
@@ -60,6 +66,9 @@ export default {
       tw_emotion_fate_mp,
     }
   },
+  // :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
+  //         :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
+  //         :nayin="nayin" :is_result="false" :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]"
   props: {
     visible: {
       type: Boolean,
@@ -68,7 +77,38 @@ export default {
     product_key: {
       type: String,
       default: 'h5_emotion2024'
-    }
+    },
+    username: {
+      type: String,
+    },
+    sex: {
+      type: Number,
+    },
+    gongli_nongli: {
+      type: Number,
+    },
+    picker_date_yangli: {
+      type: String,
+    },
+    picker_date_nongli: {
+      type: String,
+    },
+    gan: {
+      type: Array,
+    },
+    zhi: {
+      type: Array,
+    },
+    nayin: {
+      type: Array,
+    },
+    is_result: {
+      type: Boolean,
+    },
+    score: {
+      type: Array,
+    },
+
   },
   watch: {
     visible(val) {
@@ -76,17 +116,17 @@ export default {
     },
   },
   created() {
-    this.timer = setInterval(this.updateTime, 500);
-    utils.firebaseLogEvent(log_info[this.product_key]['module'], log_info[this.product_key]['content_id'], log_info[this.product_key]['event_name'], log_info[this.product_key]['type'], {
-      args_name: log_info[this.product_key]['event_name'],
-      channel: utils.getFBChannel(),
-    });
+    // this.timer = setInterval(this.updateTime, 500);
+    // utils.firebaseLogEvent(log_info[this.product_key]['module'], log_info[this.product_key]['content_id'], log_info[this.product_key]['event_name'], log_info[this.product_key]['type'], {
+    //   args_name: log_info[this.product_key]['event_name'],
+    //   channel: utils.getFBChannel(),
+    // });
   },
   mounted() {
-    this.loadBg(
-      '#canvas_mp',
-      this.getSvgUrl
-    );
+    // this.loadBg(
+    //   '#canvas_mp',
+    //   this.getSvgUrl
+    // );
   },
   computed: {
     is_consult() {

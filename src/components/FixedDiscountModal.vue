@@ -30,7 +30,7 @@ const show_info = {
   master_tarot: { module: 10010, 'content_id': -10027, 'event_name': 'view_tarotfail_download', type: 'view' },
   h5_wealth2024: { module: 10005, 'content_id': -10025, 'event_name': 'view_2024wealtyfail_download', type: 'view' }, // 2024年财运
   h5_annual2024: { module: 10003, 'content_id': -10025, 'event_name': 'view_2024reportfail_download', type: 'view' }, // 2024年年运
-  h5_annual2025: { module: 10003, 'content_id': -10025, 'event_name': 'view_2024reportfail_download', type: 'view' }, // 2025年年运
+  h5_annual2025: { module: 10015, 'content_id': -10015, 'event_name': 'view_year2025fail_download', type: 'view' }, // 2025年年运
   h5_weigh_bone: { module: 10009, 'content_id': -10025, 'event_name': 'view_chenggufail_download', type: 'view' }, // 袁天罡秤骨
   h5_bai_gua: { module: 10008, 'content_id': -10025, 'event_name': 'view_64guafail_download', type: 'view' }, // 鬼谷子
   h5_emotion2024: { module: 10006, 'content_id': -10035, 'event_name': 'view_2024lovelyfail_download', type: 'view' }, // 2024年爱情运势
@@ -42,7 +42,7 @@ const copy_info = {
   master_tarot: { module: 10010, 'content_id': -10028, 'event_name': 'click_tarotfail_copy', type: 'click' },
   h5_wealth2024: { module: 10005, 'content_id': -10026, 'event_name': 'click_2024wealtyfail_copy', type: 'click' }, // 2024年财运
   h5_annual2024: { module: 10003, 'content_id': -10026, 'event_name': 'click_2024reportfail_copy', type: 'click' }, // 2024年年运
-  h5_annual2025: { module: 10003, 'content_id': -10026, 'event_name': 'click_2024reportfail_copy', type: 'click' }, // 2025年年运
+  h5_annual2025: { module: 10015, 'content_id': -10016, 'event_name': 'click_year2025fail_copy', type: 'click' }, // 2025年年运
   h5_weigh_bone: { module: 10009, 'content_id': -10026, 'event_name': 'click_chenggufail_copy', type: 'click' }, // 袁天罡秤骨
   h5_bai_gua: { module: 10008, 'content_id': -10026, 'event_name': 'click_64guafail_copy', type: 'click' }, // 鬼谷子
   h5_emotion2024: { module: 10006, 'content_id': -10036, 'event_name': 'click_2024lovelyfail_copy', type: 'click' }, // 2024年爱情运势
@@ -54,7 +54,7 @@ const down_info = {
   master_tarot: { module: 10010, 'content_id': -10029, 'event_name': 'click_tarotfail_download', type: 'click' },
   h5_wealth2024: { module: 10005, 'content_id': -10027, 'event_name': 'click_2024wealtyfail_download', type: 'click' }, // 2024年财运
   h5_annual2024: { module: 10003, 'content_id': -10027, 'event_name': 'click_2024reportfail_download', type: 'click' }, // 2024年年运
-  h5_annual2025: { module: 10003, 'content_id': -10027, 'event_name': 'click_2024reportfail_download', type: 'click' }, // 2025年年运
+  h5_annual2025: { module: 10015, 'content_id': -10017, 'event_name': 'click_year2025fail_download', type: 'click' }, // 2025年年运
   h5_weigh_bone: { module: 10009, 'content_id': -10027, 'event_name': 'click_chenggufail_download', type: 'click' }, // 袁天罡秤骨
   h5_bai_gua: { module: 10008, 'content_id': -10027, 'event_name': 'click_64guafail_download', type: 'click' }, // 鬼谷子
   h5_emotion2024: { module: 10006, 'content_id': -10037, 'event_name': 'click_2024lovelyfail_download', type: 'click' }, // 2024年爱情运势
@@ -96,13 +96,11 @@ export default {
       if (val === 0) return
       Toast(tips_arr4[lang]);
       utils.firebaseLogEvent(copy_info[this.product_key]['module'], copy_info[this.product_key]['content_id'], copy_info[this.product_key]['event_name'], copy_info[this.product_key]['type'], {
-        args_name: copy_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
     },
     down() {
       utils.firebaseLogEvent(down_info[this.product_key]['module'], down_info[this.product_key]['content_id'], down_info[this.product_key]['event_name'], down_info[this.product_key]['type'], {
-        args_name: down_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
       this.copy(0);
@@ -117,7 +115,6 @@ export default {
           this.$emit('change_discount_modal', true)
           this.show = true;
           utils.firebaseLogEvent(show_info[this.product_key]['module'], show_info[this.product_key]['content_id'], show_info[this.product_key]['event_name'], show_info[this.product_key]['type'], {
-            args_name: show_info[this.product_key]['event_name'],
             channel: utils.getFBChannel(),
           });
         }

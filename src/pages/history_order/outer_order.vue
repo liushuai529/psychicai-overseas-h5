@@ -333,14 +333,18 @@ const event_enums = {
     c_name: 'click_history_2024report_repay',
   },
   h5_annual2025: {
-    c_id: '-10003',
-    c_name: 'click_history_2024report_repay',
+    c_id: '-10013',
+    c_name: 'click_history_Year2025_end_repay',
   },
   h5_emotion2024: {
     c_id: '-10004',
     c_name: 'click_history_2024lovely_repay',
   },
 };
+
+const copy_info = {
+  h5_annual2025: { module: 10015, 'content_id': -10023, 'event_name': 'click_history_year2025_end_copy', type: 'click' }, // 2025年年运
+}
 
 export default {
   data() {
@@ -418,16 +422,28 @@ export default {
   },
 
   mounted() {
-    utils.firebaseLogEvent(
-      '10002',
-      '-10001',
-      'page_view_history',
-      'page_view',
-      {
-        args_name: 'page_view_history',
-        channel: utils.getFBChannel(),
-      }
-    );
+    let product_key = utils.getQueryString('product_key');
+    if (product_key === 'h5_annual2025') {
+      utils.firebaseLogEvent(
+        '10015',
+        '-10012',
+        'page_view_Year2025_end_history',
+        'page_view',
+        {
+          channel: utils.getFBChannel(),
+        }
+      );
+    } else {
+      utils.firebaseLogEvent(
+        '10002',
+        '-10001',
+        'page_view_history',
+        'page_view',
+        {
+          channel: utils.getFBChannel(),
+        }
+      );
+    }
 
     this.is_android = utils.isAndroid();
     this.getData();
@@ -533,7 +549,6 @@ export default {
         'click_history_download',
         'click',
         {
-          args_name: 'click_history_download',
           channel: utils.getFBChannel(),
         }
       );
@@ -561,6 +576,17 @@ export default {
       // }
       let url = path_enums[item.product_key];
       if (item.status === 'PAYED') {
+        if (item.product_key === 'h5_annual2025') {
+          utils.firebaseLogEvent(
+            '10015',
+            '-10014',
+            'click_history_Year2025_end_check',
+            'click',
+            {
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
         if (item.ext.name || item.ext.male_name) {
           // 跳转详情页
           location.href = `${url}.html#/result?order_id=${item.id}&status=${item.status}`;
@@ -635,7 +661,6 @@ export default {
                 ? '-10030'
                 : '-10031';
             utils.firebaseLogEvent('10002', e_id, e_name, 'click', {
-              args_name: e_name,
               channel: utils.getFBChannel(),
             });
           } else {
@@ -647,10 +672,6 @@ export default {
                 : 'click_history_report3_repay',
               'click',
               {
-                args_name:
-                  length_ === 2
-                    ? 'click_history_report2_repay'
-                    : 'click_history_report3_repay',
                 channel: utils.getFBChannel(),
               }
             );
@@ -677,16 +698,28 @@ export default {
           // 组合下单结束
           return;
         }
-        utils.firebaseLogEvent(
-          '10002',
-          event_enums[product_key].c_id,
-          event_enums[product_key].c_name,
-          'click',
-          {
-            args_name: event_enums[product_key].c_name,
-            channel: utils.getFBChannel(),
-          }
-        );
+        if (product_key === 'h5_annual2025') {
+          utils.firebaseLogEvent(
+            '10015',
+            event_enums[product_key].c_id,
+            event_enums[product_key].c_name,
+            'click',
+            {
+              channel: utils.getFBChannel(),
+            }
+          );
+        } else {
+          utils.firebaseLogEvent(
+            '10002',
+            event_enums[product_key].c_id,
+            event_enums[product_key].c_name,
+            'click',
+            {
+              channel: utils.getFBChannel(),
+            }
+          );
+        }
+
         let params = {
           pay_method,
           product_key,
@@ -863,9 +896,15 @@ export default {
      * @return {*}
      */
     copyCode(code) {
+      let product_key = utils.getQueryString('product_key');
       utils.copyText('mlxz-' + code);
       Toast('复制成功');
       this.code_modal = true;
+      if (copy_info[product_key]) {
+        utils.firebaseLogEvent(copy_info[product_key]['module'], copy_info[product_key]['content_id'], copy_info[product_key]['event_name'], copy_info[product_key]['type'], {
+          channel: utils.getFBChannel(),
+        });
+      }
     },
 
     backPage() {

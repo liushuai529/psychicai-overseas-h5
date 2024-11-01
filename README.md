@@ -66,6 +66,9 @@ https://overseas.psychicai.pro/enjoy10/emotion_remarriage.html
 11链接为感情复合（getTWChannel获取当前国家码需要特殊处理）前端针对09链接，不做 FB 像素上报 Purchase
 https://overseas.psychicai.pro/enjoy11/emotion_end.html
 
+12链接为2025年运
+https://overseas.psychicai.pro/ads12/year_of_lucky_2025.html
+
 
 bjzxmlxz域名投放链接
 

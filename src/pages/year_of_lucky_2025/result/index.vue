@@ -1,7 +1,7 @@
 
 <template>
   <div :class="['result', is_cn? 'cn-bg': 'tw-bg', show_pop_modal? 'hidden-scroll': '']">   
-    <ResultPopup product_key="h5_annual2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />  
+    <ResultPopup product_key="h5_annual2025" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />  
     <!-- <UserInfo
       :username="username"
       :sex="sex"
@@ -40,54 +40,23 @@
       </div>
     </div>
 
-    <!-- <contentDetail
-      v-if="fortune.review2023"
-      :result="fortune.review2023"
-      :item_index="1"
-    /> -->
-    <contentDetail
-      v-if="fortune.whole2024"
-      :result="fortune"
-      :item_index="1"
-    />
-    <contentDetail
-      v-if="advice"
-      :result="advice"
-      :baoshi_icon="baoshi_icon"
-      :item_index="2"
-    />
-    <contentDetail
-      v-if="fortune.taisui2024"
-      :result="fortune.taisui2024"
-      :item_index="3"
-    />
-    <contentDetail v-if="fortune.gold2024" :result="fortune" :item_index="4" />
-    <contentDetail
-      v-if="fortune.career2024"
-      :result="fortune.career2024"
-      :item_index="5"
-    />
-    <contentDetail
-      v-if="fortune.wealth2024"
-      :result="fortune.wealth2024"
-      :item_index="6"
-    />
-    <contentDetail
-      v-if="fortune.emotion2024"
-      :result="fortune.emotion2024"
-      :item_index="7"
-    />
-    <contentDetail
-      v-if="fortune.health2024"
-      :result="fortune.health2024"
-      :item_index="8"
-    />
-    <contentDetail
-      v-if="fortune.scores2024"
-      :result="fortune.scores2024"
-      :content_arr="fortune.scores2024content"
-      :item_index="9"
-    />
+    <contentDetail v-if="fortune.whole2024" :result="fortune" :item_index="1" />
+    <contentDetail v-if="advice" :result="advice" :baoshi_icon="baoshi_icon" :item_index="2" />
+    <contentDetail v-if="fortune.xinggedesc" :result="fortune" :item_index="3" />
+    <contentDetail v-if="fortune.taisuititle" :result="fortune" :item_index="4" />
+    <!--年度事业分析-->
+    <contentDetail v-if="fortune.career2024" :result="fortune.career2024" :item_index="5" />
+    <!--年度财运分析-->
+    <contentDetail v-if="fortune.wealth2024" :result="fortune.wealth2024" :item_index="6" />
+    <!--年度感情分析-->
+    <contentDetail v-if="fortune.emotion2024" :result="fortune.emotion2024" :item_index="7" />
+    <!--年度健康提示-->
+    <contentDetail v-if="fortune.health2024" :result="fortune.health2024" :item_index="8" />
+    <!--特别提示-->
+    <contentDetail v-if="fortune.gold2024content" :result="fortune.gold2024content" :item_index="9" />
+    <!--每月运势-->
+    <contentDetail v-if="fortune.scores2024" :result="fortune" :content_arr="fortune.scores2024content"
+      :item_index="10" />
     <CopyCode
       :set_title="true"
       title_icon="https://psychicai-static.psychicai.pro/imgs/24044ccbe8a8dcea4ff3b56f8b525ba1f351.png"
@@ -102,9 +71,9 @@
       tips5_style="width: 5.19rem;height: 1.03rem;margin-bottom: .3rem;"
       @showModal="code_modal = true"
       a_token="qncisx"
-      e_id="10003"
-      c_id="-10010"
-      e_name="click_2024report_result"
+      e_id="10015"
+      c_id="-10009"
+      e_name="click_Year2025_end_copy"
     />
 
     <CodePop v-if="code_modal" @close="code_modal = false" />
@@ -209,12 +178,11 @@ export default {
     });
 
     utils.firebaseLogEvent(
-      '10003',
-      '-10009',
-      'page_view_2024report_result',
+      '10015',
+      '-10018',
+      'page_view_year2025_result',
       'page_view',
       {
-        args_name: 'page_view_2024report_result',
         channel: utils.getFBChannel(),
       }
     );
@@ -315,43 +283,18 @@ export default {
           mlxz_action_desc: '开始上报firebase埋点',
           mlxz_order_status: report_status,
         });
-        if (discount_pay) {
-          utils.firebaseLogEvent(
-            '10003',
-            '-10017',
-            'event_status_2024reportdiscont_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024reportdiscont_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (repay) {
-          utils.firebaseLogEvent(
-            '10002',
-            '-10012',
-            'event_status_2024reporthistory_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024reporthistory_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
+      
+       
 
-        if (!discount_pay && !repay) {
-          utils.firebaseLogEvent(
-            '10003',
-            '-10007',
-            'event_status_2024report_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024report_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
+        utils.firebaseLogEvent(
+          '10015',
+          '-10007',
+          'event_status_Year2025_end_pay_success',
+          'event_status',
+          {
+            channel: utils.getFBChannel(),
+          }
+        );
 
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成firebase埋点上报',
@@ -400,42 +343,16 @@ export default {
           mlxz_action_desc: '开始上报埋点',
           mlxz_order_status: report_status,
         });
-        if (discount_pay) {
-          utils.firebaseLogEvent(
-            '10003',
-            '-10018',
-            'event_status_2024reportdiscount_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024reportdiscount_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (repay) {
-          utils.firebaseLogEvent(
-            '10002',
-            '-10021',
-            'event_status_2024reporthistory_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024reporthistory_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (!discount_pay && !repay) {
-          utils.firebaseLogEvent(
-            '10003',
-            '-10008',
-            'event_status_2024report_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024report_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
+       
+        utils.firebaseLogEvent(
+          '10015',
+          '-10008',
+          'event_status_Year2025_end_pay_fail',
+          'event_status',
+          {
+            channel: utils.getFBChannel(),
+          }
+        );
 
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成上报埋点',
