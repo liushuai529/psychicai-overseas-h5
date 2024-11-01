@@ -240,7 +240,7 @@
                 <span>{{ $t('tips-7') }}{{ item.transfer_code || '-' }}</span>
                 <span @click="copyCode(item.transfer_code)" class="copy">{{
                   $t('tips-8')
-                  }}</span>
+                }}</span>
               </div>
 
               <div @click="handleJump(item)" :class="[
@@ -341,6 +341,10 @@ const event_enums = {
     c_name: 'click_history_2024lovely_repay',
   },
 };
+
+const copy_info = {
+  h5_annual2025: { module: 10015, 'content_id': -10023, 'event_name': 'click_history_year2025_end_copy', type: 'click' }, // 2025年年运
+}
 
 export default {
   data() {
@@ -900,9 +904,15 @@ export default {
      * @return {*}
      */
     copyCode(code) {
+      let product_key = utils.getQueryString('product_key');
       utils.copyText('mlxz-' + code);
       Toast('复制成功');
       this.code_modal = true;
+      if (copy_info[product_key]) {
+        utils.firebaseLogEvent(copy_info[product_key]['module'], copy_info[product_key]['content_id'], copy_info[product_key]['event_name'], copy_info[product_key]['type'], {
+          channel: utils.getFBChannel(),
+        });
+      }
     },
 
     backPage() {
