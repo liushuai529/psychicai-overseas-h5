@@ -108,6 +108,13 @@ export default {
       // }
     });
   },
+  watch: {
+    gan(val) {
+     if(val) {
+      console.log('val', val)
+     } 
+    },
+  },
   filters: {
     filter_name(val) {
       return utils.getShortStr(val, 8);

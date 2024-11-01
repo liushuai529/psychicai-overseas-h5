@@ -1,7 +1,7 @@
 <template>
   <div :class="['animation-page', getBgImg]" v-if="show_modal">
 
-    <UserInfo :username="username" :sex="sex" :gongli_nongli="gongli_nongli" :picker_date_yangli="picker_date_yangli"
+    <UserInfoAnimation :username="username" :sex="sex" :gongli_nongli="gongli_nongli" :picker_date_yangli="picker_date_yangli"
       :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi" :nayin="nayin" :is_result="false"
       :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" />
     <div :class="['progress-container', getBgTip, is_consult ? 'consult-color' : '']">
@@ -16,7 +16,7 @@
 import utils from '../libs/utils';
 
 import { Downloader, Parser, Player } from 'svga.lite';
-import UserInfo from '../pages/year_of_lucky_2025/detail/user_info_animation.vue';
+import UserInfoAnimation from '../pages/year_of_lucky_2025/detail/user_info_animation.vue';
 import bg_bzhh from '../assets/img/components/animation_page/img_bj_hehun.png';
 import bg_emotion from '../assets/img/components/animation_page/img_bj_ganqing.png';
 import cn_bg_emotion_fate from '../assets/img/components/animation_page/cn/img_loading_bj_cn.webp';
@@ -38,7 +38,7 @@ const log_info = {
 export default {
   name: 'AnimationPage',
   components: {
-    UserInfo,
+    UserInfoAnimation,
 
   },
   data() {

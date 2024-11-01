@@ -388,7 +388,7 @@ export default {
       utils.firebaseLogEvent(
         '10015',
         '-10002',
-        'view_year2005_end_main',
+        'view_year2025_end_main',
         'view',
         {
           channel: utils.getFBChannel(),
