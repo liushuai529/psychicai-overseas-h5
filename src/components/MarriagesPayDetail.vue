@@ -64,7 +64,7 @@
       <div class="item-container">
         <div class="method-text">支付方式</div>
         <div class="city">
-          <div>国家/地区：</div>
+          <div>{{ is_cn? '请选择币种': '請選擇幣種' }}</div>
           <img :src="getImg" @click="changeCity" />
         </div>
       </div>
