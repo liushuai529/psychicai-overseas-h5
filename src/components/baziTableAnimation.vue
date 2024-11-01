@@ -21,7 +21,7 @@
         borderColor: border_color,
         color: change_color ? text_color : '',
       }">
-        <div :class="[{ fadein_animation: true }]">
+        <div :class="[{ 'not-show': true, show: status1,  fadein_animation: status1 }]">
           <span>姓名：</span>
           <span>{{ username | filter_name }}</span>
         </div>
@@ -30,7 +30,7 @@
         borderColor: border_color,
         color: change_color ? text_color : '',
       }" class="birth name">
-        <div :class="[{ fadein_animation: true }]">{{
+        <div :class="[{ 'not-show': true, show: status2,  fadein_animation: status2 }]">{{
           gongli_nongli ? picker_date_yangli : picker_date_nongli
         }}</div>
       </tr>
@@ -43,25 +43,25 @@
           borderColor: border_color,
         }">
 
-          <div :class="[{ fadein_animation: true }]">年柱</div>
+          <div :class="[{ 'not-show': true, show: status3,  fadein_animation: status3 }]">年柱</div>
         </td>
         <td :style="{
           borderColor: border_color,
         }">
 
-          <div :class="[{ fadein_animation: true }]">月柱</div>
+          <div :class="[{ 'not-show': true, show: status3,  fadein_animation: status3 }]">月柱</div>
         </td>
         <td :style="{
           borderColor: border_color,
         }">
 
-          <div :class="[{ fadein_animation: true }]">日柱</div>
+          <div :class="[{ 'not-show': true, show: status3,  fadein_animation: status3 }]">日柱</div>
         </td>
         <td :style="{
           borderColor: border_color,
         }">
 
-          <div :class="[{ fadein_animation: true }]">时柱</div>
+          <div :class="[{ 'not-show': true, show: status3,  fadein_animation: status3 }]">时柱</div>
         </td>
       </tr>
       <tr class="v-zhu">
@@ -357,8 +357,18 @@ export default {
       tips5: tipsArr5[lang],
       tips6: tipArr6[lang],
       tips7: tipArr7[lang],
+      status1: false,
+      status2: false,
+      status3: false,
+      status4: false,
+      status5: false,
+      status6: false,
+      status7: false,
+      status8: false,
+      status9: false,
     };
   },
+  
   filters: {
     filter_name(val) {
       return utils.getShortStr(val, 8);
@@ -369,6 +379,27 @@ export default {
   },
 
   computed: {},
+  watch: {
+    gan(val) {
+     if(val) {
+      setTimeout(() => {
+        this.status1 = true;
+      }, 500);
+      setTimeout(() => {
+        this.status2 = true;
+      }, 1000);
+      setTimeout(() => {
+        this.status3 = true;
+      }, 1500);
+      setTimeout(() => {
+        this.status4 = true;
+      }, 2000);
+      setTimeout(() => {
+        this.status5 = true;
+      }, 2500);
+     } 
+    },
+  },
   mounted() {
     // this.loadBg(
     //   '#canvasji',
@@ -439,8 +470,12 @@ export default {
   animation: fadein 0.2s;
 }
 
-.hidden1 {
-  opacity: 0;
+.not-show {
+  visibility: hidden;
+}
+
+.show {
+  visibility: visible;
 }
 
 .career-ji {

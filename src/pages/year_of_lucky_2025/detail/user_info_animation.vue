@@ -9,7 +9,7 @@
       class="title-2"
       alt=""
     /> -->
-    <BaziTable
+    <BaziTableAnimation
       :sex="sex"
       :is_result="is_result"
       :username="username"
@@ -27,7 +27,7 @@
       :shi_ye_num="shi_ye_num"
       :wuxingqiang="wuxingqiang"
       :change_color="false"
-    ></BaziTable>
+    ></BaziTableAnimation>
 
     <!-- 折线图 -->
     <!-- <div v-if="!is_result" class="graph-box">
@@ -51,7 +51,7 @@ import cn_title_2 from '../../../assets/img/mlxz/year_of_lucky_2024/img_word3.we
 import tw_title_2 from '../../../assets/img/mlxz/year_of_lucky_2024/img_word3.webp';
 // import * as echarts from 'echarts';
 
-import BaziTable from '../../../components/baziTableAnimation.vue';
+import BaziTableAnimation from '../../../components/baziTableAnimation.vue';
 const Getmonth = () => {
   let arr = [];
   for (let i = 0; i < 12; i++) {
@@ -81,7 +81,7 @@ export default {
     'wuxingqiang',
   ],
   components: {
-    BaziTable,
+    BaziTableAnimation,
   },
   data() {
     return {
@@ -108,13 +108,7 @@ export default {
       // }
     });
   },
-  watch: {
-    gan(val) {
-     if(val) {
-      console.log('val', val)
-     } 
-    },
-  },
+  
   filters: {
     filter_name(val) {
       return utils.getShortStr(val, 8);
