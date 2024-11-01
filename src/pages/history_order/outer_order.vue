@@ -549,7 +549,6 @@ export default {
         'click_history_download',
         'click',
         {
-          args_name: 'click_history_download',
           channel: utils.getFBChannel(),
         }
       );
@@ -662,7 +661,6 @@ export default {
                 ? '-10030'
                 : '-10031';
             utils.firebaseLogEvent('10002', e_id, e_name, 'click', {
-              args_name: e_name,
               channel: utils.getFBChannel(),
             });
           } else {
@@ -674,10 +672,6 @@ export default {
                 : 'click_history_report3_repay',
               'click',
               {
-                args_name:
-                  length_ === 2
-                    ? 'click_history_report2_repay'
-                    : 'click_history_report3_repay',
                 channel: utils.getFBChannel(),
               }
             );
@@ -711,7 +705,6 @@ export default {
             event_enums[product_key].c_name,
             'click',
             {
-              args_name: event_enums[product_key].c_name,
               channel: utils.getFBChannel(),
             }
           );
@@ -722,7 +715,6 @@ export default {
             event_enums[product_key].c_name,
             'click',
             {
-              args_name: event_enums[product_key].c_name,
               channel: utils.getFBChannel(),
             }
           );

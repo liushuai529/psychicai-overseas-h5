@@ -96,13 +96,11 @@ export default {
       if (val === 0) return
       Toast(tips_arr4[lang]);
       utils.firebaseLogEvent(copy_info[this.product_key]['module'], copy_info[this.product_key]['content_id'], copy_info[this.product_key]['event_name'], copy_info[this.product_key]['type'], {
-        args_name: copy_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
     },
     down() {
       utils.firebaseLogEvent(down_info[this.product_key]['module'], down_info[this.product_key]['content_id'], down_info[this.product_key]['event_name'], down_info[this.product_key]['type'], {
-        args_name: down_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
       this.copy(0);
@@ -117,7 +115,6 @@ export default {
           this.$emit('change_discount_modal', true)
           this.show = true;
           utils.firebaseLogEvent(show_info[this.product_key]['module'], show_info[this.product_key]['content_id'], show_info[this.product_key]['event_name'], show_info[this.product_key]['type'], {
-            args_name: show_info[this.product_key]['event_name'],
             channel: utils.getFBChannel(),
           });
         }

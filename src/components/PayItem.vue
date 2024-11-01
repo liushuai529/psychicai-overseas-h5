@@ -146,7 +146,6 @@ export default {
     },
     async pay() {
       utils.firebaseLogEvent(pay_info[this.product_key]['module'], pay_info[this.product_key]['content_id'], pay_info[this.product_key]['event_name'], pay_info[this.product_key]['type'], {
-        args_name: pay_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
         container: utils.isFBContainer() ? 'fb' : 'web'
       });
@@ -156,7 +155,6 @@ export default {
           location.href += `&mlxz_outer_open_uid=${localStorage.getItem('mlxz_outer_open_uid')}&mlxz_outer_access_token=${localStorage.getItem('mlxz_outer_access_token')}&mlxz_outer_visitor_id=${localStorage.getItem('mlxz_outer_visitor_id')}&_fbc=${localStorage.getItem('_fbc')}&_fbp=${localStorage.getItem('_fbp')}&timestamp=${new Date().getTime()}`
         }
         utils.firebaseLogEvent(modal_info[this.product_key]['module'], modal_info[this.product_key]['content_id'], modal_info[this.product_key]['event_name'], modal_info[this.product_key]['type'], {
-          args_name: modal_info[this.product_key]['event_name'],
           channel: utils.getFBChannel(),
           os: utils.isAndroid() ? 'android' : 'ios'
         });
