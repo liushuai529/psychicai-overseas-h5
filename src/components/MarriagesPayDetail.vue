@@ -116,10 +116,6 @@ import 'vant/lib/index.css';
 import GroupPurchase from './GroupPurchase.vue';
 import PayBtn from './PayBtn.vue';
 import ConsultPayBtn from './ConsultPayBtn.vue';
-// import img_district_malaysia_cn from '../assets/img/emotion_marriages/cn/img_district_malaysia_cn.webp';
-// import img_district_malaysia_tw from '../assets/img/emotion_marriages/tw/img_district_malaysia_tw.webp';
-// import img_district_taiwan_cn from '../assets/img/emotion_marriages/cn/img_district_taiwan_cn.webp';
-// import img_district_taiwan_tw from '../assets/img/emotion_marriages/tw/img_district_taiwan_tw.webp';
 import img_district_malaysia from '../assets/img/emotion_marriages/img_district_malaysia.webp';
 import img_district_taiwan from '../assets/img/emotion_marriages/img_district_taiwan.webp';
 import img_home_btu_zixun_cn from '../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp'
