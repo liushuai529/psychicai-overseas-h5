@@ -314,7 +314,6 @@ export default {
         this.e_view_name,
         'view',
         {
-          args_name: this.e_view_name,
           channel: utils.getFBChannel(),
         }
       );
@@ -476,7 +475,6 @@ export default {
           this.product_key === 'h5_emotion2024' ? 'click_2024lovelymarriage_pay' : 'click_marriage2024lovely_pay',
           'click',
           {
-            args_name: this.product_key === 'h5_emotion2024' ? 'click_2024lovelymarriage_pay' : 'click_marriage2024lovely_pay',
             pay_type: this.pay_methods[this.check_index].title,
             channel: utils.getFBChannel(),
           }
@@ -488,7 +486,6 @@ export default {
           this.e_click_name,
           'click',
           {
-            args_name: this.e_click_name,
             pay_type: this.pay_methods[this.check_index].title,
             channel: utils.getFBChannel(),
           }

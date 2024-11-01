@@ -241,7 +241,6 @@ export default {
   methods: {
     toDetailPage() {
       utils.firebaseLogEvent(this.e_id, this.c_id, this.c_name, 'click', {
-        args_name: this.c_name,
         channel: utils.getFBChannel(),
       });
       if (this.product_key === 'h5_marriage') {

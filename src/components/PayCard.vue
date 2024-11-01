@@ -476,7 +476,6 @@ export default {
         'click_report_choice',
         'click',
         {
-          args_name: 'click_report_choice',
           // pay_type: newPayMap[this.index],
           pay_type: this.index ? newPayMap[this.index] : 'NET_BANKING',
           report_id: this.lucky_re_id,
@@ -505,7 +504,6 @@ export default {
         'event_status_pay_type',
         'event_status',
         {
-          args_name: 'event_status_pay_type',
           pay_type: click_.title,
         }
       );

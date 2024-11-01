@@ -78,7 +78,6 @@ export default {
   created() {
     this.timer = setInterval(this.updateTime, 500);
     utils.firebaseLogEvent(log_info[this.product_key]['module'], log_info[this.product_key]['content_id'], log_info[this.product_key]['event_name'], log_info[this.product_key]['type'], {
-      args_name: log_info[this.product_key]['event_name'],
       channel: utils.getFBChannel(),
     });
   },
