@@ -84,8 +84,10 @@
           </div>
           <img class="right" :src="check_index === k ? checked_icon : no_check_icon" alt="" />
         </div>
-        <img v-if="sub_type === 'zheng_yuan'" class="btn emo-btn"
+        <img v-if="sub_type === 'zheng_yuan' && utils.getFBChannel() !=='ads13'" class="btn emo-btn"
           src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
+          <img v-else-if="sub_type === 'zheng_yuan' && utils.getFBChannel() ==='ads13'" class="btn emo-btn"
+          :src="is_cn? img_home_btu_chakan_cn: img_home_btu_chakan_tw" @click="payMoney" />
         <!-- <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" /> -->
         <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn"
           :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x" @click="payMoney" />
@@ -122,6 +124,9 @@ import img_home_btu_zixun_cn from '../assets/img/emotion_marriages/cn/img_home_b
 import img_home_btu_zixun_tw from '../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp'
 import btn_pay_cn_1x from '../assets/img/year_of_lucky_2025/cn/btn_pay_cn_1x.webp'
 import btn_pay_tw_1x from '../assets/img/year_of_lucky_2025/tw/btn_pay_tw_1x.webp'
+
+import img_home_btu_chakan_cn from '../assets/img/emotion_fate/cn/img_home_btu_chakan_cn.webp'
+import img_home_btu_chakan_tw from '../assets/img/emotion_fate/tw/img_home_btu_chakan_tw.webp'
 
 
 
@@ -191,6 +196,9 @@ export default {
   },
   data() {
     return {
+      utils,
+      img_home_btu_chakan_cn,
+      img_home_btu_chakan_tw,
       img_home_btu_zixun_cn,
       img_home_btu_zixun_tw,
       btn_pay_cn_1x,

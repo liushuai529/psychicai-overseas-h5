@@ -140,7 +140,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('/mlzyy12/') > -1) {
     return 'mlzyy12';
   } else {
-    return 'enjoy05';
+    return 'ads13';
   }
 };
 
