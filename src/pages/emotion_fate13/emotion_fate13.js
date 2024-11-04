@@ -6,7 +6,7 @@
  * @Description:
  */
 import Vue from 'vue';
-import App from './emotion_fate.vue';
+import App from './emotion_fate13.vue';
 import router from '../../router/emotion_fate13.js';
 import store from '../../store/index.js';
 import FastClick from 'fastclick';
