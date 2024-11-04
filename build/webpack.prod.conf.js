@@ -1240,7 +1240,7 @@ for (var pathname of ['year_of_lucky_2025/year_of_lucky_2025', 'user_agreement/u
 }
 
 // ads13代理
-for (var pathname of ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
+for (var pathname of ['emotion_fate13/emotion_fate13', 'user_agreement/user_agreement', 'privacy/privacy']) {
   var filename = pathname.split('/')[0];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads13/' + filename + '.html'),
