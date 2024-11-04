@@ -21,7 +21,7 @@
         borderColor: border_color,
         color: change_color ? text_color : '',
       }">
-        <div :class="[{ 'not-show': true, show: status1,  fadein_animation: status1 }]">
+        <div :class="[{ 'not-show': true, show: status1, fadein_animation: status1 }]">
           <span>姓名：</span>
           <span>{{ username | filter_name }}</span>
         </div>
@@ -30,7 +30,7 @@
         borderColor: border_color,
         color: change_color ? text_color : '',
       }" class="birth name">
-        <div :class="[{ 'not-show': true, show: status2,  fadein_animation: status2 }]">{{
+        <div :class="[{ 'not-show': true, show: status2, fadein_animation: status2 }]">{{
           gongli_nongli ? picker_date_yangli : picker_date_nongli
         }}</div>
       </tr>
@@ -43,25 +43,25 @@
           borderColor: border_color,
         }">
 
-          <div :class="[{ 'not-show': true, show: status3,  fadein_animation: status3 }]">年柱</div>
+          <div :class="[{ 'not-show': true, show: status3, fadein_animation: status3 }]">年柱</div>
         </td>
         <td :style="{
           borderColor: border_color,
         }">
 
-          <div :class="[{ 'not-show': true, show: status3,  fadein_animation: status3 }]">月柱</div>
+          <div :class="[{ 'not-show': true, show: status3, fadein_animation: status3 }]">月柱</div>
         </td>
         <td :style="{
           borderColor: border_color,
         }">
 
-          <div :class="[{ 'not-show': true, show: status3,  fadein_animation: status3 }]">日柱</div>
+          <div :class="[{ 'not-show': true, show: status3, fadein_animation: status3 }]">日柱</div>
         </td>
         <td :style="{
           borderColor: border_color,
         }">
 
-          <div :class="[{ 'not-show': true, show: status3,  fadein_animation: status3 }]">时柱</div>
+          <div :class="[{ 'not-show': true, show: status3, fadein_animation: status3 }]">时柱</div>
         </td>
       </tr>
       <tr class="v-zhu">
@@ -69,7 +69,7 @@
           borderColor: border_color,
         }" :class="styleColor(it)">
 
-          <div :class="[{ fadein_animation: true }]">{{ it }}</div>
+          <div :class="[{ 'not-show': true, show: get4Status(k), fadein_animation: get4Status(k) }]">{{ it }}</div>
         </td>
       </tr>
       <tr :style="{
@@ -78,7 +78,8 @@
         <td v-for="(it, k) in zhi" :key="'zhi' + k" :style="{
           borderColor: border_color,
         }" :class="styleColor(it)">
-          <div :class="[{ fadein_animation: true }]">{{ it }}</div>
+          <!-- <div :class="[{ fadein_animation: true }]">{{ it }}</div> -->
+          <div :class="[{ 'not-show': true, show: get4Status(k), fadein_animation: get4Status(k) }]">{{ it }}</div>
         </td>
       </tr>
       <!-- 用户纳音 -->
@@ -89,7 +90,7 @@
         <td v-for="(it, k) in nayin" :style="{
           borderColor: border_color,
         }" :key="'zhi' + k">
-          <div :class="[{ fadein_animation: true }]">{{ it }}</div>
+          <div :class="[{ 'not-show': true, show: status5, fadein_animation: status5 }]">{{ it }}</div>
         </td>
       </tr>
       <tr class="v-minge">
@@ -98,14 +99,15 @@
 
           borderColor: border_color,
         }" class="label-minge">
-          <div :class="[{ fadein_animation: true }]">{{ tips1 }}</div>
+          <div :class="[{ 'not-show': true, show: status6, fadein_animation: status6 }]">{{ tips1 }}</div>
         </td>
         <td class="minge-text">
           <div :style="{
             borderColor: border_color,
             color: change_color ? text_color : '',
           }" class="bottom-1 minge-row">
-            <div style="width: 100%;" :class="[, 'minge-row', { fadein_animation: true }]">
+            <div style="width: 100%;"
+              :class="[, 'minge-row', { 'not-show': true, show: status7, fadein_animation: status7 }]">
               <div class="label-100">五行</div>
               <div>?</div>
             </div>
@@ -117,14 +119,16 @@
           }" class="bottom-1 minge-row">
 
 
-            <div style="width: 100%;" :class="[, 'minge-row', { fadein_animation: true }]">
+            <div style="width: 100%;"
+              :class="[, 'minge-row', { 'not-show': true, show: status7, fadein_animation: status7 }]">
               <div class="label-100">{{ tips2 }}</div>
               <div>?</div>
             </div>
           </div>
           <div v-if="!is_show_taohua" class="minge-row">
 
-            <div style="width: 100%;" :class="[, 'minge-row', { fadein_animation: true }]">
+            <div style="width: 100%;"
+              :class="[, 'minge-row', { 'not-show': true, show: status7, fadein_animation: status7 }]">
               <div class="label-100">{{ tips3 }}</div>
               <div>?</div>
             </div>
@@ -139,7 +143,7 @@
         </td>
         <td :style="{ background: minge_color }" class="geju">
           <div v-if="!ming_ge">
-            <div style="width: 100%;" :class="[, 'minge-row', { fadein_animation: true }]">
+            <div style="width: 100%;" :class="[, 'minge-row', { 'not-show': true, show: status8, fadein_animation: status8 }]">
               <div>?</div>
               <div>?</div>
               <div>格</div>
@@ -156,7 +160,7 @@
             borderColor: border_color,
             color: change_color ? text_color : '',
           }" class="bottom-1 minge-row">
-            <div style="width: 100%;" :class="[, 'minge-row', { fadein_animation: true }]">
+            <div style="width: 100%;" :class="[, 'minge-row', { 'not-show': true, show: status9, fadein_animation: status9 }]">
               <div class="label-100">日元</div>
               <div>{{ riyuanqiangruo ? riyuanqiangruo : '？' }}</div>
             </div>
@@ -165,7 +169,7 @@
             borderColor: border_color,
             color: change_color ? text_color : '',
           }" class="bottom-1 minge-row">
-            <div style="width: 100%;" :class="[, 'minge-row', { fadein_animation: true }]">
+            <div style="width: 100%;" :class="[, 'minge-row', { 'not-show': true, show: status9, fadein_animation: status9 }]">
               <div class="label-100">{{ tips4 }}</div>
               <div>{{ getStarNum(hun_yin_num) }}</div>
             </div>
@@ -174,7 +178,7 @@
           <div v-if="!is_show_taohua" class="minge-row" :style="{
             color: change_color ? text_color : '',
           }">
-            <div style="width: 100%;" :class="[, 'minge-row', { fadein_animation: true }]">
+            <div style="width: 100%;" :class="[, 'minge-row', { 'not-show': true, show: status9, fadein_animation: status9 }]">
               <div class="label-100">{{ tips5 }}</div>
               <div>{{ getStarNum(shi_ye_num) }}</div>
             </div>
@@ -360,7 +364,10 @@ export default {
       status1: false,
       status2: false,
       status3: false,
-      status4: false,
+      'status4-0': false,
+      'status4-1': false,
+      'status4-2': false,
+      'status4-3': false,
       status5: false,
       status6: false,
       status7: false,
@@ -368,7 +375,7 @@ export default {
       status9: false,
     };
   },
-  
+
   filters: {
     filter_name(val) {
       return utils.getShortStr(val, 8);
@@ -381,23 +388,45 @@ export default {
   computed: {},
   watch: {
     gan(val) {
-     if(val) {
-      setTimeout(() => {
-        this.status1 = true;
-      }, 500);
-      setTimeout(() => {
-        this.status2 = true;
-      }, 1000);
-      setTimeout(() => {
-        this.status3 = true;
-      }, 1500);
-      setTimeout(() => {
-        this.status4 = true;
-      }, 2000);
-      setTimeout(() => {
-        this.status5 = true;
-      }, 2500);
-     } 
+      if (val) {
+        setTimeout(() => {
+          this.status1 = true;
+        }, 500);
+        setTimeout(() => {
+          this.status2 = true;
+        }, 1000);
+        setTimeout(() => {
+          this.status3 = true;
+        }, 1500);
+        setTimeout(() => {
+          this['status4-0'] = true;
+        }, 2000);
+        setTimeout(() => {
+          this['status4-1'] = true;
+        }, 2500);
+        setTimeout(() => {
+          this['status4-2'] = true;
+        }, 3000);
+        setTimeout(() => {
+          this['status4-3'] = true;
+        }, 3500);
+        setTimeout(() => {
+          this.status5 = true;
+        }, 4000);
+        setTimeout(() => {
+          this.status6 = true;
+        }, 4500);
+        setTimeout(() => {
+          this.status7 = true;
+        }, 5000);
+        setTimeout(() => {
+          this.status8 = true;
+        }, 5500);
+        setTimeout(() => {
+          this.status9 = true;
+        }, 6000);
+
+      }
     },
   },
   mounted() {
@@ -407,6 +436,25 @@ export default {
     // );
   },
   methods: {
+    get4Status(index) {
+      switch (index) {
+        case 0:
+          return this['status4-0']
+          break;
+        case 1:
+          return this['status4-1']
+          break;
+        case 2:
+          return this['status4-2']
+          break;
+        case 3:
+          return this['status4-3']
+          break;
+
+        default:
+          break;
+      }
+    },
     /**
      * @description: 获取八字颜色
      * @param {*} val

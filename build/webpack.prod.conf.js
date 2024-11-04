@@ -1239,6 +1239,29 @@ for (var pathname of ['year_of_lucky_2025/year_of_lucky_2025', 'user_agreement/u
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// ads13代理
+for (var pathname of ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads13/' + filename + '.html'),
+    template: 'template/index_ads13.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+
 
 
 // mlzyy03代理

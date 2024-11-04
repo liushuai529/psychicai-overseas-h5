@@ -121,6 +121,8 @@ const getFBChannel = () => {
     return 'enjoyA11';
   } else if (url.indexOf('/ads12/') > -1) {
     return 'ads12';
+  } else if (url.indexOf('/ads13/') > -1) {
+    return 'ads13';
   } else if (url.indexOf('/mlzyy03/') > -1) {
     return 'mlzyy03';
   } else if (url.indexOf('/mlzyy05/') > -1) {
@@ -204,6 +206,7 @@ const getFbId = () => {
     'ads111': '1253997898931627',
     'enjoyA11': '1621066301776872',
     'ads12': '1253997898931627',
+    'ads13': '1253997898931627',
     'mlzyy03': '484821661378293',
     'mlzyy05': '484821661378293',
     'mlzyy07': '484821661378293',
@@ -220,7 +223,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if(getEndStr(getFBChannel(), 2) ==='03'|| getEndStr(getFBChannel(), 2) ==='05'|| getEndStr(getFBChannel(), 2) ==='09'|| getEndStr(getFBChannel(), 2) ==='10' || getEndStr(getFBChannel(), 2) ==='11' || getEndStr(getFBChannel(), 2) ==='12' || getEndStr(getFBChannel(), 2) ==='08' || getEndStr(getFBChannel(), 2) ==='07') {
+  if(getEndStr(getFBChannel(), 2) ==='03'|| getEndStr(getFBChannel(), 2) ==='05'|| getEndStr(getFBChannel(), 2) ==='09'|| getEndStr(getFBChannel(), 2) ==='10' || getEndStr(getFBChannel(), 2) ==='11' || getEndStr(getFBChannel(), 2) ==='12' || getEndStr(getFBChannel(), 2) ==='13' || getEndStr(getFBChannel(), 2) ==='08' || getEndStr(getFBChannel(), 2) ==='07') {
     if(localStorage.getItem('current_country')) {
       return {area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code']}
     } else {
