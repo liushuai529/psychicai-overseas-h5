@@ -190,8 +190,7 @@ export default {
       };
 
       params.callback_url = `${location.origin
-        }/${utils.getFBChannel()}/${url}.html#/result?path=${path_enums[product_key]
-        }&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}&product_id=${product_id}`;
+        }/${utils.getFBChannel()}/${url}.html#/result?path=${url}&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}&product_id=${product_id}`;
       const res = await payFateOrderAPI(params);
 
       Indicator.close();
