@@ -7,7 +7,8 @@
     <div :class="['progress-container', getBgTip, is_consult ? 'consult-color' : '']">
       <div>{{ getTipText }}</div>
       <div :class="['progress-uncheck', is_consult ? 'consult-progress-uncheck' : '']">
-        <div :class="['progress-check', is_consult ? 'consult-progress-check' : '']" :style="{ width: getWidth }"></div>
+        <!-- <div :class="['progress-check', is_consult ? 'consult-progress-check' : '']" :style="{ width: getWidth }"></div> -->
+        <div :class="['progress-check', is_consult ? 'consult-progress-check' : '', type1Status? 'slow_animation1': '' , type2Status? 'slow_animation2': '', type3Status? 'fast_animation': '']" style="width: 100%;" :style="{ width: type3Status? '100%': 0 }"></div>
       </div>
     </div>
   </div>
@@ -64,6 +65,9 @@ export default {
       tw_bg_emotion_fate,
       cn_emotion_fate_mp,
       tw_emotion_fate_mp,
+      type1Status: false,
+      type2Status: false,
+      type3Status: false,
     }
   },
   // :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
@@ -114,9 +118,25 @@ export default {
     visible(val) {
       this.show_modal = val;
     },
+    type3Status(val) {
+      // if(val) {
+      //   this.
+      // }
+    }
   },
   created() {
-    // this.timer = setInterval(this.updateTime, 500);
+    setTimeout(() => {
+      this.type1Status = true;
+    }, 1000);
+    setTimeout(() => {
+      this.type1Status = false;
+      this.type2Status = true;
+    }, 2000);
+    setTimeout(() => {
+      this.type2Status = false;
+      this.type3Status = true;
+    }, 3000);
+    // this.timer = setInterval(this.updateTime, 100);
     // utils.firebaseLogEvent(log_info[this.product_key]['module'], log_info[this.product_key]['content_id'], log_info[this.product_key]['event_name'], log_info[this.product_key]['type'], {
     //   args_name: log_info[this.product_key]['event_name'],
     //   channel: utils.getFBChannel(),
@@ -133,6 +153,7 @@ export default {
       return this.product_key === 'consult_time';
     },
     getWidth() {
+      console.log('this.conten', 6.3 * (this.content / 10))
       return `${6.3 * (this.content / 10)}rem`
     },
     getSvgUrl() {
@@ -209,16 +230,22 @@ export default {
     },
     updateTime() {
       this.content = this.content + 1; // 
-      if (this.content >= this.max_time) {
-        // 当时间大于5秒，停止计时器
-        clearInterval(this.timer); // 清除计时器
+      if(this.content > 10) {
         setTimeout(() => {
-          this.show_modal = false;
-          this.$emit('update-visible', false);
-          localStorage.removeItem('mlxz_outer_animation');
-        }, 2000);
-
+          this.content = 0
+        }, 150);
       }
+      
+      // if (this.content >= this.max_time) {
+      //   // 当时间大于5秒，停止计时器
+      //   clearInterval(this.timer); // 清除计时器
+      //   setTimeout(() => {
+      //     this.show_modal = false;
+      //     this.$emit('update-visible', false);
+      //     localStorage.removeItem('mlxz_outer_animation');
+      //   }, 2000);
+
+      // }
       if (this.content > 1 && this.content <= 3) {
         this.current_time = 1
       } else if (this.content > 3 && this.content <= 6) {
@@ -295,7 +322,7 @@ export default {
         position: absolute;
         top: 0;
         left: 0;
-        width: 3rem;
+        // width: 3rem;
         height: 0.16rem;
         background: #FAD180;
         border-radius: 0.08rem;
@@ -359,4 +386,46 @@ export default {
   background: url('../assets/img/components/animation_page/img_jindu_bj_zhengyuan.webp') no-repeat;
   background-size: contain;
 }
+
+@keyframes scroll1 {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes scroll2 {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes scroll3 {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.slow_animation1 {
+  animation: scroll1 1s;
+}
+.slow_animation2 {
+  animation: scroll2 1s;
+}
+
+.fast_animation {
+  animation: scroll3 3s;
+}
+
 </style>

@@ -6,7 +6,7 @@
       border: table_border,
     }" class="user-table">
       <th>
-        <div class="gua">
+        <div  :class="[{ 'gua': true, 'not-show': true, show: status0, fadein_animation: status0 }]">
           <img src="https://psychicai-static.psychicai.pro/imgs/2404347a9915ae984267b0aab1e48afe650c.png" alt="" />
           <span>{{ sex | filter_sex }}</span>
         </div>
@@ -361,6 +361,7 @@ export default {
       tips5: tipsArr5[lang],
       tips6: tipArr6[lang],
       tips7: tipArr7[lang],
+      status0: false,
       status1: false,
       status2: false,
       status3: false,
@@ -391,40 +392,43 @@ export default {
       if (val) {
         setTimeout(() => {
           this.status1 = true;
-        }, 500);
+        }, 200);
         setTimeout(() => {
           this.status2 = true;
-        }, 1000);
+        }, 400);
+        setTimeout(() => {
+          this.status0 = true;
+        }, 600); 
         setTimeout(() => {
           this.status3 = true;
-        }, 1500);
+        }, 800);
         setTimeout(() => {
           this['status4-0'] = true;
-        }, 2000);
+        }, 1000);
         setTimeout(() => {
           this['status4-1'] = true;
-        }, 2500);
+        }, 1200);
         setTimeout(() => {
           this['status4-2'] = true;
-        }, 3000);
+        }, 1400);
         setTimeout(() => {
           this['status4-3'] = true;
-        }, 3500);
+        }, 1600);
         setTimeout(() => {
           this.status5 = true;
-        }, 4000);
+        }, 1800);
         setTimeout(() => {
           this.status6 = true;
-        }, 4500);
+        }, 2000);
         setTimeout(() => {
           this.status7 = true;
-        }, 5000);
+        }, 2200);
         setTimeout(() => {
           this.status8 = true;
-        }, 5500);
+        }, 2400);
         setTimeout(() => {
           this.status9 = true;
-        }, 6000);
+        }, 2600);
 
       }
     },
