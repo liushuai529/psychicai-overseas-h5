@@ -1740,7 +1740,7 @@ const checkEmail = (email) => {
 };
 
 const showEmail = () => {
-  return getFBChannel().indexOf('02')> -1 && isIos()
+  return false
 };
 
 //获取字符串后几位

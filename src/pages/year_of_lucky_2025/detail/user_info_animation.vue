@@ -30,7 +30,7 @@
     ></BaziTableAnimation>
 
     <!-- 折线图 -->
-    <!-- <div v-if="!is_result" class="graph-box">
+    <div v-if="!is_result" class="graph-box">
       <div class="mock-box"></div>
       <div id="shiye" class="tag-1 com-text shiye">{{ $t('tips-1') }}</div>
       <div id="jiankang" class="tag-1 com-text jiankang">
@@ -38,7 +38,7 @@
       </div>
       <div id="haoyun" class="tag-2 com-text haoyun">{{ $t('tips-3') }}</div>
       <div id="echarts" class="echarts"></div>
-    </div> -->
+    </div>
 
   </div>
 </template>
@@ -94,18 +94,18 @@ export default {
   },
   mounted() {
     this.$nextTick(async () => {
-      // if (!this.is_result) {
-      //   // this.getEcharts_year();
-      //   const shiye = document.getElementById('shiye');
-      //   const jiankang = document.getElementById('jiankang');
-      //   const haoyun = document.getElementById('haoyun');
-      //   await utils.asleep(2000);
-      //   shiye.classList.add('move1');
-      //   await utils.asleep(500);
-      //   jiankang.classList.add('move2');
-      //   await utils.asleep(500);
-      //   haoyun.classList.add('move3');
-      // }
+      if (!this.is_result) {
+        this.getEcharts_year();
+        const shiye = document.getElementById('shiye');
+        const jiankang = document.getElementById('jiankang');
+        const haoyun = document.getElementById('haoyun');
+        await utils.asleep(2000);
+        shiye.classList.add('move1');
+        await utils.asleep(500);
+        jiankang.classList.add('move2');
+        await utils.asleep(500);
+        haoyun.classList.add('move3');
+      }
     });
   },
   

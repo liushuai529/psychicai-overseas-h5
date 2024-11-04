@@ -1770,10 +1770,10 @@ export default {
               mlxz_currency: 'MYR',
               mlxz_order_status: report_status,
             });
-            utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Purchase', {
-              value: report_price.toFixed(2),
-              currency: 'MYR',
-            },{eventID: this.order_id});
+            // utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Purchase', {
+            //   value: report_price.toFixed(2),
+            //   currency: 'MYR',
+            // },{eventID: this.order_id});
             // utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "purchase", {
             //   transaction_id: this.order_id,
             //   value: report_price.toFixed(2),

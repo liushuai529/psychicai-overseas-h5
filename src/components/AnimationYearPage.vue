@@ -1,14 +1,16 @@
 <template>
-  <div :class="['animation-page', getBgImg]" v-if="show_modal">
+  <div :class="['animation-page', is_cn? 'cn-bg': 'tw-bg']" v-if="show_modal">
 
-    <UserInfoAnimation :username="username" :sex="sex" :gongli_nongli="gongli_nongli" :picker_date_yangli="picker_date_yangli"
-      :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi" :nayin="nayin" :is_result="false"
-      :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" />
+    <UserInfoAnimation :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
+      :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
+      :nayin="nayin" :is_result="false" :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" />
     <div :class="['progress-container', getBgTip, is_consult ? 'consult-color' : '']">
       <div>{{ getTipText }}</div>
       <div :class="['progress-uncheck', is_consult ? 'consult-progress-uncheck' : '']">
         <!-- <div :class="['progress-check', is_consult ? 'consult-progress-check' : '']" :style="{ width: getWidth }"></div> -->
-        <div :class="['progress-check', is_consult ? 'consult-progress-check' : '', type1Status? 'slow_animation1': '' , type2Status? 'slow_animation2': '', type3Status? 'fast_animation': '']" style="width: 100%;" :style="{ width: type3Status? '100%': 0 }"></div>
+        <div
+          :class="['progress-check', is_consult ? 'consult-progress-check' : '', type1Status ? 'slow_animation1' : '', type2Status ? 'slow_animation2' : '', type3Status ? 'fast_animation' : '']"
+          style="width: 100%;" :style="{ width: type3Status ? '100%' : 0 }"></div>
       </div>
     </div>
   </div>
@@ -122,20 +124,34 @@ export default {
       // if(val) {
       //   this.
       // }
+    },
+    gan(val) {
+      if (val) {
+
+      }
     }
   },
   created() {
+    //延迟1秒执行底部滚动条动画
     setTimeout(() => {
       this.type1Status = true;
     }, 1000);
+    //执行第二遍滚动条动画
     setTimeout(() => {
       this.type1Status = false;
       this.type2Status = true;
     }, 2000);
+    //执行第三遍滚动条动画
     setTimeout(() => {
       this.type2Status = false;
       this.type3Status = true;
     }, 3000);
+
+    // setTimeout(() => {
+    //   this.show_modal = false;
+    //   this.$emit('update-visible', false);
+    //   localStorage.removeItem('mlxz_outer_animation');
+    // }, 6000);
     // this.timer = setInterval(this.updateTime, 100);
     // utils.firebaseLogEvent(log_info[this.product_key]['module'], log_info[this.product_key]['content_id'], log_info[this.product_key]['event_name'], log_info[this.product_key]['type'], {
     //   args_name: log_info[this.product_key]['event_name'],
@@ -165,16 +181,7 @@ export default {
         return this.bzhh_svga;
       }
     },
-    getBgImg() {
-      if (this.product_key === 'h5_emotion2024') {
-        return 'emotion-bg';
-      } else if (this.product_key === 'consult_time') {
-        return utils.getLanguage() === 'zh-CN' ? 'consult-bg-cn' : 'consult-bg-tw'
-      } else {
-        return 'bzhh-bg';
-      }
-
-    },
+   
 
     getMpImg() {
       if (this.product_key === 'h5_emotion2024') {
@@ -203,6 +210,9 @@ export default {
         return utils.getLanguage() === 'zh-CN' ? '3.正在分析你的运势...' : '3.正在分析你的運勢...'
       }
     },
+    is_cn() {
+      return utils.getLanguage() === 'zh-CN';
+    },
   },
   methods: {
     /**
@@ -230,12 +240,12 @@ export default {
     },
     updateTime() {
       this.content = this.content + 1; // 
-      if(this.content > 10) {
+      if (this.content > 10) {
         setTimeout(() => {
           this.content = 0
         }, 150);
       }
-      
+
       // if (this.content >= this.max_time) {
       //   // 当时间大于5秒，停止计时器
       //   clearInterval(this.timer); // 清除计时器
@@ -345,32 +355,25 @@ export default {
   }
 }
 
-.bzhh-bg {
-  background: url('../assets/img/components/animation_page/img_bj_hehun.png') no-repeat;
-  background-color: rgba(127, 20, 22, 1);
-  background-size: cover
+
+.cn-bg {
+  background: url('../assets/img/year_of_lucky_2025/cn/mig_img_topbj_cn_1x.webp') no-repeat;
+  // background: #B5291E;
+  background-size: 100% 100%;
+  width: 7.5rem;
+  // height: 12rem;
 }
 
-.emotion-bg {
-  background: url('../assets/img/components/animation_page/img_bj_ganqing.png') no-repeat;
-  background-color: rgba(236, 69, 106, 1);
-  background-size: cover
+.tw-bg {
+  background: url('../assets/img/year_of_lucky_2025/tw/mig_img_topbj_tw_1x.webp') no-repeat;
+  // background: #B5291E;
+  background-size: 100% 100%;
+  width: 7.5rem;
+  // height: 12rem;
 }
 
-.consult-bg-cn {
-  background: url('../assets/img/components/animation_page/cn/img_loading_bj_cn.webp') no-repeat;
-  background-color: #FEF1CF;
-  background-size: cover;
-  background-position: center center;
 
-}
 
-.consult-bg-tw {
-  background: url('../assets/img/components/animation_page/tw/img_loading_bj_tw.webp') no-repeat;
-  background-color: #FEF1CF;
-  background-size: cover;
-  background-position: center center;
-}
 
 .bzhh-tip-bg {
   background: url('../assets/img/components/animation_page/img_jindu_bj_hehun.png') no-repeat;
@@ -420,6 +423,7 @@ export default {
 .slow_animation1 {
   animation: scroll1 1s;
 }
+
 .slow_animation2 {
   animation: scroll2 1s;
 }
@@ -427,5 +431,4 @@ export default {
 .fast_animation {
   animation: scroll3 3s;
 }
-
 </style>

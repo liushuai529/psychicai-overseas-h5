@@ -268,10 +268,10 @@ export default {
               mlxz_currency: currency_type,
               mlxz_order_status: report_status,
             });
-            utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Purchase', {
-              value: report_price.toFixed(2),
-              currency: currency_type,
-            }, { eventID: this.order_id });
+            // utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Purchase', {
+            //   value: report_price.toFixed(2),
+            //   currency: currency_type,
+            // }, { eventID: this.order_id });
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '完成FB埋点上报，Purchase',
               mlxz_value: report_price.toFixed(2),
