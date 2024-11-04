@@ -286,7 +286,8 @@ export default {
         this.jump_loading = false;
       }, 2000);
 
-      let url = path_enums[item.product_key || 'consult_time'];
+      // let url = path_enums[item.product_key || 'consult_time'];
+      let url = 'emotion_fate13';
       if (item.order_status === 'PAYED') {
         localStorage.setItem('mlxz_reload_page_history', 1);
         localStorage.setItem('mlxz_reload_page_home', 1);

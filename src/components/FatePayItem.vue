@@ -163,6 +163,9 @@ export default {
         user_info,
       } = this.last_order;
       let url = path_enums[product_key];
+      if(url === 'emotion_fate' && utils.getEndStr(utils.getFBChannel(), 2) === '13') {
+        url = 'emotion_fate13' 
+      }
 
 
 
