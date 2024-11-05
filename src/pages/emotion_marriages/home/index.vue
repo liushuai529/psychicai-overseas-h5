@@ -402,7 +402,7 @@ export default {
   },
   methods: {
     showEmail() {
-      return utils.isIos()
+      return utils.showEmail();
     },
     setAnimation() {
       localStorage.setItem('mlxz_outer_animation', '1');
