@@ -120,11 +120,11 @@ export default {
       this.type3Status = true;
     }, 3000);
 
-    // setTimeout(() => {
-    //   this.show_modal = false;
-    //   this.$emit('update-visible', false);
-    //   localStorage.removeItem('mlxz_outer_animation');
-    // }, 6000);
+    setTimeout(() => {
+      this.show_modal = false;
+      this.$emit('update-visible', false);
+      localStorage.removeItem('mlxz_outer_animation');
+    }, 6000);
   
   },
   mounted() {
