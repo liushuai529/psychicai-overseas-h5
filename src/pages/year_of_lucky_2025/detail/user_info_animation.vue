@@ -373,7 +373,10 @@ export default {
   // margin-top: 0.37rem;
   display: flex;
   flex-direction: column;
-  font-family: PingFangSC;
+  background: url('../../../assets/img/year_of_lucky_2025/img_cardbj_1x.webp') no-repeat;
+  background-size: 100% 100%;
+  margin-top: 1.32rem;
+  padding: 0.2rem;
 
   .title {
     width: 100%;

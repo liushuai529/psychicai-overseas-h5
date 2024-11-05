@@ -1,5 +1,5 @@
 <template>
-  <div :class="['animation-page', is_cn? 'cn-bg': 'tw-bg']" v-if="show_modal">
+  <div :class="['animation-page', is_cn ? 'cn-bg' : 'tw-bg']" v-if="show_modal">
 
     <UserInfoAnimation :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
       :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
@@ -181,7 +181,7 @@ export default {
         return this.bzhh_svga;
       }
     },
-   
+
 
     getMpImg() {
       if (this.product_key === 'h5_emotion2024') {
@@ -193,20 +193,14 @@ export default {
       }
     },
     getBgTip() {
-      if (this.product_key === 'h5_emotion2024') {
-        return 'emotion-tip-bg';
-      } else if (this.product_key === 'consult_time') {
-        return 'emotion-fate-tip-bg';
-      } else {
-        return 'bzhh-tip-bg';
-      }
+      return 'tip-bg';
     },
     getTipText() {
-      if (this.current_time === 1) {
+      if (this.type1Status) {
         return utils.getLanguage() === 'zh-CN' ? '1.正在录入你的信息...' : '1.正在錄入你的信息...'
-      } else if (this.current_time === 2) {
+      } else if (type2Status) {
         return utils.getLanguage() === 'zh-CN' ? '2.正在计算你的八字...' : '2.正在計算你的八字...'
-      } else if (this.current_time === 3) {
+      } else if (type3Status) {
         return utils.getLanguage() === 'zh-CN' ? '3.正在分析你的运势...' : '3.正在分析你的運勢...'
       }
     },
@@ -307,7 +301,7 @@ export default {
   .progress-container {
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
     width: 6.9rem;
     height: 1.46rem;
     display: flex;
@@ -375,20 +369,15 @@ export default {
 
 
 
-.bzhh-tip-bg {
-  background: url('../assets/img/components/animation_page/img_jindu_bj_hehun.png') no-repeat;
-  background-size: contain;
+.tip-bg {
+  // background: url('../assets/img/components/animation_page/img_jindu_bj_hehun.png') no-repeat;
+  // background-size: contain;
+  background: linear-gradient(90deg, rgba(251, 134, 37, 0) 0%, rgba(251, 134, 37, 0.4) 50%, rgba(251, 134, 37, 0) 100%);
+  border-radius: 0px 0px 0px 0px;
+  border: 0.02rem solid;
+  border-image: linear-gradient(90deg, rgba(255, 214, 185, 0), rgba(255, 214, 185, 0.6), rgba(255, 214, 185, 0)) 2 2;
 }
 
-.emotion-tip-bg {
-  background: url('../assets/img/components/animation_page/img_jindu_bj_ganqing.png') no-repeat;
-  background-size: contain;
-}
-
-.emotion-fate-tip-bg {
-  background: url('../assets/img/components/animation_page/img_jindu_bj_zhengyuan.webp') no-repeat;
-  background-size: contain;
-}
 
 @keyframes scroll1 {
   0% {
