@@ -1,0 +1,482 @@
+<!--
+ * @Author: wujiang@weli.cn
+ * @Date: 2023-11-07 21:00:52
+ * @LastEditors: wujiang 
+ * @LastEditTime: 2024-05-31 14:19:36
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="icon"
+      type="image/webp"
+      href="https://psychicai-static.psychicai.pro/imgs/2404ee6a892eba5445598ef8d05f5a65203c.webp"
+    />
+    <title></title>
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+    <meta http-equiv="expires" content="0" />
+    <link rel="stylesheet" href="../css/swiper-3.3.1.min.css" />
+    <script async src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <script>
+      
+      function getQueryStr(key) {
+        if (typeof window !== 'undefined') {
+          let url = location.hash;
+          let theRequest = new Object();
+          if (url.indexOf('?') != -1) {
+            let str = url.substr(1).split('?')[1];
+            let strs = str.split('&');
+            for (let i = 0; i < strs.length; i++) {
+              theRequest[strs[i].split('=')[0]] = decodeURI(strs[i].split('=')[1]);
+            }
+          }
+          return theRequest[key] == null ? '' : theRequest[key];
+        }
+      }
+      function setCookie(name, value, days, path) {
+        var expires = "";
+        if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=" + (path || "/");
+      }
+      if(getQueryStr('_fbc')&&getQueryStr('_fbp')) {
+        setCookie("_fbc", getQueryStr('_fbc'), 7, "/");
+        setCookie("_fbp", getQueryStr('_fbp'), 7, "/");
+      }
+
+      if(getQueryStr('mlxz_outer_open_uid')|| getQueryStr('mlxz_outer_access_token') ||getQueryStr('mlxz_outer_visitor_id')) {
+        localStorage.setItem('mlxz_outer_open_uid', getQueryStr('mlxz_outer_open_uid'));
+        localStorage.setItem('mlxz_outer_access_token', getQueryStr('mlxz_outer_access_token'));
+        localStorage.setItem('mlxz_outer_visitor_id', getQueryStr('mlxz_outer_visitor_id'));
+      }
+      if(getQueryStr('current_country')) {
+        localStorage.setItem('current_country', decodeURIComponent(getQueryStr('current_country')));
+      }
+      
+    </script>
+    <script>
+      (function () {
+  
+        var queryString = {},
+          browserMovedToBackground = false;
+  
+        // Parse the query string so we can take individual query string params
+        (function (search) {
+  
+          search = (search || '').split(/[\&\?]/g);
+          for (var i = 0, count = search.length; i < count; i++) {
+            if (!search[i]) continue;
+            var pair = search[i].split('=');
+            queryString[pair[0]] = queryString[pair[0]] !== undefined ?
+              ([pair[1] || ''].concat(queryString[pair[0]])) :
+              (pair[1] || '');
+          }
+  
+        })(window.location.search);
+  
+        // Listen to visibility change to prevent next url
+        window.document.addEventListener("visibilitychange", function (e) {
+          browserMovedToBackground = window.document.visibilityState === 'hidden' || window.document.visibilityState === 'unloaded';
+        });
+        window.addEventListener("blur", function (e) {
+          browserMovedToBackground = true;
+        });
+  
+        var AppRedirect = {
+          /** 
+           * @expose 
+           * @public
+           * */
+          queryString: queryString,
+  
+          redirect: function (options) {
+  
+            var hasIos = !!(options.iosApp || options.iosAppStore);
+            var hasAndroid = !!(options.android);
+            var hasOverallFallback = !!(options.overallFallback);
+  
+            /**
+            * What happens now is:
+            * 1. We select the correct platform based on userAgent
+            * 2. We try to open the app using the special schema
+            *
+            *    └───> If it succeded, the we have left the browser, and went to the app.
+            *          *. If the user goes back to the browser at this stage, he will be sadly redirected to the second url (AppStore etc.)
+            *    └───> If opening the app failed (schema not recognized), then:
+            *          1. An error will be shown
+            *          2. The user will be redirected to the second url.
+            *          *.  Returning to the browser later will show the error.
+            * 
+            * For Android it's different. There's the intent:// url, which takes the "package" argument in order to fallback to the Store. 
+            * But if you want to aggregate arguments to the store, you can use the "fallback" argument for that, and supply a Store url. 
+            * QueryString arguments will be automatically aggregated.
+            */
+  
+            var tryToOpenInMultiplePhases = function (urls) {
+  
+              browserMovedToBackground = false;
+  
+              var currentIndex = 0;
+              var redirectTime = new Date();
+              window.location = urls[currentIndex++];
+  
+              var next = function () {
+                if (urls.length > currentIndex) {
+                  setTimeout(function () {
+  
+                    if (browserMovedToBackground) {
+                      console.log('Browser moved to the background, we assume that we are done here')
+                      return;
+                    }
+  
+                    if (new Date() - redirectTime > 3000) {
+                      console.log('Enough time has passed, the app is probably open');
+                    } else {
+                      redirectTime = new Date();
+                      window.location = urls[currentIndex++];
+                      next();
+                    }
+  
+                  }, 10);
+                }
+              };
+  
+              next();
+  
+            };
+  
+            // var chromeVersion = /Chrome\/([0-9\.]+)/.test(navigator.userAgent) ? navigator.userAgent.match(/Chrome\/([0-9\.]+)/)[1] : '';
+  
+            if (hasIos && /iP(hone|ad|od)/.test(navigator.userAgent)) {
+  
+              var urls = [];
+              if (options.iosApp) {
+                urls.push(options.iosApp);
+              }
+              if (options.iosAppStore) {
+                urls.push(options.iosAppStore);
+              }
+              tryToOpenInMultiplePhases(urls);
+  
+            } else if (hasAndroid && /Android/.test(navigator.userAgent)) {
+  
+              var intent = options.android;
+              var intentUrl = 'intent://' + intent.host + '#Intent;' +
+                'scheme=' + encodeURIComponent(intent.scheme) + ';' +
+                'package=' + encodeURIComponent(intent.package) + ';' +
+                (intent.action ? 'action=' + encodeURIComponent(intent.action) + ';' : '') +
+                (intent.category ? 'category=' + encodeURIComponent(intent.category) + ';' : '') +
+                (intent.component ? 'component=' + encodeURIComponent(intent.component) + ';' : '') +
+                (intent.fallback ? 'S.browser_fallback_url=' + encodeURIComponent(intent.fallback) + ';' : '') +
+                'end';
+              var anchor = document.createElement('a');
+              document.body.appendChild(anchor);
+              anchor.href = intentUrl;
+              if (anchor.click) {
+                anchor.click();
+              } else {
+                window.location = intentUrl;
+              }
+  
+            } else if (hasOverallFallback) {
+              window.location = options.overallFallback;
+            } else {
+              console.log('Unknown platform and no overallFallback URL, nothing to do');
+            }
+  
+          }
+        };
+  
+        /** @expose */
+        window.AppRedirect = AppRedirect;
+  
+      })();
+    </script>
+    
+    <!-- <script
+      async src="https://static.guance.com/browser-sdk/v3/dataflux-rum.js"
+      type="text/javascript"
+    ></script>
+    <script>
+      const is_prod = !/(localhost|192\.168|test-|console)/.test(location.href);
+
+      is_prod &&
+        window.DATAFLUX_RUM &&
+        window.DATAFLUX_RUM.init({
+          applicationId: 'psychicai_h5',
+          datakitOrigin: 'https://future-datakit.wekoi.ai', // 协议（包括：//），域名（或IP地址）[和端口号],
+          env: /(localhost|192\.168|test|console)/.test(location.href)
+            ? 'test'
+            : 'prod',
+          version: '1.0.0',
+          service: 'browser',
+          sessionSampleRate: 100,
+          sessionReplaySampleRate: 70,
+          trackInteractions: true,
+          traceType: 'ddtrace', // 非必填，默认为ddtrace，目前支持 ddtrace、zipkin、skywalking_v3、jaeger、zipkin_single_header、w3c_traceparent 6种类型
+          allowedTracingOrigins: [], // 非必填，允许注入trace采集器所需header头部的所有请求列表。可以是请求的origin，也可以是是正则
+        });
+      is_prod &&
+        window.DATAFLUX_RUM &&
+        window.DATAFLUX_RUM.startSessionReplayRecording();
+    </script> -->
+
+
+    <!-- Facebook Pixel Code -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        'script',
+        'https://connect.facebook.net/en_US/fbevents.js'
+      );
+      if(localStorage.getItem('mlxz_outer_visitor_id')) {
+        fbq('init', '1204473250855169',  {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
+      } else {
+        fbq('init', '1204473250855169');
+      }
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1204473250855169&ev=PageView&noscript=1"
+      />
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- 引入Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js" crossorigin="anonymous"></script>
+
+
+    <!-- <script>
+      //兼容客户端方法
+      window.callbackEtouchUserInfo = function () {
+        console.log('callbackEtouchUserInfo()');
+      };
+      if (/(localhost|192\.168|test-|console)/.test(location.href)) {
+        var vConsole = new VConsole();
+      }
+    </script> -->
+
+    <script>
+      (function (h, o, u, n, d) {
+        h = h[d] = h[d] || {
+          q: [],
+          onReady: function (c) {
+            h.q.push(c)
+          }
+        }
+        d = o.createElement(u)
+        d.async = 1
+        d.src = n
+        n = o.getElementsByTagName(u)[0]
+        n.parentNode.insertBefore(d, n)
+      })(
+        window,
+        document,
+        'script',
+        'https://static.guance.com/browser-sdk/v3/dataflux-rum.js',
+        'DATAFLUX_RUM'
+      )
+      
+      DATAFLUX_RUM && DATAFLUX_RUM.onReady(function () {
+        const is_prod = !/(localhost|192\.168|test-|console)/.test(location.href);
+        is_prod && DATAFLUX_RUM && DATAFLUX_RUM.init({
+          applicationId: 'psychicai_h5',
+          datakitOrigin: 'https://future-datakit.wekoi.ai', // 协议（包括：//），域名（或IP地址）[和端口号],
+          env: /(localhost|192\.168|test|console)/.test(location.href)
+            ? 'test'
+            : 'prod',
+          version: '1.0.0',
+          service: 'browser',
+          sessionSampleRate: 100,
+          sessionReplaySampleRate: 70,
+          trackInteractions: true,
+          traceType: 'ddtrace', // 非必填，默认为ddtrace，目前支持 ddtrace、zipkin、skywalking_v3、jaeger、zipkin_single_header、w3c_traceparent 6种类型
+          allowedTracingOrigins: [], // 非必填，允许注入trace采集器所需header头部的所有请求列表。可以是请求的origin，也可以是是正则
+        })
+      })
+    </script>
+   
+
+    <style>
+      body {
+        padding-bottom: constant(safe-area-inset-bottom);
+        padding-bottom: env(safe-area-inset-bottom);
+        margin: 0 auto;
+      }
+      .hidden-scroll {
+        overflow: hidden !important;
+        height: 100vh;
+      }
+      .nian-huo {
+        color: #f33f3f;
+      }
+      .nian-shui {
+        color: #0f71d2;
+      }
+      .nian-mu {
+        color: #19be1d;
+      }
+      .nian-jin {
+        color: #fb9400;
+      }
+      .nian-tu {
+        color: #9a7a4b;
+      }
+      @keyframes scaleBtn {
+        0% {
+          transform: scale(0.9);
+        }
+
+        100% {
+          transform: scale(1.1);
+        }
+      }
+      .huxi-btn {
+        animation: scaleBtn 1s infinite ease-in-out alternate;
+      }
+
+      body > div[data-own='1'] {
+        display: block !important;
+      }
+
+      .h-code {
+        display: none !important;
+      }
+      .loading-container {
+        width: 100%;
+        height: 100%;
+        font-size: 0.28rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      @keyframes btnMove {
+        0% {
+          transform: scale(0.9);
+        }
+
+        100% {
+          transform: scale(1.02);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--通用px单位解决方案-->
+    <script>
+      !(function (e, t) {
+        var n = e.documentElement,
+          i = 'orientationchange' in window ? 'orientationchange' : 'resize',
+          d =
+            (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
+            function () {
+              var t = n.clientWidth;
+              t &&
+                (t >= 750
+                  ? ((t = 750), (e.body.style.width = '750px'))
+                  : (e.body.style.width = t + 'px'),
+                (n.style.fontSize = 100 * (t / 750) + 'px'),
+                (n.dataset.width = t),
+                (n.dataset.percent = 100 * (t / 750)));
+            });
+        d(),
+          e.documentElement.classList.add('iosx' + t.devicePixelRatio),
+          e.addEventListener && t.addEventListener(i, d, !1);
+      })(document, window);
+      console.log('项目名称', 'enjoy-h5');
+    </script>
+    <script src="../js/base64.js" crossorigin="anonymous"></script>
+    <script src="../js/md5.js" crossorigin="anonymous"></script>
+    <script src="../js/zepto.min.js" crossorigin="anonymous"></script>
+    <script src="../js/mobiscroll.zepto.js" crossorigin="anonymous"></script>
+    <script src="../js/swiper-3.3.1.jquery.min.js" crossorigin="anonymous"></script>
+    <!--content-->
+    <div id="app" data-own="1">
+      <!-- <div class="loading-container">命理寻真</div> -->
+    </div>
+    <!-- built files will be auto injected -->
+
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = 'https://www.clarity.ms/tag/' + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, 'clarity', 'script', 'mfgfvho5pg');
+    </script>
+    <script>
+      !(function (d, w) {
+        const cookieMap = new Map();
+
+        document.cookie.split("; ").forEach((cookie) => {
+            const [key, value] = cookie.split("=");
+            cookieMap.set(key, value);
+        })
+        w.localStorage.setItem('_fbc', cookieMap.get("_fbc")=== undefined ? '':cookieMap.get("_fbc"))
+        w.localStorage.setItem('_fbp', cookieMap.get("_fbp")=== undefined ? '':cookieMap.get("_fbp"))
+      })(document, window);
+    </script>
+    <script>
+      function loadJs(url) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = url;
+        head.appendChild(script);
+      }
+  
+      // 测试环境加载vconsole
+      if (window.location.href.indexOf('//test-overseas.psychicai.pro/') > 0) {
+        loadJs(
+          'https://cdn.jsdelivr.net/npm/vconsole@3.3.4/dist/vconsole.min.js'
+        );
+        setTimeout(() => {
+          if(window.VConsole) {
+          var vConsole = new window.VConsole();
+        }
+        }, 4000);
+      }
+    </script>
+  </body>
+</html>
