@@ -1,5 +1,5 @@
 <template>
-  <div :class="['animation-page', is_cn ? 'cn-bg' : 'tw-bg']" v-if="show_modal">
+  <div :class="['animation-page-year', is_cn ? 'cn-bg' : 'tw-bg']" v-if="show_modal">
 
     <UserInfoAnimation :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
       :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
@@ -157,7 +157,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.animation-page {
+.animation-page-year {
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -245,16 +245,16 @@ export default {
 
 
 .cn-bg {
-  background: url('../assets/img/year_of_lucky_2025/cn/mig_img_topbj_cn_1x.webp') no-repeat;
-  // background: #B5291E;
+  background-image: url('../assets/img/year_of_lucky_2025/cn/mig_img_topbj_cn_1x.webp') no-repeat;
+  background-color: #B5291E;
   background-size: 100% 100%;
   width: 7.5rem;
   // height: 12rem;
 }
 
 .tw-bg {
-  background: url('../assets/img/year_of_lucky_2025/tw/mig_img_topbj_tw_1x.webp') no-repeat;
-  // background: #B5291E;
+  background-image: url('../assets/img/year_of_lucky_2025/tw/mig_img_topbj_tw_1x.webp') no-repeat;
+  background-color: #B5291E;
   background-size: 100% 100%;
   width: 7.5rem;
   // height: 12rem;

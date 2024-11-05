@@ -131,6 +131,8 @@ const getFBChannel = () => {
     return 'mlzyy07';
   } else if (url.indexOf('/mlzyy08') > -1) {
     return 'mlzyy08';
+  } else if (url.indexOf('/mlzyy108') > -1) {
+    return 'mlzyy108';
   } else if (url.indexOf('/mlzyy09/') > -1) {
     return 'mlzyy09';
   } else if (url.indexOf('/mlzyy10/') > -1) {
@@ -211,6 +213,7 @@ const getFbId = () => {
     'mlzyy05': '484821661378293',
     'mlzyy07': '484821661378293',
     'mlzyy08': '484821661378293',
+    'mlzyy108': '1614762922442330',
     'mlzyy09': '484821661378293',
     'mlzyy10': '484821661378293',
     'mlzyy11': '484821661378293',
