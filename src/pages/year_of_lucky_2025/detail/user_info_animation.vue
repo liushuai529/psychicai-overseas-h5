@@ -1,14 +1,6 @@
 
 <template>
   <div :class="{ 'user-info': true }">
-    <!-- <div class="title">
-      <img :src="language == 'zh-CN' ? cn_title_1 : tw_title_1" alt="" />
-    </div>
-    <img
-      :src="language == 'zh-CN' ? cn_title_2 : tw_title_2"
-      class="title-2"
-      alt=""
-    /> -->
     <BaziTableAnimation
       :sex="sex"
       :is_result="is_result"
@@ -45,11 +37,6 @@
 
 <script>
 import utils from '../../../libs/utils.js';
-import cn_title_1 from '../../../assets/img/mlxz/year_of_lucky_2024/result_img_word.webp';
-import tw_title_1 from '../../../assets/img/tw_mlxz/year_24/detail/result_img_word.webp';
-import cn_title_2 from '../../../assets/img/mlxz/year_of_lucky_2024/img_word3.webp';
-import tw_title_2 from '../../../assets/img/mlxz/year_of_lucky_2024/img_word3.webp';
-// import * as echarts from 'echarts';
 
 import BaziTableAnimation from '../../../components/baziTableAnimation.vue';
 const Getmonth = () => {
@@ -86,10 +73,6 @@ export default {
   data() {
     return {
       language: utils.getLanguage(),
-      cn_title_1,
-      tw_title_1,
-      cn_title_2,
-      tw_title_2,
     };
   },
   mounted() {

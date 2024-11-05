@@ -434,10 +434,7 @@ export default {
     },
   },
   mounted() {
-    // this.loadBg(
-    //   '#canvasji',
-    //   this.is_career ? this.career_ji : this.year_ji_svga
-    // );
+   
   },
   methods: {
     get4Status(index) {

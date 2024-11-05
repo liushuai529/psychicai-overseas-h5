@@ -7,7 +7,6 @@
     <div :class="['progress-container', getBgTip, is_consult ? 'consult-color' : '']">
       <div>{{ getTipText }}</div>
       <div :class="['progress-uncheck', is_consult ? 'consult-progress-uncheck' : '']">
-        <!-- <div :class="['progress-check', is_consult ? 'consult-progress-check' : '']" :style="{ width: getWidth }"></div> -->
         <div
           :class="['progress-check', is_consult ? 'consult-progress-check' : '', type1Status ? 'slow_animation1' : '', type2Status ? 'slow_animation2' : '', type3Status ? 'fast_animation' : '']"
           style="width: 100%;" :style="{ width: type3Status ? '100%' : 0 }"></div>
@@ -18,28 +17,12 @@
 <script>
 import utils from '../libs/utils';
 
-import { Downloader, Parser, Player } from 'svga.lite';
 import UserInfoAnimation from '../pages/year_of_lucky_2025/detail/user_info_animation.vue';
-import bg_bzhh from '../assets/img/components/animation_page/img_bj_hehun.png';
-import bg_emotion from '../assets/img/components/animation_page/img_bj_ganqing.png';
-import cn_bg_emotion_fate from '../assets/img/components/animation_page/cn/img_loading_bj_cn.webp';
-import tw_bg_emotion_fate from '../assets/img/components/animation_page/tw/img_loading_bj_tw.webp';
-import cn_bzhh_mp from '../assets/img/components/animation_page/bzhh_mp.png';
-import cn_emotion_mp from '../assets/img/components/animation_page/emotion_mp.png';
-import tw_bzhh_mp from '../assets/img/components/animation_page/bzhh_mp.png';
-import tw_emotion_mp from '../assets/img/components/animation_page/emotion_mp.png';
-import cn_emotion_fate_mp from '../assets/img/components/animation_page/emotion_fate_mp.webp';
-import tw_emotion_fate_mp from '../assets/img/components/animation_page/emotion_fate_mp.webp';
 
-const log_info = {
-  h5_emotion2024: { module: 10006, 'content_id': -10034, 'event_name': 'page_view_giflove', type: 'page_view' }, // 2024年爱情运势
-  h5_marriage: { module: 10007, 'content_id': -10036, 'event_name': 'page_view_gifmarriage', type: 'page_view' }, //合婚
-  consult_time: { module: 10011, 'content_id': -10003, 'event_name': 'page_view_giflove', type: 'page_view' }, //正缘报告
-}
 
 
 export default {
-  name: 'AnimationPage',
+  name: 'AnimationYearPage',
   components: {
     UserInfoAnimation,
 
@@ -57,16 +40,6 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/2406c6f666683c824312b07e66feb0c73ad2.svga',
       emotion_fate_svga:
         'https://psychicai-static.psychicai.pro/imgs/24084481306c796346a5ac7aafae1d5c50bf.svga',
-      bg_bzhh,
-      bg_emotion,
-      cn_bzhh_mp,
-      cn_emotion_mp,
-      tw_bzhh_mp,
-      tw_emotion_mp,
-      cn_bg_emotion_fate,
-      tw_bg_emotion_fate,
-      cn_emotion_fate_mp,
-      tw_emotion_fate_mp,
       type1Status: false,
       type2Status: false,
       type3Status: false,
@@ -147,50 +120,19 @@ export default {
       this.type3Status = true;
     }, 3000);
 
-    setTimeout(() => {
-      this.show_modal = false;
-      this.$emit('update-visible', false);
-      localStorage.removeItem('mlxz_outer_animation');
-    }, 6000);
-    // this.timer = setInterval(this.updateTime, 100);
-    // utils.firebaseLogEvent(log_info[this.product_key]['module'], log_info[this.product_key]['content_id'], log_info[this.product_key]['event_name'], log_info[this.product_key]['type'], {
-    //   args_name: log_info[this.product_key]['event_name'],
-    //   channel: utils.getFBChannel(),
-    // });
+    // setTimeout(() => {
+    //   this.show_modal = false;
+    //   this.$emit('update-visible', false);
+    //   localStorage.removeItem('mlxz_outer_animation');
+    // }, 6000);
+  
   },
   mounted() {
-    // this.loadBg(
-    //   '#canvas_mp',
-    //   this.getSvgUrl
-    // );
+  
   },
   computed: {
     is_consult() {
       return this.product_key === 'consult_time';
-    },
-    getWidth() {
-      console.log('this.conten', 6.3 * (this.content / 10))
-      return `${6.3 * (this.content / 10)}rem`
-    },
-    getSvgUrl() {
-      if (this.product_key === 'h5_emotion2024') {
-        return this.emotion_svga
-      } else if (this.product_key === 'consult_time') {
-        return this.emotion_fate_svga
-      } else {
-        return this.bzhh_svga;
-      }
-    },
-
-
-    getMpImg() {
-      if (this.product_key === 'h5_emotion2024') {
-        return utils.getLanguage() === 'zh-CN' ? cn_emotion_mp : tw_emotion_mp
-      } else if (this.product_key === 'consult_time') {
-        return utils.getLanguage() === 'zh-CN' ? cn_emotion_fate_mp : tw_emotion_fate_mp
-      } else {
-        return utils.getLanguage() === 'zh-CN' ? cn_bzhh_mp : tw_bzhh_mp
-      }
     },
     getBgTip() {
       return 'tip-bg';
@@ -209,55 +151,7 @@ export default {
     },
   },
   methods: {
-    /**
-     * @description: 加载svga动画
-     * @param {*} dom 元素dom
-     * @param {*} url svga地址
-     * @param {*} is_loop 是否循环
-     * @return {*}
-     */
-    loadBg(dom, url, is_loop = true) {
-      const downloader = new Downloader();
-      // 默认调用 WebWorker 线程解析
-      // 可配置 new Parser({ disableWorker: true }) 禁止
-      const parser = new Parser();
-      // #canvas 是 HTMLCanvasElement
-      const player = new Player(dom);
-      (async () => {
-        const fileData = await downloader.get(url);
-        const svgaData = await parser.do(fileData);
-        player.set({ loop: is_loop });
-        await player.mount(svgaData);
-        // 开始播放动画
-        player.start();
-      })();
-    },
-    updateTime() {
-      this.content = this.content + 1; // 
-      if (this.content > 10) {
-        setTimeout(() => {
-          this.content = 0
-        }, 150);
-      }
-
-      // if (this.content >= this.max_time) {
-      //   // 当时间大于5秒，停止计时器
-      //   clearInterval(this.timer); // 清除计时器
-      //   setTimeout(() => {
-      //     this.show_modal = false;
-      //     this.$emit('update-visible', false);
-      //     localStorage.removeItem('mlxz_outer_animation');
-      //   }, 2000);
-
-      // }
-      if (this.content > 1 && this.content <= 3) {
-        this.current_time = 1
-      } else if (this.content > 3 && this.content <= 6) {
-        this.current_time = 2
-      } else if (this.content > 7 && this.content <= 10) {
-        this.current_time = 3
-      }
-    },
+   
   }
 }
 </script>
