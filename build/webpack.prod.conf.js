@@ -1354,6 +1354,28 @@ for (var pathname of ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// mlzyy108代理
+for (var pathname of ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/mlzyy108/' + filename + '.html'),
+    template: 'template/index_mlzyy108.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
 // mlzyy09代理
 for (var pathname of ['emotion_marriages/emotion_marriages', 'user_agreement/user_agreement', 'privacy/privacy']) {
   var filename = pathname.split('/')[0];
