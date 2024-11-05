@@ -147,11 +147,11 @@ export default {
       this.type3Status = true;
     }, 3000);
 
-    // setTimeout(() => {
-    //   this.show_modal = false;
-    //   this.$emit('update-visible', false);
-    //   localStorage.removeItem('mlxz_outer_animation');
-    // }, 6000);
+    setTimeout(() => {
+      this.show_modal = false;
+      this.$emit('update-visible', false);
+      localStorage.removeItem('mlxz_outer_animation');
+    }, 6000);
     // this.timer = setInterval(this.updateTime, 100);
     // utils.firebaseLogEvent(log_info[this.product_key]['module'], log_info[this.product_key]['content_id'], log_info[this.product_key]['event_name'], log_info[this.product_key]['type'], {
     //   args_name: log_info[this.product_key]['event_name'],
@@ -198,9 +198,9 @@ export default {
     getTipText() {
       if (this.type1Status) {
         return utils.getLanguage() === 'zh-CN' ? '1.正在录入你的信息...' : '1.正在錄入你的信息...'
-      } else if (type2Status) {
+      } else if (this.type2Status) {
         return utils.getLanguage() === 'zh-CN' ? '2.正在计算你的八字...' : '2.正在計算你的八字...'
-      } else if (type3Status) {
+      } else if (this.type3Status) {
         return utils.getLanguage() === 'zh-CN' ? '3.正在分析你的运势...' : '3.正在分析你的運勢...'
       }
     },

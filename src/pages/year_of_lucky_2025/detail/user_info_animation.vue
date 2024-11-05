@@ -33,10 +33,10 @@
     <div v-if="!is_result" class="graph-box">
       <div class="mock-box"></div>
       <div id="shiye" class="tag-1 com-text shiye">{{ $t('tips-1') }}</div>
-      <div id="jiankang" class="tag-1 com-text jiankang">
+      <div id="jiankang" class="tag-2 com-text jiankang">
         {{ $t('tips-2') }}
       </div>
-      <div id="haoyun" class="tag-2 com-text haoyun">{{ $t('tips-3') }}</div>
+      <div id="haoyun" class="tag-3 com-text haoyun">{{ $t('tips-3') }}</div>
       <div id="echarts" class="echarts"></div>
     </div>
 
@@ -95,7 +95,9 @@ export default {
   mounted() {
     this.$nextTick(async () => {
       if (!this.is_result) {
-        this.getEcharts_year();
+        setTimeout(() => {
+          this.getEcharts_year();
+        }, 1000);
         const shiye = document.getElementById('shiye');
         const jiankang = document.getElementById('jiankang');
         const haoyun = document.getElementById('haoyun');
@@ -198,7 +200,7 @@ export default {
             type: 'line', //类型 折线
             smooth: true, //是否平滑
             itemStyle: {
-              color: '#FF7A00',
+              color: '#FE3A3A',
             },
             data: self.score,
             showSymbol: false,
@@ -206,11 +208,11 @@ export default {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
                   offset: 0,
-                  color: '#FFF1E3',
+                  color: '#FFCCC0',
                 },
                 {
                   offset: 1,
-                  color: '#FDFAEC',
+                  color: '#FFCCC0',
                 },
               ]),
             },
@@ -489,12 +491,17 @@ export default {
   }
 
   .tag-1 {
-    background: url('https://psychicai-static.psychicai.pro/imgs/240478be5c9f4f28446ca874ac8ce89ec686.png')
+    background: url('../../../assets/img/year_of_lucky_2025/tag_img_shiye.webp')
       no-repeat;
     background-size: contain;
   }
   .tag-2 {
-    background: url('https://psychicai-static.psychicai.pro/imgs/24044ec478d6521a4a0caa0950cc8d7ca107.png')
+    background: url('../../../assets/img/year_of_lucky_2025/tag_img_jiankang.webp')
+      no-repeat;
+    background-size: contain;
+  }
+  .tag-3 {
+    background: url('../../../assets/img/year_of_lucky_2025/tag_img_haoyun.webp')
       no-repeat;
     background-size: contain;
   }

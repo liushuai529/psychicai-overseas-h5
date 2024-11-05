@@ -1,9 +1,9 @@
 <template>
   <div :class="{ detail: true, 'hidden-scroll': pay_modal || show_discount_modal, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
-    <!-- <AnimationYearPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_annual2025"
+    <AnimationYearPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_annual2025"
       :visible="showAnimation" @update-visible="showAnimation = false" :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
           :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan1" :zhi="zhi1"
-          :nayin="nayin1" :is_result="false" :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]"/> -->
+          :nayin="nayin1" :is_result="false" :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]"/>
     <FbShareNotice v-if="is_show_fb_notice" />
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <div class="info-box">
