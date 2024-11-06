@@ -10,10 +10,10 @@
       'tw-bg': language === 'zh-TW',
     }">
 
-      <audio ref="audioPlayer" src="https://psychicai-static.psychicai.pro/audio/life_marriage.mp3"></audio>
+      <confirm @close-confirm="closeConfirm" :show="showConfirm" />
       <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
       <div :class="['info',]">
-       
+
         <div :class="['info-content', showEmail() ? 'info-height' : '']">
           <div class="title">
             <img :src="is_cn ? cn_img_tittle_home_xinxi : tw_img_tittle_home_xinxi" />
@@ -52,22 +52,6 @@
               </div>
             </div>
             <div class="divider-line"></div>
-
-
-
-
-
-
-            <!-- <div v-if="this.showEmail()" class="info-item">
-              <div class="left input-container">
-                <div>{{ $t('email-label') }}：</div>
-                <div class="info-input">
-                  <input style="width: 4rem;" type="text" id="email" v-model="email"
-                    :placeholder="$t('email-placeholder')" />
-                </div>
-              </div>
-            </div>
-            <div v-if="this.showEmail()" class="divider-line"></div> -->
           </div>
 
 
@@ -77,7 +61,8 @@
           </div>
 
           <div class="info-bottom">
-            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_remarriage/login_icon_choose.webp"
+            <img v-if="privacyChecked" class="info-check"
+              src="../../../assets/img/emotion_remarriage/login_icon_choose.webp"
               @click="privacyChecked = !privacyChecked" />
             <img v-else class="info-check" src="../../../assets/img/emotion_remarriage/login_icon_choose_no.webp"
               @click="privacyChecked = !privacyChecked" />
@@ -85,23 +70,88 @@
             <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
             <span @click="link('privacy.html')">{{
               $t('privacy-policy')
-              }}</span>
+            }}</span>
           </div>
 
         </div>
-  
+
 
       </div>
       <img class="card" :src="is_cn ? cn_icon_2 : tw_icon_2" />
-      <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" style="margin-bottom: 0.6rem;"/>
+      <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" style="margin-bottom: 0.6rem;" />
       <!-- <img class="card" style="margin-bottom: 0.6rem;" :src="is_cn ? cn_icon_5 : tw_icon_5" /> -->
-      <img v-if="showFixedBtn" class="fix-btn emo-btn" src="../../../assets/img/emotion_remarriage/img_home_btu_chakan.webp"
-        @click="check" />
+      <img v-if="showFixedBtn" class="fix-btn emo-btn"
+        src="../../../assets/img/emotion_remarriage/img_home_btu_chakan.webp" @click="check" />
       <!-- 時间选择控件 -->
       <DatetimePicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && !show_nongli"></DatetimePicker>
       <NongliPicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
+
+      <van-action-sheet v-model:show="show_sheet" title="立即获得咨询师详解" style="height: 7.1rem;">
+        <div class="item-container">
+            <div class="info-item">
+              <div class="left input-container">
+                <div>姓名：</div>
+                <div class="info-input">
+                  <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
+                </div>
+
+              </div>
+              <!-- <div class="sex-container">
+                <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
+              </div> -->
+            </div>
+
+
+            <div class="info-item">
+              <div class="left input-container">
+                <div>性别：</div>
+              </div>
+              <div class="sex-container">
+                <div :class="['unselect', sex == 1? 'select': '']" @click="changeSex(1)">男</div>
+                <div :class="['unselect', sex == 0? 'select': '']" @click="changeSex(0)">女</div>
+                <!-- <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
+                <img :src="sex == 1 ? boy : girl" @click="changeSex()" /> -->
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="left input-container">
+                <div>生辰：</div>
+                <div class="info-input">
+                  <div class="info-birth" :style="{
+                    color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
+                  }" @click="openPicker">
+                    {{ picker_date || $t('birth-placeholder') }}
+                  </div>
+                </div>
+
+              </div>
+              <div class="birth-container">
+                <img src="../../../assets/img/emotion_voice/icon_rili.webp" @click="openPicker" />
+              </div>
+            </div>
+          </div>
+
+          
+
+          <div class="info-bottom">
+            <img v-if="privacyChecked" class="info-check"
+              src="../../../assets/img/emotion_voice/icon_choose_seleted.webp"
+              @click="privacyChecked = !privacyChecked" />
+            <img v-else class="info-check" src="../../../assets/img/emotion_voice/icon_choose_normal.webp"
+              @click="privacyChecked = !privacyChecked" />
+            {{ $t('check-label') }}
+            <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
+            <span @click="link('privacy.html')">{{
+              $t('privacy-policy')
+            }}</span>
+          </div>
+          <div id="info-btn" :class="['btn', 'emo-btn', btn_status? 'btn-check': '']" @click="check" >
+            立即提交
+          </div>
+      </van-action-sheet>
 
       <NewFooter type="emotion_marriages" v-if="showFixedBtn" product_key="consult_time" />
 
@@ -137,6 +187,7 @@ import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.webp';
 import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.webp';
 
 import combinePayPop from '../../../components/combinePayPop.vue';
+import confirm from './confirm.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
 
 import cn_card_1 from '../../../assets/img/emotion/new/2.webp';
@@ -183,6 +234,7 @@ export default {
     DatetimePicker,
     NongliPicker,
     combinePayPop,
+    confirm,
     HomeFooter,
     PopNotice,
     FixedOrder,
@@ -258,10 +310,15 @@ export default {
       duration_time: {
         entry_time: 0,
         exit_time: 0,
-      }
+      },
+      showConfirm: false,
+      show_sheet: false,
     };
   },
   computed: {
+    btn_status() {
+      return this.privacyChecked && this.picker_date_obj !=null && this.username.length>0
+    },
     is_show_fb_notice() {
       return utils.isFBContainer();
     },
@@ -295,6 +352,7 @@ export default {
 
   },
   created() {
+    this.showConfirm = true
     this.$store.dispatch('common/getProduction', 'consult_time');
     utils.firebaseLogEvent(
       '10014',
@@ -414,12 +472,25 @@ export default {
         'view',
         {
           channel: utils.getFBChannel(),
-          time: (this.duration_time.exit_time - this.duration_time.entry_time)/1000
+          time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
         }
       );
     }
   },
   methods: {
+    /**
+     * 播放声音
+     */
+    playVoice() {
+
+    },
+    /**
+     * 关闭弹窗，开始播放音乐
+     */
+    closeConfirm() {
+      this.showConfirm = false
+      this.playVoice();
+    },
     showEmail() {
       return utils.showEmail();
     },
@@ -531,13 +602,9 @@ export default {
      * @return {*}
      */
     changeSex(val) {
+
      
-      if (this.sex == 0) {
-        this.sex = 1;
-      } else {
-        this.sex = 0;
-      }
-      // this.sex = val + '';
+      this.sex = val + '';
     },
 
     // 端内加载背景SVGA动画
@@ -636,6 +703,7 @@ export default {
      * @return {*}
      */
     async check() {
+      // this.show_sheet = true
       let username = this.username;
       let email = this.email;
       let sex = this.sex;
@@ -731,8 +799,8 @@ export default {
         let same_ = this.productList.find(
           item => item.product_key === this.product_key
         );
-        const { price, currency_type } = same_; 
-        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "generate_lead", {
+        const { price, currency_type } = same_;
+        utils.getFBChannel().indexOf('google') > -1 && gtag && gtag("event", "generate_lead", {
           currency: currency_type,
           value: price,
         });
@@ -959,6 +1027,199 @@ export default {
   // }
 
 
+  .item-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0.2rem;
+
+        .info-item {
+          width: 6.7rem;
+          height: 1.05rem;
+          margin-bottom: 0.2rem;
+          border-radius: 0.24rem;
+          background: #F6F7F8;
+          padding: 0.3rem;
+          line-height: 0.82rem;
+          overflow: hidden;
+          // border: 1px solid red;
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          font-weight: 400;
+          font-size: 0.3rem;
+          color: #07060F;
+          line-height: 0.48rem;
+          text-align: justify;
+          font-style: normal;
+
+          .left {
+            display: flex;
+            margin-top: 0.1rem;
+          }
+
+          .input-container {
+            flex: auto;
+            height: 0.92rem;
+            // background-color: #fff;
+            border-radius: 0.12rem;
+            display: flex;
+            box-sizing: border-box;
+            padding: 0.06rem;
+            align-items: center;
+
+            input {
+              // width: 100%;
+              width: 3.2rem;
+              font-size: 0.3rem;
+              line-height: 0.42rem;
+              outline: none;
+              border: none;
+              background-color: transparent;
+              padding: 0;
+              // margin: 0 0.3rem;
+
+              &::input-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-webkit-input-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-moz-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-moz-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-ms-input-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+            }
+          }
+
+          .sex-container {
+            display: flex;
+            width: 5rem;
+            height: 0.6rem;
+            margin-top: 0.1rem;
+            .unselect {
+              width: 1.08rem;
+              height: 0.65rem;
+              background: #FFFFFF;
+              border-radius: 0.65rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-weight: 400;
+              font-size: 0.3rem;
+              color: #ABADB4;
+              line-height: 0.45rem;
+              text-align: left;
+              font-style: normal;
+              text-transform: none;
+
+            }
+            .select {
+              width: 1.08rem;
+              height: 0.65rem;
+              background: #6677FF;
+              border-radius: 0.65rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-weight: 400;
+              font-size: 0.3rem;
+              color: #FFFFFF;
+              line-height: 0.45rem;
+              text-align: left;
+              font-style: normal;
+              text-transform: none;
+            }
+
+            img {
+              width: 1.7rem;
+              height: 0.6rem;
+            }
+          }
+
+          .birth-container {
+            margin-right: 0.13rem;
+            display: flex;
+            width: 0.46rem;
+            height: 0.46rem;
+            margin-top: 0.1rem;
+
+            img {
+              width: 0.46rem;
+              height: 0.46rem;
+            }
+          }
+        }
+      }
+
+
+
+
+      .btn {
+        display: flex;
+        margin: auto;
+        margin-top: 0.4rem;
+        width: 5.9rem;
+        height: 0.92rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient( 90deg, rgba(251,76,146,0.4) 0%, rgba(255,90,79,0.4) 100%);
+        border-radius: 1rem;
+        font-weight: 600;
+        font-size: 0.32rem;
+        color: #FFFFFF;
+        line-height: 0.32rem;
+      }
+      .btn-check {
+        background: linear-gradient( 90deg, #FB4C92 0%, #FF5A4F 100%);
+      }
+
+      .info-bottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #95979F;
+        font-size: 0.22rem;
+        line-height: 0.3rem;
+        margin-top: 0.3rem;
+
+        img {
+          width: 0.3rem;
+          height: 0.3rem;
+          margin-right: 0.12rem;
+        }
+
+        span {
+          color: #F8446A;
+        }
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   .info {
     position: relative;
     display: flex;
@@ -968,7 +1229,7 @@ export default {
     // height: 6.34rem;
     margin-top: 8rem;
 
-  
+
 
     .info-content {
       // background: url('../../../assets/img/emotion_remarriage/xinxi_img_bj_zhong.webp') no-repeat;
@@ -979,10 +1240,10 @@ export default {
       flex-direction: column;
       align-items: center;
       padding: 0.34rem 0.4rem;
-height: 5.4rem;
-background-color: #FFF3F3;
-border-radius: 0.3rem;
-border: 0.06rem solid #FFBBBB;
+      height: 5.4rem;
+      background-color: #FFF3F3;
+      border-radius: 0.3rem;
+      border: 0.06rem solid #FFBBBB;
 
       .title {
         width: 6.1rem;
@@ -1131,24 +1392,9 @@ border: 0.06rem solid #FFBBBB;
       // height: 5.4rem;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
+
+  
 
 
 
