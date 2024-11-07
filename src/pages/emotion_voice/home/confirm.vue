@@ -128,5 +128,7 @@ export default {
 
 .van-dialog {
   background-color: transparent !important;
+  display: flex;
+  justify-content: center;
 }
 </style>
