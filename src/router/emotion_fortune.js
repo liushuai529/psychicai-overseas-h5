@@ -12,7 +12,7 @@ import detail from './../pages/emotion_fortune/detail/index.vue';
 import result from './../pages/emotion_fortune/result/index.vue';
 import utils from '../libs/utils';
 import request from '../api/request';
-import {getBaseInfoAPI} from '../api/api';
+import { getBaseInfoAPI } from '../api/api';
 Vue.use(Router);
 
 const visitorLoginAPI = async (data, callback) => {
@@ -29,7 +29,7 @@ const visitorLoginAPI = async (data, callback) => {
     localStorage.setItem('mlxz_outer_open_uid', res.data.open_uid);
     localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
     localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
-    utils.getFBChannel().indexOf('google') < 0 && utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
+    utils.getFBChannel().indexOf('google') < 0 && utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('init', utils.getFbId()[utils.getFBChannel()], { 'external_id': localStorage.getItem('mlxz_outer_visitor_id') || '' });
     // console.log('首次登录');
   }
   if (utils.getEndStr(utils.getFBChannel(), 2) === '03' || utils.getEndStr(utils.getFBChannel(), 2) === '05') {
@@ -37,7 +37,16 @@ const visitorLoginAPI = async (data, callback) => {
   } else {
     callback()
   }
- 
+  if (utils.getFBChannel().indexOf('google') > -1) {
+    //通过gtag方式设置clientid
+    utils.setGoogleClientId();
+    setTimeout(() => {
+      if (!localStorage.getItem('google_client_id')) {
+        utils.setGoogleClientIdByCookie();
+      }
+      console.log('google_client_id', localStorage.getItem('google_client_id'))
+    }, 2000);
+  }
 };
 
 const checkCurrentCountry = async (callback) => {
@@ -62,7 +71,7 @@ export default new Router({
       component: index,
       beforeEnter: (to, from, next) => {
         visitorLoginAPI({}, next)
-       
+
       }
     },
     {

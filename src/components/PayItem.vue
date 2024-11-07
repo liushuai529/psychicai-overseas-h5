@@ -191,17 +191,10 @@ export default {
             external_id: localStorage.getItem('mlxz_outer_visitor_id'),
           },
         };
-        const cookieMap = new Map();
-        document.cookie.split("; ").forEach((cookie) => {
-          const [key, value] = cookie.split("=");
-          cookieMap.set(key, value);
-        })
-        if (cookieMap.get("_ga")) {
-          let _ga = cookieMap.get("_ga");
-          const secondIndex = this.findSecondIndexOf(_ga, '.');
+        if (localStorage.getItem('google_client_id')) {
           params_combine = Object.assign({}, params_combine, {
             ga_param: {
-              client_id: _ga.substr(secondIndex + 1)
+              client_id: localStorage.getItem('google_client_id')
             },
           });
         }
@@ -251,17 +244,10 @@ export default {
           external_id: localStorage.getItem('mlxz_outer_visitor_id'),
         },
       };
-      const cookieMap = new Map();
-      document.cookie.split("; ").forEach((cookie) => {
-        const [key, value] = cookie.split("=");
-        cookieMap.set(key, value);
-      })
-      if (cookieMap.get("_ga")) {
-        let _ga = cookieMap.get("_ga");
-        const secondIndex = this.findSecondIndexOf(_ga, '.');
+      if (localStorage.getItem('google_client_id')) {
         params = Object.assign({}, params, {
           ga_param: {
-            client_id: _ga.substr(secondIndex + 1)
+            client_id: localStorage.getItem('google_client_id')
           },
         });
       }

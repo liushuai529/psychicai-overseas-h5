@@ -153,7 +153,7 @@ const getFBChannel = () => {
 };
 
 const isShowCombine = () => {
-  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "mlzyy03","ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05","ocean05","ocean105", "mlzyy05" ];
+  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "mlzyy03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05"];
 };
 
 /**
@@ -167,13 +167,13 @@ const getFbId = () => {
     'nova01': '718889796870693',
     'enjoy02': '1505987713629330',
     'panda02': '824193972893573',
-    'ads03': '1044851500346581', 
+    'ads03': '1044851500346581',
     'ads103': '1253997898931627',
     'enjoy03': '2368489400014794',
-    'enjoy103': '526401886558503', 
-    'enjoy203': '861527552585605', 
-    'enjoy303': '1564667847798341', 
-    'enjoyA03': '1715073332661886', 
+    'enjoy103': '526401886558503',
+    'enjoy203': '861527552585605',
+    'enjoy303': '1564667847798341',
+    'enjoyA03': '1715073332661886',
     'ocean03': '1217293436105371',
     'ocean103': '1032807048109332',
     'panda03': '7693892440702728',
@@ -183,7 +183,7 @@ const getFbId = () => {
     'enjoy105': '378704948392994',
     'enjoy205': '860085072353121',
     'enjoy305': '933553268786721',
-    'enjoyA05': '893944682272629', 
+    'enjoyA05': '893944682272629',
     'ocean05': '1632290727618886',
     'ocean105': '1826896374468281',
     'enjoy06': '397861279464435',
@@ -236,16 +236,16 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if(getEndStr(getFBChannel(), 2) ==='03'|| getEndStr(getFBChannel(), 2) ==='05'|| getEndStr(getFBChannel(), 2) ==='09'|| getEndStr(getFBChannel(), 2) ==='10' || getEndStr(getFBChannel(), 2) ==='11' || getEndStr(getFBChannel(), 2) ==='12' || getEndStr(getFBChannel(), 2) ==='13' || getEndStr(getFBChannel(), 2) ==='08' || getEndStr(getFBChannel(), 2) ==='07') {
-    if(localStorage.getItem('current_country')) {
-      return {area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code']}
+  if (getEndStr(getFBChannel(), 2) === '03' || getEndStr(getFBChannel(), 2) === '05' || getEndStr(getFBChannel(), 2) === '09' || getEndStr(getFBChannel(), 2) === '10' || getEndStr(getFBChannel(), 2) === '11' || getEndStr(getFBChannel(), 2) === '12' || getEndStr(getFBChannel(), 2) === '13' || getEndStr(getFBChannel(), 2) === '08' || getEndStr(getFBChannel(), 2) === '07') {
+    if (localStorage.getItem('current_country')) {
+      return { area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code'] }
     } else {
-      return {area_code: '60', iso_code: 'MY'}
+      return { area_code: '60', iso_code: 'MY' }
     }
   } else {
-    return ['ads05', 'enjoy05','enjoy105', 'enjoy205', 'enjoy305', 'enjoyA05', 'ocean05', 'ocean105', 'enjoy06', 'panda06', 'ocean06','ads08', 'enjoy08', 'enjoy108', 'enjoy308', 'enjoyA08', 'ocean08'].includes(getFBChannel()) ? {area_code: '886', iso_code: 'TW'}: {area_code: '60', iso_code: 'MY'};
+    return ['ads05', 'enjoy05', 'enjoy105', 'enjoy205', 'enjoy305', 'enjoyA05', 'ocean05', 'ocean105', 'enjoy06', 'panda06', 'ocean06', 'ads08', 'enjoy08', 'enjoy108', 'enjoy308', 'enjoyA08', 'ocean08'].includes(getFBChannel()) ? { area_code: '886', iso_code: 'TW' } : { area_code: '60', iso_code: 'MY' };
   }
-  
+
 };
 /**
  * @description: 是否是生产环境
@@ -955,7 +955,7 @@ const copyToClipboard = text => {
  * @return {*}
  */
 const isProd = () => {
-  return window.location.href.indexOf('//overseas.psychicai.pro')>0
+  return window.location.href.indexOf('//overseas.psychicai.pro') > 0
 };
 
 //获取UA信息返回数组
@@ -1279,9 +1279,12 @@ const firebaseConfig = {
   appId: '1:391425422960:web:7fd76da07aaab6390766b5',
   measurementId: 'G-43C3GF0Z45',
 };
+let analytics = null
+if (getFBChannel().indexOf('google') < 0) {
+  firebase.initializeApp(firebaseConfig);
+  analytics = firebase.analytics();
+}
 
-firebase.initializeApp(firebaseConfig);
-const analytics = firebase.analytics();
 // 埋点上报function
 const firebaseLogEvent = (
   module_id,
@@ -1309,7 +1312,7 @@ const firebaseLogEvent = (
   if (!isProd()) {
     return true;
   }
-  analytics.logEvent(event_name, outer_obj);
+  analytics && analytics.logEvent(event_name, outer_obj);
 
   // return new Promise((resolve, reject) => {
   //   try {
@@ -1394,7 +1397,7 @@ const getExtraParams = (product_key, querystring) => {
       male_is_gongli,
       female_is_gongli,
       sex,
-      email: email === undefined || !showEmail()? '': email,
+      email: email === undefined || !showEmail() ? '' : email,
     };
   }
   // 其他 单人信息
@@ -1418,7 +1421,7 @@ const getExtraParams = (product_key, querystring) => {
       birth_month,
       birth_date,
       birth_hour,
-      email: email === undefined || !showEmail()? '': email,
+      email: email === undefined || !showEmail() ? '' : email,
       date: moment(
         `${birth_year}${+birth_month < 10 ? '0' + birth_month : birth_month}${+birth_date < 10 ? '0' + birth_date : birth_date
         }`
@@ -1446,7 +1449,7 @@ const isElementInViewport = el => {
  * @return {*}
  */
 const openApp = () => {
-  if(isAndroid()) {
+  if (isAndroid()) {
     openAdjustApp();
   } else if (isIos()) {
     window.open(
@@ -1757,10 +1760,40 @@ const showEmail = () => {
 };
 
 //获取字符串后几位
-const getEndStr = (str,n) => {
-  if(!str) return ''
+const getEndStr = (str, n) => {
+  if (!str) return ''
   return str.substr(str.length - n);
 };
+
+const findSecondIndexOf = (str, char) => {
+  const firstIndex = str.indexOf(char);
+  if (firstIndex === -1) {
+    return -1; // 字符没有出现，返回-1
+  }
+  return str.indexOf(char, firstIndex + 1);
+};
+
+const setGoogleClientIdByCookie = () => {
+  const cookieMap = new Map();
+  document.cookie.split("; ").forEach((cookie) => {
+    const [key, value] = cookie.split("=");
+    cookieMap.set(key, value);
+  })
+  if (cookieMap.get("_ga")) {
+    let _ga = cookieMap.get("_ga");
+    const secondIndex = findSecondIndexOf(_ga, '.');
+    localStorage.setItem('google_client_id', _ga.substr(secondIndex + 1));
+  }
+}
+
+const setGoogleClientId = () => {
+  gtag('get', 'G-43C3GF0Z45', 'client_id', (clientID) => {
+    console.log('Client ID: ' + clientID);
+    localStorage.setItem('google_client_id', clientID);
+  });
+}
+
+
 
 
 
@@ -1842,4 +1875,6 @@ export default {
   checkEmail,
   showEmail,
   getEndStr,
+  setGoogleClientId,
+  setGoogleClientIdByCookie,
 };

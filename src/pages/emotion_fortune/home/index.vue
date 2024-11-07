@@ -405,6 +405,7 @@ export default {
     },
   },
   created() {
+    
     this.showComboAttach();
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {

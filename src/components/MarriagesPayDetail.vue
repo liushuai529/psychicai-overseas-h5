@@ -589,11 +589,6 @@ export default {
       }
       localStorage.setItem('report_price', this.product.price);
       Indicator.open(tipsArr5[utils.getLanguage()]);
-      const cookieMap = new Map();
-      document.cookie.split("; ").forEach((cookie) => {
-        const [key, value] = cookie.split("=");
-        cookieMap.set(key, value);
-      })
       let params = {
         pay_method: pay_method,
         product_key: this.combine_product_ids.length ? this.h5_combo2_attach.product_key : this.product_key,
@@ -620,12 +615,10 @@ export default {
         trade_pay_type,
         trade_target_org,
       });
-      if (cookieMap.get("_ga")) {
-        let _ga = cookieMap.get("_ga");
-        const secondIndex = this.findSecondIndexOf(_ga, '.');
+      if (localStorage.getItem('google_client_id')) {
         pay_max_params = Object.assign({}, pay_max_params, {
           ga_param: {
-            client_id: _ga.substr(secondIndex + 1)
+            client_id: localStorage.getItem('google_client_id')
           },
         });
       }
