@@ -24,8 +24,14 @@ import hunyin_img_chat_push_left_android_tw from '../assets/img/emotion_marriage
 import hunyin_img_chat_push_left_ios_cn from '../assets/img/emotion_marriages/cn/hunyin_img_chat_push_left_ios_cn.webp';
 import hunyin_img_chat_push_left_ios_tw from '../assets/img/emotion_marriages/tw/hunyin_img_chat_push_left_ios_tw.webp';
 
+
+
+
 import hunyin_img_chat_push_right_android_cn from '../assets/img/emotion_marriages/cn/hunyin_img_chat_push_right_android_cn.webp';
 import hunyin_img_chat_push_right_android_tw from '../assets/img/emotion_marriages/tw/hunyin_img_chat_push_right_android_tw.webp';
+
+import lianmai_img_chat_push_right_android_cn from '../assets/img/emotion_voice/cn/lianmai_img_chat_push_right_android_cn.webp';
+import lianmai_img_chat_push_right_android_tw from '../assets/img/emotion_voice/tw/lianmai_img_chat_push_right_android_tw.webp';
 
 
 
@@ -34,6 +40,13 @@ import img_chat_push_left_android_tw from '../assets/img/emotion_fate/tw/img_cha
 
 import img_chat_push_left_ios_cn from '../assets/img/emotion_fate/cn/img_chat_push_left_ios_cn.webp';
 import img_chat_push_left_ios_tw from '../assets/img/emotion_fate/tw/img_chat_push_left_ios_tw.webp';
+
+
+import lianmai_img_chat_push_left_android_cn from '../assets/img/emotion_voice/cn/lianmai_img_chat_push_left_android_cn.webp';
+import lianmai_img_chat_push_left_android_tw from '../assets/img/emotion_voice/tw/lianmai_img_chat_push_left_android_tw.webp';
+
+import lianmai_img_chat_push_left_ios_cn from '../assets/img/emotion_voice/cn/lianmai_img_chat_push_left_ios_cn.webp';
+import lianmai_img_chat_push_left_ios_tw from '../assets/img/emotion_voice/tw/lianmai_img_chat_push_left_ios_tw.webp';
 
 import img_chat_push_right_android_cn from '../assets/img/emotion_fate/cn/img_chat_push_right_android_cn.webp';
 import img_chat_push_right_android_tw from '../assets/img/emotion_fate/tw/img_chat_push_right_android_tw.webp';
@@ -91,12 +104,18 @@ export default {
   },
   data() {
     return {
+      lianmai_img_chat_push_left_android_cn,
+      lianmai_img_chat_push_left_android_tw,
+      lianmai_img_chat_push_left_ios_cn,
+      lianmai_img_chat_push_left_ios_tw,
       hunyin_img_chat_push_left_android_cn,
       hunyin_img_chat_push_left_android_tw,
       hunyin_img_chat_push_left_ios_cn,
       hunyin_img_chat_push_left_ios_tw,
       hunyin_img_chat_push_right_android_cn,
       hunyin_img_chat_push_right_android_tw,
+      lianmai_img_chat_push_right_android_cn,
+      lianmai_img_chat_push_right_android_tw,
       end_img_chat_push_left_android_cn,
       end_img_chat_push_left_android_tw,
       end_img_chat_push_left_ios_cn,
@@ -139,11 +158,14 @@ export default {
       }
     },
     avatar_url() {
+      
       if (utils.getLanguage() === 'zh-CN') {
         if (this.sub_type === 'fu_he' || this.sub_type === 'life_marriages') {
           return hunyin_img_chat_push_right_android_cn
         } else if (this.sub_type === 'yuan_jin') {
           return end_img_chat_push_right_android_cn
+        }  else if (this.sub_type === 'zhuan_chang') {
+          return lianmai_img_chat_push_right_android_cn
         } else {
           return img_chat_push_right_android_cn
         }
@@ -152,6 +174,8 @@ export default {
           return hunyin_img_chat_push_right_android_tw
         } else if (this.sub_type === 'yuan_jin') {
           return end_img_chat_push_right_android_tw
+        } else if (this.sub_type === 'zhuan_chang') {
+          return lianmai_img_chat_push_right_android_tw
         } else {
           return img_chat_push_right_android_tw
         }
@@ -166,6 +190,8 @@ export default {
             return hunyin_img_chat_push_left_ios_cn
           } else if (this.sub_type === 'yuan_jin') {
             return end_img_chat_push_left_ios_cn
+          } else if (this.sub_type === 'zhuan_chang') {
+            return lianmai_img_chat_push_left_ios_cn
           } else {
             return img_chat_push_left_ios_cn
           }
@@ -175,6 +201,8 @@ export default {
             return hunyin_img_chat_push_left_android_cn
           } else if (this.sub_type === 'yuan_jin') {
             return end_img_chat_push_left_android_cn
+          } else if (this.sub_type === 'zhuan_chang') {
+            return lianmai_img_chat_push_left_android_cn
           } else {
             return img_chat_push_left_android_cn
           }
@@ -186,6 +214,8 @@ export default {
             return hunyin_img_chat_push_left_ios_tw
           } else if (this.sub_type === 'yuan_jin') {
             return end_img_chat_push_left_ios_tw
+          } else if (this.sub_type === 'zhuan_chang') {
+            return lianmai_img_chat_push_left_ios_tw
           } else {
             return img_chat_push_left_ios_tw
           }
@@ -194,6 +224,8 @@ export default {
             return hunyin_img_chat_push_left_android_tw
           } else if (this.sub_type === 'yuan_jin') {
             return end_img_chat_push_left_android_tw
+          } else if (this.sub_type === 'zhuan_chang') {
+            return lianmai_img_chat_push_left_android_tw
           } else {
             return img_chat_push_left_android_tw
           }

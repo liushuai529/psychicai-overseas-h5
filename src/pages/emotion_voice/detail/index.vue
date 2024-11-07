@@ -7,33 +7,27 @@
     <img class="header-title" :src="is_cn ? cn_info_title : tw_info_title" alt="" />
     <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
     
+    
+    <div :class="['method-box', !is_show_combination ? 'method-height' : null]" style="margin-top: -2.5rem; border: 1px solid red;">
+      
 
-
-    <div style="width: 6.98rem; margin-top: -6rem; margin-bottom: 0.24rem;">
-      <MessageCard sub_type="yuan_jin"  :date="query_user_string.split('|')[2] ==1 ? picker_date_yangli: picker_date_nongli" :username="username" @scrollClick="scrollClick"/>
-    </div>
-
-    <MarriagesPayItem product_key="consult_time" sub_type="yuan_jin"  @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
-    <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
-      <img v-if="product_key !== 'consult_time'" id="method-title-img" class="method-title-img"
-        :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
-
-      <div v-else style="display: flex; flex-direction: column;">
+      <div style="display: flex; flex-direction: column;">
         <div id="method-title-img" class="method-title-img-consult">
           <img :src="is_cn ? cn_paypage_tittle_pay : tw_paypage_tittle_pay" />
         </div>
-        <!-- <UserInfo style="margin-top: 0.24rem;" :picker_date_nongli="picker_date_nongli" :picker_date_yangli="picker_date_yangli" :username="username"
-          :sex="sex" /> -->
+        <UserInfo style="margin-top: 0.24rem;" :picker_date_nongli="picker_date_nongli" :picker_date_yangli="picker_date_yangli" :username="username"
+          :sex="sex" />
       </div>
 
 
       <MarriagesPayDetail style="margin-top: 0.24rem;" className="pay-method" ref="payDetail" :product_key="product_key"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10014"
-        c_click_id="-10007" e_click_name="click_fate_end_pay" :consult_time="consult_time" sub_type="yuan_jin"/>
-      <div class="img-consult-bottom">
+        c_click_id="-10007" e_click_name="click_fate_end_pay" :consult_time="consult_time" sub_type="zhuan_chang"/>
+      <!-- <div class="img-consult-bottom">
 
-      </div>
+      </div> -->
     </div>
+    <MarriagesPayItem product_key="consult_time" sub_type="zhuan_chang"  @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
 
     <!-- <div class="method-title-img-consult">
       <img :src="is_cn ? cn_paypage_tittle_xiangqing : tw_paypage_tittle_xiangqing" />
@@ -42,6 +36,7 @@
     <div class="tag-bg">
       <img class="module"  :src="is_cn ? cn_bg_1 : tw_bg_1" @click="scrollClick" />
       <img class="module"  :src="is_cn ? cn_bg_2 : tw_bg_2" @click="scrollClick" />
+      <img class="module"  :src="is_cn ? cn_bg_3 : tw_bg_3" @click="scrollClick" />
     </div>
     <!-- <div class="img-consult-bottom"></div> -->
 
@@ -64,25 +59,21 @@ import utils from '../../../libs/utils';
 import UserInfo from './user_info.vue';
 import MessageCard from './message_card.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
-import cn_pay_btn from '../../../assets/img/emotion/home_btn.webp';
 
 
-import cn_home_btn from '../../../assets/img/emotion_remarriage/cn/img_home_btu_zixun_cn.webp';
-import tw_home_btn from '../../../assets/img/emotion_remarriage/tw/img_home_btu_zixun_tw.webp';
-import cn_history_order from '../../../assets/img/emotion_fate/cn/home_lsdd_cn.webp';
-import tw_history_order from '../../../assets/img/emotion_fate/tw/home_lsdd_tw.webp';
+import cn_home_btn from '../../../assets/img/emotion_voice/cn/paypag_btn_zixun_cn.webp';
+import tw_home_btn from '../../../assets/img/emotion_voice/tw/paypag_btn_zixun_tw.webp';
+import cn_history_order from '../../../assets/img/emotion_voice/cn/paypage_lsdd_cn.webp';
+import tw_history_order from '../../../assets/img/emotion_voice/tw/paypage_lsdd_tw.webp';
 
 
 import PayCard from '../../../components/PayCard.vue';
-import cn_card_1 from '../../../assets/img/emotion/home_card1.webp';
-import tw_card_1 from '../../../assets/img/tw_mlxz/emotion/home_card1.webp';
-import cn_card_2 from '../../../assets/img/emotion/home_card2.webp';
-import tw_card_2 from '../../../assets/img/tw_mlxz/emotion/home_card2.webp';
+
 import payModal from '../../../components/PayModal.vue';
 import BaziTable from '../../../components/baziTable.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
-import cn_info_title from '../../../assets/img/emotion_end/cn/img_bj_paypage_cn.webp';
-import tw_info_title from '../../../assets/img/emotion_end/tw/img_bj_paypage_tw.webp';
+import cn_info_title from '../../../assets/img/emotion_voice/cn/paypage_img_topbj_cn.webp';
+import tw_info_title from '../../../assets/img/emotion_voice/tw/paypage_img_topbj_tw.webp';
 import cn_zhong3 from '../../../assets/img/emotion/new/zhong_3.webp';
 import tw_zhong3 from '../../../assets/img/emotion/new/tw/zhong_3.webp';
 import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
@@ -91,10 +82,12 @@ import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
 
-import cn_bg_1 from '../../../assets/img/emotion_remarriage/cn/paypage_neirong_cn.webp';
-import tw_bg_1 from '../../../assets/img/emotion_remarriage/tw/paypage_neirong_tw.webp';
-import cn_bg_2 from '../../../assets/img/emotion_end/cn/paypage_neirong_mark_cn.webp';
-import tw_bg_2 from '../../../assets/img/emotion_end/tw/paypage_neirong_mark_tw.webp';
+import cn_bg_1 from '../../../assets/img/emotion_voice/cn/paypage_img_details_01_cn.webp';
+import tw_bg_1 from '../../../assets/img/emotion_voice/tw/paypage_img_details_01_tw.webp';
+import cn_bg_2 from '../../../assets/img/emotion_voice/cn/paypag_img_details_02_cn.webp';
+import tw_bg_2 from '../../../assets/img/emotion_voice/tw/paypag_img_details_02_tw.webp';
+import cn_bg_3 from '../../../assets/img/emotion_voice/cn/paypag_img_details_mark_cn.webp';
+import tw_bg_3 from '../../../assets/img/emotion_voice/tw/paypag_img_details_mark_tw.webp';
 
 
 
@@ -105,8 +98,8 @@ import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhif
 // import cn_paypage_tittle_xiangqing from '../../../assets/img/emotion_remarriage/cn/paypage_tittle_xiangqing_cn.webp';
 // import tw_paypage_tittle_xiangqing from '../../../assets/img/emotion_remarriage/tw/paypage_tittle_xiangqing_tw.webp';
 
-import cn_paypage_tittle_pay from '../../../assets/img/emotion_remarriage/cn/paypage_tittle_pay_cn.webp';
-import tw_paypage_tittle_pay from '../../../assets/img/emotion_remarriage/tw/paypage_tittle_pay_tw.webp';
+import cn_paypage_tittle_pay from '../../../assets/img/emotion_voice/cn/paypage_tittle_xinxi_cn.webp';
+import tw_paypage_tittle_pay from '../../../assets/img/emotion_voice/tw/paypage_tittle_xinxi_tw.webp';
 
 
 
@@ -150,6 +143,8 @@ export default {
       tw_bg_1,
       cn_bg_2,
       tw_bg_2,
+      cn_bg_3,
+      tw_bg_3,
       img_zhifu_jian,
       img_zhifu_fan,
       cn_home_btn,
@@ -178,11 +173,7 @@ export default {
       gan: ['-', '-', '-', '-'],
       zhi: ['-', '-', '-', '-'],
       language: utils.getLanguage(),
-      cn_card_1,
-      tw_card_1,
-      cn_card_2,
-      tw_card_2,
-      cn_pay_btn,
+    
       tw_pay_btn:
         'https://psychicai-static.psychicai.pro/imgs/24042269434e28dd4083b3f1f63ad52b09bf.png',
       pay_modal: false, //支付弹窗
@@ -470,7 +461,7 @@ export default {
 <style scoped lang="less">
 .header-title {
   width: 7.5rem;
-  height: 7.5rem;
+  height: 5rem;
 }
 .order-icon {
   position: fixed;
@@ -482,20 +473,22 @@ export default {
 }
 
 .method-title-img-consult {
-  width: 7.1rem;
-  height: 0.84rem;
-  background-image: url(../../../assets/img/emotion_remarriage/card_img_bj_shang.webp);
+  // width: 7.02rem;
+  height: 1.45rem;
+  // background-image: url(../../../assets/img/emotion_remarriage/card_img_bj_shang.webp);
+  // background-image: url(../../../assets/img/emotion_voice/tw/paypage_tittle_xinxi_tw.webp);
+  
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
   justify-content: center;
-  background-color: #ED8C8C;
+  // background-color: #ED8C8C;
   // flex-direction: column;
 
   img {
-    width: 6.14rem;
-    height: 0.9rem;
+    width: 7.02rem;
+    height: 1.45rem;
   }
 }
 
@@ -523,16 +516,15 @@ export default {
   // height: 11.06rem;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-  /* padding-top: 1.14rem; */
   margin-bottom: 0.24rem;
-  background: #fffafa;
-  border-radius: 0.16rem;
-  // background: url(../../../assets/img/emotion_remarriage/card_img_bj_shang.webp);
-  background: url('../../../assets/img/emotion_remarriage/card_img_bj_zhong.png') ;
-  // background-size: cover;
-  background-size: 7.1rem 9.91rem;
+  // background: #fffafa;
+  // border-radius: 0.16rem;
+  // background: url('../../../assets/img/emotion_remarriage/card_img_bj_zhong.png') ;
+  // background-size: 7.1rem 9.91rem;
+  background-color: #fff;
+  border-radius: 0.3rem;
+
 
   .method-title-img {
     width: 6.68rem;

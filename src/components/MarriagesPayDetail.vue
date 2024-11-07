@@ -64,7 +64,7 @@
       <div class="item-container">
         <div class="method-text">支付方式</div>
         <div class="city">
-          <div>{{ is_cn? '请选择币种:': '請選擇幣種:' }}</div>
+          <div>{{ is_cn ? '请选择币种:' : '請選擇幣種:' }}</div>
           <img :src="getImg" @click="changeCity" />
         </div>
       </div>
@@ -84,10 +84,12 @@
           </div>
           <img class="right" :src="check_index === k ? checked_icon : no_check_icon" alt="" />
         </div>
-        <img v-if="sub_type === 'zheng_yuan' && utils.getFBChannel() !=='ads13'" class="btn emo-btn"
+        <img v-if="sub_type === 'zheng_yuan' && utils.getFBChannel() !== 'ads13'" class="btn emo-btn"
           src="../assets/img/emotion_fate/img_home_btu_chakan.webp" @click="payMoney" />
-          <img v-else-if="sub_type === 'zheng_yuan' && utils.getFBChannel() ==='ads13'" class="btn emo-btn"
-          :src="is_cn? img_home_btu_chakan_cn: img_home_btu_chakan_tw" @click="payMoney" />
+        <img v-else-if="sub_type === 'zheng_yuan' && utils.getFBChannel() === 'ads13'" class="btn emo-btn"
+          :src="is_cn ? img_home_btu_chakan_cn : img_home_btu_chakan_tw" @click="payMoney" />
+        <img v-else-if="sub_type === 'zhuan_chang'" class="btn emo-btn"
+          :src="is_cn ? paypag_btn_zixun_cn : paypag_btn_zixun_tw" @click="payMoney" />
         <!-- <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" /> -->
         <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn"
           :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x" @click="payMoney" />
@@ -127,6 +129,9 @@ import btn_pay_tw_1x from '../assets/img/year_of_lucky_2025/tw/btn_pay_tw_1x.web
 
 import img_home_btu_chakan_cn from '../assets/img/emotion_fate/cn/img_home_btu_chakan_cn.webp'
 import img_home_btu_chakan_tw from '../assets/img/emotion_fate/tw/img_home_btu_chakan_tw.webp'
+
+import paypag_btn_zixun_cn from '../assets/img/emotion_voice/cn/paypag_btn_zixun_cn.webp'
+import paypag_btn_zixun_tw from '../assets/img/emotion_voice/tw/paypag_btn_zixun_tw.webp'
 
 
 
@@ -199,6 +204,8 @@ export default {
       utils,
       img_home_btu_chakan_cn,
       img_home_btu_chakan_tw,
+      paypag_btn_zixun_cn,
+      paypag_btn_zixun_tw,
       img_home_btu_zixun_cn,
       img_home_btu_zixun_tw,
       btn_pay_cn_1x,

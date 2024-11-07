@@ -145,8 +145,10 @@ const getFBChannel = () => {
     return 'mlzyy11';
   } else if (url.indexOf('/mlzyy12/') > -1) {
     return 'mlzyy12';
+  } else if (url.indexOf('/ads15/') > -1) {
+    return 'ads15';
   } else {
-    return 'ads13';
+    return 'ads15';
   }
 };
 
@@ -213,6 +215,7 @@ const getFbId = () => {
     'enjoyA11': '1621066301776872',
     'ads12': '1253997898931627',
     'ads13': '1253997898931627',
+    'ads15': '1253997898931627',
     'mlzyy03': '484821661378293',
     'mlzyy05': '484821661378293',
     'mlzyy07': '484821661378293',
@@ -224,6 +227,7 @@ const getFbId = () => {
     'mlzyy10': '484821661378293',
     'mlzyy11': '484821661378293',
     'mlzyy12': '484821661378293',
+    'mlzyy15': '484821661378293',
   }
 }
 
