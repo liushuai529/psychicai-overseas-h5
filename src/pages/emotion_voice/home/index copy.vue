@@ -1,13 +1,87 @@
 <template>
   <div>
+
+    <!-- <FbShareNotice v-if="is_show_fb_notice" /> -->
+
     <div :class="{
       container: true,
       'fix-box': choose_time ? true : false,
+      'cn-bg': language === 'zh-CN',
+      'tw-bg': language === 'zh-TW',
     }">
 
       <confirm @close-confirm="closeConfirm" :show="showConfirm" />
-      
-    
+      <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
+      <div :class="['info',]">
+
+        <div :class="['info-content', showEmail() ? 'info-height' : '']">
+          <div class="title">
+            <img :src="is_cn ? cn_img_tittle_home_xinxi : tw_img_tittle_home_xinxi" />
+          </div>
+
+
+          <div class="item-container">
+            <div class="info-item">
+              <div class="left input-container">
+                <div>姓名：</div>
+                <div class="info-input">
+                  <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
+                </div>
+
+              </div>
+              <div class="sex-container">
+                <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
+              </div>
+            </div>
+            <div class="divider-line"></div>
+
+            <div class="info-item">
+              <div class="left input-container">
+                <div>生辰：</div>
+                <div class="info-input">
+                  <div class="info-birth" :style="{
+                    color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
+                  }" @click="openPicker">
+                    {{ picker_date || $t('birth-placeholder') }}
+                  </div>
+                </div>
+
+              </div>
+              <div class="birth-container">
+                <img src="../../../assets/img/emotion_remarriage/icon_rili.webp" @click="openPicker" />
+              </div>
+            </div>
+            <div class="divider-line"></div>
+          </div>
+
+
+
+          <div id="info-btn" class="btn emo-btn" @click="check">
+            <img src="../../../assets/img/emotion_remarriage/img_home_btu_chakan.webp" />
+          </div>
+
+          <div class="info-bottom">
+            <img v-if="privacyChecked" class="info-check"
+              src="../../../assets/img/emotion_remarriage/login_icon_choose.webp"
+              @click="privacyChecked = !privacyChecked" />
+            <img v-else class="info-check" src="../../../assets/img/emotion_remarriage/login_icon_choose_no.webp"
+              @click="privacyChecked = !privacyChecked" />
+            {{ $t('check-label') }}
+            <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
+            <span @click="link('privacy.html')">{{
+              $t('privacy-policy')
+            }}</span>
+          </div>
+
+        </div>
+
+
+      </div>
+      <img class="card" :src="is_cn ? cn_icon_2 : tw_icon_2" />
+      <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" style="margin-bottom: 0.6rem;" />
+      <!-- <img class="card" style="margin-bottom: 0.6rem;" :src="is_cn ? cn_icon_5 : tw_icon_5" /> -->
+      <img v-if="showFixedBtn" class="fix-btn emo-btn"
+        src="../../../assets/img/emotion_remarriage/img_home_btu_chakan.webp" @click="check" />
       <!-- 時间选择控件 -->
       <DatetimePicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && !show_nongli"></DatetimePicker>
@@ -912,7 +986,13 @@ export default {
   }
 }
 
+.cn-bg {
+  background-image: url('../../../assets/img/emotion_end/cn/img_home_topbj_cn.webp');
+}
 
+.tw-bg {
+  background-image: url('../../../assets/img/emotion_end/tw/img_home_topbj_tw.webp');
+}
 
 #bg-svga {
   position: absolute;
@@ -927,11 +1007,25 @@ export default {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: top center;
+  background-color: #ED8C8C;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
-  
+  padding-bottom: 1.2rem;
+
+  // .title {
+  //   position: relative;
+  //   z-index: 10;
+  //   width: 100%;
+
+  //   img {
+  //     margin-top: 0.35rem;
+  //     margin-left: 0.51rem;
+  //     width: 2.8rem;
+  //   }
+  // }
+
 
   .item-container {
         display: flex;

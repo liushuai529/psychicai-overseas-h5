@@ -74,11 +74,7 @@ import BaziTable from '../../../components/baziTable.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
 import cn_info_title from '../../../assets/img/emotion_voice/cn/paypage_img_topbj_cn.webp';
 import tw_info_title from '../../../assets/img/emotion_voice/tw/paypage_img_topbj_tw.webp';
-import cn_zhong3 from '../../../assets/img/emotion/new/zhong_3.webp';
-import tw_zhong3 from '../../../assets/img/emotion/new/tw/zhong_3.webp';
-import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
-import tw_zhong4 from '../../../assets/img/emotion/new/tw/zhong_4.webp';
-import { report_id_arr } from '../../../libs/enum';
+
 import HomeFooter from '../../../components/HomeFooter.vue';
 import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
 
@@ -91,19 +87,11 @@ import tw_bg_3 from '../../../assets/img/emotion_voice/tw/paypag_img_details_mar
 
 
 
-import img_zhifu_jian from '../../../assets/img/emotion_v2/new/cn/detail/img_zhifu_jian.webp';
-import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_jian.webp';
-
-
-// import cn_paypage_tittle_xiangqing from '../../../assets/img/emotion_remarriage/cn/paypage_tittle_xiangqing_cn.webp';
-// import tw_paypage_tittle_xiangqing from '../../../assets/img/emotion_remarriage/tw/paypage_tittle_xiangqing_tw.webp';
-
 import cn_paypage_tittle_pay from '../../../assets/img/emotion_voice/cn/paypage_tittle_xinxi_cn.webp';
 import tw_paypage_tittle_pay from '../../../assets/img/emotion_voice/tw/paypage_tittle_xinxi_tw.webp';
 
 
 
-import card_img_bj_shang from '../../../assets/img/emotion_fate/card_img_bj_shang.webp';
 
 
 import NewFooter from '../../../components/NewFooter.vue';
@@ -134,8 +122,6 @@ export default {
       localStorage: window.localStorage,
       cn_history_order,
       tw_history_order,
-      // cn_paypage_tittle_xiangqing,
-      // tw_paypage_tittle_xiangqing,
       cn_paypage_tittle_pay,
       tw_paypage_tittle_pay,
       card_img_bj_shang,
@@ -145,15 +131,9 @@ export default {
       tw_bg_2,
       cn_bg_3,
       tw_bg_3,
-      img_zhifu_jian,
-      img_zhifu_fan,
       cn_home_btn,
       tw_home_btn,
 
-      cn_zhong3,
-      cn_zhong4,
-      tw_zhong3,
-      tw_zhong4,
       cn_info_title,
       tw_info_title,
       product_id: 25,
@@ -475,7 +455,6 @@ export default {
 .method-title-img-consult {
   // width: 7.02rem;
   height: 1.45rem;
-  // background-image: url(../../../assets/img/emotion_remarriage/card_img_bj_shang.webp);
   // background-image: url(../../../assets/img/emotion_voice/tw/paypage_tittle_xinxi_tw.webp);
   
   background-size: auto 100%;
