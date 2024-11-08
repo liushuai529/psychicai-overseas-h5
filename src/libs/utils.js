@@ -1306,7 +1306,7 @@ const firebaseLogEvent = (
     device_id: getDeviceId() || '',
     args: args_,
   };
-  console.log('----firebase start-----');
+  console.log('----firebase start-----',firebase);
   console.log('这是firebase埋点', JSON.stringify(outer_obj));
   console.log('----firebase end-----');
   if (!isProd()) {
