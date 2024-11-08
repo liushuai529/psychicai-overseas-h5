@@ -34,9 +34,24 @@
     <div class="info-box">
       <div class="card">
         <img :src="is_cn? home_img_tittle_xinxi_cn_1x: home_img_tittle_xinxi_tw_1x" />
-        <UserInfo :username="username" :sex="sex" :gongli_nongli="gongli_nongli"
-          :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
-          :nayin="nayin" :is_result="false" :score="[10, 30, 40, 35, 30, 60, 70, 68, 60, 78, 85, 100]" />
+        <UserInfo
+          :username="username"
+          :sex="sex"
+          :gongli_nongli="gongli_nongli"
+          :picker_date_yangli="picker_date_yangli"
+          :picker_date_nongli="picker_date_nongli"
+          :gan="gan"
+          :zhi="zhi"
+          :nayin="nayin"
+          :cai_bo_num="cai_bo_num"
+          :gui_ren_num="gui_ren_num"
+          :hun_yin_num="hun_yin_num"
+          :ming_ge="ming_ge"
+          :riyuanqiangruo="riyuanqiangruo"
+          :shi_ye_num="shi_ye_num"
+          :wuxingqiang="wuxingqiang"
+          :is_result="true"
+        />
       </div>
     </div>
 
