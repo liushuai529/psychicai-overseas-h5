@@ -285,7 +285,7 @@ export default {
         this.jump_loading = false;
       }, 2000);
 
-      let url = 'emotion_end';
+      let url = 'emotion_voice';
       if (item.order_status === 'PAYED') {
         localStorage.setItem('mlxz_reload_page_history', 1);
         localStorage.setItem('mlxz_reload_page_home', 1);
@@ -343,7 +343,7 @@ export default {
           consult_time: {
             user_info: item.user_info
           },
-          product_sub_type: 'yuan_jin',
+          product_sub_type: 'zhuan_chang',
 
         };
 

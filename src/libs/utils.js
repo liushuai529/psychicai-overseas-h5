@@ -148,7 +148,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('/ads15/') > -1) {
     return 'ads15';
   } else {
-    return 'ads15';
+    return 'google_ocean03';
   }
 };
 
@@ -236,7 +236,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if (getEndStr(getFBChannel(), 2) === '03' || getEndStr(getFBChannel(), 2) === '05' || getEndStr(getFBChannel(), 2) === '09' || getEndStr(getFBChannel(), 2) === '10' || getEndStr(getFBChannel(), 2) === '11' || getEndStr(getFBChannel(), 2) === '12' || getEndStr(getFBChannel(), 2) === '13' || getEndStr(getFBChannel(), 2) === '08' || getEndStr(getFBChannel(), 2) === '07') {
+  if (getEndStr(getFBChannel(), 2) === '03' || getEndStr(getFBChannel(), 2) === '05' || getEndStr(getFBChannel(), 2) === '09' || getEndStr(getFBChannel(), 2) === '10' || getEndStr(getFBChannel(), 2) === '11' || getEndStr(getFBChannel(), 2) === '12' || getEndStr(getFBChannel(), 2) === '13' || getEndStr(getFBChannel(), 2) === '15' || getEndStr(getFBChannel(), 2) === '08' || getEndStr(getFBChannel(), 2) === '07') {
     if (localStorage.getItem('current_country')) {
       return { area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code'] }
     } else {
@@ -1280,10 +1280,10 @@ const firebaseConfig = {
   measurementId: 'G-43C3GF0Z45',
 };
 let analytics = null
-if (getFBChannel().indexOf('google') < 0) {
+setTimeout(() => {
   firebase.initializeApp(firebaseConfig);
   analytics = firebase.analytics();
-}
+}, 0);
 
 // 埋点上报function
 const firebaseLogEvent = (

@@ -165,6 +165,8 @@ export default {
         url = 'emotion_remarriage';
       } else if(this.sub_type === 'yuan_jin') {
         url = 'emotion_end';
+      } else if(this.sub_type === 'zhuan_chang') {
+        url = 'emotion_voice';
       } 
       let params = {
         pay_method,

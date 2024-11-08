@@ -1,93 +1,156 @@
 <template>
   <div>
+
+    <!-- <FbShareNotice v-if="is_show_fb_notice" /> -->
+
     <div :class="{
       container: true,
       'fix-box': choose_time ? true : false,
+      'cn-bg': language === 'zh-CN',
+      'tw-bg': language === 'zh-TW',
     }">
 
       <confirm @close-confirm="closeConfirm" :show="showConfirm" />
-      <img class="nav" :src="is_cn? home_img_nav_cn: home_img_nav_tw"/>
-      <img class="card" :src="is_cn? home_img_bazixinxi_cn: home_img_bazixinxi_tw"/>
+      <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
+      <div :class="['info',]">
 
-      <div class="bottom-container">
-        <div class="top">
-          <div class="left"></div>
-          <div class="right">
-            <img />
+        <div :class="['info-content', showEmail() ? 'info-height' : '']">
+          <div class="title">
+            <img :src="is_cn ? cn_img_tittle_home_xinxi : tw_img_tittle_home_xinxi" />
           </div>
+
+
+          <div class="item-container">
+            <div class="info-item">
+              <div class="left input-container">
+                <div>姓名：</div>
+                <div class="info-input">
+                  <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
+                </div>
+
+              </div>
+              <div class="sex-container">
+                <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
+              </div>
+            </div>
+            <div class="divider-line"></div>
+
+            <div class="info-item">
+              <div class="left input-container">
+                <div>生辰：</div>
+                <div class="info-input">
+                  <div class="info-birth" :style="{
+                    color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
+                  }" @click="openPicker">
+                    {{ picker_date || $t('birth-placeholder') }}
+                  </div>
+                </div>
+
+              </div>
+              <div class="birth-container">
+                <img src="../../../assets/img/emotion_remarriage/icon_rili.webp" @click="openPicker" />
+              </div>
+            </div>
+            <div class="divider-line"></div>
+          </div>
+
+
+
+          <div id="info-btn" class="btn emo-btn" @click="showcheck">
+            <img src="../../../assets/img/emotion_remarriage/img_home_btu_chakan.webp" />
+          </div>
+
+          <div class="info-bottom">
+            <img v-if="privacyChecked" class="info-check"
+              src="../../../assets/img/emotion_remarriage/login_icon_choose.webp"
+              @click="privacyChecked = !privacyChecked" />
+            <img v-else class="info-check" src="../../../assets/img/emotion_remarriage/login_icon_choose_no.webp"
+              @click="privacyChecked = !privacyChecked" />
+            {{ $t('check-label') }}
+            <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
+            <span @click="link('privacy.html')">{{
+              $t('privacy-policy')
+            }}</span>
+          </div>
+
         </div>
-        <div class="bottom">2</div>
+
+
       </div>
-
-
+      <img class="card" :src="is_cn ? cn_icon_2 : tw_icon_2" />
+      <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" style="margin-bottom: 0.6rem;" />
+      <!-- <img class="card" style="margin-bottom: 0.6rem;" :src="is_cn ? cn_icon_5 : tw_icon_5" /> -->
+      <img v-if="showFixedBtn" class="fix-btn emo-btn"
+        src="../../../assets/img/emotion_remarriage/img_home_btu_chakan.webp" @click="check" />
       <!-- 時间选择控件 -->
-      <DatetimePicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+      <DatetimePicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && !show_nongli"></DatetimePicker>
-      <NongliPicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+      <NongliPicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
 
       <van-action-sheet v-model:show="show_sheet" title="立即获得咨询师详解" style="height: 7.1rem;">
         <div class="item-container">
-          <div class="info-item">
-            <div class="left input-container">
-              <div>姓名：</div>
-              <div class="info-input">
-                <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
-              </div>
+            <div class="info-item">
+              <div class="left input-container">
+                <div>姓名：</div>
+                <div class="info-input">
+                  <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
+                </div>
 
-            </div>
-            <!-- <div class="sex-container">
+              </div>
+              <!-- <div class="sex-container">
                 <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
               </div> -->
-          </div>
-
-
-          <div class="info-item">
-            <div class="left input-container">
-              <div>性别：</div>
             </div>
-            <div class="sex-container">
-              <div :class="['unselect', sex == 1 ? 'select' : '']" @click="changeSex(1)">男</div>
-              <div :class="['unselect', sex == 0 ? 'select' : '']" @click="changeSex(0)">女</div>
-              <!-- <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
-                <img :src="sex == 1 ? boy : girl" @click="changeSex()" /> -->
-            </div>
-          </div>
 
-          <div class="info-item">
-            <div class="left input-container">
-              <div>生辰：</div>
-              <div class="info-input">
-                <div class="info-birth" :style="{
-                  color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
-                }" @click="openPicker">
-                  {{ picker_date || $t('birth-placeholder') }}
-                </div>
+
+            <div class="info-item">
+              <div class="left input-container">
+                <div>性别：</div>
               </div>
-
+              <div class="sex-container">
+                <div :class="['unselect', sex == 1? 'select': '']" @click="changeSex(1)">男</div>
+                <div :class="['unselect', sex == 0? 'select': '']" @click="changeSex(0)">女</div>
+                <!-- <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
+                <img :src="sex == 1 ? boy : girl" @click="changeSex()" /> -->
+              </div>
             </div>
-            <div class="birth-container">
-              <img src="../../../assets/img/emotion_voice/icon_rili.webp" @click="openPicker" />
+
+            <div class="info-item">
+              <div class="left input-container">
+                <div>生辰：</div>
+                <div class="info-input">
+                  <div class="info-birth" :style="{
+                    color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
+                  }" @click="openPicker">
+                    {{ picker_date || $t('birth-placeholder') }}
+                  </div>
+                </div>
+
+              </div>
+              <div class="birth-container">
+                <img src="../../../assets/img/emotion_voice/icon_rili.webp" @click="openPicker" />
+              </div>
             </div>
           </div>
-        </div>
 
+          
 
-
-        <div class="info-bottom">
-          <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_voice/icon_choose_seleted.webp"
-            @click="privacyChecked = !privacyChecked" />
-          <img v-else class="info-check" src="../../../assets/img/emotion_voice/icon_choose_normal.webp"
-            @click="privacyChecked = !privacyChecked" />
-          {{ $t('check-label') }}
-          <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
-          <span @click="link('privacy.html')">{{
-            $t('privacy-policy')
-          }}</span>
-        </div>
-        <div id="info-btn" :class="['btn', 'emo-btn', btn_status ? 'btn-check' : '']" @click="check">
-          立即提交
-        </div>
+          <div class="info-bottom">
+            <img v-if="privacyChecked" class="info-check"
+              src="../../../assets/img/emotion_voice/icon_choose_seleted.webp"
+              @click="privacyChecked = !privacyChecked" />
+            <img v-else class="info-check" src="../../../assets/img/emotion_voice/icon_choose_normal.webp"
+              @click="privacyChecked = !privacyChecked" />
+            {{ $t('check-label') }}
+            <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
+            <span @click="link('privacy.html')">{{
+              $t('privacy-policy')
+            }}</span>
+          </div>
+          <div id="info-btn" :class="['btn', 'emo-btn', btn_status? 'btn-check': '']" @click="check" >
+            立即提交
+          </div>
       </van-action-sheet>
 
       <NewFooter type="emotion_marriages" v-if="showFixedBtn" product_key="consult_time" />
@@ -107,7 +170,7 @@ import {
   getLastOrderAPI,
   getComboAttachAPI,
   reportBuryingEventAPI,
-} from '../../../api/api';
+} from '../../../api/api.js';
 import moment from 'dayjs';
 // @ts-ignore
 
@@ -118,7 +181,7 @@ import {
   reportName,
   path_enums,
   maidianEnum,
-} from '../../../libs/enum';
+} from '../../../libs/enum.js';
 
 import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.webp';
 import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.webp';
@@ -126,14 +189,6 @@ import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.webp';
 import combinePayPop from '../../../components/combinePayPop.vue';
 import confirm from './confirm.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
-
-import home_img_nav_tw from '../../../assets/img/emotion_voice/tw/home_img_nav_tw.webp'
-import home_img_nav_cn from '../../../assets/img/emotion_voice/cn/home_img_nav_cn.webp'
-
-import home_img_bazixinxi_tw from '../../../assets/img/emotion_voice/tw/home_img_bazixinxi_tw.webp'
-import home_img_bazixinxi_cn from '../../../assets/img/emotion_voice/cn/home_img_bazixinxi_cn.webp'
-
-
 
 import cn_card_1 from '../../../assets/img/emotion/new/2.webp';
 import tw_card_1 from '../../../assets/img/emotion/new/tw/2.webp';
@@ -192,10 +247,6 @@ export default {
       tw_img_tittle_home_xinxi,
       boy,
       girl,
-      home_img_nav_tw,
-      home_img_nav_cn,
-      home_img_bazixinxi_tw,
-      home_img_bazixinxi_cn,
       cn_icon_1,
       cn_icon_2,
       cn_icon_3,
@@ -212,8 +263,8 @@ export default {
 
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,
-      sex: '1',
-      year: '1995',
+      sex: '0',
+      year: '2000',
       month: '',
       date: '',
       birth_hour: '-1',
@@ -266,7 +317,7 @@ export default {
   },
   computed: {
     btn_status() {
-      return this.privacyChecked && this.picker_date_obj != null && this.username.length > 0
+      return this.privacyChecked && this.picker_date_obj !=null && this.username.length>0
     },
     is_show_fb_notice() {
       return utils.isFBContainer();
@@ -552,7 +603,7 @@ export default {
      */
     changeSex(val) {
 
-
+     
       this.sex = val + '';
     },
 
@@ -646,13 +697,17 @@ export default {
       window.localStorage.setItem('_emotion_fate_info', querystring);
       location.href = url;
     },
+    
+    showcheck() {
+      this.show_sheet = true
+    },
 
     /**
      * @description: 跳转到支付页
      * @return {*}
      */
     async check() {
-      // this.show_sheet = true
+      
       let username = this.username;
       let email = this.email;
       let sex = this.sex;
@@ -935,7 +990,13 @@ export default {
   }
 }
 
+.cn-bg {
+  background-image: url('../../../assets/img/emotion_end/cn/img_home_topbj_cn.webp');
+}
 
+.tw-bg {
+  background-image: url('../../../assets/img/emotion_end/tw/img_home_topbj_tw.webp');
+}
 
 #bg-svga {
   position: absolute;
@@ -946,242 +1007,206 @@ export default {
 
 .container {
   width: 7.5rem;
-  height: 100vh;
-  background-image: url('../../../assets/img/emotion_voice/home_img_backdrop.webp');
-  background-color: red;
-  background-size: cover;
   position: relative;
   background-repeat: no-repeat;
+  background-size: contain;
   background-position: top center;
+  background-color: #ED8C8C;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
+  padding-bottom: 1.2rem;
 
-  .nav {
-    width: 7.5rem;
-    height: 1.12rem;
-  }
-  .card {
-    width: 7.02rem;
-    height: 3.77rem;
-    margin-top: 4rem;
-  }
-  .bottom-container {
-    width: 7.02rem;
-    height: 100%;
+  // .title {
+  //   position: relative;
+  //   z-index: 10;
+  //   width: 100%;
 
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .top {
-      display: flex;
-      height: 100%;
-      
-      .left {
-        width: 5.24rem;
-        height: 100%;
-        border: 1px solid red;
-      }
-      .right {
-        display: flex;
-        flex-direction: column;
-        margin-left: 0.3rem;
-        img {
-          width: 1.48rem;
-          height: 1.26rem;
-        }
-      }
-
-    }
-    .bottom {
-      width: 100%;
-      height: 1rem;
-      border: 1px solid blue; 
-    }
-  }
+  //   img {
+  //     margin-top: 0.35rem;
+  //     margin-left: 0.51rem;
+  //     width: 2.8rem;
+  //   }
+  // }
 
 
   .item-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 0.2rem;
-
-    .info-item {
-      width: 6.7rem;
-      height: 1.05rem;
-      margin-bottom: 0.2rem;
-      border-radius: 0.24rem;
-      background: #F6F7F8;
-      padding: 0.3rem;
-      line-height: 0.82rem;
-      overflow: hidden;
-      // border: 1px solid red;
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
-      font-weight: 400;
-      font-size: 0.3rem;
-      color: #07060F;
-      line-height: 0.48rem;
-      text-align: justify;
-      font-style: normal;
-
-      .left {
         display: flex;
-        margin-top: 0.1rem;
-      }
-
-      .input-container {
-        flex: auto;
-        height: 0.92rem;
-        // background-color: #fff;
-        border-radius: 0.12rem;
-        display: flex;
-        box-sizing: border-box;
-        padding: 0.06rem;
+        flex-direction: column;
         align-items: center;
+        margin-top: 0.2rem;
 
-        input {
-          // width: 100%;
-          width: 3.2rem;
-          font-size: 0.3rem;
-          line-height: 0.42rem;
-          outline: none;
-          border: none;
-          background-color: transparent;
-          padding: 0;
-          // margin: 0 0.3rem;
-
-          &::input-placeholder {
-            color: rgba(51, 51, 51, 0.5);
-          }
-
-          &::-webkit-input-placeholder {
-            color: rgba(51, 51, 51, 0.5);
-          }
-
-          &::-moz-placeholder {
-            color: rgba(51, 51, 51, 0.5);
-          }
-
-          &::-moz-placeholder {
-            color: rgba(51, 51, 51, 0.5);
-          }
-
-          &::-ms-input-placeholder {
-            color: rgba(51, 51, 51, 0.5);
-          }
-        }
-      }
-
-      .sex-container {
-        display: flex;
-        width: 5rem;
-        height: 0.6rem;
-        margin-top: 0.1rem;
-
-        .unselect {
-          width: 1.08rem;
-          height: 0.65rem;
-          background: #FFFFFF;
-          border-radius: 0.65rem;
-          display: flex;
-          justify-content: center;
+        .info-item {
+          width: 6.7rem;
+          height: 1.05rem;
+          margin-bottom: 0.2rem;
+          border-radius: 0.24rem;
+          background: #F6F7F8;
+          padding: 0.3rem;
+          line-height: 0.82rem;
+          overflow: hidden;
+          // border: 1px solid red;
           align-items: center;
+          display: flex;
+          justify-content: space-between;
           font-weight: 400;
           font-size: 0.3rem;
-          color: #ABADB4;
-          line-height: 0.45rem;
-          text-align: left;
+          color: #07060F;
+          line-height: 0.48rem;
+          text-align: justify;
           font-style: normal;
-          text-transform: none;
 
-        }
+          .left {
+            display: flex;
+            margin-top: 0.1rem;
+          }
 
-        .select {
-          width: 1.08rem;
-          height: 0.65rem;
-          background: #6677FF;
-          border-radius: 0.65rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-weight: 400;
-          font-size: 0.3rem;
-          color: #FFFFFF;
-          line-height: 0.45rem;
-          text-align: left;
-          font-style: normal;
-          text-transform: none;
-        }
+          .input-container {
+            flex: auto;
+            height: 0.92rem;
+            // background-color: #fff;
+            border-radius: 0.12rem;
+            display: flex;
+            box-sizing: border-box;
+            padding: 0.06rem;
+            align-items: center;
 
-        img {
-          width: 1.7rem;
-          height: 0.6rem;
+            input {
+              // width: 100%;
+              width: 3.2rem;
+              font-size: 0.3rem;
+              line-height: 0.42rem;
+              outline: none;
+              border: none;
+              background-color: transparent;
+              padding: 0;
+              // margin: 0 0.3rem;
+
+              &::input-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-webkit-input-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-moz-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-moz-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+
+              &::-ms-input-placeholder {
+                color: rgba(51, 51, 51, 0.5);
+              }
+            }
+          }
+
+          .sex-container {
+            display: flex;
+            width: 5rem;
+            height: 0.6rem;
+            margin-top: 0.1rem;
+            .unselect {
+              width: 1.08rem;
+              height: 0.65rem;
+              background: #FFFFFF;
+              border-radius: 0.65rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-weight: 400;
+              font-size: 0.3rem;
+              color: #ABADB4;
+              line-height: 0.45rem;
+              text-align: left;
+              font-style: normal;
+              text-transform: none;
+
+            }
+            .select {
+              width: 1.08rem;
+              height: 0.65rem;
+              background: #6677FF;
+              border-radius: 0.65rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-weight: 400;
+              font-size: 0.3rem;
+              color: #FFFFFF;
+              line-height: 0.45rem;
+              text-align: left;
+              font-style: normal;
+              text-transform: none;
+            }
+
+            img {
+              width: 1.7rem;
+              height: 0.6rem;
+            }
+          }
+
+          .birth-container {
+            margin-right: 0.13rem;
+            display: flex;
+            width: 0.46rem;
+            height: 0.46rem;
+            margin-top: 0.1rem;
+
+            img {
+              width: 0.46rem;
+              height: 0.46rem;
+            }
+          }
         }
       }
 
-      .birth-container {
-        margin-right: 0.13rem;
+
+
+
+      .btn {
         display: flex;
-        width: 0.46rem;
-        height: 0.46rem;
-        margin-top: 0.1rem;
+        margin: auto;
+        margin-top: 0.4rem;
+        width: 5.9rem;
+        height: 0.92rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient( 90deg, rgba(251,76,146,0.4) 0%, rgba(255,90,79,0.4) 100%);
+        border-radius: 1rem;
+        font-weight: 600;
+        font-size: 0.32rem;
+        color: #FFFFFF;
+        line-height: 0.32rem;
+      }
+      .btn-check {
+        background: linear-gradient( 90deg, #FB4C92 0%, #FF5A4F 100%);
+      }
+
+      .info-bottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #95979F;
+        font-size: 0.22rem;
+        line-height: 0.3rem;
+        margin-top: 0.3rem;
 
         img {
-          width: 0.46rem;
-          height: 0.46rem;
+          width: 0.3rem;
+          height: 0.3rem;
+          margin-right: 0.12rem;
+        }
+
+        span {
+          color: #F8446A;
         }
       }
-    }
-  }
-
-
-
-
-  .btn {
-    display: flex;
-    margin: auto;
-    margin-top: 0.4rem;
-    width: 5.9rem;
-    height: 0.92rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(90deg, rgba(251, 76, 146, 0.4) 0%, rgba(255, 90, 79, 0.4) 100%);
-    border-radius: 1rem;
-    font-weight: 600;
-    font-size: 0.32rem;
-    color: #FFFFFF;
-    line-height: 0.32rem;
-  }
-
-  .btn-check {
-    background: linear-gradient(90deg, #FB4C92 0%, #FF5A4F 100%);
-  }
-
-  .info-bottom {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #95979F;
-    font-size: 0.22rem;
-    line-height: 0.3rem;
-    margin-top: 0.3rem;
-
-    img {
-      width: 0.3rem;
-      height: 0.3rem;
-      margin-right: 0.12rem;
-    }
-
-    span {
-      color: #F8446A;
-    }
-  }
 
 
 
@@ -1373,15 +1398,15 @@ export default {
 
   }
 
+  
 
 
 
-
-  // .card {
-  //   width: 7.1rem;
-  //   // margin-bottom: 0.36rem;
-  //   margin-top: 0.24rem;
-  // }
+  .card {
+    width: 7.1rem;
+    // margin-bottom: 0.36rem;
+    margin-top: 0.24rem;
+  }
 }
 
 // .mt-180 {

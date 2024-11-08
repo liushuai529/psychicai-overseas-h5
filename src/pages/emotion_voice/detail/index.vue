@@ -8,13 +8,10 @@
     <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
     
     
-    <div :class="['method-box', !is_show_combination ? 'method-height' : null]" style="margin-top: -2.5rem; border: 1px solid red;">
+    <div :class="['method-box', !is_show_combination ? 'method-height' : null]" style="margin-top: -2.5rem; ">
       
 
-      <div style="display: flex; flex-direction: column;">
-        <div id="method-title-img" class="method-title-img-consult">
-          <img :src="is_cn ? cn_paypage_tittle_pay : tw_paypage_tittle_pay" />
-        </div>
+      <div style="display: flex; flex-direction: column; margin-top: 1.4rem;">
         <UserInfo style="margin-top: 0.24rem;" :picker_date_nongli="picker_date_nongli" :picker_date_yangli="picker_date_yangli" :username="username"
           :sex="sex" />
       </div>
@@ -65,6 +62,11 @@ import cn_home_btn from '../../../assets/img/emotion_voice/cn/paypag_btn_zixun_c
 import tw_home_btn from '../../../assets/img/emotion_voice/tw/paypag_btn_zixun_tw.webp';
 import cn_history_order from '../../../assets/img/emotion_voice/cn/paypage_lsdd_cn.webp';
 import tw_history_order from '../../../assets/img/emotion_voice/tw/paypage_lsdd_tw.webp';
+
+import paypage_cardbj_pay_cn from '../../../assets/img/emotion_voice/cn/paypage_cardbj_pay_cn.webp';
+import paypage_cardbj_pay_tw from '../../../assets/img/emotion_voice/tw/paypage_cardbj_pay_tw.webp';
+
+
 
 
 import PayCard from '../../../components/PayCard.vue';
@@ -122,9 +124,10 @@ export default {
       localStorage: window.localStorage,
       cn_history_order,
       tw_history_order,
+      paypage_cardbj_pay_cn,
+      paypage_cardbj_pay_tw,
       cn_paypage_tittle_pay,
       tw_paypage_tittle_pay,
-      card_img_bj_shang,
       cn_bg_1,
       tw_bg_1,
       cn_bg_2,
@@ -492,16 +495,14 @@ export default {
 
 .method-box {
   width: 7.1rem;
-  // height: 11.06rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 0.24rem;
   // background: #fffafa;
   // border-radius: 0.16rem;
-  // background: url('../../../assets/img/emotion_remarriage/card_img_bj_zhong.png') ;
-  // background-size: 7.1rem 9.91rem;
-  background-color: #fff;
+  background: url('../../../assets/img/emotion_voice/cn/paypage_cardbj_pay_cn.webp') no-repeat;
+  background-size: 100% 100%;
   border-radius: 0.3rem;
 
 
