@@ -305,7 +305,7 @@
 
     DATAFLUX_RUM && DATAFLUX_RUM.onReady(function () {
       const is_prod = !/(localhost|192\.168|test-|console)/.test(location.href);
-      is_prod && DATAFLUX_RUM && DATAFLUX_RUM.init({
+      DATAFLUX_RUM && DATAFLUX_RUM.init({
         applicationId: 'psychicai_h5',
         datakitOrigin: 'https://future-datakit.wekoi.ai', // 协议（包括：//），域名（或IP地址）[和端口号],
         env: /(localhost|192\.168|test|console)/.test(location.href)
@@ -479,7 +479,7 @@
     }
 
     // 测试环境加载vconsole
-    if (window.location.href.indexOf('//test-overseas.psychicai.pro/') > 0) {
+    if (window.location.href.indexOf('//test-overseas.psychicai.pro/') > 0 || window.location.href.indexOf('//test-overseas.bjzxmlxz.com/') > 0) {
       loadJs(
         'https://cdn.jsdelivr.net/npm/vconsole@3.3.4/dist/vconsole.min.js'
       );

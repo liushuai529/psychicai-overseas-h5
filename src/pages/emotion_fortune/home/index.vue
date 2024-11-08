@@ -405,6 +405,7 @@ export default {
     },
   },
   created() {
+    
     this.showComboAttach();
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
@@ -444,7 +445,6 @@ export default {
   mounted() {
     //svga动画预加载
     // this.preloadSVGA()
-    utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "select_content", {});
     if (utils.isProd()) {
       try {
         utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('trackCustom', 'CustomChannel', {

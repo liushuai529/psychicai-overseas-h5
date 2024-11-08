@@ -1,107 +1,110 @@
 <template>
   <div>
-
-    <!-- <FbShareNotice v-if="is_show_fb_notice" /> -->
-
     <div :class="{
       container: true,
       'fix-box': choose_time ? true : false,
-      'cn-bg': language === 'zh-CN',
-      'tw-bg': language === 'zh-TW',
     }">
 
-      <audio ref="audioPlayer" src="https://psychicai-static.psychicai.pro/audio/life_marriage.mp3"></audio>
-      <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
-      <div :class="['info',]">
-       
-        <div :class="['info-content', showEmail() ? 'info-height' : '']">
-          <div class="title">
-            <img :src="is_cn ? cn_img_tittle_home_xinxi : tw_img_tittle_home_xinxi" />
+      <audio ref="audioPlayer"
+        src="https://psychicai-static.psychicai.pro/files/241124a310d464a846d79d03349c2a1e314c.mp3"
+        @ended="onEnded"></audio>
+      <confirm @close-confirm="closeConfirm" :show="showConfirm" />
+      <canvas class="canvas-bg1" id="canvas1"></canvas>
+      <canvas class="canvas-bg2" id="canvas2"></canvas>
+      <img class="nav" :src="is_cn ? home_img_nav_cn : home_img_nav_tw" @click="handleAction" />
+      <img class="music" :src="is_cn ? home_img_voice_cn : home_img_voice_tw" @click="handleAction" />
+      <img class="textbj" :src="is_cn ? home_img_textbj_cn : home_img_textbj_tw" @click="handleAction" />
+      <img class="card" :src="is_cn ? home_img_bazixinxi_cn : home_img_bazixinxi_tw" />
+
+      <div class="bottom-container">
+        <div class="top">
+          <div class="left" ref="scrollContainer">
+            <div class="item" v-for="item in message_list"><span>情感老师</span>{{ item }}</div>
+
           </div>
-
-
-          <div class="item-container">
-            <div class="info-item">
-              <div class="left input-container">
-                <div>姓名：</div>
-                <div class="info-input">
-                  <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
-                </div>
-
-              </div>
-              <div class="sex-container">
-                <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
+          <div class="right">
+            <div>
+              <img :src="is_cn ? home_img_lianmai_cn : home_img_lianmai_tw" @click="handleAction" />
+              <div class="btn">
+                <p>{{ is_cn ? '历史订单' : '歷史訂單' }}</p>
+                <img src="../../../assets/img/emotion_voice/home_img_more.webp" />
               </div>
             </div>
-            <div class="divider-line"></div>
-
-            <div class="info-item">
-              <div class="left input-container">
-                <div>生辰：</div>
-                <div class="info-input">
-                  <div class="info-birth" :style="{
-                    color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
-                  }" @click="openPicker">
-                    {{ picker_date || $t('birth-placeholder') }}
-                  </div>
-                </div>
-
-              </div>
-              <div class="birth-container">
-                <img src="../../../assets/img/emotion_remarriage/icon_rili.webp" @click="openPicker" />
-              </div>
-            </div>
-            <div class="divider-line"></div>
-
-
-
-
-
-
-            <!-- <div v-if="this.showEmail()" class="info-item">
-              <div class="left input-container">
-                <div>{{ $t('email-label') }}：</div>
-                <div class="info-input">
-                  <input style="width: 4rem;" type="text" id="email" v-model="email"
-                    :placeholder="$t('email-placeholder')" />
-                </div>
-              </div>
-            </div>
-            <div v-if="this.showEmail()" class="divider-line"></div> -->
           </div>
-
-
-
-          <div id="info-btn" class="btn emo-btn" @click="check">
-            <img src="../../../assets/img/emotion_remarriage/img_home_btu_chakan.webp" />
-          </div>
-
-          <div class="info-bottom">
-            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_remarriage/login_icon_choose.webp"
-              @click="privacyChecked = !privacyChecked" />
-            <img v-else class="info-check" src="../../../assets/img/emotion_remarriage/login_icon_choose_no.webp"
-              @click="privacyChecked = !privacyChecked" />
-            {{ $t('check-label') }}
-            <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
-            <span @click="link('privacy.html')">{{
-              $t('privacy-policy')
-              }}</span>
-          </div>
-
         </div>
-  
-
+        <img class="bottom" :src="is_cn ? home_img_gongneng_cn : home_img_gongneng_tw" @click="handleAction" />
       </div>
-      <img class="card" :src="is_cn ? cn_icon_2 : tw_icon_2" />
-      <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" style="margin-bottom: 0.6rem;"/>
-      <!-- <img class="card" style="margin-bottom: 0.6rem;" :src="is_cn ? cn_icon_5 : tw_icon_5" /> -->
-      <img v-if="showFixedBtn" class="fix-btn emo-btn" src="../../../assets/img/emotion_remarriage/img_home_btu_chakan.webp"
-        @click="check" />
+
+
       <!-- 時间选择控件 -->
-      <DatetimePicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+      <DatetimePicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && !show_nongli"></DatetimePicker>
-      <NongliPicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+      <NongliPicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
+
+      <van-action-sheet v-model:show="show_sheet" title="立即获得咨询师详解" style="height: 7.1rem;">
+        <div class="item-container">
+          <div class="info-item">
+            <div class="left input-container">
+              <div>姓名：</div>
+              <div class="info-input">
+                <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
+              </div>
+
+            </div>
+            <!-- <div class="sex-container">
+                <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
+              </div> -->
+          </div>
+
+
+          <div class="info-item">
+            <div class="left input-container">
+              <div>性别：</div>
+            </div>
+            <div class="sex-container">
+              <div :class="['unselect', sex == 1 ? 'select' : '']" @click="changeSex(1)">男</div>
+              <div :class="['unselect', sex == 0 ? 'select' : '']" @click="changeSex(0)">女</div>
+              <!-- <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
+                <img :src="sex == 1 ? boy : girl" @click="changeSex()" /> -->
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="left input-container">
+              <div>生辰：</div>
+              <div class="info-input">
+                <div class="info-birth" :style="{
+                  color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
+                }" @click="openPicker">
+                  {{ picker_date || $t('birth-placeholder') }}
+                </div>
+              </div>
+
+            </div>
+            <div class="birth-container">
+              <img src="../../../assets/img/emotion_voice/icon_rili.webp" @click="openPicker" />
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="info-bottom">
+          <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_voice/icon_choose_seleted.webp"
+            @click="privacyChecked = !privacyChecked" />
+          <img v-else class="info-check" src="../../../assets/img/emotion_voice/icon_choose_normal.webp"
+            @click="privacyChecked = !privacyChecked" />
+          {{ $t('check-label') }}
+          <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
+          <span @click="link('privacy.html')">{{
+            $t('privacy-policy')
+          }}</span>
+        </div>
+        <div id="info-btn" :class="['btn', 'emo-btn', btn_status ? 'btn-check' : '']" @click="check">
+          立即提交
+        </div>
+      </van-action-sheet>
 
       <NewFooter type="emotion_marriages" v-if="showFixedBtn" product_key="consult_time" />
 
@@ -120,7 +123,7 @@ import {
   getLastOrderAPI,
   getComboAttachAPI,
   reportBuryingEventAPI,
-} from '../../../api/api';
+} from '../../../api/api.js';
 import moment from 'dayjs';
 // @ts-ignore
 
@@ -131,13 +134,38 @@ import {
   reportName,
   path_enums,
   maidianEnum,
-} from '../../../libs/enum';
+} from '../../../libs/enum.js';
 
 import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.webp';
 import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.webp';
 
 import combinePayPop from '../../../components/combinePayPop.vue';
+import confirm from './confirm.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
+
+import home_img_nav_tw from '../../../assets/img/emotion_voice/tw/home_img_nav_tw.webp'
+import home_img_nav_cn from '../../../assets/img/emotion_voice/cn/home_img_nav_cn.webp'
+
+import home_img_voice_tw from '../../../assets/img/emotion_voice/tw/home_img_voice_tw.webp'
+import home_img_voice_cn from '../../../assets/img/emotion_voice/cn/home_img_voice_cn.webp'
+
+import home_img_textbj_tw from '../../../assets/img/emotion_voice/tw/home_img_textbj_tw.webp'
+import home_img_textbj_cn from '../../../assets/img/emotion_voice/cn/home_img_textbj_cn.webp'
+
+
+
+import home_img_bazixinxi_tw from '../../../assets/img/emotion_voice/tw/home_img_bazixinxi_tw.webp'
+import home_img_bazixinxi_cn from '../../../assets/img/emotion_voice/cn/home_img_bazixinxi_cn.webp'
+
+import home_img_lianmai_tw from '../../../assets/img/emotion_voice/tw/home_img_lianmai_tw.webp'
+import home_img_lianmai_cn from '../../../assets/img/emotion_voice/cn/home_img_lianmai_cn.webp'
+
+import home_img_gongneng_tw from '../../../assets/img/emotion_voice/tw/home_img_gongneng_tw.webp'
+import home_img_gongneng_cn from '../../../assets/img/emotion_voice/cn/home_img_gongneng_cn.webp'
+
+
+
+
 
 import cn_card_1 from '../../../assets/img/emotion/new/2.webp';
 import tw_card_1 from '../../../assets/img/emotion/new/tw/2.webp';
@@ -183,6 +211,7 @@ export default {
     DatetimePicker,
     NongliPicker,
     combinePayPop,
+    confirm,
     HomeFooter,
     PopNotice,
     FixedOrder,
@@ -195,6 +224,18 @@ export default {
       tw_img_tittle_home_xinxi,
       boy,
       girl,
+      home_img_nav_tw,
+      home_img_nav_cn,
+      home_img_voice_tw,
+      home_img_voice_cn,
+      home_img_textbj_cn,
+      home_img_textbj_tw,
+      home_img_bazixinxi_tw,
+      home_img_bazixinxi_cn,
+      home_img_lianmai_tw,
+      home_img_lianmai_cn,
+      home_img_gongneng_tw,
+      home_img_gongneng_cn,
       cn_icon_1,
       cn_icon_2,
       cn_icon_3,
@@ -211,8 +252,8 @@ export default {
 
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,
-      sex: '1',
-      year: '1995',
+      sex: '0',
+      year: '2000',
       month: '',
       date: '',
       birth_hour: '-1',
@@ -258,10 +299,16 @@ export default {
       duration_time: {
         entry_time: 0,
         exit_time: 0,
-      }
+      },
+      showConfirm: false,
+      show_sheet: false,
+      message_list: []
     };
   },
   computed: {
+    btn_status() {
+      return this.privacyChecked && this.picker_date_obj != null && this.username.length > 0
+    },
     is_show_fb_notice() {
       return utils.isFBContainer();
     },
@@ -279,6 +326,14 @@ export default {
   },
   watch: {
 
+    show_sheet(val) {
+      if(!val) {
+        // this.$refs.audioPlayer.play()
+        this.playSound()
+        
+      }
+    },
+
     username(val) {
       if (val) {
         let new_ = val.trim();
@@ -295,6 +350,12 @@ export default {
 
   },
   created() {
+    // setInterval(() => {
+    //   this.message_list.push('情感導師：老師，我和男朋友一直異國戀，昨天晚上，他電話那邊有別的女生聲音，後來聊了幾分鐘，就掛斷了，我後面問他是誰，他只是說同學來宿舍拿東西，我現在特別焦慮，能幫我看看嗎？')
+    //   this.scrollToBottom();
+    // }, 2000);
+
+    this.showConfirm = true
     this.$store.dispatch('common/getProduction', 'consult_time');
     utils.firebaseLogEvent(
       '10014',
@@ -324,9 +385,14 @@ export default {
     console.log('销毁111')
   },
   mounted() {
+    const audioPlayer = this.$refs.audioPlayer;
+    audioPlayer.addEventListener('timeupdate', function () {
+      console.log('Current playback position: ' + audioPlayer.currentTime + ' seconds');
+      localStorage.setItem('current_play_position', audioPlayer.currentTime)
+    });
     this.duration_time.entry_time = new Date().getTime()
-    //svga动画预加载
-    // this.preloadSVGA()
+    //svga动画加载
+    this.loadSVGA()
     if (utils.isProd()) {
       try {
         utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('trackCustom', 'CustomChannel', {
@@ -414,12 +480,69 @@ export default {
         'view',
         {
           channel: utils.getFBChannel(),
-          time: (this.duration_time.exit_time - this.duration_time.entry_time)/1000
+          time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
         }
       );
     }
   },
   methods: {
+    loadSVGA() {
+      this.loadSvgaBg('#canvas1', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
+      this.loadSvgaBg('#canvas2', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
+    },
+    // 端内加载背景SVGA动画
+    loadSvgaBg(dom, url, is_loop = true) {
+      const downloader = new Downloader();
+      // 默认调用 WebWorker 线程解析
+      // 可配置 new Parser({ disableWorker: true }) 禁止
+      const parser = new Parser();
+      // #canvas 是 HTMLCanvasElement
+      const player = new Player(dom);
+
+      (async () => {
+        const fileData = await downloader.get(url);
+        const svgaData = await parser.do(fileData);
+
+        player.set({ loop: is_loop });
+
+        await player.mount(svgaData);
+
+        // 开始播放动画
+        player.start();
+      })();
+    },
+    onEnded() {
+      localStorage.removeItem('current_play_position');
+      console.log('声音播放结束');
+    },
+    playSound() {
+      if(localStorage.getItem('current_play_position')) {
+        this.$refs.audioPlayer.currentTime = parseFloat(localStorage.getItem('current_play_position'))
+        console.log('转换时间', parseFloat(localStorage.getItem('current_play_position')))
+      }
+      this.$refs.audioPlayer.play();
+      // console.log('当前时间', this.$refs.audioPlayer.currentTime)
+      // utils.firebaseLogEvent(
+      //   '10014',
+      //   '-10006',
+      //   'click_voice_bar',
+      //   'click',
+      //   {
+      //     channel: utils.getFBChannel(),
+      //   }
+      // );
+    },
+    scrollToBottom() {
+      const container = this.$refs.scrollContainer;
+      container.scrollTop = container.scrollHeight;
+    },
+    /**
+     * 关闭弹窗，开始播放音乐
+     */
+    closeConfirm() {
+      this.showConfirm = false
+      this.playSound();
+    },
     showEmail() {
       return utils.showEmail();
     },
@@ -531,36 +654,11 @@ export default {
      * @return {*}
      */
     changeSex(val) {
-     
-      if (this.sex == 0) {
-        this.sex = 1;
-      } else {
-        this.sex = 0;
-      }
-      // this.sex = val + '';
+
+
+      this.sex = val + '';
     },
 
-    // 端内加载背景SVGA动画
-    loadBg(dom, url, is_loop = true) {
-      const downloader = new Downloader();
-      // 默认调用 WebWorker 线程解析
-      // 可配置 new Parser({ disableWorker: true }) 禁止
-      const parser = new Parser();
-      // #canvas 是 HTMLCanvasElement
-      const player = new Player(dom);
-
-      (async () => {
-        const fileData = await downloader.get(url);
-        const svgaData = await parser.do(fileData);
-
-        player.set({ loop: is_loop });
-
-        await player.mount(svgaData);
-
-        // 开始播放动画
-        player.start();
-      })();
-    },
 
     /**
      * @description: 跳转协议页面
@@ -631,11 +729,18 @@ export default {
       location.href = url;
     },
 
+    handleAction() {
+      this.show_sheet = true
+      const audioPlayer = this.$refs.audioPlayer;
+      audioPlayer.pause();
+    },
+
     /**
      * @description: 跳转到支付页
      * @return {*}
      */
     async check() {
+
       let username = this.username;
       let email = this.email;
       let sex = this.sex;
@@ -731,8 +836,8 @@ export default {
         let same_ = this.productList.find(
           item => item.product_key === this.product_key
         );
-        const { price, currency_type } = same_; 
-        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "generate_lead", {
+        const { price, currency_type } = same_;
+        utils.getFBChannel().indexOf('google') > -1 && gtag && gtag("event", "generate_lead", {
           currency: currency_type,
           value: price,
         });
@@ -918,13 +1023,7 @@ export default {
   }
 }
 
-.cn-bg {
-  background-image: url('../../../assets/img/emotion_end/cn/img_home_topbj_cn.webp');
-}
 
-.tw-bg {
-  background-image: url('../../../assets/img/emotion_end/tw/img_home_topbj_tw.webp');
-}
 
 #bg-svga {
   position: absolute;
@@ -935,28 +1034,338 @@ export default {
 
 .container {
   width: 7.5rem;
+  height: 100vh;
+  background-image: url('../../../assets/img/emotion_voice/home_img_backdrop.webp');
+  background-color: red;
+  background-size: cover;
   position: relative;
   background-repeat: no-repeat;
-  background-size: contain;
   background-position: top center;
-  background-color: #ED8C8C;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
-  padding-bottom: 1.2rem;
 
-  // .title {
-  //   position: relative;
-  //   z-index: 10;
-  //   width: 100%;
+  .canvas-bg1 {
+    position: absolute;
+    top: 1.12rem;
+    left: 0.24rem;
+    width: 7.02rem;
+    height: 2.48rem;
+    z-index: 2;
+  }
+  .canvas-bg2 {
+    position: absolute;
+    top: 1.12rem;
+    left: 0.24rem;
+    width: 7.5rem;
+    height: 4.42rem;
+    z-index: 2;
+  }
 
-  //   img {
-  //     margin-top: 0.35rem;
-  //     margin-left: 0.51rem;
-  //     width: 2.8rem;
-  //   }
-  // }
+ 
+
+  .nav {
+    width: 7.5rem;
+    height: 1.12rem;
+  }
+  
+  .music {
+    width: 7.02rem;
+    height: 2.48rem;
+  }
+
+  .textbj {
+    width: 7.5rem;
+    height: 4.42rem;
+    margin-top: -2.5rem;
+  }
+
+  .card {
+    width: 7.02rem;
+    height: 3.77rem;
+    // margin-top: 4rem;
+  }
+
+  .bottom-container {
+    width: 7.02rem;
+    height: calc(100vh - 9rem);
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .top {
+      display: flex;
+
+      height: 100%;
+
+      .left {
+        width: 5.24rem;
+        height: 100%;
+        border: 1px solid red;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+
+        .item {
+          width: 5.24rem;
+          background: rgba(0, 0, 0, 0.2);
+          border-radius: 0.26rem;
+          padding: 0.16rem;
+          font-weight: 400;
+          font-size: 0.26rem;
+          color: #fff;
+          line-height: 0.3rem;
+          text-align: left;
+          font-style: normal;
+          text-transform: none;
+          margin-bottom: 0.12rem;
+
+          span {
+            color: #6CE0FF;
+          }
+        }
+
+
+      }
+
+      .right {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0.3rem;
+        justify-content: flex-end;
+
+        img {
+          width: 1.48rem;
+          height: 1.26rem;
+          align-self: flex-end;
+        }
+
+        .btn {
+          // width: 148px;
+          height: 0.56rem;
+          background: rgba(0, 0, 0, 0.2);
+          border-radius: 0.16rem;
+          padding: 0.15rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 0.24rem;
+          color: #FFFFFF;
+          line-height: 0.24rem;
+
+          img {
+            width: 0.22rem;
+            height: 0.22rem;
+          }
+        }
+      }
+
+    }
+
+    .bottom {
+      width: 7.02rem;
+      height: 0.76rem;
+    }
+  }
+
+
+  .item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.2rem;
+
+    .info-item {
+      width: 6.7rem;
+      height: 1.05rem;
+      margin-bottom: 0.2rem;
+      border-radius: 0.24rem;
+      background: #F6F7F8;
+      padding: 0.3rem;
+      line-height: 0.82rem;
+      overflow: hidden;
+      // border: 1px solid red;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 400;
+      font-size: 0.3rem;
+      color: #07060F;
+      line-height: 0.48rem;
+      text-align: justify;
+      font-style: normal;
+
+      .left {
+        display: flex;
+        margin-top: 0.1rem;
+      }
+
+      .input-container {
+        flex: auto;
+        height: 0.92rem;
+        // background-color: #fff;
+        border-radius: 0.12rem;
+        display: flex;
+        box-sizing: border-box;
+        padding: 0.06rem;
+        align-items: center;
+
+        input {
+          // width: 100%;
+          width: 3.2rem;
+          font-size: 0.3rem;
+          line-height: 0.42rem;
+          outline: none;
+          border: none;
+          background-color: transparent;
+          padding: 0;
+          // margin: 0 0.3rem;
+
+          &::input-placeholder {
+            color: rgba(51, 51, 51, 0.5);
+          }
+
+          &::-webkit-input-placeholder {
+            color: rgba(51, 51, 51, 0.5);
+          }
+
+          &::-moz-placeholder {
+            color: rgba(51, 51, 51, 0.5);
+          }
+
+          &::-moz-placeholder {
+            color: rgba(51, 51, 51, 0.5);
+          }
+
+          &::-ms-input-placeholder {
+            color: rgba(51, 51, 51, 0.5);
+          }
+        }
+      }
+
+      .sex-container {
+        display: flex;
+        width: 5rem;
+        height: 0.6rem;
+        margin-top: 0.1rem;
+
+        .unselect {
+          width: 1.08rem;
+          height: 0.65rem;
+          background: #FFFFFF;
+          border-radius: 0.65rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: 400;
+          font-size: 0.3rem;
+          color: #ABADB4;
+          line-height: 0.45rem;
+          text-align: left;
+          font-style: normal;
+          text-transform: none;
+
+        }
+
+        .select {
+          width: 1.08rem;
+          height: 0.65rem;
+          background: #6677FF;
+          border-radius: 0.65rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: 400;
+          font-size: 0.3rem;
+          color: #FFFFFF;
+          line-height: 0.45rem;
+          text-align: left;
+          font-style: normal;
+          text-transform: none;
+        }
+
+        img {
+          width: 1.7rem;
+          height: 0.6rem;
+        }
+      }
+
+      .birth-container {
+        margin-right: 0.13rem;
+        display: flex;
+        width: 0.46rem;
+        height: 0.46rem;
+        margin-top: 0.1rem;
+
+        img {
+          width: 0.46rem;
+          height: 0.46rem;
+        }
+      }
+    }
+  }
+
+
+
+
+  .btn {
+    display: flex;
+    margin: auto;
+
+    // width: 5.9rem;
+    height: 0.92rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(251, 76, 146, 0.4) 0%, rgba(255, 90, 79, 0.4) 100%);
+    border-radius: 1rem;
+    font-weight: 600;
+    font-size: 0.32rem;
+    color: #FFFFFF;
+    line-height: 0.32rem;
+  }
+
+  .btn-check {
+    background: linear-gradient(90deg, #FB4C92 0%, #FF5A4F 100%);
+  }
+
+  .info-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #95979F;
+    font-size: 0.22rem;
+    line-height: 0.3rem;
+    margin-top: 0.3rem;
+
+    img {
+      width: 0.3rem;
+      height: 0.3rem;
+      margin-right: 0.12rem;
+    }
+
+    span {
+      color: #F8446A;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   .info {
@@ -968,7 +1377,7 @@ export default {
     // height: 6.34rem;
     margin-top: 8rem;
 
-  
+
 
     .info-content {
       // background: url('../../../assets/img/emotion_remarriage/xinxi_img_bj_zhong.webp') no-repeat;
@@ -979,10 +1388,10 @@ export default {
       flex-direction: column;
       align-items: center;
       padding: 0.34rem 0.4rem;
-height: 5.4rem;
-background-color: #FFF3F3;
-border-radius: 0.3rem;
-border: 0.06rem solid #FFBBBB;
+      height: 5.4rem;
+      background-color: #FFF3F3;
+      border-radius: 0.3rem;
+      border: 0.06rem solid #FFBBBB;
 
       .title {
         width: 6.1rem;
@@ -995,116 +1404,116 @@ border: 0.06rem solid #FFBBBB;
         }
       }
 
-      .item-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 0.2rem;
+      // .item-container {
+      //   display: flex;
+      //   flex-direction: column;
+      //   align-items: center;
+      //   margin-top: 0.2rem;
 
-        .info-item {
-          width: 6.3rem;
-          height: 0.82rem;
-          line-height: 0.82rem;
-          overflow: hidden;
-          // border: 1px solid red;
-          align-items: center;
-          display: flex;
-          justify-content: space-between;
-          font-weight: 400;
-          font-size: 0.32rem;
-          color: #3A0922;
-          line-height: 0.48rem;
-          text-align: justify;
-          font-style: normal;
+      //   .info-item {
+      //     width: 6.3rem;
+      //     height: 0.82rem;
+      //     line-height: 0.82rem;
+      //     overflow: hidden;
+      //     // border: 1px solid red;
+      //     align-items: center;
+      //     display: flex;
+      //     justify-content: space-between;
+      //     font-weight: 400;
+      //     font-size: 0.32rem;
+      //     color: #3A0922;
+      //     line-height: 0.48rem;
+      //     text-align: justify;
+      //     font-style: normal;
 
-          .left {
-            display: flex;
-            margin-top: 0.1rem;
-          }
+      //     .left {
+      //       display: flex;
+      //       margin-top: 0.1rem;
+      //     }
 
-          .input-container {
-            flex: auto;
-            height: 0.92rem;
-            // background-color: #fff;
-            border-radius: 0.12rem;
-            display: flex;
-            box-sizing: border-box;
-            padding: 0.06rem;
-            align-items: center;
+      //     .input-container {
+      //       flex: auto;
+      //       height: 0.92rem;
+      //       // background-color: #fff;
+      //       border-radius: 0.12rem;
+      //       display: flex;
+      //       box-sizing: border-box;
+      //       padding: 0.06rem;
+      //       align-items: center;
 
-            input {
-              // width: 100%;
-              width: 3.2rem;
-              font-size: 0.3rem;
-              line-height: 0.42rem;
-              outline: none;
-              border: none;
-              background-color: transparent;
-              padding: 0;
-              // margin: 0 0.3rem;
+      //       input {
+      //         // width: 100%;
+      //         width: 3.2rem;
+      //         font-size: 0.3rem;
+      //         line-height: 0.42rem;
+      //         outline: none;
+      //         border: none;
+      //         background-color: transparent;
+      //         padding: 0;
+      //         // margin: 0 0.3rem;
 
-              &::input-placeholder {
-                color: rgba(51, 51, 51, 0.5);
-              }
+      //         &::input-placeholder {
+      //           color: rgba(51, 51, 51, 0.5);
+      //         }
 
-              &::-webkit-input-placeholder {
-                color: rgba(51, 51, 51, 0.5);
-              }
+      //         &::-webkit-input-placeholder {
+      //           color: rgba(51, 51, 51, 0.5);
+      //         }
 
-              &::-moz-placeholder {
-                color: rgba(51, 51, 51, 0.5);
-              }
+      //         &::-moz-placeholder {
+      //           color: rgba(51, 51, 51, 0.5);
+      //         }
 
-              &::-moz-placeholder {
-                color: rgba(51, 51, 51, 0.5);
-              }
+      //         &::-moz-placeholder {
+      //           color: rgba(51, 51, 51, 0.5);
+      //         }
 
-              &::-ms-input-placeholder {
-                color: rgba(51, 51, 51, 0.5);
-              }
-            }
-          }
+      //         &::-ms-input-placeholder {
+      //           color: rgba(51, 51, 51, 0.5);
+      //         }
+      //       }
+      //     }
 
-          .sex-container {
-            display: flex;
-            width: 1.7rem;
-            height: 0.6rem;
-            margin-top: 0.1rem;
+      //     .sex-container {
+      //       display: flex;
+      //       width: 1.7rem;
+      //       height: 0.6rem;
+      //       margin-top: 0.1rem;
 
-            img {
-              width: 1.7rem;
-              height: 0.6rem;
-            }
-          }
+      //       img {
+      //         width: 1.7rem;
+      //         height: 0.6rem;
+      //       }
+      //     }
 
-          .birth-container {
-            margin-right: 0.13rem;
-            display: flex;
-            width: 0.46rem;
-            height: 0.46rem;
-            margin-top: 0.1rem;
+      //     .birth-container {
+      //       margin-right: 0.13rem;
+      //       display: flex;
+      //       width: 0.46rem;
+      //       height: 0.46rem;
+      //       margin-top: 0.1rem;
 
-            img {
-              width: 0.46rem;
-              height: 0.46rem;
-            }
-          }
-        }
-      }
+      //       img {
+      //         width: 0.46rem;
+      //         height: 0.46rem;
+      //       }
+      //     }
+      //   }
+      // }
 
 
 
-      .btn {
-        display: flex;
-        margin-top: 0.4rem;
-        width: 5.9rem;
-        height: 0.92rem;
+      // .btn {
+      //   display: flex;
+      //   margin-top: 0.4rem;
+      //   width: 5.9rem;
+      //   height: 0.92rem;
 
-        img {
-          width: 5.9rem;
-          height: 0.92rem;
-        }
-      }
+      //   img {
+      //     width: 5.9rem;
+      //     height: 0.92rem;
+      //   }
+      // }
 
       .info-bottom {
         display: flex;
@@ -1131,32 +1540,17 @@ border: 0.06rem solid #FFBBBB;
       // height: 5.4rem;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
 
 
 
-  .card {
-    width: 7.1rem;
-    // margin-bottom: 0.36rem;
-    margin-top: 0.24rem;
-  }
+
+
+  // .card {
+  //   width: 7.1rem;
+  //   // margin-bottom: 0.36rem;
+  //   margin-top: 0.24rem;
+  // }
 }
 
 // .mt-180 {
