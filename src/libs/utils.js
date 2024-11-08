@@ -148,7 +148,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('/ads15/') > -1) {
     return 'ads15';
   } else {
-    return 'ads12';
+    return 'ads15';
   }
 };
 
