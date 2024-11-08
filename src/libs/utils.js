@@ -1793,6 +1793,7 @@ const setGoogleClientIdByCookie = () => {
     gcyLog(`通过cookie开始获取google_client_id`, {
       mlxz_action_desc: `google_client_id获取失败`,
     }); 
+    localStorage.setItem('google_client_id', `675248207.${Math.floor(Math.random() * 9000000000) + 1000000000}`);
   }
 }
 
