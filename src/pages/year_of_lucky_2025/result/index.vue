@@ -35,23 +35,23 @@
       <div class="card">
         <img :src="is_cn? home_img_tittle_xinxi_cn_1x: home_img_tittle_xinxi_tw_1x" />
         <UserInfo
-        :username="username"
-        :sex="sex"
-        :gongli_nongli="gongli_nongli"
-        :picker_date_yangli="picker_date_yangli"
-        :picker_date_nongli="picker_date_nongli"
-        :gan="gan"
-        :zhi="zhi"
-        :nayin="nayin"
-        :cai_bo_num="cai_bo_num"
-        :gui_ren_num="gui_ren_num"
-        :hun_yin_num="hun_yin_num"
-        :ming_ge="ming_ge"
-        :riyuanqiangruo="riyuanqiangruo"
-        :shi_ye_num="shi_ye_num"
-        :wuxingqiang="wuxingqiang"
-        :is_result="true"
-      />
+          :username="username"
+          :sex="sex"
+          :gongli_nongli="gongli_nongli"
+          :picker_date_yangli="picker_date_yangli"
+          :picker_date_nongli="picker_date_nongli"
+          :gan="gan"
+          :zhi="zhi"
+          :nayin="nayin"
+          :cai_bo_num="cai_bo_num"
+          :gui_ren_num="gui_ren_num"
+          :hun_yin_num="hun_yin_num"
+          :ming_ge="ming_ge"
+          :riyuanqiangruo="riyuanqiangruo"
+          :shi_ye_num="shi_ye_num"
+          :wuxingqiang="wuxingqiang"
+          :is_result="true"
+        />
       </div>
     </div>
 
