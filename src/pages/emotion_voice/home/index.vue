@@ -11,6 +11,8 @@
       <confirm @close-confirm="closeConfirm" :show="showConfirm" />
       <canvas class="canvas-bg1" id="canvas1"></canvas>
       <canvas class="canvas-bg2" id="canvas2"></canvas>
+      <img :class="['banner', banner_status ? 'fadein_animation' : '']"
+        :src="is_cn ? home_img_zixunpush_cn : home_img_zixunpush_tw" @click="handleAction" />
       <img class="nav" :src="is_cn ? home_img_nav_cn : home_img_nav_tw" @click="handleAction" />
       <img class="music" :src="is_cn ? home_img_voice_cn : home_img_voice_tw" @click="handleAction" />
       <img class="textbj" :src="is_cn ? home_img_textbj_cn : home_img_textbj_tw" @click="handleAction" />
@@ -99,7 +101,7 @@
           <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
           <span @click="link('privacy.html')">{{
             $t('privacy-policy')
-            }}</span>
+          }}</span>
         </div>
         <div id="info-btn" :class="['btn', 'emo-btn', btn_status ? 'btn-check' : '']" @click="check">
           立即提交
@@ -144,6 +146,9 @@ import { Downloader, Parser, Player } from 'svga.lite';
 
 import home_img_nav_tw from '../../../assets/img/emotion_voice/tw/home_img_nav_tw.webp'
 import home_img_nav_cn from '../../../assets/img/emotion_voice/cn/home_img_nav_cn.webp'
+
+import home_img_zixunpush_tw from '../../../assets/img/emotion_voice/tw/home_img_zixunpush_tw.webp'
+import home_img_zixunpush_cn from '../../../assets/img/emotion_voice/cn/home_img_zixunpush_cn.webp'
 
 import home_img_voice_tw from '../../../assets/img/emotion_voice/tw/home_img_voice_tw.webp'
 import home_img_voice_cn from '../../../assets/img/emotion_voice/cn/home_img_voice_cn.webp'
@@ -204,6 +209,8 @@ export default {
       girl,
       home_img_nav_tw,
       home_img_nav_cn,
+      home_img_zixunpush_cn,
+      home_img_zixunpush_tw,
       home_img_voice_tw,
       home_img_voice_cn,
       home_img_textbj_cn,
@@ -272,7 +279,8 @@ export default {
       show_sheet: false,
       message_list: [],
       message_index: 0,
-
+      banner_status: false,
+      banner_status1: false,
     };
   },
   computed: {
@@ -296,15 +304,23 @@ export default {
   },
   watch: {
 
+    message_index(val) {
+      console.log('val事件', val)
+      if (val === 5 || val === 15 || val === 30 || val === 60 || val === 90 || val === 120) {
+        this.banner_status = true
+        setTimeout(() => {
+          this.banner_status = false
+        }, 8000);
+      }
+    },
     showConfirm(val) {
-      if(!val) {
-        
+      if (!val) {
+        this.timer = setInterval(this.messageHandle, 1000);
       }
     },
 
     show_sheet(val) {
       if (!val) {
-       
         this.playSound()
 
       }
@@ -350,13 +366,11 @@ export default {
     //   });
   },
   beforeDestroy() {
-    if (this.timer) {
-      clearInterval(this.timer);
-    }
-    console.log('销毁111')
+
   },
   mounted() {
-    if(!localStorage.getItem('current_play_position')) {
+
+    if (!localStorage.getItem('current_play_position')) {
       localStorage.setItem('current_play_position', 0)
     }
     const audioPlayer = this.$refs.audioPlayer;
@@ -461,13 +475,16 @@ export default {
   },
   methods: {
     messageHandle() {
-      
-      this.message_index += 1;
-      this.message_list.push(this.message_index + '情感導師：老師，我和男朋友一直異國戀，昨天晚上，他電話那邊有別的女生聲音，後來聊了幾分鐘，就掛斷了，我後面問他是誰，他只是說同學來宿舍拿東西，我現在特別焦慮，能幫我看看嗎？')
-      this.$nextTick(() => {
-      this.scrollToBottom();
-    });
-      if (this.message_index > 9) {
+      this.message_index = this.message_index + 1;
+      if (this.message_index < 11) {
+        this.message_list.push(this.message_index + '情感導師：老師，我和男朋友一直異國戀，昨天晚上，他電話那邊有別的女生聲音，後來聊了幾分鐘，就掛斷了，我後面問他是誰，他只是說同學來宿舍拿東西，我現在特別焦慮，能幫我看看嗎？')
+        this.$nextTick(() => {
+          this.scrollToBottom();
+        });
+      }
+      console.log('this.message_index', this.message_index)
+      if (this.message_index > 120) {
+        console.log('执行定时器')
         clearInterval(this.timer)
       }
     },
@@ -511,13 +528,14 @@ export default {
       console.log('声音播放结束');
     },
     playSound() {
+
       if (localStorage.getItem('current_play_position')) {
         this.$refs.audioPlayer.currentTime = parseFloat(localStorage.getItem('current_play_position'))
-        console.log('转换时间', parseFloat(localStorage.getItem('current_play_position')))
+        console.log('转换时间1', parseFloat(localStorage.getItem('current_play_position')))
         this.$refs.audioPlayer.play();
       }
-      
-      
+
+
       // console.log('当前时间', this.$refs.audioPlayer.currentTime)
       // utils.firebaseLogEvent(
       //   '10014',
@@ -531,8 +549,7 @@ export default {
     },
     scrollToBottom() {
       let container = this.$refs.scrollContainer;
-      container.scrollTop = container.scrollHeight+200;
-      console.log('container.scrollTop', container.scrollTop)
+      container.scrollTop = container.scrollHeight;
     },
     /**
      * 关闭弹窗，开始播放音乐
@@ -540,7 +557,7 @@ export default {
     closeConfirm() {
       this.showConfirm = false
       this.playSound();
-        this.timer = setInterval(this.messageHandle, 1000);
+
     },
     showEmail() {
       return utils.showEmail();
@@ -1069,6 +1086,49 @@ export default {
     height: 1.12rem;
   }
 
+  .banner {
+    position: absolute;
+    top: 7.52rem;
+    left: -6.08rem;
+    width: 6.08rem;
+    height: 1.04rem;
+  }
+
+  .fadein_animation {
+    animation: fadein 7.5s;
+  }
+
+
+  @keyframes fadein {
+    0% {
+      left: -6.08rem;
+    }
+
+    20% {
+      left: 0rem;
+    }
+
+    40% {
+      left: 0rem;
+    }
+
+    60% {
+      left: 0rem;
+    }
+
+    80% {
+      left: 0rem;
+    }
+
+    100% {
+      left: -6.08rem;
+    }
+
+  }
+
+
+
+
   .music {
     width: 7.02rem;
     height: 2.48rem;
@@ -1121,7 +1181,7 @@ export default {
           text-align: left;
           font-style: normal;
           text-transform: none;
-          // margin-bottom: 0.12rem;
+          margin-bottom: 0.12rem;
 
           span {
             color: #6CE0FF;

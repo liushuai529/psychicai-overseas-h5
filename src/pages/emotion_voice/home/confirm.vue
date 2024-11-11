@@ -52,7 +52,6 @@ export default {
   methods: {
     playVoice() {
       this.$emit('close-confirm')
-      // this.show = false;
     }
   },
 };
