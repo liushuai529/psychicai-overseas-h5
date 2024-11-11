@@ -145,6 +145,8 @@ const getFBChannel = () => {
     return 'mlzyy11';
   } else if (url.indexOf('/mlzyy12/') > -1) {
     return 'mlzyy12';
+  } else if (url.indexOf('/mlzyy15/') > -1) {
+    return 'mlzyy15';
   } else if (url.indexOf('/ads15/') > -1) {
     return 'ads15';
   } else {

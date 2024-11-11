@@ -230,9 +230,9 @@ export default {
   },
   async created() {
     utils.firebaseLogEvent(
-      '10014',
-      '-10004',
-      'page_view_fate_end_mid',
+      '10016',
+      '-10007',
+      'page_view_love_voice_mid',
       'page_view',
       {
         channel: utils.getFBChannel(),
@@ -249,15 +249,6 @@ export default {
   mounted() {
     this.duration_time.entry_time = new Date().getTime()
     window.scrollTo(0, 0);
-    // setTimeout(() => {
-    //   this.$nextTick(() => {
-    //     // 滚动到指定元素
-    //     const element = document.getElementById('method-title-img');
-    //     if (element) {
-    //       element.scrollIntoView({ behavior: 'smooth' });
-    //     }
-    //   });
-    // }, 2000);
     let self = this;
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
@@ -270,9 +261,9 @@ export default {
     this.duration_time.exit_time = new Date().getTime();
     if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
-        '10014',
-        '-10005',
-        'view_fate_end_duration',
+        '10016',
+        '-10008',
+        'view_love_voice_duration',
         'view',
         {
           channel: utils.getFBChannel(),

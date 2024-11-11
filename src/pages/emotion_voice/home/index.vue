@@ -26,7 +26,8 @@
           </div>
           <div class="right">
             <div>
-              <img class="emo-btn" :src="is_cn ? home_img_lianmai_cn : home_img_lianmai_tw" @click="handleAction" />
+              <img class="emo-btn" :src="is_cn ? home_img_lianmai_cn : home_img_lianmai_tw"
+                @click="handleAction('Connecting')" />
               <div class="btn" @click="toOrder">
                 <p>{{ is_cn ? '历史订单' : '歷史訂單' }}</p>
                 <img src="../../../assets/img/emotion_voice/home_img_more.webp" />
@@ -273,6 +274,7 @@ export default {
       comboAttachData: null, //套餐未使用报告信息
       duration_time: {
         entry_time: 0,
+        entry_time1: 0,
         exit_time: 0,
       },
       showConfirm: false,
@@ -281,6 +283,7 @@ export default {
       message_index: 0,
       banner_status: false,
       banner_status1: false,
+
     };
   },
   computed: {
@@ -345,9 +348,9 @@ export default {
     this.showConfirm = true
     this.$store.dispatch('common/getProduction', 'consult_time');
     utils.firebaseLogEvent(
-      '10014',
+      '10016',
       '-10001',
-      'page_view_fate_end_main',
+      'page_view_love_voice_join_main',
       'page_view',
       {
         channel: utils.getFBChannel(),
@@ -369,7 +372,7 @@ export default {
 
   },
   mounted() {
-
+    this.duration_time.entry_time = new Date().getTime()
     if (!localStorage.getItem('current_play_position')) {
       localStorage.setItem('current_play_position', 0)
     }
@@ -378,7 +381,6 @@ export default {
       // console.log('Current playback position: ' + audioPlayer.currentTime + ' seconds');
       localStorage.setItem('current_play_position', audioPlayer.currentTime)
     });
-    this.duration_time.entry_time = new Date().getTime()
     //svga动画加载
     this.loadSVGA()
     if (utils.isProd()) {
@@ -462,13 +464,24 @@ export default {
     this.duration_time.exit_time = new Date().getTime();
     if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
-        '10014',
+        '10016',
         '-10002',
-        'view_fate_end_main',
+        'view_love_voice_join_main',
         'view',
         {
           channel: utils.getFBChannel(),
           time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
+        }
+      );
+
+      utils.firebaseLogEvent(
+        '10016',
+        '-10004',
+        'view_love_voice_main',
+        'view',
+        {
+          channel: utils.getFBChannel(),
+          time: (this.duration_time.exit_time - this.duration_time.entry_time1) / 1000
         }
       );
     }
@@ -528,24 +541,10 @@ export default {
       console.log('声音播放结束');
     },
     playSound() {
-
       if (localStorage.getItem('current_play_position')) {
         this.$refs.audioPlayer.currentTime = parseFloat(localStorage.getItem('current_play_position'))
-        console.log('转换时间1', parseFloat(localStorage.getItem('current_play_position')))
         this.$refs.audioPlayer.play();
       }
-
-
-      // console.log('当前时间', this.$refs.audioPlayer.currentTime)
-      // utils.firebaseLogEvent(
-      //   '10014',
-      //   '-10006',
-      //   'click_voice_bar',
-      //   'click',
-      //   {
-      //     channel: utils.getFBChannel(),
-      //   }
-      // );
     },
     scrollToBottom() {
       let container = this.$refs.scrollContainer;
@@ -555,8 +554,18 @@ export default {
      * 关闭弹窗，开始播放音乐
      */
     closeConfirm() {
+      this.duration_time.entry_time1 = new Date().getTime()
       this.showConfirm = false
       this.playSound();
+      utils.firebaseLogEvent(
+        '10016',
+        '-10003',
+        'page_view_love_voice_main',
+        'page_view',
+        {
+          channel: utils.getFBChannel(),
+        }
+      );
 
     },
     showEmail() {
@@ -745,10 +754,22 @@ export default {
       location.href = url;
     },
 
-    handleAction() {
+    handleAction(val) {
       this.show_sheet = true
       const audioPlayer = this.$refs.audioPlayer;
       audioPlayer.pause();
+      //连麦操作
+      if (val === 'Connecting') {
+        utils.firebaseLogEvent(
+          '10016',
+          '-10005',
+          'click_love_voice_main',
+          'view',
+          {
+            channel: utils.getFBChannel(),
+          }
+        );
+      }
     },
 
     /**
@@ -764,9 +785,9 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         utils.firebaseLogEvent(
-          '10014',
-          '-10003',
-          'click_fate_end_main',
+          '10016',
+          '-10006',
+          'click_love_voice_submit',
           'click',
           {
             channel: utils.getFBChannel(),
@@ -785,9 +806,9 @@ export default {
       // }
       if (time_obj == null) {
         utils.firebaseLogEvent(
-          '10014',
-          '-10003',
-          'click_fate_end_main',
+          '10016',
+          '-10006',
+          'click_love_voice_submit',
           'click',
           {
             channel: utils.getFBChannel(),
@@ -799,9 +820,9 @@ export default {
       }
       if (!this.privacyChecked) {
         utils.firebaseLogEvent(
-          '10014',
-          '-10003',
-          'click_fate_end_main',
+          '10016',
+          '-10006',
+          'click_love_voice_submit',
           'click',
           {
             channel: utils.getFBChannel(),
@@ -834,9 +855,9 @@ export default {
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
-        '10014',
-        '-10003',
-        'click_fate_end_main',
+        '10016',
+        '-10006',
+        'click_love_voice_submit',
         'click',
         {
           channel: utils.getFBChannel(),
