@@ -39,7 +39,7 @@ export default {
 
     show(val) {
       if (!val) {
-        this.$emit('play-voice')
+        this.$emit('close-confirm')
       }
     },
 

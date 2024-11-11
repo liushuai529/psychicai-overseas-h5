@@ -24,8 +24,8 @@
           </div>
           <div class="right">
             <div>
-              <img :src="is_cn ? home_img_lianmai_cn : home_img_lianmai_tw" @click="handleAction" />
-              <div class="btn">
+              <img class="emo-btn" :src="is_cn ? home_img_lianmai_cn : home_img_lianmai_tw" @click="handleAction" />
+              <div class="btn" @click="toOrder">
                 <p>{{ is_cn ? '历史订单' : '歷史訂單' }}</p>
                 <img src="../../../assets/img/emotion_voice/home_img_more.webp" />
               </div>
@@ -99,7 +99,7 @@
           <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
           <span @click="link('privacy.html')">{{
             $t('privacy-policy')
-          }}</span>
+            }}</span>
         </div>
         <div id="info-btn" :class="['btn', 'emo-btn', btn_status ? 'btn-check' : '']" @click="check">
           立即提交
@@ -136,8 +136,7 @@ import {
   maidianEnum,
 } from '../../../libs/enum.js';
 
-import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.webp';
-import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.webp';
+
 
 import combinePayPop from '../../../components/combinePayPop.vue';
 import confirm from './confirm.vue';
@@ -167,35 +166,16 @@ import home_img_gongneng_cn from '../../../assets/img/emotion_voice/cn/home_img_
 
 
 
-import cn_card_1 from '../../../assets/img/emotion/new/2.webp';
-import tw_card_1 from '../../../assets/img/emotion/new/tw/2.webp';
-import cn_card_2 from '../../../assets/img/emotion/new/3.webp';
-import tw_card_2 from '../../../assets/img/emotion/new/tw/3.webp';
-import cn_history_order from '../../../assets/img/emotion_fate/cn/home_lsdd_cn.webp';
-import tw_history_order from '../../../assets/img/emotion_fate/tw/home_lsdd_tw.webp';
+
 
 import PopNotice from '../../../components/PopNotice.vue';
 
-import cn_img_tittle_home_xinxi from '../../../assets/img/emotion_remarriage/cn/img_tittle_home_xinxi_cn.webp';
-import tw_img_tittle_home_xinxi from '../../../assets/img/emotion_remarriage/tw/img_tittle_home_xinxi_tw.webp';
+
 
 import boy from '../../../assets/img/emotion_remarriage/img_boy.webp';
 import girl from '../../../assets/img/emotion_remarriage/img_girl.webp';
 
-import cn_icon_1 from '../../../assets/img/emotion_remarriage/cn/home_neirong_01_cn.webp';
-import cn_icon_2 from '../../../assets/img/emotion_end/cn/home_neirong_02_cn.webp';
-import cn_icon_3 from '../../../assets/img/emotion_remarriage/cn/home_neirong_03_cn.webp';
-import cn_icon_4 from '../../../assets/img/emotion_remarriage/cn/home_neirong_04_cn.webp';
-// import cn_icon_5 from '../../../assets/img/emotion_remarriage/cn/home_neirong_05_cn.webp';
 
-
-import tw_icon_1 from '../../../assets/img/emotion_remarriage/tw/home_neirong_01_tw.webp';
-import tw_icon_2 from '../../../assets/img/emotion_end/tw/home_neirong_02_tw.webp';
-import tw_icon_3 from '../../../assets/img/emotion_remarriage/tw/home_neirong_03_tw.webp';
-import tw_icon_4 from '../../../assets/img/emotion_remarriage/tw/home_neirong_04_tw.webp';
-// import tw_icon_5 from '../../../assets/img/emotion_remarriage/tw/home_neirong_05_tw.webp';
-import cn_info from '../../../assets/img/emotion_v2/new/cn/info.webp';
-import tw_info from '../../../assets/img/emotion_v2/new/tw/info.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 
 
@@ -220,8 +200,6 @@ export default {
   },
   data() {
     return {
-      cn_img_tittle_home_xinxi,
-      tw_img_tittle_home_xinxi,
       boy,
       girl,
       home_img_nav_tw,
@@ -236,20 +214,7 @@ export default {
       home_img_lianmai_cn,
       home_img_gongneng_tw,
       home_img_gongneng_cn,
-      cn_icon_1,
-      cn_icon_2,
-      cn_icon_3,
-      cn_icon_4,
-      tw_icon_1,
-      tw_icon_2,
-      tw_icon_3,
-      tw_icon_4,
-      cn_history_order,
-      tw_history_order,
-      cn_info,
-      tw_info,
       utils,
-
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,
       sex: '0',
@@ -275,12 +240,15 @@ export default {
       showFixedBtn: false,
       //
       language: utils.getLanguage(),
-      cn_home_btn,
-      tw_home_btn,
-      cn_card_1,
-      tw_card_1,
-      cn_card_2,
-      tw_card_2,
+      cn_voice_svga:
+        'https://psychicai-static.psychicai.pro/imgs/241163f31c3e28f04512b627922694f29e89.svga',
+      tw_voice_svga:
+        'https://psychicai-static.psychicai.pro/imgs/241106114ba742054231b588194dcc70e352.svga',
+      cn_text_svga:
+        'https://psychicai-static.psychicai.pro/imgs/2411e27b33d4a9b24fcfa745f48993b6734c.svga',
+      tw_text_svga:
+        'https://psychicai-static.psychicai.pro/imgs/2411ca0f8cf332f9430992cbc214e6afc030.svga',
+
       is_show_btn: true,
       pay_modal: false,
       product_price: '',
@@ -302,7 +270,9 @@ export default {
       },
       showConfirm: false,
       show_sheet: false,
-      message_list: []
+      message_list: [],
+      message_index: 0,
+
     };
   },
   computed: {
@@ -326,11 +296,17 @@ export default {
   },
   watch: {
 
-    show_sheet(val) {
+    showConfirm(val) {
       if(!val) {
-        // this.$refs.audioPlayer.play()
-        this.playSound()
         
+      }
+    },
+
+    show_sheet(val) {
+      if (!val) {
+       
+        this.playSound()
+
       }
     },
 
@@ -350,11 +326,6 @@ export default {
 
   },
   created() {
-    // setInterval(() => {
-    //   this.message_list.push('情感導師：老師，我和男朋友一直異國戀，昨天晚上，他電話那邊有別的女生聲音，後來聊了幾分鐘，就掛斷了，我後面問他是誰，他只是說同學來宿舍拿東西，我現在特別焦慮，能幫我看看嗎？')
-    //   this.scrollToBottom();
-    // }, 2000);
-
     this.showConfirm = true
     this.$store.dispatch('common/getProduction', 'consult_time');
     utils.firebaseLogEvent(
@@ -385,9 +356,12 @@ export default {
     console.log('销毁111')
   },
   mounted() {
+    if(!localStorage.getItem('current_play_position')) {
+      localStorage.setItem('current_play_position', 0)
+    }
     const audioPlayer = this.$refs.audioPlayer;
     audioPlayer.addEventListener('timeupdate', function () {
-      console.log('Current playback position: ' + audioPlayer.currentTime + ' seconds');
+      // console.log('Current playback position: ' + audioPlayer.currentTime + ' seconds');
       localStorage.setItem('current_play_position', audioPlayer.currentTime)
     });
     this.duration_time.entry_time = new Date().getTime()
@@ -486,9 +460,29 @@ export default {
     }
   },
   methods: {
+    messageHandle() {
+      
+      this.message_index += 1;
+      this.message_list.push(this.message_index + '情感導師：老師，我和男朋友一直異國戀，昨天晚上，他電話那邊有別的女生聲音，後來聊了幾分鐘，就掛斷了，我後面問他是誰，他只是說同學來宿舍拿東西，我現在特別焦慮，能幫我看看嗎？')
+      this.$nextTick(() => {
+      this.scrollToBottom();
+    });
+      if (this.message_index > 9) {
+        clearInterval(this.timer)
+      }
+    },
+    /**
+    * @description: 跳转历史订单页
+    * @return {*}
+    */
+    toOrder() {
+      this.$router.push({
+        path: 'order',
+      });
+    },
     loadSVGA() {
-      this.loadSvgaBg('#canvas1', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
-      this.loadSvgaBg('#canvas2', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
+      this.loadSvgaBg('#canvas1', this.is_cn ? this.cn_voice_svga : this.tw_voice_svga);
+      this.loadSvgaBg('#canvas2', this.is_cn ? this.cn_text_svga : this.tw_text_svga);
     },
     // 端内加载背景SVGA动画
     loadSvgaBg(dom, url, is_loop = true) {
@@ -513,14 +507,17 @@ export default {
     },
     onEnded() {
       localStorage.removeItem('current_play_position');
+      this.show_sheet = true
       console.log('声音播放结束');
     },
     playSound() {
-      if(localStorage.getItem('current_play_position')) {
+      if (localStorage.getItem('current_play_position')) {
         this.$refs.audioPlayer.currentTime = parseFloat(localStorage.getItem('current_play_position'))
         console.log('转换时间', parseFloat(localStorage.getItem('current_play_position')))
+        this.$refs.audioPlayer.play();
       }
-      this.$refs.audioPlayer.play();
+      
+      
       // console.log('当前时间', this.$refs.audioPlayer.currentTime)
       // utils.firebaseLogEvent(
       //   '10014',
@@ -533,8 +530,9 @@ export default {
       // );
     },
     scrollToBottom() {
-      const container = this.$refs.scrollContainer;
-      container.scrollTop = container.scrollHeight;
+      let container = this.$refs.scrollContainer;
+      container.scrollTop = container.scrollHeight+200;
+      console.log('container.scrollTop', container.scrollTop)
     },
     /**
      * 关闭弹窗，开始播放音乐
@@ -542,6 +540,7 @@ export default {
     closeConfirm() {
       this.showConfirm = false
       this.playSound();
+        this.timer = setInterval(this.messageHandle, 1000);
     },
     showEmail() {
       return utils.showEmail();
@@ -1036,7 +1035,6 @@ export default {
   width: 7.5rem;
   height: 100vh;
   background-image: url('../../../assets/img/emotion_voice/home_img_backdrop.webp');
-  background-color: red;
   background-size: cover;
   position: relative;
   background-repeat: no-repeat;
@@ -1054,22 +1052,23 @@ export default {
     height: 2.48rem;
     z-index: 2;
   }
+
   .canvas-bg2 {
     position: absolute;
     top: 1.12rem;
-    left: 0.24rem;
+    left: 0rem;
     width: 7.5rem;
     height: 4.42rem;
     z-index: 2;
   }
 
- 
+
 
   .nav {
     width: 7.5rem;
     height: 1.12rem;
   }
-  
+
   .music {
     width: 7.02rem;
     height: 2.48rem;
@@ -1100,14 +1099,15 @@ export default {
       display: flex;
 
       height: 100%;
+      max-height: calc(100vh - 8rem);
 
       .left {
         width: 5.24rem;
         height: 100%;
-        border: 1px solid red;
         display: flex;
         flex-direction: column;
         overflow-y: scroll;
+        max-height: calc(100vh - 8rem);
 
         .item {
           width: 5.24rem;
@@ -1121,7 +1121,7 @@ export default {
           text-align: left;
           font-style: normal;
           text-transform: none;
-          margin-bottom: 0.12rem;
+          // margin-bottom: 0.12rem;
 
           span {
             color: #6CE0FF;
@@ -1144,7 +1144,7 @@ export default {
         }
 
         .btn {
-          // width: 148px;
+          width: 1.48rem;
           height: 0.56rem;
           background: rgba(0, 0, 0, 0.2);
           border-radius: 0.16rem;
@@ -1314,8 +1314,8 @@ export default {
   .btn {
     display: flex;
     margin: auto;
-
-    // width: 5.9rem;
+    margin-top: 0.4rem;
+    width: 5.9rem;
     height: 0.92rem;
     display: flex;
     justify-content: center;
