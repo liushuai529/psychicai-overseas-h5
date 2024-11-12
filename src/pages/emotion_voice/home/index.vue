@@ -1195,6 +1195,7 @@ export default {
   .bottom-container {
     width: 7.02rem;
     height: calc(100vh - 9rem);
+    // max-height: calc(100vh - 9.2rem);
 
 
     display: flex;
@@ -1205,7 +1206,7 @@ export default {
       display: flex;
 
       height: 100%;
-      max-height: calc(100vh - 8rem);
+      max-height: calc(100vh - 10rem);
 
       .left {
         width: 5.24rem;
@@ -1213,7 +1214,7 @@ export default {
         display: flex;
         flex-direction: column;
         overflow-y: scroll;
-        max-height: calc(100vh - 8rem);
+        max-height: calc(100vh - 10rem);
 
         .item {
           width: 5.24rem;
