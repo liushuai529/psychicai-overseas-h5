@@ -9,13 +9,13 @@
         src="https://psychicai-static.psychicai.pro/files/241124a310d464a846d79d03349c2a1e314c.mp3"
         @ended="onEnded"></audio>
       <confirm @close-confirm="closeConfirm" :show="showConfirm" />
-      <canvas class="canvas-bg1" id="canvas1" @click="handleAction"></canvas>
-      <canvas class="canvas-bg2" id="canvas2" @click="handleAction"></canvas>
+      <canvas class="canvas-bg1" id="canvas1" @click="handleAction('咨询师连麦卡片')"></canvas>
+      <canvas class="canvas-bg2" id="canvas2" @click="handleAction('咨询师连麦卡片')"></canvas>
       <img :class="['banner', banner_status ? 'fadein_animation' : '']"
-        :src="is_cn ? home_img_zixunpush_cn : home_img_zixunpush_tw" @click="handleAction" />
-      <img class="nav" :src="is_cn ? home_img_nav_cn : home_img_nav_tw" @click="handleAction" />
-      <img class="music" :src="is_cn ? home_img_voice_cn : home_img_voice_tw" @click="handleAction" />
-      <img class="textbj" :src="is_cn ? home_img_textbj_cn : home_img_textbj_tw" @click="handleAction" />
+        :src="is_cn ? home_img_zixunpush_cn : home_img_zixunpush_tw" @click="handleAction('飘带')" />
+      <img class="nav" :src="is_cn ? home_img_nav_cn : home_img_nav_tw" @click="handleAction('顶部区域')" />
+      <img class="music" :src="is_cn ? home_img_voice_cn : home_img_voice_tw" @click="handleAction('咨询师连麦卡片')" />
+      <img class="textbj" :src="is_cn ? home_img_textbj_cn : home_img_textbj_tw" @click="handleAction('咨询师连麦卡片')" />
       <img class="card" :src="is_cn ? home_img_bazixinxi_cn : home_img_bazixinxi_tw" />
 
       <div class="bottom-container">
@@ -27,7 +27,7 @@
           <div class="right">
             <div>
               <img class="emo-btn" :src="is_cn ? home_img_lianmai_cn : home_img_lianmai_tw"
-                @click="handleAction('Connecting')" />
+                @click="handleAction('连麦按钮')" />
               <div class="btn" @click="toOrder">
                 <p>{{ is_cn ? '历史订单' : '歷史訂單' }}</p>
                 <img src="../../../assets/img/emotion_voice/home_img_more.webp" />
@@ -35,7 +35,7 @@
             </div>
           </div>
         </div>
-        <img class="bottom" :src="is_cn ? home_img_gongneng_cn : home_img_gongneng_tw" @click="handleAction" />
+        <img class="bottom" :src="is_cn ? home_img_gongneng_cn : home_img_gongneng_tw" @click="handleAction('底部卡片')" />
       </div>
 
 
@@ -102,7 +102,7 @@
           <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
           <span @click="link('privacy.html')">{{
             $t('privacy-policy')
-          }}</span>
+            }}</span>
         </div>
         <div id="info-btn" :class="['btn', 'emo-btn', btn_status ? 'btn-check' : '']" @click="check">
           立即提交
@@ -195,28 +195,28 @@ const tipsArr5 = {
 };
 
 const messageArr_cn = [
-  {key: '公告：', value: '终于等到你的到来，快来一起聊聊吧'},
-  {key: '旭：', value: '老师，我和男朋友一直异国恋，昨天晚上，他电话那边有别的女生声音，后来聊了几分钟，就挂断了，我后面问他是谁，他只是说同学来宿舍拿东西，我现在特别焦虑，能帮我看看吗？'},
-  {key: '情感导师：', value: '想要咨询的同学，可以点击上麦哦～老师会为你1对1解答。'},
-  {key: '@子明：', value: '老师，我暗恋的一个女生，最近总是忽冷忽热，1996年3月21号阳历，能帮我看看，她到底怎么想的吗？'},
-  {key: '情感导师回复子明：', value: '你可以点击连麦，老师一会会为你解答'},
-  {key: '@子明回复情感导师：', value: '好的老师～'},
-  {key: '情感导师：', value: '想要咨询的同学，可以点击上麦哦～老师会为你1对1解答。'},
-  {key: '疯子：', value: '我快要结婚了，也好怕遇到这种婆婆，更可怕的是自己的伴侣，没有起到任何作用，真的好窒息，老师，我下单了，希望可以帮我看看对方的父母和我合不合？'},
-  {key: 'soom回复旭旭：', value: '咱们情况有点像，我是前天让老师给我看过一次，卦相是说，现在有人在向我男朋友示好，我就忍不住去看他最近社交账号的浏览记录，发现真的是有！这今天又来找老师看看。'},
-  {key: '情感导师：', value: '想要咨询的同学，可以点击上麦哦～老师会为你1对1解答。'},
+  { key: '公告：', value: '终于等到你的到来，快来一起聊聊吧' },
+  { key: '旭：', value: '老师，我和男朋友一直异国恋，昨天晚上，他电话那边有别的女生声音，后来聊了几分钟，就挂断了，我后面问他是谁，他只是说同学来宿舍拿东西，我现在特别焦虑，能帮我看看吗？' },
+  { key: '情感导师：', value: '想要咨询的同学，可以点击上麦哦～老师会为你1对1解答。' },
+  { key: '@子明：', value: '老师，我暗恋的一个女生，最近总是忽冷忽热，1996年3月21号阳历，能帮我看看，她到底怎么想的吗？' },
+  { key: '情感导师回复子明：', value: '你可以点击连麦，老师一会会为你解答' },
+  { key: '@子明回复情感导师：', value: '好的老师～' },
+  { key: '情感导师：', value: '想要咨询的同学，可以点击上麦哦～老师会为你1对1解答。' },
+  { key: '疯子：', value: '我快要结婚了，也好怕遇到这种婆婆，更可怕的是自己的伴侣，没有起到任何作用，真的好窒息，老师，我下单了，希望可以帮我看看对方的父母和我合不合？' },
+  { key: 'soom回复旭旭：', value: '咱们情况有点像，我是前天让老师给我看过一次，卦相是说，现在有人在向我男朋友示好，我就忍不住去看他最近社交账号的浏览记录，发现真的是有！这今天又来找老师看看。' },
+  { key: '情感导师：', value: '想要咨询的同学，可以点击上麦哦～老师会为你1对1解答。' },
 ];
 const messageArr_tw = [
-  {key: '公告：', value: '終于等到你的到來，快來一起聊聊吧'},
-  {key: '旭：', value: '老師，我和男朋友一直異國戀，昨天晚上，他電話那邊有別的女生聲音，後來聊了幾分鍾，就挂斷了，我後面問他是誰，他只是說同學來宿舍拿東西，我現在特別焦慮，能幫我看看嗎？'},
-  {key: '情感導師：', value: '想要咨詢的同學，可以點擊上麥哦～老師會爲你1對1解答。'},
-  {key: '@子明：', value: '老師，我暗戀的一個女生，最近總是忽冷忽熱，1996年3月21號陽曆，能幫我看看，她到底怎麽想的嗎？'},
-  {key: '情感導師回複子明：', value: '你可以點擊連麥，老師一會會爲你解答'},
-  {key: '@子明回複情感導師：', value: '好的老師～'},
-  {key: '情感導師：', value: '想要咨詢的同學，可以點擊上麥哦～老師會爲你1對1解答。'},
-  {key: '瘋子：', value: '我快要結婚了，也好怕遇到這種婆婆，更可怕的是自己的伴侶，沒有起到任何作用，真的好窒息，老師，我下單了，希望可以幫我看看對方的父母和我合不合？'},
-  {key: 'soom回複旭旭：', value: '咱們情況有點像，我是前天讓老師給我看過一次，卦相是說，現在有人在向我男朋友示好，我就忍不住去看他最近社交賬號的浏覽記錄，發現真的是有！這今天又來找老師看看。'},
-  {key: '情感導師：', value: '想要咨詢的同學，可以點擊上麥哦～老師會爲你1對1解答。'},
+  { key: '公告：', value: '終于等到你的到來，快來一起聊聊吧' },
+  { key: '旭：', value: '老師，我和男朋友一直異國戀，昨天晚上，他電話那邊有別的女生聲音，後來聊了幾分鍾，就挂斷了，我後面問他是誰，他只是說同學來宿舍拿東西，我現在特別焦慮，能幫我看看嗎？' },
+  { key: '情感導師：', value: '想要咨詢的同學，可以點擊上麥哦～老師會爲你1對1解答。' },
+  { key: '@子明：', value: '老師，我暗戀的一個女生，最近總是忽冷忽熱，1996年3月21號陽曆，能幫我看看，她到底怎麽想的嗎？' },
+  { key: '情感導師回複子明：', value: '你可以點擊連麥，老師一會會爲你解答' },
+  { key: '@子明回複情感導師：', value: '好的老師～' },
+  { key: '情感導師：', value: '想要咨詢的同學，可以點擊上麥哦～老師會爲你1對1解答。' },
+  { key: '瘋子：', value: '我快要結婚了，也好怕遇到這種婆婆，更可怕的是自己的伴侶，沒有起到任何作用，真的好窒息，老師，我下單了，希望可以幫我看看對方的父母和我合不合？' },
+  { key: 'soom回複旭旭：', value: '咱們情況有點像，我是前天讓老師給我看過一次，卦相是說，現在有人在向我男朋友示好，我就忍不住去看他最近社交賬號的浏覽記錄，發現真的是有！這今天又來找老師看看。' },
+  { key: '情感導師：', value: '想要咨詢的同學，可以點擊上麥哦～老師會爲你1對1解答。' },
 ];
 
 export default {
@@ -513,7 +513,7 @@ export default {
     messageHandle() {
       this.message_index = this.message_index + 1;
       if (this.message_index < 11) {
-        this.message_list.push(this.is_cn? {key: messageArr_cn[this.message_index-1]['key'], value: messageArr_cn[this.message_index-1]['value']}: {key: messageArr_tw[this.message_index-1]['key'], value: messageArr_tw[this.message_index-1]['value']})
+        this.message_list.push(this.is_cn ? { key: messageArr_cn[this.message_index - 1]['key'], value: messageArr_cn[this.message_index - 1]['value'] } : { key: messageArr_tw[this.message_index - 1]['key'], value: messageArr_tw[this.message_index - 1]['value'] })
         this.$nextTick(() => {
           this.scrollToBottom();
         });
@@ -588,7 +588,7 @@ export default {
           'view',
           {
             channel: utils.getFBChannel(),
-            time: (new Date().getTime()- this.duration_time.entry_time) / 1000
+            time: (new Date().getTime() - this.duration_time.entry_time) / 1000
           }
         );
       }
@@ -794,17 +794,16 @@ export default {
       const audioPlayer = this.$refs.audioPlayer;
       audioPlayer.pause();
       //连麦操作
-      if (val === 'Connecting') {
-        utils.firebaseLogEvent(
-          '10016',
-          '-10005',
-          'click_love_voice_main',
-          'click',
-          {
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
+      utils.firebaseLogEvent(
+        '10016',
+        '-10005',
+        'click_love_voice_main',
+        'click',
+        {
+          channel: utils.getFBChannel(),
+          click_area: val
+        }
+      );
     },
 
     /**
