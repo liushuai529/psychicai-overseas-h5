@@ -499,17 +499,6 @@ export default {
     if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
         '10016',
-        '-10002',
-        'view_love_voice_join_main',
-        'view',
-        {
-          channel: utils.getFBChannel(),
-          time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
-        }
-      );
-
-      utils.firebaseLogEvent(
-        '10016',
         '-10004',
         'view_love_voice_main',
         'view',
@@ -599,7 +588,7 @@ export default {
           'view',
           {
             channel: utils.getFBChannel(),
-            time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
+            time: (new Date().getTime()- this.duration_time.entry_time) / 1000
           }
         );
       }
