@@ -402,7 +402,7 @@ export default {
 
     // 赋默认值
     let storaged_userInfo = window.localStorage.getItem(
-      '_emotion_fate_info'
+      '_emotion_voice'
     );
     if (storaged_userInfo) {
       let arr = storaged_userInfo.split('|');
@@ -661,7 +661,7 @@ export default {
       querystring += time_obj.birth_hour || '-1';
       querystring += '|';
       querystring += email;
-      window.localStorage.setItem('_emotion_fate_info', querystring);
+      window.localStorage.setItem('_emotion_voice', querystring);
       location.href = url;
     },
     /**
@@ -751,7 +751,7 @@ export default {
       querystring += '|';
       querystring += email;
 
-      window.localStorage.setItem('_emotion_fate_info', querystring);
+      window.localStorage.setItem('_emotion_voice', querystring);
       location.href = url;
     },
 
@@ -852,7 +852,7 @@ export default {
       querystring += email;
       //设置过渡动画标识
       this.setAnimation();
-      window.localStorage.setItem('_emotion_fate_info', querystring);
+      window.localStorage.setItem('_emotion_voice', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
