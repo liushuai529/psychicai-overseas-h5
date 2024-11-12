@@ -39,7 +39,7 @@ export default {
 
     show(val) {
       if (!val) {
-        this.$emit('close-confirm')
+        // this.$emit('close-confirm')
       }
     },
 

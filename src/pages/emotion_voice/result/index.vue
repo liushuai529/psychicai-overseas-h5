@@ -157,7 +157,7 @@ export default {
 
     utils.firebaseLogEvent(
       '10016',
-      '-10011',
+      '-10012',
       'page_view_love_voice_chatpage',
       'page_view',
       {
@@ -267,13 +267,11 @@ export default {
       Toast(tips_arr4[lang]);
       if (val === 0) return
       utils.firebaseLogEvent(copy_info[this.product_key]['module'], copy_info[this.product_key]['content_id'], copy_info[this.product_key]['event_name'], copy_info[this.product_key]['type'], {
-        args_name: copy_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
     },
     downClick(arg) {
       utils.firebaseLogEvent(down_info[this.product_key]['module'], down_info[this.product_key]['content_id'], down_info[this.product_key]['event_name'], down_info[this.product_key]['type'], {
-        args_name: down_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
       if (arg) {

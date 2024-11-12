@@ -102,7 +102,7 @@
           <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
           <span @click="link('privacy.html')">{{
             $t('privacy-policy')
-            }}</span>
+          }}</span>
         </div>
         <div id="info-btn" :class="['btn', 'emo-btn', btn_status ? 'btn-check' : '']" @click="check">
           立即提交
@@ -386,7 +386,7 @@ export default {
       if (document.visibilityState !== 'visible') {
         this.$refs.audioPlayer && this.$refs.audioPlayer.pause()
       } else {
-        !this.showConfirm && this.$refs.audioPlayer && this.$refs.audioPlayer.play() 
+        !this.showConfirm && this.$refs.audioPlayer && this.$refs.audioPlayer.play()
       }
     });
     //svga动画加载
@@ -565,6 +565,18 @@ export default {
       this.duration_time.entry_time1 = new Date().getTime()
       this.showConfirm = false
       this.playSound();
+      if (this.duration_time.entry_time) {
+        utils.firebaseLogEvent(
+          '10016',
+          '-10002',
+          'view_love_voice_join_main',
+          'view',
+          {
+            channel: utils.getFBChannel(),
+            time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
+          }
+        );
+      }
       utils.firebaseLogEvent(
         '10016',
         '-10003',
@@ -772,7 +784,7 @@ export default {
           '10016',
           '-10005',
           'click_love_voice_main',
-          'view',
+          'click',
           {
             channel: utils.getFBChannel(),
           }
