@@ -9,8 +9,8 @@
         src="https://psychicai-static.psychicai.pro/files/241124a310d464a846d79d03349c2a1e314c.mp3"
         @ended="onEnded"></audio>
       <confirm @close-confirm="closeConfirm" :show="showConfirm" />
-      <canvas class="canvas-bg1" id="canvas1"></canvas>
-      <canvas class="canvas-bg2" id="canvas2"></canvas>
+      <canvas class="canvas-bg1" id="canvas1" @click="handleAction"></canvas>
+      <canvas class="canvas-bg2" id="canvas2" @click="handleAction"></canvas>
       <img :class="['banner', banner_status ? 'fadein_animation' : '']"
         :src="is_cn ? home_img_zixunpush_cn : home_img_zixunpush_tw" @click="handleAction" />
       <img class="nav" :src="is_cn ? home_img_nav_cn : home_img_nav_tw" @click="handleAction" />
@@ -45,7 +45,7 @@
       <NongliPicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
 
-      <van-action-sheet v-model:show="show_sheet" title="立即获得咨询师详解" style="height: 7.1rem;">
+      <van-action-sheet v-model:show="show_sheet" :title="is_cn? '立即获得咨询师详解': '立即獲得咨詢師詳解'" style="height: 7.1rem;">
         <div class="item-container">
           <div class="info-item">
             <div class="left input-container">
@@ -119,6 +119,7 @@ import FbShareNotice from '../../../components/FbShareNotice.vue';
 import FixedOrder from '../../../components/FixedOrder.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
+import { showToast } from 'vant';
 import utils from '../../../libs/utils.js';
 import {
   getPayOrderInfoAPI,
@@ -1041,6 +1042,11 @@ export default {
   },
 };
 </script>
+<style>
+.mint-toast {
+  z-index: 999999;
+}
+</style>
 <style scoped lang="less">
 .fix-box {
   position: fixed !important;
@@ -1229,7 +1235,7 @@ export default {
           height: 0.56rem;
           background: rgba(0, 0, 0, 0.2);
           border-radius: 0.16rem;
-          padding: 0.15rem;
+          // padding: 0.15rem;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -1240,6 +1246,7 @@ export default {
           img {
             width: 0.22rem;
             height: 0.22rem;
+            margin-bottom: 0.15rem;
           }
         }
       }
@@ -1738,4 +1745,7 @@ export default {
 .emo-btn {
   animation: emoBtn 1s infinite ease-in-out alternate;
 }
+
+
+
 </style>

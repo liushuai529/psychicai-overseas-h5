@@ -8,18 +8,18 @@
     <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
     
     
-    <div :class="['method-box', !is_show_combination ? 'method-height' : null]" style="margin-top: -2.5rem; ">
+    <div :class="['method-box', is_cn? 'cn-bg': 'tw-bg', !is_show_combination ? 'method-height' : null]" style="margin-top: -2.5rem; ">
       
 
-      <div style="display: flex; flex-direction: column; margin-top: 1.4rem;">
+      <div id="method-title-img" style="display: flex; flex-direction: column; margin-top: 1.4rem;">
         <UserInfo style="margin-top: 0.24rem;" :picker_date_nongli="picker_date_nongli" :picker_date_yangli="picker_date_yangli" :username="username"
           :sex="sex" />
       </div>
 
 
       <MarriagesPayDetail style="margin-top: 0.24rem;" className="pay-method" ref="payDetail" :product_key="product_key"
-        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10014"
-        c_click_id="-10007" e_click_name="click_fate_end_pay" :consult_time="consult_time" sub_type="zhuan_chang"/>
+        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10016"
+        c_click_id="-10009" e_click_name="click_love_voice_pay" :consult_time="consult_time" sub_type="zhuan_chang"/>
       <!-- <div class="img-consult-bottom">
 
       </div> -->
@@ -484,6 +484,12 @@ export default {
   }
 }
 
+.cn-bg {
+  background: url('../../../assets/img/emotion_voice/cn/paypage_cardbj_pay_cn.webp') no-repeat;
+}
+.tw-bg {
+  background: url('../../../assets/img/emotion_voice/tw/paypage_cardbj_pay_tw.webp') no-repeat;
+}
 .method-box {
   width: 7.1rem;
   display: flex;
@@ -492,7 +498,7 @@ export default {
   margin-bottom: 0.24rem;
   // background: #fffafa;
   // border-radius: 0.16rem;
-  background: url('../../../assets/img/emotion_voice/cn/paypage_cardbj_pay_cn.webp') no-repeat;
+  
   background-size: 100% 100%;
   border-radius: 0.3rem;
 
@@ -555,15 +561,15 @@ export default {
     margin-top: -0.9rem;
   }
 
-  .cn-bg {
-    background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.webp) no-repeat;
-    background-size: 100% 100%;
-  }
+  // .cn-bg {
+  //   background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.webp) no-repeat;
+  //   background-size: 100% 100%;
+  // }
 
-  .tw-bg {
-    background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.webp) no-repeat;
-    background-size: 100% 100%;
-  }
+  // .tw-bg {
+  //   background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.webp) no-repeat;
+  //   background-size: 100% 100%;
+  // }
 
   .text {
     width: 6.74rem;
