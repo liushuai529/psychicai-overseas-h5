@@ -370,7 +370,6 @@ export default {
     //   });
   },
   beforeDestroy() {
-    alert('测试关闭')
     this.$refs.audioPlayer && this.$refs.audioPlayer.pause()
   },
   mounted() {
@@ -387,7 +386,7 @@ export default {
       if (document.visibilityState !== 'visible') {
         this.$refs.audioPlayer && this.$refs.audioPlayer.pause()
       } else {
-        this.$refs.audioPlayer && this.$refs.audioPlayer.play() 
+        !this.showConfirm && this.$refs.audioPlayer && this.$refs.audioPlayer.play() 
       }
     });
     //svga动画加载
