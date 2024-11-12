@@ -45,7 +45,7 @@
       <NongliPicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
 
-      <van-action-sheet v-model:show="show_sheet" :title="is_cn? '立即获得咨询师详解': '立即獲得咨詢師詳解'" style="height: 7.1rem;">
+      <van-action-sheet v-model:show="show_sheet" :title="is_cn ? '立即获得咨询师详解' : '立即獲得咨詢師詳解'" style="height: 7.1rem;">
         <div class="item-container">
           <div class="info-item">
             <div class="left input-container">
@@ -102,7 +102,7 @@
           <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
           <span @click="link('privacy.html')">{{
             $t('privacy-policy')
-          }}</span>
+            }}</span>
         </div>
         <div id="info-btn" :class="['btn', 'emo-btn', btn_status ? 'btn-check' : '']" @click="check">
           立即提交
@@ -370,7 +370,7 @@ export default {
     //   });
   },
   beforeDestroy() {
-
+    this.$refs.audioPlayer && this.$refs.audioPlayer.pause()
   },
   mounted() {
     this.duration_time.entry_time = new Date().getTime()
@@ -1745,7 +1745,4 @@ export default {
 .emo-btn {
   animation: emoBtn 1s infinite ease-in-out alternate;
 }
-
-
-
 </style>
