@@ -370,6 +370,7 @@ export default {
     //   });
   },
   beforeDestroy() {
+    alert('测试关闭')
     this.$refs.audioPlayer && this.$refs.audioPlayer.pause()
   },
   mounted() {
