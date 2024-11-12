@@ -9,30 +9,33 @@
         src="https://psychicai-static.psychicai.pro/files/241124a310d464a846d79d03349c2a1e314c.mp3"
         @ended="onEnded"></audio>
       <confirm @close-confirm="closeConfirm" :show="showConfirm" />
-      <canvas class="canvas-bg1" id="canvas1"></canvas>
-      <canvas class="canvas-bg2" id="canvas2"></canvas>
-      <img class="nav" :src="is_cn ? home_img_nav_cn : home_img_nav_tw" @click="handleAction" />
-      <img class="music" :src="is_cn ? home_img_voice_cn : home_img_voice_tw" @click="handleAction" />
-      <img class="textbj" :src="is_cn ? home_img_textbj_cn : home_img_textbj_tw" @click="handleAction" />
+      <canvas class="canvas-bg1" id="canvas1" @click="handleAction('咨询师连麦卡片')"></canvas>
+      <canvas class="canvas-bg2" id="canvas2" @click="handleAction('咨询师连麦卡片')"></canvas>
+      <img :class="['banner', banner_status ? 'fadein_animation' : '']"
+        :src="is_cn ? home_img_zixunpush_cn : home_img_zixunpush_tw" @click="handleAction('飘带')" />
+      <img class="nav" :src="is_cn ? home_img_nav_cn : home_img_nav_tw" @click="handleAction('顶部区域')" />
+      <img class="music" :src="is_cn ? home_img_voice_cn : home_img_voice_tw" @click="handleAction('咨询师连麦卡片')" />
+      <img class="textbj" :src="is_cn ? home_img_textbj_cn : home_img_textbj_tw" @click="handleAction('咨询师连麦卡片')" />
       <img class="card" :src="is_cn ? home_img_bazixinxi_cn : home_img_bazixinxi_tw" />
 
       <div class="bottom-container">
         <div class="top">
           <div class="left" ref="scrollContainer">
-            <div class="item" v-for="item in message_list"><span>情感老师</span>{{ item }}</div>
+            <div class="item" v-for="item in message_list"><span>{{ item.key }}</span>{{ item.value }}</div>
 
           </div>
           <div class="right">
             <div>
-              <img :src="is_cn ? home_img_lianmai_cn : home_img_lianmai_tw" @click="handleAction" />
-              <div class="btn">
+              <img class="emo-btn" :src="is_cn ? home_img_lianmai_cn : home_img_lianmai_tw"
+                @click="handleAction('连麦按钮')" />
+              <div class="btn" @click="toOrder">
                 <p>{{ is_cn ? '历史订单' : '歷史訂單' }}</p>
                 <img src="../../../assets/img/emotion_voice/home_img_more.webp" />
               </div>
             </div>
           </div>
         </div>
-        <img class="bottom" :src="is_cn ? home_img_gongneng_cn : home_img_gongneng_tw" @click="handleAction" />
+        <img class="bottom" :src="is_cn ? home_img_gongneng_cn : home_img_gongneng_tw" @click="handleAction('底部卡片')" />
       </div>
 
 
@@ -42,7 +45,7 @@
       <NongliPicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
 
-      <van-action-sheet v-model:show="show_sheet" title="立即获得咨询师详解" style="height: 7.1rem;">
+      <van-action-sheet v-model:show="show_sheet" :title="is_cn ? '立即获得咨询师详解' : '立即獲得咨詢師詳解'" style="height: 7.1rem;">
         <div class="item-container">
           <div class="info-item">
             <div class="left input-container">
@@ -99,7 +102,7 @@
           <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
           <span @click="link('privacy.html')">{{
             $t('privacy-policy')
-          }}</span>
+            }}</span>
         </div>
         <div id="info-btn" :class="['btn', 'emo-btn', btn_status ? 'btn-check' : '']" @click="check">
           立即提交
@@ -116,6 +119,7 @@ import FbShareNotice from '../../../components/FbShareNotice.vue';
 import FixedOrder from '../../../components/FixedOrder.vue';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import { Toast, Indicator } from 'mint-ui';
+import { showToast } from 'vant';
 import utils from '../../../libs/utils.js';
 import {
   getPayOrderInfoAPI,
@@ -136,8 +140,7 @@ import {
   maidianEnum,
 } from '../../../libs/enum.js';
 
-import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/btn.webp';
-import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/btn.webp';
+
 
 import combinePayPop from '../../../components/combinePayPop.vue';
 import confirm from './confirm.vue';
@@ -145,6 +148,9 @@ import { Downloader, Parser, Player } from 'svga.lite';
 
 import home_img_nav_tw from '../../../assets/img/emotion_voice/tw/home_img_nav_tw.webp'
 import home_img_nav_cn from '../../../assets/img/emotion_voice/cn/home_img_nav_cn.webp'
+
+import home_img_zixunpush_tw from '../../../assets/img/emotion_voice/tw/home_img_zixunpush_tw.webp'
+import home_img_zixunpush_cn from '../../../assets/img/emotion_voice/cn/home_img_zixunpush_cn.webp'
 
 import home_img_voice_tw from '../../../assets/img/emotion_voice/tw/home_img_voice_tw.webp'
 import home_img_voice_cn from '../../../assets/img/emotion_voice/cn/home_img_voice_cn.webp'
@@ -167,35 +173,16 @@ import home_img_gongneng_cn from '../../../assets/img/emotion_voice/cn/home_img_
 
 
 
-import cn_card_1 from '../../../assets/img/emotion/new/2.webp';
-import tw_card_1 from '../../../assets/img/emotion/new/tw/2.webp';
-import cn_card_2 from '../../../assets/img/emotion/new/3.webp';
-import tw_card_2 from '../../../assets/img/emotion/new/tw/3.webp';
-import cn_history_order from '../../../assets/img/emotion_fate/cn/home_lsdd_cn.webp';
-import tw_history_order from '../../../assets/img/emotion_fate/tw/home_lsdd_tw.webp';
+
 
 import PopNotice from '../../../components/PopNotice.vue';
 
-import cn_img_tittle_home_xinxi from '../../../assets/img/emotion_remarriage/cn/img_tittle_home_xinxi_cn.webp';
-import tw_img_tittle_home_xinxi from '../../../assets/img/emotion_remarriage/tw/img_tittle_home_xinxi_tw.webp';
+
 
 import boy from '../../../assets/img/emotion_remarriage/img_boy.webp';
 import girl from '../../../assets/img/emotion_remarriage/img_girl.webp';
 
-import cn_icon_1 from '../../../assets/img/emotion_remarriage/cn/home_neirong_01_cn.webp';
-import cn_icon_2 from '../../../assets/img/emotion_end/cn/home_neirong_02_cn.webp';
-import cn_icon_3 from '../../../assets/img/emotion_remarriage/cn/home_neirong_03_cn.webp';
-import cn_icon_4 from '../../../assets/img/emotion_remarriage/cn/home_neirong_04_cn.webp';
-// import cn_icon_5 from '../../../assets/img/emotion_remarriage/cn/home_neirong_05_cn.webp';
 
-
-import tw_icon_1 from '../../../assets/img/emotion_remarriage/tw/home_neirong_01_tw.webp';
-import tw_icon_2 from '../../../assets/img/emotion_end/tw/home_neirong_02_tw.webp';
-import tw_icon_3 from '../../../assets/img/emotion_remarriage/tw/home_neirong_03_tw.webp';
-import tw_icon_4 from '../../../assets/img/emotion_remarriage/tw/home_neirong_04_tw.webp';
-// import tw_icon_5 from '../../../assets/img/emotion_remarriage/tw/home_neirong_05_tw.webp';
-import cn_info from '../../../assets/img/emotion_v2/new/cn/info.webp';
-import tw_info from '../../../assets/img/emotion_v2/new/tw/info.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 
 
@@ -206,6 +193,32 @@ const tipsArr5 = {
   'zh-CN': '订单创建中...',
   'zh-TW': '訂單創建中...',
 };
+
+const messageArr_cn = [
+  { key: '公告：', value: '终于等到你的到来，快来一起聊聊吧' },
+  { key: '旭：', value: '老师，我和男朋友一直异国恋，昨天晚上，他电话那边有别的女生声音，后来聊了几分钟，就挂断了，我后面问他是谁，他只是说同学来宿舍拿东西，我现在特别焦虑，能帮我看看吗？' },
+  { key: '情感导师：', value: '想要咨询的同学，可以点击上麦哦～老师会为你1对1解答。' },
+  { key: '@子明：', value: '老师，我暗恋的一个女生，最近总是忽冷忽热，1996年3月21号阳历，能帮我看看，她到底怎么想的吗？' },
+  { key: '情感导师回复子明：', value: '你可以点击连麦，老师一会会为你解答' },
+  { key: '@子明回复情感导师：', value: '好的老师～' },
+  { key: '情感导师：', value: '想要咨询的同学，可以点击上麦哦～老师会为你1对1解答。' },
+  { key: '疯子：', value: '我快要结婚了，也好怕遇到这种婆婆，更可怕的是自己的伴侣，没有起到任何作用，真的好窒息，老师，我下单了，希望可以帮我看看对方的父母和我合不合？' },
+  { key: 'soom回复旭旭：', value: '咱们情况有点像，我是前天让老师给我看过一次，卦相是说，现在有人在向我男朋友示好，我就忍不住去看他最近社交账号的浏览记录，发现真的是有！这今天又来找老师看看。' },
+  { key: '情感导师：', value: '想要咨询的同学，可以点击上麦哦～老师会为你1对1解答。' },
+];
+const messageArr_tw = [
+  { key: '公告：', value: '終于等到你的到來，快來一起聊聊吧' },
+  { key: '旭：', value: '老師，我和男朋友一直異國戀，昨天晚上，他電話那邊有別的女生聲音，後來聊了幾分鍾，就挂斷了，我後面問他是誰，他只是說同學來宿舍拿東西，我現在特別焦慮，能幫我看看嗎？' },
+  { key: '情感導師：', value: '想要咨詢的同學，可以點擊上麥哦～老師會爲你1對1解答。' },
+  { key: '@子明：', value: '老師，我暗戀的一個女生，最近總是忽冷忽熱，1996年3月21號陽曆，能幫我看看，她到底怎麽想的嗎？' },
+  { key: '情感導師回複子明：', value: '你可以點擊連麥，老師一會會爲你解答' },
+  { key: '@子明回複情感導師：', value: '好的老師～' },
+  { key: '情感導師：', value: '想要咨詢的同學，可以點擊上麥哦～老師會爲你1對1解答。' },
+  { key: '瘋子：', value: '我快要結婚了，也好怕遇到這種婆婆，更可怕的是自己的伴侶，沒有起到任何作用，真的好窒息，老師，我下單了，希望可以幫我看看對方的父母和我合不合？' },
+  { key: 'soom回複旭旭：', value: '咱們情況有點像，我是前天讓老師給我看過一次，卦相是說，現在有人在向我男朋友示好，我就忍不住去看他最近社交賬號的浏覽記錄，發現真的是有！這今天又來找老師看看。' },
+  { key: '情感導師：', value: '想要咨詢的同學，可以點擊上麥哦～老師會爲你1對1解答。' },
+];
+
 export default {
   components: {
     DatetimePicker,
@@ -220,12 +233,12 @@ export default {
   },
   data() {
     return {
-      cn_img_tittle_home_xinxi,
-      tw_img_tittle_home_xinxi,
       boy,
       girl,
       home_img_nav_tw,
       home_img_nav_cn,
+      home_img_zixunpush_cn,
+      home_img_zixunpush_tw,
       home_img_voice_tw,
       home_img_voice_cn,
       home_img_textbj_cn,
@@ -236,20 +249,7 @@ export default {
       home_img_lianmai_cn,
       home_img_gongneng_tw,
       home_img_gongneng_cn,
-      cn_icon_1,
-      cn_icon_2,
-      cn_icon_3,
-      cn_icon_4,
-      tw_icon_1,
-      tw_icon_2,
-      tw_icon_3,
-      tw_icon_4,
-      cn_history_order,
-      tw_history_order,
-      cn_info,
-      tw_info,
       utils,
-
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,
       sex: '0',
@@ -275,12 +275,15 @@ export default {
       showFixedBtn: false,
       //
       language: utils.getLanguage(),
-      cn_home_btn,
-      tw_home_btn,
-      cn_card_1,
-      tw_card_1,
-      cn_card_2,
-      tw_card_2,
+      cn_voice_svga:
+        'https://psychicai-static.psychicai.pro/imgs/241163f31c3e28f04512b627922694f29e89.svga',
+      tw_voice_svga:
+        'https://psychicai-static.psychicai.pro/imgs/241106114ba742054231b588194dcc70e352.svga',
+      cn_text_svga:
+        'https://psychicai-static.psychicai.pro/imgs/2411e27b33d4a9b24fcfa745f48993b6734c.svga',
+      tw_text_svga:
+        'https://psychicai-static.psychicai.pro/imgs/2411ca0f8cf332f9430992cbc214e6afc030.svga',
+
       is_show_btn: true,
       pay_modal: false,
       product_price: '',
@@ -298,11 +301,16 @@ export default {
       comboAttachData: null, //套餐未使用报告信息
       duration_time: {
         entry_time: 0,
+        entry_time1: 0,
         exit_time: 0,
       },
       showConfirm: false,
       show_sheet: false,
-      message_list: []
+      message_list: [],
+      message_index: 0,
+      banner_status: false,
+      banner_status1: false,
+
     };
   },
   computed: {
@@ -326,11 +334,25 @@ export default {
   },
   watch: {
 
+    message_index(val) {
+      console.log('val事件', val)
+      if (val === 5 || val === 15 || val === 30 || val === 60 || val === 90 || val === 120) {
+        this.banner_status = true
+        setTimeout(() => {
+          this.banner_status = false
+        }, 8000);
+      }
+    },
+    showConfirm(val) {
+      if (!val) {
+        this.timer = setInterval(this.messageHandle, 1000);
+      }
+    },
+
     show_sheet(val) {
-      if(!val) {
-        // this.$refs.audioPlayer.play()
+      if (!val) {
         this.playSound()
-        
+
       }
     },
 
@@ -350,17 +372,12 @@ export default {
 
   },
   created() {
-    // setInterval(() => {
-    //   this.message_list.push('情感導師：老師，我和男朋友一直異國戀，昨天晚上，他電話那邊有別的女生聲音，後來聊了幾分鐘，就掛斷了，我後面問他是誰，他只是說同學來宿舍拿東西，我現在特別焦慮，能幫我看看嗎？')
-    //   this.scrollToBottom();
-    // }, 2000);
-
     this.showConfirm = true
     this.$store.dispatch('common/getProduction', 'consult_time');
     utils.firebaseLogEvent(
-      '10014',
+      '10016',
       '-10001',
-      'page_view_fate_end_main',
+      'page_view_love_voice_join_main',
       'page_view',
       {
         channel: utils.getFBChannel(),
@@ -379,18 +396,25 @@ export default {
     //   });
   },
   beforeDestroy() {
-    if (this.timer) {
-      clearInterval(this.timer);
-    }
-    console.log('销毁111')
+    this.$refs.audioPlayer && this.$refs.audioPlayer.pause()
   },
   mounted() {
+    this.duration_time.entry_time = new Date().getTime()
+    if (!localStorage.getItem('current_play_position')) {
+      localStorage.setItem('current_play_position', 0)
+    }
     const audioPlayer = this.$refs.audioPlayer;
     audioPlayer.addEventListener('timeupdate', function () {
-      console.log('Current playback position: ' + audioPlayer.currentTime + ' seconds');
+      // console.log('Current playback position: ' + audioPlayer.currentTime + ' seconds');
       localStorage.setItem('current_play_position', audioPlayer.currentTime)
     });
-    this.duration_time.entry_time = new Date().getTime()
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState !== 'visible') {
+        this.$refs.audioPlayer && this.$refs.audioPlayer.pause()
+      } else {
+        !this.showConfirm && this.$refs.audioPlayer && this.$refs.audioPlayer.play()
+      }
+    });
     //svga动画加载
     this.loadSVGA()
     if (utils.isProd()) {
@@ -411,7 +435,7 @@ export default {
 
     // 赋默认值
     let storaged_userInfo = window.localStorage.getItem(
-      '_emotion_fate_info'
+      '_emotion_voice'
     );
     if (storaged_userInfo) {
       let arr = storaged_userInfo.split('|');
@@ -474,21 +498,44 @@ export default {
     this.duration_time.exit_time = new Date().getTime();
     if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
-        '10014',
-        '-10002',
-        'view_fate_end_main',
+        '10016',
+        '-10004',
+        'view_love_voice_main',
         'view',
         {
           channel: utils.getFBChannel(),
-          time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
+          time: (this.duration_time.exit_time - this.duration_time.entry_time1) / 1000
         }
       );
     }
   },
   methods: {
+    messageHandle() {
+      this.message_index = this.message_index + 1;
+      if (this.message_index < 11) {
+        this.message_list.push(this.is_cn ? { key: messageArr_cn[this.message_index - 1]['key'], value: messageArr_cn[this.message_index - 1]['value'] } : { key: messageArr_tw[this.message_index - 1]['key'], value: messageArr_tw[this.message_index - 1]['value'] })
+        this.$nextTick(() => {
+          this.scrollToBottom();
+        });
+      }
+      console.log('this.message_index', this.message_index)
+      if (this.message_index > 120) {
+        console.log('执行定时器')
+        clearInterval(this.timer)
+      }
+    },
+    /**
+    * @description: 跳转历史订单页
+    * @return {*}
+    */
+    toOrder() {
+      this.$router.push({
+        path: 'order',
+      });
+    },
     loadSVGA() {
-      this.loadSvgaBg('#canvas1', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
-      this.loadSvgaBg('#canvas2', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
+      this.loadSvgaBg('#canvas1', this.is_cn ? this.cn_voice_svga : this.tw_voice_svga);
+      this.loadSvgaBg('#canvas2', this.is_cn ? this.cn_text_svga : this.tw_text_svga);
     },
     // 端内加载背景SVGA动画
     loadSvgaBg(dom, url, is_loop = true) {
@@ -513,35 +560,48 @@ export default {
     },
     onEnded() {
       localStorage.removeItem('current_play_position');
+      this.show_sheet = true
       console.log('声音播放结束');
     },
     playSound() {
-      if(localStorage.getItem('current_play_position')) {
+      if (localStorage.getItem('current_play_position')) {
         this.$refs.audioPlayer.currentTime = parseFloat(localStorage.getItem('current_play_position'))
-        console.log('转换时间', parseFloat(localStorage.getItem('current_play_position')))
+        this.$refs.audioPlayer.play();
       }
-      this.$refs.audioPlayer.play();
-      // console.log('当前时间', this.$refs.audioPlayer.currentTime)
-      // utils.firebaseLogEvent(
-      //   '10014',
-      //   '-10006',
-      //   'click_voice_bar',
-      //   'click',
-      //   {
-      //     channel: utils.getFBChannel(),
-      //   }
-      // );
     },
     scrollToBottom() {
-      const container = this.$refs.scrollContainer;
+      let container = this.$refs.scrollContainer;
       container.scrollTop = container.scrollHeight;
     },
     /**
      * 关闭弹窗，开始播放音乐
      */
     closeConfirm() {
+      this.duration_time.entry_time1 = new Date().getTime()
       this.showConfirm = false
       this.playSound();
+      if (this.duration_time.entry_time) {
+        utils.firebaseLogEvent(
+          '10016',
+          '-10002',
+          'view_love_voice_join_main',
+          'view',
+          {
+            channel: utils.getFBChannel(),
+            time: (new Date().getTime() - this.duration_time.entry_time) / 1000
+          }
+        );
+      }
+      utils.firebaseLogEvent(
+        '10016',
+        '-10003',
+        'page_view_love_voice_main',
+        'page_view',
+        {
+          channel: utils.getFBChannel(),
+        }
+      );
+
     },
     showEmail() {
       return utils.showEmail();
@@ -635,7 +695,7 @@ export default {
       querystring += time_obj.birth_hour || '-1';
       querystring += '|';
       querystring += email;
-      window.localStorage.setItem('_emotion_fate_info', querystring);
+      window.localStorage.setItem('_emotion_voice', querystring);
       location.href = url;
     },
     /**
@@ -725,14 +785,25 @@ export default {
       querystring += '|';
       querystring += email;
 
-      window.localStorage.setItem('_emotion_fate_info', querystring);
+      window.localStorage.setItem('_emotion_voice', querystring);
       location.href = url;
     },
 
-    handleAction() {
+    handleAction(val) {
       this.show_sheet = true
       const audioPlayer = this.$refs.audioPlayer;
       audioPlayer.pause();
+      //连麦操作
+      utils.firebaseLogEvent(
+        '10016',
+        '-10005',
+        'click_love_voice_main',
+        'click',
+        {
+          channel: utils.getFBChannel(),
+          click_area: val
+        }
+      );
     },
 
     /**
@@ -748,9 +819,9 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         utils.firebaseLogEvent(
-          '10014',
-          '-10003',
-          'click_fate_end_main',
+          '10016',
+          '-10006',
+          'click_love_voice_submit',
           'click',
           {
             channel: utils.getFBChannel(),
@@ -769,9 +840,9 @@ export default {
       // }
       if (time_obj == null) {
         utils.firebaseLogEvent(
-          '10014',
-          '-10003',
-          'click_fate_end_main',
+          '10016',
+          '-10006',
+          'click_love_voice_submit',
           'click',
           {
             channel: utils.getFBChannel(),
@@ -783,9 +854,9 @@ export default {
       }
       if (!this.privacyChecked) {
         utils.firebaseLogEvent(
-          '10014',
-          '-10003',
-          'click_fate_end_main',
+          '10016',
+          '-10006',
+          'click_love_voice_submit',
           'click',
           {
             channel: utils.getFBChannel(),
@@ -814,13 +885,13 @@ export default {
       querystring += email;
       //设置过渡动画标识
       this.setAnimation();
-      window.localStorage.setItem('_emotion_fate_info', querystring);
+      window.localStorage.setItem('_emotion_voice', querystring);
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
-        '10014',
-        '-10003',
-        'click_fate_end_main',
+        '10016',
+        '-10006',
+        'click_love_voice_submit',
         'click',
         {
           channel: utils.getFBChannel(),
@@ -1004,6 +1075,11 @@ export default {
   },
 };
 </script>
+<style>
+.mint-toast {
+  z-index: 999999;
+}
+</style>
 <style scoped lang="less">
 .fix-box {
   position: fixed !important;
@@ -1036,7 +1112,6 @@ export default {
   width: 7.5rem;
   height: 100vh;
   background-image: url('../../../assets/img/emotion_voice/home_img_backdrop.webp');
-  background-color: red;
   background-size: cover;
   position: relative;
   background-repeat: no-repeat;
@@ -1054,22 +1129,66 @@ export default {
     height: 2.48rem;
     z-index: 2;
   }
+
   .canvas-bg2 {
     position: absolute;
     top: 1.12rem;
-    left: 0.24rem;
+    left: 0rem;
     width: 7.5rem;
     height: 4.42rem;
     z-index: 2;
   }
 
- 
+
 
   .nav {
     width: 7.5rem;
     height: 1.12rem;
   }
-  
+
+  .banner {
+    position: absolute;
+    top: 7.52rem;
+    left: -6.08rem;
+    width: 6.08rem;
+    height: 1.04rem;
+  }
+
+  .fadein_animation {
+    animation: fadein 7.5s;
+  }
+
+
+  @keyframes fadein {
+    0% {
+      left: -6.08rem;
+    }
+
+    20% {
+      left: 0rem;
+    }
+
+    40% {
+      left: 0rem;
+    }
+
+    60% {
+      left: 0rem;
+    }
+
+    80% {
+      left: 0rem;
+    }
+
+    100% {
+      left: -6.08rem;
+    }
+
+  }
+
+
+
+
   .music {
     width: 7.02rem;
     height: 2.48rem;
@@ -1090,6 +1209,7 @@ export default {
   .bottom-container {
     width: 7.02rem;
     height: calc(100vh - 9rem);
+    // max-height: calc(100vh - 9.2rem);
 
 
     display: flex;
@@ -1100,14 +1220,15 @@ export default {
       display: flex;
 
       height: 100%;
+      max-height: calc(100vh - 10rem);
 
       .left {
         width: 5.24rem;
         height: 100%;
-        border: 1px solid red;
         display: flex;
         flex-direction: column;
         overflow-y: scroll;
+        max-height: calc(100vh - 10rem);
 
         .item {
           width: 5.24rem;
@@ -1144,11 +1265,11 @@ export default {
         }
 
         .btn {
-          // width: 148px;
+          width: 1.48rem;
           height: 0.56rem;
           background: rgba(0, 0, 0, 0.2);
           border-radius: 0.16rem;
-          padding: 0.15rem;
+          // padding: 0.15rem;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -1159,6 +1280,7 @@ export default {
           img {
             width: 0.22rem;
             height: 0.22rem;
+            margin-bottom: 0.15rem;
           }
         }
       }
@@ -1314,8 +1436,8 @@ export default {
   .btn {
     display: flex;
     margin: auto;
-
-    // width: 5.9rem;
+    margin-top: 0.4rem;
+    width: 5.9rem;
     height: 0.92rem;
     display: flex;
     justify-content: center;

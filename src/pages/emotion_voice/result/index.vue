@@ -69,10 +69,10 @@ const tips_arr4 = {
 };
 
 const copy_info = {
-  consult_time: { module: 10014, 'content_id': -10012, 'event_name': 'click_fate_end_copy', type: 'click' },
+  consult_time: { module: 10016, 'content_id': -10014, 'event_name': 'click_love_voice_copy', type: 'click' },
 }
 const down_info = {
-  consult_time: { module: 10014, 'content_id': -10014, 'event_name': 'click_fate_end_result', type: 'click' },
+  consult_time: { module: 10016, 'content_id': -10016, 'event_name': 'click_love_voice_result', type: 'click' },
 }
 
 import {
@@ -156,9 +156,9 @@ export default {
     });
 
     utils.firebaseLogEvent(
-      '10014',
-      '-10010',
-      'page_view_fate_end_chatpage',
+      '10016',
+      '-10012',
+      'page_view_love_voice_chatpage',
       'page_view',
       {
         channel: utils.getFBChannel(),
@@ -194,9 +194,9 @@ export default {
     this.duration_time.exit_time = new Date().getTime();
     if (this.duration_time.entry_time) {
       utils.firebaseLogEvent(
-        '10014',
-        '-10011',
-        'view_fate_end_chatpage_duration',
+        '10016',
+        '-10013',
+        'view_love_voice_chatpage_duration',
         'view',
         {
           channel: utils.getFBChannel(),
@@ -267,13 +267,11 @@ export default {
       Toast(tips_arr4[lang]);
       if (val === 0) return
       utils.firebaseLogEvent(copy_info[this.product_key]['module'], copy_info[this.product_key]['content_id'], copy_info[this.product_key]['event_name'], copy_info[this.product_key]['type'], {
-        args_name: copy_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
     },
     downClick(arg) {
       utils.firebaseLogEvent(down_info[this.product_key]['module'], down_info[this.product_key]['content_id'], down_info[this.product_key]['event_name'], down_info[this.product_key]['type'], {
-        args_name: down_info[this.product_key]['event_name'],
         channel: utils.getFBChannel(),
       });
       if (arg) {
@@ -348,9 +346,9 @@ export default {
 
 
         utils.firebaseLogEvent(
-          '10014',
-          '-10008',
-          'event_status_fate_end_pay_success',
+          '10016',
+          '-10010',
+          'event_status_love_voice_pay_success',
           'event_status',
           {
             channel: utils.getFBChannel(),
@@ -398,9 +396,9 @@ export default {
 
 
         utils.firebaseLogEvent(
-          '10014',
-          '-10009',
-          'event_status_fate_end_pay_fail',
+          '10016',
+          '-10011',
+          'event_status_love_voice_pay_fail',
           'event_status',
           {
             channel: utils.getFBChannel(),
@@ -494,7 +492,7 @@ export default {
       Indicator.close();
       Toast(this.$t('fail-result'));
       setTimeout(() => {
-        let querystring = localStorage.getItem('_emotion_fate_info');
+        let querystring = localStorage.getItem('_emotion_voice');
         let path = 'detail?querystring=' + querystring;
         this.$router.push({ path });
         // location.href = 'emotion_fate.html';

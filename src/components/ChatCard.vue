@@ -264,6 +264,10 @@ export default {
         utils.firebaseLogEvent(10014, -10013, 'click_fate_end_card_result', 'click', {
           channel: utils.getFBChannel(),
         });
+      } else if (this.sub_type === 'zhuan_chang') {
+        utils.firebaseLogEvent(10016, -10015, 'click_love_voice_card_result', 'click', {
+          channel: utils.getFBChannel(),
+        });
       } else {
         utils.firebaseLogEvent(10011, -10013, 'click_truelove_result', 'click', {
           channel: utils.getFBChannel(),

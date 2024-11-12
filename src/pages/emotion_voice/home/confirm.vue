@@ -1,12 +1,12 @@
 <template>
 
-  <van-dialog v-model:show="show" :showConfirmButton=false closeOnClickOverlay>
+  <van-dialog v-model:show="show" :showConfirmButton=false>
     <div class="confirm-modal">
-      <div class="modal-container">
+      <div class="modal-container" @click="playVoice">
         <img class="icon" src="../../../assets/img/emotion_voice/home_img_window_mic.webp" />
         <div class="title">{{ is_cn? '点击进入连麦间': '點擊進入連麥間' }}</div>
         <div class="content">{{ is_cn? '这里可以放心倾诉，聆听你的故事': '這裏可以放心傾訴，聆聽你的故事' }}</div>
-        <div class="btn" @click="playVoice">{{ is_cn? '立即进入': '立即進入' }}</div>
+        <div class="btn">{{ is_cn? '立即进入': '立即進入' }}</div>
       </div>
     </div>
   </van-dialog>
@@ -39,7 +39,7 @@ export default {
 
     show(val) {
       if (!val) {
-        this.$emit('play-voice')
+        // this.$emit('close-confirm')
       }
     },
 
@@ -52,7 +52,6 @@ export default {
   methods: {
     playVoice() {
       this.$emit('close-confirm')
-      // this.show = false;
     }
   },
 };
@@ -78,7 +77,7 @@ export default {
 
     .icon {
       position: absolute;
-      left: 1.65rem;
+      left: 1.8rem;
       top: 0rem;
       width: 2.4rem;
       height: 2.4rem;

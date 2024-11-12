@@ -77,8 +77,8 @@ import utils from '@/libs/utils';
 import { path_enums } from '../../../libs/enum';
 import { getFateHistoryOrderAPI, payFateOrderAPI } from '../../../api/api';
 import { getHistoryOrderImg } from '../../../libs/enum';
-import consult_time_android from '../../../assets/img/emotion_fate/img_order_history_logo_android.webp'
-import consult_time_ios from '../../../assets/img/emotion_fate/img_order_history_logo_ios.webp'
+import consult_time_android from '../../../assets/img/emotion_voice/img_order_history_logo_android.webp'
+import consult_time_ios from '../../../assets/img/emotion_voice/img_order_history_logo_ios.webp'
 // import CodePop from '../components/CodePop.vue';
 // import FixDowonLoad from '../components/FixDowonLoad.vue';
 
@@ -196,9 +196,9 @@ export default {
 
   mounted() {
     utils.firebaseLogEvent(
-      '10014',
-      '-10017',
-      'page_view_fate_end_history',
+      '10016',
+      '-10019',
+      'page_view_love_voice_history',
       'page_view',
       {
         channel: utils.getFBChannel(),
@@ -295,9 +295,9 @@ export default {
           query: { order_id: item.order_id, status: 'SUCCESS', product_key: item.product_key || 'consult_time' },
         });
         utils.firebaseLogEvent(
-          10014,
-          -10019,
-          'click_history_fate_end_check',
+          10016,
+          -10021,
+          'click_history_love_voice_check',
           'click',
           {
             channel: utils.getFBChannel(),
@@ -320,9 +320,9 @@ export default {
           trade_target_org,
         } = item;
         utils.firebaseLogEvent(
-          10014,
-          -10018,
-          'click_history_fate_end_repay',
+          10016,
+          -10020,
+          'click_history_love_voice_repay',
           'click',
           {
             channel: utils.getFBChannel(),

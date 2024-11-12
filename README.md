@@ -70,7 +70,7 @@ https://overseas.psychicai.pro/enjoy11/emotion_end.html
 https://overseas.psychicai.pro/ads12/year_of_lucky_2025.html
 
 13链接为正缘报告复刻链接
-https://overseas.psychicai.pro/ads12/emotion_fate13.html
+https://overseas.psychicai.pro/ads13/emotion_fate13.html
 
 
 bjzxmlxz域名投放链接
