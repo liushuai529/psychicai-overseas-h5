@@ -383,6 +383,13 @@ export default {
       // console.log('Current playback position: ' + audioPlayer.currentTime + ' seconds');
       localStorage.setItem('current_play_position', audioPlayer.currentTime)
     });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState !== 'visible') {
+        this.$refs.audioPlayer && this.$refs.audioPlayer.pause()
+      } else {
+        this.$refs.audioPlayer && this.$refs.audioPlayer.play() 
+      }
+    });
     //svga动画加载
     this.loadSVGA()
     if (utils.isProd()) {
