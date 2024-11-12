@@ -77,8 +77,8 @@ import utils from '@/libs/utils';
 import { path_enums } from '../../../libs/enum';
 import { getFateHistoryOrderAPI, payFateOrderAPI } from '../../../api/api';
 import { getHistoryOrderImg } from '../../../libs/enum';
-import consult_time_android from '../../../assets/img/emotion_fate/img_order_history_logo_android.webp'
-import consult_time_ios from '../../../assets/img/emotion_fate/img_order_history_logo_ios.webp'
+import consult_time_android from '../../../assets/img/emotion_voice/img_order_history_logo_android.webp'
+import consult_time_ios from '../../../assets/img/emotion_voice/img_order_history_logo_ios.webp'
 // import CodePop from '../components/CodePop.vue';
 // import FixDowonLoad from '../components/FixDowonLoad.vue';
 
