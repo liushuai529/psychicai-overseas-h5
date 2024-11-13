@@ -3,7 +3,7 @@
     <div class="pay-contaienr">
       <div class="left">
         <div class="title">{{ is_cn ? '您有待支付订单' : '您有待支付訂單' }}</div>
-        <div class="desc">{{ is_cn ? '已根据您的八字信息成功生成「报告」' : '已根據您的八字信息成功生成「報告」' }}</div>
+        <div class="desc">{{ is_cn ? '已根据您的八字信息成功生成「咨询订单」' : '已根據您的八字信息成功生成「咨詢訂單」' }}</div>
       </div>
       <div class="right">立即支付</div>
     </div>

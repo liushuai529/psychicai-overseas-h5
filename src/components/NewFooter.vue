@@ -85,7 +85,7 @@ export default {
   width: 100%;
   height: 2rem;
   z-index: 98;
-  bottom: 0;
+  bottom: -0.03rem;
 
   img {
     width: 7.5rem;
