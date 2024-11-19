@@ -1294,13 +1294,13 @@ const firebaseConfig = {
 };
 
 const firebaseConfig1 = {
-  apiKey: "AIzaSyAJW_tcPgFrogqvt8NscdVzjOqKU5Se0gA",
-  authDomain: "psychic-fortune.firebaseapp.com",
-  projectId: "psychic-fortune",
-  storageBucket: "psychic-fortune.firebasestorage.app",
-  messagingSenderId: "391425422960",
-  appId: "1:391425422960:web:b81c01b7c0c6d7ec0766b5",
-  measurementId: "G-84VZCFNFQH"
+  apiKey: "AIzaSyDDsKSwxVZLUpENipBxgq7Q1s0Eulu-hmI",
+  authDomain: "psychich5-fortune.firebaseapp.com",
+  projectId: "psychich5-fortune",
+  storageBucket: "psychich5-fortune.firebasestorage.app",
+  messagingSenderId: "378667987987",
+  appId: "1:378667987987:web:e73a741f70e43b25b37be6",
+  measurementId: "G-NXSL3SYRF0"
 };
 
 let analytics = null
