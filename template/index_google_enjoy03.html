@@ -421,7 +421,11 @@
       // 载入 gtag.js
       var script = document.createElement('script');
       script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
+      if (window.location.hostname.indexOf('overseas.psychicai.pro') > -1) {
+        script.src = `https://www.googletagmanager.com/gtag/js?id=G-43C3GF0Z45`;
+      } else if (window.location.hostname.indexOf('ssybjmlxz.com') > -1) {
+        script.src = `https://www.googletagmanager.com/gtag/js?id=G-8P1TDGH909`;
+      }
       document.head.appendChild(script);
 
       // 设置 gtag
