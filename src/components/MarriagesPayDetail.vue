@@ -547,7 +547,7 @@ export default {
       this.pay_lock_time = setTimeout(() => {
         this.payCanClick = false
       }, 2000);
-      if (utils.isProd()) {
+      if (utils.isProd() || this.test_fb_upload) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
 
         Indicator.close();

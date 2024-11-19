@@ -733,9 +733,6 @@ export default {
      * @return {*}
      */
     async check() {
-      gtag("event", "join_group", {
-  group_id: "G_12345"
-});
       let username = this.username;
       let email = this.email;
       let sex = this.sex;
