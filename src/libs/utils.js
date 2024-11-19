@@ -1292,9 +1292,24 @@ const firebaseConfig = {
   appId: '1:391425422960:web:7fd76da07aaab6390766b5',
   measurementId: 'G-43C3GF0Z45',
 };
+
+const firebaseConfig1 = {
+  apiKey: "AIzaSyAJW_tcPgFrogqvt8NscdVzjOqKU5Se0gA",
+  authDomain: "psychic-fortune.firebaseapp.com",
+  projectId: "psychic-fortune",
+  storageBucket: "psychic-fortune.firebasestorage.app",
+  messagingSenderId: "391425422960",
+  appId: "1:391425422960:web:b81c01b7c0c6d7ec0766b5",
+  measurementId: "G-84VZCFNFQH"
+};
+
 let analytics = null
 setTimeout(() => {
-  firebase.initializeApp(firebaseConfig);
+  if (window.location.hostname.indexOf('overseas.psychicai.pro') > -1) {
+    firebase.initializeApp(firebaseConfig);
+  } else if (window.location.hostname.indexOf('ssybjmlxz.com') > -1) {
+    firebase.initializeApp(firebaseConfig1);
+  }
   analytics = firebase.analytics();
 }, 0);
 
