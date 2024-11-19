@@ -45,6 +45,8 @@ const getFBChannel = () => {
     return 'ocean03';
   } else if (url.indexOf('/google_ocean03/') > -1) {
     return 'google_ocean03';
+  } else if (url.indexOf('/google_enjoy03/') > -1) {
+    return 'google_enjoy03';
   } else if (url.indexOf('/ocean103/') > -1) {
     return 'ocean103';
   } else if (url.indexOf('/enjoy05/') > -1) {
@@ -161,7 +163,7 @@ const getFBChannel = () => {
 };
 
 const isShowCombine = () => {
-  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "mlzyy03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05"];
+  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "google_enjoy03", "mlzyy03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05"];
 };
 
 /**
