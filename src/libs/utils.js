@@ -968,7 +968,7 @@ const copyToClipboard = text => {
  * @return {*}
  */
 const isProd = () => {
-  return window.location.href.indexOf('//overseas.psychicai.pro') > 0
+  return window.location.href.indexOf('//overseas.psychicai.pro') > 0 || window.location.href.indexOf('//overseas.ssybjmlxz.com') > 0
 };
 
 //获取UA信息返回数组
