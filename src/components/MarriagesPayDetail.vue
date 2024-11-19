@@ -623,7 +623,8 @@ export default {
       if (localStorage.getItem('google_client_id')) {
         pay_max_params = Object.assign({}, pay_max_params, {
           ga_param: {
-            client_id: localStorage.getItem('google_client_id')
+            client_id: localStorage.getItem('google_client_id'),
+            test_ga_upload: this.test_fb_upload,
           },
         });
       }
