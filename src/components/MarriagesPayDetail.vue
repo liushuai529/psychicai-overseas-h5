@@ -252,6 +252,7 @@ export default {
       city: 0,
       current_country: {},
       test_fb_upload: '',//拼接参数
+      test_ga_upload: '',//拼接参数
     };
   },
   props: {
@@ -404,6 +405,7 @@ export default {
   },
   mounted() {
     this.test_fb_upload = utils.getQueryStr('test_fb_upload')
+    this.test_ga_upload = utils.getQueryStr('test_ga_upload')
   },
 
   methods: {
@@ -547,7 +549,7 @@ export default {
       this.pay_lock_time = setTimeout(() => {
         this.payCanClick = false
       }, 2000);
-      if (utils.isProd() || this.test_fb_upload) {
+      if (utils.isProd() || this.test_ga_upload) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
 
         Indicator.close();

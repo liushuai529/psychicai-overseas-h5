@@ -332,7 +332,6 @@ export default {
       api_time: 0,
       local_time: 0,
       timer: null,
-      test_fb_upload: '',//拼接参数
     };
   },
   computed: {
@@ -430,7 +429,6 @@ export default {
     }
   },
   mounted() {
-    this.test_fb_upload = utils.getQueryStr('test_fb_upload')
     this.showNoticePop();
 
     // 赋默认值
@@ -648,7 +646,7 @@ export default {
         channel: utils.getFBChannel(),
         click_type: 'screen_tracking',
       });
-      if (utils.isProd() || this.test_fb_upload) {
+      if (utils.isProd()) {
         
         try {
           utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Lead');

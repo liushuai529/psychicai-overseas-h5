@@ -158,7 +158,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('/ads16/') > -1) {
     return 'ads16';
   } else {
-    return 'mlzyy17';
+    return 'google_enjoy03';
   }
 };
 

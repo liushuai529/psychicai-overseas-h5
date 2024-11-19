@@ -269,6 +269,8 @@ export default {
       last_title: '',
       timer: null,
       comboAttachData: null, //套餐未使用报告信息
+      test_fb_upload: '',//拼接参数
+      test_ga_upload: '',//拼接参数
     };
   },
   computed: {
@@ -443,6 +445,9 @@ export default {
     }
   },
   mounted() {
+    this.test_fb_upload = utils.getQueryStr('test_fb_upload')
+    this.test_ga_upload = utils.getQueryStr('test_ga_upload')
+    console.log('this.test_ga_upload', this.test_ga_upload)
     //svga动画预加载
     // this.preloadSVGA()
     if (utils.isProd()) {
@@ -861,7 +866,7 @@ export default {
           click_type: 'screen_tracking',
         }
       );
-      if (utils.isProd()) {
+      if (utils.isProd()  || this.test_ga_upload) {
         
         try {
           utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Lead');
