@@ -1,6 +1,6 @@
 <template>
-  <div>
-
+  <div style="">
+测试页面
   </div>
 </template>
 <script>

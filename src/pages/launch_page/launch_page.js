@@ -6,8 +6,8 @@
  * @Description:
  */
 import Vue from 'vue';
-import App from './emotion_voice.vue';
-import router from '../../router/emotion_voice.js';
+import App from './launch_page.vue';
+import router from '../../router/launch_page.js';
 import store from '../../store/index.js';
 import FastClick from 'fastclick';
 import VueResource from 'vue-resource';

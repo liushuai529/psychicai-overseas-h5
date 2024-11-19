@@ -38,30 +38,6 @@ export default new Router({
       }
     },
     {
-      path: '/detail',
-      name: 'detail',
-      component: detail,
-      beforeEnter: (to, from, next) => {
-        visitorLoginAPI({}, next)
-      }
-    },
-    {
-      path: '/result',
-      name: 'result',
-      component: result,
-      beforeEnter: (to, from, next) => {
-        visitorLoginAPI({}, next)
-      }
-    },
-    {
-      path: '/order',
-      name: 'order',
-      component: order,
-      beforeEnter: (to, from, next) => {
-        visitorLoginAPI({}, next)
-      }
-    },
-    {
       path: '*',
       redirect: '/',
     },
