@@ -149,12 +149,14 @@ const getFBChannel = () => {
     return 'mlzyy15';
   } else if (url.indexOf('/mlzyy16/') > -1) {
     return 'mlzyy16';
+  }  else if (url.indexOf('/mlzyy17/') > -1) {
+    return 'mlzyy17';
   } else if (url.indexOf('/ads15/') > -1) {
     return 'ads15';
   } else if (url.indexOf('/ads16/') > -1) {
     return 'ads16';
   } else {
-    return 'google_ocean03';
+    return 'mlzyy17';
   }
 };
 
@@ -236,6 +238,7 @@ const getFbId = () => {
     'mlzyy12': '484821661378293',
     'mlzyy15': '484821661378293',
     'mlzyy16': '484821661378293',
+    'mlzyy17': '1491830848258517',
   }
 }
 

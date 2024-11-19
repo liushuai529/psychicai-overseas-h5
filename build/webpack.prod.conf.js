@@ -1598,6 +1598,28 @@ for (var pathname of ['emotion_fortune_2025/emotion_fortune_2025', 'user_agreeme
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// mlzyy17代理
+for (var pathname of ['launch_page/launch_page']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/mlzyy17/' + filename + '.html'),
+    template: 'template/index_mlzyy17.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
 
 
 
