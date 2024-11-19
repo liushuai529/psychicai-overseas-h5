@@ -412,6 +412,7 @@
     var gaMeasurementId = '';
     
     if (window.location.hostname.indexOf('overseas.psychicai.pro')>-1) {
+      
       gaMeasurementId = 'G-43C3GF0Z45';  // 域名 A
     } else if (window.location.hostname.indexOf('ssybjmlxz.com')>-1) {
       gaMeasurementId = 'G-8P1TDGH909';  // 域名 B
@@ -430,6 +431,7 @@
       gtag('js', new Date());
 
       // 配置 Google Analytics
+      console.log('当前googleID', gaMeasurementId)
       gtag('config', gaMeasurementId);
     }
   </script>
