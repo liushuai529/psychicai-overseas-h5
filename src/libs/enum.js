@@ -33,6 +33,7 @@ export const path_enums = {
   h5_annual2024: 'year_of_lucky_2024',
   h5_annual2025: 'year_of_lucky_2025',
   h5_emotion2024: 'emotion_fortune',
+  h5_emotion2025: 'emotion_fortune_2025',
   h5_career2024: 'career_fortune_2024',
   BA_ZI_HE_HUN: 'marriage_measure_overseas',
   QUAN_NIAN_YUN_SHI: 'new_year_luck_overseas',
@@ -291,6 +292,7 @@ export const getHistoryOrderImg = {
   h5_weigh_bone: yuantiangang,
   h5_bai_gua: guiguzi,
   h5_emotion2024: ganqingyun,
+  h5_emotion2025: ganqingyun,
   h5_career2024: shiyeyun,
   h5_wealth2024: caiyun,
   h5_marriage: hehun,
@@ -453,6 +455,10 @@ export const reportName = {
     cn: '2024感情运势',
     tw: '2024感情運勢',
   },
+  h5_emotion2025: {
+    cn: '2025感情运势',
+    tw: '2025感情運勢',
+  },
   h5_annual2024: {
     cn: '2024年年运',
     tw: '2024年年運',
@@ -549,6 +555,7 @@ export const url_enums = {
   h5_annual2024: 'year_of_lucky_2024',
   h5_annual2025: 'year_of_lucky_2025',
   h5_emotion2024: 'emotion_fortune',
+  h5_emotion2025: 'emotion_fortune_2025',
   h5_career2024: 'career_fortune_2024',
 };
 

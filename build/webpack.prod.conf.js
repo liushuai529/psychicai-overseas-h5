@@ -1196,6 +1196,28 @@ for (var pathname of ['emotion_voice/emotion_voice', 'user_agreement/user_agreem
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// ads16代理
+for (var pathname of ['emotion_fortune_2025/emotion_fortune_2025', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/ads16/' + filename + '.html'),
+    template: 'template/index_ads16.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
 
 // ads111代理
 for (var pathname of ['emotion_end/emotion_end', 'user_agreement/user_agreement', 'privacy/privacy']) {
@@ -1538,6 +1560,28 @@ for (var pathname of ['emotion_voice/emotion_voice', 'user_agreement/user_agreem
   var conf = {
     filename: path.resolve(__dirname, '../dist/mlzyy15/' + filename + '.html'),
     template: 'template/index_mlzyy15.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// mlzyy16代理
+for (var pathname of ['emotion_fortune_2025/emotion_fortune_2025', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/mlzyy16/' + filename + '.html'),
+    template: 'template/index_mlzyy16.html',
     inject: true,
     minify: {
       removeComments: true,

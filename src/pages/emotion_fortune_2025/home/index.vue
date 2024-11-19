@@ -169,26 +169,12 @@
         v-show="choose_time && !show_nongli"></DatetimePicker>
       <NongliPicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
-      <!-- <combinePayPop
-      :visible="pay_modal"
-      :all_list="productList"
-      :product_key="product_key"
-      :product_price="product_price"
-      :query_user_string="query_user_string"
-      @update-visible="pay_modal = false"
-      @getOrderId="getOrderId"
-    ></combinePayPop> -->
-      <!-- <HotProduct v-if="!is_channel_05" product_key="h5_emotion2024" url="emotion_fortune" e_id="10006" /> -->
-      <NewFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
-      <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
+
+      <NewFooter v-if="showFixedBtn" product_key="h5_emotion2025" />
+      <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2025" />
       <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"
         e_id="10006" c_id="-10021" c_name="click_2024lovely_discount1" />
-      <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
-        :new_order_key="new_order_key" name="local" top="4.7rem" :time="local_time" @payOrder="checkOrder"
-        @jumpDetail="jumpOrder" />
-      <FixedOrder v-if="show_api_order && !is_show_notice" :title="last_title" :is_show_move="is_show_notice"
-        :last_order="last_order" name="api" top="6.7rem" :time="api_time" @payOrder="checkOrder"
-        @jumpDetail="jumpOrder" />
+    
     </div>
   </div>
 </template>
@@ -237,19 +223,22 @@ import HotProduct from '../../../components/hotProduct.vue';
 import PopNotice from '../../../components/PopNotice.vue';
 
 import cn_icon_0 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_huode_cn.webp';
-import cn_icon_1 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_01_cn.webp';
-import cn_icon_2 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_02_cn.webp';
-import cn_icon_3 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_03_cn.webp';
-import cn_icon_4 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_04_cn.webp';
-import cn_icon_5 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_05_cn.webp';
+import cn_icon_1 from '../../../assets/img/emotion_fortune_2025/cn/home_img_details_01_cn.webp';
+import cn_icon_2 from '../../../assets/img/emotion_fortune_2025/cn/home_img_details_02_cn.webp';
+import cn_icon_3 from '../../../assets/img/emotion_fortune_2025/cn/home_img_details_03_cn.webp';
+import cn_icon_4 from '../../../assets/img/emotion_fortune_2025/cn/home_img_details_04_cn.webp';
+import cn_icon_5 from '../../../assets/img/emotion_fortune_2025/cn/home_img_details_05_cn.webp';
+
+
+
 
 
 import tw_icon_0 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_huode_tw.webp';
-import tw_icon_1 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_01_tw.webp';
-import tw_icon_2 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_02_tw.webp';
-import tw_icon_3 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_03_tw.webp';
-import tw_icon_4 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_04_tw.webp';
-import tw_icon_5 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_05_tw.webp';
+import tw_icon_1 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_01_tw.webp';
+import tw_icon_2 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_02_tw.webp';
+import tw_icon_3 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_03_tw.webp';
+import tw_icon_4 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_04_tw.webp';
+import tw_icon_5 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_05_tw.webp';
 import cn_info from '../../../assets/img/emotion_v2/new/cn/info.webp';
 import tw_info from '../../../assets/img/emotion_v2/new/tw/info.webp';
 import NewFooter from '../../../components/NewFooter.vue';
@@ -317,7 +306,7 @@ export default {
       // 底部弹出popup版本所需数据
       visible: false,
       product_id: 2,
-      product_key: 'h5_emotion2024',
+      product_key: 'h5_emotion2025',
       query_user_string: '',
       is_combine,
       has_pay: '',
@@ -336,7 +325,6 @@ export default {
       fix_order_info: null, //最新一个订单信息
       new_order_key: '',
       reportName,
-      show_api_order: false,
       last_order: null,
       api_time: 0,
       local_time: 0,
@@ -409,31 +397,7 @@ export default {
     is_show_hot() {
       return ['enjoy02', 'panda02'].includes(utils.getFBChannel());
     },
-    show_fixed_order() {
-      if (this.last_order) {
-        if (
-          this.last_order.product_key === this.new_order_key &&
-          this.last_order.status !== 'PAYED'
-        ) {
-          return false;
-        }
-      }
-
-      let flag =
-        this.fix_order_info && this.new_order_key !== this.product_key
-          ? true
-          : false;
-
-      if (flag) {
-        const { main_id, click_id, view_id, click_name, view_name } =
-          maidianEnum[this.new_order_key]||{};
-        main_id && utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
-          args_name: view_name,
-          channel: utils.getFBChannel(),
-        });
-      }
-      return flag;
-    },
+   
     local_title() {
       console.log('getTitle',this.new_order_key)
       return utils.getTitle(this.new_order_key);
@@ -500,7 +464,6 @@ export default {
     );
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
-    this.getLastOrder();
     // 埋点事件上传
     // reportBuryingEventAPI({
     //   event: 'page_view_2024lovely_main',
@@ -1155,39 +1118,7 @@ export default {
       this.is_show_notice = false;
     },
 
-    // 获取最新一个订单信息
-    async getLastOrder() {
-      const res = await getLastOrderAPI();
-      if (res.status !== 1000) return;
-      this.last_order = res.data;
-      this.last_title = utils.getTitle(
-        this.last_order ? this.last_order.product_key : ''
-      );
-
-      if (
-        this.last_order &&
-        this.last_order.status !== 'PAYED' &&
-        this.last_order.product_key !== this.product_key
-      ) {
-        this.logDiscountEvent();
-
-        //
-        if (
-          +localStorage.getItem('mlxz_fixed_api_order_id') ===
-          this.last_order.id
-        ) {
-          this.api_time = +localStorage.getItem('mlxz_fixed_api_order_time');
-          this.show_api_order = true;
-          return;
-        }
-        this.api_time =
-          +localStorage.getItem('mlxz_fixed_api_order_time') || 15 * 60 * 1000;
-        localStorage.setItem('mlxz_fixed_api_order_id', this.last_order.id);
-        this.show_api_order = true;
-      } else {
-        this.show_api_order = false;
-      }
-    },
+   
     logDiscountEvent() {
       const { ext, pay_method, product_key, product_id, payment } =
         this.last_order;
@@ -1242,7 +1173,6 @@ export default {
       localStorage.removeItem('mlxz_fixed_api_order_time');
       Indicator.close();
       if (res.status !== 1000) return;
-      this.show_api_order = false;
 
       await utils.asleep(1000);
       location.href = res.data.pay_url;

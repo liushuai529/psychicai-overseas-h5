@@ -1,49 +1,29 @@
-<!--
- * @Author: wujiang@weli.cn
- * @Date: 2023-11-15 11:33:50
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-06-05 18:56:46
- * @Description: 
--->
 <template>
-  <div class="result" :class="['result', show_pop_modal? 'hidden-scroll': '']">
-    <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />
-    <div :class="['info-box', lang ? 'cn-bg' : 'tw-bg']">
-      <BaziTable
-        :sex="sex"
-        :is_result="true"
-        :username="username"
-        :gongli_nongli="gongli_nongli"
-        :picker_date_yangli="picker_date_yangli"
-        :picker_date_nongli="picker_date_nongli"
-        :gan="gan"
-        :zhi="zhi"
-        :nayin="nayin"
-        :cai_bo_num="cai_bo_num"
-        :gui_ren_num="gui_ren_num"
-        :hun_yin_num="hun_yin_num"
-        :ming_ge="ming_ge"
-        :riyuanqiangruo="riyuanqiangruo"
-        :shi_ye_num="shi_ye_num"
-        :wuxingqiang="wuxingqiang"
-        :tao_hua_num="tao_hua_num"
-        :fuqigong="fuqigong"
-        text_color="#6D2215"
-        minge_color="#EC436B"
-        :show_daji="false"
-        bg="#FFFAFA"
-        width="6.5rem"
-        table_border="0.02rem solid #EC436B"
-        border_color="#EC436B"
-        :is_show_taohua="1"
-        :change_color="true"
-      />
+  <div :class="['result', is_cn ? 'result-cn-bg' : 'result-tw-bg', show_pop_modal ? 'hidden-scroll' : '']">
+    <!-- <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" /> -->
+    <div :class="['info-box', is_cn ? 'cn-bg' : 'tw-bg']">
+      <BaziTable :sex="sex" :is_result="true" :username="username" :gongli_nongli="gongli_nongli"
+        :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
+        :nayin="nayin" :cai_bo_num="cai_bo_num" :gui_ren_num="gui_ren_num" :hun_yin_num="hun_yin_num" :ming_ge="ming_ge"
+        :riyuanqiangruo="riyuanqiangruo" :shi_ye_num="shi_ye_num" :wuxingqiang="wuxingqiang" :tao_hua_num="tao_hua_num"
+        :fuqigong="fuqigong" text_color="#6D2215" minge_color="#EC436B" :show_daji="false" bg="#FFFAFA" width="6.5rem"
+        table_border="0.02rem solid #EC436B" border_color="#EC436B" :is_show_taohua="1" :change_color="true" />
     </div>
 
-    <contentDetail v-if="fortune.qian" :result="fortune.qian" :item_index="2" />
-    <contentDetail v-if="fortune.concept" :result="fortune" :item_index="3" />
-    <contentDetail v-if="fortune.keyword" :result="fortune" :item_index="5" />
-    <contentDetail class="hidden-code" :result="fortune" :item_index="6" />
+    <contentDetail v-if="fortune.qian" :result="fortune" :item_index="1" />
+    <contentDetail v-if="fortune.guide" :result="fortune.guide" :item_index="2" />
+    <contentDetail v-if="fortune.review" :result="fortune.review" :item_index="3" />
+    <contentDetail v-if="fortune.concept" :result="fortune.concept" :item_index="4" />
+    
+    <contentDetail v-if="fortune.zodiac" :result="fortune" :item_index="5" />
+
+    <contentDetail v-if="fortune.fortunegan" :result="fortune.fortunegan" :item_index="6" />
+    <contentDetail v-if="fortune.fortunezhi" :result="fortune.fortunezhi" :item_index="7" />
+
+
+
+    <contentDetail class="hidden-code" :result="fortune" :item_index="8" />
+    <contentDetail class="hidden-code" :result="fortune" :item_index="9" />
   </div>
 </template>
 
@@ -125,7 +105,7 @@ export default {
     };
   },
   created() {
-   
+
     // localStorage.removeItem('mlxz_fixed_order_info');
     // localStorage.removeItem('mlxz_fixed_order_key');
     // localStorage.removeItem('mlxz_fixed_local_order_time');
@@ -175,7 +155,7 @@ export default {
     this.query();
   },
   computed: {
-    lang() {
+    is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
   },
@@ -313,7 +293,7 @@ export default {
         });
         console.log('Purchase事件上报', this.order_id)
         if (utils.isProd()) {
-          
+
           try {
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '开始上报FB埋点，Purchase',
@@ -466,7 +446,7 @@ export default {
       getResultAPI({ order_id: this.$route.query.order_id }).then(res => {
         let can_store =
           (res.data && ['PAYED', 'FAIL'].includes(res.data.status)) ||
-          (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
+            (this.count === 6 && ['PAYED', 'FAIL'].includes(res.data.status))
             ? true
             : false;
         if (res.data.status === 'PAYED') {
@@ -536,16 +516,16 @@ export default {
           road_forecast === '吉'
             ? 1
             : road_forecast === '小吉'
-            ? 2
-            : road_forecast === '平'
-            ? 3
-            : 4;
+              ? 2
+              : road_forecast === '平'
+                ? 3
+                : 4;
 
         this.fortune.concept = concept.replace(/\n/g, '<br/>');
         this.fortune.review = review.replace(/\n/g, '<br/>');
-        this.fortune.status = status.replace(/\n/g, '<br/>');
-        this.fortune.road_desc = road_desc.replace(/\n/g, '<br/>');
-        this.fortune.trend = trend.replace(/\n/g, '<br/>');
+        this.fortune.status = status && status.replace(/\n/g, '<br/>');
+        this.fortune.road_desc = road_desc && road_desc.replace(/\n/g, '<br/>');
+        this.fortune.trend = trend && trend.replace(/\n/g, '<br/>');
         if (notice) {
           this.fortune.notice = notice.replace(/\n/g, '<br/>');
         }
@@ -655,17 +635,16 @@ export default {
       );
       let lunar = solar.getLunar();
       this.picker_date_nongli = +is_gongli
-        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${
-            this.picker_hour
-          }`
+        ? `${lunar.getYear()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()} ${this.picker_hour
+        }`
         : `${birth_year}年${utils.formateNongliMonth(
-            birth_month
-          )}${utils.formateNongliDate(birth_date)} ${this.picker_hour}`;
+          birth_month
+        )}${utils.formateNongliDate(birth_date)} ${this.picker_hour}`;
       this.picker_date_yangli = +is_gongli
         ? `${birth_year}-${birth_month}-${birth_date} ${this.picker_hour}`
         : `${Lunar.fromYmd(+birth_year, +birth_month, +birth_date)
-            .getSolar()
-            .toString()} ${this.picker_hour}`;
+          .getSolar()
+          .toString()} ${this.picker_hour}`;
     },
   },
 };
@@ -674,18 +653,28 @@ export default {
 <style scoped lang="less">
 .result {
   padding: 0.43rem 0.22rem 0.5rem;
-  background-image: url('../../../assets/img/emotion_v2/new/cn/result/jieguo_ig_bj.webp');
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: #ec436b;
+  background-color: #FB789A;
+  padding-top: 1.3rem;
+}
+
+.result-cn-bg {
+  background-image: url('../../../assets/img/emotion_fortune_2025/cn/mig_img_topbj_cn.webp');
+}
+
+.result-tw-bg {
+  background-image: url('../../../assets/img/emotion_fortune_2025/tw/mig_img_topbj_tw.webp');
 }
 
 .cn-bg {
-  background-image: url('../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.webp');
+  background: url(../../../assets/img/emotion_fortune_2025/cn/paypage_cardbj_xinxi_cn.webp) no-repeat;
+  background-size: 100% 100%;
 }
 
 .tw-bg {
-  background-image: url('../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.webp');
+  background: url(../../../assets/img/emotion_fortune_2025/tw/paypage_cardbj_xinxi_tw.webp) no-repeat;
+  background-size: 100% 100%;
 }
 
 .info-box {

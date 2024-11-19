@@ -2,10 +2,10 @@
   <div
     :class="{ detail: true, 'hidden-scroll': pay_modal || !!localStorage.getItem('mlxz_outer_animation') || show_discount_modal }">
     <FbShareNotice v-if="is_show_fb_notice && !localStorage.getItem('mlxz_outer_animation')" />
-    <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_emotion2024"
+    <AnimationPage v-if="!!localStorage.getItem('mlxz_outer_animation')" product_key="h5_emotion2025"
       :visible="showAnimation" @update-visible="showAnimation = false" />
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
-    <img class="header-title" :src="is_cn ? cn_info_title : tw_info_title" alt="" />
+    <img class="header-title" :src="is_cn ? mig_img_topbj_cn : mig_img_topbj_tw" alt="" />
 
 
     <div :class="{ 'pay-box': true, 'cn-bg': is_cn, 'tw-bg': !is_cn }">
@@ -17,55 +17,33 @@
         table_border="0.02rem solid #EC436B" border_color="#EC436B" :is_show_taohua="1" :change_color="true">
       </BaziTable>
     </div>
-    <PayItem product_key="h5_emotion2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
-    <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
-      <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
-      <MarriagesPayDetail v-if="is03_series" className="pay-method" ref="payDetail" :product_key="product_key"
+    <PayItem product_key="h5_emotion2025" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
+    <div :class="['method-box', 'method-height', is_cn? 'box-bg-cn': 'box-bg-tw']">
+      <!-- <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" /> -->
+      <MarriagesPayDetail  className="pay-method" ref="payDetail" :product_key="product_key" :btn_url="pay_btn"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10006"
         c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
         e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
-      <PayDetail v-else className="pay-method" ref="payDetail" :product_key="product_key"
-        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10006"
-        c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
-        e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
+     
     </div>
-    <GejuInfo v-if="is_show_combinationSpecial02" style="margin-bottom: 0.36rem" :product_key="product_key"
-      :user_desc="[mingge_desc]" :dataList="[gejujiedu]" />
-    <!-- <div class="card-box">
-      <canvas id="qian"></canvas>
-    </div> -->
+    <!-- <GejuInfo v-if="is_show_combinationSpecial02" style="margin-bottom: 0.36rem" :product_key="product_key"
+      :user_desc="[mingge_desc]" :dataList="[gejujiedu]" /> -->
+   
+    <img class="module" :src="is_cn ? cn_bg_0 : tw_bg_0" />
     <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" />
     <img class="module" :src="is_cn ? cn_bg_2 : tw_bg_2" />
     <img class="module" :src="is_cn ? cn_bg_3 : tw_bg_3" />
-    <NewFooter product_key="h5_emotion2024" />
+    <img class="module" :src="is_cn ? cn_bg_4 : tw_bg_4" />
+    <img class="module" :src="is_cn ? cn_bg_5 : tw_bg_5" />
+    <img class="module" :src="is_cn ? cn_bg_6 : tw_bg_6" />
+    <img class="module" :src="is_cn ? cn_bg_7 : tw_bg_7" />
+    <NewFooter product_key="h5_emotion2025" />
 
     <div class="footer"></div>
-    <!-- <img
-      v-if="showFixedBtn"
-      @click="showPayModal"
-      class="ce-btn huxi-btn fix-box"
-      :src="language === 'zh-CN' ? cn_pay_btn : tw_pay_btn"
-      alt=""
-    /> -->
-    <!-- <payModal
-      :product_key="product_key"
-      v-model="pay_modal"
-      :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg"
-      :query_user_string="query_user_string"
-      :title="username_title"
-      title_style="color:#fff"
-      @close="pay_modal = false"
-      e_view_id="10006"
-      c_view_id="-10005"
-      e_view_name="view_2024lovely_pay"
-      a_view_token="184kba"
-      c_click_id="-10006"
-      e_click_name="click_2024lovely_pay"
-      a_click_token="2rov44"
-    /> -->
-    <img @click="payOrder" :class="['emo-btn', is03_series? 'fix-btn1': 'fix-btn']" :src="btn_url" />
-    <HomeFooter product_key="h5_emotion2024" />
-    <FixedDiscountModal product_key="h5_emotion2024" @change_discount_modal="change_discount_modal" />
+   
+    <img @click="payOrder" :class="['emo-btn', 'fix-btn']" :src="btn_url" />
+    <HomeFooter product_key="h5_emotion2025" />
+    <FixedDiscountModal product_key="h5_emotion2025" @change_discount_modal="change_discount_modal" />
   </div>
 </template>
 
@@ -75,14 +53,9 @@ import utils from '../../../libs/utils';
 // @ts-ignore
 import UserInfo from './user_info.vue';
 import { Solar, Lunar, LunarMonth } from 'lunar-javascript';
-import cn_pay_btn from '../../../assets/img/emotion/home_btn.webp';
+import pay_btn from '../../../assets/img/emotion_fortune_2025/pay_btn.webp';
 
-import cn_home_btn1 from '../../../assets/img/emotion_v2/new/cn/btn.webp';
-import tw_home_btn1 from '../../../assets/img/emotion_v2/new/tw/btn.webp';
-import cn_home_btn from '../../../assets/img/emotion_v2/new/cn/pay.webp';
-import tw_home_btn from '../../../assets/img/emotion_v2/new/tw/pay.webp';
-import cn_home_xs_btn from '../../../assets/img/emotion_v2/new/cn/pay_xs.webp';
-import tw_home_xs_btn from '../../../assets/img/emotion_v2/new/tw/pay_xs.webp';
+
 
 import img_home_btu_zixun_cn from '../../../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp'
 import img_home_btu_zixun_tw from '../../../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp'
@@ -96,8 +69,8 @@ import tw_card_2 from '../../../assets/img/tw_mlxz/emotion/home_card2.webp';
 import payModal from '../../../components/PayModal.vue';
 import BaziTable from '../../../components/baziTable.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
-import cn_info_title from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_toutu.webp';
-import tw_info_title from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_toutu.webp';
+import mig_img_topbj_cn from '../../../assets/img/emotion_fortune_2025/cn/mig_img_topbj_cn.webp';
+import mig_img_topbj_tw from '../../../assets/img/emotion_fortune_2025/tw/mig_img_topbj_tw.webp';
 import cn_zhong3 from '../../../assets/img/emotion/new/zhong_3.webp';
 import tw_zhong3 from '../../../assets/img/emotion/new/tw/zhong_3.webp';
 import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
@@ -107,14 +80,24 @@ import HomeFooter from '../../../components/HomeFooter.vue';
 import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
 import PayDetail from '../../../components/PayDetail.vue';
 
-import cn_bg_1 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_1.webp';
-import cn_bg_2 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_2.webp';
-import cn_bg_3 from '../../../assets/img/emotion_v2/new/cn/detail/zhongjian_img_3.webp';
-import tw_bg_1 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_1_fanti.webp';
-import tw_bg_2 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_2_fanti.webp';
-import tw_bg_3 from '../../../assets/img/emotion_v2/new/tw/detail/zhongjian_img_3_fanti.webp';
-import img_zhifu_jian from '../../../assets/img/emotion_v2/new/cn/detail/img_zhifu_jian.webp';
-import img_zhifu_fan from '../../../assets/img/emotion_v2/new/tw/detail/img_zhifu_jian.webp';
+import cn_bg_0 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_huode_cn.webp';
+import cn_bg_1 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_01_cn.webp';
+import cn_bg_2 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_02_cn.webp';
+import cn_bg_3 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_03_cn.webp';
+import cn_bg_4 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_04_cn.webp';
+import cn_bg_5 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_05_cn.webp';
+import cn_bg_6 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_06_cn.webp';
+import cn_bg_7 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_07_cn.webp';
+
+import tw_bg_0 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_huode_tw.webp';
+import tw_bg_1 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_01_tw.webp';
+import tw_bg_2 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_02_tw.webp';
+import tw_bg_3 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_03_tw.webp';
+import tw_bg_4 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_04_tw.webp';
+import tw_bg_5 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_05_tw.webp';
+import tw_bg_6 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_06_tw.webp';
+import tw_bg_7 from '../../../assets/img/emotion_fortune_2025/tw/mid_img_details_07_tw.webp';
+
 import NewFooter from '../../../components/NewFooter.vue';
 import GejuInfo from '../../../components/GejuInfo.vue';
 import AnimationPage from '../../../components/AnimationPage.vue';
@@ -143,30 +126,33 @@ export default {
   data() {
     return {
       localStorage: window.localStorage,
+      pay_btn,
+      cn_bg_0,
       cn_bg_1,
       cn_bg_2,
       cn_bg_3,
+      cn_bg_4,
+      cn_bg_5,
+      cn_bg_6,
+      cn_bg_7,
+      tw_bg_0,
       tw_bg_1,
       tw_bg_2,
       tw_bg_3,
-      img_zhifu_jian,
-      img_zhifu_fan,
-      cn_home_btn,
-      tw_home_btn,
-      cn_home_btn1,
-      tw_home_btn1,
-      cn_home_xs_btn,
-      tw_home_xs_btn,
+      tw_bg_4,
+      tw_bg_5,
+      tw_bg_6,
+      tw_bg_7,
       img_home_btu_zixun_cn,
       img_home_btu_zixun_tw,
       cn_zhong3,
       cn_zhong4,
       tw_zhong3,
       tw_zhong4,
-      cn_info_title,
-      tw_info_title,
+      mig_img_topbj_cn,
+      mig_img_topbj_tw,
       product_id: 25,
-      product_key: 'h5_emotion2024',
+      product_key: 'h5_emotion2025',
       query_user_string: '',
       showBottomBtn: false,
       year: '',
@@ -186,7 +172,6 @@ export default {
       tw_card_1,
       cn_card_2,
       tw_card_2,
-      cn_pay_btn,
       tw_pay_btn:
         'https://psychicai-static.psychicai.pro/imgs/24042269434e28dd4083b3f1f63ad52b09bf.png',
       pay_modal: false, //支付弹窗
@@ -268,31 +253,9 @@ export default {
     },
     btn_url() {
       if (this.language === 'zh-CN') {
-        if (this.channel1) {
-          return cn_home_btn;
-        }
-        else if (this.channel2) {
-          // return cn_home_xs_btn;
-          return cn_home_btn1;
-        } else if (this.is03_series) {
-          return img_home_btu_zixun_cn;
-        }
-        else {
-          return cn_home_btn1;
-        }
+        return pay_btn;
       } else {
-        if (this.channel1) {
-          return tw_home_btn;
-        }
-        else if (this.channel2) {
-          // return tw_home_xs_btn;
-          return tw_home_btn1;
-        } else if (this.is03_series) {
-          return img_home_btu_zixun_tw;
-        }
-        else {
-          return tw_home_btn1;
-        }
+        return pay_btn;
       }
     },
   },
@@ -487,7 +450,7 @@ export default {
 <style scoped lang="less">
 .header-title {
   width: 7.5rem;
-  height: 3rem;
+  height: 3.12rem;
 }
 
 .method-box {
@@ -495,11 +458,11 @@ export default {
   // height: 11.06rem;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-  /* padding-top: 1.14rem; */
+  padding-top: 1.14rem;
   margin-bottom: 0.49rem;
-  background: #fffafa;
+  
+  background-size: 100% 100%; 
   border-radius: 0.16rem;
 
   .method-title-img {
@@ -507,6 +470,12 @@ export default {
     height: 0.93rem;
     margin-top: -0.13rem;
   }
+}
+.box-bg-cn {
+  background-image: url('../../../assets/img/emotion_fortune_2025/cn/paypage_cardbj_pay_cn.webp');
+}
+.box-bg-tw {
+  background-image: url('../../../assets/img/emotion_fortune_2025/tw/paypage_cardbj_pay_tw.webp');
 }
 
 .method-height {
@@ -517,7 +486,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ec436b;
+  background: #FB789A;
 
   .pay-box {
     margin-bottom: 0.3rem;
@@ -527,16 +496,16 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -0.9rem;
+    margin-top: -1.7rem;
   }
 
   .cn-bg {
-    background: url(../../../assets/img/emotion_v2/new/cn/detail/img_xinxi_jian.webp) no-repeat;
+    background: url(../../../assets/img/emotion_fortune_2025/cn/paypage_cardbj_xinxi_cn.webp) no-repeat;
     background-size: 100% 100%;
   }
 
   .tw-bg {
-    background: url(../../../assets/img/emotion_v2/new/tw/detail/img_xinxi_fan.webp) no-repeat;
+    background: url(../../../assets/img/emotion_fortune_2025/tw/paypage_cardbj_xinxi_tw.webp) no-repeat;
     background-size: 100% 100%;
   }
 
@@ -596,19 +565,13 @@ export default {
 }
 
 .fix-btn {
-  width: 6.28rem;
-  height: 1.34rem;
+  width: 5.64rem;
+  height: 0.92rem;
   position: fixed;
   bottom: 0.2rem;
   z-index: 99;
 }
-.fix-btn1 {
-  width: 5.7rem;
-  height: 0.98rem;
-  position: fixed;
-  bottom: 0.2rem;
-  z-index: 99;
-}
+
 
 
 
