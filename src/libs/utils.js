@@ -45,6 +45,8 @@ const getFBChannel = () => {
     return 'ocean03';
   } else if (url.indexOf('/google_ocean03/') > -1) {
     return 'google_ocean03';
+  } else if (url.indexOf('/google_enjoy03/') > -1) {
+    return 'google_enjoy03';
   } else if (url.indexOf('/ocean103/') > -1) {
     return 'ocean103';
   } else if (url.indexOf('/enjoy05/') > -1) {
@@ -147,15 +149,21 @@ const getFBChannel = () => {
     return 'mlzyy12';
   } else if (url.indexOf('/mlzyy15/') > -1) {
     return 'mlzyy15';
+  } else if (url.indexOf('/mlzyy16/') > -1) {
+    return 'mlzyy16';
+  }  else if (url.indexOf('/mlzyy17/') > -1) {
+    return 'mlzyy17';
   } else if (url.indexOf('/ads15/') > -1) {
     return 'ads15';
+  } else if (url.indexOf('/ads16/') > -1) {
+    return 'ads16';
   } else {
-    return 'ads15';
+    return 'google_enjoy03';
   }
 };
 
 const isShowCombine = () => {
-  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "mlzyy03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05"];
+  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "google_enjoy03", "mlzyy03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05"];
 };
 
 /**
@@ -218,6 +226,7 @@ const getFbId = () => {
     'ads12': '1253997898931627',
     'ads13': '1253997898931627',
     'ads15': '1253997898931627',
+    'ads16': '1253997898931627',
     'mlzyy03': '484821661378293',
     'mlzyy05': '484821661378293',
     'mlzyy07': '484821661378293',
@@ -230,6 +239,8 @@ const getFbId = () => {
     'mlzyy11': '484821661378293',
     'mlzyy12': '484821661378293',
     'mlzyy15': '484821661378293',
+    'mlzyy16': '484821661378293',
+    'mlzyy17': '1491830848258517',
   }
 }
 
@@ -238,7 +249,7 @@ const getFbId = () => {
  * @return {*}
  */
 const getTWChannel = () => {
-  if (getEndStr(getFBChannel(), 2) === '03' || getEndStr(getFBChannel(), 2) === '05' || getEndStr(getFBChannel(), 2) === '09' || getEndStr(getFBChannel(), 2) === '10' || getEndStr(getFBChannel(), 2) === '11' || getEndStr(getFBChannel(), 2) === '12' || getEndStr(getFBChannel(), 2) === '13' || getEndStr(getFBChannel(), 2) === '15' || getEndStr(getFBChannel(), 2) === '08' || getEndStr(getFBChannel(), 2) === '07') {
+  if (getEndStr(getFBChannel(), 2) === '03' || getEndStr(getFBChannel(), 2) === '05' || getEndStr(getFBChannel(), 2) === '09' || getEndStr(getFBChannel(), 2) === '10' || getEndStr(getFBChannel(), 2) === '11' || getEndStr(getFBChannel(), 2) === '12' || getEndStr(getFBChannel(), 2) === '13' || getEndStr(getFBChannel(), 2) === '15' || getEndStr(getFBChannel(), 2) === '16' || getEndStr(getFBChannel(), 2) === '08' || getEndStr(getFBChannel(), 2) === '07') {
     if (localStorage.getItem('current_country')) {
       return { area_code: JSON.parse(localStorage.getItem('current_country'))['area_code'], iso_code: JSON.parse(localStorage.getItem('current_country'))['iso_code'] }
     } else {
@@ -1281,9 +1292,26 @@ const firebaseConfig = {
   appId: '1:391425422960:web:7fd76da07aaab6390766b5',
   measurementId: 'G-43C3GF0Z45',
 };
+
+const firebaseConfig1 = {
+  apiKey: "AIzaSyDDsKSwxVZLUpENipBxgq7Q1s0Eulu-hmI",
+  authDomain: "psychich5-fortune.firebaseapp.com",
+  projectId: "psychich5-fortune",
+  storageBucket: "psychich5-fortune.firebasestorage.app",
+  messagingSenderId: "378667987987",
+  appId: "1:378667987987:web:e73a741f70e43b25b37be6",
+  measurementId: "G-NXSL3SYRF0"
+};
+
 let analytics = null
 setTimeout(() => {
-  firebase.initializeApp(firebaseConfig);
+  if (window.location.hostname.indexOf('overseas.psychicai.pro') > -1) {
+    firebase.initializeApp(firebaseConfig);
+  } else if (window.location.hostname.indexOf('ssybjmlxz.com') > -1) {
+    firebase.initializeApp(firebaseConfig1);
+  } else {
+    firebase.initializeApp(firebaseConfig1); 
+  }
   analytics = firebase.analytics();
 }, 0);
 
@@ -1341,7 +1369,7 @@ const getShortStr = (str, len = 4) => {
 
 // 获取语言
 const getLanguage = () => {
-  // return 'zh-TW';
+  return 'zh-TW';
   let now_lang =
     navigator.language.indexOf('zh-') > -1 ? navigator.language : 'zh-CN';
   return getRequestParams('language') || now_lang;

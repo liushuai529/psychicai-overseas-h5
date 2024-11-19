@@ -262,10 +262,10 @@
       }
       fbq('track', 'PageView');
     </script> -->
-  <noscript>
+  <!-- <noscript>
     <img height="1" width="1" style="display: none"
       src="https://www.facebook.com/tr?id=1217293436105371&ev=PageView&noscript=1" />
-  </noscript>
+  </noscript> -->
   <!-- End Facebook Pixel Code -->
   <!-- 引入Firebase JavaScript SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js" crossorigin="anonymous"></script>
@@ -398,13 +398,55 @@
   </style>
   <meta name="google-site-verification" content="dJZxXU-ILrEDK8QplPlAuUOkbkjakPxnpoeEvrD_Pm4" />
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-43C3GF0Z45"></script>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-43C3GF0Z45"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-43C3GF0Z45');
+  </script> -->
+
+  <script>
+    // 根据当前域名设置 Google Analytics ID
+    var gaMeasurementId = '';
+
+    if (window.location.hostname.indexOf('overseas.psychicai.pro') > -1) {
+
+      gaMeasurementId = 'G-43C3GF0Z45';  // 域名 A
+    } else if (window.location.hostname.indexOf('ssybjmlxz.com') > -1) {
+      gaMeasurementId = 'G-NXSL3SYRF0';  // 域名 B
+    }
+
+    if (gaMeasurementId) {
+      // 载入 gtag.js
+      var script = document.createElement('script');
+      script.async = true;
+      if (window.location.hostname.indexOf('overseas.psychicai.pro') > -1) {
+        script.src = `https://www.googletagmanager.com/gtag/js?id=G-43C3GF0Z45`;
+      } else if (window.location.hostname.indexOf('ssybjmlxz.com') > -1) {
+        script.src = `https://www.googletagmanager.com/gtag/js?id=G-NXSL3SYRF0`;
+      } else {
+        script.src = `https://www.googletagmanager.com/gtag/js?id=G-NXSL3SYRF0`; 
+      }
+      
+      document.head.appendChild(script);
+
+      // 设置 gtag
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      // 配置 Google Analytics
+      console.log('当前googleID', gaMeasurementId)
+      if (window.location.hostname.indexOf('overseas.psychicai.pro') > -1) {
+        gtag('config', 'G-43C3GF0Z45');
+      } else if (window.location.hostname.indexOf('ssybjmlxz.com') > -1) {
+        gtag('config', 'G-NXSL3SYRF0');
+      } else {
+        gtag('config', 'G-NXSL3SYRF0');
+      }
+    }
   </script>
 </head>
 

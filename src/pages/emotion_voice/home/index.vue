@@ -67,7 +67,7 @@
             </div>
             <div class="sex-container">
               <div :class="['unselect', sex == 1 ? 'select' : '']" @click="changeSex(1)">男</div>
-              <div :class="['unselect', sex == 0 ? 'select' : '']" @click="changeSex(0)">女</div>
+              <div :class="['unselect', sex == 0 ? 'select woman' : '']" @click="changeSex(0)">女</div>
               <!-- <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
                 <img :src="sex == 1 ? boy : girl" @click="changeSex()" /> -->
             </div>
@@ -512,11 +512,77 @@ export default {
   methods: {
     messageHandle() {
       this.message_index = this.message_index + 1;
-      if (this.message_index < 11) {
-        this.message_list.push(this.is_cn ? { key: messageArr_cn[this.message_index - 1]['key'], value: messageArr_cn[this.message_index - 1]['value'] } : { key: messageArr_tw[this.message_index - 1]['key'], value: messageArr_tw[this.message_index - 1]['value'] })
-        this.$nextTick(() => {
-          this.scrollToBottom();
-        });
+      // if (this.message_index < 11) {
+      //   this.message_list.push(this.is_cn ? { key: messageArr_cn[this.message_index - 1]['key'], value: messageArr_cn[this.message_index - 1]['value'] } : { key: messageArr_tw[this.message_index - 1]['key'], value: messageArr_tw[this.message_index - 1]['value'] })
+      //   this.$nextTick(() => {
+      //     this.scrollToBottom();
+      //   });
+      // }
+      switch (this.message_index) {
+        case 1:
+          this.message_list.push(this.is_cn ? { key: messageArr_cn[0]['key'], value: messageArr_cn[0]['value'] } : { key: messageArr_tw[0]['key'], value: messageArr_tw[0]['value'] })
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
+          break;
+
+        case 3:
+          this.message_list.push(this.is_cn ? { key: messageArr_cn[1]['key'], value: messageArr_cn[1]['value'] } : { key: messageArr_tw[1]['key'], value: messageArr_tw[1]['value'] })
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
+          break;
+        case 4:
+          this.message_list.push(this.is_cn ? { key: messageArr_cn[2]['key'], value: messageArr_cn[2]['value'] } : { key: messageArr_tw[2]['key'], value: messageArr_tw[2]['value'] })
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
+          break;
+        case 7:
+          this.message_list.push(this.is_cn ? { key: messageArr_cn[3]['key'], value: messageArr_cn[3]['value'] } : { key: messageArr_tw[3]['key'], value: messageArr_tw[3]['value'] })
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
+          break;
+        case 11:
+          this.message_list.push(this.is_cn ? { key: messageArr_cn[4]['key'], value: messageArr_cn[4]['value'] } : { key: messageArr_tw[4]['key'], value: messageArr_tw[4]['value'] })
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
+          break;
+        case 13:
+          this.message_list.push(this.is_cn ? { key: messageArr_cn[5]['key'], value: messageArr_cn[5]['value'] } : { key: messageArr_tw[5]['key'], value: messageArr_tw[5]['value'] })
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
+          break;
+        case 17:
+          this.message_list.push(this.is_cn ? { key: messageArr_cn[6]['key'], value: messageArr_cn[6]['value'] } : { key: messageArr_tw[6]['key'], value: messageArr_tw[6]['value'] })
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
+          break;
+        case 18:
+          this.message_list.push(this.is_cn ? { key: messageArr_cn[7]['key'], value: messageArr_cn[7]['value'] } : { key: messageArr_tw[7]['key'], value: messageArr_tw[7]['value'] })
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
+          break;
+        case 20:
+          this.message_list.push(this.is_cn ? { key: messageArr_cn[8]['key'], value: messageArr_cn[8]['value'] } : { key: messageArr_tw[8]['key'], value: messageArr_tw[8]['value'] })
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
+          break;
+        case 21:
+          this.message_list.push(this.is_cn ? { key: messageArr_cn[9]['key'], value: messageArr_cn[9]['value'] } : { key: messageArr_tw[9]['key'], value: messageArr_tw[9]['value'] })
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
+          break;
+
+        default:
+          break;
       }
       console.log('this.message_index', this.message_index)
       if (this.message_index > 120) {
@@ -1228,7 +1294,8 @@ export default {
         display: flex;
         flex-direction: column;
         overflow-y: scroll;
-        max-height: calc(100vh - 10rem);
+        margin-top: 0.2rem;
+        max-height: calc(100vh - 10.6rem);
 
         .item {
           width: 5.24rem;
@@ -1276,6 +1343,7 @@ export default {
           font-size: 0.24rem;
           color: #FFFFFF;
           line-height: 0.24rem;
+          margin-bottom: 0.26rem;
 
           img {
             width: 0.22rem;
@@ -1290,6 +1358,7 @@ export default {
     .bottom {
       width: 7.02rem;
       height: 0.76rem;
+      margin-bottom: 0.2rem;
     }
   }
 
@@ -1408,6 +1477,9 @@ export default {
           font-style: normal;
           text-transform: none;
         }
+        .woman {
+          background: #F8446A;
+        }
 
         img {
           width: 1.7rem;
@@ -1436,7 +1508,7 @@ export default {
   .btn {
     display: flex;
     margin: auto;
-    margin-top: 0.4rem;
+    // margin-top: 0.4rem;
     width: 5.9rem;
     height: 0.92rem;
     display: flex;
@@ -1448,6 +1520,7 @@ export default {
     font-size: 0.32rem;
     color: #FFFFFF;
     line-height: 0.32rem;
+    margin-top: 0.2rem
   }
 
   .btn-check {

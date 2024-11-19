@@ -28,6 +28,7 @@ import tw_emotion_fate_mp from '../assets/img/components/animation_page/emotion_
 
 const log_info = {
   h5_emotion2024: { module: 10006, 'content_id': -10034, 'event_name': 'page_view_giflove', type: 'page_view' }, // 2024年爱情运势
+  h5_emotion2025: { module: 10006, 'content_id': -10034, 'event_name': 'page_view_giflove', type: 'page_view' }, // 2025年爱情运势
   h5_marriage: { module: 10007, 'content_id': -10036, 'event_name': 'page_view_gifmarriage', type: 'page_view' }, //合婚
   consult_time: { module: 10011, 'content_id': -10003, 'event_name': 'page_view_giflove', type: 'page_view' }, //正缘报告
 }
@@ -95,7 +96,7 @@ export default {
       return `${6.3 * (this.content / 10)}rem`
     },
     getSvgUrl() {
-      if (this.product_key === 'h5_emotion2024') {
+      if (this.product_key === 'h5_emotion2024' || this.product_key === 'h5_emotion2025') {
         return this.emotion_svga
       } else if (this.product_key === 'consult_time') {
         return this.emotion_fate_svga
@@ -104,7 +105,7 @@ export default {
       }
     },
     getBgImg() {
-      if (this.product_key === 'h5_emotion2024') {
+      if (this.product_key === 'h5_emotion2024' || this.product_key === 'h5_emotion2025') {
         return 'emotion-bg';
       } else if (this.product_key === 'consult_time') {
         return utils.getLanguage() === 'zh-CN' ? 'consult-bg-cn' : 'consult-bg-tw'
@@ -115,7 +116,7 @@ export default {
     },
 
     getMpImg() {
-      if (this.product_key === 'h5_emotion2024') {
+      if (this.product_key === 'h5_emotion2024' || this.product_key === 'h5_emotion2025') {
         return utils.getLanguage() === 'zh-CN' ? cn_emotion_mp : tw_emotion_mp
       } else if (this.product_key === 'consult_time') {
         return utils.getLanguage() === 'zh-CN' ? cn_emotion_fate_mp : tw_emotion_fate_mp
@@ -124,7 +125,7 @@ export default {
       }
     },
     getBgTip() {
-      if (this.product_key === 'h5_emotion2024') {
+      if (this.product_key === 'h5_emotion2024' || this.product_key === 'h5_emotion2025') {
         return 'emotion-tip-bg';
       } else if (this.product_key === 'consult_time') {
         return 'emotion-fate-tip-bg';

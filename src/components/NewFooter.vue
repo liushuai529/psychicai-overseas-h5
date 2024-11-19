@@ -1,10 +1,3 @@
-<!--
- * @Author: wujiang@weli.cn
- * @Date: 2024-05-30 18:31:51
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-30 18:34:29
- * @Description: 底部遮罩层
--->
 <template>
   <div class="new-footer">
     <img :src="imgUrl" />
@@ -14,6 +7,7 @@
 <script>
 
 import h5_emotion2024 from '../assets/img/bottom_bg/emotion.webp';
+import h5_emotion2025 from '../assets/img/bottom_bg/emotion_2025.webp';
 import h5_marriage from '../assets/img/bottom_bg/h5_marriage.webp';
 import h5_wealth2024 from '../assets/img/bottom_bg/h5_wealth2024.webp';
 import h5_career2024 from '../assets/img/bottom_bg/h5_career2024.webp';
@@ -39,6 +33,7 @@ export default {
   data() {
     return {
       h5_emotion2024,
+      h5_emotion2025,
       h5_marriage,
       h5_wealth2024,
       h5_career2024,
@@ -51,12 +46,14 @@ export default {
   },
   computed: {
     imgUrl() {
-      if(this.type) {
+      if (this.type) {
         return consult_time1;
       }
       switch (this.product_key) {
         case 'h5_emotion2024':
           return this.h5_emotion2024
+        case 'h5_emotion2025':
+          return this.h5_emotion2025
         case 'h5_marriage':
           return this.h5_marriage
         case 'h5_wealth2024':
@@ -68,7 +65,7 @@ export default {
         case 'h5_annual2024':
           return this.h5_annual2024
         case 'h5_annual2025':
-          return this.h5_annual2025  
+          return this.h5_annual2025
         case 'consult_time':
           return this.consult_time
         default:
@@ -85,7 +82,7 @@ export default {
   width: 100%;
   height: 2rem;
   z-index: 98;
-  bottom: 0;
+  bottom: -0.03rem;
 
   img {
     width: 7.5rem;

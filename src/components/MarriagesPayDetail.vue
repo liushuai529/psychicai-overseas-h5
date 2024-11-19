@@ -64,7 +64,7 @@
       <div class="item-container">
         <div class="method-text">支付方式</div>
         <div class="city">
-          <div>{{ is_cn ? '请选择币种:' : '請選擇幣種:' }}</div>
+          <div style="margin-right: 0.1rem;">{{ is_cn ? '请选择币种:' : '請選擇幣種:' }}</div>
           <img :src="getImg" @click="changeCity" />
         </div>
       </div>
@@ -93,6 +93,7 @@
         <!-- <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" /> -->
         <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn"
           :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x" @click="payMoney" />
+        <img v-else-if="btn_url" class="btn emo-btn" :src="btn_url" />
         <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"
           @click="payMoney" />
 
@@ -251,6 +252,7 @@ export default {
       city: 0,
       current_country: {},
       test_fb_upload: '',//拼接参数
+      test_ga_upload: '',//拼接参数
     };
   },
   props: {
@@ -306,6 +308,10 @@ export default {
     consult_time: {
       type: Object,
       default: null,
+    },
+    btn_url: {
+      type: String,
+      default: '', 
     }
 
   },
@@ -399,6 +405,7 @@ export default {
   },
   mounted() {
     this.test_fb_upload = utils.getQueryStr('test_fb_upload')
+    this.test_ga_upload = utils.getQueryStr('test_ga_upload')
   },
 
   methods: {
@@ -542,7 +549,7 @@ export default {
       this.pay_lock_time = setTimeout(() => {
         this.payCanClick = false
       }, 2000);
-      if (utils.isProd()) {
+      if (utils.isProd() || this.test_ga_upload) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
 
         Indicator.close();
@@ -618,7 +625,8 @@ export default {
       if (localStorage.getItem('google_client_id')) {
         pay_max_params = Object.assign({}, pay_max_params, {
           ga_param: {
-            client_id: localStorage.getItem('google_client_id')
+            client_id: localStorage.getItem('google_client_id'),
+            test_ga_upload: this.test_fb_upload,
           },
         });
       }

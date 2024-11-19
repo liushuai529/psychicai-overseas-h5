@@ -8,36 +8,27 @@
 <template>
   <div :class="['more-content', className]">
     <img v-if="set_title" :style="title_icon_style" :src="title_icon" alt="" />
-    <img :src="is_black_logo ? black_logo : white_logo" class="logo" alt="" />
+    <img :src="is_cn ? cn_logo : tw_logo" class="logo" alt="" />
     <div :style="`color:${tips1_color}`" class="tips1">{{ tips1 }}</div>
-    <div :class="['code-common', codeClass]">
+    <div :class="['code-common', codeClass]" v-if="transfer_code">
       <span :style="`color:${code_color}`">
         {{ tips2 }}：{{ transfer_code || '-' }}
       </span>
-      <span
-        @click="handleCopyCode(1)"
-        :style="`color:${tips3_color}`"
-        class="tips3"
-        >{{ tips3 }}</span
-      >
+      <span @click="handleCopyCode(1)" :style="`color:${tips3_color}`" class="tips3">{{ tips3 }}</span>
     </div>
 
-    <div :style="code_text_style" class="tips4">
+    <div :style="code_text_style" class="tips4" v-if="transfer_code">
       {{ tips5 }}
     </div>
-    <img
-      @click="handleCopyCode(0)"
-      :style="tips5_style"
-      :src="code_btn"
-      alt=""
-    />
+    <img @click="handleCopyCode(0)" :style="tips5_style" :src="code_btn" alt="" />
   </div>
 </template>
 
 <script>
 import { Toast } from 'mint-ui';
 import utils from '../libs/utils';
-import black_logo from '../assets/img/mlxz/career_2024/result/home_img_logo.webp';
+import cn_logo from '../assets/img/emotion_fortune_2025/cn/result_img_logo_cn.webp';
+import tw_logo from '../assets/img/emotion_fortune_2025/tw/result_img_logo_tw.webp';
 const lang = utils.getLanguage();
 const tips_arr1 = {
   'zh-CN': '神准测算报告，请下载「命理寻真」',
@@ -88,7 +79,7 @@ export default {
     },
     showModal: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
     code_color: {
       type: String,
@@ -143,7 +134,8 @@ export default {
       tips5: tips_arr5[lang],
       white_logo:
         'https://psychicai-static.psychicai.pro/imgs/240401762cbffce2420f95f7b526da19163c.png',
-      black_logo,
+      cn_logo,
+      tw_logo,
     };
   },
   computed: {
@@ -158,8 +150,10 @@ export default {
      * @return {*}
      */
     async handleCopyCode(val) {
-      utils.copyText('mlxz-' + this.transfer_code);
-      Toast(tips_arr4[lang]);
+      if (this.transfer_code) {
+        utils.copyText('mlxz-' + this.transfer_code);
+        Toast(tips_arr4[lang]);
+      }
 
       if (!val) {
         utils.firebaseLogEvent(this.e_id, this.c_id, this.e_name, 'click', {
@@ -182,10 +176,12 @@ export default {
   flex-direction: column;
   align-items: center;
   font-family: system-ui;
+
   .logo {
-    width: 3.05rem;
-    height: 0.82rem;
+    width: 3.06rem;
+    height: 0.88rem;
   }
+
   .tips1 {
     height: 0.28rem;
     font-weight: 400;
@@ -194,6 +190,7 @@ export default {
     margin: 0.4rem auto;
   }
 }
+
 .code-common {
   display: flex;
   justify-content: space-between;
@@ -205,24 +202,29 @@ export default {
   font-size: 0.32rem;
   width: 6.18rem;
   min-height: 1.04rem;
+
   span {
     line-height: 0.32rem;
     height: 0.32rem;
   }
 }
+
 .tips3 {
   text-decoration: underline;
 }
+
 .tips4 {
   height: 0.26rem;
   font-size: 0.26rem;
   line-height: 0.26rem;
   text-align: center;
 }
+
 .tips5 {
   width: 4.98rem;
   height: 1rem;
 }
+
 .career-code {
   background: url('../assets/img/mlxz/moreResult/career_24.webp') no-repeat;
   background-size: 100% 100%;
@@ -233,20 +235,44 @@ export default {
   width: 7.11rem;
   height: 6.94rem;
   padding-top: 1.53rem;
-  background: url('../assets/img/emotion_v2/new/cn/result/img_xiazai_jian.webp')
-    no-repeat;
+  background: url('../assets/img/emotion_v2/new/cn/result/img_xiazai_jian.webp') no-repeat;
   background-size: 100% 100%;
 }
-.emotion-code {
-  background: url('../assets/img/emotion_v2/new/cn/result/img_shibiema_card.webp')
-    no-repeat;
+
+.emotion2025-box {
+  width: 7.11rem;
+  height: 6.94rem;
+  padding-top: 1.53rem;
+  background: url('../assets/img/emotion_fortune_2025/result_img_cardbj_download01.webp') no-repeat;
   background-size: 100% 100%;
+}
+
+.emotion2025-download-box {
+  width: 7.11rem;
+  height: 4.58rem;
+  padding-top: 1.3rem;
+  background: url('../assets/img/emotion_fortune_2025/result_img_cardbj_download02.webp') no-repeat;
+  background-size: 100% 100%;
+}
+
+.emotion-code {
+  background: url('../assets/img/emotion_v2/new/cn/result/img_shibiema_card.webp') no-repeat;
+  background-size: 100% 100%;
+}
+
+.emotion2025-code {
+  width: 6.4rem;
+  height: 1rem;
+  background: #FFE8F0;
+  border-radius: 0.2rem;
+  border: 0.01rem solid #D72663;
 }
 
 .guiguzi-code {
   background: url('../assets/img/mlxz/moreResult/ggz_bg.webp') no-repeat;
   background-size: 100% 100%;
 }
+
 .guiguzi-box {
   width: 7.1rem;
   height: 7.11rem;
@@ -262,6 +288,7 @@ export default {
   border-radius: 0.19rem;
   padding-top: 0.4rem;
 }
+
 .wealth-code {
   background: url('../assets/img/mlxz/moreResult/wealth_bg.webp') no-repeat;
   background-size: 100% 100%;
@@ -274,6 +301,7 @@ export default {
   border-radius: 0.16rem;
   border: 0.06rem solid #d19a47;
 }
+
 .marry-code {
   background: url('../assets/img/mlxz/moreResult/bzhh_bg.webp') no-repeat;
   background-size: 100% 100%;
@@ -288,6 +316,7 @@ export default {
   background-color: #37438a;
   border-radius: 0.2rem;
 }
+
 .weight-code {
   background: url('../assets/img/mlxz/moreResult/weight_bg.webp') no-repeat;
   background-size: 100% 100%;
@@ -296,17 +325,17 @@ export default {
 .year-box {
   width: 7.1rem;
   min-height: 6.74rem;
-  background: url('https://psychicai-static.psychicai.pro/imgs/24043fd43250af19446888c2b6c6723ebf4f.png')
-    no-repeat;
+  background: url('https://psychicai-static.psychicai.pro/imgs/24043fd43250af19446888c2b6c6723ebf4f.png') no-repeat;
   background-size: 100% 100%;
 }
+
 .year-box-2025 {
   width: 7.1rem;
   min-height: 6.74rem;
-  background: url('../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp')
-    no-repeat;
+  background: url('../assets/img/year_of_lucky_2025/img_cardbj_xinxi.webp') no-repeat;
   background-size: 100% 100%;
 }
+
 .year-code {
   background: url('../assets/img/mlxz/moreResult/year_bg.webp') no-repeat;
   background-size: 100% 100%;
