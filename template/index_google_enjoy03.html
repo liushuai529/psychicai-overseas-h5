@@ -434,7 +434,12 @@
       gtag('js', new Date());
 
       // 配置 Google Analytics
-      gtag('config', gaMeasurementId);
+      if (window.location.hostname.indexOf('overseas.psychicai.pro') > -1) {
+        gtag('config', 'G-43C3GF0Z45');
+      } else if (window.location.hostname.indexOf('ssybjmlxz.com') > -1) {
+        gtag('config', 'G-8P1TDGH909');
+      }
+      
     }
   </script>
 </head>
