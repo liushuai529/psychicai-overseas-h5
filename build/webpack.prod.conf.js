@@ -216,7 +216,7 @@ for (var pathname in entries) {
 }
 
 // ads103代理
-for (var pathname in entries) {
+for (let pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads103/' + filename + '.html'),
@@ -257,11 +257,10 @@ for (var pathname in entries) {
     conf.chunks = ['manifest', 'vendor', pathname];
     conf.hash = false;
   }
-
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 // enjoy103代理
-for (var pathname in entries) {
+for (let pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy103/' + filename + '.html'),
@@ -284,7 +283,7 @@ for (var pathname in entries) {
 }
 
 // enjoy203代理
-for (var pathname in entries) {
+for (let pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy203/' + filename + '.html'),
@@ -307,7 +306,7 @@ for (var pathname in entries) {
 }
 
 // enjoy303代理
-for (var pathname in entries) {
+for (let pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoy303/' + filename + '.html'),
@@ -330,7 +329,7 @@ for (var pathname in entries) {
 }
 
 // enjoyA03代理
-for (var pathname in entries) {
+for (let pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
   var conf = {
     filename: path.resolve(__dirname, '../dist/enjoyA03/' + filename + '.html'),
@@ -399,7 +398,7 @@ for (var pathname in entries) {
 }
 
 // ocean103代理
-for (var pathname in entries) {
+for (let pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean103/' + filename + '.html'),
@@ -464,6 +463,30 @@ for (let pathname_google_ocean03 of ['emotion_fortune/emotion_fortune', 'user_ag
     conf_google_ocean03.hash = false;
   }
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf_google_ocean03));
+}
+
+// blue03代理
+for (let pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[pathname.split('/').length - 1];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/blue03/' + filename + '.html'),
+    template: 'template/index_blue03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+   
+  }
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
 
@@ -660,6 +683,28 @@ for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean105/' + filename + '.html'),
     template: 'template/index_ocean105.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// blue05代理
+for (var pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/blue05/' + filename + '.html'),
+    template: 'template/index_blue05.html',
     inject: true,
     minify: {
       removeComments: true,
@@ -970,6 +1015,28 @@ for (var pathname of ['emotion_fate/emotion_fate', 'user_agreement/user_agreemen
   var conf = {
     filename: path.resolve(__dirname, '../dist/ocean08/' + filename + '.html'),
     template: 'template/index_ocean08.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// blue08代理
+for (var pathname of ['emotion_fate/emotion_fate', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/blue08/' + filename + '.html'),
+    template: 'template/index_blue08.html',
     inject: true,
     minify: {
       removeComments: true,
@@ -1313,6 +1380,28 @@ for (var pathname of ['emotion_fate13/emotion_fate13', 'user_agreement/user_agre
   var conf = {
     filename: path.resolve(__dirname, '../dist/ads13/' + filename + '.html'),
     template: 'template/index_ads13.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
+
+// blue13代理
+for (var pathname of ['emotion_fate13/emotion_fate13', 'user_agreement/user_agreement', 'privacy/privacy']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/blue13/' + filename + '.html'),
+    template: 'template/index_blue13.html',
     inject: true,
     minify: {
       removeComments: true,

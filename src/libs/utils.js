@@ -125,6 +125,10 @@ const getFBChannel = () => {
     return 'ads12';
   } else if (url.indexOf('/ads13/') > -1) {
     return 'ads13';
+  } else if (url.indexOf('/ads15/') > -1) {
+    return 'ads15';
+  } else if (url.indexOf('/ads16/') > -1) {
+    return 'ads16';
   } else if (url.indexOf('/mlzyy03/') > -1) {
     return 'mlzyy03';
   } else if (url.indexOf('/mlzyy05/') > -1) {
@@ -151,19 +155,23 @@ const getFBChannel = () => {
     return 'mlzyy15';
   } else if (url.indexOf('/mlzyy16/') > -1) {
     return 'mlzyy16';
-  }  else if (url.indexOf('/mlzyy17/') > -1) {
+  } else if (url.indexOf('/mlzyy17/') > -1) {
     return 'mlzyy17';
-  } else if (url.indexOf('/ads15/') > -1) {
-    return 'ads15';
-  } else if (url.indexOf('/ads16/') > -1) {
-    return 'ads16';
+  } else if (url.indexOf('/mlzyy17/') > -1) {
+    return 'blue03';
+  } else if (url.indexOf('/mlzyy17/') > -1) {
+    return 'blue05';
+  } else if (url.indexOf('/mlzyy17/') > -1) {
+    return 'blue08';
+  } else if (url.indexOf('/mlzyy17/') > -1) {
+    return 'blue13';
   } else {
     return 'google_enjoy03';
   }
 };
 
 const isShowCombine = () => {
-  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "google_enjoy03", "mlzyy03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05"];
+  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "google_enjoy03", "mlzyy03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05", "blue03", "blue05"];
 };
 
 /**
@@ -241,6 +249,10 @@ const getFbId = () => {
     'mlzyy15': '484821661378293',
     'mlzyy16': '484821661378293',
     'mlzyy17': '1491830848258517',
+    'blue03': '1547507465872255',
+    'blue05': '1547507465872255',
+    'blue08': '1547507465872255',
+    'blue13': '1547507465872255',
   }
 }
 
@@ -1369,7 +1381,7 @@ const getShortStr = (str, len = 4) => {
 
 // 获取语言
 const getLanguage = () => {
-  return 'zh-TW';
+  // return 'zh-TW';
   let now_lang =
     navigator.language.indexOf('zh-') > -1 ? navigator.language : 'zh-CN';
   return getRequestParams('language') || now_lang;
