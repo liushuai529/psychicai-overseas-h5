@@ -15,7 +15,7 @@
     <contentDetail v-if="fortune.review" :result="fortune.review" :item_index="3" />
     <contentDetail v-if="fortune.concept" :result="fortune.concept" :item_index="4" />
     
-    <contentDetail v-if="fortune.zodiac" :result="fortune" :item_index="5" />
+    <contentDetail v-if="fortune.zodiac" :result="fortune" :item_index="5" :zodiac_img="zodiacObj[fortune.zodiac]"/>
 
     <contentDetail v-if="fortune.fortunegan" :result="fortune.fortunegan" :item_index="6" />
     <contentDetail v-if="fortune.fortunezhi" :result="fortune.fortunezhi" :item_index="7" />
@@ -43,10 +43,51 @@ import {
 } from '../../../api/api.js';
 import BaziTable from '../../../components/baziTable.vue';
 import ResultPopup from '../../../components/ResultPopup.vue';
+import result_img_shengxiao_gou from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_gou.webp';
+import result_img_shengxiao_hou from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_hou.webp';
+import result_img_shengxiao_hu from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_hu.webp';
+import result_img_shengxiao_ji from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_ji.webp';
+import result_img_shengxiao_long from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_long.webp';
+import result_img_shengxiao_ma from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_ma.webp';
+import result_img_shengxiao_niu from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_niu.webp';
+import result_img_shengxiao_she from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_she.webp';
+import result_img_shengxiao_shu from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_shu.webp';
+import result_img_shengxiao_tu from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_tu.webp';
+import result_img_shengxiao_yang from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_yang.webp';
+import result_img_shengxiao_zhu from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_zhu.webp';
+const zodiacObj = {
+  '狗': result_img_shengxiao_gou,
+  '猴': result_img_shengxiao_hou,
+  '虎': result_img_shengxiao_hu,
+  '鸡':result_img_shengxiao_ji,
+  '雞': result_img_shengxiao_ji,
+  '龙': result_img_shengxiao_long,
+  '龍': result_img_shengxiao_long,
+  '牛': result_img_shengxiao_niu,
+  '蛇': result_img_shengxiao_she,
+  '鼠': result_img_shengxiao_shu,
+  '兔': result_img_shengxiao_tu,
+  '羊': result_img_shengxiao_yang,
+  '猪': result_img_shengxiao_zhu,
+  '豬': result_img_shengxiao_zhu,
+};
 export default {
   components: { contentDetail, UserInfo, BaziTable, ResultPopup },
   data() {
     return {
+      zodiacObj,
+      result_img_shengxiao_gou,
+      result_img_shengxiao_hou,
+      result_img_shengxiao_hu,
+      result_img_shengxiao_ji,
+      result_img_shengxiao_long,
+      result_img_shengxiao_ma,
+      result_img_shengxiao_niu,
+      result_img_shengxiao_she,
+      result_img_shengxiao_shu,
+      result_img_shengxiao_tu,
+      result_img_shengxiao_yang,
+      result_img_shengxiao_zhu,
       loading: false,
       hasData: false,
 

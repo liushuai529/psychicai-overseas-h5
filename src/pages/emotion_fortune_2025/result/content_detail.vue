@@ -22,6 +22,7 @@
 
     <div v-show="item_index === 5" :class="`item-${item_index} ${language}-item${item_index}-bg`">
       <img class="title-img" :src="is_cn? result_img_tittle_05_cn: result_img_tittle_05_tw"/>
+      <img :src="zodiac_img"/>
       <div class="zodiac">{{ result.zodiac }}</div>
       <div>{{ result.fortunezodiac }}</div>
     </div>
@@ -36,56 +37,7 @@
       <span>{{ result }}</span>
     </div>
 
-
-
-
-    <!-- <div v-show="item_index === 3" class="emo-common-box">
-      <div class="emo-back-box">
-        <img :src="language === 'zh-CN' ? cn_emo_back : tw_emo_back" alt="" />
-      </div>
-      <div class="header-box"></div>
-      <div class="content-box">
-        <div :class="`item-${item_index}`">
-          <img class="title-3" :src="language === 'zh-CN' ? cn_title1 : tw_title1" alt="" />
-          <div v-html="result.concept" class="text-box"></div>
-        </div>
-        <div class="item-4">
-          <img class="title-3" :src="language === 'zh-CN' ? cn_title2 : tw_title2" alt="" />
-          <div v-html="result.review" class="text-box"></div>
-        </div>
-      </div>
-      <div class="footer-box"></div>
-    </div>
-    <div v-show="item_index === 5" class="emo-common-box">
-      <div class="emo-back-box">
-        <img :src="language === 'zh-CN' ? cn_ganqingzhanwang : tw_ganqingzhanwang" alt="" />
-      </div>
-      <div class="header-box"></div>
-      <div class="content-box">
-        <div class="item-4">
-          <img class="title-3" :src="language === 'zh-CN' ? cn_title3 : tw_title3" alt="" />
-          <div class="keyword-box">
-            <div class="bg-box">
-              {{ result.keyword }}
-            </div>
-          </div>
-        </div>
-        <div class="item-4">
-          <img class="title-3" :src="language === 'zh-CN' ? cn_title4 : tw_title4" alt="" />
-          <div v-html="result.status" class="text-box"></div>
-          <div v-html="result.road_desc" class="text-box"></div>
-        </div>
-        <div class="item-4">
-          <img class="title-3" :src="language === 'zh-CN' ? cn_title5 : tw_title5" alt="" />
-          <div v-html="result.trend" class="text-box"></div>
-        </div>
-        <div v-if="result.notice" class="item-4">
-          <img class="title-3" :src="language === 'zh-CN' ? cn_title6 : tw_title6" alt="" />
-          <div v-html="result.notice" class="text-box"></div>
-        </div>
-      </div>
-      <div class="footer-box"></div>
-    </div> -->
+   
     <CopyCode style="margin-top: 0.2rem" className="emotion2025-box" v-show="item_index === 8" tips1_color="#222"
       code_color="#EC436B" :transfer_code="result.transfer_code" codeClass="emotion2025-code"
       :code_btn="is_cn ? cn_code_btn : tw_code_btn" code_text_style="margin:.3rem auto;color:#A18884"
@@ -168,6 +120,10 @@ export default {
     content_arr: {
       type: Array,
       default: () => [],
+    },
+    zodiac_img: {
+      type: String,
+      default: '',
     },
   },
   components: {
@@ -390,6 +346,16 @@ export default {
     left: 0;
     width: 7.1rem;
     height: 1rem;
+  }
+  .zodiac {
+    font-weight: 600;
+    font-size: 0.5rem;
+    color: #ED003F;
+    line-height: 0.75rem;
+  }
+  img {
+    width: 3rem;
+    height: 3rem;
   }
 }
 
