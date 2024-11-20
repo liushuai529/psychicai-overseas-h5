@@ -93,7 +93,7 @@
         <!-- <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" /> -->
         <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn"
           :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x" @click="payMoney" />
-        <img v-else-if="btn_url" class="btn emo-btn" :src="btn_url" />
+        <img v-else-if="btn_url" class="btn emo-btn" :src="btn_url" @click="payMoney"/>
         <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"
           @click="payMoney" />
 

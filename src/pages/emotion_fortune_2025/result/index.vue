@@ -1,13 +1,13 @@
 <template>
   <div :class="['result', is_cn ? 'result-cn-bg' : 'result-tw-bg', show_pop_modal ? 'hidden-scroll' : '']">
-    <!-- <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" /> -->
+    <ResultPopup product_key="h5_emotion2025" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />
     <div :class="['info-box', is_cn ? 'cn-bg' : 'tw-bg']">
       <BaziTable :sex="sex" :is_result="true" :username="username" :gongli_nongli="gongli_nongli"
         :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
         :nayin="nayin" :cai_bo_num="cai_bo_num" :gui_ren_num="gui_ren_num" :hun_yin_num="hun_yin_num" :ming_ge="ming_ge"
         :riyuanqiangruo="riyuanqiangruo" :shi_ye_num="shi_ye_num" :wuxingqiang="wuxingqiang" :tao_hua_num="tao_hua_num"
-        :fuqigong="fuqigong" text_color="#6D2215" minge_color="#EC436B" :show_daji="false" bg="#FFFAFA" width="6.5rem"
-        table_border="0.02rem solid #EC436B" border_color="#EC436B" :is_show_taohua="1" :change_color="true" />
+        :fuqigong="fuqigong" text_color="#6D2215" minge_color="#DB4539" :show_daji="false" bg="#FFF3F7" width="6.5rem"
+        table_border="0.02rem solid #4D1A1A" border_color="#4D1A1A" :is_show_taohua="1" :change_color="true" />
     </div>
 
     <contentDetail v-if="fortune.qian" :result="fortune" :item_index="1" />
@@ -15,7 +15,7 @@
     <contentDetail v-if="fortune.review" :result="fortune.review" :item_index="3" />
     <contentDetail v-if="fortune.concept" :result="fortune.concept" :item_index="4" />
     
-    <contentDetail v-if="fortune.zodiac" :result="fortune" :item_index="5" />
+    <contentDetail v-if="fortune.zodiac" :result="fortune" :item_index="5" :zodiac_img="zodiacObj[fortune.zodiac]"/>
 
     <contentDetail v-if="fortune.fortunegan" :result="fortune.fortunegan" :item_index="6" />
     <contentDetail v-if="fortune.fortunezhi" :result="fortune.fortunezhi" :item_index="7" />
@@ -43,10 +43,51 @@ import {
 } from '../../../api/api.js';
 import BaziTable from '../../../components/baziTable.vue';
 import ResultPopup from '../../../components/ResultPopup.vue';
+import result_img_shengxiao_gou from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_gou.webp';
+import result_img_shengxiao_hou from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_hou.webp';
+import result_img_shengxiao_hu from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_hu.webp';
+import result_img_shengxiao_ji from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_ji.webp';
+import result_img_shengxiao_long from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_long.webp';
+import result_img_shengxiao_ma from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_ma.webp';
+import result_img_shengxiao_niu from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_niu.webp';
+import result_img_shengxiao_she from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_she.webp';
+import result_img_shengxiao_shu from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_shu.webp';
+import result_img_shengxiao_tu from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_tu.webp';
+import result_img_shengxiao_yang from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_yang.webp';
+import result_img_shengxiao_zhu from '../../../assets/img/emotion_fortune_2025/result_img_shengxiao_zhu.webp';
+const zodiacObj = {
+  '狗': result_img_shengxiao_gou,
+  '猴': result_img_shengxiao_hou,
+  '虎': result_img_shengxiao_hu,
+  '鸡':result_img_shengxiao_ji,
+  '雞': result_img_shengxiao_ji,
+  '龙': result_img_shengxiao_long,
+  '龍': result_img_shengxiao_long,
+  '牛': result_img_shengxiao_niu,
+  '蛇': result_img_shengxiao_she,
+  '鼠': result_img_shengxiao_shu,
+  '兔': result_img_shengxiao_tu,
+  '羊': result_img_shengxiao_yang,
+  '猪': result_img_shengxiao_zhu,
+  '豬': result_img_shengxiao_zhu,
+};
 export default {
   components: { contentDetail, UserInfo, BaziTable, ResultPopup },
   data() {
     return {
+      zodiacObj,
+      result_img_shengxiao_gou,
+      result_img_shengxiao_hou,
+      result_img_shengxiao_hu,
+      result_img_shengxiao_ji,
+      result_img_shengxiao_long,
+      result_img_shengxiao_ma,
+      result_img_shengxiao_niu,
+      result_img_shengxiao_she,
+      result_img_shengxiao_shu,
+      result_img_shengxiao_tu,
+      result_img_shengxiao_yang,
+      result_img_shengxiao_zhu,
       loading: false,
       hasData: false,
 
