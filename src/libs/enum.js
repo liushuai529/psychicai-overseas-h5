@@ -276,6 +276,7 @@ import nianyun2025 from '../assets/img/mlxz/history_order/dingdan_img_nianyun202
 import yuantiangang from '../assets/img/mlxz/history_order/dingdan_img_yuantiangang.webp';
 import guiguzi from '../assets/img/mlxz/history_order/dingdan_img_guiguzi.webp';
 import ganqingyun from '../assets/img/mlxz/history_order/dingdan_img_ganqing.webp';
+import ganqingyun2025 from '../assets/img/mlxz/history_order/lsdd_img_cover_25ganqing.webp';
 import shiyeyun from '../assets/img/mlxz/history_order/dingdan_img_shiye.webp';
 import caiyun from '../assets/img/mlxz/history_order/dingdan_img_caiyun.webp';
 import hehun from '../assets/img/mlxz/history_order/dingdan_img_hehun.webp';
@@ -292,7 +293,7 @@ export const getHistoryOrderImg = {
   h5_weigh_bone: yuantiangang,
   h5_bai_gua: guiguzi,
   h5_emotion2024: ganqingyun,
-  h5_emotion2025: ganqingyun,
+  h5_emotion2025: ganqingyun2025,
   h5_career2024: shiyeyun,
   h5_wealth2024: caiyun,
   h5_marriage: hehun,
