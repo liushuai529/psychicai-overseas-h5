@@ -157,13 +157,13 @@ const getFBChannel = () => {
     return 'mlzyy16';
   } else if (url.indexOf('/mlzyy17/') > -1) {
     return 'mlzyy17';
-  } else if (url.indexOf('/mlzyy17/') > -1) {
+  } else if (url.indexOf('/blue03/') > -1) {
     return 'blue03';
-  } else if (url.indexOf('/mlzyy17/') > -1) {
+  } else if (url.indexOf('/blue05/') > -1) {
     return 'blue05';
-  } else if (url.indexOf('/mlzyy17/') > -1) {
+  } else if (url.indexOf('/blue08/') > -1) {
     return 'blue08';
-  } else if (url.indexOf('/mlzyy17/') > -1) {
+  } else if (url.indexOf('/blue13/') > -1) {
     return 'blue13';
   } else {
     return 'google_enjoy03';
