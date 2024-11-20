@@ -14,7 +14,7 @@
         :nayin="nayin" :cai_bo_num="cai_bo_num" :gui_ren_num="gui_ren_num" :hun_yin_num="hun_yin_num" :ming_ge="ming_ge"
         :riyuanqiangruo="riyuanqiangruo" :shi_ye_num="shi_ye_num" :wuxingqiang="wuxingqiang" :tao_hua_num="0"
         fuqigong="" text_color="#6D2215" minge_color="#EC436B" :show_daji="false" bg="#fff" width="6.5rem"
-        table_border="0.02rem solid #EC436B" border_color="#EC436B" :is_show_taohua="1" :change_color="true">
+        table_border="0.02rem solid #4D1A1A" border_color="#4D1A1A" :is_show_taohua="1" :change_color="true">
       </BaziTable>
     </div>
     <PayItem product_key="h5_emotion2025" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />

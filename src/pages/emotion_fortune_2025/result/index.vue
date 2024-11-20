@@ -6,8 +6,8 @@
         :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
         :nayin="nayin" :cai_bo_num="cai_bo_num" :gui_ren_num="gui_ren_num" :hun_yin_num="hun_yin_num" :ming_ge="ming_ge"
         :riyuanqiangruo="riyuanqiangruo" :shi_ye_num="shi_ye_num" :wuxingqiang="wuxingqiang" :tao_hua_num="tao_hua_num"
-        :fuqigong="fuqigong" text_color="#6D2215" minge_color="#EC436B" :show_daji="false" bg="#FFFAFA" width="6.5rem"
-        table_border="0.02rem solid #EC436B" border_color="#EC436B" :is_show_taohua="1" :change_color="true" />
+        :fuqigong="fuqigong" text_color="#6D2215" minge_color="#DB4539" :show_daji="false" bg="#FFF3F7" width="6.5rem"
+        table_border="0.02rem solid #4D1A1A" border_color="#4D1A1A" :is_show_taohua="1" :change_color="true" />
     </div>
 
     <contentDetail v-if="fortune.qian" :result="fortune" :item_index="1" />
