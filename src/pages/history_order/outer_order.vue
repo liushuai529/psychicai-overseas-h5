@@ -340,6 +340,11 @@ const event_enums = {
     c_id: '-10004',
     c_name: 'click_history_2024lovely_repay',
   },
+  h5_emotion2025: {
+    c_id: '-10014',
+    c_name: 'click_history_2025lovely_repay',
+  },
+  
 };
 
 const copy_info = {
@@ -693,6 +698,16 @@ export default {
           return;
         }
         if (product_key === 'h5_annual2025') {
+          utils.firebaseLogEvent(
+            '10015',
+            event_enums[product_key].c_id,
+            event_enums[product_key].c_name,
+            'click',
+            {
+              channel: utils.getFBChannel(),
+            }
+          );
+        } else if (product_key === 'h5_emotion2025') {
           utils.firebaseLogEvent(
             '10015',
             event_enums[product_key].c_id,
