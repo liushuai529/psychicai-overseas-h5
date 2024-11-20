@@ -84,6 +84,10 @@ const tips_arr9 = {
     'zh-CN': '2024年爱情运势',
     'zh-TW': '2024年愛情運勢', 
   }, // 2024年爱情运势
+  h5_emotion2025: {
+    'zh-CN': '2025年爱情运势',
+    'zh-TW': '2025年愛情運勢', 
+  }, // 2025年爱情运势
   h5_marriage: {
     'zh-CN': '八字合婚',
     'zh-TW': '八字合婚', 
@@ -241,7 +245,7 @@ export default {
     background: linear-gradient(180deg, #D3F2E5 0%, #FFFFFF 38%, #FFFFFF 100%);
     border-radius: 0.4rem;
     /* margin-top: 1.8rem; */
-    margin-bottom: 0.2rem;
+    // margin-bottom: 0.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;

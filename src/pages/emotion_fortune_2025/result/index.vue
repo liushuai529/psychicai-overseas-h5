@@ -1,6 +1,6 @@
 <template>
   <div :class="['result', is_cn ? 'result-cn-bg' : 'result-tw-bg', show_pop_modal ? 'hidden-scroll' : '']">
-    <!-- <ResultPopup product_key="h5_emotion2024" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" /> -->
+    <ResultPopup product_key="h5_emotion2025" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />
     <div :class="['info-box', is_cn ? 'cn-bg' : 'tw-bg']">
       <BaziTable :sex="sex" :is_result="true" :username="username" :gongli_nongli="gongli_nongli"
         :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
