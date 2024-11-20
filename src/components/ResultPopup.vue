@@ -23,7 +23,7 @@
 import utils from '../libs/utils';
 //h5_emotion2024
 
-import cn_img_popovers_logo from '../assets/img/components/result_popup/cn/img_popovers_logo.webp';
+import cn_img_popovers_logo from '../assets/img/components/result_popup/cn/img_popovers_logo_cn.webp';
 import tw_img_popovers_logo from '../assets/img/components/result_popup/tw/img_popovers_logo_tw.webp';
 import { Toast } from 'mint-ui';
 const lang = utils.getLanguage();
