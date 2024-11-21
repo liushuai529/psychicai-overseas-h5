@@ -492,7 +492,7 @@ export default {
           mlxz_action_type: 'view',
           mlxz_channel: `pageview_main_${utils.getFBChannel()}`,
         });
-        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "select_content", {});
+        utils.isGoogleChannel() && gtag && gtag("event", "select_content", {});
       } catch (err) {
         console.log('no fbq:', err);
       }
@@ -914,7 +914,7 @@ export default {
           item => item.product_key === this.product_key
         );
         const { price, currency_type } = same_; 
-        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "generate_lead", {
+        utils.isGoogleChannel() && gtag && gtag("event", "generate_lead", {
           currency: currency_type,
           value: price,
         });

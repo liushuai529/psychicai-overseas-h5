@@ -465,6 +465,28 @@ for (let pathname_google_ocean03 of ['emotion_fortune/emotion_fortune', 'user_ag
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf_google_ocean03));
 }
 
+// google_ads03代理
+for (let pathname_google_ocean03 of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  let filename_google_ocean03 = pathname_google_ocean03.split('/')[0];
+  let conf_google_ocean03 = {
+    filename: path.resolve(__dirname, '../dist/google_ads03/' + filename_google_ocean03 + '.html'),
+    template: 'template/index_google_ads03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname_google_ocean03 in webpackConfig.entry) {
+    conf_google_ocean03.chunks = ['manifest', 'vendor', pathname_google_ocean03];
+    conf_google_ocean03.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf_google_ocean03));
+}
+
 // blue03代理
 for (let pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
