@@ -520,7 +520,7 @@ export default {
      * @return {*}
      */
     changeSex(val) {
-     
+
       if (this.sex == 0) {
         this.sex = 1;
       } else {
@@ -737,7 +737,7 @@ export default {
         }
       );
       if (utils.isProd()) {
-        
+
         try {
           utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Lead');
         } catch (err) {
@@ -746,11 +746,13 @@ export default {
         let same_ = this.productList.find(
           item => item.product_key === this.product_key
         );
-        const { price, currency_type } = same_; 
+        const { price, currency_type } = same_;
         utils.isGoogleChannel() && gtag && gtag("event", "generate_lead", {
           currency: currency_type,
           value: price,
         });
+        utils.isTiktokChannel() && ttq && ttq.track('ViewContent', {});
+
       }
       let { has_pay, order_id, product_key } = this.$route.query;
 
