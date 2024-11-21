@@ -410,7 +410,7 @@
   <script>
     // 根据当前域名设置 Google Analytics ID
     var gaMeasurementId = '';
-    
+      console.log('window.location.url', window.location.url)
     if (!window.location.url.indexOf('/google_')>-1) {
       gaMeasurementId = 'G-43C3GF0Z45';  // 域名 A
     } else {

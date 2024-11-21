@@ -429,16 +429,19 @@
     })(window, document, 'clarity', 'script', 'mfgfvho5pg');
   </script>
   <script>
-    !(function (d, w) {
-      const cookieMap = new Map();
-
-      document.cookie.split("; ").forEach((cookie) => {
-        const [key, value] = cookie.split("=");
-        cookieMap.set(key, value);
+    function getCookie(name) {
+      let cookie = {};
+      document.cookie.split(';').forEach(function (el) {
+        let [k, v] = el.split('=');
+        cookie[k.trim()] = v;
       })
-      w.localStorage.setItem('_fbc', cookieMap.get("_fbc") === undefined ? '' : cookieMap.get("_fbc"))
-      w.localStorage.setItem('_fbp', cookieMap.get("_fbp") === undefined ? '' : cookieMap.get("_fbp"))
-    })(document, window);
+      return cookie[name];
+    }
+    // TikTok Click ID
+    setTimeout(() => {
+      localStorage.setItem('ttclid', getCookie('ttclid') ? '' : getCookie('ttclid'))
+      localStorage.setItem('ttp', getCookie('_ttp') ? '' : getCookie('_ttp'))
+    }, 1000);
   </script>
   <script>
     function loadJs(url) {
