@@ -410,8 +410,8 @@
   <script>
     // 根据当前域名设置 Google Analytics ID
     var gaMeasurementId = '';
-      console.log('window.location.url', window, window.location.url)
-    if (!window.location.url.indexOf('/google_')>-1) {
+      console.log('window.location.href', window, window.location.href)
+    if (!window.location.href.indexOf('/google_')>-1) {
       gaMeasurementId = 'G-43C3GF0Z45';  // 域名 A
     } else {
       gaMeasurementId = 'G-NXSL3SYRF0';  // 域名 B
@@ -421,7 +421,7 @@
       // 载入 gtag.js
       var script = document.createElement('script');
       script.async = true;
-      if (!window.location.url.indexOf('/google_')>-1) {
+      if (!window.location.href.indexOf('/google_')>-1) {
         script.src = `https://www.googletagmanager.com/gtag/js?id=G-43C3GF0Z45`;
       } else {
         script.src = `https://www.googletagmanager.com/gtag/js?id=G-NXSL3SYRF0`;
@@ -434,7 +434,7 @@
       gtag('js', new Date());
 
       // 配置 Google Analytics
-      if (!window.location.url.indexOf('/google_')>-1) {
+      if (!window.location.href.indexOf('/google_')>-1) {
         gtag('config', 'G-43C3GF0Z45');
       } else {
         gtag('config', 'G-NXSL3SYRF0'); 
