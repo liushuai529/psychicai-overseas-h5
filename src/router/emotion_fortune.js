@@ -37,7 +37,7 @@ const visitorLoginAPI = async (data, callback) => {
   } else {
     callback()
   }
-  if (utils.getFBChannel().indexOf('google') > -1) {
+  if (utils.isGoogleChannel()) {
     //通过gtag方式设置clientid
     utils.setGoogleClientId();
     setTimeout(() => {

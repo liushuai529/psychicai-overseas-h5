@@ -1331,7 +1331,7 @@ let analytics = null
 setTimeout(() => {
   if (!isGoogleChannel()) {
     firebase.initializeApp(firebaseConfig);
-  } else if (window.location.hostname.indexOf('ssybjmlxz.com') > -1) {
+  } else {
     firebase.initializeApp(firebaseConfig1);
   } 
   analytics = firebase.analytics();
