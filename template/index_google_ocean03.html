@@ -409,38 +409,18 @@
 
   <script>
     // 根据当前域名设置 Google Analytics ID
-    var gaMeasurementId = '';
-    if (!window.location.href.indexOf('/google_')>-1) {
-      gaMeasurementId = 'G-43C3GF0Z45';  // 域名 A
-    } else {
-      gaMeasurementId = 'G-NXSL3SYRF0';  // 域名 B
-    }
+    // 载入 gtag.js
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=G-NXSL3SYRF0`;
+    document.head.appendChild(script);
 
-    if (gaMeasurementId) {
-      // 载入 gtag.js
-      var script = document.createElement('script');
-      script.async = true;
-      if (!window.location.href.indexOf('/google_')>-1) {
-        script.src = `https://www.googletagmanager.com/gtag/js?id=G-43C3GF0Z45`;
-      } else {
-        script.src = `https://www.googletagmanager.com/gtag/js?id=G-NXSL3SYRF0`; 
-      }
-      
-      document.head.appendChild(script);
-
-      // 设置 gtag
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-
-      // 配置 Google Analytics
-      console.log('当前googleID', gaMeasurementId)
-      if (!window.location.href.indexOf('/google_')>-1) {
-        gtag('config', 'G-43C3GF0Z45');
-      } else {
-        gtag('config', 'G-NXSL3SYRF0');
-      }
-    }
+    // 设置 gtag
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    // 配置 Google Analytics
+    gtag('config', 'G-NXSL3SYRF0');
   </script>
 </head>
 
