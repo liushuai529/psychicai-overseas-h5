@@ -1327,13 +1327,11 @@ const firebaseConfig1 = {
 
 let analytics = null
 setTimeout(() => {
-  if (window.location.hostname.indexOf('overseas.psychicai.pro') > -1) {
+  if (!isGoogleChannel()) {
     firebase.initializeApp(firebaseConfig);
   } else if (window.location.hostname.indexOf('ssybjmlxz.com') > -1) {
     firebase.initializeApp(firebaseConfig1);
-  } else {
-    firebase.initializeApp(firebaseConfig1); 
-  }
+  } 
   analytics = firebase.analytics();
 }, 0);
 
