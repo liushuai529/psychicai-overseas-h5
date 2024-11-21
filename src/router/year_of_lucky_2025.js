@@ -23,7 +23,7 @@ const visitorLoginAPI_year = async (data, callback) => {
     localStorage.setItem('mlxz_outer_open_uid', res.data.open_uid);
     localStorage.setItem('mlxz_outer_access_token', res.data.access_token);
     localStorage.setItem('mlxz_outer_visitor_id', res.data.visitor_id);
-    utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
+    utils.isFBChannel() && fbq && fbq('init', utils.getFbId()[utils.getFBChannel()], {'external_id': localStorage.getItem('mlxz_outer_visitor_id')|| ''});
     callback && callback();
   }
   checkCurrentCountry(callback);

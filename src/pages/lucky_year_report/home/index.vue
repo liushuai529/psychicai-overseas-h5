@@ -694,7 +694,7 @@ export default {
       if (utils.isProd()) {
         
         try {
-          utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Lead');
+          utils.isFBChannel() && fbq && fbq('track', 'Lead');
         } catch (err) {
           console.error('Lead  error message:', err);
         }

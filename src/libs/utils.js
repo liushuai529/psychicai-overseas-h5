@@ -168,7 +168,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('/blue13/') > -1) {
     return 'blue13';
   } else if (url.indexOf('/tiktok_gatherone08/') > -1) {
-    return 'tiktok_gatherone08';
+    return 'tt_gatherone08';
   } else {
     return 'google_enjoy03';
   }
@@ -179,8 +179,14 @@ const isGoogleChannel = () => {
 }
 
 const isTiktokChannel = () => {
-  return getFBChannel().indexOf('tiktok')> -1;
+  return getFBChannel().startsWith('tt_')> -1;
 }
+
+const isFBChannel = () => {
+  return !isGoogleChannel() && !isTiktokChannel();
+}
+
+
 
 const isShowCombine = () => {
   return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "google_enjoy03",  "google_ads03", "mlzyy03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05", "blue03", "blue05"];
@@ -1330,8 +1336,10 @@ const firebaseConfig1 = {
 let analytics = null
 setTimeout(() => {
   if (!isGoogleChannel()) {
+    console.log('非google渠道')
     firebase.initializeApp(firebaseConfig);
   } else {
+    console.log('google渠道')
     firebase.initializeApp(firebaseConfig1);
   } 
   analytics = firebase.analytics();
@@ -1947,4 +1955,5 @@ export default {
   setGoogleClientIdByCookie,
   isGoogleChannel,
   isTiktokChannel,
+  isFBChannel,
 };

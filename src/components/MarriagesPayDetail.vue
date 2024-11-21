@@ -556,7 +556,7 @@ export default {
 
         Indicator.close();
         try {
-          utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'AddToCart', {
+          utils.isFBChannel() && fbq && fbq('track', 'AddToCart', {
             value: this.product.price.toFixed(2),
             currency: this.product.currency_type || 'MYR',
           });
