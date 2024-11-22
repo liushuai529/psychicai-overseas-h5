@@ -641,11 +641,11 @@ export default {
               },
             });
           }
-          if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('ttq')) {
+          if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('_ttq')) {
             pay_max_params = Object.assign({}, pay_max_params, {
               tt_param: {
                 ttclid: utils.getLocalStorage('ttclid'),
-                ttq: utils.getcookieInfo('ttq'),
+                ttq: utils.getcookieInfo('_ttq'),
                 page_url: location.href,
               },
             });
