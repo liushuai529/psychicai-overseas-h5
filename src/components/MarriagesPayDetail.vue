@@ -633,11 +633,11 @@ export default {
           },
         });
       }
-      if (localStorage.getItem('ttclid')) {
+      if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('ttq')) {
         pay_max_params = Object.assign({}, pay_max_params, {
           tt_param: {
-            ttclid: localStorage.getItem('ttclid') ? localStorage.getItem('ttclid') : '',
-            ttq: localStorage.getItem('ttp') ? localStorage.getItem('ttp') : '',
+            ttclid: utils.getLocalStorage('ttclid'),
+            ttq: utils.getcookieInfo('ttq'),
             page_url: location.href,
             test_tt_upload: this.test_tt_upload,
           },

@@ -1810,6 +1810,10 @@ const getcookieInfo = (key) => {
   return cookieMap.get(key) === undefined ? '' : cookieMap.get(key)
 };
 
+const getLocalStorage = (key) => {
+  return localStorage.getItem(key) === undefined ? '' : localStorage.getItem(key)
+}
+
 const checkEmail = (email) => {
   var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   return emailRegex.test(email);
@@ -1947,6 +1951,7 @@ export default {
   firebaseLogEvent,
   getShortStr,
   getcookieInfo,
+  getLocalStorage,
   getExtendUrl,
   checkEmail,
   showEmail,
