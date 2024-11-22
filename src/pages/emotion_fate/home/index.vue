@@ -736,7 +736,6 @@ export default {
           click_type: 'screen_tracking',
         }
       );
-      utils.isTiktokChannel() && ttq && ttq.track('ViewContent');
       if (utils.isProd()) {
 
         try {
