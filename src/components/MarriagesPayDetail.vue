@@ -574,7 +574,11 @@ export default {
           ]
         });
         
-        utils.isTiktokChannel() && ttq && ttq.track('AddToCart');
+        utils.isTiktokChannel() && ttq && ttq.track('AddToCart', {
+          contents: [{
+            content_id: this.product.product_id,
+          }]
+        });
       }
 
       this.logEventForSort({

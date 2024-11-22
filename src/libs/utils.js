@@ -1865,7 +1865,7 @@ const setGoogleClientId = () => {
   gcyLog(`通过gtag开始获取google_client_id`, {
     mlxz_action_desc: 'google_client_id',
   });
-  gtag && gtag('get', 'G-43C3GF0Z45', 'client_id', (clientID) => {
+  gtag && gtag('get', 'G-NXSL3SYRF0', 'client_id', (clientID) => {
     console.log('Client ID: ' + clientID);
     localStorage.setItem('google_client_id', clientID);
   });
