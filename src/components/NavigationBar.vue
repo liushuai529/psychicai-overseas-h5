@@ -233,7 +233,7 @@ export default {
       if (utils.isProd()) {
         
         try {
-          utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'CompleteRegistration');
+          utils.isFBChannel() && fbq && fbq('track', 'CompleteRegistration');
         } catch (err) {
           console.error('CompleteRegistration  error message:', err);
         }

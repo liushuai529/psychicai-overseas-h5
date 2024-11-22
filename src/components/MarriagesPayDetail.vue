@@ -253,6 +253,7 @@ export default {
       current_country: {},
       test_fb_upload: '',//拼接参数
       test_ga_upload: '',//拼接参数
+      test_tt_upload: '',
     };
   },
   props: {
@@ -406,6 +407,7 @@ export default {
   mounted() {
     this.test_fb_upload = utils.getQueryStr('test_fb_upload')
     this.test_ga_upload = utils.getQueryStr('test_ga_upload')
+    this.test_tt_upload = utils.getQueryStr('test_tt_upload')
   },
 
   methods: {
@@ -549,19 +551,20 @@ export default {
       this.pay_lock_time = setTimeout(() => {
         this.payCanClick = false
       }, 2000);
-      if (utils.isProd() || this.test_ga_upload) {
+      utils.isTiktokChannel() && ttq && ttq.track('AddToCart');
+      if (utils.isProd() || this.test_ga_upload || this.test_tt_upload) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
 
         Indicator.close();
         try {
-          utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'AddToCart', {
+          utils.isFBChannel() && fbq && fbq('track', 'AddToCart', {
             value: this.product.price.toFixed(2),
             currency: this.product.currency_type || 'MYR',
           });
         } catch (err) {
           console.error('AddToCart error message:', err);
         }
-        utils.getFBChannel().indexOf('google') > -1 && gtag && gtag("event", "add_to_cart", {
+        utils.isGoogleChannel() && gtag && gtag("event", "add_to_cart", {
           value: this.product.price.toFixed(2),
           currency: this.product.currency_type || 'MYR',
           items: [
@@ -570,7 +573,7 @@ export default {
             }
           ]
         });
-
+        utils.isTiktokChannel() && ttq && ttq.track('AddToCart');
       }
 
       this.logEventForSort({
@@ -627,6 +630,16 @@ export default {
           ga_param: {
             client_id: localStorage.getItem('google_client_id'),
             test_ga_upload: this.test_fb_upload,
+          },
+        });
+      }
+      if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('_ttq')) {
+        pay_max_params = Object.assign({}, pay_max_params, {
+          tt_param: {
+            ttclid: utils.getLocalStorage('ttclid'),
+            ttq: utils.getcookieInfo('_ttq'),
+            page_url: location.href,
+            test_tt_upload: this.test_tt_upload,
           },
         });
       }

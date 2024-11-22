@@ -240,7 +240,7 @@
                 <span>{{ $t('tips-7') }}{{ item.transfer_code || '-' }}</span>
                 <span @click="copyCode(item.transfer_code)" class="copy">{{
                   $t('tips-8')
-                }}</span>
+                  }}</span>
               </div>
 
               <div @click="handleJump(item)" :class="[
@@ -344,7 +344,7 @@ const event_enums = {
     c_id: '-10014',
     c_name: 'click_history_2025lovely_repay',
   },
-  
+
 };
 
 const copy_info = {
@@ -633,11 +633,20 @@ export default {
               external_id: localStorage.getItem('mlxz_outer_visitor_id'),
             },
           };
-      
-          if (localStorage.getItem('google_client_id')) {
+
+          if (utils.getLocalStorage('google_client_id')) {
             params = Object.assign({}, params, {
               ga_param: {
-                client_id: localStorage.getItem('google_client_id')
+                client_id: utils.getLocalStorage('google_client_id')
+              },
+            });
+          }
+          if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('_ttq')) {
+            pay_max_params = Object.assign({}, pay_max_params, {
+              tt_param: {
+                ttclid: utils.getLocalStorage('ttclid'),
+                ttq: utils.getcookieInfo('_ttq'),
+                page_url: location.href,
               },
             });
           }

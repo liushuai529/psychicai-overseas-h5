@@ -333,7 +333,7 @@ export default {
     // this.preloadSVGA()
     if (utils.isProd()) {
       try {
-        utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('trackCustom', 'CustomChannel', {
+        utils.isFBChannel() && fbq && fbq('trackCustom', 'CustomChannel', {
           channel: `pageview_main_${utils.getFBChannel()}`,
         });
         utils.gcyLog(`感情运首页`, {
@@ -520,7 +520,7 @@ export default {
      * @return {*}
      */
     changeSex(val) {
-     
+
       if (this.sex == 0) {
         this.sex = 1;
       } else {
@@ -736,21 +736,24 @@ export default {
           click_type: 'screen_tracking',
         }
       );
+      utils.isTiktokChannel() && ttq && ttq.track('ViewContent');
       if (utils.isProd()) {
-        
+
         try {
-          utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Lead');
+          utils.isFBChannel() && fbq && fbq('track', 'Lead');
         } catch (err) {
           console.error('Lead  error message:', err);
         }
         let same_ = this.productList.find(
           item => item.product_key === this.product_key
         );
-        const { price, currency_type } = same_; 
-        utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "generate_lead", {
+        const { price, currency_type } = same_;
+        utils.isGoogleChannel() && gtag && gtag("event", "generate_lead", {
           currency: currency_type,
           value: price,
         });
+        utils.isTiktokChannel() && ttq && ttq.track('ViewContent');
+
       }
       let { has_pay, order_id, product_key } = this.$route.query;
 

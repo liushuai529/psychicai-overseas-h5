@@ -3,7 +3,8 @@
     <div v-infinite-scroll="() => loadMore()" :infinite-scroll-immediate-check="true" infinite-scroll-disabled="loading"
       infinite-scroll-distance="10" :class="['container']">
       <div class="new-tab">
-        <img @click="backPage" src="../../../assets/img/emotion_fate/icon_order_history_back.webp" class="back" alt="" />
+        <img @click="backPage" src="../../../assets/img/emotion_fate/icon_order_history_back.webp" class="back"
+          alt="" />
         {{ is_cn ? '历史订单' : '歷史訂單' }}
       </div>
       <div class="top-box">
@@ -169,10 +170,10 @@ export default {
     },
     top_tip() {
       if (utils.getLanguage() === 'zh-CN') {
-          return '咨询遇到问题联系：plum7server@wekoi.cn'
-        } else {
-          return '咨詢遇到問題聯系：plum7server@wekoi.cn'
-        }
+        return '咨询遇到问题联系：plum7server@wekoi.cn'
+      } else {
+        return '咨詢遇到問題聯系：plum7server@wekoi.cn'
+      }
     }
 
   },
@@ -349,6 +350,16 @@ export default {
           product_sub_type: 'zheng_yuan',
 
         };
+
+        if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('_ttq')) {
+          params = Object.assign({}, params, {
+            tt_param: {
+              ttclid: utils.getLocalStorage('ttclid'),
+              ttq: utils.getcookieInfo('_ttq'),
+              page_url: location.href,
+            },
+          });
+        }
 
         params.callback_url = `${location.origin
           }/${utils.getFBChannel()}/${url}.html#/result?path=${url}&report_price=${same_product.price}&repay=1&currency_type=${trade_currency || 'MYR'}&product_id=${product_id}`;

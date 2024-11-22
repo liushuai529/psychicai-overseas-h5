@@ -265,11 +265,11 @@ export default {
               mlxz_currency: currency_type,
               mlxz_order_status: report_status,
             });
-            // utils.getFBChannel().indexOf('google') < 0 && fbq && fbq('track', 'Purchase', {
+            // utils.isFBChannel() && fbq && fbq('track', 'Purchase', {
             //   value: report_price.toFixed(2),
             //   currency: currency_type,
             // },{eventID: this.order_id});
-            // utils.getFBChannel().indexOf('google')> -1 && gtag && gtag("event", "purchase", {
+            // utils.isGoogleChannel() && gtag && gtag("event", "purchase", {
             //   transaction_id: this.order_id,
             //   value: report_price.toFixed(2),
             //   currency: currency_type, 

@@ -153,8 +153,6 @@
 
           };
 
-          // var chromeVersion = /Chrome\/([0-9\.]+)/.test(navigator.userAgent) ? navigator.userAgent.match(/Chrome\/([0-9\.]+)/)[1] : '';
-
           if (hasIos && /iP(hone|ad|od)/.test(navigator.userAgent)) {
 
             var urls = [];
@@ -201,22 +199,26 @@
     })();
   </script>
 
-  
+  <!-- TikTok Pixel Code Start -->
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
+        for (
+          var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
+      }, ttq.load = function (e, n) {
+        var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
+          ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+      };
+
+
+      ttq.load('CSVD3T3C77UF5CI6GB0G');
+      ttq.page();
+    }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
   <!-- 引入Firebase JavaScript SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js" crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js" crossorigin="anonymous"></script>
-
-
-  <!-- <script>
-      //兼容客户端方法
-      window.callbackEtouchUserInfo = function () {
-        console.log('callbackEtouchUserInfo()');
-      };
-      if (/(localhost|192\.168|test-|console)/.test(location.href)) {
-        var vConsole = new VConsole();
-      }
-    </script> -->
-
   <script>
     (function (h, o, u, n, d) {
       h = h[d] = h[d] || {
@@ -240,7 +242,7 @@
 
     DATAFLUX_RUM && DATAFLUX_RUM.onReady(function () {
       const is_prod = !/(localhost|192\.168|test-|console)/.test(location.href);
-      DATAFLUX_RUM && DATAFLUX_RUM.init({
+      is_prod && DATAFLUX_RUM && DATAFLUX_RUM.init({
         applicationId: 'psychicai_h5',
         datakitOrigin: 'https://future-datakit.wekoi.ai', // 协议（包括：//），域名（或IP地址）[和端口号],
         env: /(localhost|192\.168|test|console)/.test(location.href)
@@ -331,32 +333,6 @@
       }
     }
   </style>
-  <meta name="google-site-verification" content="dJZxXU-ILrEDK8QplPlAuUOkbkjakPxnpoeEvrD_Pm4" />
-  <!-- Google tag (gtag.js) -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-43C3GF0Z45"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-43C3GF0Z45');
-  </script> -->
-
-  <script>
-    // 根据当前域名设置 Google Analytics ID
-    // 载入 gtag.js
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=G-NXSL3SYRF0`;
-    document.head.appendChild(script);
-
-    // 设置 gtag
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    // 配置 Google Analytics
-    gtag('config', 'G-NXSL3SYRF0');
-  </script>
 </head>
 
 <body>
@@ -394,31 +370,33 @@
   </div>
   <!-- built files will be auto injected -->
 
-  <!-- <script type="text/javascript">
-      (function (c, l, a, r, i, t, y) {
-        c[a] =
-          c[a] ||
-          function () {
-            (c[a].q = c[a].q || []).push(arguments);
-          };
-        t = l.createElement(r);
-        t.async = 1;
-        t.src = 'https://www.clarity.ms/tag/' + i;
-        y = l.getElementsByTagName(r)[0];
-        y.parentNode.insertBefore(t, y);
-      })(window, document, 'clarity', 'script', 'mfgfvho5pg');
-    </script> -->
+  <script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+      c[a] =
+        c[a] ||
+        function () {
+          (c[a].q = c[a].q || []).push(arguments);
+        };
+      t = l.createElement(r);
+      t.async = 1;
+      t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0];
+      y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', 'mfgfvho5pg');
+  </script>
   <script>
-    !(function (d, w) {
-      const cookieMap = new Map();
+    // 从 URL 获取 ttclid 参数值 
+    const urlParams = new URLSearchParams(window.location.search);
+    console.log('urlParams', urlParams)
+    const ttclidValue = urlParams.get('ttclid');
+    console.log('ttclidValue', ttclidValue)
+    // 将 ttclid 保存到本地存储，有效期为 28 天 
+    if (ttclidValue) {
+      // 使用 key='ttclid' 将值保存在本地存储中 
+      console.log('使用 key=ttclid将值保存在本地存储中 ', ttclidValue)
+      localStorage.setItem('ttclid', ttclidValue);
+    }
 
-      document.cookie.split("; ").forEach((cookie) => {
-        const [key, value] = cookie.split("=");
-        cookieMap.set(key, value);
-      })
-      w.localStorage.setItem('_fbc', cookieMap.get("_fbc") === undefined ? '' : cookieMap.get("_fbc"))
-      w.localStorage.setItem('_fbp', cookieMap.get("_fbp") === undefined ? '' : cookieMap.get("_fbp"))
-    })(document, window);
   </script>
   <script>
     function loadJs(url) {
