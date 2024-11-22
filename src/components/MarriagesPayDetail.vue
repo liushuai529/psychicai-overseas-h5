@@ -551,6 +551,7 @@ export default {
       this.pay_lock_time = setTimeout(() => {
         this.payCanClick = false
       }, 2000);
+      console.log('utils.isTiktokChannel()', utils.isTiktokChannel(), utils.isGoogleChannel(),utils.isFBChannel(),)
       if (utils.isProd() || this.test_ga_upload || this.test_tt_upload) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
 
@@ -572,6 +573,7 @@ export default {
             }
           ]
         });
+        
         utils.isTiktokChannel() && ttq && ttq.track('AddToCart');
       }
 
