@@ -167,7 +167,7 @@ const getFBChannel = () => {
     return 'blue08';
   } else if (url.indexOf('/blue13/') > -1) {
     return 'blue13';
-  } else if (url.indexOf('/tiktok_gatherone08/') > -1) {
+  } else if (url.indexOf('/tt_gatherone08/') > -1) {
     return 'tt_gatherone08';
   } else {
     return 'google_enjoy03';
