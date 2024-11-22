@@ -179,7 +179,7 @@ const isGoogleChannel = () => {
 }
 
 const isTiktokChannel = () => {
-  return getFBChannel().startsWith('tt_')> -1;
+  return getFBChannel().startsWith('tt_');
 }
 
 const isFBChannel = () => {
