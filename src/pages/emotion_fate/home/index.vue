@@ -751,7 +751,7 @@ export default {
           currency: currency_type,
           value: price,
         });
-        utils.isTiktokChannel() && ttq && ttq.track('ViewContent', {});
+        utils.isTiktokChannel() && ttq && ttq.track('ViewContent');
 
       }
       let { has_pay, order_id, product_key } = this.$route.query;

@@ -572,6 +572,7 @@ export default {
             }
           ]
         });
+        utils.isTiktokChannel() && ttq && ttq.track('AddToCart');
 
 
       }
