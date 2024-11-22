@@ -355,7 +355,7 @@ export default {
           params = Object.assign({}, params, {
             tt_param: {
               ttclid: utils.getLocalStorage('ttclid'),
-              ttq: utils.getcookieInfo('_ttp'),
+              ttp: utils.getcookieInfo('_ttp'),
               page_url: location.href,
             },
           });

@@ -204,7 +204,7 @@ export default {
           pay_max_params = Object.assign({}, pay_max_params, {
             tt_param: {
               ttclid: utils.getLocalStorage('ttclid'),
-              ttq: utils.getcookieInfo('_ttp'),
+              ttp: utils.getcookieInfo('_ttp'),
               page_url: location.href,
             },
           });
