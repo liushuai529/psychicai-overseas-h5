@@ -351,11 +351,11 @@ export default {
 
         };
 
-        if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('_ttq')) {
+        if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('_ttp')) {
           params = Object.assign({}, params, {
             tt_param: {
               ttclid: utils.getLocalStorage('ttclid'),
-              ttq: utils.getcookieInfo('_ttq'),
+              ttq: utils.getcookieInfo('_ttp'),
               page_url: location.href,
             },
           });
