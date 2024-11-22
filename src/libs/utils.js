@@ -1812,6 +1812,7 @@ const getcookieInfo = (key) => {
 
 const getLocalStorage = (key) => {
   return localStorage.getItem(key) === undefined || localStorage.getItem(key) === null || !localStorage.getItem(key) ? '' : localStorage.getItem(key)
+  // return localStorage.getItem(key) || '';
 }
 
 const checkEmail = (email) => {
