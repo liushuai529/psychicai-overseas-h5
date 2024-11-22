@@ -87,7 +87,7 @@
             <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
             <span @click="link('privacy.html')">{{
               $t('privacy-policy')
-              }}</span>
+            }}</span>
           </div>
 
         </div>
@@ -736,6 +736,14 @@ export default {
           click_type: 'screen_tracking',
         }
       );
+      let same_ = this.productList.find(
+          item => item.product_key === this.product_key
+        );
+      utils.isTiktokChannel() && ttq && ttq.track('ViewContent', {
+          contents: [{
+            content_id: same_.product_id,
+          }]
+        });
       if (utils.isProd()) {
         try {
           utils.isFBChannel() && fbq && fbq('track', 'Lead');
@@ -750,7 +758,11 @@ export default {
           currency: currency_type,
           value: price,
         });
-        utils.isTiktokChannel() && ttq && ttq.track('ViewContent');
+        utils.isTiktokChannel() && ttq && ttq.track('ViewContent', {
+          contents: [{
+            content_id: same_.product_id,
+          }]
+        });
 
       }
       let { has_pay, order_id, product_key } = this.$route.query;
