@@ -1878,7 +1878,6 @@ const setGoogleClientId = () => {
 
 
 
-
 export default {
   getTitle,
   gcyLog,
@@ -1962,3 +1961,4 @@ export default {
   isTiktokChannel,
   isFBChannel,
 };
+
