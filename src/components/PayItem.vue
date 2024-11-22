@@ -193,10 +193,19 @@ export default {
             external_id: localStorage.getItem('mlxz_outer_visitor_id'),
           },
         };
-        if (localStorage.getItem('google_client_id')) {
+        if (utils.getLocalStorage('google_client_id')) {
           params_combine = Object.assign({}, params_combine, {
             ga_param: {
-              client_id: localStorage.getItem('google_client_id')
+              client_id: utils.getLocalStorage('google_client_id')
+            },
+          });
+        }
+        if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('ttq')) {
+          pay_max_params = Object.assign({}, pay_max_params, {
+            tt_param: {
+              ttclid: utils.getLocalStorage('ttclid'),
+              ttq: utils.getcookieInfo('ttq'),
+              page_url: location.href,
             },
           });
         }

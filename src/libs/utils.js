@@ -170,7 +170,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('/tt_gatherone08/') > -1) {
     return 'tt_gatherone08';
   } else {
-    return 'google_enjoy03';
+    return 'tt_gatherone08';
   }
 };
 

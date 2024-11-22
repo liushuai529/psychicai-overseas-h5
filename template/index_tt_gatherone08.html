@@ -429,31 +429,16 @@
     })(window, document, 'clarity', 'script', 'mfgfvho5pg');
   </script>
   <script>
-    // function getCookie(name) {
-    //   let cookie = {};
-    //   document.cookie.split(';').forEach(function (el) {
-    //     let [k, v] = el.split('=');
-    //     cookie[k.trim()] = v;
-    //   })
-    //   return cookie[name];
-    // }
-    // // TikTok Click ID
-    // setTimeout(() => {
-    //   localStorage.setItem('ttclid', getCookie('ttclid') ? '' : getCookie('ttclid'))
-    //   localStorage.setItem('ttp', getCookie('_ttp') ? '' : getCookie('_ttp'))
-    // }, 1000);
     // 从 URL 获取 ttclid 参数值 
     const urlParams = new URLSearchParams(window.location.search);
+    console.log('urlParams', urlParams)
     const ttclidValue = urlParams.get('ttclid');
+    console.log('ttclidValue', ttclidValue)
     // 将 ttclid 保存到本地存储，有效期为 28 天 
     if (ttclidValue) {
-      let expirationDate = new Date(new Date().getDate() + 28)
-      let data = {
-        value: ttclid, expirationDate: expirationDate.toISOString()
-      }
       // 使用 key='ttclid' 将值保存在本地存储中 
-      console.log('使用 key=ttclid将值保存在本地存储中 ', data)
-      localStorage.setItem('ttclid', data);
+      console.log('使用 key=ttclid将值保存在本地存储中 ', ttclidValue)
+      localStorage.setItem('ttclid', ttclidValue);
     }
 
   </script>
