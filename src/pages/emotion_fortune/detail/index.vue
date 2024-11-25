@@ -18,52 +18,23 @@
       </BaziTable>
     </div>
     <PayItem product_key="h5_emotion2024" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
-    <div :class="['method-box', !is_show_combination ? 'method-height' : null]">
+    <div :class="['method-box', 'method-height']">
       <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
-      <MarriagesPayDetail v-if="is03_series" className="pay-method" ref="payDetail" :product_key="product_key"
-        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10006"
-        c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
-        e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
-      <PayDetail v-else className="pay-method" ref="payDetail" :product_key="product_key"
+      <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10006"
         c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
         e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
     </div>
     <GejuInfo v-if="is_show_combinationSpecial02" style="margin-bottom: 0.36rem" :product_key="product_key"
       :user_desc="[mingge_desc]" :dataList="[gejujiedu]" />
-    <!-- <div class="card-box">
-      <canvas id="qian"></canvas>
-    </div> -->
+
     <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" />
     <img class="module" :src="is_cn ? cn_bg_2 : tw_bg_2" />
     <img class="module" :src="is_cn ? cn_bg_3 : tw_bg_3" />
     <NewFooter product_key="h5_emotion2024" />
 
     <div class="footer"></div>
-    <!-- <img
-      v-if="showFixedBtn"
-      @click="showPayModal"
-      class="ce-btn huxi-btn fix-box"
-      :src="language === 'zh-CN' ? cn_pay_btn : tw_pay_btn"
-      alt=""
-    /> -->
-    <!-- <payModal
-      :product_key="product_key"
-      v-model="pay_modal"
-      :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg"
-      :query_user_string="query_user_string"
-      :title="username_title"
-      title_style="color:#fff"
-      @close="pay_modal = false"
-      e_view_id="10006"
-      c_view_id="-10005"
-      e_view_name="view_2024lovely_pay"
-      a_view_token="184kba"
-      c_click_id="-10006"
-      e_click_name="click_2024lovely_pay"
-      a_click_token="2rov44"
-    /> -->
-    <img @click="payOrder" :class="['emo-btn', is03_series? 'fix-btn1': 'fix-btn']" :src="btn_url" />
+    <img @click="payOrder" :class="['emo-btn', 'fix-btn1']" :src="btn_url" />
     <HomeFooter product_key="h5_emotion2024" />
     <FixedDiscountModal product_key="h5_emotion2024" @change_discount_modal="change_discount_modal" />
   </div>
@@ -234,12 +205,7 @@ export default {
     is_show_fb_notice() {
       return utils.isFBContainer() && utils.getFBChannel().indexOf('02') > -1;
     },
-    //套餐支付显示逻辑
-    is_show_combination() {
-      return ['enjoy01', 'panda01'].includes(
-        utils.getFBChannel()
-      );
-    },
+   
     is_show_combinationSpecial02() {
       return !(utils.isShowCombine().includes(utils.getFBChannel()));
     },
@@ -260,9 +226,6 @@ export default {
     channel2() {
       return ['enjoy02', 'panda02'].includes(utils.getFBChannel());
     },
-    is03_series() {
-      return utils.getEndStr(utils.getFBChannel(), 2) === '03' || utils.getEndStr(utils.getFBChannel(), 2) === '05'
-    },
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
@@ -272,26 +235,18 @@ export default {
           return cn_home_btn;
         }
         else if (this.channel2) {
-          // return cn_home_xs_btn;
           return cn_home_btn1;
-        } else if (this.is03_series) {
+        } else {
           return img_home_btu_zixun_cn;
-        }
-        else {
-          return cn_home_btn1;
         }
       } else {
         if (this.channel1) {
           return tw_home_btn;
         }
         else if (this.channel2) {
-          // return tw_home_xs_btn;
           return tw_home_btn1;
-        } else if (this.is03_series) {
+        } else {
           return img_home_btu_zixun_tw;
-        }
-        else {
-          return tw_home_btn1;
         }
       }
     },
@@ -602,6 +557,7 @@ export default {
   bottom: 0.2rem;
   z-index: 99;
 }
+
 .fix-btn1 {
   width: 5.7rem;
   height: 0.98rem;
