@@ -1807,10 +1807,21 @@ const getcookieInfo = (key) => {
     const [key, value] = cookie.split("=");
     cookieMap.set(key, value);
   })
+  if(key === '_ttp'){
+    gcyLog(`通过cookie开始获取_ttp`, {
+      mlxz_action_desc: `_ttp:${cookieMap.get(key)}`,
+    });
+  }
+
   return cookieMap.get(key) === undefined ? '' : cookieMap.get(key)
 };
 
 const getLocalStorage = (key) => {
+  if(key === 'ttclid'){
+    gcyLog(`通过LocalStorage开始获取ttclid`, {
+      mlxz_action_desc: `ttclid:${localStorage.getItem(key)}`,
+    });
+  }
   return localStorage.getItem(key) === undefined || localStorage.getItem(key) === null || !localStorage.getItem(key) ? '' : localStorage.getItem(key)
   // return localStorage.getItem(key) || '';
 }
