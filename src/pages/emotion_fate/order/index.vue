@@ -351,6 +351,7 @@ export default {
 
         };
 
+
         if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('_ttp')) {
           params = Object.assign({}, params, {
             tt_param: {

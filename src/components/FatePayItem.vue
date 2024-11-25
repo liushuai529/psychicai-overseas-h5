@@ -188,6 +188,15 @@ export default {
         product_sub_type: this.sub_type ? 'life_marriages' : 'zheng_yuan',
 
       };
+      if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('_ttp')) {
+        params = Object.assign({}, params, {
+          tt_param: {
+            ttclid: utils.getLocalStorage('ttclid'),
+            ttp: utils.getcookieInfo('_ttp'),
+            page_url: location.href,
+          },
+        });
+      }
 
       params.callback_url = `${location.origin
         }/${utils.getFBChannel()}/${url}.html#/result?path=${url}&report_price=${payment}&repay=1&currency_type=${trade_currency || 'MYR'}&product_id=${product_id}`;
