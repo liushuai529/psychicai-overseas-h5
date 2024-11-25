@@ -736,14 +736,6 @@ export default {
           click_type: 'screen_tracking',
         }
       );
-      let same_ = this.productList.find(
-          item => item.product_key === this.product_key
-        );
-      utils.isTiktokChannel() && ttq && ttq.track('ViewContent', {
-          contents: [{
-            content_id: same_.product_id,
-          }]
-        });
       if (utils.isProd()) {
         try {
           utils.isFBChannel() && fbq && fbq('track', 'Lead');
