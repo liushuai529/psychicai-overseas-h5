@@ -69,6 +69,9 @@ const request = (url, method, data) => {
         } else {
           Toast(res.desc);
           Indicator.close();
+          // if(res.status === 1004){
+          //   location.reload();
+          // }
           reject(res);
         }
       })

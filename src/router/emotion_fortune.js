@@ -32,11 +32,12 @@ const visitorLoginAPI = async (data, callback) => {
     utils.isFBChannel() && utils.isFBChannel() && fbq && fbq('init', utils.getFbId()[utils.getFBChannel()], { 'external_id': localStorage.getItem('mlxz_outer_visitor_id') || '' });
     // console.log('首次登录');
   }
-  if (utils.getEndStr(utils.getFBChannel(), 2) === '03' || utils.getEndStr(utils.getFBChannel(), 2) === '05') {
-    checkCurrentCountry(callback)
-  } else {
-    callback()
-  }
+  // if (utils.getEndStr(utils.getFBChannel(), 2) === '03' || utils.getEndStr(utils.getFBChannel(), 2) === '05') {
+    
+  // } else {
+  //   callback()
+  // }
+  checkCurrentCountry(callback)
   if (utils.isGoogleChannel()) {
     //通过gtag方式设置clientid
     utils.setGoogleClientId();
@@ -56,6 +57,7 @@ const checkCurrentCountry = async (callback) => {
     callback && callback();
     setTimeout(async () => {
       const res = await getBaseInfoAPI();
+      console.log('res', res)
       if (res.status !== 1000) return;
       localStorage.setItem('current_country', JSON.stringify({ area_code: res.data.current_country.code, iso_code: res.data.current_country.iso_code }))
     }, 3000);
