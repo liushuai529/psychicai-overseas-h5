@@ -29,8 +29,20 @@ const visitorLoginAPI_year = async (data, callback) => {
   checkCurrentCountry(callback);
 };
 
+const validateCurrentCountry = () => {
+  let currencies = [
+    { iso_code: 'MY', area_code: '60', symbol: 'RM' },
+    { iso_code: 'TW', area_code: '886', symbol: 'NT$' },
+  ];
+  const current_country = JSON.parse(localStorage.getItem('current_country'))
+  if(!currencies.find(item => item.iso_code === current_country.iso_code)) {
+    localStorage.setItem('current_country', JSON.stringify({ iso_code: 'MY', area_code: '60' }))
+  }
+}
+
 const checkCurrentCountry = async (callback) => {
   if (localStorage.getItem('current_country')) {
+    validateCurrentCountry();
     callback && callback();
   } else {
     callback && callback(); 

@@ -32,11 +32,12 @@ const visitorLoginAPI = async (data, callback) => {
     utils.isFBChannel() && utils.isFBChannel() && fbq && fbq('init', utils.getFbId()[utils.getFBChannel()], { 'external_id': localStorage.getItem('mlxz_outer_visitor_id') || '' });
     // console.log('首次登录');
   }
-  if (utils.getEndStr(utils.getFBChannel(), 2) === '03' || utils.getEndStr(utils.getFBChannel(), 2) === '05') {
-    checkCurrentCountry(callback)
-  } else {
-    callback()
-  }
+  // if (utils.getEndStr(utils.getFBChannel(), 2) === '03' || utils.getEndStr(utils.getFBChannel(), 2) === '05') {
+  //   checkCurrentCountry(callback)
+  // } else {
+  //   callback()
+  // }
+  checkCurrentCountry(callback)
   if (utils.isGoogleChannel()) {
     //通过gtag方式设置clientid
     utils.setGoogleClientId();
@@ -49,8 +50,20 @@ const visitorLoginAPI = async (data, callback) => {
   }
 };
 
+const validateCurrentCountry = () => {
+  let currencies = [
+    { iso_code: 'MY', area_code: '60', symbol: 'RM' },
+    { iso_code: 'TW', area_code: '886', symbol: 'NT$' },
+  ];
+  const current_country = JSON.parse(localStorage.getItem('current_country'))
+  if(!currencies.find(item => item.iso_code === current_country.iso_code)) {
+    localStorage.setItem('current_country', JSON.stringify({ iso_code: 'MY', area_code: '60' }))
+  }
+}
+
 const checkCurrentCountry = async (callback) => {
   if (localStorage.getItem('current_country')) {
+    validateCurrentCountry()
     callback && callback();
   } else {
     callback && callback();
@@ -60,7 +73,6 @@ const checkCurrentCountry = async (callback) => {
       localStorage.setItem('current_country', JSON.stringify({ area_code: res.data.current_country.code, iso_code: res.data.current_country.iso_code }))
     }, 3000);
   }
-
 };
 
 export default new Router({
