@@ -1894,6 +1894,24 @@ const resetLogin = async () => {
 
 
 
+const getCurrenciesArray = () => {
+  // 03、05投放链接支持4地区支付
+  if (getEndStr(getFBChannel(), 2) === '03' || getEndStr(getFBChannel(), 2) === '05') {
+    return [
+      { iso_code: 'MY', area_code: '60', symbol: 'RM' },
+      { iso_code: 'SG', area_code: '65', symbol: 'SGD' },
+      { iso_code: 'TW', area_code: '886', symbol: 'NT$' },
+      { iso_code: 'HK', area_code: '852', symbol: 'HKD' },
+    ]
+  } else {
+    return [
+      { iso_code: 'MY', area_code: '60', symbol: 'RM' },
+      { iso_code: 'TW', area_code: '886', symbol: 'NT$' },
+    ]
+  }
+}
+
+
 
 
 
@@ -1982,5 +2000,6 @@ export default {
   isTiktokChannel,
   isFBChannel,
   resetLogin,
+  getCurrenciesArray,
 };
 
