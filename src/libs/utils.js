@@ -6,7 +6,7 @@
  * @Description: 工具函数
  */
 import moment from 'dayjs';
-// import request from '../api/request';
+import request from '../api/request';
 
 /**
  * @description: 获取FB代理渠道
@@ -175,7 +175,7 @@ const getFBChannel = () => {
 };
 
 const isGoogleChannel = () => {
-  return getFBChannel().indexOf('google')> -1;
+  return getFBChannel().indexOf('google') > -1;
 }
 
 const isTiktokChannel = () => {
@@ -189,7 +189,7 @@ const isFBChannel = () => {
 
 
 const isShowCombine = () => {
-  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "google_enjoy03",  "google_ads03", "mlzyy03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05", "blue03", "blue05"];
+  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "google_enjoy03", "google_ads03", "mlzyy03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05", "blue03", "blue05"];
 };
 
 /**
@@ -998,7 +998,7 @@ const copyToClipboard = text => {
  * @return {*}
  */
 const isProd = () => {
-  return window.location.href.indexOf('//test-') < 0 && window.location.href.indexOf('//1') < 0 
+  return window.location.href.indexOf('//test-') < 0 && window.location.href.indexOf('//1') < 0
 };
 
 //获取UA信息返回数组
@@ -1341,7 +1341,7 @@ setTimeout(() => {
   } else {
     console.log('google渠道')
     firebase.initializeApp(firebaseConfig1);
-  } 
+  }
   analytics = firebase.analytics();
 }, 0);
 
@@ -1366,7 +1366,7 @@ const firebaseLogEvent = (
     device_id: getDeviceId() || '',
     args: args_,
   };
-  console.log('----firebase start-----',firebase);
+  console.log('----firebase start-----', firebase);
   console.log('这是firebase埋点', JSON.stringify(outer_obj));
   console.log('----firebase end-----');
   if (!isProd()) {
@@ -1807,7 +1807,7 @@ const getcookieInfo = (key) => {
     const [key, value] = cookie.split("=");
     cookieMap.set(key, value);
   })
-  if(key === '_ttp'){
+  if (key === '_ttp') {
     gcyLog(`通过cookie开始获取_ttp`, {
       mlxz_action_desc: `_ttp:${cookieMap.get(key)}`,
     });
@@ -1817,7 +1817,7 @@ const getcookieInfo = (key) => {
 };
 
 const getLocalStorage = (key) => {
-  if(key === 'ttclid'){
+  if (key === 'ttclid') {
     gcyLog(`通过LocalStorage开始获取ttclid`, {
       mlxz_action_desc: `ttclid:${localStorage.getItem(key)}`,
     });
@@ -1868,7 +1868,7 @@ const setGoogleClientIdByCookie = () => {
   } else {
     gcyLog(`通过cookie开始获取google_client_id`, {
       mlxz_action_desc: `google_client_id获取失败`,
-    }); 
+    });
     localStorage.setItem('google_client_id', `675248207.${Math.floor(Math.random() * 9000000000) + 1000000000}`);
   }
 }
@@ -1881,6 +1881,15 @@ const setGoogleClientId = () => {
     console.log('Client ID: ' + clientID);
     localStorage.setItem('google_client_id', clientID);
   });
+}
+
+const resetLogin = async () => {
+  const login_res = await request('/web/login/visitor', 'POST', {});
+  if (login_res.status !== 1000) return;
+  localStorage.setItem('mlxz_outer_open_uid', login_res.data.open_uid);
+  localStorage.setItem('mlxz_outer_access_token', login_res.data.access_token);
+  localStorage.setItem('mlxz_outer_visitor_id', login_res.data.visitor_id);
+  location.reload();
 }
 
 
@@ -1972,5 +1981,6 @@ export default {
   isGoogleChannel,
   isTiktokChannel,
   isFBChannel,
+  resetLogin,
 };
 

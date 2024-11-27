@@ -7,9 +7,9 @@
  */
 import crypto from 'crypto';
 import utils from '../libs/utils';
-const { getRequestParams, getUp, getLanguage } = utils;
+// const { getRequestParams, getUp, getLanguage } = utils;
 
-let isAndroid = utils.isAndroid();
+// let isAndroid = utils.isAndroid();
 
 /**
  * @description: 签名
