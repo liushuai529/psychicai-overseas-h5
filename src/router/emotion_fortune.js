@@ -33,7 +33,7 @@ const visitorLoginAPI = async (data, callback) => {
     // console.log('首次登录');
   }
   // if (utils.getEndStr(utils.getFBChannel(), 2) === '03' || utils.getEndStr(utils.getFBChannel(), 2) === '05') {
-    
+
   // } else {
   //   callback()
   // }
@@ -53,10 +53,12 @@ const visitorLoginAPI = async (data, callback) => {
 const validateCurrentCountry = () => {
   let currencies = [
     { iso_code: 'MY', area_code: '60', symbol: 'RM' },
+    { iso_code: 'SG', area_code: '65', symbol: 'S$' },
     { iso_code: 'TW', area_code: '886', symbol: 'NT$' },
+    { iso_code: 'HK', area_code: '852', symbol: 'HKD' },
   ];
   const current_country = JSON.parse(localStorage.getItem('current_country'))
-  if(!currencies.find(item => item.iso_code === current_country.iso_code)) {
+  if (!currencies.find(item => item.iso_code === current_country.iso_code)) {
     localStorage.setItem('current_country', JSON.stringify({ iso_code: 'MY', area_code: '60' }))
   }
 }
