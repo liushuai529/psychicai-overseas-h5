@@ -487,6 +487,28 @@ for (let pagePath of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
   webpackConfig.plugins.push(new HtmlWebpackPlugin(htmlPluginConfig));
 }
 
+// gatherone03代理
+for (let pagePath of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  let pageName = pagePath.split('/')[0];
+  let htmlPluginConfig = {
+    filename: path.resolve(__dirname, '../dist/gatherone03/' + pageName + '.html'),
+    template: 'template/index_gatherone03.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pagePath in webpackConfig.entry) {
+    htmlPluginConfig.chunks = ['manifest', 'vendor', pagePath];
+    htmlPluginConfig.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(htmlPluginConfig));
+}
+
 // blue03代理
 for (let pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
