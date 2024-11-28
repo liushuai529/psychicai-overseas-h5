@@ -6,22 +6,9 @@
       'cn-bg': language === 'zh-CN',
       'tw-bg': language === 'zh-TW',
     }">
-
-      <!-- <div v-if="!is_channel_01 && !is_channel_05" @click="backHome()" :class="['back-box']" :style="getStyle">
-        <img src="../../../assets/img/common/baogao_icon_home.webp" class="left" alt="" />
-        <div class="right">{{ is_cn ? '首页' : '首頁' }}</div>
-      </div> -->
-      <!-- <canvas id="bg-svga"></canvas> -->
-      <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order"
-        alt="" />
-      <div :class="['info', utils.showEmail() ? 'info-height' : '', is_cn? 'info-cn': 'info-tw']">
+      <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
+      <div :class="['info', utils.showEmail() ? 'info-height' : '', is_cn ? 'info-cn' : 'info-tw']">
         <div class="info-content">
-
-
-
-
-
-
           <div class="item-container mt-100">
             <div class="info-item">
               <div class="left input-container">
@@ -29,7 +16,6 @@
                 <div class="info-input">
                   <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
                 </div>
-
               </div>
               <div class="sex-container">
                 <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
@@ -47,7 +33,6 @@
                     {{ picker_date || $t('birth-placeholder') }}
                   </div>
                 </div>
-
               </div>
               <div class="birth-container">
                 <img src="../../../assets/img/emotion_fortune_2025/icon_rili.webp" @click="openPicker" />
@@ -55,19 +40,13 @@
             </div>
             <div class="divider-line"></div>
           </div>
-
-
-
           <div id="info-btn" class="btn huxi-btn" @click="check">
             <img :src="is_cn ? cn_home_btn : tw_home_btn" />
           </div>
-
-
-
-
           <!-- <div class="top-bg"> -->
           <div class="info-bottom">
-            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion_fortune_2025/login_icon_choose.webp"
+            <img v-if="privacyChecked" class="info-check"
+              src="../../../assets/img/emotion_fortune_2025/login_icon_choose.webp"
               @click="privacyChecked = !privacyChecked" />
             <img v-else class="info-check" src="../../../assets/img/emotion_fortune_2025/login_icon_choose_no.webp"
               @click="privacyChecked = !privacyChecked" />
@@ -75,87 +54,10 @@
             <span @click="toPrivacy('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
             <span @click="toPrivacy('privacy.html')">{{
               $t('privacy-policy')
-            }}</span>
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <!-- <div class="info-item mt-100">
-            <div class="info-label">{{ $t('name-label') }}:</div>
-            <div class="info-input">
-              <input type="text" id="username" v-model="username" :placeholder="$t('name-placeholder')" />
-            </div>
-          </div>
-          <div class="divider-line"></div>
-          <div class="info-item">
-            <div class="info-label">{{ $t('birth-label') }}:</div>
-            <div class="info-input">
-              <div class="info-birth" :style="{
-                color: picker_date ? '#333' : 'rgba(51, 51, 51, 0.5)',
-              }" @click="openPicker">
-                {{ picker_date || $t('birth-placeholder') }}
-              </div>
-              <img @click="openPicker" class="info-arrow" src="../../../assets/img/emotion_v2/new/icon_you.webp" />
-            </div>
-          </div>
-          <div class="divider-line"></div>
-
-          <div class="info-item">
-            <div class="info-label">{{ $t('sex-label') }}:</div>
-            <div class="info-input">
-              <div class="sex-tab left-tab" :class="{ active: sex === '1' }" ref="sex_male" @click="changeSex(1)">
-                <div class="sex-text">男</div>
-              </div>
-              <div class="sex-tab" :class="{ active: sex === '0' }" ref="sex_female" @click="changeSex(0)">
-                <div class="sex-text">女</div>
-              </div>
-            </div>
-
-          </div>
-          <div v-if="utils.showEmail()" class="divider-line"></div>
-
-          <div v-if="utils.showEmail()" class="info-item">
-            <div class="info-label">{{ $t('email-label') }}:</div>
-            <div class="info-input">
-              <input type="text" id="email" v-model="email" :placeholder="$t('email-placeholder')" />
-            </div>
-          </div>
-
-          <img id="info-btn" class="info-btn emo-btn" :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
-            @click="check" />
-          <div class="info-bottom">
-            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/emotion/xieyi-checked.webp"
-              @click="privacyChecked = !privacyChecked" />
-            <img v-else class="info-check" src="../../../assets/img/emotion/xieyi-no-check.webp"
-              @click="privacyChecked = !privacyChecked" />
-            {{ $t('check-label') }}
-            <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
-            <span @click="link('privacy.html')">{{
-              $t('privacy-policy')
               }}</span>
-          </div> -->
+          </div>
         </div>
       </div>
-      <!-- <div class="card-box">
-      <canvas id="qian"></canvas>
-    </div> -->
       <img class="card mt-34" :src="is_cn ? cn_icon_0 : tw_icon_0" />
       <img class="card" :src="is_cn ? cn_icon_1 : tw_icon_1" />
       <img class="card" :src="is_cn ? cn_icon_2 : tw_icon_2" />
@@ -169,12 +71,8 @@
         v-show="choose_time && !show_nongli"></DatetimePicker>
       <NongliPicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
-
       <NewFooter v-if="showFixedBtn" product_key="h5_emotion2025" />
       <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2025" />
-      <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"
-        e_id="10006" c_id="-10021" c_name="click_2024lovely_discount1" />
-    
     </div>
   </div>
 </template>
@@ -199,12 +97,6 @@ import HeaderNotice from '../../../components/headerNotice.vue';
 
 import DatetimePicker from '../../../components/DatetimePicker';
 import NongliPicker from '../../../components/NongliPicker';
-import {
-  reportEnum,
-  reportName,
-  path_enums,
-  maidianEnum,
-} from '../../../libs/enum.js';
 
 import cn_home_btn from '../../../assets/img/emotion_fortune_2025/cn/home_btn_cn.webp';
 import tw_home_btn from '../../../assets/img/emotion_fortune_2025/tw/home_btn_tw.webp';
@@ -220,7 +112,6 @@ import cn_history_order from '../../../assets/img/emotion_fortune_2025/cn/home_l
 import tw_history_order from '../../../assets/img/emotion_fortune_2025/tw/home_lsdd_tw.webp';
 
 import HotProduct from '../../../components/hotProduct.vue';
-import PopNotice from '../../../components/PopNotice.vue';
 
 import cn_icon_0 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_huode_cn.webp';
 import cn_icon_1 from '../../../assets/img/emotion_fortune_2025/cn/home_img_details_01_cn.webp';
@@ -239,14 +130,10 @@ import tw_icon_2 from '../../../assets/img/emotion_fortune_2025/tw/home_img_deta
 import tw_icon_3 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_03_tw.webp';
 import tw_icon_4 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_04_tw.webp';
 import tw_icon_5 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_05_tw.webp';
-import cn_info from '../../../assets/img/emotion_v2/new/cn/info.webp';
-import tw_info from '../../../assets/img/emotion_v2/new/tw/info.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 
 
 
-// 组合测算相关参数
-let is_combine = utils.getQueryString('is_combine');
 const tipsArr5 = {
   'zh-CN': '订单创建中...',
   'zh-TW': '訂單創建中...',
@@ -259,7 +146,6 @@ export default {
     combinePayPop,
     HotProduct,
     HomeFooter,
-    PopNotice,
     FixedOrder,
     NewFooter,
     NavigationBar,
@@ -282,8 +168,6 @@ export default {
       tw_icon_5,
       cn_history_order,
       tw_history_order,
-      cn_info,
-      tw_info,
       utils,
       boy,
       girl,
@@ -304,11 +188,8 @@ export default {
       choose_time: false,
       show_nongli: false,
       // 底部弹出popup版本所需数据
-      visible: false,
-      product_id: 2,
       product_key: 'h5_emotion2025',
       query_user_string: '',
-      is_combine,
       has_pay: '',
       showFixedBtn: false,
       //
@@ -316,104 +197,21 @@ export default {
       cn_home_btn,
       tw_home_btn,
       is_show_btn: true,
-      pay_modal: false,
-      product_price: '',
-
-      // 挽留弹窗
-      is_show_notice: false, // 是否展示挽留弹窗
-      count_down: 0, // 挽留弹窗倒计时
-      fix_order_info: null, //最新一个订单信息
-      new_order_key: '',
-      reportName,
-      last_order: null,
-      api_time: 0,
-      local_time: 0,
-      last_title: '',
-      timer: null,
-      comboAttachData: null, //套餐未使用报告信息
+      duration_time: {
+        entry_time: 0,
+        exit_time: 0,
+      }
     };
   },
   computed: {
-    is03_series() {
-      return utils.getEndStr(utils.getFBChannel(), 2) ==='03'
-    },
-    is_show_fb_notice() {
-      return utils.isFBContainer() && utils.getFBChannel().indexOf('02') > -1;
-    },
-    getStyle() {
-      return
-      //有未使用报告引导框、没有支付提醒tips
-      if (
-        this.comboAttachData &&
-        this.comboAttachData.product_key &&
-        !this.has_pay
-      ) {
-        console.warn('有未使用报告引导框、没有支付提醒tips');
-        return 'top: 0.5rem';
-      } else if (
-        this.comboAttachData &&
-        this.comboAttachData.product_key &&
-        this.has_pay
-      ) {
-        //有未使用报告引导框、有支付提醒tips
-        console.warn('有未使用报告引导框、有支付提醒tips');
-        return 'top: 0.7rem';
-      } else if (
-        !this.comboAttachData && this.has_pay && this.is_show_fb_notice
-      ) {
-        console.warn('没有有未使用报告引导框、有支付提醒tip、有FB引导');
-        //没有有未使用报告引导框、有支付提醒tips
-        return 'top: 1.2rem';
-      } else if (
-        !this.comboAttachData && this.has_pay
-      ) {
-        console.warn('没有有未使用报告引导框、有支付提醒tips');
-        //没有有未使用报告引导框、有支付提醒tips
-        return 'top: 0.7rem';
-      } else if (
-        !this.comboAttachData && this.is_show_fb_notice
-      ) {
-        console.warn('没有有未使用报告引导框、有FB引导');
-        //没有有未使用报告引导框、有FB引导
-        return 'top: 0.7rem';
-      }
-    },
-    //套餐支付显示逻辑
-    is_show_combination() {
-      return ['enjoy01', 'panda02'].includes(
-        utils.getFBChannel()
-      );
-    },
-    //当前报告类型与引导类型不同，则显示
-    is_show_current_combination() {
-      return this.comboAttachData.product_key !== this.product_key;
-    },
     productList() {
       return this.$store.state.common.productList;
     },
     is_cn() {
       return this.language === 'zh-CN';
     },
-    is_show_hot() {
-      return ['enjoy02', 'panda02'].includes(utils.getFBChannel());
-    },
-   
-    local_title() {
-      console.log('getTitle',this.new_order_key)
-      return utils.getTitle(this.new_order_key);
-    },
-    is_channel_01() {
-      return utils.getFBChannel().indexOf('01') > -1;
-    },
-    is_channel_05() {
-      return utils.getFBChannel().indexOf('05') > -1;
-    },
   },
   watch: {
-    is_show_notice(val) {
-      if (val) {
-      }
-    },
     username(val) {
       if (val) {
         let new_ = val.trim();
@@ -421,67 +219,45 @@ export default {
         if (!regex.test(new_)) {
           this.username = new_.replace(/[^\u4E00-\u9FA5A-Za-z0-9]/g, '');
         }
-
         if (new_.length > 20) {
           this.username = new_.slice(0, 20);
         }
       }
     },
-    is_show_notice(val) {
-      if (val) {
-        utils.firebaseLogEvent(
-          '10006',
-          '-10020',
-          'view_2024lovely_discount1',
-          'view',
-          {
-            args_name: 'view_2024lovely_discount1',
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
-    },
   },
   created() {
-    
-    this.showComboAttach();
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
-        this.showComboAttach();
-      }
-    });
-   
     this.$store.dispatch('common/getProduction');
     utils.firebaseLogEvent(
-      '10006',
+      '10017',
       '-10001',
-      'page_view_2024lovely_main',
+      'page_view_LOVE2025_end_main',
       'page_view',
       {
-        args_name: 'page_view_2024lovely_main',
         channel: utils.getFBChannel(),
       }
     );
     const { has_pay } = this.$route.query;
     this.has_pay = has_pay ? has_pay : '';
-    // 埋点事件上传
-    // reportBuryingEventAPI({
-    //   event: 'page_view_2024lovely_main',
-    //   channel: utils.getFBChannel(),
-    // })
-    //   .then()
-    //   .catch(err => {
-    //     console.warn(`埋点事件上传失败${err}`);
-    //   });
   },
-  beforeDestroy() {
-    if (this.timer) {
-      clearInterval(this.timer);
+  destroyed() {
+    this.duration_time.exit_time = new Date().getTime();
+    if (this.duration_time.entry_time) {
+      utils.firebaseLogEvent(
+        '10017',
+        '-10002',
+        'view_LOVE2025_end_main',
+        'view',
+        {
+          channel: utils.getFBChannel(),
+          time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
+        }
+      );
     }
   },
   mounted() {
     //svga动画预加载
     // this.preloadSVGA()
+    this.duration_time.entry_time = new Date().getTime()
     if (utils.isProd()) {
       try {
         utils.isFBChannel() && fbq && fbq('trackCustom', 'CustomChannel', {
@@ -497,9 +273,7 @@ export default {
         console.log('no fbq:', err);
       }
     }
-    if(!this.is03_series) {
-      this.showNoticePop();
-    }
+
 
     // 赋默认值
     let storaged_userInfo = window.localStorage.getItem(
@@ -561,8 +335,6 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
-    // self.loadBg('#bg-svga', self.is_cn ? cn_header : tw_header);
-    // self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
   },
   methods: {
     setAnimation() {
@@ -578,37 +350,6 @@ export default {
       image.onerror = function () {
         console.error('Failed to preload SVGA');
       };
-    },
-    //顶部引导横幅，开始测算
-    async startCalculateClick() {
-      //顶部套餐报告与当前报告不同
-      // if(this.comboAttachData.product_key !== this.product_key) {
-      //   location.href = `${path_enums[product_key]}.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id}&product_key=${this.comboAttachData.product_key}`;
-      // } else {
-
-      // }
-      location.href = `${path_enums[this.comboAttachData.product_key]
-        }.html#/?has_pay=SUCCESS&order_id=${this.comboAttachData.order_id
-        }&product_key=${this.comboAttachData.product_key}`;
-    },
-    //请求接口，是否展示引导标识
-    async showComboAttach() {
-      const res = await getComboAttachAPI();
-      if (res.status !== 1000) return;
-      if (res.data && res.data.combine) {
-        //组合套餐中未测算的报告
-        let sub_orders = res.data.combine.sub_orders.find(
-          item => !item.extra_ce_suan
-        );
-        //获取到未测算的报告信息
-        this.comboAttachData = {
-          product_id: sub_orders.product_id,
-          order_id: sub_orders.order_id,
-          product_key: sub_orders.product_key,
-        };
-      } else {
-        this.comboAttachData = null;
-      }
     },
     // 获取订单ID
     getOrderId(val) {
@@ -782,12 +523,11 @@ export default {
       let time_obj = this.picker_date_obj;
       if (username == '') {
         utils.firebaseLogEvent(
-          '10006',
-          '-10002',
-          'click_2024lovely_main',
+          '10017',
+          '-10003',
+          'click_LOVE2025_end_main',
           'click',
           {
-            args_name: 'click_2024lovely_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -804,12 +544,11 @@ export default {
       // }
       if (time_obj == null) {
         utils.firebaseLogEvent(
-          '10006',
-          '-10002',
-          'click_2024lovely_main',
+          '10017',
+          '-10003',
+          'click_LOVE2025_end_main',
           'click',
           {
-            args_name: 'click_2024lovely_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -819,12 +558,11 @@ export default {
       }
       if (!this.privacyChecked) {
         utils.firebaseLogEvent(
-          '10006',
-          '-10002',
-          'click_2024lovely_main',
+          '10017',
+          '-10003',
+          'click_LOVE2025_end_main',
           'click',
           {
-            args_name: 'click_2024lovely_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -835,12 +573,11 @@ export default {
 
       if (email == '' && utils.showEmail()) {
         utils.firebaseLogEvent(
-          '10006',
-          '-10002',
-          'click_2024lovely_main',
+          '10017',
+          '-10003',
+          'click_LOVE2025_end_main',
           'click',
           {
-            args_name: 'click_2024lovely_main',
             channel: utils.getFBChannel(),
             click_type: 'error',
           }
@@ -850,26 +587,6 @@ export default {
         dom.focus();
         return;
       }
-      // if(!utils.checkEmail(email) && utils.showEmail()) {
-      //   utils.firebaseLogEvent(
-      //     '10006',
-      //     '-10002',
-      //     'click_2024lovely_main',
-      //     'click',
-      //     {
-      //       args_name: 'click_2024lovely_main',
-      //       channel: utils.getFBChannel(),
-      //       click_type: 'error',
-      //     }
-      //   );
-      //   Toast(this.$t('email-tips-1'));
-      //   let dom = document.getElementById('email');
-      //   dom.focus();
-      //   return;
-      // }
-
-
-
 
       let querystring = '';
       querystring += username;
@@ -893,18 +610,17 @@ export default {
       let path = 'detail?querystring=' + querystring;
       this.query_user_string = querystring;
       utils.firebaseLogEvent(
-        '10006',
-        '-10002',
-        'click_2024lovely_main',
+        '10017',
+        '-10003',
+        'click_LOVE2025_end_main',
         'click',
         {
-          args_name: 'click_2024lovely_main',
           channel: utils.getFBChannel(),
           click_type: 'screen_tracking',
         }
       );
       if (utils.isProd()) {
-        
+
         try {
           utils.isFBChannel() && fbq && fbq('track', 'Lead');
         } catch (err) {
@@ -913,7 +629,7 @@ export default {
         let same_ = this.productList.find(
           item => item.product_key === this.product_key
         );
-        const { price, currency_type } = same_; 
+        const { price, currency_type } = same_;
         utils.isGoogleChannel() && gtag && gtag("event", "generate_lead", {
           currency: currency_type,
           value: price,
@@ -939,7 +655,6 @@ export default {
         let same_ = this.productList.find(
           item => item.product_key === this.product_key
         );
-        const { price, unit, product_id, google_goods_id, product_key } = same_;
         // 缓存最新一个订单信息
         localStorage.setItem('mlxz_fixed_order_info', querystring);
         localStorage.setItem('mlxz_fixed_order_key', this.product_key);
@@ -960,35 +675,6 @@ export default {
           `mlxz_show_notice_${this.product_key}`,
           num_ ? 2 : 1
         );
-        this.product_price = price || '-';
-        this.$router.push({ path });
-        return;
-        if (utils.isVersionMoreThan('1.1.1')) {
-          this.pay_modal = true;
-          return;
-        }
-
-        let params = {
-          pay_method: 'google_pay',
-          product_key: product_key,
-          platform: 'ANDROID',
-          product_id: product_id,
-          extra_ce_suan: this.getExtra(product_key, querystring),
-        };
-        payOrderAPI(params).then(res => {
-          if (res.status === 1000) {
-            Indicator.close();
-            this.order_id = res.data.id;
-            window.psychicai_client.onWebPayDialog(
-              res.data.id,
-              price + '',
-              unit,
-              google_goods_id,
-              reportEnum[product_key]
-            );
-          }
-        });
-        return;
         this.$router.push({ path });
       }
     },
@@ -1070,142 +756,6 @@ export default {
 
       return params;
     },
-
-    async backHome() {
-      utils.firebaseLogEvent(
-        '10006',
-        '-10011',
-        'click_2024lovely_main_home',
-        'click',
-        {
-          args_name: 'click_2024lovely_main_home',
-          channel: utils.getFBChannel(),
-        }
-      );
-      await utils.asleep(600);
-      let check_event = utils.getQueryStr('check_event');
-      if (!check_event && utils.isProd()) {
-        location.href = 'index.html';
-      } else {
-        window.open('index.html', '_blank');
-      }
-    },
-    // 展示挽留弹窗  通过定时器
-    showNoticePop() {
-      this.timer = setInterval(() => {
-        this.fix_order_info = localStorage.getItem('mlxz_fixed_order_info');
-        this.new_order_key = localStorage.getItem('mlxz_fixed_order_key');
-        let is_show_notice = localStorage.getItem(
-          `mlxz_show_notice_${this.product_key}`
-        );
-        this.is_show_notice = is_show_notice
-          ? +is_show_notice === 1
-            ? true
-            : false
-          : false;
-        let time_ = localStorage.getItem(`mlxz_count_down_${this.product_key}`);
-        let set_time_ = (5 * 60 + 48) * 1000 + 280;
-        this.count_down = +time_ || 0;
-        // this.count_down = time_ ? (set_time_ > +time_ ? set_time_ : +time_) : 0;
-        this.local_time =
-          +localStorage.getItem('mlxz_fixed_local_order_time') || 0;
-      }, 1000);
-    },
-    // 关闭当前报告的挽留弹窗
-    closeNotice() {
-      localStorage.setItem(`mlxz_show_notice_${this.product_key}`, 2);
-      localStorage.removeItem(`mlxz_count_down_${this.product_key}`);
-      this.is_show_notice = false;
-    },
-
-   
-    logDiscountEvent() {
-      const { ext, pay_method, product_key, product_id, payment } =
-        this.last_order;
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[product_key];
-      utils.firebaseLogEvent(main_id, view_id, view_name, 'view', {
-        args_name: view_name,
-        channel: utils.getFBChannel(),
-      });
-    },
-    // api订单下单
-    async checkOrder() {
-      const {
-        ext,
-        pay_method,
-        product_key,
-        product_id,
-        payment,
-        trade_currency,
-        trade_pay_type,
-        trade_target_org,
-      } = this.last_order;
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[product_key];
-      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
-        args_name: click_name,
-        channel: utils.getFBChannel(),
-      });
-      Indicator.open(tipsArr5[utils.getLanguage()]);
-
-      if (this.last_order.status === 'PAYED') return;
-      let params = {
-        pay_method: pay_method,
-        product_key: product_key,
-        product_id: product_id,
-        platform: 'WEB',
-        extra_ce_suan: ext,
-        trade_pay_type,
-        trade_target_org,
-        fb_param: {
-          fbc: utils.getcookieInfo('_fbc'),
-          fbp: utils.getcookieInfo('_fbp'),
-          external_id: localStorage.getItem('mlxz_outer_visitor_id'),
-        },
-        callback_url: `${location.origin}/${utils.getFBChannel()}/${path_enums[product_key]
-          }.html#/result?path=${path_enums[product_key]
-          }&report_price=${payment}&discount_pay=1&currency_type=${trade_currency || 'MYR'}`,
-      };
-
-      const res = await payOrderAPI(params);
-      localStorage.removeItem('mlxz_fixed_api_order_id');
-      localStorage.removeItem('mlxz_fixed_api_order_time');
-      Indicator.close();
-      if (res.status !== 1000) return;
-
-      await utils.asleep(1000);
-      location.href = res.data.pay_url;
-    },
-    jumpOrder() {
-      const { main_id, click_id, view_id, click_name, view_name } =
-        maidianEnum[this.new_order_key];
-      utils.firebaseLogEvent(main_id, click_id, click_name, 'click', {
-        args_name: click_name,
-        channel: utils.getFBChannel(),
-      });
-      if (this.new_order_key === 'h5_marriage') {
-        let marry_info = JSON.parse(
-          localStorage.getItem('mlxz_user_info_h5_marriage')
-        );
-        let male_str = marry_info.male_str;
-        let female_str = marry_info.female_str;
-        let path = `detail?querystring=${marry_info.user_info}&male_str=${male_str}&female_str=${female_str}
-&pay_modal=1&use_fixed_time=1&discount_pay=1`;
-        location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
-          }.html#/${path}`;
-
-        return;
-      }
-      let path =
-        'detail?querystring=' +
-        this.fix_order_info +
-        '&pay_modal=1' +
-        '&use_fixed_time=1&discount_pay=1';
-
-      location.href = `${location.origin}/${utils.getFBChannel()}/${path_enums[this.new_order_key]
-        }.html#/${path}`;
-    },
   },
 };
 </script>
@@ -1272,12 +822,14 @@ export default {
 
   .info-cn {
     background-image: url('../../../assets/img/emotion_fortune_2025/cn/home_cardbj_xinxi_cn.webp');
-    background-size: 100% 100%; 
+    background-size: 100% 100%;
   }
+
   .info-tw {
     background-image: url('../../../assets/img/emotion_fortune_2025/tw/home_cardbj_xinxi_tw.webp');
     background-size: 100% 100%;
   }
+
   .info {
     justify-content: center;
     position: relative;
@@ -1426,6 +978,7 @@ export default {
       .mt-100 {
         margin-top: 1rem;
       }
+
       .info-item {
         // margin-bottom: 0.2rem;
         width: 6.5rem;
@@ -1551,6 +1104,7 @@ export default {
           height: 0.3rem;
           margin-right: 0.12rem;
         }
+
         span {
           color: #DC0E4D;
         }

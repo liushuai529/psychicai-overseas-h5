@@ -258,7 +258,6 @@ const year_data = {
   showFixedBtn: false,
   is_show_btn: true,
   pay_modal: false,
-  product_price: '',
   cn_new_user_btn,
   tw_new_user_btn,
   cn_header_svga:
@@ -419,7 +418,6 @@ export default {
     },
 
     mounted_year() {
-      // this.showNoticePop();
 
       // 赋默认值
       let storaged_userInfo = localStorage.getItem('year_of_lucky_info');
