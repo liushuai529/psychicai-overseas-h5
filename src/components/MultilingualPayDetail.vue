@@ -244,9 +244,9 @@ export default {
       test_ga_upload: '',//拼接参数
       test_tt_upload: '',
       currencies: [
-        { iso_code: 'MY', area_code: '60', symbol: 'RM' },
+        { iso_code: 'MY', area_code: '60', symbol: 'MYR' },
         { iso_code: 'SG', area_code: '65', symbol: 'SGD' },
-        { iso_code: 'TW', area_code: '886', symbol: 'NT$' },
+        { iso_code: 'TW', area_code: '886', symbol: 'TWD' },
         { iso_code: 'HK', area_code: '852', symbol: 'HKD' },
       ],
     };

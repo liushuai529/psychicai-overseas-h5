@@ -1905,8 +1905,8 @@ const getCurrenciesArray = () => {
     ]
   } else {
     return [
-      { iso_code: 'MY', area_code: '60', symbol: 'RM' },
-      { iso_code: 'TW', area_code: '886', symbol: 'NT$' },
+      { iso_code: 'MY', area_code: '60', symbol: 'MYR' },
+      { iso_code: 'TW', area_code: '886', symbol: 'TWD' },
     ]
   }
 }
