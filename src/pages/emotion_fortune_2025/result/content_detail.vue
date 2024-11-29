@@ -230,12 +230,12 @@ export default {
 }
 
 .zh-CN-item5-bg {
-  background: url('../../../assets/img/emotion_fortune_2025/result_img_cardbj.webp') no-repeat;
+  background: url('../../../assets/img/emotion_fortune_2025/result_img_cardbj_long.webp') no-repeat;
 
 }
 
 .zh-TW-item5-bg {
-  background: url('../../../assets/img/emotion_fortune_2025/result_img_cardbj.webp') no-repeat;
+  background: url('../../../assets/img/emotion_fortune_2025/result_img_cardbj_long.webp') no-repeat;
 }
 
 .zh-CN-item6-bg {

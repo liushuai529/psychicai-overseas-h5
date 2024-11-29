@@ -30,8 +30,17 @@ const visitorLoginAPI = async (data, callback) => {
   checkCurrentCountry(callback)
 };
 
+const validateCurrentCountry = () => {
+  let currencies = utils.getCurrenciesArray();
+  const current_country = JSON.parse(localStorage.getItem('current_country'))
+  if(!currencies.find(item => item.iso_code === current_country.iso_code)) {
+    localStorage.setItem('current_country', JSON.stringify({ iso_code: 'MY', area_code: '60' }))
+  }
+}
+
 const checkCurrentCountry = async (callback) => {
   if (localStorage.getItem('current_country')) {
+    validateCurrentCountry();
     callback && callback();
   } else {
     callback && callback(); 

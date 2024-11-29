@@ -18,17 +18,16 @@
       </BaziTable>
     </div>
     <PayItem product_key="h5_emotion2025" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
-    <div :class="['method-box', 'method-height', is_cn? 'box-bg-cn': 'box-bg-tw']">
+    <div :class="['method-box', 'method-height', is_cn ? 'box-bg-cn' : 'box-bg-tw']">
       <!-- <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" /> -->
-      <MarriagesPayDetail  className="pay-method" ref="payDetail" :product_key="product_key" :btn_url="pay_btn"
-        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10006"
-        c_view_id="-10005" e_view_name="view_2024lovely_pay" a_view_token="184kba" c_click_id="-10006"
-        e_click_name="click_2024lovely_pay" a_click_token="2rov44" />
-     
+      <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key" :btn_url="pay_btn"
+        :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10017"
+        c_click_id="-10006" e_click_name="click_LOVE2025_end_pay" a_click_token="2rov44" />
+
     </div>
     <!-- <GejuInfo v-if="is_show_combinationSpecial02" style="margin-bottom: 0.36rem" :product_key="product_key"
       :user_desc="[mingge_desc]" :dataList="[gejujiedu]" /> -->
-   
+
     <img class="module" :src="is_cn ? cn_bg_0 : tw_bg_0" />
     <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" />
     <img class="module" :src="is_cn ? cn_bg_2 : tw_bg_2" />
@@ -40,7 +39,7 @@
     <NewFooter product_key="h5_emotion2025" />
 
     <div class="footer"></div>
-   
+
     <img @click="payOrder" :class="['emo-btn', 'fix-btn']" :src="btn_url" />
     <HomeFooter product_key="h5_emotion2025" />
     <FixedDiscountModal product_key="h5_emotion2025" @change_discount_modal="change_discount_modal" />
@@ -57,8 +56,7 @@ import pay_btn from '../../../assets/img/emotion_fortune_2025/pay_btn.webp';
 
 
 
-import img_home_btu_zixun_cn from '../../../assets/img/emotion_marriages/cn/img_home_btu_zixun_cn.webp'
-import img_home_btu_zixun_tw from '../../../assets/img/emotion_marriages/tw/img_home_btu_zixun_tw.webp'
+
 
 
 import PayCard from '../../../components/PayCard.vue';
@@ -71,10 +69,7 @@ import BaziTable from '../../../components/baziTable.vue';
 import { Downloader, Parser, Player } from 'svga.lite';
 import mig_img_topbj_cn from '../../../assets/img/emotion_fortune_2025/cn/mig_img_topbj_cn.webp';
 import mig_img_topbj_tw from '../../../assets/img/emotion_fortune_2025/tw/mig_img_topbj_tw.webp';
-import cn_zhong3 from '../../../assets/img/emotion/new/zhong_3.webp';
-import tw_zhong3 from '../../../assets/img/emotion/new/tw/zhong_3.webp';
-import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
-import tw_zhong4 from '../../../assets/img/emotion/new/tw/zhong_4.webp';
+
 import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
@@ -143,12 +138,6 @@ export default {
       tw_bg_5,
       tw_bg_6,
       tw_bg_7,
-      img_home_btu_zixun_cn,
-      img_home_btu_zixun_tw,
-      cn_zhong3,
-      cn_zhong4,
-      tw_zhong3,
-      tw_zhong4,
       mig_img_topbj_cn,
       mig_img_topbj_tw,
       product_id: 25,
@@ -195,6 +184,10 @@ export default {
       showAnimation: true,//过渡动画标识
       showPayGuideModal: false,//待支付蒙版
       show_discount_modal: false,//低价折扣弹窗
+      duration_time: {
+        entry_time: 0,
+        exit_time: 0,
+      },
     };
   },
   watch: {
@@ -264,12 +257,11 @@ export default {
   },
   async created() {
     utils.firebaseLogEvent(
-      '10006',
-      '-10003',
-      'page_view_2024lovely_mid',
+      '10017',
+      '-10004',
+      'page_view_LOVE2025_end_mid',
       'page_view',
       {
-        args_name: 'page_view_2024lovely_mid',
         channel: utils.getFBChannel(),
       }
     );
@@ -280,6 +272,7 @@ export default {
   },
 
   mounted() {
+    this.duration_time.entry_time = new Date().getTime()
     window.scrollTo(0, 0);
     setTimeout(() => {
       this.$nextTick(() => {
@@ -299,22 +292,22 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
-    // self.loadBg('#qian', self.is_cn ? cn_qian : tw_qian);
-    this.$nextTick(() => {
-      let dom = document.querySelector('.fix-btn');
-      if (dom) {
-        utils.firebaseLogEvent(
-          '10006',
-          '-10019',
-          'view_2024lovely_button',
-          'view',
-          {
-            args_name: 'view_2024lovely_button',
-            channel: utils.getFBChannel(),
-          }
-        );
-      }
-    });
+  },
+
+  destroyed() {
+    this.duration_time.exit_time = new Date().getTime();
+    if (this.duration_time.entry_time) {
+      utils.firebaseLogEvent(
+        '10017',
+        '-10005',
+        'view_LOVE2025_end_duration',
+        'view',
+        {
+          channel: utils.getFBChannel(),
+          time: (this.duration_time.exit_time - this.duration_time.entry_time) / 1000
+        }
+      );
+    }
   },
   methods: {
     /**
@@ -424,21 +417,6 @@ export default {
         }，${nongli_desc}生人`;
     },
 
-    // 支付弹窗
-    showPayModal() {
-      utils.firebaseLogEvent(
-        '10006',
-        '-10004',
-        'click_2024lovely_mid',
-        'click',
-        {
-          args_name: 'click_2024lovely_mid',
-          channel: utils.getFBChannel(),
-        }
-      );
-
-      this.pay_modal = true;
-    },
     payOrder() {
       localStorage.removeItem('mlxz_count_pay_item_h5_emotion2024');
       this.$refs.payDetail.payMoney();
@@ -461,8 +439,8 @@ export default {
   align-items: center;
   padding-top: 1.14rem;
   margin-bottom: 0.49rem;
-  
-  background-size: 100% 100%; 
+
+  background-size: 100% 100%;
   border-radius: 0.16rem;
 
   .method-title-img {
@@ -471,9 +449,11 @@ export default {
     margin-top: -0.13rem;
   }
 }
+
 .box-bg-cn {
   background-image: url('../../../assets/img/emotion_fortune_2025/cn/paypage_cardbj_pay_cn.webp');
 }
+
 .box-bg-tw {
   background-image: url('../../../assets/img/emotion_fortune_2025/tw/paypage_cardbj_pay_tw.webp');
 }

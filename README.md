@@ -81,3 +81,7 @@ https://test-overseas.bjzxmlxz.com/enjoyA08/emotion_fate.html#/
 https://test-overseas.bjzxmlxz.com/enjoyA09/emotion_marriages.html#/
 https://test-overseas.bjzxmlxz.com/enjoyA10/emotion_remarriage.html#/
 https://test-overseas.bjzxmlxz.com/enjoyA11/emotion_end.html#/
+
+mlxzfortune.xyz域名投放链接
+https://test.mlxzfortune.xyz/
+https://www.mlxzfortune.xyz/

@@ -69,6 +69,9 @@ const request = (url, method, data) => {
         } else {
           Toast(res.desc);
           Indicator.close();
+          if (res.status == 1004) {
+            utils.resetLogin();
+          }
           reject(res);
         }
       })
@@ -76,7 +79,7 @@ const request = (url, method, data) => {
         if (err && err.code === 1008) {
           Indicator.close();
         } else {
-          if(err === 'Network Error') {
+          if (err === 'Network Error') {
           } else {
             Toast(err);
           }

@@ -51,18 +51,20 @@
 
       <div class="item-container">
         <div class="method-text">支付方式</div>
-        <div class="city">
-          <div style="margin-right: 0.1rem;">{{ is_cn ? '请选择币种:' : '請選擇幣種:' }}</div>
-          <img :src="getImg" @click="changeCity" />
-        </div>
-      </div>
-      <div class="item-container">
-
         <div class="buy-people">
           今日已有<span>{{ buy_people }}</span>{{ tips2 }}
         </div>
-        <div></div>
+
       </div>
+      <div class="country-box">
+        <div class="currency-list">
+          <div :class="['currency-item', { active: currency.iso_code === current_country.iso_code }]"
+            v-for="(currency, index) in currencies" @click="changeCity(currency)" :key="currency.symbol">{{
+              currency.symbol }}
+          </div>
+        </div>
+      </div>
+
       <!-- 支付方式 -->
       <div class="method-list">
         <div v-for="(it, k) in pay_methods" @click="check_index = k" :key="k" class="item">
@@ -81,7 +83,7 @@
         <!-- <img v-else-if="sub_type === 'fu_he'" class="btn emo-btn" :src="getBottomImg" @click="payMoney" /> -->
         <img v-else-if="product_key === 'h5_annual2025'" class="btn emo-btn"
           :src="is_cn ? btn_pay_cn_1x : btn_pay_tw_1x" @click="payMoney" />
-        <img v-else-if="btn_url" class="btn emo-btn" :src="btn_url" @click="payMoney"/>
+        <img v-else-if="btn_url" class="btn emo-btn" :src="btn_url" @click="payMoney" />
         <img v-else class="btn emo-btn" :src="is_cn ? img_home_btu_zixun_cn : img_home_btu_zixun_tw"
           @click="payMoney" />
 
@@ -228,7 +230,6 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/24048e756ae2d40f436184b0bc8018199fbb.png',
       no_check_icon:
         'https://psychicai-static.psychicai.pro/imgs/2404f091a163349f45d3909f82e4660cc3c6.png',
-      start_down: false,
       is_show_shandong: false,
       is_show_daoqi: false,
       payCanClick: false,
@@ -243,8 +244,10 @@ export default {
       test_ga_upload: '',//拼接参数
       test_tt_upload: '',
       currencies: [
-        { iso_code: 'MY', area_code: '60', symbol: 'RM' },
-        { iso_code: 'TW', area_code: '886', symbol: 'NT$' },
+        { iso_code: 'MY', area_code: '60', symbol: 'MYR' },
+        { iso_code: 'SG', area_code: '65', symbol: 'SGD' },
+        { iso_code: 'TW', area_code: '886', symbol: 'TWD' },
+        { iso_code: 'HK', area_code: '852', symbol: 'HKD' },
       ],
     };
   },
@@ -304,7 +307,7 @@ export default {
     },
     btn_url: {
       type: String,
-      default: '', 
+      default: '',
     }
 
   },
@@ -363,7 +366,7 @@ export default {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
-   
+
   },
   filters: {
     filterTime(val_) {
@@ -379,14 +382,6 @@ export default {
   },
   created() {
     this.current_country = JSON.parse(localStorage.getItem('current_country'))
-    if(!this.current_country) {
-      this.current_country = { iso_code: 'MY', area_code: '60' }
-    }
-    if(!this.currencies.find(item => item.iso_code === this.current_country.iso_code)) {
-      this.current_country = { iso_code: 'MY', area_code: '60' }
-      localStorage.setItem('current_country', JSON.stringify({ iso_code: 'MY', area_code: '60' }))
-    }
-    
     // 首次挽留的弹窗计时
     let use_fixed_time = this.$route.query.use_fixed_time;
     if (use_fixed_time) {
@@ -416,17 +411,9 @@ export default {
       }
       return str.indexOf(char, firstIndex + 1);
     },
-    changeCity() {
-      // if (!this.current_country) {
-      //   this.current_country = JSON.parse(localStorage.getItem('current_country'))
-      // }
-      if (this.current_country.iso_code === 'MY') {
-        this.current_country = { area_code: '886', iso_code: 'TW' }
-        localStorage.setItem('current_country', JSON.stringify({ area_code: '886', iso_code: 'TW' }))
-      } else {
-        this.current_country = { area_code: '60', iso_code: 'MY' }
-        localStorage.setItem('current_country', JSON.stringify({ area_code: '60', iso_code: 'MY' }))
-      }
+    changeCity(currency) {
+      this.current_country = { area_code: currency.area_code, iso_code: currency.iso_code }
+      localStorage.setItem('current_country', JSON.stringify({ area_code: currency.area_code, iso_code: currency.iso_code }))
       setTimeout(() => {
 
         this.getPayMethod(1)
@@ -505,7 +492,6 @@ export default {
         const res = await getPayMethodsAPI();
         this.loading = false;
         if (res.status === 1000) {
-          this.start_down = true;
           this.pay_methods = res.data;
           if (type) {
             this.getProductionList()
@@ -549,7 +535,7 @@ export default {
       this.pay_lock_time = setTimeout(() => {
         this.payCanClick = false
       }, 2000);
-      console.log('utils.isTiktokChannel()', utils.isTiktokChannel(), utils.isGoogleChannel(),utils.isFBChannel(),)
+      console.log('utils.isTiktokChannel()', utils.isTiktokChannel(), utils.isGoogleChannel(), utils.isFBChannel(),)
       if (utils.isProd() || this.test_ga_upload || this.test_tt_upload) {
         Indicator.open(tipsArr6[utils.getLanguage()]);
 
@@ -571,7 +557,7 @@ export default {
             }
           ]
         });
-        
+
         utils.isTiktokChannel() && ttq && ttq.track('AddToCart', {
           contents: [{
             content_id: this.product.product_id,
@@ -639,7 +625,7 @@ export default {
       if (utils.getLocalStorage('ttclid') || utils.getcookieInfo('_ttp')) {
         pay_max_params = Object.assign({}, pay_max_params, {
           tt_param: {
-            ttclid: utils.getLocalStorage('ttclid')|| '',
+            ttclid: utils.getLocalStorage('ttclid') || '',
             ttp: utils.getcookieInfo('_ttp'),
             page_url: location.href,
             test_tt_upload: this.test_tt_upload,
@@ -786,14 +772,11 @@ export default {
 }
 
 .buy-people {
-  width: 100%;
   height: 0.26rem;
   font-weight: 400;
   font-size: 0.26rem;
   color: #99999a;
   line-height: 0.26rem;
-  margin-top: 0.05rem;
-  margin-bottom: 0.3rem;
 
   span {
     color: #e24c2e;
@@ -1002,6 +985,59 @@ export default {
       width: 1.64rem;
       height: 0.54rem;
     }
+  }
+}
+
+.country-box {
+  display: flex;
+  align-items: center;
+
+  .currency-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.1rem;
+    padding: 0.16rem;
+    width: 6.5rem;
+    /* 添加100%宽度确保充满容器 */
+
+    .currency-item {
+      width: 1.47rem;
+      height: 0.74rem;
+      border-radius: 0.2rem;
+      font-size: 0.28rem;
+      font-weight: 500;
+      color: #5D5D5E;
+      text-align: center;
+      font-style: normal;
+      border: 0.02rem solid #D6D6D6;
+      background-color: #fffafa;
+      transition: all 0.3s;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .active {
+      background-color: #E24C2E;
+      color: #fff;
+    }
+  }
+
+
+  .currency-btn:hover {
+    background: #e8e8e8;
+  }
+
+  .currency-symbol {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  .currency-code {
+    font-size: 14px;
+    color: #666;
   }
 }
 
