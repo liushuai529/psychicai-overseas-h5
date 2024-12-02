@@ -159,6 +159,12 @@ const getFBChannel = () => {
     return 'mlzyy16';
   } else if (url.indexOf('/mlzyy17/') > -1) {
     return 'mlzyy17';
+  } else if (url.indexOf('/zyy03/') > -1) {
+    return 'zyy03';
+  } else if (url.indexOf('/zyy05/') > -1) {
+    return 'zyy05';
+  } else if (url.indexOf('/zyy08/') > -1) {
+    return 'zyy08';
   } else if (url.indexOf('/blue03/') > -1) {
     return 'blue03';
   } else if (url.indexOf('/blue05/') > -1) {
@@ -271,6 +277,9 @@ const getFbId = () => {
     'mlzyy15': '484821661378293',
     'mlzyy16': '484821661378293',
     'mlzyy17': '1491830848258517',
+    'zyy03': '549528487877341',
+    'zyy05': '549528487877341',
+    'zyy08': '549528487877341',
     'blue03': '1547507465872255',
     'blue05': '1547507465872255',
     'blue08': '1547507465872255',
@@ -291,7 +300,7 @@ const getTWChannel = () => {
       return { area_code: '60', iso_code: 'MY' }
     }
   } else {
-    return ['ads05', 'enjoy05', 'enjoy105', 'enjoy205', 'enjoy305', 'enjoyA05', 'ocean05', 'ocean105', 'enjoy06', 'panda06', 'ocean06', 'ads08', 'enjoy08', 'enjoy108', 'enjoy308', 'enjoyA08', 'ocean08'].includes(getFBChannel()) ? { area_code: '886', iso_code: 'TW' } : { area_code: '60', iso_code: 'MY' };
+    return ['ads05', 'enjoy05', 'enjoy105', 'enjoy205', 'enjoy305', 'enjoyA05', 'ocean05', 'ocean105', 'zyy05', 'enjoy06', 'panda06', 'ocean06', 'ads08', 'enjoy08', 'enjoy108', 'enjoy308', 'enjoyA08', 'ocean08', 'zyy08'].includes(getFBChannel()) ? { area_code: '886', iso_code: 'TW' } : { area_code: '60', iso_code: 'MY' };
   }
 
 };
