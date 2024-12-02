@@ -1,6 +1,7 @@
 <template>
   <div :class="['result', is_cn ? 'result-cn-bg' : 'result-tw-bg', show_pop_modal ? 'hidden-scroll' : '']">
-    <ResultPopup product_key="h5_emotion2025" @change_pop_modal="change_pop_modal" :transfer_code="fortune.transfer_code|| ''" />
+    <ResultPopup product_key="h5_emotion2025" @change_pop_modal="change_pop_modal"
+      :transfer_code="fortune.transfer_code || ''" />
     <div :class="['info-box', is_cn ? 'cn-bg' : 'tw-bg']">
       <BaziTable :sex="sex" :is_result="true" :username="username" :gongli_nongli="gongli_nongli"
         :picker_date_yangli="picker_date_yangli" :picker_date_nongli="picker_date_nongli" :gan="gan" :zhi="zhi"
@@ -14,8 +15,8 @@
     <contentDetail v-if="fortune.guide" :result="fortune.guide" :item_index="2" />
     <contentDetail v-if="fortune.review" :result="fortune.review" :item_index="3" />
     <contentDetail v-if="fortune.concept" :result="fortune.concept" :item_index="4" />
-    
-    <contentDetail v-if="fortune.zodiac" :result="fortune" :item_index="5" :zodiac_img="zodiacObj[fortune.zodiac]"/>
+
+    <contentDetail v-if="fortune.zodiac" :result="fortune" :item_index="5" :zodiac_img="zodiacObj[fortune.zodiac]" />
 
     <contentDetail v-if="fortune.fortunegan" :result="fortune.fortunegan" :item_index="6" />
     <contentDetail v-if="fortune.fortunezhi" :result="fortune.fortunezhi" :item_index="7" />
@@ -59,7 +60,7 @@ const zodiacObj = {
   '狗': result_img_shengxiao_gou,
   '猴': result_img_shengxiao_hou,
   '虎': result_img_shengxiao_hu,
-  '鸡':result_img_shengxiao_ji,
+  '鸡': result_img_shengxiao_ji,
   '雞': result_img_shengxiao_ji,
   '龙': result_img_shengxiao_long,
   '龍': result_img_shengxiao_long,
@@ -161,12 +162,11 @@ export default {
     });
 
     utils.firebaseLogEvent(
-      '10006',
-      '-10009',
-      'page_view_2024lovely_result',
+      '10017',
+      '-10018',
+      'page_view_LOVE2025_result',
       'page_view',
       {
-        args_name: 'page_view_2024lovely_result',
         channel: utils.getFBChannel(),
       }
     );
@@ -262,7 +262,6 @@ export default {
       let discount_pay = +utils.getQueryStr('discount_pay');
       let currency_type = utils.getQueryStr('currency_type');
       let combine_product_ids = +utils.getQueryStr('combine_product_ids');
-      let repay = +utils.getQueryStr('repay');
       let product_id = utils.getQueryStr('product_id');
       utils.gcyLog(`order_id:${this.order_id}`, {
         mlxz_action_desc: '准备上报埋点，获取订单状态',
@@ -273,68 +272,21 @@ export default {
           mlxz_action_desc: '开始上报firebase埋点',
           mlxz_order_status: report_status,
         });
-        if (discount_pay) {
-          utils.firebaseLogEvent(
-            '10006',
-            '-10024',
-            'event_status_2024lovelydiscont_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovelydiscont_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (repay) {
-          let history_name =
-            repay == 3
-              ? 'event_status_2024lovelymarriagehistory_pay_success'
-              : 'event_status_2024lovelyhistory_pay_success';
-
-          utils.firebaseLogEvent(
-            '10002',
-            repay == 3 ? '-10032' : '-10013',
-            history_name,
-            'event_status',
-            {
-              args_name: history_name,
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (!discount_pay && !repay && !combine_product_ids) {
-          utils.firebaseLogEvent(
-            '10006',
-            '-10007',
-            'event_status_2024lovely_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovely_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (combine_product_ids) {
-          //成功
-          utils.firebaseLogEvent(
-            '10006',
-            '-10026',
-            'event_status_2024lovelymarriage_pay_success',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovelymarriage_pay_success',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-
+        utils.firebaseLogEvent(
+          '10017',
+          '-10007',
+          'event_status_LOVE2025_end_pay_success',
+          'event_status',
+          {
+            channel: utils.getFBChannel(),
+          }
+        );
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成firebase埋点上报',
           mlxz_order_status: report_status,
         });
         console.log('Purchase事件上报', this.order_id)
         if (utils.isProd()) {
-
           try {
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '开始上报FB埋点，Purchase',
@@ -342,20 +294,6 @@ export default {
               mlxz_currency: currency_type,
               mlxz_order_status: report_status,
             });
-            // utils.isFBChannel() && fbq && fbq('track', 'Purchase', {
-            //   value: report_price.toFixed(2),
-            //   currency: currency_type,
-            // },{eventID: this.order_id});
-            // utils.isGoogleChannel() && gtag && gtag("event", "purchase", {
-            //   transaction_id: this.order_id,
-            //   value: report_price.toFixed(2),
-            //   currency: currency_type, 
-            //   items: [
-            //     {
-            //       item_id: product_id, 
-            //     }
-            //   ]
-            // })
             utils.gcyLog(`order_id:${this.order_id}`, {
               mlxz_action_desc: '完成FB埋点上报，Purchase',
               mlxz_value: report_price.toFixed(2),
@@ -375,60 +313,15 @@ export default {
           mlxz_action_desc: '开始上报埋点',
           mlxz_order_status: report_status,
         });
-        if (discount_pay) {
-          utils.firebaseLogEvent(
-            '10006',
-            '-10025',
-            'event_status_2024lovelydiscount_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovelydiscount_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (repay) {
-          let history_name =
-            repay == 3
-              ? 'event_status_2024lovelymarriagehistory_pay_fail'
-              : 'event_status_2024lovelyhistory_pay_fail';
-          utils.firebaseLogEvent(
-            '10002',
-            repay === 3 ? '-10033' : '-10022',
-            history_name,
-            'event_status',
-            {
-              args_name: history_name,
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (!discount_pay && !repay && !combine_product_ids) {
-          utils.firebaseLogEvent(
-            '10006',
-            '-10008',
-            'event_status_2024lovely_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovely_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-        if (combine_product_ids) {
-          //失败
-          utils.firebaseLogEvent(
-            '10006',
-            '-10027',
-            'event_status_2024lovelymarriage_pay_fail',
-            'event_status',
-            {
-              args_name: 'event_status_2024lovelymarriage_pay_fail',
-              channel: utils.getFBChannel(),
-            }
-          );
-        }
-
+        utils.firebaseLogEvent(
+          '10017',
+          '-10008',
+          'event_status_LOVE2025_end_pay_fail',
+          'event_status',
+          {
+            channel: utils.getFBChannel(),
+          }
+        );
         utils.gcyLog(`order_id:${this.order_id}`, {
           mlxz_action_desc: '完成上报埋点',
           mlxz_order_status: report_status,

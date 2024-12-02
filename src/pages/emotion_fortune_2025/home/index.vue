@@ -67,9 +67,9 @@
       <img v-if="showFixedBtn" class="fix-btn emo-btn" :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
         @click="check" />
       <!-- 時间选择控件 -->
-      <DatetimePicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+      <DatetimePicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && !show_nongli"></DatetimePicker>
-      <NongliPicker start="1901" end="2020" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
+      <NongliPicker start="1900" end="2050" :year="year" :month="month" :date="date" :birth_hour="birth_hour"
         v-show="choose_time && show_nongli"></NongliPicker>
       <NewFooter v-if="showFixedBtn" product_key="h5_emotion2025" />
       <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2025" />
@@ -174,7 +174,7 @@ export default {
 
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,
-      sex: '1',
+      sex: '0',
       year: '1995',
       month: '',
       date: '',

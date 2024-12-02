@@ -169,6 +169,8 @@ const getFBChannel = () => {
     return 'blue13';
   } else if (url.indexOf('/tt_gatherone08/') > -1) {
     return 'tt_gatherone08';
+  } else if (url.indexOf('/tt_enjoy08/') > -1) {
+    return 'tt_enjoy08';
   } else if (url.indexOf('/gatherone03/') > -1) {
     return 'gatherone03';
   } else {
@@ -1001,7 +1003,7 @@ const copyToClipboard = text => {
  * @return {*}
  */
 const isProd = () => {
-  return window.location.href.indexOf('//test-') < 0 && window.location.href.indexOf('//1') < 0
+  return window.location.href.indexOf('//test') < 0 && window.location.href.indexOf('//1') < 0
 };
 
 //获取UA信息返回数组

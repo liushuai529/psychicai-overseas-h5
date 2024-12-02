@@ -34,6 +34,7 @@ const show_info = {
   h5_weigh_bone: { module: 10009, 'content_id': -10025, 'event_name': 'view_chenggufail_download', type: 'view' }, // 袁天罡秤骨
   h5_bai_gua: { module: 10008, 'content_id': -10025, 'event_name': 'view_64guafail_download', type: 'view' }, // 鬼谷子
   h5_emotion2024: { module: 10006, 'content_id': -10035, 'event_name': 'view_2024lovelyfail_download', type: 'view' }, // 2024年爱情运势
+  h5_emotion2025: { module: 10017, 'content_id': -10015, 'event_name': 'view_LOVE2025fail_download', type: 'view' }, // 2025年爱情运势
   h5_marriage: { module: 10007, 'content_id': -10037, 'event_name': 'view_marriagefail_download', type: 'view' }, //合婚
   h5_career2024: { module: 10004, 'content_id': -10025, 'event_name': 'view_2024careerfail_download', type: 'view' }, // 2024年事业运势 
 }
@@ -46,6 +47,7 @@ const copy_info = {
   h5_weigh_bone: { module: 10009, 'content_id': -10026, 'event_name': 'click_chenggufail_copy', type: 'click' }, // 袁天罡秤骨
   h5_bai_gua: { module: 10008, 'content_id': -10026, 'event_name': 'click_64guafail_copy', type: 'click' }, // 鬼谷子
   h5_emotion2024: { module: 10006, 'content_id': -10036, 'event_name': 'click_2024lovelyfail_copy', type: 'click' }, // 2024年爱情运势
+  h5_emotion2025: { module: 10017, 'content_id': -10016, 'event_name': 'click_LOVE2025fail_copy', type: 'click' }, // 2025年爱情运势
   h5_marriage: { module: 10007, 'content_id': -10038, 'event_name': 'click_marriagefail_copy', type: 'click' }, //合婚
   h5_career2024: { module: 10004, 'content_id': -10026, 'event_name': 'click_2024careerfail_copy', type: 'click' }, // 2024年事业运势 
 }
@@ -58,6 +60,7 @@ const down_info = {
   h5_weigh_bone: { module: 10009, 'content_id': -10027, 'event_name': 'click_chenggufail_download', type: 'click' }, // 袁天罡秤骨
   h5_bai_gua: { module: 10008, 'content_id': -10027, 'event_name': 'click_64guafail_download', type: 'click' }, // 鬼谷子
   h5_emotion2024: { module: 10006, 'content_id': -10037, 'event_name': 'click_2024lovelyfail_download', type: 'click' }, // 2024年爱情运势
+  h5_emotion2025: { module: 10017, 'content_id': -10017, 'event_name': 'click_LOVE2025fail_download', type: 'click' }, // 2025年爱情运势
   h5_marriage: { module: 10007, 'content_id': -10039, 'event_name': 'click_marriagefail_download', type: 'click' }, //合婚
   h5_career2024: { module: 10004, 'content_id': -10027, 'event_name': 'click_2024careerfail_download', type: 'click' }, // 2024年事业运势 
 }

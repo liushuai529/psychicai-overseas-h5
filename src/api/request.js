@@ -67,10 +67,11 @@ const request = (url, method, data) => {
         if (res.status === 1000) {
           resolve(res);
         } else {
-          Toast(res.desc);
           Indicator.close();
           if (res.status == 1004) {
             utils.resetLogin();
+          } else {
+            Toast(res.desc);
           }
           reject(res);
         }

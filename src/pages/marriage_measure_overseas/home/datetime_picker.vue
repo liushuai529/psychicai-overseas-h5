@@ -415,7 +415,7 @@ export default {
 }
 .calendar-picker .picker {
   /* width: 33.3% !important; */
-  width: 25% !important;
+  // width: 25% !important;
 }
 
 .all-day {
