@@ -85,3 +85,7 @@ https://test-overseas.bjzxmlxz.com/enjoyA11/emotion_end.html#/
 mlxzfortune.xyz域名投放链接
 https://test.mlxzfortune.xyz/gatherone03/emotion_fortune.html#/
 https://www.mlxzfortune.xyz/gatherone03/emotion_fortune.html#/
+
+hwcsserver.fyi 域名链接格式：
+https://www.hwcsserver.fyi/zyy03/emotion_fortune.html#/
+https://test.hwcsserver.fyi/zyy03/emotion_fortune.html#/
