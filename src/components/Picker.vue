@@ -608,6 +608,15 @@ export default {
   }
 }
 .picker:nth-child(1) {
-  width: 25%;
+  width: 20%;
+}
+.picker:nth-child(2) {
+  width: 20%;
+}
+.picker:nth-child(3) {
+  width: 20%;
+}
+.picker:nth-child(4) {
+  width: 40%;
 }
 </style>

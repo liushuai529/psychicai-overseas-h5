@@ -503,7 +503,7 @@ export default {
   height: 4.72rem;
 }
 .calendar-picker .picker {
-  width: 25% !important;
+  // width: 25% !important;
 }
 
 .all-day {

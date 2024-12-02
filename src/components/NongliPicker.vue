@@ -151,55 +151,55 @@ export default {
         let hour = [
           {
             value: '-1',
-            text: '时辰不清楚',
+            text: '未知时间',
           },
           {
             value: '0',
-            text: '0时 子时',
+            text: '23:00-00:59（子）',
           },
           {
             value: '2',
-            text: '2时 丑时',
+            text: '01:00-02:59（丑）',
           },
           {
             value: '4',
-            text: '4时 寅时',
+            text: '03:00-04:59（寅）',
           },
           {
             value: '6',
-            text: '6时 卯时',
+            text: '05:00-06:59（卯）',
           },
           {
             value: '8',
-            text: '8时 辰时',
+            text: '07:00-08:59（辰）',
           },
           {
             value: '10',
-            text: '10时 巳时',
+            text: '09:00-10:59（巳）',
           },
           {
             value: '12',
-            text: '12时 午时',
+            text: '11:00-12:59（午）',
           },
           {
             value: '14',
-            text: '14时 未时',
+            text: '13:00-14:59（未）',
           },
           {
             value: '16',
-            text: '16时 申时',
+            text: '15:00-16:59（申）',
           },
           {
             value: '18',
-            text: '18时 酉时',
+            text: '17:00-18:59（酉）',
           },
           {
             value: '20',
-            text: '20时 戌时',
+            text: '19:00-20:59（戌）',
           },
           {
             value: '22',
-            text: '22时 亥时',
+            text: '21:00-22:59（亥）',
           },
         ];
         return hour;
@@ -208,55 +208,55 @@ export default {
         return [
           {
             value: '-1',
-            text: '時辰不清楚',
+            text: '未知時間',
           },
           {
             value: '0',
-            text: '0時 子時',
+            text: '00:00-00:59（子）',
           },
           {
             value: '2',
-            text: '2時 醜時',
+            text: '01:00-02:59（醜）',
           },
           {
             value: '4',
-            text: '4時 寅時',
+            text: '03:00-04:59（寅）',
           },
           {
             value: '6',
-            text: '6時 卯時',
+            text: '05:00-06:59（卯）',
           },
           {
             value: '8',
-            text: '8時 辰時',
+            text: '07:00-08:59（辰）',
           },
           {
             value: '10',
-            text: '10時 巳時',
+            text: '09:00-10:59（巳）',
           },
           {
             value: '12',
-            text: '12時 午時',
+            text: '11:00-12:59（午）',
           },
           {
             value: '14',
-            text: '14時 未時',
+            text: '13:00-14:59（未）',
           },
           {
             value: '16',
-            text: '16時 申時',
+            text: '15:00-16:59（申）',
           },
           {
             value: '18',
-            text: '18時 酉時',
+            text: '17:00-18:59（酉）',
           },
           {
             value: '20',
-            text: '20時 戌時',
+            text: '19:00-20:59（戌）',
           },
           {
             value: '22',
-            text: '22時 亥時',
+            text: '21:00-22:59（亥）',
           },
         ];
       })(),
@@ -493,7 +493,7 @@ export default {
   height: 4.72rem;
 }
 .calendar-picker .picker {
-  width: 25% !important;
+  // width: 25% !important;
 }
 
 .all-day {
