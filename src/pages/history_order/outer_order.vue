@@ -341,14 +341,30 @@ const event_enums = {
     c_name: 'click_history_2024lovely_repay',
   },
   h5_emotion2025: {
-    c_id: '-10014',
-    c_name: 'click_history_2025lovely_repay',
+    c_id: '-10013',
+    c_name: 'click_history_LOVE2025_end_repay',
   },
 
 };
 
+const event_check_enums = {
+  h5_annual2025: {
+    module: 10015,
+    c_id: '-10014',
+    c_name: 'click_history_Year2025_end_check',
+  },
+  h5_emotion2025: {
+    module: 10017,
+    c_id: '-10014',
+    c_name: 'click_history_LOVE2025_end_check',
+  },
+};
+
+
+
 const copy_info = {
   h5_annual2025: { module: 10015, 'content_id': -10023, 'event_name': 'click_history_year2025_end_copy', type: 'click' }, // 2025年年运
+  h5_emotion2025: { module: 10017, 'content_id': -10023, 'event_name': 'click_LOVE2025_end_copy', type: 'click' }, // 2025年爱情运势
 }
 
 export default {
@@ -433,6 +449,16 @@ export default {
         '10015',
         '-10012',
         'page_view_Year2025_end_history',
+        'page_view',
+        {
+          channel: utils.getFBChannel(),
+        }
+      );
+    } else if (product_key === 'h5_emotion2025') {
+      utils.firebaseLogEvent(
+        '10017',
+        '-10012',
+        'page_view_LOVE2025_end_history',
         'page_view',
         {
           channel: utils.getFBChannel(),
@@ -581,11 +607,22 @@ export default {
       // }
       let url = path_enums[item.product_key];
       if (item.status === 'PAYED') {
-        if (item.product_key === 'h5_annual2025') {
+        // if (item.product_key === 'h5_annual2025') {
+        //   utils.firebaseLogEvent(
+        //     '10015',
+        //     '-10014',
+        //     'click_history_Year2025_end_check',
+        //     'click',
+        //     {
+        //       channel: utils.getFBChannel(),
+        //     }
+        //   );
+        // }
+        if (event_check_enums[item.product_key]) {
           utils.firebaseLogEvent(
-            '10015',
-            '-10014',
-            'click_history_Year2025_end_check',
+            event_check_enums[item.product_key].module,
+            event_check_enums[item.product_key].c_id,
+            event_check_enums[item.product_key].c_name,
             'click',
             {
               channel: utils.getFBChannel(),
@@ -718,7 +755,7 @@ export default {
           );
         } else if (product_key === 'h5_emotion2025') {
           utils.firebaseLogEvent(
-            '10015',
+            '10017',
             event_enums[product_key].c_id,
             event_enums[product_key].c_name,
             'click',
