@@ -28,7 +28,7 @@ import tw_emotion_fate_mp from '../assets/img/components/animation_page/emotion_
 
 const log_info = {
   h5_emotion2024: { module: 10006, 'content_id': -10034, 'event_name': 'page_view_giflove', type: 'page_view' }, // 2024年爱情运势
-  h5_emotion2025: { module: 10006, 'content_id': -10034, 'event_name': 'page_view_giflove', type: 'page_view' }, // 2025年爱情运势
+  h5_emotion2025: { module: 10017, 'content_id': -10034, 'event_name': 'page_view_giflove', type: 'page_view' }, // 2025年爱情运势
   h5_marriage: { module: 10007, 'content_id': -10036, 'event_name': 'page_view_gifmarriage', type: 'page_view' }, //合婚
   consult_time: { module: 10011, 'content_id': -10003, 'event_name': 'page_view_giflove', type: 'page_view' }, //正缘报告
 }
