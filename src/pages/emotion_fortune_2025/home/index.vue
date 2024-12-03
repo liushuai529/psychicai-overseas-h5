@@ -64,6 +64,7 @@
       <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" />
       <img class="card" :src="is_cn ? cn_icon_4 : tw_icon_4" />
       <img class="card" :src="is_cn ? cn_icon_5 : tw_icon_5" />
+      <img class="card" :src="is_cn ? cn_icon_6 : tw_icon_6" />
       <img v-if="showFixedBtn" class="fix-btn emo-btn" :src="language === 'zh-CN' ? cn_home_btn : tw_home_btn"
         @click="check" />
       <!-- 時间选择控件 -->
@@ -119,6 +120,7 @@ import cn_icon_2 from '../../../assets/img/emotion_fortune_2025/cn/home_img_deta
 import cn_icon_3 from '../../../assets/img/emotion_fortune_2025/cn/home_img_details_03_cn.webp';
 import cn_icon_4 from '../../../assets/img/emotion_fortune_2025/cn/home_img_details_04_cn.webp';
 import cn_icon_5 from '../../../assets/img/emotion_fortune_2025/cn/home_img_details_05_cn.webp';
+import cn_icon_6 from '../../../assets/img/emotion_fortune_2025/cn/home_img_details_06_cn.webp';
 
 
 
@@ -130,6 +132,7 @@ import tw_icon_2 from '../../../assets/img/emotion_fortune_2025/tw/home_img_deta
 import tw_icon_3 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_03_tw.webp';
 import tw_icon_4 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_04_tw.webp';
 import tw_icon_5 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_05_tw.webp';
+import tw_icon_6 from '../../../assets/img/emotion_fortune_2025/tw/home_img_details_06_tw.webp';
 import NewFooter from '../../../components/NewFooter.vue';
 
 
@@ -160,12 +163,14 @@ export default {
       cn_icon_3,
       cn_icon_4,
       cn_icon_5,
+      cn_icon_6,
       tw_icon_0,
       tw_icon_1,
       tw_icon_2,
       tw_icon_3,
       tw_icon_4,
       tw_icon_5,
+      tw_icon_6,
       cn_history_order,
       tw_history_order,
       utils,

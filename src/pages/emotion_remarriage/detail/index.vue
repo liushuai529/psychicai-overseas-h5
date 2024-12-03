@@ -221,7 +221,6 @@ export default {
         entry_time: 0,
         exit_time: 0,
       },
-      current_country: {},
     };
   },
   watch: {
@@ -256,21 +255,6 @@ export default {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
-    getBottomImg() {
-      if (this.current_country && this.current_country.iso_code === 'TW') {
-        if (this.is_cn) {
-          return img_home_btu_zixun_nt_cn_1x
-        } else {
-          return img_home_btu_zixun_nt_tw_1x
-        }
-      } else {
-        if (this.is_cn) {
-          return img_home_btu_zixun_rm_cn_1x
-        } else {
-          return img_home_btu_zixun_rm_tw_1x
-        }
-      }
-    },
   },
   beforeCreate() {
   },
@@ -294,17 +278,7 @@ export default {
 
   mounted() {
     this.duration_time.entry_time = new Date().getTime()
-    this.startWatching('current_country');
     window.scrollTo(0, 0);
-    // setTimeout(() => {
-    //   this.$nextTick(() => {
-    //     // 滚动到指定元素
-    //     const element = document.getElementById('method-title-img');
-    //     if (element) {
-    //       element.scrollIntoView({ behavior: 'smooth' });
-    //     }
-    //   });
-    // }, 2000);
     let self = this;
     let initialWindowHeight = window.innerHeight;
     // 添加resize事件监听器
@@ -329,21 +303,6 @@ export default {
     }
   },
   methods: {
-    //监听localStorage数据变化
-    startWatching(key) {
-      setInterval(() => {
-        const currentStorage = JSON.parse(localStorage.getItem(key)) || {};
-        if (JSON.stringify(this.storage) !== JSON.stringify(currentStorage)) {
-          this.storage = currentStorage;
-          this.localStorageChanged();
-        }
-      }, 1000);
-    },
-    localStorageChanged() {
-      if(localStorage.getItem('current_country')) {
-        this.current_country = JSON.parse(localStorage.getItem('current_country'))
-      }
-    },
      /**
      * @description: 跳转历史订单页
      * @return {*}

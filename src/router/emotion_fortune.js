@@ -66,12 +66,10 @@ const checkCurrentCountry = (callback) => {
     callback && callback();
     setTimeout(async () => {
       const res = await getBaseInfoAPI();
-      console.log('res', res)
       if (res.status !== 1000) return;
       localStorage.setItem('current_country', JSON.stringify({ area_code: res.data.current_country.code, iso_code: res.data.current_country.iso_code }))
-    }, 3000);
+    }, 0);
   }
-
 };
 
 export default new Router({

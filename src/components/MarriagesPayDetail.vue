@@ -338,6 +338,7 @@ export default {
         h5_wealth2024: '142',
         h5_career2024: '103',
         h5_emotion2024: '98',
+        h5_emotion2025: '8687',
         h5_annual2024: '193',
         h5_annual2025: '8687',
         h5_bai_gua: '146',

@@ -50,10 +50,15 @@ const visitorLoginAPI = async (data, callback) => {
   }
 };
 
+/**
+ * 验证当前国家
+ */
 const validateCurrentCountry = () => {
+  // 获取当前国家
   let currencies = utils.getCurrenciesArray();
   const current_country = JSON.parse(localStorage.getItem('current_country'))
-  if(!currencies.find(item => item.iso_code === current_country.iso_code)) {
+  // 如果当前国家不在货币数组中，则设置为马来西亚
+  if (!currencies.find(item => item.iso_code === current_country.iso_code)) {
     localStorage.setItem('current_country', JSON.stringify({ iso_code: 'MY', area_code: '60' }))
   }
 }
@@ -68,7 +73,7 @@ const checkCurrentCountry = async (callback) => {
       const res = await getBaseInfoAPI();
       if (res.status !== 1000) return;
       localStorage.setItem('current_country', JSON.stringify({ area_code: res.data.current_country.code, iso_code: res.data.current_country.iso_code }))
-    }, 3000);
+    }, 0);
   }
 };
 

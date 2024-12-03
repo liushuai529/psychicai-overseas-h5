@@ -418,7 +418,9 @@ export default {
       Indicator.close();
       Toast(this.$t('fail-result'));
       setTimeout(() => {
-        location.href = 'emotion_fortune.html';
+        let querystring = localStorage.getItem('_emotion_fortune_2025_info');
+        let path = 'detail?querystring=' + querystring;
+        this.$router.push({ path });
       }, 1000);
     },
 

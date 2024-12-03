@@ -140,7 +140,7 @@ export default {
           },
           {
             value: '0',
-            text: '00:00-00:59（子）',
+            text: '23:00-00:59（子）',
           },
           {
             value: '2',
