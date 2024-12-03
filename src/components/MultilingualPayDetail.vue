@@ -56,7 +56,7 @@
         </div>
 
       </div>
-      <div class="country-box">
+      <div class="country-box" v-if="current_country && current_country.iso_code">
         <div class="currency-list">
           <div :class="['currency-item', { active: currency.iso_code === current_country.iso_code }]"
             v-for="(currency, index) in currencies" @click="changeCity(currency)" :key="currency.symbol">{{
@@ -66,7 +66,7 @@
       </div>
 
       <!-- 支付方式 -->
-      <div class="method-list">
+      <div class="method-list" v-if="current_country && current_country.iso_code">
         <div v-for="(it, k) in pay_methods" @click="check_index = k" :key="k" class="item">
           <div class="left">
             <img :src="it.icon" alt="" />
@@ -381,7 +381,12 @@ export default {
     },
   },
   created() {
-    this.current_country = JSON.parse(localStorage.getItem('current_country'))
+    if(localStorage.getItem('current_country')) {
+      this.current_country = JSON.parse(localStorage.getItem('current_country'))
+    } else {
+      this.startWatching('current_country')
+    }
+    // this.current_country = JSON.parse(localStorage.getItem('current_country'))
     // 首次挽留的弹窗计时
     let use_fixed_time = this.$route.query.use_fixed_time;
     if (use_fixed_time) {
@@ -404,6 +409,21 @@ export default {
   },
 
   methods: {
+     //监听localStorage数据变化
+     startWatching(key) {
+      setInterval(() => {
+        const currentStorage = JSON.parse(localStorage.getItem(key)) || {};
+        if (JSON.stringify(this.storage) !== JSON.stringify(currentStorage)) {
+          this.storage = currentStorage;
+          this.localStorageChanged();
+        }
+      }, 1000);
+    },
+    localStorageChanged() {
+      if(localStorage.getItem('current_country')) {
+        this.current_country = JSON.parse(localStorage.getItem('current_country'))
+      }
+    },
     findSecondIndexOf(str, char) {
       const firstIndex = str.indexOf(char);
       if (firstIndex === -1) {
