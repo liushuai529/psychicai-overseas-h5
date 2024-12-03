@@ -1419,6 +1419,8 @@ const getLanguage = () => {
   return getRequestParams('language') || now_lang;
 };
 
+
+
 // 延迟函数
 const asleep = delay => {
   return new Promise(resolve => {
@@ -1924,6 +1926,22 @@ const getCurrenciesArray = () => {
     ]
   }
 }
+// 获取app名称
+const getAppName = () => {
+  if(isAndroid()) {
+    if(getLanguage() === 'zh-CN') {
+      return '命理寻真';
+    } else {
+      return '命理尋真';
+    }
+  } else {
+    if(getLanguage() === 'zh-CN') {
+      return '寻真';
+    } else {
+      return '尋真';
+    }
+  }
+}
 
 
 
@@ -2015,5 +2033,6 @@ export default {
   isFBChannel,
   resetLogin,
   getCurrenciesArray,
+  getAppName,
 };
 

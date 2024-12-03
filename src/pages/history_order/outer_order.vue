@@ -17,8 +17,7 @@
         <!-- <img class="order-icon" :src="is_cn ? cn_title : tw_title" alt="" /> -->
 
         <div class="text">
-          {{ $t('tips-1')
-          }}<span class="download" @click="openApp()">{{ $t('tips-2') }} </span>
+          {{ is_cn ? `复制订单邀请码，打开${ app_name }，您可以在命理寻真中查看您的报告。` : `復製訂單邀請碼，打開${ app_name }，您可以在命理尋真中查看您的報告。` }}<span class="download" @click="openApp()">{{ $t('tips-2') }} </span>
         </div>
       </div>
       <div class="content">
@@ -414,6 +413,9 @@ export default {
     CodePop,
   },
   computed: {
+    app_name() {
+      return utils.getAppName();
+    },
     is_ios() {
       return utils.isIos();
     },

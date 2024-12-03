@@ -4,7 +4,7 @@
       <div class="head">
         <div class="title">{{ tips_arr1[lang] }}</div>
         <div style="margin-top: 0.2rem;">{{ `您的【${tips_arr9[product_key][lang]}】${tips_arr2[lang]}` }}</div>
-        <div style="margin-top: 0.2rem;">{{ is_cn? '【命理寻真】赠送15分钟免费在线咨询，职业咨询师针对性解决您的困扰。': '【命理尋真】贈送15分鐘免費在線咨詢，職業咨詢師針對性解決您的困擾。' }}</div>
+        <div style="margin-top: 0.2rem;">{{ is_cn? `【${app_name}】赠送15分钟免费在线咨询，职业咨询师针对性解决您的困扰。`: `【${app_name}】贈送15分鐘免費在線咨詢，職業咨詢師針對性解決您的困擾。` }}</div>
       </div>
       <div class="copy-container">
         <div class="left">{{tips_arr6[lang]}}：{{ transfer_code }}</div>
@@ -32,8 +32,8 @@ const tips_arr1 = {
   'zh-TW': '尊敬的用戶您好：',
 };
 const tips_arr2 = {
-  'zh-CN': '已生成，为了保障您的隐私，全部报告请在【命理寻真】App中查看。',
-  'zh-TW': '已生成，為了保障您的隱私，全部報告請在【命理尋真】App中查看。',
+  'zh-CN': `已生成，为了保障您的隐私，全部报告请在【${ utils.getAppName() }】App中查看。`,
+  'zh-TW': `已生成，為了保障您的隱私，全部報告請在【${ utils.getAppName() }】App中查看。`,
 };
 const tips_arr3 = {
   'zh-CN': '复制',
@@ -44,8 +44,8 @@ const tips_arr4 = {
   'zh-TW': '複製成功',
 };
 const tips_arr5 = {
-  'zh-CN': '复制邀请码，打开命理寻真App',
-  'zh-TW': '復製邀請碼，打開命理尋真App',
+  'zh-CN': `复制邀请码，打开${ utils.getAppName() }App`,
+  'zh-TW': `復製邀請碼，打開${ utils.getAppName() }App`,
 };
 const tips_arr6 = {
   'zh-CN': '邀请码',
@@ -190,6 +190,9 @@ export default {
     }
   },
   computed: {
+    app_name() {
+      return utils.getAppName();
+    },
     show_modal() {
       /**
        * 所有报告的渠道均展示引导app下载遮罩
