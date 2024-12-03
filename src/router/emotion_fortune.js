@@ -70,7 +70,6 @@ const checkCurrentCountry = (callback) => {
       localStorage.setItem('current_country', JSON.stringify({ area_code: res.data.current_country.code, iso_code: res.data.current_country.iso_code }))
     }, 0);
   }
-
 };
 
 export default new Router({
