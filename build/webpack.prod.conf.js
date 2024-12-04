@@ -509,6 +509,28 @@ for (let pagePath of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
   webpackConfig.plugins.push(new HtmlWebpackPlugin(htmlPluginConfig));
 }
 
+// gatherone16代理
+for (var pathname of ['emotion_fortune_2025/emotion_fortune_2025', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+  let pageName = pagePath.split('/')[0];
+  let htmlPluginConfig = {
+    filename: path.resolve(__dirname, '../dist/gatherone16/' + pageName + '.html'),
+    template: 'template/index_gatherone16.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pagePath in webpackConfig.entry) {
+    htmlPluginConfig.chunks = ['manifest', 'vendor', pagePath];
+    htmlPluginConfig.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(htmlPluginConfig));
+}
+
 // blue03代理
 for (let pathname of ['emotion_fortune/emotion_fortune', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
   var filename = pathname.split('/')[pathname.split('/').length - 1];
@@ -1488,27 +1510,6 @@ for (var pathname of ['emotion_voice/emotion_voice', 'user_agreement/user_agreem
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
-// ads16代理
-for (var pathname of ['emotion_fortune_2025/emotion_fortune_2025', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
-  var filename = pathname.split('/')[0];
-  var conf = {
-    filename: path.resolve(__dirname, '../dist/ads16/' + filename + '.html'),
-    template: 'template/index_ads16.html',
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true,
-    },
-  };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
-    conf.hash = false;
-  }
-  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 
 // ads111代理
@@ -1890,27 +1891,6 @@ for (var pathname of ['emotion_voice/emotion_voice', 'user_agreement/user_agreem
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
-// mlzyy16代理
-for (var pathname of ['emotion_fortune_2025/emotion_fortune_2025', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
-  var filename = pathname.split('/')[0];
-  var conf = {
-    filename: path.resolve(__dirname, '../dist/mlzyy16/' + filename + '.html'),
-    template: 'template/index_mlzyy16.html',
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true,
-    },
-  };
-  if (pathname in webpackConfig.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
-    conf.hash = false;
-  }
-  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
-}
 
 // mlzyy17代理
 for (var pathname of ['launch_page/launch_page']) {

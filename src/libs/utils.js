@@ -183,6 +183,8 @@ const getFBChannel = () => {
     return 'tt_enjoy08';
   } else if (url.indexOf('/gatherone03/') > -1) {
     return 'gatherone03';
+  } else if (url.indexOf('/gatherone16/') > -1) {
+    return 'gatherone16';
   } else {
     return 'enjoy03';
   }
@@ -291,6 +293,7 @@ const getFbId = () => {
     'lunamobi03': '1232089381202273',
     'lunamobi05': '1232089381202273',
     'gatherone03': '545529068266373',
+    'gatherone16': '545529068266373',
   }
 }
 
