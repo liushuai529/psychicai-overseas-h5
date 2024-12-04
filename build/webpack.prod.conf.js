@@ -510,7 +510,7 @@ for (let pagePath of ['emotion_fortune/emotion_fortune', 'user_agreement/user_ag
 }
 
 // gatherone16代理
-for (var pathname of ['emotion_fortune_2025/emotion_fortune_2025', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
+for (var pagePath of ['emotion_fortune_2025/emotion_fortune_2025', 'user_agreement/user_agreement', 'privacy/privacy', 'history_order/history_order']) {
   let pageName = pagePath.split('/')[0];
   let htmlPluginConfig = {
     filename: path.resolve(__dirname, '../dist/gatherone16/' + pageName + '.html'),
