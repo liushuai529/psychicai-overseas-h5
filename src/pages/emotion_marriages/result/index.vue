@@ -1,6 +1,6 @@
 <template>
   <div class="result" :class="['result']">
-    <ChatCard  :transfer_code="transfer_code" sub_type="life_marriages"/>
+    <ChatCard v-if="is_first" :transfer_code="transfer_code" sub_type="life_marriages"/>
     <div class="top" @click="downClick">
       <img :src="is_cn ? cn_img_chat_top_laoshi : tw_img_chat_top_laoshi" />
     </div>
@@ -141,6 +141,7 @@ export default {
       message_show2: false,
       message_show3: false,
       product_key: 'consult_time',
+      transfer_code:'',
       duration_time: {
         entry_time: 0,
         exit_time: 0,
