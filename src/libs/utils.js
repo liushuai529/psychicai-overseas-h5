@@ -1021,7 +1021,7 @@ const copyToClipboard = text => {
  * @return {*}
  */
 const isProd = () => {
-  return window.location.href.indexOf('//test') > -1 && window.location.href.indexOf('//1') > -1
+  return window.location.href.indexOf('//test') > -1 || window.location.href.indexOf('//1') > -1
 };
 
 //获取UA信息返回数组

@@ -473,7 +473,7 @@
       }
   
       // 测试环境加载vconsole
-      if (window.location.href.indexOf('//test') > -1 && window.location.href.indexOf('//1') > -1) {
+      if (window.location.href.indexOf('//test') > -1 || window.location.href.indexOf('//1') > -1) {
         loadJs(
           'https://cdn.jsdelivr.net/npm/vconsole@3.3.4/dist/vconsole.min.js'
         );
