@@ -5,7 +5,7 @@
         <div class="left">{{ `${is_cn ? '邀请码' : '邀請碼'}：${transfer_code}` }}</div>
         <div class="right" @click="copy">{{ is_cn ? '复制' : '復製' }}</div>
       </div>
-      <div class="tip-container">{{ is_cn ? '复制邀请码，打开命理寻真App即可享受更多折扣' : '復製邀請碼，打開命理尋真App即可享受更多折扣' }}</div>
+      <div class="tip-container">{{ is_cn ? `复制邀请码，打开${ app_name }App即可享受更多折扣` : `復製邀請碼，打開${ app_name }App即可享受更多折扣` }}</div>
       <img class="btn-logo" @click="down" :src="is_cn ? cn_btn_zhekou_xaizai : tw_btn_zhekou_xaizai" />
       <p class="tip">{{ is_cn? '我的-我的报告中查看': '我的-我的報告中查看' }}</p>
     </div>
@@ -128,6 +128,9 @@ export default {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
+    app_name() {
+      return utils.getAppName();
+    }
   },
   mounted() {
     this.getData();

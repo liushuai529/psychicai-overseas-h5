@@ -24,7 +24,7 @@
 
 
     <contentDetail class="hidden-code" :result="fortune" :item_index="8" />
-    <contentDetail class="hidden-code" :result="fortune" :item_index="9" />
+    <!-- <contentDetail class="hidden-code" :result="fortune" :item_index="9" /> -->
   </div>
 </template>
 

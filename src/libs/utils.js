@@ -173,12 +173,18 @@ const getFBChannel = () => {
     return 'blue08';
   } else if (url.indexOf('/blue13/') > -1) {
     return 'blue13';
+  } else if (url.indexOf('/lunamobi03/') > -1) {
+    return 'lunamobi03';
+  } else if (url.indexOf('/lunamobi05/') > -1) {
+    return 'lunamobi05';
   } else if (url.indexOf('/tt_gatherone08/') > -1) {
     return 'tt_gatherone08';
   } else if (url.indexOf('/tt_enjoy08/') > -1) {
     return 'tt_enjoy08';
   } else if (url.indexOf('/gatherone03/') > -1) {
     return 'gatherone03';
+  } else if (url.indexOf('/gatherone16/') > -1) {
+    return 'gatherone16';
   } else {
     return 'enjoy03';
   }
@@ -199,7 +205,7 @@ const isFBChannel = () => {
 
 
 const isShowCombine = () => {
-  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "google_enjoy03", "google_ads03", "mlzyy03", "gatherone03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05", "blue03", "blue05"];
+  return ["ads03", "ads103", "enjoy03", "enjoy103", "enjoy203", "enjoy303", "enjoyA03", "panda03", "ocean03", "ocean103", "google_ocean03", "google_enjoy03", "google_ads03", "mlzyy03", "gatherone03", "lunamobi03", "ads05", "ads105", "enjoy05", "enjoy105", "enjoy205", "enjoy305", "enjoyA05", "ocean05", "ocean105", "mlzyy05", "blue03", "blue05", "lunamobi05"];
 };
 
 /**
@@ -284,7 +290,10 @@ const getFbId = () => {
     'blue05': '1547507465872255',
     'blue08': '1547507465872255',
     'blue13': '1547507465872255',
+    'lunamobi03': '1232089381202273',
+    'lunamobi05': '1232089381202273',
     'gatherone03': '545529068266373',
+    'gatherone16': '545529068266373',
   }
 }
 
@@ -1012,7 +1021,7 @@ const copyToClipboard = text => {
  * @return {*}
  */
 const isProd = () => {
-  return window.location.href.indexOf('//test') < 0 && window.location.href.indexOf('//1') < 0
+  return window.location.href.indexOf('//test') > -1 && window.location.href.indexOf('//1') > -1
 };
 
 //获取UA信息返回数组
@@ -1418,6 +1427,8 @@ const getLanguage = () => {
     navigator.language.indexOf('zh-') > -1 ? navigator.language : 'zh-CN';
   return getRequestParams('language') || now_lang;
 };
+
+
 
 // 延迟函数
 const asleep = delay => {
@@ -1924,6 +1935,22 @@ const getCurrenciesArray = () => {
     ]
   }
 }
+// 获取app名称
+const getAppName = () => {
+  if(isAndroid()) {
+    if(getLanguage() === 'zh-CN') {
+      return '命理寻真';
+    } else {
+      return '命理尋真';
+    }
+  } else {
+    if(getLanguage() === 'zh-CN') {
+      return '寻真';
+    } else {
+      return '尋真';
+    }
+  }
+}
 
 
 
@@ -2015,5 +2042,6 @@ export default {
   isFBChannel,
   resetLogin,
   getCurrenciesArray,
+  getAppName,
 };
 
