@@ -111,12 +111,12 @@
       <HomeFooter v-if="showFixedBtn" product_key="h5_emotion2024" />
       <PopNotice v-if="is_show_notice" @close="closeNotice" :count_down="count_down" :product_key="product_key"
         e_id="10006" c_id="-10021" c_name="click_2024lovely_discount1" />
-      <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
+      <!-- <FixedOrder v-if="show_fixed_order && !is_show_notice" :title="local_title" :is_show_move="is_show_notice"
         :new_order_key="new_order_key" name="local" top="4.7rem" :time="local_time" @payOrder="checkOrder"
         @jumpDetail="jumpOrder" />
       <FixedOrder v-if="show_api_order && !is_show_notice" :title="last_title" :is_show_move="is_show_notice"
         :last_order="last_order" name="api" top="6.7rem" :time="api_time" @payOrder="checkOrder"
-        @jumpDetail="jumpOrder" />
+        @jumpDetail="jumpOrder" /> -->
     </div>
   </div>
 </template>
