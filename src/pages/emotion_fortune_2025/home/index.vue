@@ -345,7 +345,7 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
-    this.loadBg('#bg-svga', this.is_cn ? cn_header_svga : tw_header_svga);
+    // this.loadBg('#bg-svga', this.is_cn ? cn_header_svga : tw_header_svga);
   },
   methods: {
     setAnimation() {
