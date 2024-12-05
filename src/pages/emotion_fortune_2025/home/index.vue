@@ -6,6 +6,7 @@
       'cn-bg': language === 'zh-CN',
       'tw-bg': language === 'zh-TW',
     }">
+      <canvas id="bg-svga"></canvas>
       <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
       <div :class="['info', utils.showEmail() ? 'info-height' : '', is_cn ? 'info-cn' : 'info-tw']">
         <div class="info-content">
@@ -54,7 +55,7 @@
             <span @click="toPrivacy('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
             <span @click="toPrivacy('privacy.html')">{{
               $t('privacy-policy')
-              }}</span>
+            }}</span>
           </div>
         </div>
       </div>
@@ -157,6 +158,10 @@ export default {
   },
   data() {
     return {
+      cn_header_svga:
+        'https://psychicai-static.psychicai.pro/imgs/2406ce0cb03241ea456db046b71c40ee417c.svga',
+      tw_header_svga:
+        'https://psychicai-static.psychicai.pro/imgs/240699790b16f7ff4bdcb0d22c167fcb76d8.svga',
       cn_icon_0,
       cn_icon_1,
       cn_icon_2,
@@ -340,6 +345,7 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
+    this.loadBg('#bg-svga', this.is_cn ? cn_header_svga : tw_header_svga);
   },
   methods: {
     setAnimation() {
@@ -822,6 +828,13 @@ export default {
       margin-left: 0.51rem;
       width: 2.8rem;
     }
+  }
+
+  #bg-svga {
+    position: absolute;
+    width: 7.5rem;
+    height: 9rem;
+    top: 0;
   }
 
 

@@ -65,6 +65,8 @@ const zodiacObj = {
   '龙': result_img_shengxiao_long,
   '龍': result_img_shengxiao_long,
   '牛': result_img_shengxiao_niu,
+  '马': result_img_shengxiao_ma,
+  '馬': result_img_shengxiao_ma,
   '蛇': result_img_shengxiao_she,
   '鼠': result_img_shengxiao_shu,
   '兔': result_img_shengxiao_tu,

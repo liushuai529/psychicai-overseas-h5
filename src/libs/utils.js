@@ -186,7 +186,7 @@ const getFBChannel = () => {
   } else if (url.indexOf('/gatherone16/') > -1) {
     return 'gatherone16';
   } else {
-    return 'enjoy03';
+    return 'mlzyy308';
   }
 };
 
@@ -1021,7 +1021,7 @@ const copyToClipboard = text => {
  * @return {*}
  */
 const isProd = () => {
-  return window.location.href.indexOf('//test') > -1 && window.location.href.indexOf('//1') > -1
+  return window.location.href.indexOf('//test') < 0 && window.location.href.indexOf('//1') < 0
 };
 
 //获取UA信息返回数组
