@@ -20,7 +20,7 @@
         <div class="message">
           <span>您的八字信息：</span>
           <span>姓名：{{ username }}</span>
-          <span>日期：{{ gongli_nongli ? picker_date_yangli : picker_date_nongli }}</span>
+          <!-- <span>日期：{{ gongli_nongli ? picker_date_yangli : picker_date_nongli }}</span> -->
         </div>
       </div>
 
