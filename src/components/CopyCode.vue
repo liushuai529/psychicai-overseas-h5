@@ -2,7 +2,7 @@
 <template>
   <div :class="['more-content', className]">
     <img v-if="set_title" :style="title_icon_style" :src="title_icon" alt="" />
-    <img :src="is_cn ? cn_logo : tw_logo" class="logo" alt="" />
+    <img :src="logo_url" class="logo" alt="" />
     <div :style="`color:${tips1_color}`" class="tips1">{{ tips1 }}</div>
     <div :class="['code-common', codeClass]" v-if="transfer_code">
       <span :style="`color:${code_color}`">
@@ -23,6 +23,7 @@ import { Toast } from 'mint-ui';
 import utils from '../libs/utils';
 import cn_logo from '../assets/img/emotion_fortune_2025/cn/result_img_logo_cn.webp';
 import tw_logo from '../assets/img/emotion_fortune_2025/tw/result_img_logo_tw.webp';
+import ios_logo from '../assets/img/emotion_fortune_2025/result_img_logo_ios.webp';
 const lang = utils.getLanguage();
 const tips_arr1 = {
   'zh-CN': `神准测算报告，请下载「${utils.getAppName()}」`,
@@ -130,12 +131,20 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/240401762cbffce2420f95f7b526da19163c.png',
       cn_logo,
       tw_logo,
+      ios_logo,
     };
   },
   computed: {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
+    logo_url() {
+      if(utils.isAndroid()) {
+        return is_cn ? cn_logo : tw_logo
+      } else {
+        return ios_logo;
+      }
+    }
   },
   methods: {
     /**
