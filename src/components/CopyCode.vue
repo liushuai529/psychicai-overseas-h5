@@ -1,10 +1,4 @@
-<!--
- * @Author: wujiang@weli.cn
- * @Date: 2024-04-19 10:41:34
- * @LastEditors: wujiang 
- * @LastEditTime: 2024-05-29 17:54:27
- * @Description: 更多精彩
--->
+
 <template>
   <div :class="['more-content', className]">
     <img v-if="set_title" :style="title_icon_style" :src="title_icon" alt="" />
@@ -31,8 +25,8 @@ import cn_logo from '../assets/img/emotion_fortune_2025/cn/result_img_logo_cn.we
 import tw_logo from '../assets/img/emotion_fortune_2025/tw/result_img_logo_tw.webp';
 const lang = utils.getLanguage();
 const tips_arr1 = {
-  'zh-CN': '神准测算报告，请下载「命理寻真」',
-  'zh-TW': '神準測算報告，請下載「命理尋真」',
+  'zh-CN': `神准测算报告，请下载「${utils.getAppName()}」`,
+  'zh-TW': `神準測算報告，請下載「${utils.getAppName()}」`,
 };
 const tips_arr2 = {
   'zh-CN': '邀请码',
@@ -47,8 +41,8 @@ const tips_arr4 = {
   'zh-TW': '複製成功',
 };
 const tips_arr5 = {
-  'zh-CN': '复制邀请码，打开命理寻真，可重复查看您购买的报告',
-  'zh-TW': '復製邀請碼，打開命理尋真，可重復查看您購買的報告',
+  'zh-CN': `复制邀请码，打开${utils.getAppName()}，可重复查看您购买的报告`,
+  'zh-TW': `復製邀請碼，打開${utils.getAppName()}，可重復查看您購買的報告`,
 };
 export default {
   name: 'CopyCode',
