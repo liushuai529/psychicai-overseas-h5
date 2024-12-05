@@ -54,8 +54,8 @@ const tipsArr1 = {
   'zh-TW': '邀請碼已復製',
 };
 const tipsArr2 = {
-  'zh-CN': '1.打开命理寻真',
-  'zh-TW': '1.打開命理尋真',
+  'zh-CN': `1.打开${utils.getAppName()}`,
+  'zh-TW': `1.打開${utils.getAppName()}`,
 };
 const tipsArr3 = {
   'zh-CN': '2.保存报告',
@@ -70,8 +70,8 @@ const tipsArr5 = {
   'zh-TW': '下載',
 };
 const tipsArr6 = {
-  'zh-CN': '命理寻真',
-  'zh-TW': '命理尋真',
+  'zh-CN': utils.getAppName(),
+  'zh-TW': utils.getAppName(),
 };
 const language = utils.getLanguage();
 export default {
