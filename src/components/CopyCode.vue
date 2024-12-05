@@ -140,7 +140,7 @@ export default {
     },
     logo_url() {
       if(utils.isAndroid()) {
-        return is_cn ? cn_logo : tw_logo
+        return this.is_cn ? cn_logo : tw_logo
       } else {
         return ios_logo;
       }
