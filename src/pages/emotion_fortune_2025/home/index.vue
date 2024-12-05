@@ -185,7 +185,7 @@ export default {
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,
       sex: '0',
-      year: '1995',
+      year: '2000',
       month: '',
       date: '',
       birth_hour: '-1',
