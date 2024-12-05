@@ -6,7 +6,7 @@
       :visible="showAnimation" @update-visible="showAnimation = false" />
     <PayGuideModal v-if="showPayGuideModal" @show_modal="showModal" />
     <img class="header-title" :src="is_cn ? cn_info_title : tw_info_title" alt="" />
-    <UserInfo style="margin-top: -5.8rem; margin-bottom: 0.44rem;" :picker_date_nongli="picker_date_nongli"
+    <UserInfo style="margin-top: -5.8rem;" :picker_date_nongli="picker_date_nongli"
       :picker_date_yangli="picker_date_yangli" :username="username" :sex="sex" />
 
 

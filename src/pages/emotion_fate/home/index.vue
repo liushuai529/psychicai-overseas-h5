@@ -31,13 +31,13 @@
                 </div>
 
               </div>
-              <div class="sex-container">
+              <!-- <div class="sex-container">
                 <img :src="sex == 1 ? boy : girl" @click="changeSex()" />
-              </div>
+              </div> -->
             </div>
             <div class="divider-line"></div>
 
-            <div class="info-item">
+            <!-- <div class="info-item">
               <div class="left input-container">
                 <div>生辰：</div>
                 <div class="info-input">
@@ -52,8 +52,8 @@
               <div class="birth-container">
                 <img src="../../../assets/img/emotion_fate/icon_rili.webp" @click="openPicker" />
               </div>
-            </div>
-            <div class="divider-line"></div>
+            </div> -->
+            <!-- <div class="divider-line"></div> -->
 
 
 
@@ -87,7 +87,7 @@
             <span @click="link('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
             <span @click="link('privacy.html')">{{
               $t('privacy-policy')
-            }}</span>
+              }}</span>
           </div>
 
         </div>
@@ -219,15 +219,20 @@ export default {
 
       privacyChecked: true, // 同意隐私协议
       showFixedBtn: false,
-      sex: '1',
+      sex: '0',
       year: '1995',
-      month: '',
-      date: '',
+      month: '1',
+      date: '1',
       birth_hour: '-1',
       username: '',
       email: '',
-      picker_date: '',
-      picker_date_obj: null,
+      picker_date: '1995年1月1日 未知时间',
+      picker_date_obj: {
+        year: 1995,
+        month: 1,
+        date: 1,
+        birth_hour: -1,
+      },
       picker_hour: '',
       gongli_nongli: '1',
       choose_time: false,
@@ -625,6 +630,8 @@ export default {
      * @return {*}
      */
     async check() {
+      console.log(this.picker_date, this.picker_date_obj)
+      // return
       let username = this.username;
       let email = this.email;
       let sex = this.sex;

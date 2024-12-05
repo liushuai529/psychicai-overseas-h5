@@ -17,7 +17,7 @@
         <!-- <img class="order-icon" :src="is_cn ? cn_title : tw_title" alt="" /> -->
 
         <div class="text">
-          {{ is_cn ? `复制订单邀请码，打开${ app_name }，您可以在命理寻真中查看您的报告。` : `復製訂單邀請碼，打開${ app_name }，您可以在命理尋真中查看您的報告。` }}<span class="download" @click="openApp()">{{ $t('tips-2') }} </span>
+          {{ is_cn ? `复制订单邀请码，打开${ app_name }，您可以在${ app_name }中查看您的报告。` : `復製訂單邀請碼，打開${ app_name }，您可以在${ app_name }中查看您的報告。` }}<span class="download" @click="openApp()">{{ $t('tips-2') }} </span>
         </div>
       </div>
       <div class="content">
@@ -363,7 +363,7 @@ const event_check_enums = {
 
 const copy_info = {
   h5_annual2025: { module: 10015, 'content_id': -10023, 'event_name': 'click_history_year2025_end_copy', type: 'click' }, // 2025年年运
-  h5_emotion2025: { module: 10017, 'content_id': -10023, 'event_name': 'click_LOVE2025_end_copy', type: 'click' }, // 2025年爱情运势
+  h5_emotion2025: { module: 10017, 'content_id': -10023, 'event_name': 'click_history_LOVE2025_end_copy', type: 'click' }, // 2025年爱情运势
 }
 
 export default {
