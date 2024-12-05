@@ -363,7 +363,7 @@ const event_check_enums = {
 
 const copy_info = {
   h5_annual2025: { module: 10015, 'content_id': -10023, 'event_name': 'click_history_year2025_end_copy', type: 'click' }, // 2025年年运
-  h5_emotion2025: { module: 10017, 'content_id': -10023, 'event_name': 'click_LOVE2025_end_copy', type: 'click' }, // 2025年爱情运势
+  h5_emotion2025: { module: 10017, 'content_id': -10023, 'event_name': 'click_history_LOVE2025_end_copy', type: 'click' }, // 2025年爱情运势
 }
 
 export default {
