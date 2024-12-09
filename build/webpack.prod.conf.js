@@ -1914,6 +1914,27 @@ for (var pathname of ['launch_page/launch_page']) {
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
 
+// 活动渠道
+for (var pathname of ['recall/recall']) {
+  var filename = pathname.split('/')[0];
+  var conf = {
+    filename: path.resolve(__dirname, '../dist/activity01/' + filename + '.html'),
+    template: 'template/index_activity01.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true,
+    },
+  };
+  if (pathname in webpackConfig.entry) {
+    conf.chunks = ['manifest', 'vendor', pathname];
+    conf.hash = false;
+  }
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+}
 
 
 
