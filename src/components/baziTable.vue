@@ -1,19 +1,13 @@
 <template>
   <div class="table-box">
-    <table
-      :style="{
-        background: bg,
-        width: width,
-        border: table_border,
-      }"
-      class="user-table"
-    >
+    <table :style="{
+      background: bg,
+      width: width,
+      border: table_border,
+    }" class="user-table">
       <th>
         <div class="gua">
-          <img
-            src="https://psychicai-static.psychicai.pro/imgs/2404347a9915ae984267b0aab1e48afe650c.png"
-            alt=""
-          />
+          <img src="https://psychicai-static.psychicai.pro/imgs/2404347a9915ae984267b0aab1e48afe650c.png" alt="" />
           <span>{{ sex | filter_sex }}</span>
         </div>
         <!-- <canvas
@@ -23,140 +17,95 @@
         >
         </canvas> -->
       </th>
-      <tr
-        class="name"
-        :style="{
-          borderColor: border_color,
-          color: change_color ? text_color : '',
-        }"
-      >
+      <tr class="name" :style="{
+        borderColor: border_color,
+        color: change_color ? text_color : '',
+      }">
         <span>姓名：</span>
         <span>{{ username | filter_name }}</span>
+        <span v-if="is_exp" class="exp">示例</span>
       </tr>
-      <tr
-        :style="{
-          borderColor: border_color,
-          color: change_color ? text_color : '',
-        }"
-        class="birth name"
-      >
+      <tr :style="{
+        borderColor: border_color,
+        color: change_color ? text_color : '',
+      }" class="birth name">
         {{
           gongli_nongli ? picker_date_yangli : picker_date_nongli
         }}
       </tr>
-      <tr
-        :style="{
-          color: change_color ? text_color : '',
+      <tr :style="{
+        color: change_color ? text_color : '',
 
+        borderColor: border_color,
+      }" class="name c-zhu">
+        <td :style="{
           borderColor: border_color,
-        }"
-        class="name c-zhu"
-      >
-        <td
-          :style="{
-            borderColor: border_color,
-          }"
-        >
+        }">
           年柱
         </td>
-        <td
-          :style="{
-            borderColor: border_color,
-          }"
-        >
+        <td :style="{
+          borderColor: border_color,
+        }">
           月柱
         </td>
-        <td
-          :style="{
-            borderColor: border_color,
-          }"
-        >
+        <td :style="{
+          borderColor: border_color,
+        }">
           日柱
         </td>
-        <td
-          :style="{
-            borderColor: border_color,
-          }"
-        >
+        <td :style="{
+          borderColor: border_color,
+        }">
           时柱
         </td>
       </tr>
       <tr class="v-zhu">
-        <td
-          v-for="(it, k) in gan"
-          :key="'gan' + k"
-          :style="{
-            borderColor: border_color,
-          }"
-          :class="styleColor(it)"
-        >
+        <td v-for="(it, k) in gan" :key="'gan' + k" :style="{
+          borderColor: border_color,
+        }" :class="styleColor(it)">
           {{ it }}
         </td>
       </tr>
-      <tr
-        :style="{
+      <tr :style="{
+        borderColor: border_color,
+      }" class="v-zhu bottom-1">
+        <td v-for="(it, k) in zhi" :key="'zhi' + k" :style="{
           borderColor: border_color,
-        }"
-        class="v-zhu bottom-1"
-      >
-        <td
-          v-for="(it, k) in zhi"
-          :key="'zhi' + k"
-          :style="{
-            borderColor: border_color,
-          }"
-          :class="styleColor(it)"
-        >
+        }" :class="styleColor(it)">
           {{ it }}
         </td>
       </tr>
       <!-- 用户纳音 -->
-      <tr
-        :style="{
+      <tr :style="{
+        borderColor: border_color,
+        color: change_color ? text_color : '',
+      }" class="v-nayin bottom-1">
+        <td v-for="(it, k) in nayin" :style="{
           borderColor: border_color,
-          color: change_color ? text_color : '',
-        }"
-        class="v-nayin bottom-1"
-      >
-        <td
-          v-for="(it, k) in nayin"
-          :style="{
-            borderColor: border_color,
-          }"
-          :key="'zhi' + k"
-        >
+        }" :key="'zhi' + k">
           {{ it }}
         </td>
       </tr>
       <tr class="v-minge">
-        <td
-          :style="{
-            color: change_color ? text_color : '',
+        <td :style="{
+          color: change_color ? text_color : '',
 
-            borderColor: border_color,
-          }"
-          class="label-minge"
-        >
+          borderColor: border_color,
+        }" class="label-minge">
           {{ tips1 }}
         </td>
         <td class="minge-text">
-          <div
-            :style="{
-              borderColor: border_color,
-              color: change_color ? text_color : '',
-            }"
-            class="bottom-1 minge-row"
-          >
+          <div :style="{
+            borderColor: border_color,
+            color: change_color ? text_color : '',
+          }" class="bottom-1 minge-row">
             <div class="label-100">五行</div>
             <div>{{ wuxingqiang ? wuxingqiang + ' 强' : '？' }}</div>
           </div>
-          <div
-            :style="{
-              borderColor: border_color,
-              color: change_color ? text_color : '',
-            }"
-            class="bottom-1 minge-row"
-          >
+          <div :style="{
+            borderColor: border_color,
+            color: change_color ? text_color : '',
+          }" class="bottom-1 minge-row">
             <div class="label-100">{{ tips2 }}</div>
             <div>{{ getStarNum(gui_ren_num) }}</div>
           </div>
@@ -164,14 +113,10 @@
             <div class="label-100">{{ tips3 }}</div>
             <div>{{ getStarNum(cai_bo_num) }}</div>
           </div>
-          <div
-            :style="{
-              borderColor: border_color,
-              color: change_color ? text_color : '',
-            }"
-            v-else
-            class="minge-row"
-          >
+          <div :style="{
+            borderColor: border_color,
+            color: change_color ? text_color : '',
+          }" v-else class="minge-row">
             <div class="label-100">{{ tips6 }}</div>
             <div>{{ getStarNum(tao_hua_num) }}</div>
           </div>
@@ -188,44 +133,30 @@
           </div>
         </td>
         <td class="minge-text">
-          <div
-            :style="{
-              borderColor: border_color,
-              color: change_color ? text_color : '',
-            }"
-            class="bottom-1 minge-row"
-          >
+          <div :style="{
+            borderColor: border_color,
+            color: change_color ? text_color : '',
+          }" class="bottom-1 minge-row">
             <div class="label-100">日元</div>
             <div>{{ riyuanqiangruo ? riyuanqiangruo : '？' }}</div>
           </div>
-          <div
-            :style="{
-              borderColor: border_color,
-              color: change_color ? text_color : '',
-            }"
-            class="bottom-1 minge-row"
-          >
+          <div :style="{
+            borderColor: border_color,
+            color: change_color ? text_color : '',
+          }" class="bottom-1 minge-row">
             <div class="label-100">{{ tips4 }}</div>
             <div>{{ getStarNum(hun_yin_num) }}</div>
           </div>
 
-          <div
-            v-if="!is_show_taohua"
-            class="minge-row"
-            :style="{
-              color: change_color ? text_color : '',
-            }"
-          >
+          <div v-if="!is_show_taohua" class="minge-row" :style="{
+            color: change_color ? text_color : '',
+          }">
             <div class="label-100">{{ tips5 }}</div>
             <div>{{ getStarNum(shi_ye_num) }}</div>
           </div>
-          <div
-            v-else
-            class="minge-row"
-            :style="{
-              color: change_color ? text_color : '',
-            }"
-          >
+          <div v-else class="minge-row" :style="{
+            color: change_color ? text_color : '',
+          }">
             <div class="label-100">{{ tips7 }}</div>
             <div>{{ fuqigong ? fuqigong : '？' }}</div>
           </div>
@@ -384,6 +315,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    is_exp: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -467,6 +402,7 @@ export default {
   width: 1rem;
   height: 1.57rem;
 }
+
 .year-ji {
   width: 1rem;
   height: 1.62rem;
@@ -481,11 +417,13 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
+
   .daji {
     position: absolute;
     right: 0.1rem;
     top: -0.48rem;
   }
+
   .gua {
     width: 1.1rem;
     height: 1.1rem;
@@ -499,6 +437,7 @@ export default {
     position: absolute;
     left: 0.1rem;
     top: 0.28rem;
+
     img {
       width: 100%;
       height: 100%;
@@ -508,10 +447,12 @@ export default {
       z-index: 1;
       animation: circle_rotate 2s linear infinite;
     }
+
     span {
       z-index: 2;
     }
   }
+
   .name {
     width: 100%;
     height: 0.68rem;
@@ -526,11 +467,30 @@ export default {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    .exp {
+      background: #DF2113;
+      border-radius: 0.1rem;
+      padding: 0.02rem 0.1rem 0.02rem 0.1rem;
+      font-weight: 500;
+      font-size: 0.24rem;
+      color: #FFFFFF;
+      padding: 0.1rem;
+      padding-top: 0.02rem;
+      padding-bottom: 0.02rem;
+      margin-left: 0.1rem;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      text-align: left;
+    }
   }
+
   .c-zhu {
     font-weight: 400;
     font-size: 0.28rem;
     color: #DF2113;
+
     td {
       width: 25%;
       height: 100%;
@@ -541,9 +501,11 @@ export default {
       align-items: center;
     }
   }
+
   .c-zhu td:last-child {
     border-right: none;
   }
+
   .v-zhu {
     width: 100%;
     height: 0.57rem;
@@ -554,6 +516,7 @@ export default {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
     td {
       width: 25%;
       height: 100%;
@@ -564,9 +527,11 @@ export default {
       align-items: center;
     }
   }
+
   .v-zhu td:last-child {
     border-right: none;
   }
+
   .v-nayin {
     width: 100%;
     height: 0.71rem;
@@ -578,6 +543,7 @@ export default {
     justify-content: center;
     align-items: center;
     color: #4D2B1A;
+
     td {
       width: 25%;
       height: 100%;
@@ -588,9 +554,11 @@ export default {
       align-items: center;
     }
   }
+
   .v-nayin td:last-child {
     border-right: none;
   }
+
   .v-minge {
     width: 100%;
     height: 1.83rem;
@@ -601,6 +569,7 @@ export default {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start !important;
+
     .label-minge {
       width: 25%;
       color: #DF2113;
@@ -611,10 +580,12 @@ export default {
       justify-content: center;
       align-items: center;
     }
+
     .minge-text {
       width: 34%;
       height: 100%;
       color: #4D2B1A;
+
       .minge-row {
         display: flex;
         flex-direction: row;
@@ -623,6 +594,7 @@ export default {
         justify-content: space-around;
       }
     }
+
     .geju {
       width: 7%;
       height: 100%;
@@ -639,6 +611,7 @@ export default {
   width: 1rem;
   text-align: left;
 }
+
 .bottom-1 {
   border-bottom: 1px solid #4D1A1A;
 }
@@ -647,6 +620,7 @@ export default {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -656,6 +630,7 @@ export default {
   0% {
     transform: rotateY(0deg);
   }
+
   100% {
     transform: rotateY(360deg);
   }

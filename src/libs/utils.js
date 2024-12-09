@@ -185,6 +185,8 @@ const getFBChannel = () => {
     return 'gatherone03';
   } else if (url.indexOf('/gatherone16/') > -1) {
     return 'gatherone16';
+  } else if (url.indexOf('/activity01/') > -1) {
+    return 'activity01';
   } else {
     return 'ads10';
   }
