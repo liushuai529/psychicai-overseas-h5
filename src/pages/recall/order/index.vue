@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div style="width: 7.5rem; height: 1rem; background-color: yellow;" @click="downApp(0)"></div>
+    <div v-if="head_url" class="head" @click="downApp(0)">
+      <img :src="head_url" class="head" />
+    </div>
     <div :class="['result', is_cn ? 'cn-bg' : 'tw-bg']">
 
 
@@ -32,7 +34,7 @@
       <contentDetail style="margin-bottom: 2rem;" v-if="fortune.scores2024" :result="fortune"
         :content_arr="fortune.scores2024content" :item_index="10" />
       <div class="btn-modal" @click="downApp(1)">
-
+        <img :src="bottom_url" />
       </div>
 
     </div>
@@ -48,10 +50,22 @@ import CodePop from '../../../components/CodePop.vue';
 import CopyCode from '../../../components/CopyCode.vue';
 import home_img_tittle_xinxi_cn_1x from './../../../assets/img/year_of_lucky_2025/cn/home_img_tittle_xinxi_cn_1x.webp';
 import home_img_tittle_xinxi_tw_1x from './../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_xinxi_tw_1x.webp';
+import img_top_freebtn_malaysia_cn from './../../../assets/img/recall/cn/img_top_freebtn_malaysia_cn.webp';
+import img_top_freebtn_taiwan_cn from './../../../assets/img/recall/cn/img_top_freebtn_taiwan_cn.webp';
+import btn_backapp_cn from './../../../assets/img/recall/cn/btn_backapp_cn.webp';
+import img_top_freebtn_malaysia_tw from './../../../assets/img/recall/tw/img_top_freebtn_malaysia_tw.webp';
+import img_top_freebtn_taiwan_tw from './../../../assets/img/recall/tw/img_top_freebtn_taiwan_tw.webp';
+import btn_backapp_tw from './../../../assets/img/recall/tw/btn_backapp_tw.webp';
 export default {
   components: { contentDetail, UserInfo, CodePop, CopyCode, },
   data() {
     return {
+      btn_backapp_cn,
+      btn_backapp_tw,
+      img_top_freebtn_malaysia_cn,
+      img_top_freebtn_taiwan_cn,
+      img_top_freebtn_malaysia_tw,
+      img_top_freebtn_taiwan_tw,
       home_img_tittle_xinxi_cn_1x,
       home_img_tittle_xinxi_tw_1x,
       loading: false,
@@ -172,15 +186,42 @@ export default {
       shi_ye_num: 5,
       wuxingqiang: '木',
       type: '',
+      iso_code: '',
     };
   },
   computed: {
     is_cn() {
       return utils.getLanguage() === 'zh-CN';
     },
+    head_url() {
+      if (utils.getLanguage() === 'zh-CN') {
+        if (this.iso_code === 'TW') {
+          return img_top_freebtn_taiwan_cn;
+        } else {
+          return img_top_freebtn_malaysia_cn;
+        }
+      } else {
+        if (this.iso_code === 'TW') {
+          return img_top_freebtn_taiwan_tw;
+        } else {
+          return img_top_freebtn_malaysia_tw;
+        }
+
+      }
+
+
+    },
+    bottom_url() {
+      if (utils.getLanguage() === 'zh-CN') {
+        return btn_backapp_cn;
+      } else {
+        return btn_backapp_tw;
+      }
+    }
   },
   async mounted() {
     this.type = this.$route.query.type;
+    this.iso_code = this.$route.query.iso_code;
     console.log('this.type', this.type)
     utils.firebaseLogEvent(
       '10018',
@@ -197,7 +238,7 @@ export default {
   watch: {},
   methods: {
     downApp(num) {
-      location.href = 'mlxz://recall/report';
+      location.href = `mlxz://recall/report?channel=${this.type}`;
       if (num === 0) {
         utils.firebaseLogEvent(
           '10018',
@@ -238,6 +279,11 @@ export default {
   background-size: contain;
   width: 7.5rem;
   height: 12rem;
+}
+
+.head {
+  width: 7.5rem;
+  height: 1.28rem;
 }
 
 .result {
@@ -313,6 +359,15 @@ export default {
     width: 7.5rem;
     height: 1.96rem;
     background: url('../../../assets/img/recall/nianyun_img_btnmengban.webp');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 5.7rem;
+      height: 0.96rem;
+      object-fit: contain;
+    }
   }
 }
 
