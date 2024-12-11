@@ -20,7 +20,7 @@
       <div id="method-title-img" class="method-title-img-consult" v-else>
         <img :src="is_cn ? cn_paypage_tittle_pay : tw_paypage_tittle_pay" />
       </div>
-      <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
+      <MultilingualPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10011"
         c_click_id="-10006" e_click_name="click_truelove_pay" :consult_time="consult_time" sub_type="zheng_yuan"/>
       <div class="img-consult-bottom">
@@ -82,7 +82,7 @@ import tw_zhong4 from '../../../assets/img/emotion/new/tw/zhong_4.webp';
 import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
 import PayDetail from '../../../components/PayDetail.vue';
-import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
+import MultilingualPayDetail from '../../../components/MultilingualPayDetail.vue';
 
 import cn_bg_1 from '../../../assets/img/emotion_fate/cn/paypage_neirong_01_cn.webp';
 import cn_bg_2 from '../../../assets/img/emotion_fate/cn/paypage_neirong_02_cn.webp';
@@ -125,7 +125,7 @@ export default {
     BaziTable,
     HomeFooter,
     PayDetail,
-    MarriagesPayDetail,
+    MultilingualPayDetail,
     NewFooter,
     GejuInfo,
     AnimationPage,

@@ -27,7 +27,7 @@
       </div>
 
 
-      <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
+      <MultilingualPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10013"
         c_click_id="-10006" e_click_name="click_complex_pay" :consult_time="consult_time" sub_type="fu_he"/>
       <div class="img-consult-bottom">
@@ -91,7 +91,7 @@ import cn_zhong4 from '../../../assets/img/emotion/new/zhong_4.webp';
 import tw_zhong4 from '../../../assets/img/emotion/new/tw/zhong_4.webp';
 import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
-import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
+import MultilingualPayDetail from '../../../components/MultilingualPayDetail.vue';
 
 import cn_bg_1 from '../../../assets/img/emotion_remarriage/cn/paypage_neirong_cn.webp';
 import tw_bg_1 from '../../../assets/img/emotion_remarriage/tw/paypage_neirong_tw.webp';
@@ -135,7 +135,7 @@ export default {
     payModal,
     BaziTable,
     HomeFooter,
-    MarriagesPayDetail,
+    MultilingualPayDetail,
     NewFooter,
     GejuInfo,
     AnimationPage,
