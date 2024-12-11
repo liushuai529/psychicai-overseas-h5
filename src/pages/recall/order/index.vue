@@ -52,14 +52,22 @@ import home_img_tittle_xinxi_cn_1x from './../../../assets/img/year_of_lucky_202
 import home_img_tittle_xinxi_tw_1x from './../../../assets/img/year_of_lucky_2025/tw/home_img_tittle_xinxi_tw_1x.webp';
 import img_top_freebtn_malaysia_cn from './../../../assets/img/recall/cn/img_top_freebtn_malaysia_cn.webp';
 import img_top_freebtn_taiwan_cn from './../../../assets/img/recall/cn/img_top_freebtn_taiwan_cn.webp';
+import img_top_freebtn_hongkong_cn from './../../../assets/img/recall/cn/img_top_freebtn_hongkong_cn.webp';
+import img_top_freebtn_singapore_cn from './../../../assets/img/recall/cn/img_top_freebtn_singapore_cn.webp';
 import btn_backapp_cn from './../../../assets/img/recall/cn/btn_backapp_cn.webp';
 import img_top_freebtn_malaysia_tw from './../../../assets/img/recall/tw/img_top_freebtn_malaysia_tw.webp';
 import img_top_freebtn_taiwan_tw from './../../../assets/img/recall/tw/img_top_freebtn_taiwan_tw.webp';
+import img_top_freebtn_hongkong_tw from './../../../assets/img/recall/tw/img_top_freebtn_hongkong_tw.webp';
+import img_top_freebtn_singapore_tw from './../../../assets/img/recall/tw/img_top_freebtn_singapore_tw.webp';
 import btn_backapp_tw from './../../../assets/img/recall/tw/btn_backapp_tw.webp';
 export default {
   components: { contentDetail, UserInfo, CodePop, CopyCode, },
   data() {
     return {
+      img_top_freebtn_hongkong_cn,
+      img_top_freebtn_singapore_cn,
+      img_top_freebtn_hongkong_tw,
+      img_top_freebtn_singapore_tw,
       btn_backapp_cn,
       btn_backapp_tw,
       img_top_freebtn_malaysia_cn,
@@ -197,16 +205,23 @@ export default {
       if (utils.getLanguage() === 'zh-CN') {
         if (this.iso_code === 'TW') {
           return img_top_freebtn_taiwan_cn;
-        } else {
+        } else if (this.iso_code === 'MY') {
           return img_top_freebtn_malaysia_cn;
+        } else if (this.iso_code === 'HK') {
+          return img_top_freebtn_hongkong_cn;
+        } else if (this.iso_code === 'SG') {
+          return img_top_freebtn_singapore_cn;
         }
       } else {
         if (this.iso_code === 'TW') {
           return img_top_freebtn_taiwan_tw;
-        } else {
+        } else if (this.iso_code === 'MY') {
           return img_top_freebtn_malaysia_tw;
+        } else if (this.iso_code === 'HK') {
+          return img_top_freebtn_hongkong_tw;
+        } else if (this.iso_code === 'SG') {
+          return img_top_freebtn_singapore_tw;
         }
-
       }
 
 
