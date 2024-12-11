@@ -59,7 +59,6 @@ import img_top_freebtn_malaysia_tw from './../../../assets/img/recall/tw/img_top
 import img_top_freebtn_taiwan_tw from './../../../assets/img/recall/tw/img_top_freebtn_taiwan_tw.webp';
 import img_top_freebtn_hongkong_tw from './../../../assets/img/recall/tw/img_top_freebtn_hongkong_tw.webp';
 import img_top_freebtn_singapore_tw from './../../../assets/img/recall/tw/img_top_freebtn_singapore_tw.webp';
-
 import btn_backapp_tw from './../../../assets/img/recall/tw/btn_backapp_tw.webp';
 export default {
   components: { contentDetail, UserInfo, CodePop, CopyCode, },
