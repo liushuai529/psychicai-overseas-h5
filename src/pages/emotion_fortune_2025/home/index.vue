@@ -66,7 +66,6 @@
       
       <div :style="`background-image:url(${is_cn ? cn_icon_3 : tw_icon_3});width: 7.1rem; height: 6.22rem; background-size: 100%`" class="card">
         <canvas class="canvas-card" id="canvas3"></canvas>
-        <!-- <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" /> -->
       </div>
       <img class="card" :src="is_cn ? cn_icon_4 : tw_icon_4" />
       <img class="card" :src="is_cn ? cn_icon_5 : tw_icon_5" />
@@ -163,8 +162,7 @@ export default {
   },
   data() {
     return {
-      //https://psychicai-static.psychicai.pro/imgs/2412f9c10c630ccb4ed78dea8be0f2730ea5.svga 感情签简
-      //https://psychicai-static.psychicai.pro/imgs/2412729ca6c15b6e455db010446f8f8cd847.svga 感情签繁
+      
       // 生肖图简
       // 生肖图繁
       // 头图繁
