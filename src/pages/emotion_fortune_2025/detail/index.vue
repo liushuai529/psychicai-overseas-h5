@@ -20,7 +20,7 @@
     <PayItem product_key="h5_emotion2025" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
     <div :class="['method-box', 'method-height', is_cn ? 'box-bg-cn' : 'box-bg-tw']">
       <!-- <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" /> -->
-      <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key" :btn_url="pay_btn"
+      <MultilingualPayDetail className="pay-method" ref="payDetail" :product_key="product_key" :btn_url="pay_btn"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10017"
         c_click_id="-10006" e_click_name="click_LOVE2025_end_pay" a_click_token="2rov44" />
 
@@ -72,7 +72,7 @@ import mig_img_topbj_tw from '../../../assets/img/emotion_fortune_2025/tw/mig_im
 
 import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
-import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
+import MultilingualPayDetail from '../../../components/MultilingualPayDetail.vue';
 import PayDetail from '../../../components/PayDetail.vue';
 
 import cn_bg_0 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_huode_cn.webp';
@@ -108,7 +108,7 @@ export default {
     payModal,
     BaziTable,
     HomeFooter,
-    MarriagesPayDetail,
+    MultilingualPayDetail,
     PayDetail,
     NewFooter,
     GejuInfo,
