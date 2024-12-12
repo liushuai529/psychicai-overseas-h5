@@ -90,10 +90,9 @@ export default {
       localStorage.setItem('activity_current_time', formattedTime)
 
       return formattedTime
-    }
-  },
-  downApp(num) {
-    location.href = `mlxz://recall/report?channel=${this.type}`;
+    },
+    downApp(num) {
+      location.href = `mlxz://recall/report?channel=${this.type}`;
       if (num === 0) {
         utils.firebaseLogEvent(
           '10019',
@@ -116,6 +115,8 @@ export default {
         );
       }
     }
+  },
+
 };
 </script>
 <style scoped lang="less">
