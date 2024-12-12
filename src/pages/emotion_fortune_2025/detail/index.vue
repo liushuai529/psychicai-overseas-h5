@@ -175,8 +175,6 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/240413f79ffd1c864e35a747295e1eb15e4f.png',
       cn_card_svga: 'https://psychicai-static.psychicai.pro/imgs/2412f9c10c630ccb4ed78dea8be0f2730ea5.svga', //感情签简
       tw_card_svga: 'https://psychicai-static.psychicai.pro/imgs/2412729ca6c15b6e455db010446f8f8cd847.svga',// 感情签繁  
-
-
       nayin: ['？', '？', '？', '？'],
       cai_bo_num: 0,
       gui_ren_num: 0,
