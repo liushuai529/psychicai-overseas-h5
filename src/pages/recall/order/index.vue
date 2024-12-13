@@ -223,8 +223,6 @@ export default {
           return img_top_freebtn_singapore_tw;
         }
       }
-
-
     },
     bottom_url() {
       if (utils.getLanguage() === 'zh-CN') {
