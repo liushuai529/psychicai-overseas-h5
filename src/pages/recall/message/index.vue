@@ -92,8 +92,8 @@ export default {
       return formattedTime
     },
     downApp(num) {
-      location.href = `mlxz://recall/report?channel=${this.type}`;
       if (num === 0) {
+        location.href = `mlxz://recall/report?channel=${this.type}`;
         utils.firebaseLogEvent(
           '10019',
           '-10002',
@@ -104,6 +104,7 @@ export default {
           }
         );
       } else {
+        location.href = `mlxz://recall/consult`;
         utils.firebaseLogEvent(
           '10019',
           '-10003',
