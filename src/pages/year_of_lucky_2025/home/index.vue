@@ -69,7 +69,8 @@
 
           <!-- <div class="top-bg"> -->
           <div class="info-bottom">
-            <img v-if="privacyChecked" class="info-check" src="../../../assets/img/year_of_lucky_2025/login_icon_choose.webp"
+            <img v-if="privacyChecked" class="info-check"
+              src="../../../assets/img/year_of_lucky_2025/login_icon_choose.webp"
               @click="privacyChecked = !privacyChecked" />
             <img v-else class="info-check" src="../../../assets/img/year_of_lucky_2025/login_icon_choose_no.webp"
               @click="privacyChecked = !privacyChecked" />
@@ -77,7 +78,7 @@
             <span @click="toPrivacy('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
             <span @click="toPrivacy('privacy.html')">{{
               $t('privacy-policy')
-            }}</span>
+              }}</span>
           </div>
           <!-- <img class="top-bg" src="../../../assets/img/year_of_lucky_2025/xinxi_img_bj_xia.webp" /> -->
           <!-- </div> -->

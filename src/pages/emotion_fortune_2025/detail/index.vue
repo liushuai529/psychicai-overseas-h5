@@ -20,7 +20,7 @@
     <PayItem product_key="h5_emotion2025" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
     <div :class="['method-box', 'method-height', is_cn ? 'box-bg-cn' : 'box-bg-tw']">
       <!-- <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" /> -->
-      <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key" :btn_url="pay_btn"
+      <MultilingualPayDetail className="pay-method" ref="payDetail" :product_key="product_key" :btn_url="pay_btn"
         :bg="language === 'zh-CN' ? cn_modal_bg : tw_modal_bg" :query_user_string="query_user_string" e_view_id="10017"
         c_click_id="-10006" e_click_name="click_LOVE2025_end_pay" a_click_token="2rov44" />
 
@@ -29,7 +29,12 @@
       :user_desc="[mingge_desc]" :dataList="[gejujiedu]" /> -->
 
     <img class="module" :src="is_cn ? cn_bg_0 : tw_bg_0" />
-    <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" />
+    <div
+      :style="`background-image:url(${is_cn ? cn_bg_1 : tw_bg_1});width: 7.1rem; height: 5.5rem; background-size: 100%`"
+      class="module">
+      <canvas class="canvas-card" id="canvas3"></canvas>
+    </div>
+    <!-- <img class="module" :src="is_cn ? cn_bg_1 : tw_bg_1" /> -->
     <img class="module" :src="is_cn ? cn_bg_2 : tw_bg_2" />
     <img class="module" :src="is_cn ? cn_bg_3 : tw_bg_3" />
     <img class="module" :src="is_cn ? cn_bg_4 : tw_bg_4" />
@@ -72,7 +77,7 @@ import mig_img_topbj_tw from '../../../assets/img/emotion_fortune_2025/tw/mig_im
 
 import { report_id_arr } from '../../../libs/enum';
 import HomeFooter from '../../../components/HomeFooter.vue';
-import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
+import MultilingualPayDetail from '../../../components/MultilingualPayDetail.vue';
 import PayDetail from '../../../components/PayDetail.vue';
 
 import cn_bg_0 from '../../../assets/img/emotion_fortune_2025/cn/mid_img_details_huode_cn.webp';
@@ -108,7 +113,7 @@ export default {
     payModal,
     BaziTable,
     HomeFooter,
-    MarriagesPayDetail,
+    MultilingualPayDetail,
     PayDetail,
     NewFooter,
     GejuInfo,
@@ -168,7 +173,8 @@ export default {
         'https://psychicai-static.psychicai.pro/imgs/240417650ffa5df14b56ab7b1be09971e885.png',
       tw_modal_bg:
         'https://psychicai-static.psychicai.pro/imgs/240413f79ffd1c864e35a747295e1eb15e4f.png',
-
+      cn_card_svga: 'https://psychicai-static.psychicai.pro/imgs/2412f9c10c630ccb4ed78dea8be0f2730ea5.svga', //感情签简
+      tw_card_svga: 'https://psychicai-static.psychicai.pro/imgs/2412729ca6c15b6e455db010446f8f8cd847.svga',// 感情签繁  
       nayin: ['？', '？', '？', '？'],
       cai_bo_num: 0,
       gui_ren_num: 0,
@@ -292,6 +298,7 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
+    this.loadBg('#canvas3', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
   },
 
   destroyed() {
@@ -498,6 +505,10 @@ export default {
     width: 7.02rem;
 
     margin-bottom: 0.36rem;
+  }
+  .canvas-card {
+    width: 7.1rem;
+    height: 5.5rem;
   }
 
   .fixed-btn {

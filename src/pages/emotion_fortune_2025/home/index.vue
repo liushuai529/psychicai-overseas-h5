@@ -7,6 +7,7 @@
       'tw-bg': language === 'zh-TW',
     }">
       <canvas id="bg-svga"></canvas>
+      <!-- <canvas class="canvas-bg" id="canvas1"></canvas> -->
       <img class="order-icon" @click="toOrder" :src="is_cn ? cn_history_order : tw_history_order" alt="" />
       <div :class="['info', utils.showEmail() ? 'info-height' : '', is_cn ? 'info-cn' : 'info-tw']">
         <div class="info-content">
@@ -55,14 +56,17 @@
             <span @click="toPrivacy('user_agreement.html')">{{ $t('user-agreement') }} </span>{{ $t('and') }}
             <span @click="toPrivacy('privacy.html')">{{
               $t('privacy-policy')
-            }}</span>
+              }}</span>
           </div>
         </div>
       </div>
       <img class="card mt-34" :src="is_cn ? cn_icon_0 : tw_icon_0" />
       <img class="card" :src="is_cn ? cn_icon_1 : tw_icon_1" />
       <img class="card" :src="is_cn ? cn_icon_2 : tw_icon_2" />
-      <img class="card" :src="is_cn ? cn_icon_3 : tw_icon_3" />
+      
+      <div :style="`background-image:url(${is_cn ? cn_icon_3 : tw_icon_3});width: 7.1rem; height: 6.22rem; background-size: 100%`" class="card">
+        <canvas class="canvas-card" id="canvas3"></canvas>
+      </div>
       <img class="card" :src="is_cn ? cn_icon_4 : tw_icon_4" />
       <img class="card" :src="is_cn ? cn_icon_5 : tw_icon_5" />
       <img class="card" :src="is_cn ? cn_icon_6 : tw_icon_6" />
@@ -158,10 +162,23 @@ export default {
   },
   data() {
     return {
-      cn_header_svga:
-        'https://psychicai-static.psychicai.pro/imgs/2406ce0cb03241ea456db046b71c40ee417c.svga',
-      tw_header_svga:
-        'https://psychicai-static.psychicai.pro/imgs/240699790b16f7ff4bdcb0d22c167fcb76d8.svga',
+      
+      // 生肖图简
+      // 生肖图繁
+      // 头图繁
+      cn_home_svga:
+        'https://psychicai-static.psychicai.pro/imgs/241271e33221ef574bf5b43285c73193e075.svga',
+      tw_home_svga:
+        'https://psychicai-static.psychicai.pro/imgs/2412a8278fe0502241739f7554422220fb2b.svga',
+      cn_card_svga:
+        'https://psychicai-static.psychicai.pro/imgs/24120d0937a94d05497eac5c1b8a41092652.svga',
+      tw_card_svga:
+        'https://psychicai-static.psychicai.pro/imgs/241224a73176658c4da6aa3a8b0aa447e5c9.svga',
+
+      // cn_header_svga:
+      //   'https://psychicai-static.psychicai.pro/imgs/2406ce0cb03241ea456db046b71c40ee417c.svga',
+      // tw_header_svga:
+      //   'https://psychicai-static.psychicai.pro/imgs/240699790b16f7ff4bdcb0d22c167fcb76d8.svga',
       cn_icon_0,
       cn_icon_1,
       cn_icon_2,
@@ -345,7 +362,9 @@ export default {
       self.is_show_btn =
         initialWindowHeight > window.innerHeight ? false : true;
     });
-    // this.loadBg('#bg-svga', this.is_cn ? cn_header_svga : tw_header_svga);
+    this.loadBg('#bg-svga', this.is_cn ? this.cn_home_svga : this.tw_home_svga);
+    this.loadBg('#canvas3', this.is_cn ? this.cn_card_svga : this.tw_card_svga);
+    
   },
   methods: {
     setAnimation() {
@@ -1137,6 +1156,10 @@ export default {
   .card {
     width: 7.06rem;
     margin-bottom: 0.36rem;
+  }
+  .canvas-card {
+    width: 7.1rem;
+    height: 6.22rem;
   }
 }
 

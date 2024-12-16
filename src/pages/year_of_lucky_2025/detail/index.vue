@@ -23,7 +23,7 @@
     <PayItem product_key="h5_annual2025" @show_modal="showModal" :show_pay_guide_modal="showPayGuideModal" />
     <div :class="['method-box']">
       <img id="method-title-img" class="method-title-img" :src="is_cn ? img_zhifu_jian : img_zhifu_fan" />
-      <MarriagesPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
+      <MultilingualPayDetail className="pay-method" ref="payDetail" :product_key="product_key"
         :query_user_string="query_user_string" e_view_id="10015" c_view_id="-10006" e_view_name="click_Year2025_end_pay"
         a_view_token="184kba" c_click_id="-10006" e_click_name="click_Year2025_end_pay" a_click_token="2rov44" />
     </div>
@@ -58,7 +58,7 @@ import tw_pay_btn from '../../../assets/img/mlxz/year_of_lucky_2024/tw/img_butto
 import analyzeModal from './analyze.vue';
 import payModal from '../../../components/PayModal.vue';
 import AnimationYearPage from '../../../components/AnimationYearPage.vue';
-import MarriagesPayDetail from '../../../components/MarriagesPayDetail.vue';
+import MultilingualPayDetail from '../../../components/MultilingualPayDetail.vue';
 import { report_id_arr } from '../../../libs/enum';
 
 import home_img_tittle_xinxi_cn_1x from './../../../assets/img/year_of_lucky_2025/cn/home_img_tittle_xinxi_cn_1x.webp';
@@ -153,7 +153,7 @@ export default {
     PayGuideModal,
     FixedDiscountModal,
     AnimationYearPage,
-    MarriagesPayDetail,
+    MultilingualPayDetail,
   },
   data() {
     return {
