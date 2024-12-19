@@ -103,6 +103,7 @@ import {
   payOrderAPI,
   payFateOrderAPI,
   reportEventAPI,
+  getBaseInfoAPI,
 } from '../api/api';
 import utils from '../libs/utils';
 import { path_enums } from '../libs/enum';
@@ -192,6 +193,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       utils,
       img_home_btu_chakan_cn,
       img_home_btu_chakan_tw,
@@ -380,27 +382,34 @@ export default {
       }
     },
   },
-  created() {
-    if(localStorage.getItem('current_country')) {
-      this.current_country = JSON.parse(localStorage.getItem('current_country'))
-    } else {
-      this.startWatching('current_country')
+  async created() {
+    try {
+      this.loading = true;
+      // Initialize location first
+      if(localStorage.getItem('current_country')) {
+        this.current_country = JSON.parse(localStorage.getItem('current_country'));
+        await this.initializePaymentMethods();
+      } else {
+        // Only call getBaseInfoAPI for new users (no cached location)
+        if (await this.waitForLocation()) {
+          await this.initializePaymentMethods();
+        }
+      }
+
+      // Initialize timer
+      let use_fixed_time = this.$route.query.use_fixed_time;
+      if (use_fixed_time) {
+        this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
+        localStorage.removeItem('mlxz_fixed_local_order_time');
+      } else {
+        this.time = 15 * 60 * 1000;
+      }
+    } catch (error) {
+      console.error('Initialization error:', error);
+      Toast(this.is_cn ? '初始化失败，请刷新重试' : '初始化失敗，請刷新重試');
+    } finally {
+      this.loading = false;
     }
-    // this.current_country = JSON.parse(localStorage.getItem('current_country'))
-    // 首次挽留的弹窗计时
-    let use_fixed_time = this.$route.query.use_fixed_time;
-    if (use_fixed_time) {
-      this.time = +localStorage.getItem(`mlxz_fixed_local_order_time`);
-      localStorage.removeItem('mlxz_fixed_local_order_time');
-    } else {
-      this.time = 15 * 60 * 1000;
-    }
-
-
-    this.getProductionList();
-
-    this.getPayMethod();
-
   },
   mounted() {
     this.test_fb_upload = utils.getQueryStr('test_fb_upload')
@@ -409,21 +418,37 @@ export default {
   },
 
   methods: {
-     //监听localStorage数据变化
-     startWatching(key) {
-      setInterval(() => {
-        const currentStorage = JSON.parse(localStorage.getItem(key)) || {};
-        if (JSON.stringify(this.storage) !== JSON.stringify(currentStorage)) {
-          this.storage = currentStorage;
-          this.localStorageChanged();
+    async waitForLocation() {
+      try {
+        const baseInfo = await getBaseInfoAPI();
+        if (baseInfo?.status === 1000 && baseInfo.data?.current_country) {
+          this.current_country = baseInfo.data.current_country;
+          localStorage.setItem('current_country', JSON.stringify(this.current_country));
+          return true;
         }
-      }, 1000);
-    },
-    localStorageChanged() {
-      if(localStorage.getItem('current_country')) {
-        this.current_country = JSON.parse(localStorage.getItem('current_country'))
+        return false;
+      } catch (error) {
+        console.error('Location detection failed:', error);
+        Toast(this.is_cn ? '定位失败，请重试' : '定位失敗，請重試');
+        return false;
       }
     },
+
+    async initializePaymentMethods() {
+      try {
+        this.loading = true;
+        await Promise.all([
+          this.getProductionList(),
+          this.getPayMethod()
+        ]);
+      } catch (error) {
+        console.error('Payment methods initialization failed:', error);
+        Toast(this.is_cn ? '支付方式初始化失败' : '支付方式初始化失敗');
+      } finally {
+        this.loading = false;
+      }
+    },
+
     findSecondIndexOf(str, char) {
       const firstIndex = str.indexOf(char);
       if (firstIndex === -1) {
@@ -431,13 +456,18 @@ export default {
       }
       return str.indexOf(char, firstIndex + 1);
     },
-    changeCity(currency) {
-      this.current_country = { area_code: currency.area_code, iso_code: currency.iso_code }
-      localStorage.setItem('current_country', JSON.stringify({ area_code: currency.area_code, iso_code: currency.iso_code }))
-      setTimeout(() => {
-
-        this.getPayMethod(1)
-      }, 100);
+    async changeCity(currency) {
+      try {
+        this.loading = true;
+        this.current_country = { area_code: currency.area_code, iso_code: currency.iso_code };
+        localStorage.setItem('current_country', JSON.stringify(this.current_country));
+        await this.initializePaymentMethods();
+      } catch (error) {
+        console.error('Location change failed:', error);
+        Toast(this.is_cn ? '切换地区失败，请重试' : '切換地區失敗，請重試');
+      } finally {
+        this.loading = false;
+      }
     },
     getCombineProductIds(product_ids) {
       this.combine_product_ids = product_ids;
