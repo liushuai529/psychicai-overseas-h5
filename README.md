@@ -72,6 +72,9 @@ https://overseas.psychicai.pro/ads12/year_of_lucky_2025.html
 13链接为正缘报告复刻链接
 https://overseas.psychicai.pro/ads13/emotion_fate13.html
 
+16链接为2025感情运测算报告
+https://overseas.psychicai.pro/gatherone16/emotion_fortune_2025.html#/
+
 
 bjzxmlxz域名投放链接
 
